@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{86A0B5DB-28BC-49EE-9A0C-5F86B0E567EE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DisenoColumnas</RootNamespace>
+    <AssemblyName>DisenoColumnas</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MathNet.Numerics.4.8.1\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=3.0.6.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>packages\DockPanelSuite.3.0.6\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\Columna.cs" />
+    <Compile Include="Clases\ColumnaAlzadoDrawing.cs" />
+    <Compile Include="Clases\ResultadosETABS.cs" />
+    <Compile Include="Clases\Material.cs" />
+    <Compile Include="Clases\Seccion.cs" />
+    <Compile Include="Clases\Viga.cs" />
+    <Compile Include="Diseño\Despiece.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diseño\Despiece.Designer.cs">
+      <DependentUpon>Despiece.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz Inicial\VariablesdeEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Inicial\VariablesdeEntrada.Designer.cs">
+      <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfazViewInfo\Informacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazViewInfo\Informacion.Designer.cs">
+      <DependentUpon>Informacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Proyecto.cs" />
+    <Compile Include="NewProject.cs" />
+    <Compile Include="InterfazPlano\PlantaColumnas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfazPlano\PlantaColumnas.Designer.cs">
+      <DependentUpon>PlantaColumnas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz Inicial\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Inicial\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilidades\MovimientoPantalla.cs" />
+    <EmbeddedResource Include="Diseño\Despiece.resx">
+      <DependentUpon>Despiece.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Inicial\VariablesdeEntrada.resx">
+      <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazPlano\PlantaColumnas.resx">
+      <DependentUpon>PlantaColumnas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Inicial\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfazViewInfo\Informacion.resx">
+      <DependentUpon>Informacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anadir.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\efe Prima Ce Pixelado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x16Blanca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minimizex16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Maximizar14X11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Restaurar14x11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Newx16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveAllx13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveX16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Openx16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Arriba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Abajo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
