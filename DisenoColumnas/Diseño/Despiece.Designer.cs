@@ -38,13 +38,13 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.RefuerzoRequerido = new System.Windows.Forms.PictureBox();
             this.Draw_Column = new System.Windows.Forms.PictureBox();
             this.Draw_Colum_Alzado = new System.Windows.Forms.PictureBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.Up = new System.Windows.Forms.Button();
             this.Down = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.CambiarPiso = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.Panel8.SuspendLayout();
             this.Panel9.SuspendLayout();
@@ -52,7 +52,7 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RefuerzoRequerido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).BeginInit();
             this.SuspendLayout();
@@ -149,7 +149,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.Down);
             this.panel3.Controls.Add(this.Up);
-            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.RefuerzoRequerido);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Location = new System.Drawing.Point(845, 13);
             this.panel3.Name = "panel3";
@@ -160,7 +160,7 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.CambiarPiso);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
@@ -178,19 +178,19 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Refuerzo Requerido";
             // 
-            // pictureBox2
+            // RefuerzoRequerido
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.RefuerzoRequerido.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(9, 35);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(195, 556);
-            this.pictureBox2.TabIndex = 12;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox2_Paint);
+            this.RefuerzoRequerido.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.RefuerzoRequerido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RefuerzoRequerido.Location = new System.Drawing.Point(9, 35);
+            this.RefuerzoRequerido.Name = "RefuerzoRequerido";
+            this.RefuerzoRequerido.Size = new System.Drawing.Size(195, 556);
+            this.RefuerzoRequerido.TabIndex = 12;
+            this.RefuerzoRequerido.TabStop = false;
+            this.RefuerzoRequerido.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox2_Paint);
             // 
             // Draw_Column
             // 
@@ -230,31 +230,41 @@
             // 
             // Up
             // 
+            this.Up.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Up.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Up.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.Up.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Up.Image = global::DisenoColumnas.Properties.Resources.Arriba;
             this.Up.Location = new System.Drawing.Point(207, 37);
             this.Up.Name = "Up";
             this.Up.Size = new System.Drawing.Size(24, 23);
             this.Up.TabIndex = 20;
-            this.Up.Text = "button1";
             this.Up.UseVisualStyleBackColor = true;
+            this.Up.Click += new System.EventHandler(this.Up_Click);
             // 
             // Down
             // 
+            this.Down.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Down.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Down.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.Down.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Down.Image = global::DisenoColumnas.Properties.Resources.Abajo;
             this.Down.Location = new System.Drawing.Point(207, 568);
             this.Down.Name = "Down";
             this.Down.Size = new System.Drawing.Size(24, 23);
             this.Down.TabIndex = 21;
-            this.Down.Text = "button2";
             this.Down.UseVisualStyleBackColor = true;
+            this.Down.Click += new System.EventHandler(this.Down_Click);
             // 
-            // label2
+            // CambiarPiso
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Gainsboro;
-            this.label2.Location = new System.Drawing.Point(162, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Piso X -X ";
+            this.CambiarPiso.AutoSize = true;
+            this.CambiarPiso.BackColor = System.Drawing.Color.Gainsboro;
+            this.CambiarPiso.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CambiarPiso.Location = new System.Drawing.Point(146, 9);
+            this.CambiarPiso.Name = "CambiarPiso";
+            this.CambiarPiso.Size = new System.Drawing.Size(0, 13);
+            this.CambiarPiso.TabIndex = 22;
             // 
             // Despiece
             // 
@@ -283,7 +293,7 @@
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RefuerzoRequerido)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).EndInit();
             this.ResumeLayout(false);
@@ -302,12 +312,12 @@
         internal System.Windows.Forms.Panel panel2;
         internal System.Windows.Forms.Label Title_Colum_Model;
         internal System.Windows.Forms.Panel panel3;
-        internal System.Windows.Forms.PictureBox pictureBox2;
+        internal System.Windows.Forms.PictureBox RefuerzoRequerido;
         internal System.Windows.Forms.Panel panel4;
         internal System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Button Down;
         private System.Windows.Forms.Button Up;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label CambiarPiso;
     }
 }

@@ -137,6 +137,7 @@ namespace DisenoColumnas.Clases
 
         private ColumnaAlzadoDrawing CoordForAlzado1 { get; set; }
 
+        public int StoryMostrar { get; set; } = -1; 
         private void CoordAlzado()
         {
             CoordForAlzado1 = new ColumnaAlzadoDrawing(this);
