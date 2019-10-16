@@ -1,18 +1,13 @@
 ﻿using DisenoColumnas.Clases;
-using DisenoColumnas.DefinirColumnas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DisenoColumnas
 {
-
     [Serializable]
     public class Proyecto
     {
-
         public string Empresa { get; } = "efe Prima Ce";
         public string Ruta { get; set; } = "";
 
@@ -20,7 +15,7 @@ namespace DisenoColumnas
 
         public float Nivel_Fundacion { get; set; }
 
-        public List<Tuple<string,float>> Stories { get; set; }
+        public List<Tuple<string, float>> Stories { get; set; }
 
         public List<MAT_CONCRETE> Lista_Materiales { get; set; }
         public List<Seccion> Lista_Secciones { get; set; }
@@ -32,14 +27,9 @@ namespace DisenoColumnas
 
         public float AlturaEdificio { get; set; }
 
-
         public void AlturaEdificio_()
         {
-            AlturaEdificio = Stories.Sum(x => x.Item2)  + e_Fundacion;
+            AlturaEdificio = Stories.Sum(x => x.Item2) + e_Fundacion;
         }
-      
-
     }
-
-
 }

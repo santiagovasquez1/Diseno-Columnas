@@ -1,12 +1,5 @@
 ﻿using DisenoColumnas.DefinirColumnas;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -19,22 +12,10 @@ namespace DisenoColumnas.Diseño
             InitializeComponent();
         }
 
-
-
-
-
-
-
-
-
-
         private void Draw_Column_Paint(object sender, PaintEventArgs e)
         {
-
             if (PlantaColumnas.ColumnaSelect != null)
             {
-
-
                 float MaxB = -999999;
                 for (int i = 0; i < PlantaColumnas.ColumnaSelect.Seccions.Count; i++)
                 {
@@ -44,7 +25,6 @@ namespace DisenoColumnas.Diseño
                         {
                             MaxB = PlantaColumnas.ColumnaSelect.Seccions[i].Item1.B;
                         }
-
                     }
                 }
 
@@ -56,7 +36,6 @@ namespace DisenoColumnas.Diseño
                 e.Graphics.Clear(Color.White);
                 Title_Colum_Model.Text = "Columna: " + PlantaColumnas.ColumnaSelect.Name;
                 PlantaColumnas.ColumnaSelect.Paint_Alzado1(e, Draw_Column.Height - 10, Draw_Column.Width, SX, SY, X, Y);
-
             }
         }
 
@@ -65,9 +44,8 @@ namespace DisenoColumnas.Diseño
             Draw_Column.Invalidate();
         }
 
-
         private int StoryMostrar = 0;
-        
+
         private void PictureBox2_Paint(object sender, PaintEventArgs e)
         {
             if (PlantaColumnas.ColumnaSelect != null)
@@ -77,7 +55,6 @@ namespace DisenoColumnas.Diseño
                 double MaxAs = -999999;
                 for (int i = 0; i < PlantaColumnas.ColumnaSelect.resultadosETABs.Count; i++)
                 {
-
                     if (PlantaColumnas.ColumnaSelect.resultadosETABs[i] != null)
                     {
                         for (int j = 0; i < PlantaColumnas.ColumnaSelect.resultadosETABs[i].As.Count; j++)
@@ -92,15 +69,8 @@ namespace DisenoColumnas.Diseño
 
                 double SX = (Draw_Column.Width - 15) / MaxAs;
                 double SY = Draw_Column.Height / (Form1.Proyecto_.AlturaEdificio);
-                double X = 7.5f;
-                double Y = 5;
-
-                
 
                 //e.Graphics.DrawLine(new Pen)
-
-
-
             }
         }
     }

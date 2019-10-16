@@ -73,6 +73,12 @@
     <Compile Include="Interfaz Inicial\VariablesdeEntrada.Designer.cs">
       <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz Seccion\Interfaz_Seccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\Interfaz_Seccion.Designer.cs">
+      <DependentUpon>Interfaz_Seccion.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfazViewInfo\Informacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Inicial\VariablesdeEntrada.resx">
       <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\Interfaz_Seccion.resx">
+      <DependentUpon>Interfaz_Seccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfazPlano\PlantaColumnas.resx">
       <DependentUpon>PlantaColumnas.cs</DependentUpon>
