@@ -787,5 +787,10 @@ namespace DisenoColumnas
             FInterfaz_Seccion interfaz_Seccion = new FInterfaz_Seccion();
             interfaz_Seccion.Show(PanelContenedor);
         }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+         
+        }
     }
 }

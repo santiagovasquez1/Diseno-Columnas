@@ -171,7 +171,8 @@
   </data>
   <data name="Restaurar14x11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Restaurar14x11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  <data name="anadir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  </data>
+    <data name="anadir" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\anadir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="zoom-increasing-symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -189,9 +190,10 @@
   <data name="efe Prima Ce Pixelado" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\efe Prima Ce Pixelado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Abajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Abajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  <data name="Csearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <data name="Abajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+      <value>..\Resources\Abajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    </data>
+    <data name="Csearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Csearch.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Czoom-increasing-symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -203,8 +205,9 @@
   <data name="Czoom-out" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Czoom-out.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+      <value>..\Resources\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    </data>
   <data name="Czoom-out-option" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Czoom-out-option.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
