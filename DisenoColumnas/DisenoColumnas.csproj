@@ -181,16 +181,16 @@
     <None Include="Resources\Abajo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\Jrosales\.NET\Extensiones Auxiliares\SpanDataGridViewCell_src\src\SpannedDataGridViewNet2\SpannedDataGridViewNet2.csproj">
-      <Project>{2ab3e335-0e47-4ef6-b6a2-9ebf4b1967d0}</Project>
-      <Name>SpannedDataGridViewNet2</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\SaveX13.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpannedDataGridViewNet2\SpannedDataGridViewNet2.csproj">
+      <Project>{2ab3e335-0e47-4ef6-b6a2-9ebf4b1967d0}</Project>
+      <Name>SpannedDataGridViewNet2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
