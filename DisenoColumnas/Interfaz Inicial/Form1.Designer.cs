@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel5 = new System.Windows.Forms.Panel();
+            this.Button_Minimize = new System.Windows.Forms.Button();
+            this.Button_MaxRest = new System.Windows.Forms.Button();
+            this.Button_Cerrar = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,26 +40,24 @@
             this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.variablesDeEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plantaDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infromaciónDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.PanelContenedor = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolBar = new System.Windows.Forms.ToolStrip();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.Button_Minimize = new System.Windows.Forms.Button();
-            this.Button_MaxRest = new System.Windows.Forms.Button();
-            this.Button_Cerrar = new System.Windows.Forms.Button();
-            this.variablesDeEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dibujoSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.toolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel5
@@ -72,6 +73,60 @@
             this.panel5.Size = new System.Drawing.Size(1069, 26);
             this.panel5.TabIndex = 24;
             this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel5_MouseDown);
+            // 
+            // Button_Minimize
+            // 
+            this.Button_Minimize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_Minimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Minimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.Button_Minimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.Button_Minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Minimize.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Minimize.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_Minimize.Image = global::DisenoColumnas.Properties.Resources.Minimizex16;
+            this.Button_Minimize.Location = new System.Drawing.Point(949, 0);
+            this.Button_Minimize.Name = "Button_Minimize";
+            this.Button_Minimize.Size = new System.Drawing.Size(40, 26);
+            this.Button_Minimize.TabIndex = 27;
+            this.Button_Minimize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_Minimize.UseVisualStyleBackColor = true;
+            this.Button_Minimize.Click += new System.EventHandler(this.Minimized_Click);
+            // 
+            // Button_MaxRest
+            // 
+            this.Button_MaxRest.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_MaxRest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_MaxRest.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.Button_MaxRest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.Button_MaxRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_MaxRest.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_MaxRest.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_MaxRest.Image = global::DisenoColumnas.Properties.Resources.Maximizar14X11;
+            this.Button_MaxRest.Location = new System.Drawing.Point(989, 0);
+            this.Button_MaxRest.Name = "Button_MaxRest";
+            this.Button_MaxRest.Size = new System.Drawing.Size(40, 26);
+            this.Button_MaxRest.TabIndex = 28;
+            this.Button_MaxRest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_MaxRest.UseVisualStyleBackColor = true;
+            this.Button_MaxRest.Click += new System.EventHandler(this.Button_MaxRest_Click);
+            // 
+            // Button_Cerrar
+            // 
+            this.Button_Cerrar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_Cerrar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Cerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(101)))), ((int)(((byte)(113)))));
+            this.Button_Cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.Button_Cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Cerrar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Cerrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_Cerrar.Image = global::DisenoColumnas.Properties.Resources.x16Blanca;
+            this.Button_Cerrar.Location = new System.Drawing.Point(1029, 0);
+            this.Button_Cerrar.Name = "Button_Cerrar";
+            this.Button_Cerrar.Size = new System.Drawing.Size(40, 26);
+            this.Button_Cerrar.TabIndex = 26;
+            this.Button_Cerrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_Cerrar.UseVisualStyleBackColor = true;
+            this.Button_Cerrar.Click += new System.EventHandler(this.Close_Click);
             // 
             // menuStrip1
             // 
@@ -153,11 +208,19 @@
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.editarToolStripMenuItem.Text = "Editar";
             // 
+            // variablesDeEntradaToolStripMenuItem
+            // 
+            this.variablesDeEntradaToolStripMenuItem.Name = "variablesDeEntradaToolStripMenuItem";
+            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.variablesDeEntradaToolStripMenuItem.Text = "Variables de Entrada";
+            this.variablesDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.VariablesDeEntradaToolStripMenuItem_Click);
+            // 
             // verToolStripMenuItem
             // 
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.plantaDeColumnasToolStripMenuItem,
-            this.infromaciónDeColumnasToolStripMenuItem});
+            this.infromaciónDeColumnasToolStripMenuItem,
+            this.dibujoSecciónToolStripMenuItem});
             this.verToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
             this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
@@ -195,6 +258,17 @@
             this.panel1.TabIndex = 26;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseDown);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DisenoColumnas.Properties.Resources.efe_Prima_Ce_Pixelado;
+            this.pictureBox1.Location = new System.Drawing.Point(8, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(187, 179);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 70;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
@@ -225,17 +299,6 @@
             this.toolBar.Size = new System.Drawing.Size(1069, 25);
             this.toolBar.TabIndex = 30;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DisenoColumnas.Properties.Resources.efe_Prima_Ce_Pixelado;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(187, 179);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 70;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseDown);
-            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -254,66 +317,12 @@
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "toolStripButton2";
             // 
-            // Button_Minimize
+            // dibujoSecciónToolStripMenuItem
             // 
-            this.Button_Minimize.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_Minimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.Button_Minimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.Button_Minimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.Button_Minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Minimize.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Minimize.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Button_Minimize.Image = global::DisenoColumnas.Properties.Resources.Minimizex16;
-            this.Button_Minimize.Location = new System.Drawing.Point(949, 0);
-            this.Button_Minimize.Name = "Button_Minimize";
-            this.Button_Minimize.Size = new System.Drawing.Size(40, 26);
-            this.Button_Minimize.TabIndex = 27;
-            this.Button_Minimize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_Minimize.UseVisualStyleBackColor = true;
-            this.Button_Minimize.Click += new System.EventHandler(this.Minimized_Click);
-            // 
-            // Button_MaxRest
-            // 
-            this.Button_MaxRest.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_MaxRest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.Button_MaxRest.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.Button_MaxRest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.Button_MaxRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_MaxRest.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_MaxRest.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Button_MaxRest.Image = global::DisenoColumnas.Properties.Resources.Maximizar14X11;
-            this.Button_MaxRest.Location = new System.Drawing.Point(989, 0);
-            this.Button_MaxRest.Name = "Button_MaxRest";
-            this.Button_MaxRest.Size = new System.Drawing.Size(40, 26);
-            this.Button_MaxRest.TabIndex = 28;
-            this.Button_MaxRest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_MaxRest.UseVisualStyleBackColor = true;
-            this.Button_MaxRest.Click += new System.EventHandler(this.Button_MaxRest_Click);
-            // 
-            // Button_Cerrar
-            // 
-            this.Button_Cerrar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_Cerrar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.Button_Cerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(101)))), ((int)(((byte)(113)))));
-            this.Button_Cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
-            this.Button_Cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Cerrar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Cerrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Button_Cerrar.Image = global::DisenoColumnas.Properties.Resources.x16Blanca;
-            this.Button_Cerrar.Location = new System.Drawing.Point(1029, 0);
-            this.Button_Cerrar.Name = "Button_Cerrar";
-            this.Button_Cerrar.Size = new System.Drawing.Size(40, 26);
-            this.Button_Cerrar.TabIndex = 26;
-            this.Button_Cerrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_Cerrar.UseVisualStyleBackColor = true;
-            this.Button_Cerrar.Click += new System.EventHandler(this.Close_Click);
-            // 
-            // variablesDeEntradaToolStripMenuItem
-            // 
-            this.variablesDeEntradaToolStripMenuItem.Name = "variablesDeEntradaToolStripMenuItem";
-            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.variablesDeEntradaToolStripMenuItem.Text = "Variables de Entrada";
-            this.variablesDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.VariablesDeEntradaToolStripMenuItem_Click);
+            this.dibujoSecciónToolStripMenuItem.Name = "dibujoSecciónToolStripMenuItem";
+            this.dibujoSecciónToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.dibujoSecciónToolStripMenuItem.Text = "Dibujo Sección";
+            this.dibujoSecciónToolStripMenuItem.Click += new System.EventHandler(this.dibujoSecciónToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -337,9 +346,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,6 +380,7 @@
         private System.Windows.Forms.ToolStripMenuItem plantaDeColumnasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infromaciónDeColumnasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem variablesDeEntradaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dibujoSecciónToolStripMenuItem;
     }
 }
 

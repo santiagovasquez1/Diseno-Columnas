@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
 {
@@ -14,7 +16,7 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    public class Seccion
+    public class Seccion : IEvenetosSeccion
     {
         public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
@@ -41,7 +43,34 @@ namespace DisenoColumnas.Clases
 
         public double Area { get; set; }
 
+        public List<Point> Vertices { get; set; } = new List<Point>();
+
         private List<float[]> CoordenadasSeccion { get; set; }
+
+        public void MouseDown(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MouseIsOverPolygon(Point mouse_pt, out List<Point> hit_polygon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MouseIsOverRebar(Point mouse_pt, out List<Point> hit_polygon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MouseMove_NotDrawing(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MouseUp(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void CalcularArea()
         {

@@ -57,6 +57,8 @@
   <ItemGroup>
     <Compile Include="Clases\Columna.cs" />
     <Compile Include="Clases\ColumnaAlzadoDrawing.cs" />
+    <Compile Include="Clases\CRefuerzo.cs" />
+    <Compile Include="Clases\IEvenetosSeccion.cs" />
     <Compile Include="Clases\ResultadosETABS.cs" />
     <Compile Include="Clases\Material.cs" />
     <Compile Include="Clases\Seccion.cs" />
@@ -72,6 +74,12 @@
     </Compile>
     <Compile Include="Interfaz Inicial\VariablesdeEntrada.Designer.cs">
       <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz Seccion\Fseleccion_Columnas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\Fseleccion_Columnas.Designer.cs">
+      <DependentUpon>Fseleccion_Columnas.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaz Seccion\Interfaz_Seccion.cs">
       <SubType>Form</SubType>
@@ -112,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Inicial\VariablesdeEntrada.resx">
       <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\Fseleccion_Columnas.resx">
+      <DependentUpon>Fseleccion_Columnas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Seccion\Interfaz_Seccion.resx">
       <DependentUpon>Interfaz_Seccion.cs</DependentUpon>
@@ -179,6 +190,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Abajo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\move.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom-increasing-symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom-out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Csearch.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Czoom-increasing-symbol.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Czoom-increasing-symbol-1.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Czoom-out.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Czoom-out-option.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,9 +5,9 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace DisenoColumnas.Interfaz_Seccion
 {
-    public partial class Interfaz_Seccion : DockContent
+    public partial class FInterfaz_Seccion : DockContent
     {
-        public Interfaz_Seccion()
+        public FInterfaz_Seccion()
         {
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
@@ -58,6 +58,35 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 g.DrawLine(P, 0, Alto_Cuadro * i, Width, Alto_Cuadro * i);
             }
+        }
+
+        private void FInterfaz_Seccion_Paint(object sender, PaintEventArgs e)
+        {
+            Grafica.Invalidate();
+        }
+
+        private void BAcercar_Click(object sender, EventArgs e)
+        {
+            Cursor pCursor = Cursors.Cross;
+            Grafica.Cursor = pCursor;
+        }
+
+        private void Mover_Click(object sender, EventArgs e)
+        {
+            Cursor pCursor = Cursors.Hand;
+            Grafica.Cursor = pCursor;
+        }
+
+        private void BSeleccion_Click(object sender, EventArgs e)
+        {
+            Cursor pCursor = Cursors.Arrow;
+            Grafica.Cursor = pCursor;
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Fseleccion_Columnas fseleccion = new Fseleccion_Columnas();
+            fseleccion.ShowDialog();
         }
     }
 }
