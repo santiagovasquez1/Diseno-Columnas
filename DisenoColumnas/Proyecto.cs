@@ -9,9 +9,16 @@ using System.Threading.Tasks;
 namespace DisenoColumnas
 {
 
+
+    [Serializable]
+    public enum GDE
+    {
+        DMO,DES
+    }
     [Serializable]
     public class Proyecto
     {
+
 
         public string Empresa { get; } = "efe Prima Ce";
         public string Ruta { get; set; } = "";
@@ -28,11 +35,12 @@ namespace DisenoColumnas
 
         public List<Viga> Lista_Vigas { get; set; }
 
-        public Columna ColumSelect { get; set; }
+        public Columna ColumnaSelect { get; set; }
 
         public float AlturaEdificio { get; set; }
 
-
+        public GDE DMO_DES { get; set; }
+       
         public void AlturaEdificio_()
         {
             AlturaEdificio = Stories.Sum(x => x.Item2)  + e_Fundacion;

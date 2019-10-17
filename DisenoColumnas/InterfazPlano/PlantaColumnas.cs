@@ -17,9 +17,6 @@ namespace DisenoColumnas.DefinirColumnas
     public partial class PlantaColumnas : DockContent
     {
 
-
-        public static Columna ColumnaSelect;
-
         public PlantaColumnas()
         {
             InitializeComponent();
@@ -30,6 +27,7 @@ namespace DisenoColumnas.DefinirColumnas
         private void PlantaColumnas_Load(object sender, EventArgs e)
         {
             Grafica.Invalidate();
+            
         }
 
 
@@ -95,9 +93,24 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void PlantaColumnas_Paint(object sender, PaintEventArgs e)
         {
+         
+            foreach (Columna columna1 in Form1.Proyecto_.Lista_Columnas)
+            {
+
+                if (columna1 != Form1.Proyecto_.ColumnaSelect)
+                {
+                    columna1.BrushesColor = Brushes.Black;
+                    Form1.m_Informacion.Invalidate();
+                    Form1.m_Despiece.Invalidate();
+                }
+                else
+                {
+                    columna1.BrushesColor = Brushes.Red;
+                }
+
+            }
+
             Grafica.Invalidate();
-
-
         }
 
 
@@ -106,16 +119,19 @@ namespace DisenoColumnas.DefinirColumnas
         {
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
-                ColumnaSelect= columna.MouseDown(e);
+                Form1.Proyecto_.ColumnaSelect = columna.MouseDown(e);
                 Grafica.Invalidate();
-               
-                if (ColumnaSelect != null) { break; }
+             
+
+
+                if (Form1.Proyecto_.ColumnaSelect != null) { Form1.mLcolumnas.Text= Form1.Proyecto_.ColumnaSelect.Name;  break; }
                
             }
+
             foreach (Columna columna1 in Form1.Proyecto_.Lista_Columnas)
             {
 
-                if (columna1 != ColumnaSelect)
+                if (columna1 != Form1.Proyecto_.ColumnaSelect)
                 {
                     columna1.BrushesColor = Brushes.Black;
                     Form1.m_Informacion.Invalidate();
@@ -123,7 +139,6 @@ namespace DisenoColumnas.DefinirColumnas
                 }
 
             }
- 
 
 
         }

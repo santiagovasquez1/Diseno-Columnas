@@ -1,6 +1,6 @@
-﻿namespace DisenoColumnas.InterfazViewInfo
+﻿namespace DisenoColumnas.Diseño
 {
-    partial class Informacion
+    partial class Form_Estribos
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.Info_D = new System.Windows.Forms.DataGridView();
-            this.NameColum = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Column1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.Column2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.B = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
@@ -63,23 +61,11 @@
             this.AceroR,
             this.Asasign});
             this.Info_D.GridColor = System.Drawing.Color.DarkGray;
-            this.Info_D.Location = new System.Drawing.Point(12, 53);
+            this.Info_D.Location = new System.Drawing.Point(12, 27);
             this.Info_D.Name = "Info_D";
             this.Info_D.ReadOnly = true;
-            this.Info_D.Size = new System.Drawing.Size(884, 476);
-            this.Info_D.TabIndex = 0;
-            this.Info_D.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGridView1_Paint);
-            // 
-            // NameColum
-            // 
-            this.NameColum.AutoSize = true;
-            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NameColum.Location = new System.Drawing.Point(22, 24);
-            this.NameColum.Name = "NameColum";
-            this.NameColum.Size = new System.Drawing.Size(56, 14);
-            this.NameColum.TabIndex = 0;
-            this.NameColum.Text = "Columna: ";
+            this.Info_D.Size = new System.Drawing.Size(823, 476);
+            this.Info_D.TabIndex = 1;
             // 
             // Column1
             // 
@@ -153,30 +139,25 @@
             this.Asasign.Name = "Asasign";
             this.Asasign.ReadOnly = true;
             // 
-            // Informacion
+            // Form_Estribos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(908, 535);
-            this.Controls.Add(this.NameColum);
+            this.ClientSize = new System.Drawing.Size(847, 515);
             this.Controls.Add(this.Info_D);
-            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Informacion";
-            this.Text = "Informacion";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Informacion_Paint);
+            this.Name = "Form_Estribos";
+            this.ShowIcon = false;
+            this.Text = "Información de Estribos";
             ((System.ComponentModel.ISupportInitialize)(this.Info_D)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView Info_D;
-        public  System.Windows.Forms.Label NameColum;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column1;
         private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column2;
         private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx B;

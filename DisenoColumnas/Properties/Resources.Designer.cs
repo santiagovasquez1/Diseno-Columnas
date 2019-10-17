@@ -103,6 +103,16 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap image {
+            get {
+                object obj = ResourceManager.GetObject("image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Maximizar14X11 {
             get {
                 object obj = ResourceManager.GetObject("Maximizar14X11", resourceCulture);
@@ -156,6 +166,16 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap SaveAllx13 {
             get {
                 object obj = ResourceManager.GetObject("SaveAllx13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SaveX13 {
+            get {
+                object obj = ResourceManager.GetObject("SaveX13", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

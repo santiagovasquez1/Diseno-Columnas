@@ -20,10 +20,13 @@ namespace DisenoColumnas
 {
     public partial class Form1 : Form
     {
+
+
         private PlantaColumnas m_PlantaColumnas;
         public static Informacion m_Informacion;
         public static Despiece m_Despiece;
         public static VariablesdeEntrada variablesdeEntrada;
+        public static ComboBox mLcolumnas;
 
         private List<string> ArchivoE2K2009ETABS;
         private List<string> ArchivoResultados2009;
@@ -108,14 +111,14 @@ namespace DisenoColumnas
             {
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
-                PlantaColumnas.ColumnaSelect = Proyecto_.ColumSelect;
+              
 
                 if (m_PlantaColumnas != null)
                 {
                     m_PlantaColumnas.DockHandler.DockPanel = null;
                 }
                 m_PlantaColumnas = new PlantaColumnas();
-                m_PlantaColumnas.Show(PanelContenedor);
+                //m_PlantaColumnas.Show(PanelContenedor);
 
                 if (m_Informacion != null)
                 {
@@ -130,9 +133,18 @@ namespace DisenoColumnas
                     m_Despiece.DockHandler.DockPanel = null;
                 }
 
+
+                mLcolumnas = LColumna;
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
-
+                LColumna.Enabled = true;
+                La_Column.Enabled = true;
+                LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
+                if (Proyecto_.ColumnaSelect != null)
+                {
+                    LColumna.Text = Proyecto_.ColumnaSelect.Name;
+                }
+                WindowState = FormWindowState.Maximized;
             }
         }
 
@@ -149,7 +161,7 @@ namespace DisenoColumnas
                 if (Proyecto_ != null)
                 {
                     Proyecto_.Ruta = SaveFile.FileName;
-                    Proyecto_.ColumSelect= PlantaColumnas.ColumnaSelect ;
+                   
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
 
                 }
@@ -163,7 +175,7 @@ namespace DisenoColumnas
             {
                 if (Proyecto_.Ruta != "")
                 {
-                    Proyecto_.ColumSelect = PlantaColumnas.ColumnaSelect;
+                    
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                 }
                 else
@@ -199,15 +211,19 @@ namespace DisenoColumnas
 
                 variablesdeEntrada = new VariablesdeEntrada();
                 variablesdeEntrada.ShowDialog();
-
+                mLcolumnas = LColumna;
                 m_PlantaColumnas = new PlantaColumnas();
-                m_PlantaColumnas.Show(PanelContenedor);
+             //   m_PlantaColumnas.Show(PanelContenedor);
                 m_Informacion = new Informacion();
                 m_Informacion.Show(PanelContenedor);
 
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
 
+                LColumna.Enabled = true;
+                La_Column.Enabled = true;
+
+                LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
             }
 
@@ -287,7 +303,7 @@ namespace DisenoColumnas
 
             List<List<string>> Resultados2 = new List<List<string>>();
 
-            for (int i=0;i< ArchivoResultados2009.Count; i++)
+            for (int i = 0; i < ArchivoResultados2009.Count; i++)
             {
                 if (ArchivoResultados2009[i] != null)
                 {
@@ -295,7 +311,7 @@ namespace DisenoColumnas
                 }
             }
 
-            foreach(Columna columna in Proyecto_.Lista_Columnas)
+            foreach (Columna columna in Proyecto_.Lista_Columnas)
             {
 
                 columna.resultadosETABs = new List<ResultadosETABS>();
@@ -308,19 +324,22 @@ namespace DisenoColumnas
                     {
                         if (columna.Name == Resultados2[i][1] && columna.Seccions[j].Item2 == Resultados2[i][0])
                         {
-                      
+
                             resultados.Estacion.Add(Convert.ToSingle(Resultados2[i][3]));
                             resultados.Asmin.Add(Convert.ToSingle(Resultados2[i][7]));
                             resultados.As.Add(Convert.ToSingle(Resultados2[i][8]));
 
 
                         }
-                     
+
                     }
                     columna.resultadosETABs.Add(resultados);
+                    columna.AsignarAsTopMediumButton_();
                 }
-                
+
             }
+
+
 
 
         }
@@ -529,6 +548,7 @@ namespace DisenoColumnas
                     {
                         tipodeSeccion = TipodeSeccion.L;
                     }
+     
 
 
                     H = 0;
@@ -584,7 +604,7 @@ namespace DisenoColumnas
                     if(mAT_.Name== Material_Aux) {
 
                         Seccion seccion = new Seccion(Nombre, B, H,TF,TW, mAT_, tipodeSeccion,Coord);
-                        Proyecto_.Lista_Secciones.Add(seccion);
+                         Proyecto_.Lista_Secciones.Add(seccion);
 
                     }
 
@@ -738,10 +758,14 @@ namespace DisenoColumnas
                         if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
                         {
                             Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            if (seccion.Shape == TipodeSeccion.None)
+                            {
+                                seccion = null;
+                            }
                             Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
                             colum.Seccions.Add(tuple_aux);
                         }
-
+               
                     }
 
 
@@ -801,9 +825,6 @@ namespace DisenoColumnas
                 column.VigaMayor = VigaMayor;
 
             }
-
-
-
             //Asignar Altura Libre;
 
 
@@ -882,5 +903,40 @@ namespace DisenoColumnas
                 variablesdeEntrada.ShowDialog();
             }
         }
+
+
+        
+        private void LColumna_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LColumna.Text != "")
+            {
+                Proyecto_.ColumnaSelect = Proyecto_.Lista_Columnas.Find(x => x.Name == LColumna.Text);
+                m_Informacion.Invalidate();
+                m_PlantaColumnas.Invalidate();
+                m_Despiece.Invalidate();
+            }
+        }
+
+        private void ToolStripButton2_Click(object sender, EventArgs e)
+        {
+            OpenProject();
+        }
+
+        private void Button8_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            SaveAs();
+        }
+
+        private void ToolStripButton1_Click(object sender, EventArgs e)
+        {
+            NewProject();
+        }
+
+
     }
 }

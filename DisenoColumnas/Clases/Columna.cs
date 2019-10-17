@@ -144,6 +144,11 @@ namespace DisenoColumnas.Clases
 
 
         }
+        public void AsignarAsTopMediumButton_()
+        {
+            for( int i=0;i< resultadosETABs.Count; i++) { resultadosETABs[i].AsignarAsTopMediumButton(); }
+        }
+
 
 
 
