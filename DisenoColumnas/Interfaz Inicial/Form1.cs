@@ -2,19 +2,13 @@
 using DisenoColumnas.DefinirColumnas;
 using DisenoColumnas.Diseño;
 using DisenoColumnas.Interfaz_Inicial;
+using DisenoColumnas.Interfaz_Seccion;
 using DisenoColumnas.InterfazViewInfo;
 using DisenoColumnas.Utilidades;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace DisenoColumnas
 {
@@ -31,9 +25,9 @@ namespace DisenoColumnas
         private List<string> ArchivoE2K2009ETABS;
         private List<string> ArchivoResultados2009;
         public static Proyecto Proyecto_;
+
         public Form1()
         {
-
             InitializeComponent();
         }
 
@@ -67,14 +61,12 @@ namespace DisenoColumnas
 
         private void Button_MaxRest_Click(object sender, EventArgs e)
         {
-
             if (WindowState == FormWindowState.Normal)
             {
                 WindowState = FormWindowState.Maximized;
                 Button_MaxRest.Image = Properties.Resources.Restaurar14x11;
-
             }
-            else if(WindowState == FormWindowState.Maximized)
+            else if (WindowState == FormWindowState.Maximized)
             {
                 WindowState = FormWindowState.Normal;
                 Button_MaxRest.Image = Properties.Resources.Maximizar14X11;
@@ -91,14 +83,12 @@ namespace DisenoColumnas
             NewProject();
 
             //Falta resultados
-
         }
 
         private void AbrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenProject();
         }
-
 
         private void OpenProject()
         {
@@ -111,7 +101,7 @@ namespace DisenoColumnas
             {
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
-              
+
 
                 if (m_PlantaColumnas != null)
                 {
@@ -124,7 +114,7 @@ namespace DisenoColumnas
                 {
                     m_Informacion.DockHandler.DockPanel = null;
                 }
-                
+
                 m_Informacion = new Informacion();
                 m_Informacion.Show(PanelContenedor);
 
@@ -150,54 +140,47 @@ namespace DisenoColumnas
 
         private void SaveAs()
         {
-
             SaveFileDialog SaveFile = new SaveFileDialog();
             SaveFile.Filter = "DMC |*.Colum";
             SaveFile.Title = "Guardar Proyecto";
             SaveFile.ShowDialog();
 
-            if(SaveFile.FileName != "")
+            if (SaveFile.FileName != "")
             {
                 if (Proyecto_ != null)
                 {
                     Proyecto_.Ruta = SaveFile.FileName;
-                   
-                    FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
 
+                    FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                 }
             }
         }
 
         private void Save()
         {
-
             if (Proyecto_ != null)
             {
                 if (Proyecto_.Ruta != "")
                 {
-                    
+
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                 }
                 else
                 {
                     SaveAs();
                 }
-
             }
         }
+
         private void GuardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Save();
         }
 
-
         private void GuardarComoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveAs();
         }
-
-
-
 
         private void NewProject()
         {
@@ -207,7 +190,6 @@ namespace DisenoColumnas
             if (Ruta1 != "" && Ruta2 != "")
             {
                 WindowState = FormWindowState.Maximized;
-
 
                 variablesdeEntrada = new VariablesdeEntrada();
                 variablesdeEntrada.ShowDialog();
@@ -226,22 +208,16 @@ namespace DisenoColumnas
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
             }
-
-
-
         }
 
         private string AbrirE2K2009yCSV2009()
         {
-
-            
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.DefaultExt = "e2K";
             openFileDialog1.Filter = "Archivo de ETABS 9.5 |*.$ET;*.e2k";
             openFileDialog1.Title = "Abrir Archivo de ETABS 9.5";
             openFileDialog1.ShowDialog();
-
 
             if (openFileDialog1.FileName != "")
             {
@@ -251,22 +227,13 @@ namespace DisenoColumnas
 
                 OpenFileDialog openFileDialog2 = new OpenFileDialog();
                 openFileDialog2.Filter = "Abrir Archivo con Resultados |.csv";
-
-
             }
             return openFileDialog1.FileName;
-
         }
-
-
-
 
         private string AsingarResultadosaColumna()
         {
-
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
-
 
             openFileDialog.Title = "Resultados a Flexo Compresión";
             openFileDialog.Filter = "Resultados |*.csv";
@@ -285,22 +252,13 @@ namespace DisenoColumnas
                     MessageBox.Show(FunctionsProject.AbriArchivoResultados2009(openFileDialog.FileName).Item2, Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     openFileDialog.FileName = "";
                 }
-
             }
 
             return openFileDialog.FileName;
-
         }
-
-
-
-
-
 
         private void AsignarResultados()
         {
-
-
             List<List<string>> Resultados2 = new List<List<string>>();
 
             for (int i = 0; i < ArchivoResultados2009.Count; i++)
@@ -313,9 +271,7 @@ namespace DisenoColumnas
 
             foreach (Columna columna in Proyecto_.Lista_Columnas)
             {
-
                 columna.resultadosETABs = new List<ResultadosETABS>();
-
 
                 for (int j = 0; j < columna.Seccions.Count; j++)
                 {
@@ -328,8 +284,6 @@ namespace DisenoColumnas
                             resultados.Estacion.Add(Convert.ToSingle(Resultados2[i][3]));
                             resultados.Asmin.Add(Convert.ToSingle(Resultados2[i][7]));
                             resultados.As.Add(Convert.ToSingle(Resultados2[i][8]));
-
-
                         }
 
                     }
@@ -344,46 +298,29 @@ namespace DisenoColumnas
 
         }
 
-
-
-
-
-
-
-
-
         private void CrearObjetosNecesarios()
         {
-
-
             //STORIES
 
             List<List<string>> Stories = new List<List<string>>();
 
-            Proyecto_.Stories = new List<Tuple<string,float>>();
+            Proyecto_.Stories = new List<Tuple<string, float>>();
 
-            int Inicio= ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ STORIES - IN SEQUENCE FROM TOP")) + 1;
+            int Inicio = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ STORIES - IN SEQUENCE FROM TOP")) + 1;
             int Fin = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ DIAPHRAGM NAMES")) - 2;
 
-            for(int i= Inicio;i<Fin;i++)
+            for (int i = Inicio; i < Fin; i++)
             {
                 Stories.Add(ArchivoE2K2009ETABS[i].Split((char)34).ToList());
             }
-            for(int i=0; i < Stories.Count; i++)
+            for (int i = 0; i < Stories.Count; i++)
             {
-            
                 string Name_Story = Stories[i][1].Replace("\"", "");
-                float Altura_Story =(float) Convert.ToDouble(Stories[i][2].Replace("  HEIGHT ", "").Split().ToList()[0]);
-
+                float Altura_Story = (float)Convert.ToDouble(Stories[i][2].Replace("  HEIGHT ", "").Split().ToList()[0]);
 
                 Tuple<string, float> tuple_Aux = new Tuple<string, float>(Name_Story, Altura_Story);
                 Proyecto_.Stories.Add(tuple_Aux);
-
-
             }
-
-
-
 
             //Puntos
             int Inicio_PointCoordinates = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ POINT COORDINATES")) + 1;
@@ -391,29 +328,21 @@ namespace DisenoColumnas
             int Final_PointCoordinates = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ LINE CONNECTIVITIES")) - 1;
             List<List<string>> PointsConnectivities = new List<List<string>>();
 
-
             for (int i = Inicio_PointCoordinates; i < Final_PointCoordinates; i++)
             {
                 PointsConnectivities.Add(ArchivoE2K2009ETABS[i].Split().ToList());
-
             }
-
 
             List<Tuple<string, double[]>> Points = new List<Tuple<string, double[]>>();
 
-
             for (int i = 0; i < PointsConnectivities.Count; i++)
             {
-
-
                 string PointNumber = PointsConnectivities[i][3].Replace("\"", "");
                 double[] XY = new double[] { Convert.ToDouble(PointsConnectivities[i][5]), Convert.ToDouble(PointsConnectivities[i][6]) };
 
                 Tuple<string, double[]> Point = new Tuple<string, double[]>(PointNumber, XY);
                 Points.Add(Point);
-
             }
-
 
             // Definir Materiales
 
@@ -421,20 +350,18 @@ namespace DisenoColumnas
             int Final_MaterialProperties = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ FRAME SECTIONS")) - 1;
 
             List<List<string>> Lista_Materiales_Aux2 = new List<List<string>>();
-            List<string> Lista_Materiales_Aux = new List<string>(); 
-            
+            List<string> Lista_Materiales_Aux = new List<string>();
 
-            for(int i= Inicio_MaterialProperties; i< Final_MaterialProperties; i++)
+            for (int i = Inicio_MaterialProperties; i < Final_MaterialProperties; i++)
             {
                 Lista_Materiales_Aux.Add(ArchivoE2K2009ETABS[i]);
             }
 
-
-            //Solo Encontrara Material Tipo Concreto 
+            //Solo Encontrara Material Tipo Concreto
 
             Proyecto_.Lista_Materiales = new List<MAT_CONCRETE>();
 
-            for(int i=0; i < Lista_Materiales_Aux.Count; i++)
+            for (int i = 0; i < Lista_Materiales_Aux.Count; i++)
             {
                 if (Lista_Materiales_Aux[i].Contains("FC"))
                 {
@@ -442,17 +369,13 @@ namespace DisenoColumnas
                 }
             }
 
-            for(int i=0; i < Lista_Materiales_Aux2.Count; i++)
+            for (int i = 0; i < Lista_Materiales_Aux2.Count; i++)
             {
-
                 MAT_CONCRETE material = new MAT_CONCRETE();
                 material.Name = Lista_Materiales_Aux2[i][4].Replace("\"", "");
-                material.FC =(float)Convert.ToDouble(Lista_Materiales_Aux2[i][13].Replace("\"",""));
+                material.FC = (float)Convert.ToDouble(Lista_Materiales_Aux2[i][13].Replace("\"", ""));
                 Proyecto_.Lista_Materiales.Add(material);
-
             }
-
-
 
             //Secciones
 
@@ -461,9 +384,7 @@ namespace DisenoColumnas
             int Inicio_FrameSecctions = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ FRAME SECTIONS")) + 1;
             int Final_FrameSecctions = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ REBAR DEFINITIONS")) - 1;
 
-
             List<List<string>> Lista_Secciones_Aux = new List<List<string>>();
-
 
             for (int i = Inicio_FrameSecctions; i < Final_FrameSecctions; i++)
             {
@@ -473,22 +394,17 @@ namespace DisenoColumnas
                 }
             }
 
-
-
-            for(int i=0;i< Lista_Secciones_Aux.Count;i++)
+            for (int i = 0; i < Lista_Secciones_Aux.Count; i++)
             {
-
                 string Nombre = Lista_Secciones_Aux[i][4].Replace("\"", "");
                 string Material_Aux = Lista_Secciones_Aux[i][7].Replace("\"", "");
                 string SHAPE = Lista_Secciones_Aux[i][10].Replace("\"", "");
                 List<float[]> Coord = null;
                 TipodeSeccion tipodeSeccion;
-                float TF, TW, B,H;
-
+                float TF, TW, B, H;
 
                 if (SHAPE == "SD")
                 {
-
                     //Section Designer
 
                     int Inicio_DesignerSections = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ SECTION DESIGNER SECTIONS")) + 1;
@@ -496,46 +412,32 @@ namespace DisenoColumnas
 
                     List<List<string>> SectionDesginer = new List<List<string>>();
 
-                    int NoPuntos=0;
+                    int NoPuntos = 0;
                     for (int j = Inicio_DesignerSections; j < Final_DesignerSection; j++)
                     {
-                         SectionDesginer.Add(ArchivoE2K2009ETABS[j].Split((char)34).ToList());
-                 
+                        SectionDesginer.Add(ArchivoE2K2009ETABS[j].Split((char)34).ToList());
                     }
 
-                    for(int k=0; k< SectionDesginer.Count; k++)
+                    for (int k = 0; k < SectionDesginer.Count; k++)
                     {
-
                         if (SectionDesginer[k].Count == 7)
                         {
-
                             if (SectionDesginer[k][5] == "POLYGON")
                             {
-
                                 NoPuntos = Convert.ToInt32(SectionDesginer[k][6].Replace("  NUMCORNERPTS ", ""));
                                 Coord = new List<float[]>();
 
-                                for (int s = k + 1; s < k + NoPuntos+1; s++)
+                                for (int s = k + 1; s < k + NoPuntos + 1; s++)
                                 {
                                     string[] SDASD = SectionDesginer[s][2].Split();
                                     float X = Convert.ToSingle(SectionDesginer[s][2].Split()[9]);
-                                    float Y= Convert.ToSingle(SectionDesginer[s][2].Split()[12]);
+                                    float Y = Convert.ToSingle(SectionDesginer[s][2].Split()[12]);
 
-                                    float[] XY = { X, Y};
+                                    float[] XY = { X, Y };
                                     Coord.Add(XY);
-
                                 }
-
-                              
-
-
                             }
-
-
-
-
                         }
-
                     }
 
                     tipodeSeccion = TipodeSeccion.None;
@@ -548,14 +450,12 @@ namespace DisenoColumnas
                     {
                         tipodeSeccion = TipodeSeccion.L;
                     }
-     
 
 
                     H = 0;
                     B = 0;
                     TW = 0;
                     TF = 0;
-
                 }
                 else
                 {
@@ -598,7 +498,6 @@ namespace DisenoColumnas
                     catch { TW = 0; }
                 }
 
-
                 foreach (MAT_CONCRETE mAT_ in Proyecto_.Lista_Materiales)
                 {
                     if(mAT_.Name== Material_Aux) {
@@ -607,14 +506,10 @@ namespace DisenoColumnas
                          Proyecto_.Lista_Secciones.Add(seccion);
 
                     }
-
                 }
-
             }
 
-
-
-            //TUPLAS DE COLUMNAS Y VIGAS 
+            //TUPLAS DE COLUMNAS Y VIGAS
 
             List<List<string>> LineConectives = new List<List<string>>();
 
@@ -625,17 +520,14 @@ namespace DisenoColumnas
             for (int i = Inicio_LineConnectives; i < Final_LineConnectives; i++)
             {
                 LineConectives.Add(ArchivoE2K2009ETABS[i].Split().ToList());
-
             }
 
-          
             List<Tuple<string, string, double[]>> AuxColums = new List<Tuple<string, string, double[]>>();
 
             List<Tuple<string, string[], double[]>> AuxBeams = new List<Tuple<string, string[], double[]>>();
 
             for (int i = 0; i < LineConectives.Count; i++)
             {
-
                 if (LineConectives[i][6] == "COLUMN")
                 {
                     string Name = LineConectives[i][4].Replace("\"", "");
@@ -644,7 +536,6 @@ namespace DisenoColumnas
                     AuxColums.Add(Colum_Tu);
                 }
 
-
                 if (LineConectives[i][6] == "BEAM")
                 {
                     string Name = LineConectives[i][4].Replace("\"", "");
@@ -652,109 +543,83 @@ namespace DisenoColumnas
                     Tuple<string, string[], double[]> Beam_Tu = new Tuple<string, string[], double[]>(Name, PointNumber, new double[2]);
                     AuxBeams.Add(Beam_Tu);
                 }
-
-
             }
-
-
 
             // LINE ASSIGNS
 
             List<List<string>> LineAssingns = new List<List<string>>();
 
-            Inicio = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ LINE ASSIGNS"))+1;
+            Inicio = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ LINE ASSIGNS")) + 1;
 
-            Fin = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ AREA ASSIGNS"))-1;
+            Fin = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ AREA ASSIGNS")) - 1;
 
-            for(int i= Inicio; i< Fin; i++)
+            for (int i = Inicio; i < Fin; i++)
             {
                 LineAssingns.Add(ArchivoE2K2009ETABS[i].Split((char)34).ToList());
             }
 
-
-
-
             // OBJETOS VIGAS
-
 
             Proyecto_.Lista_Vigas = new List<Viga>();
 
-
-            for(int i=0; i< AuxBeams.Count; i++)
+            for (int i = 0; i < AuxBeams.Count; i++)
             {
-
                 Viga viga = new Viga(AuxBeams[i].Item1);
                 viga.Points = AuxBeams[i].Item2;
                 Proyecto_.Lista_Vigas.Add(viga);
             }
-       
+
             //Asignar Secciones a Vigas por Piso
 
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
-
                 for (int j = 0; j < LineAssingns.Count; j++)
                 {
-
                     string Story = LineAssingns[j][3].Replace("\"", "");
                     string NameBeam = LineAssingns[j][1].Replace("\"", "");
-                    string NameSeccion = LineAssingns[j][5].Replace("\"","");
+                    string NameSeccion = LineAssingns[j][5].Replace("\"", "");
                     foreach (Viga viga in Proyecto_.Lista_Vigas)
                     {
-                        
-                        if(viga.Name== NameBeam && Story== Proyecto_.Stories[i].Item1)
+                        if (viga.Name == NameBeam && Story == Proyecto_.Stories[i].Item1)
                         {
                             Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
                             Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
                             viga.Seccions.Add(tuple_aux);
                         }
-
                     }
-
-
                 }
-
             }
-            
 
-            //OBJETOS COLUMNA  
+            //OBJETOS COLUMNA
 
-            Proyecto_.Lista_Columnas= new List<Columna>();
-
+            Proyecto_.Lista_Columnas = new List<Columna>();
 
             for (int i = 0; i < AuxColums.Count; i++)
             {
-
                 Columna columna = new Columna(AuxColums[i].Item1);
 
-                for (int j = 0; j < Points.Count; j++) {
-                    if (AuxColums[i].Item2 == Points[j].Item1) {
-
+                for (int j = 0; j < Points.Count; j++)
+                {
+                    if (AuxColums[i].Item2 == Points[j].Item1)
+                    {
                         columna.CoordXY = Points[j].Item2;
                         columna.Point = AuxColums[i].Item2;
                     }
-
-
                 }
                 Proyecto_.Lista_Columnas.Add(columna);
             }
-
-
 
             //Asignar Secciones a Columnas por Piso
 
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
-
                 for (int j = 0; j < LineAssingns.Count; j++)
                 {
-
                     string Story = LineAssingns[j][3].Replace("\"", "");
                     string NameColum = LineAssingns[j][1].Replace("\"", "");
                     string NameSeccion = LineAssingns[j][5].Replace("\"", "");
                     foreach (Columna colum in Proyecto_.Lista_Columnas)
                     {
-
                         if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
                         {
                             Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
@@ -765,39 +630,34 @@ namespace DisenoColumnas
                             Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
                             colum.Seccions.Add(tuple_aux);
                         }
-               
+
                     }
-
-
                 }
-
             }
 
-           //Determinar Viga por Piso
+            //Determinar Viga por Piso
 
-            foreach(Columna column in Proyecto_.Lista_Columnas)
+            foreach (Columna column in Proyecto_.Lista_Columnas)
             {
-
                 List<Viga> vigasPosibles = new List<Viga>();
 
-                foreach(Viga viga in Proyecto_.Lista_Vigas)
+                foreach (Viga viga in Proyecto_.Lista_Vigas)
                 {
-
-                    if(viga.Points[0]== column.Point | viga.Points[1]== column.Point)
+                    if (viga.Points[0] == column.Point | viga.Points[1] == column.Point)
                     {
                         vigasPosibles.Add(viga);
                     }
-
                 }
 
-                Viga VigaMayor= new Viga("Viga con Mayor H Por Piso");
-                Seccion seccionMayor = new Seccion("Inicial",0,-99999,0,0,new MAT_CONCRETE(),TipodeSeccion.None);
+                Viga VigaMayor = new Viga("Viga con Mayor H Por Piso");
+                Seccion seccionMayor = new Seccion("Inicial", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
                 Tuple<Seccion, string> tuple_Seccion_Mayor = null;
 
-                for (int i = 0; i < Proyecto_.Stories.Count; i++) {
+                for (int i = 0; i < Proyecto_.Stories.Count; i++)
+                {
                     tuple_Seccion_Mayor = new Tuple<Seccion, string>(seccionMayor, Proyecto_.Stories[i].Item1);
                     VigaMayor.Seccions.Add(tuple_Seccion_Mayor);
-                 }
+                }
 
                 foreach (Viga viga1 in vigasPosibles)
                 {
@@ -807,50 +667,36 @@ namespace DisenoColumnas
                         {
                             if (viga1.Seccions[i].Item2 == VigaMayor.Seccions[j].Item2)
                             {
-
-                                if(viga1.Seccions[i].Item1.H> VigaMayor.Seccions[j].Item1.H)
+                                if (viga1.Seccions[i].Item1.H > VigaMayor.Seccions[j].Item1.H)
                                 {
-
                                     VigaMayor.Seccions[j] = viga1.Seccions[i];
-
                                 }
                             }
                         }
                     }
-                   
-
-               
                 }
 
                 column.VigaMayor = VigaMayor;
-
             }
             //Asignar Altura Libre;
 
-
-            foreach(Columna columna1 in Proyecto_.Lista_Columnas)
+            foreach (Columna columna1 in Proyecto_.Lista_Columnas)
             {
-
                 columna1.LuzLibre = new List<float>();
                 for (int i = 0; i < columna1.Seccions.Count; i++)
                 {
-
                     columna1.LuzLibre.Add(Proyecto_.Stories[i].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
                 }
-        
-
             }
-
-                     
         }
 
         private void PlantaDeColumnasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if ( m_PlantaColumnas.Created == false)
+            if (m_PlantaColumnas.Created == false)
             {
                 m_PlantaColumnas = new PlantaColumnas();
             }
-        
+
             m_PlantaColumnas.Show(PanelContenedor);
         }
 
@@ -864,23 +710,21 @@ namespace DisenoColumnas
             m_Informacion.Show(PanelContenedor);
         }
 
-
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(Proyecto_ != null)
+            if (Proyecto_ != null)
             {
-                if(Proyecto_.Ruta == ""  | Proyecto_.Ruta !="")
+                if (Proyecto_.Ruta == "" | Proyecto_.Ruta != "")
                 {
                     DialogResult box;
-                    box= MessageBox.Show("¿Desea guardar los cambios en el Proyecto?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    box = MessageBox.Show("¿Desea guardar los cambios en el Proyecto?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
                     if (box == DialogResult.Yes)
                     {
                         Save();
                     }
-                    else if (box==DialogResult.No) {
-
+                    else if (box == DialogResult.No)
+                    {
                         Application.Exit();
                     }
                     else if (box == DialogResult.Cancel)
@@ -893,7 +737,7 @@ namespace DisenoColumnas
 
         private void VariablesDeEntradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(variablesdeEntrada != null)
+            if (variablesdeEntrada != null)
             {
                 variablesdeEntrada.ShowDialog();
             }
@@ -905,7 +749,7 @@ namespace DisenoColumnas
         }
 
 
-        
+
         private void LColumna_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (LColumna.Text != "")
@@ -938,5 +782,10 @@ namespace DisenoColumnas
         }
 
 
+        private void dibujoSecciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FInterfaz_Seccion interfaz_Seccion = new FInterfaz_Seccion();
+            interfaz_Seccion.Show(PanelContenedor);
+        }
     }
 }
