@@ -5,9 +5,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -21,14 +18,12 @@ namespace DisenoColumnas.Diseño
         }
 
 
-        
+
         private void Draw_Column_Paint(object sender, PaintEventArgs e)
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
             if (ColumnaSelect != null)
             {
-
-
                 float MaxB = -999999;
                 for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
                 {
@@ -38,7 +33,6 @@ namespace DisenoColumnas.Diseño
                         {
                             MaxB = ColumnaSelect.Seccions[i].Item1.B;
                         }
-
                     }
                 }
 
@@ -88,7 +82,7 @@ namespace DisenoColumnas.Diseño
 
 
 
-        
+
         //private void PictureBox2_Paint(object sender, PaintEventArgs e)
         //{
         //    if (ColumnaSelect != null)
@@ -153,7 +147,7 @@ namespace DisenoColumnas.Diseño
         //        float YI = -15;
         //        y1 = 0;
         //        //y1 = (float)ColumnaSelect.resultadosETABs[ColumnaSelect.StoryMostrar].Estacion[ColumnaSelect.resultadosETABs[ColumnaSelect.StoryMostrar].Estacion.Count-1];
-                
+
 
         //        try
         //        {
@@ -200,7 +194,7 @@ namespace DisenoColumnas.Diseño
         //{
         //    if(ColumnaSelect != null)
         //    {
-              
+
 
         //            ColumnaSelect.StoryMostrar = ColumnaSelect.StoryMostrar - 2;
         //            if (ColumnaSelect.StoryMostrar < 0)
@@ -209,7 +203,7 @@ namespace DisenoColumnas.Diseño
         //            }
         //            RefuerzoRequerido.Invalidate();
 
-               
+
 
 
         //    }

@@ -1,10 +1,7 @@
 ﻿using DisenoColumnas.Clases;
-using DisenoColumnas.DefinirColumnas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DisenoColumnas
 {
@@ -27,7 +24,7 @@ namespace DisenoColumnas
 
         public float Nivel_Fundacion { get; set; }
 
-        public List<Tuple<string,float>> Stories { get; set; }
+        public List<Tuple<string, float>> Stories { get; set; }
 
         public List<MAT_CONCRETE> Lista_Materiales { get; set; }
         public List<Seccion> Lista_Secciones { get; set; }
@@ -42,14 +39,10 @@ namespace DisenoColumnas
         public GDE DMO_DES { get; set; }
 
         public float R { get; set; }
-       
+
         public void AlturaEdificio_()
         {
-            AlturaEdificio = Stories.Sum(x => x.Item2)  + e_Fundacion;
+            AlturaEdificio = Stories.Sum(x => x.Item2) + e_Fundacion;
         }
-      
-
     }
-
-
 }
