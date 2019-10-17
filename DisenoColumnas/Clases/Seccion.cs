@@ -45,6 +45,8 @@ namespace DisenoColumnas.Clases
 
         public List<Point> Vertices { get; set; } = new List<Point>();
 
+        public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
+
         private List<float[]> CoordenadasSeccion { get; set; }
 
         public void MouseDown(object sender, MouseEventArgs e)

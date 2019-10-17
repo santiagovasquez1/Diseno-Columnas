@@ -63,6 +63,9 @@
     <Compile Include="Clases\Material.cs" />
     <Compile Include="Clases\Seccion.cs" />
     <Compile Include="Clases\Viga.cs" />
+    <Compile Include="Controles\CDoubleBufferedPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Diseño\Despiece.cs">
       <SubType>Form</SubType>
     </Compile>

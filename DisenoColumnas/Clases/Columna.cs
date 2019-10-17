@@ -88,7 +88,7 @@ namespace DisenoColumnas.Clases
 
         public string Point { get; set; }
 
-        public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>();
+        public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>(); //Item 1 es la seccion, item2 es el piso
         public Viga VigaMayor { get; set; }
 
         public List<float> LuzLibre { get; set; }
