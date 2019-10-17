@@ -40,6 +40,8 @@ namespace DisenoColumnas
         public float AlturaEdificio { get; set; }
 
         public GDE DMO_DES { get; set; }
+
+        public float R { get; set; }
        
         public void AlturaEdificio_()
         {

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.Info_D = new System.Windows.Forms.DataGridView();
-            this.NameColum = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Column1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.Column2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.B = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
@@ -40,6 +38,8 @@
             this.Locali = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AceroR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Asasign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameColum = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.Info_D)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,20 +66,9 @@
             this.Info_D.Location = new System.Drawing.Point(12, 53);
             this.Info_D.Name = "Info_D";
             this.Info_D.ReadOnly = true;
-            this.Info_D.Size = new System.Drawing.Size(884, 476);
+            this.Info_D.Size = new System.Drawing.Size(771, 476);
             this.Info_D.TabIndex = 0;
             this.Info_D.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGridView1_Paint);
-            // 
-            // NameColum
-            // 
-            this.NameColum.AutoSize = true;
-            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NameColum.Location = new System.Drawing.Point(22, 24);
-            this.NameColum.Name = "NameColum";
-            this.NameColum.Size = new System.Drawing.Size(56, 14);
-            this.NameColum.TabIndex = 0;
-            this.NameColum.Text = "Columna: ";
             // 
             // Column1
             // 
@@ -153,15 +142,26 @@
             this.Asasign.Name = "Asasign";
             this.Asasign.ReadOnly = true;
             // 
+            // NameColum
+            // 
+            this.NameColum.AutoSize = true;
+            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NameColum.Location = new System.Drawing.Point(22, 24);
+            this.NameColum.Name = "NameColum";
+            this.NameColum.Size = new System.Drawing.Size(56, 14);
+            this.NameColum.TabIndex = 0;
+            this.NameColum.Text = "Columna: ";
+            // 
             // Informacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(908, 535);
+            this.ClientSize = new System.Drawing.Size(1066, 535);
             this.Controls.Add(this.NameColum);
             this.Controls.Add(this.Info_D);
-            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));
+            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Informacion";
             this.Text = "Informacion";

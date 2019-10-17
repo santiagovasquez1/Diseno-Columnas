@@ -25,11 +25,6 @@ namespace DisenoColumnas.Interfaz_Inicial
         private void Cb_Aceptar_Click(object sender, EventArgs e)
         {
 
-            
-         
-
-
-
             if (Radio_Des.Checked | Radio_Dmo.Checked)
             {
 
@@ -45,6 +40,8 @@ namespace DisenoColumnas.Interfaz_Inicial
                 {
                     Form1.Proyecto_.Nivel_Fundacion = Convert.ToSingle(T_arranque.Text);
                     Form1.Proyecto_.e_Fundacion = Convert.ToSingle(T_Vf.Text);
+                    Form1.Proyecto_.R = Convert.ToSingle(R_Box.Text);
+
                     Form1.Proyecto_.AlturaEdificio_();
                     if (Radio_Des.Checked)
                     {

@@ -67,12 +67,6 @@
     <Compile Include="Diseño\Despiece.Designer.cs">
       <DependentUpon>Despiece.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diseño\Form_Estribos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Diseño\Form_Estribos.Designer.cs">
-      <DependentUpon>Form_Estribos.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interfaz Inicial\VariablesdeEntrada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,9 +103,6 @@
     <Compile Include="Utilidades\MovimientoPantalla.cs" />
     <EmbeddedResource Include="Diseño\Despiece.resx">
       <DependentUpon>Despiece.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Diseño\Form_Estribos.resx">
-      <DependentUpon>Form_Estribos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Inicial\VariablesdeEntrada.resx">
       <DependentUpon>VariablesdeEntrada.cs</DependentUpon>

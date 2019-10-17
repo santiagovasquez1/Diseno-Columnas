@@ -39,6 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Radio_Dmo = new System.Windows.Forms.RadioButton();
             this.cb_Aceptar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.R_Box = new System.Windows.Forms.TextBox();
             this.Panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +74,7 @@
             this.Label7.BackColor = System.Drawing.Color.Transparent;
             this.Label7.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label7.ForeColor = System.Drawing.Color.Black;
-            this.Label7.Location = new System.Drawing.Point(22, 78);
+            this.Label7.Location = new System.Drawing.Point(22, 119);
             this.Label7.Name = "Label7";
             this.Label7.Size = new System.Drawing.Size(137, 15);
             this.Label7.TabIndex = 26;
@@ -83,20 +85,20 @@
             this.T_arranque.BackColor = System.Drawing.Color.White;
             this.T_arranque.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_arranque.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_arranque.Location = new System.Drawing.Point(221, 75);
+            this.T_arranque.Location = new System.Drawing.Point(220, 118);
             this.T_arranque.Name = "T_arranque";
             this.T_arranque.Size = new System.Drawing.Size(66, 23);
-            this.T_arranque.TabIndex = 23;
+            this.T_arranque.TabIndex = 4;
             // 
             // T_Vf
             // 
             this.T_Vf.BackColor = System.Drawing.Color.White;
             this.T_Vf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_Vf.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_Vf.Location = new System.Drawing.Point(220, 116);
+            this.T_Vf.Location = new System.Drawing.Point(220, 147);
             this.T_Vf.Name = "T_Vf";
             this.T_Vf.Size = new System.Drawing.Size(66, 23);
-            this.T_Vf.TabIndex = 24;
+            this.T_Vf.TabIndex = 5;
             // 
             // Label2
             // 
@@ -104,7 +106,7 @@
             this.Label2.BackColor = System.Drawing.Color.Transparent;
             this.Label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.Black;
-            this.Label2.Location = new System.Drawing.Point(22, 122);
+            this.Label2.Location = new System.Drawing.Point(22, 150);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(171, 15);
             this.Label2.TabIndex = 25;
@@ -113,6 +115,8 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.R_Box);
+            this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.Radio_Des);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.Radio_Dmo);
@@ -124,7 +128,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(334, 204);
+            this.panel2.Size = new System.Drawing.Size(334, 227);
             this.panel2.TabIndex = 27;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel2_MouseDown);
             // 
@@ -137,7 +141,7 @@
             this.Radio_Des.Location = new System.Drawing.Point(241, 40);
             this.Radio_Des.Name = "Radio_Des";
             this.Radio_Des.Size = new System.Drawing.Size(45, 19);
-            this.Radio_Des.TabIndex = 75;
+            this.Radio_Des.TabIndex = 2;
             this.Radio_Des.Text = "DES";
             this.Radio_Des.UseVisualStyleBackColor = false;
             // 
@@ -162,7 +166,7 @@
             this.Radio_Dmo.Location = new System.Drawing.Point(170, 41);
             this.Radio_Dmo.Name = "Radio_Dmo";
             this.Radio_Dmo.Size = new System.Drawing.Size(53, 19);
-            this.Radio_Dmo.TabIndex = 74;
+            this.Radio_Dmo.TabIndex = 1;
             this.Radio_Dmo.Text = "DMO";
             this.Radio_Dmo.UseVisualStyleBackColor = false;
             // 
@@ -171,20 +175,43 @@
             this.cb_Aceptar.BackColor = System.Drawing.Color.White;
             this.cb_Aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Aceptar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_Aceptar.Location = new System.Drawing.Point(133, 164);
+            this.cb_Aceptar.Location = new System.Drawing.Point(122, 190);
             this.cb_Aceptar.Name = "cb_Aceptar";
             this.cb_Aceptar.Size = new System.Drawing.Size(71, 24);
-            this.cb_Aceptar.TabIndex = 27;
+            this.cb_Aceptar.TabIndex = 6;
             this.cb_Aceptar.Text = "Aceptar";
             this.cb_Aceptar.UseVisualStyleBackColor = false;
             this.cb_Aceptar.Click += new System.EventHandler(this.Cb_Aceptar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(22, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(119, 15);
+            this.label3.TabIndex = 77;
+            this.label3.Text = "Recubrimiento (cm):";
+            // 
+            // R_Box
+            // 
+            this.R_Box.BackColor = System.Drawing.Color.White;
+            this.R_Box.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.R_Box.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.R_Box.Location = new System.Drawing.Point(220, 81);
+            this.R_Box.Name = "R_Box";
+            this.R_Box.Size = new System.Drawing.Size(66, 23);
+            this.R_Box.TabIndex = 3;
+            this.R_Box.Text = "4";
             // 
             // VariablesdeEntrada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(334, 204);
+            this.ClientSize = new System.Drawing.Size(334, 227);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -213,5 +240,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton Radio_Dmo;
         internal System.Windows.Forms.Button cb_Aceptar;
+        internal System.Windows.Forms.TextBox R_Box;
+        internal System.Windows.Forms.Label label3;
     }
 }

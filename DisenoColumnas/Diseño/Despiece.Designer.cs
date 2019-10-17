@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.Draw_Colum_Alzado = new System.Windows.Forms.PictureBox();
             this.Label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -38,7 +36,6 @@
             this.Title_Colum_Model = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).BeginInit();
@@ -46,28 +43,6 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.Color.Gray;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(24, 652);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::DisenoColumnas.Properties.Resources.anadir;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(21, 20);
-            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // Draw_Colum_Alzado
             // 
@@ -78,7 +53,7 @@
             this.Draw_Colum_Alzado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Draw_Colum_Alzado.Location = new System.Drawing.Point(12, 35);
             this.Draw_Colum_Alzado.Name = "Draw_Colum_Alzado";
-            this.Draw_Colum_Alzado.Size = new System.Drawing.Size(839, 580);
+            this.Draw_Colum_Alzado.Size = new System.Drawing.Size(847, 580);
             this.Draw_Colum_Alzado.TabIndex = 12;
             this.Draw_Colum_Alzado.TabStop = false;
             // 
@@ -101,7 +76,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.Draw_Column);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(38, 12);
+            this.panel1.Location = new System.Drawing.Point(12, 11);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(239, 628);
             this.panel1.TabIndex = 27;
@@ -151,9 +126,9 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.Draw_Colum_Alzado);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(283, 13);
+            this.panel3.Location = new System.Drawing.Point(257, 13);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(863, 626);
+            this.panel3.Size = new System.Drawing.Size(871, 626);
             this.panel3.TabIndex = 27;
             // 
             // panel4
@@ -164,7 +139,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(861, 29);
+            this.panel4.Size = new System.Drawing.Size(869, 29);
             this.panel4.TabIndex = 19;
             // 
             // Despiece
@@ -172,18 +147,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1158, 652);
+            this.ClientSize = new System.Drawing.Size(1140, 652);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.toolStrip1);
-            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
+            this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Despiece";
             this.Text = "Despiece";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Despiece_Paint);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).EndInit();
@@ -193,12 +165,10 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ToolStrip toolStrip1;
         internal System.Windows.Forms.PictureBox Draw_Colum_Alzado;
         internal System.Windows.Forms.Label Label5;
         internal System.Windows.Forms.Panel panel1;
@@ -207,6 +177,5 @@
         internal System.Windows.Forms.Label Title_Colum_Model;
         internal System.Windows.Forms.Panel panel3;
         internal System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
