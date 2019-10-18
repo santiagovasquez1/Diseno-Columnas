@@ -1,9 +1,4 @@
 ﻿using DisenoColumnas.Clases;
-using DisenoColumnas.DefinirColumnas;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -16,8 +11,6 @@ namespace DisenoColumnas.Diseño
         {
             InitializeComponent();
         }
-
-
 
         private void Draw_Column_Paint(object sender, PaintEventArgs e)
         {
@@ -44,7 +37,6 @@ namespace DisenoColumnas.Diseño
                 e.Graphics.Clear(Color.White);
                 Title_Colum_Model.Text = "Columna: " + ColumnaSelect.Name;
                 ColumnaSelect.Paint_Alzado1(e, Draw_Column.Height - 10, Draw_Column.Width, SX, SY, X, Y);
-
             }
         }
 
@@ -54,40 +46,12 @@ namespace DisenoColumnas.Diseño
             //RefuerzoRequerido.Invalidate();
         }
 
-
-
-
-
-
         //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //private void PictureBox2_Paint(object sender, PaintEventArgs e)
         //{
         //    if (ColumnaSelect != null)
         //    {
-
         //        if(ColumnaSelect.StoryMostrar == -1)
         //        {
         //            ColumnaSelect.StoryMostrar = ColumnaSelect.LuzLibre.Count - 1;
@@ -98,7 +62,6 @@ namespace DisenoColumnas.Diseño
         //        double MaxAs = -999999;
         //        for (int i = 0; i < ColumnaSelect.resultadosETABs.Count; i++)
         //        {
-
         //            if (ColumnaSelect.resultadosETABs[i] != null)
         //            {
         //                for (int j = 0; j < ColumnaSelect.resultadosETABs[i].As.Count; j++)
@@ -148,7 +111,6 @@ namespace DisenoColumnas.Diseño
         //        y1 = 0;
         //        //y1 = (float)ColumnaSelect.resultadosETABs[ColumnaSelect.StoryMostrar].Estacion[ColumnaSelect.resultadosETABs[ColumnaSelect.StoryMostrar].Estacion.Count-1];
 
-
         //        try
         //        {
         //            y2= ColumnaSelect.LuzLibre[IndiceN] + ColumnaSelect.LuzLibre[IndiceN - 1] + (float)ColumnaSelect.resultadosETABs[IndiceN - 1 ].Estacion[0];
@@ -158,16 +120,12 @@ namespace DisenoColumnas.Diseño
         //        {
         //           y2 = (float)ColumnaSelect.LuzLibre[IndiceN] + (float)ColumnaSelect.resultadosETABs[IndiceN].Estacion[0];
 
-
         //        }
 
         //        e.Graphics.DrawLine(new Pen(Brushes.Black), x1, YI- y1*SY+RefuerzoRequerido.Height, x2, YI-y2*SY+RefuerzoRequerido.Height);
 
-
         //        for (int i = 0; i < ColumnaSelect.resultadosETABs[IndiceN].Estacion.Count; i++)
         //        {
-
-
         //            try
         //            {
         //                x2 = (float)ColumnaSelect.resultadosETABs[IndiceN - 1].As[i];
@@ -183,9 +141,7 @@ namespace DisenoColumnas.Diseño
 
         //            e.Graphics.DrawLine(new Pen(Brushes.Red), x1,YI -y2 * SY + RefuerzoRequerido.Height, x2 * SX,YI -y2 * SY + RefuerzoRequerido.Height);
 
-
         //        }
-
 
         //    }
         //}
@@ -194,17 +150,12 @@ namespace DisenoColumnas.Diseño
         //{
         //    if(ColumnaSelect != null)
         //    {
-
-
         //            ColumnaSelect.StoryMostrar = ColumnaSelect.StoryMostrar - 2;
         //            if (ColumnaSelect.StoryMostrar < 0)
         //            {
         //                ColumnaSelect.StoryMostrar = ColumnaSelect.LuzLibre.Count-1;
         //            }
         //            RefuerzoRequerido.Invalidate();
-
-
-
 
         //    }
         //}
@@ -213,15 +164,12 @@ namespace DisenoColumnas.Diseño
         //{
         //    if (ColumnaSelect != null)
         //    {
-
         //        if (ColumnaSelect.StoryMostrar < ColumnaSelect.LuzLibre.Count - 1)
         //        {
         //            ColumnaSelect.StoryMostrar = ColumnaSelect.StoryMostrar + 2;
         //            RefuerzoRequerido.Invalidate();
 
         //        }
-
-
 
         //    }
         //}

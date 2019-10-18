@@ -77,7 +77,7 @@ namespace DisenoColumnas.Clases
                     float bc = Seccions[i].Item1.B - 2 * r;
                     float S = estribos[i].Separacion / 100;
 
-                    
+
                     Ash1 = (FactorDisipacion1 * S * bc * Seccions[i].Item1.Material.FC / FY) * (Seccions[i].Item1.Area / Ach - 1);  //C.21-2
 
                     Ash2 = FactorDisipacion2 * S * bc * Seccions[i].Item1.Material.FC / FY;  //C.21-3
@@ -159,10 +159,10 @@ namespace DisenoColumnas.Clases
             }
 
             Graphics graphics = e.Graphics;
-    
+
             graphics.FillRectangle(BrushesColor, X_Colum, Y_Colum, w, h);
 
-       
+
             float Tamano_Text = (SX + SY) * 0.6f * 0.3f;
             float X_string = X_Colum + w;
 
@@ -280,6 +280,6 @@ namespace DisenoColumnas.Clases
         }
 
 
-        #endregion 
+        #endregion
     }
 }

@@ -14,8 +14,6 @@ namespace DisenoColumnas
 {
     public partial class Form1 : Form
     {
-
-
         private PlantaColumnas m_PlantaColumnas;
         public static Informacion m_Informacion;
         public static Despiece m_Despiece;
@@ -102,8 +100,6 @@ namespace DisenoColumnas
             {
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
-
-
                 if (m_PlantaColumnas != null)
                 {
                     m_PlantaColumnas.DockHandler.DockPanel = null;
@@ -174,7 +170,6 @@ namespace DisenoColumnas
             {
                 if (Proyecto_.Ruta != "")
                 {
-
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                 }
                 else
@@ -207,7 +202,7 @@ namespace DisenoColumnas
                 variablesdeEntrada.ShowDialog();
                 mLcolumnas = LColumna;
                 m_PlantaColumnas = new PlantaColumnas();
-             //   m_PlantaColumnas.Show(PanelContenedor);
+                //   m_PlantaColumnas.Show(PanelContenedor);
                 m_Informacion = new Informacion();
                 m_Informacion.Show(PanelContenedor);
 
@@ -310,22 +305,15 @@ namespace DisenoColumnas
                     {
                         if (columna.Name == Resultados2[i][1] && columna.Seccions[j].Item2 == Resultados2[i][0])
                         {
-
                             resultados.Estacion.Add(Convert.ToSingle(Resultados2[i][3]));
                             resultados.Asmin.Add(Convert.ToSingle(Resultados2[i][7]));
                             resultados.As.Add(Convert.ToSingle(Resultados2[i][8]));
                         }
-
                     }
                     columna.resultadosETABs.Add(resultados);
                     columna.AsignarAsTopMediumButton_();
                 }
-
             }
-
-
-
-
         }
 
         private void CrearObjetosNecesarios()
@@ -481,7 +469,6 @@ namespace DisenoColumnas
                         tipodeSeccion = TipodeSeccion.L;
                     }
 
-
                     H = 0;
                     B = 0;
                     TW = 0;
@@ -530,11 +517,10 @@ namespace DisenoColumnas
 
                 foreach (MAT_CONCRETE mAT_ in Proyecto_.Lista_Materiales)
                 {
-                    if(mAT_.Name== Material_Aux) {
-
-                        Seccion seccion = new Seccion(Nombre, B, H,TF,TW, mAT_, tipodeSeccion,Coord);
-                         Proyecto_.Lista_Secciones.Add(seccion);
-
+                    if (mAT_.Name == Material_Aux)
+                    {
+                        Seccion seccion = new Seccion(Nombre, B, H, TF, TW, mAT_, tipodeSeccion, Coord);
+                        Proyecto_.Lista_Secciones.Add(seccion);
                     }
                 }
             }
@@ -660,7 +646,6 @@ namespace DisenoColumnas
                             Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
                             colum.Seccions.Add(tuple_aux);
                         }
-
                     }
                 }
             }
@@ -723,7 +708,7 @@ namespace DisenoColumnas
 
             foreach(Columna columna2 in Proyecto_.Lista_Columnas)
             {
-            
+
                 for (int i = 0; i < columna2.Seccions.Count; i++)
                 {
                     Estribo estribo=null;
@@ -854,7 +839,6 @@ namespace DisenoColumnas
             NewProject();
         }
 
-
         private void dibujoSecciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FInterfaz_Seccion interfaz_Seccion = new FInterfaz_Seccion();
@@ -863,7 +847,7 @@ namespace DisenoColumnas
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void EstribosToolStripMenuItem_Click(object sender, EventArgs e)

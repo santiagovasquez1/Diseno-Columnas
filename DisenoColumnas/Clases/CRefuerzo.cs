@@ -14,7 +14,7 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    internal class CRefuerzo : IEvenetosSeccion
+    public class CRefuerzo : IEvenetosSeccion
     {
         public string Diametro { get; set; }
         public Point Coord { get; set; }
