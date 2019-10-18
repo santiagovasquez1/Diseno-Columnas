@@ -91,6 +91,7 @@
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column1.HeaderText = "Story";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -99,6 +100,7 @@
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column2.HeaderText = "F\'c";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -107,6 +109,7 @@
             this.B.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.B.HeaderText = "B";
             this.B.Name = "B";
+            this.B.ReadOnly = true;
             this.B.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.B.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -115,6 +118,7 @@
             this.H.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.H.HeaderText = "H";
             this.H.Name = "H";
+            this.H.ReadOnly = true;
             this.H.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.H.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -123,6 +127,7 @@
             this.TW.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TW.HeaderText = "Tw";
             this.TW.Name = "TW";
+            this.TW.ReadOnly = true;
             this.TW.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.TW.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -131,6 +136,7 @@
             this.TF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.TF.HeaderText = "Tf";
             this.TF.Name = "TF";
+            this.TF.ReadOnly = true;
             this.TF.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.TF.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
@@ -159,6 +165,7 @@
             this.NoRamasV_1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NoRamasV_1.HeaderText = "No. Ramas Vertical (Aleta)";
             this.NoRamasV_1.Name = "NoRamasV_1";
+            this.NoRamasV_1.ReadOnly = true;
             this.NoRamasV_1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // NoRamasV_2
@@ -166,6 +173,7 @@
             this.NoRamasV_2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NoRamasV_2.HeaderText = "No. Ramas Vertical (Alma)";
             this.NoRamasV_2.Name = "NoRamasV_2";
+            this.NoRamasV_2.ReadOnly = true;
             this.NoRamasV_2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // NoRamas_H1
@@ -173,6 +181,7 @@
             this.NoRamas_H1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NoRamas_H1.HeaderText = "No. Ramas Horizontal (Aleta)";
             this.NoRamas_H1.Name = "NoRamas_H1";
+            this.NoRamas_H1.ReadOnly = true;
             this.NoRamas_H1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // NoRamas_H2
@@ -180,6 +189,7 @@
             this.NoRamas_H2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.NoRamas_H2.HeaderText = "No. Ramas Horizontal (Alma)";
             this.NoRamas_H2.Name = "NoRamas_H2";
+            this.NoRamas_H2.ReadOnly = true;
             this.NoRamas_H2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // CuantiaVolumetrica
@@ -204,18 +214,18 @@
         #endregion
         public System.Windows.Forms.Label NameColum;
         private System.Windows.Forms.DataGridViewComboBoxColumn Diametro__;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamas_H2;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamas_H1;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamasV_2;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamasV_1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn S_value;
-        private System.Windows.Forms.DataGridViewComboBoxColumn NoEstribo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TF;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TW;
-        private System.Windows.Forms.DataGridViewTextBoxColumn H;
-        private System.Windows.Forms.DataGridViewTextBoxColumn B;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridView Info_Es_Col;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn B;
+        private System.Windows.Forms.DataGridViewTextBoxColumn H;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TF;
+        private System.Windows.Forms.DataGridViewComboBoxColumn NoEstribo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn S_value;
+        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamasV_1;
+        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamasV_2;
+        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamas_H1;
+        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamas_H2;
     }
 }

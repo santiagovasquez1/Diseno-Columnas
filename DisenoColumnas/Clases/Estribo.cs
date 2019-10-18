@@ -16,7 +16,7 @@ namespace DisenoColumnas.Clases
         {
             
             NoEstribo = noEstribo;
-
+            CalcularArea();
         }
         public int NoEstribo { get; set; }
         public double Area { get; set; }

@@ -34,7 +34,7 @@ namespace DisenoColumnas.DefinirColumnas
             //Graficar Cuadicula
 
             int No_CuadrosX = 25;
-            int No_CuadrosY = 7;
+            int No_CuadrosY = 25;
 
             float Ancho_Cuadro = Grafica.Width / No_CuadrosX;
             float Alto_Cuadro = Grafica.Height / No_CuadrosY;

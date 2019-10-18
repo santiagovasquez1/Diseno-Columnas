@@ -53,7 +53,7 @@
             this.Draw_Colum_Alzado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Draw_Colum_Alzado.Location = new System.Drawing.Point(12, 35);
             this.Draw_Colum_Alzado.Name = "Draw_Colum_Alzado";
-            this.Draw_Colum_Alzado.Size = new System.Drawing.Size(847, 580);
+            this.Draw_Colum_Alzado.Size = new System.Drawing.Size(450, 580);
             this.Draw_Colum_Alzado.TabIndex = 12;
             this.Draw_Colum_Alzado.TabStop = false;
             // 
@@ -78,7 +78,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(12, 11);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(239, 628);
+            this.panel1.Size = new System.Drawing.Size(258, 628);
             this.panel1.TabIndex = 27;
             // 
             // Draw_Column
@@ -90,7 +90,7 @@
             this.Draw_Column.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Draw_Column.Location = new System.Drawing.Point(11, 36);
             this.Draw_Column.Name = "Draw_Column";
-            this.Draw_Column.Size = new System.Drawing.Size(213, 581);
+            this.Draw_Column.Size = new System.Drawing.Size(232, 581);
             this.Draw_Column.TabIndex = 12;
             this.Draw_Column.TabStop = false;
             this.Draw_Column.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw_Column_Paint);
@@ -103,7 +103,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(237, 29);
+            this.panel2.Size = new System.Drawing.Size(256, 29);
             this.panel2.TabIndex = 19;
             // 
             // Title_Colum_Model
@@ -126,9 +126,9 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.Draw_Colum_Alzado);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(257, 13);
+            this.panel3.Location = new System.Drawing.Point(276, 13);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(871, 626);
+            this.panel3.Size = new System.Drawing.Size(474, 626);
             this.panel3.TabIndex = 27;
             // 
             // panel4
@@ -139,7 +139,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(869, 29);
+            this.panel4.Size = new System.Drawing.Size(472, 29);
             this.panel4.TabIndex = 19;
             // 
             // Despiece
@@ -147,7 +147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1140, 652);
+            this.ClientSize = new System.Drawing.Size(762, 652);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));

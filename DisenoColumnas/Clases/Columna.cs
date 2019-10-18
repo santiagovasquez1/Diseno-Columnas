@@ -45,6 +45,7 @@ namespace DisenoColumnas.Clases
         public List<Estribo> estribos { get; set; } = new List<Estribo>();
 
 
+        public List<Alzado> Alzados { get; set; } = new List<Alzado>();
 
 
 
@@ -87,6 +88,10 @@ namespace DisenoColumnas.Clases
                     {
                         estribos[i].NoRamasV1 = Convert.ToInt32(Math.Round(Ash / estribos[i].Area < 2 ? 2 : (float)Math.Round(Ash / estribos[i].Area, 2), 2));
                     }
+                    else
+                    {
+                        estribos[i].NoRamasV1 = 0;
+                    }
                     //HORIZONTAL
                     bc = Seccions[i].Item1.H - 2 * r;
 
@@ -99,6 +104,10 @@ namespace DisenoColumnas.Clases
                     if (S != 0 && estribos[i].Area != 0)
                     {
                         estribos[i].NoRamasH1 = Convert.ToInt32(Math.Round(Ash / estribos[i].Area < 2 ? 2 : (float)Math.Round(Ash / estribos[i].Area, 2), 2));
+                    }
+                    else
+                    {
+                        estribos[i].NoRamasH1 = 0;
                     }
                 }
 
