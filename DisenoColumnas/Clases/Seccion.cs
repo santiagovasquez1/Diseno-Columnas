@@ -43,6 +43,9 @@ namespace DisenoColumnas.Clases
 
         public double Area { get; set; }
 
+
+
+
         public List<Point> Vertices { get; set; } = new List<Point>();
 
         private List<float[]> CoordenadasSeccion { get; set; }
@@ -71,6 +74,17 @@ namespace DisenoColumnas.Clases
         {
             throw new NotImplementedException();
         }
+
+
+
+
+
+
+        #region Metodos - Resultados
+
+
+        
+
 
         private void CalcularArea()
         {
@@ -124,5 +138,6 @@ namespace DisenoColumnas.Clases
                 B = (float)DistMayor;
             }
         }
+        #endregion
     }
 }

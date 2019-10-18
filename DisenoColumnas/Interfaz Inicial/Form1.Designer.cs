@@ -45,6 +45,7 @@
             this.plantaDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infromaciónDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dibujoSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estribosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -59,7 +60,7 @@
             this.La_Column = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.cb_cuantiavol = new System.Windows.Forms.Button();
+            this.Cuantia_Vol_Button = new System.Windows.Forms.Button();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -227,7 +228,8 @@
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.plantaDeColumnasToolStripMenuItem,
             this.infromaciónDeColumnasToolStripMenuItem,
-            this.dibujoSecciónToolStripMenuItem});
+            this.dibujoSecciónToolStripMenuItem,
+            this.estribosToolStripMenuItem});
             this.verToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
             this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
@@ -253,6 +255,13 @@
             this.dibujoSecciónToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.dibujoSecciónToolStripMenuItem.Text = "Dibujo Sección";
             this.dibujoSecciónToolStripMenuItem.Click += new System.EventHandler(this.dibujoSecciónToolStripMenuItem_Click);
+            // 
+            // estribosToolStripMenuItem
+            // 
+            this.estribosToolStripMenuItem.Name = "estribosToolStripMenuItem";
+            this.estribosToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.estribosToolStripMenuItem.Text = "Cuantía Volumétrica";
+            this.estribosToolStripMenuItem.Click += new System.EventHandler(this.EstribosToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -300,6 +309,7 @@
             this.PanelContenedor.Name = "PanelContenedor";
             this.PanelContenedor.Size = new System.Drawing.Size(869, 660);
             this.PanelContenedor.TabIndex = 28;
+            this.PanelContenedor.ActiveDocumentChanged += new System.EventHandler(this.PanelContenedor_ActiveDocumentChanged);
             // 
             // toolBar
             // 
@@ -406,23 +416,24 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.Button8_Click);
             // 
-            // cb_cuantiavol
+            // Cuantia_Vol_Button
             // 
-            this.cb_cuantiavol.Enabled = false;
-            this.cb_cuantiavol.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.cb_cuantiavol.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(224)))), ((int)(((byte)(247)))));
-            this.cb_cuantiavol.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(222)))), ((int)(((byte)(245)))));
-            this.cb_cuantiavol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cb_cuantiavol.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_cuantiavol.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.cb_cuantiavol.Image = global::DisenoColumnas.Properties.Resources.image;
-            this.cb_cuantiavol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cb_cuantiavol.Location = new System.Drawing.Point(356, 25);
-            this.cb_cuantiavol.Name = "cb_cuantiavol";
-            this.cb_cuantiavol.Size = new System.Drawing.Size(152, 23);
-            this.cb_cuantiavol.TabIndex = 35;
-            this.cb_cuantiavol.Text = "       Cuantia Volumetrica";
-            this.cb_cuantiavol.UseVisualStyleBackColor = true;
+            this.Cuantia_Vol_Button.Enabled = false;
+            this.Cuantia_Vol_Button.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Cuantia_Vol_Button.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(224)))), ((int)(((byte)(247)))));
+            this.Cuantia_Vol_Button.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(222)))), ((int)(((byte)(245)))));
+            this.Cuantia_Vol_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Cuantia_Vol_Button.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cuantia_Vol_Button.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Cuantia_Vol_Button.Image = global::DisenoColumnas.Properties.Resources.image;
+            this.Cuantia_Vol_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Cuantia_Vol_Button.Location = new System.Drawing.Point(356, 25);
+            this.Cuantia_Vol_Button.Name = "Cuantia_Vol_Button";
+            this.Cuantia_Vol_Button.Size = new System.Drawing.Size(152, 23);
+            this.Cuantia_Vol_Button.TabIndex = 35;
+            this.Cuantia_Vol_Button.Text = "       Cuantia Volumetrica";
+            this.Cuantia_Vol_Button.UseVisualStyleBackColor = true;
+            this.Cuantia_Vol_Button.Click += new System.EventHandler(this.Cb_cuantiavol_Click);
             // 
             // Form1
             // 
@@ -435,7 +446,7 @@
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.cb_cuantiavol);
+            this.Controls.Add(this.Cuantia_Vol_Button);
             this.Controls.Add(this.PanelContenedor);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolBar);
@@ -446,6 +457,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.panel5.ResumeLayout(false);
@@ -489,11 +501,12 @@
         private System.Windows.Forms.ToolStripMenuItem variablesDeEntradaToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label3;
-        internal System.Windows.Forms.Button cb_cuantiavol;
+        internal System.Windows.Forms.Button Cuantia_Vol_Button;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         internal System.Windows.Forms.ComboBox LColumna;
         internal System.Windows.Forms.Label La_Column;
         private System.Windows.Forms.ToolStripMenuItem dibujoSecciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estribosToolStripMenuItem;
     }
 }

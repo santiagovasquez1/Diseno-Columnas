@@ -21,6 +21,7 @@ namespace DisenoColumnas
         public static Despiece m_Despiece;
         public static VariablesdeEntrada variablesdeEntrada;
         public static ComboBox mLcolumnas;
+        public static CuantiaVolumetrica mCuantiaVolumetrica;
 
         private List<string> ArchivoE2K2009ETABS;
         private List<string> ArchivoResultados2009;
@@ -116,13 +117,23 @@ namespace DisenoColumnas
                 }
 
                 m_Informacion = new Informacion();
-                m_Informacion.Show(PanelContenedor);
-
+                try
+                {
+                    m_Informacion.Show(PanelContenedor);
+                }
+                catch { }
                 if (m_Despiece != null)
                 {
                     m_Despiece.DockHandler.DockPanel = null;
                 }
 
+                if (mCuantiaVolumetrica != null)
+                {
+                    mCuantiaVolumetrica.DockHandler.DockPanel = null;
+                }
+
+                mCuantiaVolumetrica = new CuantiaVolumetrica();
+                mCuantiaVolumetrica.Show(PanelContenedor);
 
                 mLcolumnas = LColumna;
                 m_Despiece = new Despiece();
@@ -134,6 +145,7 @@ namespace DisenoColumnas
                 {
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
                 }
+                CreateDidctonary();
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -202,14 +214,32 @@ namespace DisenoColumnas
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
 
+                mCuantiaVolumetrica = new CuantiaVolumetrica();
+                mCuantiaVolumetrica.Show(PanelContenedor);
+
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
 
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
+                CreateDidctonary();
+
             }
         }
 
+
+        private void CreateDidctonary()
+        {
+            Proyecto_.AceroBarras = new Dictionary<int, double>();
+            Proyecto_.AceroBarras.Add(2, 0.32 / 10000);
+            Proyecto_.AceroBarras.Add(3, 0.71 / 10000);
+            Proyecto_.AceroBarras.Add(4, 1.29 / 10000);
+            Proyecto_.AceroBarras.Add(5, 1.99 / 10000);
+            Proyecto_.AceroBarras.Add(6, 2.84 / 10000);
+            Proyecto_.AceroBarras.Add(7, 3.87 / 10000);
+            Proyecto_.AceroBarras.Add(8, 5.10 / 10000);
+            Proyecto_.AceroBarras.Add(10, 8.09 / 10000);
+        }
         private string AbrirE2K2009yCSV2009()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -373,7 +403,7 @@ namespace DisenoColumnas
             {
                 MAT_CONCRETE material = new MAT_CONCRETE();
                 material.Name = Lista_Materiales_Aux2[i][4].Replace("\"", "");
-                material.FC = (float)Convert.ToDouble(Lista_Materiales_Aux2[i][13].Replace("\"", ""));
+                material.FC = (float)Convert.ToDouble(Lista_Materiales_Aux2[i][13].Replace("\"", ""))/10;
                 Proyecto_.Lista_Materiales.Add(material);
             }
 
@@ -688,6 +718,29 @@ namespace DisenoColumnas
                     columna1.LuzLibre.Add(Proyecto_.Stories[i].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
                 }
             }
+
+            //Crear Lista de Estribos;
+
+            foreach(Columna columna2 in Proyecto_.Lista_Columnas)
+            {
+            
+                for (int i = 0; i < columna2.Seccions.Count; i++)
+                {
+                    Estribo estribo=null;
+                    if (columna2.Seccions[i].Item1 != null)
+                    {
+                        estribo = new Estribo(0);
+                    }
+                     columna2.estribos.Add(estribo);
+                  }
+
+
+            }
+
+
+
+
+
         }
 
         private void PlantaDeColumnasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -739,6 +792,21 @@ namespace DisenoColumnas
         {
             if (variablesdeEntrada != null)
             {
+                if (Proyecto_ != null)
+                {
+                    if(Proyecto_.DMO_DES == GDE.DMO)
+                    {
+                        variablesdeEntrada.Radio_Dmo.Checked=true;
+                    }else if(Proyecto_.DMO_DES== GDE.DES)
+                    {
+                        variablesdeEntrada.Radio_Des.Checked = true;
+                    }
+
+                    variablesdeEntrada.T_Vf.Text = Proyecto_.e_Fundacion.ToString();
+                    variablesdeEntrada.T_arranque.Text= Proyecto_.Nivel_Fundacion.ToString();
+                    variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
+                }
+
                 variablesdeEntrada.ShowDialog();
             }
             else
@@ -750,6 +818,10 @@ namespace DisenoColumnas
 
 
 
+
+
+
+
         private void LColumna_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (LColumna.Text != "")
@@ -758,6 +830,7 @@ namespace DisenoColumnas
                 m_Informacion.Invalidate();
                 m_PlantaColumnas.Invalidate();
                 m_Despiece.Invalidate();
+                mCuantiaVolumetrica.Invalidate();
             }
         }
 
@@ -790,7 +863,60 @@ namespace DisenoColumnas
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-         
+            
+        }
+
+        private void EstribosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (mCuantiaVolumetrica.Created == false)
+            {
+                mCuantiaVolumetrica = new CuantiaVolumetrica();
+            }
+            mCuantiaVolumetrica.Show(PanelContenedor);
+
+        }
+
+        private void Cb_cuantiavol_Click(object sender, EventArgs e)
+        {
+            if (Proyecto_.ColumnaSelect != null) {
+
+                float FD1, FD2;
+
+
+                if(Proyecto_.DMO_DES == GDE.DMO)
+                {
+                    FD1 = 0.20f;
+                    FD2 = 0.06f;
+                }
+                else
+                {
+                    FD1 = 0.30f;
+                    FD2 = 0.09f;
+                }
+
+                Proyecto_.ColumnaSelect.CalcularCuantiaVolumetrica(FD1, FD2,Proyecto_.R/100,Proyecto_.FY);
+                mCuantiaVolumetrica.Invalidate();
+               }
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PanelContenedor_ActiveDocumentChanged(object sender, EventArgs e)
+        {
+            if (mCuantiaVolumetrica != null)
+            {
+                if (PanelContenedor.ActiveDocument == mCuantiaVolumetrica)
+                {
+                    Cuantia_Vol_Button.Enabled = true;
+                }
+                else
+                {
+                    Cuantia_Vol_Button.Enabled = false;
+                }
+            }
         }
     }
 }

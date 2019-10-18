@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.Info_D = new System.Windows.Forms.DataGridView();
+            this.NameColum = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Column1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.Column2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.B = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
@@ -38,8 +40,6 @@
             this.Locali = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AceroR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Asasign = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameColum = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.Info_D)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,12 +63,23 @@
             this.AceroR,
             this.Asasign});
             this.Info_D.GridColor = System.Drawing.Color.DarkGray;
-            this.Info_D.Location = new System.Drawing.Point(12, 53);
+            this.Info_D.Location = new System.Drawing.Point(12, 46);
             this.Info_D.Name = "Info_D";
             this.Info_D.ReadOnly = true;
-            this.Info_D.Size = new System.Drawing.Size(771, 476);
+            this.Info_D.Size = new System.Drawing.Size(1042, 476);
             this.Info_D.TabIndex = 0;
             this.Info_D.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGridView1_Paint);
+            // 
+            // NameColum
+            // 
+            this.NameColum.AutoSize = true;
+            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NameColum.Location = new System.Drawing.Point(21, 20);
+            this.NameColum.Name = "NameColum";
+            this.NameColum.Size = new System.Drawing.Size(56, 14);
+            this.NameColum.TabIndex = 0;
+            this.NameColum.Text = "Columna: ";
             // 
             // Column1
             // 
@@ -138,20 +149,12 @@
             // 
             // Asasign
             // 
+            this.Asasign.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Asasign.HeaderText = "Acero Asignado [cm²]";
             this.Asasign.Name = "Asasign";
             this.Asasign.ReadOnly = true;
-            // 
-            // NameColum
-            // 
-            this.NameColum.AutoSize = true;
-            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NameColum.Location = new System.Drawing.Point(22, 24);
-            this.NameColum.Name = "NameColum";
-            this.NameColum.Size = new System.Drawing.Size(56, 14);
-            this.NameColum.TabIndex = 0;
-            this.NameColum.Text = "Columna: ";
+            this.Asasign.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Asasign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Informacion
             // 
