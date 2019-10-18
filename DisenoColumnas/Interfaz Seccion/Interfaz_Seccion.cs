@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -12,13 +13,14 @@ namespace DisenoColumnas.Interfaz_Seccion
     public partial class FInterfaz_Seccion : DockContent
     {
         private string Nombre_Columna { get; set; }
+        private bool Over { get; set; } = false;
         private double Xmax { get; set; } = 150; //[cm]
         private double Ymax { get; set; } = 75;  //[cm]
         private List<PointF> Vertices { get; set; } = new List<PointF>();
+        private static Fseleccion_Columnas Fseleccion_Columnas { get; set; }
 
         public FInterfaz_Seccion()
         {
-
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
             Grafica.Invalidate();
@@ -38,7 +40,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (Columna_i != null)
             {
-
                 Seccion seccion_i = Columna_i.Seccions[0].Item1;
 
                 Graphics g = e.Graphics;
@@ -50,11 +51,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_grilla(g, Grafica.Height, Grafica.Width);
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
-                Dibujo_Seccion(g, seccion_i, Grafica.Height, Grafica.Width);
-
+                Dibujo_Seccion(g, seccion_i, Grafica.Height, Grafica.Width, Over);
             }
-
-
         }
 
         private void Crear_grilla(Graphics g, int Height, int Width)
@@ -71,6 +69,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Color = Color.LightGray,
                 Alignment = System.Drawing.Drawing2D.PenAlignment.Center
             };
+
             SolidBrush br = new SolidBrush(Color.LightGray);
 
             for (int i = 1; i < No_CuadrosX; i++)
@@ -106,7 +105,57 @@ namespace DisenoColumnas.Interfaz_Seccion
             g.DrawLine(P2, new Point(0, 0), new Point(0, -Height / 20));
         }
 
+        private void Grafica_Click(object sender, EventArgs e)
+        {
+        }
+
         #endregion Metodos de picture box
+
+        private bool MouseOverPoligono(PointF mouse_pt)
+        {
+            GraphicsPath path = new GraphicsPath();
+            PointF Temp;
+            float X_r, Y_r;
+
+            X_r = mouse_pt.X - Grafica.Width / 2;
+            Y_r = mouse_pt.Y - Grafica.Height / 2;
+
+            Temp = new PointF(X_r, Y_r);
+            path.AddPolygon(Vertices.ToArray());
+
+            if (path.IsVisible(Temp))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool MouseOverPoint(PointF mouse_pt)
+        {
+            PointF Temp;
+            float X_r, Y_r;
+
+            X_r = mouse_pt.X - Grafica.Width / 2;
+            Y_r = mouse_pt.Y - Grafica.Height / 2;
+            Temp = new PointF(X_r, Y_r);
+
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(Vertices.ToArray());
+
+            var pr = path.PathPoints;
+
+            foreach (PointF pi in path.PathPoints)
+            {
+                if (Temp.X == pi.X & Temp.Y == pi.Y)
+                {
+                    return true;
+                    break;
+                }
+            }
+
+            return false;
+        }
 
         private void FInterfaz_Seccion_Paint(object sender, PaintEventArgs e)
         {
@@ -133,7 +182,30 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Grafica_MouseMove(object sender, MouseEventArgs e)
         {
+            Cursor new_cursor = Cursors.Default;
             Grafica.MouseMove += Get_coordinates;
+
+            if (MouseOverPoligono(e.Location))
+            {
+                new_cursor = Cursors.Hand;
+            }
+
+            if (Grafica.Cursor != new_cursor)
+            {
+                Grafica.Cursor = new_cursor;
+            }
+        }
+
+        private void Seleccionar(object sender, MouseEventArgs e)
+        {
+            Over = false;
+            if (MouseOverPoligono(e.Location))
+            {
+                Over = true;
+                Grafica.Invalidate();
+                Fseleccion_Columnas = new Fseleccion_Columnas();
+                Fseleccion_Columnas.Show();
+            }
         }
 
         private void Get_coordinates(object sender, MouseEventArgs e)
@@ -157,11 +229,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             fseleccion.ShowDialog();
         }
 
-        private void Dibujo_Seccion(Graphics g, Seccion seccioni, int Height, int Width)
+        private void Dibujo_Seccion(Graphics g, Seccion seccioni, int Height, int Width, bool seleccion)
         {
             double X, Y;
             //SolidBrush br = new SolidBrush(Color.Gray));
-            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            SolidBrush br = seleccion == false ? new SolidBrush(Color.FromArgb(150, Color.Gray)) : new SolidBrush(Color.FromArgb(250, Color.DarkGray));
 
             Pen P1 = new Pen(Color.Black, 2.5f)
             {
@@ -237,6 +309,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             if (seccioni.Shape == TipodeSeccion.L)
             {
                 #region Vertices
+
                 X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
                 Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
                 Vertices.Add(new PointF((float)X, (float)Y));
@@ -246,7 +319,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Vertices.Add(new PointF((float)X, (float)Y));
 
                 X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y= ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Y = ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
                 Vertices.Add(new PointF((float)X, (float)Y));
 
                 X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;
@@ -260,7 +333,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
                 Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
                 Vertices.Add(new PointF((float)X, (float)Y));
-                #endregion
+
+                #endregion Vertices
             }
 
             if (seccioni.Shape != TipodeSeccion.Circle)
@@ -273,8 +347,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
         }
 
-        private void Grafica_Click(object sender, EventArgs e)
+        private void Grafica_MouseDown(object sender, MouseEventArgs e)
         {
+            Seleccionar(sender, e);
+            //Grafica.MouseDown+=Seleccionar;
+            //Grafica.MouseDown -= Seleccionar;
         }
     }
 }
