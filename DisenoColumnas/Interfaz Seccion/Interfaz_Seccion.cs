@@ -16,9 +16,9 @@ namespace DisenoColumnas.Interfaz_Seccion
         private double Ymax { get; set; } = 75;  //[cm]
         private List<PointF> Vertices { get; set; } = new List<PointF>();
 
-        public FInterfaz_Seccion(string pColumna)
+        public FInterfaz_Seccion()
         {
-            Nombre_Columna = pColumna;
+
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
             Grafica.Invalidate();
@@ -35,18 +35,26 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             int X, Y;
             Columna Columna_i = Form1.Proyecto_.ColumnaSelect;
-            Seccion seccion_i = Columna_i.Seccions[0].Item1;
 
-            Graphics g = e.Graphics;
-            Grafica.CreateGraphics().Clear(Color.White);
+            if (Columna_i != null)
+            {
 
-            X = Grafica.Width / 2;
-            Y = Grafica.Height / 2;
+                Seccion seccion_i = Columna_i.Seccions[0].Item1;
 
-            Crear_grilla(g, Grafica.Height, Grafica.Width);
-            g.TranslateTransform(X, Y);
-            Crear_ejes(g, Grafica.Height, Grafica.Width);
-            Dibujo_Seccion(g, seccion_i, Grafica.Height, Grafica.Width);
+                Graphics g = e.Graphics;
+                Grafica.CreateGraphics().Clear(Color.White);
+
+                X = Grafica.Width / 2;
+                Y = Grafica.Height / 2;
+
+                Crear_grilla(g, Grafica.Height, Grafica.Width);
+                g.TranslateTransform(X, Y);
+                Crear_ejes(g, Grafica.Height, Grafica.Width);
+                Dibujo_Seccion(g, seccion_i, Grafica.Height, Grafica.Width);
+
+            }
+
+
         }
 
         private void Crear_grilla(Graphics g, int Height, int Width)

@@ -20,6 +20,10 @@ namespace DisenoColumnas
         public static VariablesdeEntrada variablesdeEntrada;
         public static ComboBox mLcolumnas;
         public static CuantiaVolumetrica mCuantiaVolumetrica;
+        public static FInterfaz_Seccion mIntefazSeccion;
+
+
+
 
         private List<string> ArchivoE2K2009ETABS;
         private List<string> ArchivoResultados2009;
@@ -817,8 +821,10 @@ namespace DisenoColumnas
                 m_Informacion.Invalidate();
                 m_PlantaColumnas.Invalidate();
                 m_Despiece.Invalidate();
-                FInterfaz_Seccion seccion = new FInterfaz_Seccion(LColumna.Text);
-                seccion.Invalidate();
+                if (mIntefazSeccion != null)
+                {
+                    mIntefazSeccion.Invalidate();
+                }
             }
         }
 
@@ -844,8 +850,19 @@ namespace DisenoColumnas
 
         private void dibujoSecciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FInterfaz_Seccion interfaz_Seccion = new FInterfaz_Seccion(LColumna.Text);
-            interfaz_Seccion.Show(PanelContenedor);
+            if (mIntefazSeccion != null)
+            {
+                if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
+                {
+                    mIntefazSeccion = new FInterfaz_Seccion();
+                }
+
+            }
+            else
+            {
+                mIntefazSeccion = new FInterfaz_Seccion();
+            }
+            mIntefazSeccion.Show(PanelContenedor);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

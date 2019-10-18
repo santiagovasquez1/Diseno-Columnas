@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using DisenoColumnas.Interfaz_Seccion;
 
 namespace DisenoColumnas.DefinirColumnas
 {
@@ -100,7 +101,12 @@ namespace DisenoColumnas.DefinirColumnas
                 Form1.Proyecto_.ColumnaSelect = columna.MouseDown(e);
                 Grafica.Invalidate();
 
-                if (Form1.Proyecto_.ColumnaSelect != null) { Form1.mLcolumnas.Text= Form1.Proyecto_.ColumnaSelect.Name;  break; }
+                if (Form1.Proyecto_.ColumnaSelect != null)
+                {
+                    Form1.mLcolumnas.Text = Form1.Proyecto_.ColumnaSelect.Name;
+                 
+                    break;
+                }
                
             }
 
@@ -113,6 +119,12 @@ namespace DisenoColumnas.DefinirColumnas
                     Form1.m_Informacion.Invalidate();
                     Form1.m_Despiece.Invalidate();
                     Form1.mCuantiaVolumetrica.Invalidate();
+                    if (Form1.mIntefazSeccion != null)
+                    {
+                        Form1.mIntefazSeccion.Invalidate();
+                    }
+
+
 
                 }
             }
