@@ -1,5 +1,6 @@
 ﻿using DisenoColumnas.Clases;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -10,11 +11,14 @@ namespace DisenoColumnas.Interfaz_Seccion
 
     public partial class FInterfaz_Seccion : DockContent
     {
+        private string Nombre_Columna { get; set; }
         private double Xmax { get; set; } = 150; //[cm]
         private double Ymax { get; set; } = 75;  //[cm]
+        private List<PointF> Vertices { get; set; } = new List<PointF>();
 
-        public FInterfaz_Seccion()
+        public FInterfaz_Seccion(string pColumna)
         {
+            Nombre_Columna = pColumna;
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
             Grafica.Invalidate();
@@ -30,7 +34,6 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Grafica_Paint(object sender, PaintEventArgs e)
         {
             int X, Y;
-            int indice;
             Columna Columna_i = Form1.Proyecto_.ColumnaSelect;
             Seccion seccion_i = Columna_i.Seccions[0].Item1;
 
@@ -43,6 +46,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             Crear_grilla(g, Grafica.Height, Grafica.Width);
             g.TranslateTransform(X, Y);
             Crear_ejes(g, Grafica.Height, Grafica.Width);
+            Dibujo_Seccion(g, seccion_i, Grafica.Height, Grafica.Width);
         }
 
         private void Crear_grilla(Graphics g, int Height, int Width)
@@ -145,9 +149,124 @@ namespace DisenoColumnas.Interfaz_Seccion
             fseleccion.ShowDialog();
         }
 
+        private void Dibujo_Seccion(Graphics g, Seccion seccioni, int Height, int Width)
+        {
+            double X, Y;
+            //SolidBrush br = new SolidBrush(Color.Gray));
+            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+
+            Pen P1 = new Pen(Color.Black, 2.5f)
+            {
+                Brush = Brushes.Gray,
+                Color = Color.Black,
+                Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+            };
+
+            Vertices = new List<PointF>();
+
+            if (seccioni.Shape == TipodeSeccion.Rectangular)
+            {
+                #region Vertices
+
+                X = -((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+                Y = -((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = ((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+                Y = -((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = ((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+                Y = ((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = -((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+                Y = ((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                #endregion Vertices
+            }
+
+            if (seccioni.Shape == TipodeSeccion.Tee)
+            {
+                #region Vertices
+
+                X = -(seccioni.TW * 100 / 2 * (Width / 2)) / Xmax;
+                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
+                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
+                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = -seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = -seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = -seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
+                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                #endregion Vertices
+            }
+
+            if (seccioni.Shape == TipodeSeccion.L)
+            {
+                #region Vertices
+                X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
+                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+                Y= ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;
+                Y = ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;
+                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+
+                X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
+                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+                Vertices.Add(new PointF((float)X, (float)Y));
+                #endregion
+            }
+
+            if (seccioni.Shape != TipodeSeccion.Circle)
+            {
+                g.FillPolygon(br, Vertices.ToArray());
+                g.DrawPolygon(P1, Vertices.ToArray());
+            }
+            else
+            {
+            }
+        }
+
         private void Grafica_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

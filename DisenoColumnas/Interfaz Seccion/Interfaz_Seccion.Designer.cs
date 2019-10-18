@@ -169,7 +169,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox Grafica;
+        public  System.Windows.Forms.PictureBox Grafica;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton BSeleccionar_columna;
         private System.Windows.Forms.ToolStripButton BSeleccion;

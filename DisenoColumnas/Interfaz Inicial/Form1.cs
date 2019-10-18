@@ -733,12 +733,16 @@ namespace DisenoColumnas
 
         private void LColumna_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+
             if (LColumna.Text != "")
             {
                 Proyecto_.ColumnaSelect = Proyecto_.Lista_Columnas.Find(x => x.Name == LColumna.Text);
                 m_Informacion.Invalidate();
                 m_PlantaColumnas.Invalidate();
                 m_Despiece.Invalidate();
+                FInterfaz_Seccion seccion = new FInterfaz_Seccion(LColumna.Text);
+                seccion.Invalidate();
             }
         }
 
@@ -764,7 +768,7 @@ namespace DisenoColumnas
 
         private void dibujoSecciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FInterfaz_Seccion interfaz_Seccion = new FInterfaz_Seccion();
+            FInterfaz_Seccion interfaz_Seccion = new FInterfaz_Seccion(LColumna.Text);
             interfaz_Seccion.Show(PanelContenedor);
         }
 
