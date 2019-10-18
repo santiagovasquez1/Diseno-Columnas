@@ -43,6 +43,9 @@ namespace DisenoColumnas.Clases
 
         public double Area { get; set; }
 
+
+
+
         public List<Point> Vertices { get; set; } = new List<Point>();
 
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
@@ -73,6 +76,17 @@ namespace DisenoColumnas.Clases
         {
             throw new NotImplementedException();
         }
+
+
+
+
+
+
+        #region Metodos - Resultados
+
+
+        
+
 
         private void CalcularArea()
         {
@@ -126,5 +140,6 @@ namespace DisenoColumnas.Clases
                 B = (float)DistMayor;
             }
         }
+        #endregion
     }
 }

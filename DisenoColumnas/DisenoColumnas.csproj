@@ -58,13 +58,17 @@
     <Compile Include="Clases\Columna.cs" />
     <Compile Include="Clases\ColumnaAlzadoDrawing.cs" />
     <Compile Include="Clases\CRefuerzo.cs" />
+    <Compile Include="Clases\Estribo.cs" />
     <Compile Include="Clases\IEvenetosSeccion.cs" />
     <Compile Include="Clases\ResultadosETABS.cs" />
     <Compile Include="Clases\Material.cs" />
     <Compile Include="Clases\Seccion.cs" />
     <Compile Include="Clases\Viga.cs" />
-    <Compile Include="Controles\CDoubleBufferedPictureBox.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Diseño\CuantiVolumetrica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diseño\CuantiVolumetrica.Designer.cs">
+      <DependentUpon>CuantiVolumetrica.cs</DependentUpon>
     </Compile>
     <Compile Include="Diseño\Despiece.cs">
       <SubType>Form</SubType>
@@ -118,6 +122,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilidades\MovimientoPantalla.cs" />
+    <EmbeddedResource Include="Diseño\CuantiVolumetrica.resx">
+      <DependentUpon>CuantiVolumetrica.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Diseño\Despiece.resx">
       <DependentUpon>Despiece.cs</DependentUpon>
     </EmbeddedResource>

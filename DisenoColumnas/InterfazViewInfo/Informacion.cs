@@ -77,7 +77,7 @@ namespace DisenoColumnas.InterfazViewInfo
 
                         Info_D.Rows[Info_D.Rows.Count - 3].Cells["Locali"].Value = "Top";
                         Info_D.Rows[Info_D.Rows.Count - 2].Cells["Locali"].Value = "Medium";
-                        Info_D.Rows[Info_D.Rows.Count - 1].Cells["Locali"].Value = "Button";
+                        Info_D.Rows[Info_D.Rows.Count - 1].Cells["Locali"].Value = "Bottom";
 
 
                         double ptop = ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0] / ColumnaSelect.Seccions[i].Item1.Area;

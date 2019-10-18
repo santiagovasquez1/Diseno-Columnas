@@ -8,11 +8,125 @@ namespace DisenoColumnas.Clases
     [Serializable]
     public class Columna
     {
+        #region Constructor
         public Columna(string Nombre)
         {
             Name = Nombre;
         }
+        #endregion
 
+
+        #region Propiedades- Paint
+
+        [NonSerialized]
+        public Brush BrushesColor = Brushes.Black;
+        private float w;
+        private float h;
+        private float X_Colum;
+        private float Y_Colum;
+        public string Point { get; set; }
+        private ColumnaAlzadoDrawing CoordForAlzado1 { get; set; }
+        public int StoryMostrar { get; set; } = -1;
+        public double[] CoordXY { get; set; } = new double[2];   /// Cordenadas en Planta
+        #endregion
+
+
+        #region Propeidades - Calculos
+        public string Name { get; set; }
+
+
+        public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>();
+        public Viga VigaMayor { get; set; }
+
+        public List<float> LuzLibre { get; set; }
+
+        public List<ResultadosETABS> resultadosETABs { get; set; }
+
+        public List<Estribo> estribos { get; set; } = new List<Estribo>();
+
+
+
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+        #region Metodos-Calculos
+
+        public void CalcularCuantiaVolumetrica(float FactorDisipacion1, float FactorDisipacion2, float r, float FY)
+        {
+            double Ash1, Ash2, Ash;
+
+            for (int i = 0; i < Seccions.Count; i++)
+            {
+
+
+                if (Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
+                {
+
+
+                    //VERTICAL
+                    float Ach = (Seccions[i].Item1.B - 2 * r) * (Seccions[i].Item1.H - 2 * r);
+                    float bc = Seccions[i].Item1.B - 2 * r;
+                    float S = estribos[i].Separacion / 100;
+
+
+                    Ash1 = (FactorDisipacion1 * S * bc * Seccions[i].Item1.Material.FC / FY) * (Seccions[i].Item1.Area / Ach - 1);  //C.21-2
+
+                    Ash2 = FactorDisipacion2 * S * bc * Seccions[i].Item1.Material.FC / FY;  //C.21-3
+
+                    Ash = Ash1 > Ash2 ? Ash1 : Ash2;
+                    if (S != 0 && estribos[i].Area !=0)
+                    {
+                        estribos[i].NoRamasV1 = Convert.ToInt32(Math.Round(Ash / estribos[i].Area < 2 ? 2 : (float)Math.Round(Ash / estribos[i].Area, 2), 2));
+                    }
+                    //HORIZONTAL
+                    bc = Seccions[i].Item1.H - 2 * r;
+
+                    Ash1 = (FactorDisipacion1 * S * bc * Seccions[i].Item1.Material.FC / FY) * (Seccions[i].Item1.Area / Ach - 1);  //C.21-2
+
+                    Ash2 = FactorDisipacion2 * S * bc * Seccions[i].Item1.Material.FC / FY;  //C.21-3
+
+                    Ash = Ash1 > Ash2 ? Ash1 : Ash2;
+
+                    if (S != 0 && estribos[i].Area != 0)
+                    {
+                        estribos[i].NoRamasH1 = Convert.ToInt32(Math.Round(Ash / estribos[i].Area < 2 ? 2 : (float)Math.Round(Ash / estribos[i].Area, 2), 2));
+                    }
+                }
+
+
+            }
+        }
+
+
+
+        public void AsignarAsTopMediumButton_()
+        {
+            for (int i = 0; i < resultadosETABs.Count; i++) { resultadosETABs[i].AsignarAsTopMediumButton(); }
+        }
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
+
+        #region MetodosPaint
         public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI)
         {
             if (CoordXY[0] < 0)
@@ -48,6 +162,7 @@ namespace DisenoColumnas.Clases
 
             graphics.FillRectangle(BrushesColor, X_Colum, Y_Colum, w, h);
 
+
             float Tamano_Text = (SX + SY) * 0.6f * 0.3f;
             float X_string = X_Colum + w;
 
@@ -75,36 +190,10 @@ namespace DisenoColumnas.Clases
             }
         }
 
-        [NonSerialized]
-        public Brush BrushesColor = Brushes.Black;
 
-        private float w;
-        private float h;
-        private float X_Colum;
-        private float Y_Colum;
-
-        public string Name { get; set; }
-        public double[] CoordXY { get; set; } = new double[2];   /// Cordenadas en Planta
-
-        public string Point { get; set; }
-
-        public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>(); //Item 1 es la seccion, item2 es el piso
-        public Viga VigaMayor { get; set; }
-
-        public List<float> LuzLibre { get; set; }
-
-        public List<ResultadosETABS> resultadosETABs { get; set; }
-
-        private ColumnaAlzadoDrawing CoordForAlzado1 { get; set; }
-
-        public int StoryMostrar { get; set; } = -1; 
         private void CoordAlzado()
         {
             CoordForAlzado1 = new ColumnaAlzadoDrawing(this);
-        }
-        public void AsignarAsTopMediumButton_()
-        {
-            for( int i=0;i< resultadosETABs.Count; i++) { resultadosETABs[i].AsignarAsTopMediumButton(); }
         }
 
 
@@ -189,5 +278,8 @@ namespace DisenoColumnas.Clases
             Pen_Nivel.DashPattern = new float[] { 5, 2, 15, 4 };
             e.Graphics.DrawLine(Pen_Nivel, x5, y5, x6, y6);
         }
+
+
+        #endregion
     }
 }
