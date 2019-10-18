@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.Info_D = new System.Windows.Forms.DataGridView();
-            this.NameColum = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Column1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.Column2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.B = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
@@ -40,6 +38,9 @@
             this.Locali = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AceroR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Asasign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Porc_Ref = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameColum = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.Info_D)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,25 +62,15 @@
             this.TF,
             this.Locali,
             this.AceroR,
-            this.Asasign});
+            this.Asasign,
+            this.Porc_Ref});
             this.Info_D.GridColor = System.Drawing.Color.DarkGray;
-            this.Info_D.Location = new System.Drawing.Point(12, 46);
+            this.Info_D.Location = new System.Drawing.Point(12, 29);
             this.Info_D.Name = "Info_D";
             this.Info_D.ReadOnly = true;
-            this.Info_D.Size = new System.Drawing.Size(1042, 476);
+            this.Info_D.Size = new System.Drawing.Size(1013, 458);
             this.Info_D.TabIndex = 0;
             this.Info_D.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGridView1_Paint);
-            // 
-            // NameColum
-            // 
-            this.NameColum.AutoSize = true;
-            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NameColum.Location = new System.Drawing.Point(21, 20);
-            this.NameColum.Name = "NameColum";
-            this.NameColum.Size = new System.Drawing.Size(56, 14);
-            this.NameColum.TabIndex = 0;
-            this.NameColum.Text = "Columna: ";
             // 
             // Column1
             // 
@@ -92,7 +83,7 @@
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "F\'c";
+            this.Column2.HeaderText = "F\'c [kgf/cm²]";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -100,7 +91,7 @@
             // B
             // 
             this.B.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.B.HeaderText = "B";
+            this.B.HeaderText = "B [cm]";
             this.B.Name = "B";
             this.B.ReadOnly = true;
             this.B.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -108,7 +99,7 @@
             // H
             // 
             this.H.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.H.HeaderText = "H";
+            this.H.HeaderText = "H [cm]";
             this.H.Name = "H";
             this.H.ReadOnly = true;
             this.H.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -116,7 +107,7 @@
             // TW
             // 
             this.TW.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TW.HeaderText = "Tw";
+            this.TW.HeaderText = "Tw [cm]";
             this.TW.Name = "TW";
             this.TW.ReadOnly = true;
             this.TW.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -124,7 +115,7 @@
             // TF
             // 
             this.TF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TF.HeaderText = "Tf";
+            this.TF.HeaderText = "Tf [cm]";
             this.TF.Name = "TF";
             this.TF.ReadOnly = true;
             this.TF.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -156,12 +147,31 @@
             this.Asasign.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Asasign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // Porc_Ref
+            // 
+            this.Porc_Ref.HeaderText = "%Ref";
+            this.Porc_Ref.Name = "Porc_Ref";
+            this.Porc_Ref.ReadOnly = true;
+            this.Porc_Ref.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Porc_Ref.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // NameColum
+            // 
+            this.NameColum.AutoSize = true;
+            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NameColum.Location = new System.Drawing.Point(12, 9);
+            this.NameColum.Name = "NameColum";
+            this.NameColum.Size = new System.Drawing.Size(56, 14);
+            this.NameColum.TabIndex = 0;
+            this.NameColum.Text = "Columna: ";
+            // 
             // Informacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1066, 535);
+            this.ClientSize = new System.Drawing.Size(1037, 499);
             this.Controls.Add(this.NameColum);
             this.Controls.Add(this.Info_D);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
@@ -176,8 +186,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView Info_D;
         public  System.Windows.Forms.Label NameColum;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column1;
@@ -189,5 +197,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Locali;
         private System.Windows.Forms.DataGridViewTextBoxColumn AceroR;
         private System.Windows.Forms.DataGridViewTextBoxColumn Asasign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Porc_Ref;
+        internal System.Windows.Forms.DataGridView Info_D;
     }
 }

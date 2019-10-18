@@ -46,6 +46,7 @@
             this.infromaciónDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dibujoSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estribosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -58,6 +59,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.LColumna = new System.Windows.Forms.ComboBox();
             this.La_Column = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Button_Agregar = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.Cuantia_Vol_Button = new System.Windows.Forms.Button();
@@ -229,7 +232,8 @@
             this.plantaDeColumnasToolStripMenuItem,
             this.infromaciónDeColumnasToolStripMenuItem,
             this.dibujoSecciónToolStripMenuItem,
-            this.estribosToolStripMenuItem});
+            this.estribosToolStripMenuItem,
+            this.agregarAlzadoToolStripMenuItem});
             this.verToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
             this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
@@ -262,6 +266,13 @@
             this.estribosToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.estribosToolStripMenuItem.Text = "Cuantía Volumétrica";
             this.estribosToolStripMenuItem.Click += new System.EventHandler(this.EstribosToolStripMenuItem_Click);
+            // 
+            // agregarAlzadoToolStripMenuItem
+            // 
+            this.agregarAlzadoToolStripMenuItem.Name = "agregarAlzadoToolStripMenuItem";
+            this.agregarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.agregarAlzadoToolStripMenuItem.Text = "Agregar Alzado";
+            this.agregarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregarAlzadoToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -309,7 +320,7 @@
             this.PanelContenedor.Name = "PanelContenedor";
             this.PanelContenedor.Size = new System.Drawing.Size(869, 660);
             this.PanelContenedor.TabIndex = 28;
-            this.PanelContenedor.ActiveDocumentChanged += new System.EventHandler(this.PanelContenedor_ActiveDocumentChanged);
+            this.PanelContenedor.ActivePaneChanged += new System.EventHandler(this.PanelContenedor_ActivePaneChanged);
             // 
             // toolBar
             // 
@@ -384,6 +395,38 @@
             this.La_Column.TabIndex = 40;
             this.La_Column.Text = "Columna:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(509, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 19);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "|";
+            // 
+            // Button_Agregar
+            // 
+            this.Button_Agregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Agregar.Enabled = false;
+            this.Button_Agregar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Agregar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(224)))), ((int)(((byte)(247)))));
+            this.Button_Agregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(222)))), ((int)(((byte)(245)))));
+            this.Button_Agregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Agregar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Agregar.ForeColor = System.Drawing.Color.White;
+            this.Button_Agregar.Image = global::DisenoColumnas.Properties.Resources.vcsadded_93506x16;
+            this.Button_Agregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_Agregar.Location = new System.Drawing.Point(523, 26);
+            this.Button_Agregar.Name = "Button_Agregar";
+            this.Button_Agregar.Size = new System.Drawing.Size(76, 24);
+            this.Button_Agregar.TabIndex = 43;
+            this.Button_Agregar.Text = "     Agregar";
+            this.Button_Agregar.UseVisualStyleBackColor = false;
+            this.Button_Agregar.Click += new System.EventHandler(this.Button_Agregar_Click);
+            // 
             // button7
             // 
             this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
@@ -441,6 +484,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
             this.ClientSize = new System.Drawing.Size(1069, 733);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Button_Agregar);
             this.Controls.Add(this.La_Column);
             this.Controls.Add(this.LColumna);
             this.Controls.Add(this.button7);
@@ -508,5 +553,8 @@
         internal System.Windows.Forms.Label La_Column;
         private System.Windows.Forms.ToolStripMenuItem dibujoSecciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem estribosToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button Button_Agregar;
+        private System.Windows.Forms.ToolStripMenuItem agregarAlzadoToolStripMenuItem;
     }
 }

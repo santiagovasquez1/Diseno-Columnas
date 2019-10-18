@@ -115,22 +115,23 @@ namespace DisenoColumnas.InterfazViewInfo
 
 
 
-                        if (ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.Rectangular)
-                        {
+                        float FCMetros = 100;
 
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H;
+                        if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
+                        {
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
                             Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Style.BackColor = Color.LightGray;
 
 
-                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
-                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["TW"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["TF"].Style.BackColor = Color.LightGray;
 
-                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
-                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["TW"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
 
@@ -145,19 +146,19 @@ namespace DisenoColumnas.InterfazViewInfo
                         if (ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.Circle)
                         {
 
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
                             Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Style.BackColor = Color.LightGray;
 
 
-                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["TW"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["TF"].Style.BackColor = Color.LightGray;
 
 
-                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["H"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["TW"].Style.BackColor = Color.LightGray;
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
@@ -171,22 +172,23 @@ namespace DisenoColumnas.InterfazViewInfo
 
                         if (ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
                         {
+                           
 
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H;
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW;
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B* FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H* FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW* FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF* FCMetros;
 
-                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
-                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H;
-                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW;
-                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
 
 
-                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B;
-                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H;
-                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW;
-                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
 
                             DataGridViewTextBoxCellEx cell3 = (DataGridViewTextBoxCellEx)Info_D["B", Info_D.Rows.Count - 3];
                             DataGridViewTextBoxCellEx cell4 = (DataGridViewTextBoxCellEx)Info_D["H",  Info_D.Rows.Count - 3];
@@ -219,7 +221,7 @@ namespace DisenoColumnas.InterfazViewInfo
         {
             DataGridViewCellStyle StyleC = new DataGridViewCellStyle();
             StyleC.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            StyleC.Font = new Font("Vderdana", 8, FontStyle.Regular);
+            StyleC.Font = new Font("Vderdana", 8, FontStyle.Bold);
 
             DataGridViewCellStyle StyleR = new DataGridViewCellStyle();
             StyleR.Alignment = DataGridViewContentAlignment.MiddleCenter;

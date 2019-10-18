@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace DisenoColumnas
 {
@@ -21,6 +22,7 @@ namespace DisenoColumnas
         public static ComboBox mLcolumnas;
         public static CuantiaVolumetrica mCuantiaVolumetrica;
         public static FInterfaz_Seccion mIntefazSeccion;
+        public static AgregarAlzado mAgregarAlzado;
 
 
 
@@ -132,6 +134,16 @@ namespace DisenoColumnas
                     mCuantiaVolumetrica.DockHandler.DockPanel = null;
                 }
 
+                if (mAgregarAlzado != null)
+                {
+                    mAgregarAlzado.DockHandler.DockPanel = null;
+                }
+                mAgregarAlzado = new AgregarAlzado();
+
+  
+                mAgregarAlzado.Show(PanelContenedor);
+
+
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
@@ -216,12 +228,12 @@ namespace DisenoColumnas
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
+                mAgregarAlzado= new AgregarAlzado();
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
 
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
-                CreateDidctonary();
 
             }
         }
@@ -323,6 +335,7 @@ namespace DisenoColumnas
         private void CrearObjetosNecesarios()
         {
             //STORIES
+            CreateDidctonary();
 
             List<List<string>> Stories = new List<List<string>>();
 
@@ -672,9 +685,9 @@ namespace DisenoColumnas
                 Seccion seccionMayor = new Seccion("Inicial", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
                 Tuple<Seccion, string> tuple_Seccion_Mayor = null;
 
-                for (int i = 0; i < Proyecto_.Stories.Count; i++)
+                for (int i = 0; i < column.Seccions.Count; i++)
                 {
-                    tuple_Seccion_Mayor = new Tuple<Seccion, string>(seccionMayor, Proyecto_.Stories[i].Item1);
+                    tuple_Seccion_Mayor = new Tuple<Seccion, string>(seccionMayor, column.Seccions[i].Item2);
                     VigaMayor.Seccions.Add(tuple_Seccion_Mayor);
                 }
 
@@ -718,7 +731,7 @@ namespace DisenoColumnas
                     Estribo estribo=null;
                     if (columna2.Seccions[i].Item1 != null)
                     {
-                        estribo = new Estribo(0);
+                        estribo = new Estribo(3);
                     }
                      columna2.estribos.Add(estribo);
                   }
@@ -806,11 +819,6 @@ namespace DisenoColumnas
         }
 
 
-
-
-
-
-
         private void LColumna_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -821,6 +829,8 @@ namespace DisenoColumnas
                 m_Informacion.Invalidate();
                 m_PlantaColumnas.Invalidate();
                 m_Despiece.Invalidate();
+                mCuantiaVolumetrica.Invalidate();
+                mAgregarAlzado.Invalidate();
                 if (mIntefazSeccion != null)
                 {
                     mIntefazSeccion.Invalidate();
@@ -886,7 +896,6 @@ namespace DisenoColumnas
 
                 float FD1, FD2;
 
-
                 if(Proyecto_.DMO_DES == GDE.DMO)
                 {
                     FD1 = 0.20f;
@@ -908,11 +917,21 @@ namespace DisenoColumnas
 
         }
 
-        private void PanelContenedor_ActiveDocumentChanged(object sender, EventArgs e)
+        private void PanelContenedor_ActivePaneChanged(object sender, EventArgs e)
         {
             if (mCuantiaVolumetrica != null)
             {
-                if (PanelContenedor.ActiveDocument == mCuantiaVolumetrica)
+
+                bool ExistFlotante = false;
+                foreach (FloatWindow floatWindow in PanelContenedor.FloatWindows)
+                {
+                    if (floatWindow.Text == mCuantiaVolumetrica.Text)
+                    {
+                        ExistFlotante = true;
+                    }
+                }
+
+                if (PanelContenedor.ActiveDocument == mCuantiaVolumetrica | ExistFlotante)
                 {
                     Cuantia_Vol_Button.Enabled = true;
                 }
@@ -920,6 +939,83 @@ namespace DisenoColumnas
                 {
                     Cuantia_Vol_Button.Enabled = false;
                 }
+            }
+
+
+            if (mAgregarAlzado != null)
+            {
+                bool ExistFlotante = false;
+                foreach (FloatWindow floatWindow in PanelContenedor.FloatWindows)
+                {
+                    if (floatWindow.Text == mAgregarAlzado.Text)
+                    {
+                        ExistFlotante = true;
+                    }
+                }
+
+                if (PanelContenedor.ActiveDocument == mAgregarAlzado | ExistFlotante)
+                {
+                    Button_Agregar.Enabled = true;
+                }
+                else
+                {
+                    Button_Agregar.Enabled = false;
+                }
+
+
+
+            }
+
+
+
+
+
+
+        }
+
+
+
+        private void AgregarAlzadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (mAgregarAlzado.Created == false)
+            {
+                mAgregarAlzado = new AgregarAlzado();
+            }
+
+            mAgregarAlzado.Show(PanelContenedor);
+        }
+
+        private void Button_Agregar_Click(object sender, EventArgs e)
+        {
+            if(Proyecto_.ColumnaSelect != null)
+            {
+
+                int CantidadPisos=0;
+                for(int i=0; i< Proyecto_.ColumnaSelect.Seccions.Count;i++)
+                {
+                    if(Proyecto_.ColumnaSelect.Seccions[i].Item1 != null)
+                    {
+                        CantidadPisos += 1;
+                    }
+                }
+
+                int MaximoID=-99999;
+                for (int i = 0; i < Proyecto_.ColumnaSelect.Alzados.Count; i++)
+                {
+                    if (Proyecto_.ColumnaSelect.Alzados[i].ID > MaximoID)
+                    {
+                        MaximoID = Proyecto_.ColumnaSelect.Alzados[i].ID;
+                    }
+
+
+                }
+                if (MaximoID == -99999) { MaximoID = 1; } else { MaximoID  +=1; }
+
+                Alzado alzadoN = new Alzado(MaximoID, CantidadPisos);
+
+                Proyecto_.ColumnaSelect.Alzados.Add(alzadoN);
+                mAgregarAlzado.Invalidate();
+
             }
         }
     }
