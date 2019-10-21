@@ -60,7 +60,7 @@
     <Compile Include="Clases\ColumnaAlzadoDrawing.cs" />
     <Compile Include="Clases\CRefuerzo.cs" />
     <Compile Include="Clases\Estribo.cs" />
-    <Compile Include="Clases\IEvenetosSeccion.cs" />
+    <Compile Include="Clases\IEventosSeccion.cs" />
     <Compile Include="Clases\ResultadosETABS.cs" />
     <Compile Include="Clases\Material.cs" />
     <Compile Include="Clases\Seccion.cs" />

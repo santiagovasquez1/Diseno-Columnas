@@ -16,7 +16,7 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    public class Seccion : IEvenetosSeccion
+    public class Seccion : IEventosSeccion
     {
         public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {

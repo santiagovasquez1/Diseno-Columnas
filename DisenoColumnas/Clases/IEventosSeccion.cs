@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
 {
-    interface IEvenetosSeccion
+    interface IEventosSeccion
     {
         void MouseDown(object sender, MouseEventArgs e);
         void MouseUp(object sender, MouseEventArgs e);
