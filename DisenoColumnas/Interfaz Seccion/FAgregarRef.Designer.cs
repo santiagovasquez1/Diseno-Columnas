@@ -1,0 +1,324 @@
+﻿namespace DisenoColumnas.Interfaz_Seccion
+{
+    partial class FAgregarRef
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.Button_Cerrar = new System.Windows.Forms.Button();
+            this.Label6 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.agregarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuCX = new System.Windows.Forms.NumericUpDown();
+            this.nuCY = new System.Windows.Forms.NumericUpDown();
+            this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuCX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuCY)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(337, 539);
+            this.panel1.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.nuCY);
+            this.groupBox1.Controls.Add(this.nuCX);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(7, 29);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(318, 505);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Refuerzo Longitudinal";
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(186, 461);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(126, 36);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(9, 461);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(126, 36);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Aceptar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dataGridView1.Location = new System.Drawing.Point(9, 115);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(303, 340);
+            this.dataGridView1.TabIndex = 4;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "Refuerzo Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Diametro Ref";
+            this.Column2.Items.AddRange(new object[] {
+            "#3",
+            "#4",
+            "#5",
+            "#6",
+            "#7",
+            "#8"});
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "Pos X (cm):";
+            this.Column3.Name = "Column3";
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.HeaderText = "Pos Y (cm):";
+            this.Column4.Name = "Column4";
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 15);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Numero capas Y :";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 37);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Numero capas X :";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.Button_Cerrar);
+            this.panel2.Controls.Add(this.Label6);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(335, 23);
+            this.panel2.TabIndex = 14;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
+            // 
+            // Button_Cerrar
+            // 
+            this.Button_Cerrar.BackColor = System.Drawing.Color.Gray;
+            this.Button_Cerrar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_Cerrar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Cerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(101)))), ((int)(((byte)(113)))));
+            this.Button_Cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.Button_Cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Cerrar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Cerrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_Cerrar.Image = global::DisenoColumnas.Properties.Resources.x16Blanca;
+            this.Button_Cerrar.Location = new System.Drawing.Point(293, 0);
+            this.Button_Cerrar.Name = "Button_Cerrar";
+            this.Button_Cerrar.Size = new System.Drawing.Size(40, 21);
+            this.Button_Cerrar.TabIndex = 27;
+            this.Button_Cerrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_Cerrar.UseVisualStyleBackColor = false;
+            this.Button_Cerrar.Click += new System.EventHandler(this.Button_Cerrar_Click);
+            // 
+            // Label6
+            // 
+            this.Label6.AutoSize = true;
+            this.Label6.BackColor = System.Drawing.Color.Transparent;
+            this.Label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label6.ForeColor = System.Drawing.Color.Black;
+            this.Label6.Location = new System.Drawing.Point(3, 4);
+            this.Label6.Name = "Label6";
+            this.Label6.Size = new System.Drawing.Size(79, 15);
+            this.Label6.TabIndex = 22;
+            this.Label6.Text = "Lista de pisos";
+            this.Label6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label6_MouseDown);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarRefuerzoToolStripMenuItem,
+            this.eliminarRefuerzoToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(164, 48);
+            // 
+            // agregarRefuerzoToolStripMenuItem
+            // 
+            this.agregarRefuerzoToolStripMenuItem.Name = "agregarRefuerzoToolStripMenuItem";
+            this.agregarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.agregarRefuerzoToolStripMenuItem.Text = "Agregar refuerzo";
+            // 
+            // eliminarRefuerzoToolStripMenuItem
+            // 
+            this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
+            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
+            // 
+            // nuCX
+            // 
+            this.nuCX.Location = new System.Drawing.Point(114, 29);
+            this.nuCX.Name = "nuCX";
+            this.nuCX.Size = new System.Drawing.Size(35, 23);
+            this.nuCX.TabIndex = 8;
+            this.nuCX.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nuCX.ValueChanged += new System.EventHandler(this.nuCX_ValueChanged);
+            // 
+            // nuCY
+            // 
+            this.nuCY.Location = new System.Drawing.Point(114, 66);
+            this.nuCY.Name = "nuCY";
+            this.nuCY.Size = new System.Drawing.Size(35, 23);
+            this.nuCY.TabIndex = 9;
+            this.nuCY.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nuCY.ValueChanged += new System.EventHandler(this.nuCY_ValueChanged);
+            // 
+            // FAgregarRef
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(337, 539);
+            this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "FAgregarRef";
+            this.Text = "Fseleccion_Columnas";
+            this.Load += new System.EventHandler(this.FAgregarRef_Load);
+            this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuCX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuCY)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.Panel panel2;
+        internal System.Windows.Forms.Label Label6;
+        private System.Windows.Forms.Button Button_Cerrar;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem agregarRefuerzoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eliminarRefuerzoToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown nuCY;
+        private System.Windows.Forms.NumericUpDown nuCX;
+    }
+}

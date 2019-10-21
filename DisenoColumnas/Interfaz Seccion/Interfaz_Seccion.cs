@@ -13,11 +13,14 @@ namespace DisenoColumnas.Interfaz_Seccion
     public partial class FInterfaz_Seccion : DockContent
     {
         private string Nombre_Columna { get; set; }
-        private bool Over { get; set; } = false;
+        public bool Over { get; set; } = false;
+        public bool Seleccionado { get; set; } = false;
         private double Xmax { get; set; } = 150; //[cm]
         private double Ymax { get; set; } = 75;  //[cm]
         private List<PointF> Vertices { get; set; } = new List<PointF>();
-        private static Fseleccion_Columnas Fseleccion_Columnas { get; set; }
+        private static FAgregarRef Fseleccion_Columnas { get; set; }
+        private static Seccion Seccion { get; set; }
+        private static Columna Columna_i { get; set; }
 
         public FInterfaz_Seccion()
         {
@@ -28,6 +31,8 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Interfaz_Seccion_Load(object sender, EventArgs e)
         {
+            Columna_i = Form1.Proyecto_.ColumnaSelect;
+            Seccion = Columna_i.Seccions[0].Item1;
             Grafica.Invalidate();
         }
 
@@ -36,12 +41,9 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Grafica_Paint(object sender, PaintEventArgs e)
         {
             int X, Y;
-            Columna Columna_i = Form1.Proyecto_.ColumnaSelect;
 
             if (Columna_i != null)
             {
-                Seccion seccion_i = Columna_i.Seccions[0].Item1;
-
                 Graphics g = e.Graphics;
                 Grafica.CreateGraphics().Clear(Color.White);
 
@@ -51,7 +53,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_grilla(g, Grafica.Height, Grafica.Width);
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
-                Dibujo_Seccion(g, seccion_i, Grafica.Height, Grafica.Width, Over);
+                Dibujo_Seccion(g, Seccion, Grafica.Height, Grafica.Width, Over);
             }
         }
 
@@ -199,12 +201,15 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Seleccionar(object sender, MouseEventArgs e)
         {
             Over = false;
+            Seleccionado = false;
+            FAgregarRef agregarRef = new FAgregarRef(Seccion);
+
             if (MouseOverPoligono(e.Location))
             {
                 Over = true;
+                Seleccionado = true;
                 Grafica.Invalidate();
-                Fseleccion_Columnas = new Fseleccion_Columnas();
-                Fseleccion_Columnas.Show();
+                agregarRef.ShowDialog();
             }
         }
 
@@ -225,22 +230,39 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)
         {
-            Fseleccion_Columnas fseleccion = new Fseleccion_Columnas();
+            FAgregarRef fseleccion = new FAgregarRef(Seccion);
             fseleccion.ShowDialog();
         }
 
         private void Dibujo_Seccion(Graphics g, Seccion seccioni, int Height, int Width, bool seleccion)
         {
             double X, Y;
-            //SolidBrush br = new SolidBrush(Color.Gray));
-            SolidBrush br = seleccion == false ? new SolidBrush(Color.FromArgb(150, Color.Gray)) : new SolidBrush(Color.FromArgb(250, Color.DarkGray));
 
-            Pen P1 = new Pen(Color.Black, 2.5f)
+            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            Pen P1;
+
+            if (Over == false)
             {
-                Brush = Brushes.Gray,
-                Color = Color.Black,
-                Alignment = System.Drawing.Drawing2D.PenAlignment.Center
-            };
+                P1 = new Pen(Color.Black, 2.5f)
+                {
+                    Brush = Brushes.Gray,
+                    Color = Color.Black,
+                    DashStyle = DashStyle.Solid,
+                    LineJoin = LineJoin.MiterClipped,
+                    Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+                };
+            }
+            else
+            {
+                P1 = new Pen(Color.Black, 3f)
+                {
+                    Brush = Brushes.DarkRed,
+                    Color = Color.DarkRed,
+                    DashStyle = DashStyle.Dash,
+                    LineJoin = LineJoin.Round,
+                    Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+                };
+            }
 
             Vertices = new List<PointF>();
 
@@ -350,8 +372,6 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Grafica_MouseDown(object sender, MouseEventArgs e)
         {
             Seleccionar(sender, e);
-            //Grafica.MouseDown+=Seleccionar;
-            //Grafica.MouseDown -= Seleccionar;
         }
     }
 }
