@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
 {
@@ -16,20 +15,9 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    public class Seccion : IEventosSeccion
+    public class Seccion:ICloneable
     {
-        public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
-        {
-            Name = Nombre;
-            B = B_;
-            H = H_;
-            Material = Material_;
-            Shape = Shape_;
-            TW = Tw;
-            TF = Tf;
-            CoordenadasSeccion = Coordenadas;
-            CalcularArea();
-        }
+ 
 
         public string Name { get; set; }
         public MAT_CONCRETE Material { get; set; }
@@ -43,50 +31,26 @@ namespace DisenoColumnas.Clases
 
         public double Area { get; set; }
 
-
-
-
         public List<Point> Vertices { get; set; } = new List<Point>();
 
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
 
         private List<float[]> CoordenadasSeccion { get; set; }
 
-        public void MouseDown(object sender, MouseEventArgs e)
+        public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
-            throw new NotImplementedException();
+            Name = Nombre;
+            B = B_;
+            H = H_;
+            Material = Material_;
+            Shape = Shape_;
+            TW = Tw;
+            TF = Tf;
+            CoordenadasSeccion = Coordenadas;
+            CalcularArea();
         }
-
-        public bool MouseIsOverPolygon(Point mouse_pt, out List<Point> hit_polygon)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool MouseIsOverRebar(Point mouse_pt, out List<Point> hit_polygon)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MouseMove_NotDrawing(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MouseUp(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
 
         #region Metodos - Resultados
-
-
-        
-
 
         private void CalcularArea()
         {
@@ -140,6 +104,13 @@ namespace DisenoColumnas.Clases
                 B = (float)DistMayor;
             }
         }
-        #endregion
+
+        public object Clone()
+        {
+            Seccion temp = new Seccion(Name, B, H, TF, TW, Material, Shape, CoordenadasSeccion);
+            return temp;
+        }
+
+        #endregion Metodos - Resultados
     }
 }

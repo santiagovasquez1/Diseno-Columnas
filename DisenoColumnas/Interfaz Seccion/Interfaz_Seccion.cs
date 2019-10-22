@@ -32,7 +32,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Interfaz_Seccion_Load(object sender, EventArgs e)
         {
             Columna_i = Form1.Proyecto_.ColumnaSelect;
-            Seccion = Columna_i.Seccions[0].Item1;
+            Seccion = (Seccion)Columna_i.Seccions[0].Item1.Clone();
             Grafica.Invalidate();
         }
 
