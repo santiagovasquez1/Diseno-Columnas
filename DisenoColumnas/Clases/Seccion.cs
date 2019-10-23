@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
 {
@@ -16,8 +15,26 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    public class Seccion : IEvenetosSeccion
+    public class Seccion : ICloneable, IComparable
     {
+        public string Name { get; set; }
+        public MAT_CONCRETE Material { get; set; }
+        public float B { get; set; }
+        public float H { get; set; }
+
+        public float TF { get; set; }
+        public float TW { get; set; }
+
+        public TipodeSeccion Shape { get; set; }
+
+        public double Area { get; set; }
+
+        public List<Point> Vertices { get; set; } = new List<Point>();
+
+        public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
+
+        private List<float[]> CoordenadasSeccion { get; set; }
+
         public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
             Name = Nombre;
@@ -31,62 +48,7 @@ namespace DisenoColumnas.Clases
             CalcularArea();
         }
 
-        public string Name { get; set; }
-        public MAT_CONCRETE Material { get; set; }
-        public float B { get; set; }
-        public float H { get; set; }
-
-        public float TF { get; set; }
-        public float TW { get; set; }
-
-        public TipodeSeccion Shape { get; set; }
-
-        public double Area { get; set; }
-
-
-
-
-        public List<Point> Vertices { get; set; } = new List<Point>();
-
-        public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
-
-        private List<float[]> CoordenadasSeccion { get; set; }
-
-        public void MouseDown(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool MouseIsOverPolygon(Point mouse_pt, out List<Point> hit_polygon)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool MouseIsOverRebar(Point mouse_pt, out List<Point> hit_polygon)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MouseMove_NotDrawing(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MouseUp(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
-
         #region Metodos - Resultados
-
-
-
-
 
         private void CalcularArea()
         {
@@ -140,6 +102,78 @@ namespace DisenoColumnas.Clases
                 B = (float)DistMayor;
             }
         }
-        #endregion
+
+        public object Clone()
+        {
+            Seccion temp = new Seccion(Name, B, H, TF, TW, Material, Shape, CoordenadasSeccion);
+            return temp;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Seccion)
+            {
+                Seccion temp = (Seccion)obj;
+
+                if (Name == temp.Name && Material == temp.Material && Shape == temp.Shape && Area == temp.Area && B == temp.B
+                    && H == temp.H && TF == temp.TF && TW == temp.TW)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Seccion)
+            {
+                Seccion temp = (Seccion)obj;
+                if (Area > temp.Area) return 1;
+                if (Area < temp.Area) return -1;
+            }
+            return 0;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public static bool operator ==(Seccion s1, Seccion s2)
+        {
+            return s1.Equals(s2);
+        }
+
+        public static bool operator !=(Seccion s1, Seccion s2)
+        {
+            try
+            {
+                return !s1.Equals(s2);
+            }
+            catch (Exception)
+            {
+                return false;
+                //throw;
+            }
+
+        }
+
+        public static bool operator <(Seccion s1, Seccion s2)
+        {
+            if (s1.CompareTo(s2) < 0)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator >(Seccion s1, Seccion s2)
+        {
+            if (s1.CompareTo(s2) > 0)
+                return true;
+            else
+                return false;
+        }
+
+        #endregion Metodos - Resultados
     }
 }

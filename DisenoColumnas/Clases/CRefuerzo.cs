@@ -14,11 +14,20 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    public class CRefuerzo : IEvenetosSeccion
-    {
+    public class CRefuerzo : IEventosSeccion
+    {   
+        public int id { get; set; }
         public string Diametro { get; set; }
-        public Point Coord { get; set; }
+        public double[] Coord { get; set; }
         public TipodeRefuerzo TipodeRefuerzo { get; set; }
+
+        public CRefuerzo(int pid,string pdiametro,double[] pcoord,TipodeRefuerzo ptipo)
+        {
+            id = pid;
+            Diametro = pdiametro;
+            Coord = pcoord;
+            TipodeRefuerzo = ptipo;
+        }
 
         public void MouseDown(object sender, MouseEventArgs e)
         {
