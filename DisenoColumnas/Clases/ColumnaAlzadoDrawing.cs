@@ -51,7 +51,7 @@ namespace DisenoColumnas.Clases
             for (int i = 0; i < columna.LuzLibre.Count; i++)
             {
 
-                if (columna.Seccions[i].Item1 != null )
+                if (columna.Seccions[i].Item1 != null)
                 {
                     var P1 = Vector<float>.Build.Dense(new float[] { 0, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
 

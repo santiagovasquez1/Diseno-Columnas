@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Interfaz_Inicial
@@ -28,13 +21,13 @@ namespace DisenoColumnas.Interfaz_Inicial
             if (Radio_Des.Checked | Radio_Dmo.Checked)
             {
 
-               float r;
-               bool IsNumeric= Single.TryParse(T_Vf.Text,out r);
+                float r;
+                bool IsNumeric = Single.TryParse(T_Vf.Text, out r);
 
 
-                if (T_Vf.Text == "" | IsNumeric==false |r==0)
+                if (T_Vf.Text == "" | IsNumeric == false | r == 0)
                 {
-                    MessageBox.Show("El espesor asignado en la fundación es incorrecto.",Form1.Proyecto_.Empresa,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                    MessageBox.Show("El espesor asignado en la fundación es incorrecto.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
@@ -69,6 +62,6 @@ namespace DisenoColumnas.Interfaz_Inicial
             Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
-    
+
     }
 }

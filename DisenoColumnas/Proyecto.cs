@@ -7,20 +7,28 @@ namespace DisenoColumnas
 {
 
 
-   
+
 
 
     [Serializable]
     public enum GDE
     {
-        DMO,DES
+        DMO, DES
     }
     [Serializable]
     public class Proyecto
     {
+
         [NonSerialized]
         public Dictionary<int, double> AceroBarras;
 
+        [NonSerialized]
+        public Dictionary<int, float> Ld_210;
+        public Dictionary<int, float> Ld_280;
+        public Dictionary<int, float> Ld_350;
+        public Dictionary<int, float> Ld_420;
+        public Dictionary<int, float> Ld_490;
+        public Dictionary<int, float> Ld_560;
 
         public string Empresa { get; } = "efe Prima Ce";
         public string Ruta { get; set; } = "";
@@ -37,7 +45,7 @@ namespace DisenoColumnas
 
         public List<Viga> Lista_Vigas { get; set; }
 
-        public  Columna ColumnaSelect { get; set; }
+        public Columna ColumnaSelect { get; set; }
 
         public float AlturaEdificio { get; set; }
 

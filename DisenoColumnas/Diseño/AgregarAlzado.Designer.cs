@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.D_Alzado = new System.Windows.Forms.DataGridView();
-            this.NameColum = new System.Windows.Forms.Label();
             this.story = new System.Windows.Forms.DataGridViewImageColumn();
+            this.NameColum = new System.Windows.Forms.Label();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cortarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pegarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.D_Alzado)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // D_Alzado
@@ -50,6 +56,16 @@
             this.D_Alzado.Name = "D_Alzado";
             this.D_Alzado.Size = new System.Drawing.Size(620, 441);
             this.D_Alzado.TabIndex = 1;
+            this.D_Alzado.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_Alzado_CellEndEdit);
+            this.D_Alzado.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.D_Alzado_CellMouseClick);
+            // 
+            // story
+            // 
+            this.story.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.story.HeaderText = "Story";
+            this.story.Name = "story";
+            this.story.ReadOnly = true;
+            this.story.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // NameColum
             // 
@@ -62,13 +78,38 @@
             this.NameColum.TabIndex = 2;
             this.NameColum.Text = "Columna: ";
             // 
-            // story
+            // contextMenuStrip2
             // 
-            this.story.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.story.HeaderText = "Story";
-            this.story.Name = "story";
-            this.story.ReadOnly = true;
-            this.story.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copiarToolStripMenuItem,
+            this.cortarToolStripMenuItem,
+            this.pegarToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(152, 70);
+            // 
+            // copiarToolStripMenuItem
+            // 
+            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
+            this.copiarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.copiarToolStripMenuItem.Text = "Copiar";
+            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.CopiarToolStripMenuItem_Click);
+            // 
+            // cortarToolStripMenuItem
+            // 
+            this.cortarToolStripMenuItem.Name = "cortarToolStripMenuItem";
+            this.cortarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.cortarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.cortarToolStripMenuItem.Text = "Cortar";
+            this.cortarToolStripMenuItem.Click += new System.EventHandler(this.CortarToolStripMenuItem_Click);
+            // 
+            // pegarToolStripMenuItem
+            // 
+            this.pegarToolStripMenuItem.Name = "pegarToolStripMenuItem";
+            this.pegarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pegarToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.pegarToolStripMenuItem.Text = "Pegar";
+            this.pegarToolStripMenuItem.Click += new System.EventHandler(this.PegarToolStripMenuItem_Click);
             // 
             // AgregarAlzado
             // 
@@ -84,6 +125,7 @@
             this.Text = "Agregar Alzado";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AgregarAlzado_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.D_Alzado)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,5 +137,9 @@
         private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column1;
         public System.Windows.Forms.Label NameColum;
         private System.Windows.Forms.DataGridViewImageColumn story;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cortarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pegarToolStripMenuItem;
     }
 }

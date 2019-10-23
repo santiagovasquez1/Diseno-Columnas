@@ -1,14 +1,7 @@
 ﻿using DisenoColumnas.Clases;
-using DisenoColumnas.DefinirColumnas;
 using SpannedDataGridViewNet2;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -24,11 +17,11 @@ namespace DisenoColumnas.InterfazViewInfo
         }
 
 
-   
- 
+
+
         private void DataGridView1_Paint(object sender, PaintEventArgs e)
         {
-         
+
         }
 
         private void Informacion_Paint(object sender, PaintEventArgs e)
@@ -39,25 +32,28 @@ namespace DisenoColumnas.InterfazViewInfo
 
 
 
-        private void CrearDataGriedView() 
+        private void CrearDataGriedView()
         {
 
 
-          Columna ColumnaSelect=Form1.Proyecto_.ColumnaSelect;
+            Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
 
 
             if (ColumnaSelect != null)
             {
-            
+
                 Info_D.Rows.Clear();
                 NameColum.Text = "Columna: " + ColumnaSelect.Name;
 
 
-                for(int i=0; i < ColumnaSelect.Seccions.Count; i++)
+                for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
                 {
 
-                    if (ColumnaSelect.Seccions[i].Item1 != null )
+                    if (ColumnaSelect.Seccions[i].Item1 != null)
                     {
+
+                        Color Color_RefMen = Color.FromArgb(250, 99, 99);
+                        Color Color_RefCum = Color.FromArgb(29, 94, 243);
                         Info_D.Rows.Add();
                         Info_D.Rows[Info_D.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
                         Info_D.Rows[Info_D.Rows.Count - 1].Cells[1].Value = ColumnaSelect.Seccions[i].Item1.Material.FC.ToString();
@@ -68,7 +64,7 @@ namespace DisenoColumnas.InterfazViewInfo
                         Info_D.Rows[Info_D.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
                         Info_D.Rows[Info_D.Rows.Count - 1].Cells[1].Value = ColumnaSelect.Seccions[i].Item1.Material.FC.ToString();
 
-                        DataGridViewTextBoxCellEx cell = (DataGridViewTextBoxCellEx)Info_D[0, Info_D.Rows.Count-3];
+                        DataGridViewTextBoxCellEx cell = (DataGridViewTextBoxCellEx)Info_D[0, Info_D.Rows.Count - 3];
                         cell.RowSpan = 3;
                         DataGridViewTextBoxCellEx cell2 = (DataGridViewTextBoxCellEx)Info_D[1, Info_D.Rows.Count - 3];
                         cell2.RowSpan = 3;
@@ -108,10 +104,49 @@ namespace DisenoColumnas.InterfazViewInfo
 
                         //Cuantia Mayor al 4% 
 
-                        Info_D.Rows[Info_D.Rows.Count - 3].Cells["AceroR"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0] * FactorConversion,2);
+                        Info_D.Rows[Info_D.Rows.Count - 3].Cells["AceroR"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0] * FactorConversion, 2);
                         Info_D.Rows[Info_D.Rows.Count - 2].Cells["AceroR"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].AsTopMediumButton[1] * FactorConversion, 2);
                         Info_D.Rows[Info_D.Rows.Count - 1].Cells["AceroR"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].AsTopMediumButton[2] * FactorConversion, 2);
 
+
+                        Info_D.Rows[Info_D.Rows.Count - 3].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[0] * FactorConversion, 2);
+                        Info_D.Rows[Info_D.Rows.Count - 2].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[1] * FactorConversion, 2);
+                        Info_D.Rows[Info_D.Rows.Count - 1].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[2] * FactorConversion, 2);
+                        if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) < 95)
+                        {
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                        }
+                        if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 3) < 95)
+                        {
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                        }
+                        if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 3) < 95)
+                        {
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                        }
+                        else
+                        {
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                        }
+
+
+                        Info_D.Rows[Info_D.Rows.Count - 3].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 2) + "%";
+                        Info_D.Rows[Info_D.Rows.Count - 2].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 2) + "%";
+                        Info_D.Rows[Info_D.Rows.Count - 1].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 2) + "%";
 
 
 
@@ -164,7 +199,7 @@ namespace DisenoColumnas.InterfazViewInfo
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
 
                             DataGridViewTextBoxCellEx cell3 = (DataGridViewTextBoxCellEx)Info_D["B", Info_D.Rows.Count - 3];
-                            DataGridViewTextBoxCellEx cell4 = (DataGridViewTextBoxCellEx)Info_D["H",  Info_D.Rows.Count - 3];
+                            DataGridViewTextBoxCellEx cell4 = (DataGridViewTextBoxCellEx)Info_D["H", Info_D.Rows.Count - 3];
                             DataGridViewTextBoxCellEx cell5 = (DataGridViewTextBoxCellEx)Info_D["TW", Info_D.Rows.Count - 3];
                             DataGridViewTextBoxCellEx cell6 = (DataGridViewTextBoxCellEx)Info_D["TF", Info_D.Rows.Count - 3];
                             cell3.RowSpan = 3; cell4.RowSpan = 3; cell5.RowSpan = 3; ; cell6.RowSpan = 3;
@@ -172,12 +207,12 @@ namespace DisenoColumnas.InterfazViewInfo
 
                         if (ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
                         {
-                           
 
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B* FCMetros;
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H* FCMetros;
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW* FCMetros;
-                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF* FCMetros;
+
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
 
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
@@ -191,7 +226,7 @@ namespace DisenoColumnas.InterfazViewInfo
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
 
                             DataGridViewTextBoxCellEx cell3 = (DataGridViewTextBoxCellEx)Info_D["B", Info_D.Rows.Count - 3];
-                            DataGridViewTextBoxCellEx cell4 = (DataGridViewTextBoxCellEx)Info_D["H",  Info_D.Rows.Count - 3];
+                            DataGridViewTextBoxCellEx cell4 = (DataGridViewTextBoxCellEx)Info_D["H", Info_D.Rows.Count - 3];
                             DataGridViewTextBoxCellEx cell5 = (DataGridViewTextBoxCellEx)Info_D["TW", Info_D.Rows.Count - 3];
                             DataGridViewTextBoxCellEx cell6 = (DataGridViewTextBoxCellEx)Info_D["TF", Info_D.Rows.Count - 3];
                             cell3.RowSpan = 3; cell4.RowSpan = 3; cell5.RowSpan = 3; ; cell6.RowSpan = 3;
@@ -214,7 +249,7 @@ namespace DisenoColumnas.InterfazViewInfo
 
 
 
-   
+
 
 
         private void EstiloDatGridView()
@@ -240,6 +275,6 @@ namespace DisenoColumnas.InterfazViewInfo
             }
         }
 
- 
+
     }
 }

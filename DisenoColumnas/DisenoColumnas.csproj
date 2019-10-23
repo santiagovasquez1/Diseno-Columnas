@@ -108,7 +108,7 @@
       <DependentUpon>Informacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Proyecto.cs" />
-    <Compile Include="NewProject.cs" />
+    <Compile Include="FunctionsProject.cs" />
     <Compile Include="InterfazPlano\PlantaColumnas.cs">
       <SubType>Form</SubType>
     </Compile>

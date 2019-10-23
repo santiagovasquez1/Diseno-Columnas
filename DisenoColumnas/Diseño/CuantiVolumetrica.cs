@@ -1,13 +1,7 @@
 ﻿using DisenoColumnas.Clases;
 using SpannedDataGridViewNet2;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -29,19 +23,19 @@ namespace DisenoColumnas.Diseño
 
             NameColum.Text = "Columna: " + ColumnaSelect.Name;
 
-    
+
 
             for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
             {
 
                 if (ColumnaSelect.Seccions[i].Item1 != null)
                 {
-                    int IndiceRow=0;
-                    for (int j=0;j< Info_Es_Col.Rows.Count; j++) { if (Info_Es_Col.Rows[j].Cells[0].Value.ToString() == ColumnaSelect.Seccions[i].Item2) { IndiceRow = j; } }
+                    int IndiceRow = 0;
+                    for (int j = 0; j < Info_Es_Col.Rows.Count; j++) { if (Info_Es_Col.Rows[j].Cells[0].Value.ToString() == ColumnaSelect.Seccions[i].Item2) { IndiceRow = j; } }
 
-                     Info_Es_Col.Rows[IndiceRow].Cells["NoEstribo"].Value = ColumnaSelect.estribos[i].NoEstribo.ToString();
-                  
-                     Info_Es_Col.Rows[IndiceRow].Cells["S_value"].Value = ColumnaSelect.estribos[i].Separacion.ToString();
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoEstribo"].Value = ColumnaSelect.estribos[i].NoEstribo.ToString();
+
+                    Info_Es_Col.Rows[IndiceRow].Cells["S_value"].Value = ColumnaSelect.estribos[i].Separacion.ToString();
 
                     if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
                     {
@@ -77,7 +71,7 @@ namespace DisenoColumnas.Diseño
                     {
 
 
-                 
+
 
                     }
 
@@ -105,7 +99,7 @@ namespace DisenoColumnas.Diseño
             {
 
                 Info_Es_Col.Rows.Clear();
-                
+
                 NameColum.Text = "Columna: " + ColumnaSelect.Name;
 
                 float FCMetros = 100;
@@ -213,7 +207,7 @@ namespace DisenoColumnas.Diseño
         {
 
 
-            Font fontBold = new Font("Vderdana", 8, FontStyle.Bold); 
+            Font fontBold = new Font("Vderdana", 8, FontStyle.Bold);
 
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Value = "Story";
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].Value = "F'c [kgf/cm²]";
@@ -311,23 +305,23 @@ namespace DisenoColumnas.Diseño
             CreateDataGridView();
         }
 
-        
 
-        private void EditEndCell(int IndiceR,int IndiceC)
+
+        private void EditEndCell(int IndiceR, int IndiceC)
         {
 
             #region Modficiación No. y Area del Estribo
             if (Info_Es_Col.Columns[IndiceC].Name == "NoEstribo" && IndiceR != 0)
             {
 
-                if (Form1.Proyecto_.ColumnaSelect != null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value !=null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value.ToString() != "")
+                if (Form1.Proyecto_.ColumnaSelect != null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value != null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value.ToString() != "")
                 {
 
-                    int NoBarra = Convert.ToInt32( Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value);
+                    int NoBarra = Convert.ToInt32(Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value);
 
                     string Story = Info_Es_Col.Rows[IndiceR].Cells[0].Value.ToString();
                     int IndiceaM = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x => x.Item2 == Story);
-                    Form1.Proyecto_.ColumnaSelect.estribos[IndiceaM].NoEstribo=NoBarra;
+                    Form1.Proyecto_.ColumnaSelect.estribos[IndiceaM].NoEstribo = NoBarra;
                     Form1.Proyecto_.ColumnaSelect.estribos[IndiceaM].CalcularArea();
                     CalCuantiaVol();
                 }
@@ -342,7 +336,8 @@ namespace DisenoColumnas.Diseño
                 if (Form1.Proyecto_.ColumnaSelect != null && Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value != null && Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value.ToString() != "")
                 {
                     float Separacion;
-                    try {
+                    try
+                    {
                         Separacion = Convert.ToSingle(Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value);
                     }
                     catch

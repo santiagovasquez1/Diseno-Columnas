@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DisenoColumnas.Clases
 {
@@ -14,7 +10,7 @@ namespace DisenoColumnas.Clases
 
         public Estribo(int noEstribo)
         {
-            
+
             NoEstribo = noEstribo;
             CalcularArea();
         }

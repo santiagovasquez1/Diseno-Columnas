@@ -140,7 +140,7 @@ namespace DisenoColumnas
                 }
                 mAgregarAlzado = new AgregarAlzado();
 
-  
+
                 mAgregarAlzado.Show(PanelContenedor);
 
 
@@ -157,7 +157,7 @@ namespace DisenoColumnas
                 {
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
                 }
-                CreateDidctonary();
+                CreateDidctonaries();
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -228,7 +228,7 @@ namespace DisenoColumnas
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
-                mAgregarAlzado= new AgregarAlzado();
+                mAgregarAlzado = new AgregarAlzado();
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
 
@@ -239,7 +239,7 @@ namespace DisenoColumnas
         }
 
 
-        private void CreateDidctonary()
+        private void CreateDidctonaries()
         {
             Proyecto_.AceroBarras = new Dictionary<int, double>();
             Proyecto_.AceroBarras.Add(2, 0.32 / 10000);
@@ -250,6 +250,86 @@ namespace DisenoColumnas
             Proyecto_.AceroBarras.Add(7, 3.87 / 10000);
             Proyecto_.AceroBarras.Add(8, 5.10 / 10000);
             Proyecto_.AceroBarras.Add(10, 8.09 / 10000);
+
+            Proyecto_.Ld_210 = new Dictionary<int, float>();
+            Proyecto_.Ld_210.Add(2, 0.55f);
+            Proyecto_.Ld_210.Add(3, 0.55f);
+            Proyecto_.Ld_210.Add(4, 0.75f);
+            Proyecto_.Ld_210.Add(5, 0.9f);
+            Proyecto_.Ld_210.Add(6, 1.1f);
+            Proyecto_.Ld_210.Add(7, 1.6f);
+            Proyecto_.Ld_210.Add(8, 1.8f);
+            Proyecto_.Ld_210.Add(9, 2.05f);
+            Proyecto_.Ld_210.Add(10, 2.3f);
+            Proyecto_.Ld_210.Add(11, 2.55f);
+            Proyecto_.Ld_210.Add(14, 3.1f);
+
+            Proyecto_.Ld_280 = new Dictionary<int, float>();
+            Proyecto_.Ld_280.Add(2, 0.5f);
+            Proyecto_.Ld_280.Add(3, 0.5f);
+            Proyecto_.Ld_280.Add(4, 0.65f);
+            Proyecto_.Ld_280.Add(5, 0.8f);
+            Proyecto_.Ld_280.Add(6, 0.95f);
+            Proyecto_.Ld_280.Add(7, 1.4f);
+            Proyecto_.Ld_280.Add(8, 1.6f);
+            Proyecto_.Ld_280.Add(9, 1.8f);
+            Proyecto_.Ld_280.Add(10, 2.0f);
+            Proyecto_.Ld_280.Add(11, 2.2f);
+            Proyecto_.Ld_280.Add(14, 2.65f);
+
+            Proyecto_.Ld_350 = new Dictionary<int, float>();
+            Proyecto_.Ld_350.Add(2, 0.45f);
+            Proyecto_.Ld_350.Add(3, 0.45f);
+            Proyecto_.Ld_350.Add(4, 0.55f);
+            Proyecto_.Ld_350.Add(5, 0.7f);
+            Proyecto_.Ld_350.Add(6, 0.85f);
+            Proyecto_.Ld_350.Add(7, 1.25f);
+            Proyecto_.Ld_350.Add(8, 1.4f);
+            Proyecto_.Ld_350.Add(9, 1.6f);
+            Proyecto_.Ld_350.Add(10, 1.8f);
+            Proyecto_.Ld_350.Add(11, 2.0f);
+            Proyecto_.Ld_350.Add(14, 2.4f);
+
+            Proyecto_.Ld_420 = new Dictionary<int, float>();
+            Proyecto_.Ld_420.Add(2, 0.4f);
+            Proyecto_.Ld_420.Add(3, 0.4f);
+            Proyecto_.Ld_420.Add(4, 0.55f);
+            Proyecto_.Ld_420.Add(5, 0.65f);
+            Proyecto_.Ld_420.Add(6, 0.8f);
+            Proyecto_.Ld_420.Add(7, 1.15f);
+            Proyecto_.Ld_420.Add(8, 1.3f);
+            Proyecto_.Ld_420.Add(9, 1.45f);
+            Proyecto_.Ld_420.Add(10, 1.65f);
+            Proyecto_.Ld_420.Add(11, 1.8f);
+            Proyecto_.Ld_420.Add(14, 2.2f);
+
+            Proyecto_.Ld_490 = new Dictionary<int, float>();
+            Proyecto_.Ld_490.Add(2, 0.4f);
+            Proyecto_.Ld_490.Add(3, 0.4f);
+            Proyecto_.Ld_490.Add(4, 0.5f);
+            Proyecto_.Ld_490.Add(5, 0.6f);
+            Proyecto_.Ld_490.Add(6, 0.75f);
+            Proyecto_.Ld_490.Add(7, 1.05f);
+            Proyecto_.Ld_490.Add(8, 1.2f);
+            Proyecto_.Ld_490.Add(9, 1.35f);
+            Proyecto_.Ld_490.Add(10, 1.5f);
+            Proyecto_.Ld_490.Add(11, 1.7f);
+            Proyecto_.Ld_490.Add(14, 2f);
+
+            Proyecto_.Ld_560 = new Dictionary<int, float>();
+            Proyecto_.Ld_560.Add(2, 0.4f);
+            Proyecto_.Ld_560.Add(3, 0.4f);
+            Proyecto_.Ld_560.Add(4, 0.45f);
+            Proyecto_.Ld_560.Add(5, 0.6f);
+            Proyecto_.Ld_560.Add(6, 0.7f);
+            Proyecto_.Ld_560.Add(7, 1.0f);
+            Proyecto_.Ld_560.Add(8, 1.1f);
+            Proyecto_.Ld_560.Add(9, 1.25f);
+            Proyecto_.Ld_560.Add(10, 1.4f);
+            Proyecto_.Ld_560.Add(11, 1.6f);
+            Proyecto_.Ld_560.Add(14, 1.9f);
+
+
         }
         private string AbrirE2K2009yCSV2009()
         {
@@ -335,7 +415,7 @@ namespace DisenoColumnas
         private void CrearObjetosNecesarios()
         {
             //STORIES
-            CreateDidctonary();
+            CreateDidctonaries();
 
             List<List<string>> Stories = new List<List<string>>();
 
@@ -408,7 +488,7 @@ namespace DisenoColumnas
             {
                 MAT_CONCRETE material = new MAT_CONCRETE();
                 material.Name = Lista_Materiales_Aux2[i][4].Replace("\"", "");
-                material.FC = (float)Convert.ToDouble(Lista_Materiales_Aux2[i][13].Replace("\"", ""))/10;
+                material.FC = (float)Convert.ToDouble(Lista_Materiales_Aux2[i][13].Replace("\"", "")) / 10;
                 Proyecto_.Lista_Materiales.Add(material);
             }
 
@@ -717,24 +797,27 @@ namespace DisenoColumnas
                 columna1.LuzLibre = new List<float>();
                 for (int i = 0; i < columna1.Seccions.Count; i++)
                 {
-                    columna1.LuzLibre.Add(Proyecto_.Stories[i].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
+                    if (columna1.Seccions[i].Item1 != null)
+                    {
+                        columna1.LuzLibre.Add(Proyecto_.Stories[i].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
+                    }
                 }
             }
 
             //Crear Lista de Estribos;
 
-            foreach(Columna columna2 in Proyecto_.Lista_Columnas)
+            foreach (Columna columna2 in Proyecto_.Lista_Columnas)
             {
 
                 for (int i = 0; i < columna2.Seccions.Count; i++)
                 {
-                    Estribo estribo=null;
+                    Estribo estribo = null;
                     if (columna2.Seccions[i].Item1 != null)
                     {
                         estribo = new Estribo(3);
                     }
-                     columna2.estribos.Add(estribo);
-                  }
+                    columna2.estribos.Add(estribo);
+                }
 
 
             }
@@ -796,16 +879,17 @@ namespace DisenoColumnas
             {
                 if (Proyecto_ != null)
                 {
-                    if(Proyecto_.DMO_DES == GDE.DMO)
+                    if (Proyecto_.DMO_DES == GDE.DMO)
                     {
-                        variablesdeEntrada.Radio_Dmo.Checked=true;
-                    }else if(Proyecto_.DMO_DES== GDE.DES)
+                        variablesdeEntrada.Radio_Dmo.Checked = true;
+                    }
+                    else if (Proyecto_.DMO_DES == GDE.DES)
                     {
                         variablesdeEntrada.Radio_Des.Checked = true;
                     }
 
                     variablesdeEntrada.T_Vf.Text = Proyecto_.e_Fundacion.ToString();
-                    variablesdeEntrada.T_arranque.Text= Proyecto_.Nivel_Fundacion.ToString();
+                    variablesdeEntrada.T_arranque.Text = Proyecto_.Nivel_Fundacion.ToString();
                     variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
                 }
 
@@ -892,11 +976,12 @@ namespace DisenoColumnas
 
         private void Cb_cuantiavol_Click(object sender, EventArgs e)
         {
-            if (Proyecto_.ColumnaSelect != null) {
+            if (Proyecto_.ColumnaSelect != null)
+            {
 
                 float FD1, FD2;
 
-                if(Proyecto_.DMO_DES == GDE.DMO)
+                if (Proyecto_.DMO_DES == GDE.DMO)
                 {
                     FD1 = 0.20f;
                     FD2 = 0.06f;
@@ -907,9 +992,9 @@ namespace DisenoColumnas
                     FD2 = 0.09f;
                 }
 
-                Proyecto_.ColumnaSelect.CalcularCuantiaVolumetrica(FD1, FD2,Proyecto_.R/100,Proyecto_.FY);
+                Proyecto_.ColumnaSelect.CalcularCuantiaVolumetrica(FD1, FD2, Proyecto_.R / 100, Proyecto_.FY);
                 mCuantiaVolumetrica.Invalidate();
-               }
+            }
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -987,19 +1072,19 @@ namespace DisenoColumnas
 
         private void Button_Agregar_Click(object sender, EventArgs e)
         {
-            if(Proyecto_.ColumnaSelect != null)
+            if (Proyecto_.ColumnaSelect != null)
             {
 
-                int CantidadPisos=0;
-                for(int i=0; i< Proyecto_.ColumnaSelect.Seccions.Count;i++)
+                int CantidadPisos = 0;
+                for (int i = 0; i < Proyecto_.ColumnaSelect.Seccions.Count; i++)
                 {
-                    if(Proyecto_.ColumnaSelect.Seccions[i].Item1 != null)
+                    if (Proyecto_.ColumnaSelect.Seccions[i].Item1 != null)
                     {
                         CantidadPisos += 1;
                     }
                 }
 
-                int MaximoID=-99999;
+                int MaximoID = -99999;
                 for (int i = 0; i < Proyecto_.ColumnaSelect.Alzados.Count; i++)
                 {
                     if (Proyecto_.ColumnaSelect.Alzados[i].ID > MaximoID)
@@ -1009,7 +1094,7 @@ namespace DisenoColumnas
 
 
                 }
-                if (MaximoID == -99999) { MaximoID = 1; } else { MaximoID  +=1; }
+                if (MaximoID == -99999) { MaximoID = 1; } else { MaximoID += 1; }
 
                 Alzado alzadoN = new Alzado(MaximoID, CantidadPisos);
 

@@ -30,21 +30,173 @@ namespace DisenoColumnas.Diseño
                 }
 
                 float SX = (Draw_Column.Width - 15) / MaxB;
-                float SY = Draw_Column.Height / (Form1.Proyecto_.AlturaEdificio);
+
+                float Altura = 0;
+
+                for (int i = 0; i < ColumnaSelect.LuzLibre.Count; i++)
+                {
+                    Altura += ColumnaSelect.LuzLibre[i] + ColumnaSelect.VigaMayor.Seccions[i].Item1.H;
+
+
+                }
+                Altura += Form1.Proyecto_.e_Fundacion;
+                float SY = (Draw_Column.Height - 5) / (Altura);
                 float X = 7.5f;
                 float Y = 5;
 
                 e.Graphics.Clear(Color.White);
                 Title_Colum_Model.Text = "Columna: " + ColumnaSelect.Name;
-                ColumnaSelect.Paint_Alzado1(e, Draw_Column.Height - 10, Draw_Column.Width, SX, SY, X, Y);
+                ColumnaSelect.Paint_Alzado1(e, Draw_Column.Height, Draw_Column.Width, SX, SY, X, Y);
             }
         }
 
         private void Despiece_Paint(object sender, PaintEventArgs e)
         {
             Draw_Column.Invalidate();
-            //RefuerzoRequerido.Invalidate();
+            Draw_Colum_Alzado.Invalidate();
+
         }
+
+        private void Draw_Colum_Alzado_Paint(object sender, PaintEventArgs e)
+        {
+
+            float Height = Draw_Colum_Alzado.Height;
+            float Width = Draw_Colum_Alzado.Width;
+            float MaxB = -99999;
+
+            float SX, SY, YI, XI;
+            Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
+
+            if (ColumnaSelect != null)
+            {
+
+                float Altura = 0;
+
+                for (int i = 0; i < ColumnaSelect.LuzLibre.Count; i++)
+                {
+                    Altura += ColumnaSelect.LuzLibre[i] + ColumnaSelect.VigaMayor.Seccions[i].Item1.H;
+
+
+                }
+                Altura += Form1.Proyecto_.e_Fundacion;
+
+                for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
+                {
+                    if (ColumnaSelect.Seccions[i].Item1 != null)
+                    {
+                        if (ColumnaSelect.Seccions[i].Item1.B > MaxB)
+                        {
+                            MaxB = ColumnaSelect.Seccions[i].Item1.B;
+                        }
+                    }
+                }
+
+
+
+
+                SX = (Width - 15) / 10;
+                SY = (Height - 5) / Altura;
+                YI = 7.5f;
+                XI = 0;
+
+
+                for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
+                {
+                    if (ColumnaSelect.Alzados.Count >= 2)
+                    {
+                        if (i == ColumnaSelect.Alzados.Count-1)
+                        {
+                            XI = XI + Width - 0.4f*SX;
+                            }
+                    }
+                    for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
+                    {
+                
+                        if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
+                        {
+                            ColumnaSelect.Alzados[i].Colum_Alzado[j].Paint(e, SX, SY, Height, YI,XI);
+                        }
+                    }
+
+                }
+
+
+
+
+
+
+            }
+
+
+        }
+
+
+
+
+
+
+        private void MaxXyY(Columna ColumnaSelect, ref float MaxX, ref float MaxY)
+        {
+            for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
+            {
+
+                for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
+                {
+                    if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB != null)
+                    {
+                        for (int s = 0; s < ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB.Count; s++)
+                        {
+
+                            if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0] > MaxX)
+                            {
+                                MaxX = ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0];
+                            }
+
+                            if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][1] > MaxY)
+                            {
+                                MaxY = ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0];
+                            }
+
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //
 

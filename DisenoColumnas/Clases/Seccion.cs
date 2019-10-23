@@ -85,7 +85,7 @@ namespace DisenoColumnas.Clases
         #region Metodos - Resultados
 
 
-        
+
 
 
         private void CalcularArea()

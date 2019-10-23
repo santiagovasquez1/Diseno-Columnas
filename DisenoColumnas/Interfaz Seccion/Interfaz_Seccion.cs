@@ -246,7 +246,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Vertices.Add(new PointF((float)X, (float)Y));
 
                 X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y= ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
+                Y = ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
                 Vertices.Add(new PointF((float)X, (float)Y));
 
                 X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;

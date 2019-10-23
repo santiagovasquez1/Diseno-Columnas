@@ -56,6 +56,7 @@
             this.Draw_Colum_Alzado.Size = new System.Drawing.Size(450, 580);
             this.Draw_Colum_Alzado.TabIndex = 12;
             this.Draw_Colum_Alzado.TabStop = false;
+            this.Draw_Colum_Alzado.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw_Colum_Alzado_Paint);
             // 
             // Label5
             // 

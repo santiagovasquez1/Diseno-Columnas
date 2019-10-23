@@ -12,15 +12,26 @@ namespace DisenoColumnas.Clases
 
         public double[] AsTopMediumButton { get; set; } = { };
 
+        //Propiedad Adicional
+
+        public float[] As_asignado { get; set; } = { };
+
+        public float[] Porct_Refuerzo { get; set; } = { };
+
+
 
 
         public void AsignarAsTopMediumButton()
         {
+            As_asignado = new float[] { 0, 0, 0 };
+            Porct_Refuerzo = new float[] { 0, 0, 0 };
 
-            double Top =-999999; double Button = -99999; double medium =-999999;
-            for(int i=0; i < As.Count-6; i++)
+
+
+            double Top = -999999; double Button = -99999; double medium = -999999;
+            for (int i = 0; i < As.Count - 6; i++)
             {
-                if(Top< As[i])
+                if (Top < As[i])
                 {
                     Top = As[i];
                 }

@@ -67,5 +67,20 @@ namespace DisenoColumnas
             proyecto = proyectoDeserializado;
             streamReader.Close();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

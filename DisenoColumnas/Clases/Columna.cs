@@ -84,7 +84,7 @@ namespace DisenoColumnas.Clases
                     Ash2 = FactorDisipacion2 * S * bc * Seccions[i].Item1.Material.FC / FY;  //C.21-3
 
                     Ash = Ash1 > Ash2 ? Ash1 : Ash2;
-                    if (S != 0 && estribos[i].Area !=0)
+                    if (S != 0 && estribos[i].Area != 0)
                     {
                         estribos[i].NoRamasV1 = Convert.ToInt32(Math.Round(Ash / estribos[i].Area < 2 ? 2 : (float)Math.Round(Ash / estribos[i].Area, 2), 2));
                     }
@@ -114,6 +114,66 @@ namespace DisenoColumnas.Clases
 
             }
         }
+
+
+
+
+        public void ActualizarRefuerzo()
+        {
+
+            for (int i = 0; i < resultadosETABs.Count; i++)
+            {
+                resultadosETABs[i].As_asignado[0] = 0;
+                resultadosETABs[i].As_asignado[1] = 0;
+                resultadosETABs[i].As_asignado[2] = 0;
+
+            }
+            foreach (Alzado alzado in Alzados)
+            {
+
+
+                for (int i = 0; i < alzado.Colum_Alzado.Count; i++)
+                {
+
+                    if (alzado.Colum_Alzado[i] != null)
+                    {
+
+                        double AreaBarra;
+
+                        try
+                        {
+                            AreaBarra = Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
+                        }
+                        catch
+                        {
+                            AreaBarra = 0;
+                        }
+                        resultadosETABs[i].As_asignado[0] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+                        resultadosETABs[i].As_asignado[1] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+                        resultadosETABs[i].As_asignado[2] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+
+                    }
+
+                }
+
+            }
+
+            for (int i = 0; i < resultadosETABs.Count; i++)
+            {
+
+                resultadosETABs[i].Porct_Refuerzo[0] = (resultadosETABs[i].As_asignado[0] / (float)resultadosETABs[i].AsTopMediumButton[0]) * 100;
+                resultadosETABs[i].Porct_Refuerzo[1] = (resultadosETABs[i].As_asignado[1] / (float)resultadosETABs[i].AsTopMediumButton[1]) * 100;
+                resultadosETABs[i].Porct_Refuerzo[2] = (resultadosETABs[i].As_asignado[2] / (float)resultadosETABs[i].AsTopMediumButton[2]) * 100;
+            }
+
+
+
+
+        }
+
+
+
+
 
 
 

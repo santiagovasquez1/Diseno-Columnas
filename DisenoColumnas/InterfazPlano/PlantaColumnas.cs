@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using DisenoColumnas.Interfaz_Seccion;
 
 namespace DisenoColumnas.DefinirColumnas
 {
@@ -104,10 +103,10 @@ namespace DisenoColumnas.DefinirColumnas
                 if (Form1.Proyecto_.ColumnaSelect != null)
                 {
                     Form1.mLcolumnas.Text = Form1.Proyecto_.ColumnaSelect.Name;
-                 
+
                     break;
                 }
-               
+
             }
 
             foreach (Columna columna1 in Form1.Proyecto_.Lista_Columnas)
