@@ -15,10 +15,8 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    public class Seccion:ICloneable
+    public class Seccion : ICloneable, IComparable
     {
- 
-
         public string Name { get; set; }
         public MAT_CONCRETE Material { get; set; }
         public float B { get; set; }
@@ -109,6 +107,71 @@ namespace DisenoColumnas.Clases
         {
             Seccion temp = new Seccion(Name, B, H, TF, TW, Material, Shape, CoordenadasSeccion);
             return temp;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Seccion)
+            {
+                Seccion temp = (Seccion)obj;
+
+                if (Name == temp.Name && Material == temp.Material && Shape == temp.Shape && Area == temp.Area && B == temp.B
+                    && H == temp.H && TF == temp.TF && TW == temp.TW)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Seccion)
+            {
+                Seccion temp = (Seccion)obj;
+                if (Area > temp.Area) return 1;
+                if (Area < temp.Area) return -1;
+            }
+            return 0;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public static bool operator ==(Seccion s1, Seccion s2)
+        {
+            return s1.Equals(s2);
+        }
+
+        public static bool operator !=(Seccion s1, Seccion s2)
+        {
+            try
+            {
+                return !s1.Equals(s2);
+            }
+            catch (Exception)
+            {
+                return false;
+                //throw;
+            }
+
+        }
+
+        public static bool operator <(Seccion s1, Seccion s2)
+        {
+            if (s1.CompareTo(s2) < 0)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator >(Seccion s1, Seccion s2)
+        {
+            if (s1.CompareTo(s2) > 0)
+                return true;
+            else
+                return false;
         }
 
         #endregion Metodos - Resultados

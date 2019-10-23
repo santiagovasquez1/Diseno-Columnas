@@ -121,6 +121,8 @@ namespace DisenoColumnas.DefinirColumnas
                     Form1.mCuantiaVolumetrica.Invalidate();
                     if (Form1.mIntefazSeccion != null)
                     {
+                        Form1.mIntefazSeccion.Get_Columna();
+                        Form1.mIntefazSeccion.Load_Pisos();
                         Form1.mIntefazSeccion.Invalidate();
                     }
 

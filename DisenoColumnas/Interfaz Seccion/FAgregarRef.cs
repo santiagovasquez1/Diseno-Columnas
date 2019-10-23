@@ -182,6 +182,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 refuerzo = new CRefuerzo(id, diametro, coord, TipodeRefuerzo.longitudinal);
                 Seccion.Refuerzos.Add(refuerzo);
             }
+
+
             Close();
         }
 

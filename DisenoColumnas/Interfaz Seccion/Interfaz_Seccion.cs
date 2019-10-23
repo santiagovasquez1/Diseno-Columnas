@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -31,8 +32,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Interfaz_Seccion_Load(object sender, EventArgs e)
         {
-            Columna_i = Form1.Proyecto_.ColumnaSelect;
-            Seccion = (Seccion)Columna_i.Seccions[0].Item1.Clone();
+            Load_Pisos();
             Grafica.Invalidate();
         }
 
@@ -107,11 +107,21 @@ namespace DisenoColumnas.Interfaz_Seccion
             g.DrawLine(P2, new Point(0, 0), new Point(0, -Height / 20));
         }
 
-        private void Grafica_Click(object sender, EventArgs e)
+        #endregion Metodos de picture box
+
+        public void Get_Columna()
         {
+            Columna_i = Form1.Proyecto_.ColumnaSelect;
+            Seccion = (Seccion)Columna_i.Seccions[0].Item1.Clone();
+            Grafica.Invalidate();
         }
 
-        #endregion Metodos de picture box
+        public void Load_Pisos()
+        {
+            var pisos = Columna_i.Seccions.Select(x => x.Item2).ToArray();
+            lbPisos.Items.Clear();
+            lbPisos.Items.AddRange(pisos);
+        }
 
         private bool MouseOverPoligono(PointF mouse_pt)
         {
@@ -367,6 +377,14 @@ namespace DisenoColumnas.Interfaz_Seccion
             else
             {
             }
+        }
+
+        private void Dibujo_Refuerzo(Graphics g, Seccion seccioni, int Height, int Width, bool seleccion)
+        {
+            double X, Y;
+
+            SolidBrush br = new SolidBrush(Color.Blue);
+            Pen P1;
         }
 
         private void Grafica_MouseDown(object sender, MouseEventArgs e)

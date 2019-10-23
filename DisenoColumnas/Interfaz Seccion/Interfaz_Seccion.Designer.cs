@@ -37,8 +37,11 @@
             this.BReestablecer = new System.Windows.Forms.ToolStripButton();
             this.Grafica = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbPisos = new System.Windows.Forms.ListBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -126,10 +129,9 @@
             this.Grafica.BackColor = System.Drawing.Color.White;
             this.Grafica.Location = new System.Drawing.Point(27, 12);
             this.Grafica.Name = "Grafica";
-            this.Grafica.Size = new System.Drawing.Size(765, 487);
+            this.Grafica.Size = new System.Drawing.Size(702, 487);
             this.Grafica.TabIndex = 1;
             this.Grafica.TabStop = false;
-            this.Grafica.Click += new System.EventHandler(this.Grafica_Click);
             this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
@@ -146,12 +148,39 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lbPisos);
+            this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.Location = new System.Drawing.Point(735, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(166, 489);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lista de pisos";
+            // 
+            // lbPisos
+            // 
+            this.lbPisos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbPisos.FormattingEnabled = true;
+            this.lbPisos.ItemHeight = 15;
+            this.lbPisos.Location = new System.Drawing.Point(6, 24);
+            this.lbPisos.Name = "lbPisos";
+            this.lbPisos.Size = new System.Drawing.Size(154, 454);
+            this.lbPisos.TabIndex = 0;
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(796, 528);
+            this.ClientSize = new System.Drawing.Size(904, 528);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.Grafica);
@@ -163,6 +192,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,5 +209,7 @@
         private System.Windows.Forms.ToolStripButton BAlejar;
         private System.Windows.Forms.ToolStripButton BReestablecer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox lbPisos;
     }
 }
