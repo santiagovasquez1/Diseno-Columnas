@@ -16,12 +16,18 @@ namespace DisenoColumnas.Interfaz_Seccion
         private string Nombre_Columna { get; set; }
         public bool Over { get; set; } = false;
         public bool Seleccionado { get; set; } = false;
-        private double Xmax { get; set; } = 150; //[cm]
-        private double Ymax { get; set; } = 75;  //[cm]
+        private static double Xmax { get; set; } = 150; //[cm]
+        private static double Ymax { get; set; } = 75;  //[cm]
         private List<PointF> Vertices { get; set; } = new List<PointF>();
         private static FAgregarRef Fseleccion_Columnas { get; set; }
-        private static Seccion Seccion { get; set; }
+        private static Seccion seccion { get; set; }
         private static Columna Columna_i { get; set; }
+        private static int Width { get; set; }
+        private static int Height { get; set; }
+        public double EscalaX { get; set; }
+        public double EscalaY { get; set; }
+        public double EscalaR { get; set; }
+        public static string Piso { get; set; }
 
         public FInterfaz_Seccion()
         {
@@ -42,6 +48,10 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             int X, Y;
 
+            EscalaX = Grafica.Width / (2 * Xmax);
+            EscalaY = Grafica.Height / (2 * Ymax);
+            EscalaR = 0.30 * EscalaX * EscalaY;
+
             if (Columna_i != null)
             {
                 Graphics g = e.Graphics;
@@ -53,7 +63,9 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_grilla(g, Grafica.Height, Grafica.Width);
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
-                Dibujo_Seccion(g, Seccion, Grafica.Height, Grafica.Width, Over);
+                Dibujo_Seccion(g, seccion, Grafica.Height, Grafica.Width, Over);
+                seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
+                Dibujo_Refuerzo(g, seccion);
             }
         }
 
@@ -124,6 +136,16 @@ namespace DisenoColumnas.Interfaz_Seccion
             var pisos = Columna_i.Seccions.Select(x => x.Item2).ToArray();
             lbPisos.Items.Clear();
             lbPisos.Items.AddRange(pisos);
+            lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
+            Piso = lbPisos.SelectedItem.ToString();
+        }
+
+        public void get_section()
+        {
+            int indice;
+            indice = Columna_i.Seccions.FindIndex(x => x.Item2 == Piso);
+            seccion = Seccion.DeepClone(Columna_i.Seccions[indice].Item1);
+            Grafica.Invalidate();
         }
 
         private bool MouseOverPoligono(PointF mouse_pt)
@@ -215,7 +237,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             Over = false;
             Seleccionado = false;
-            FAgregarRef agregarRef = new FAgregarRef(Seccion);
+            FAgregarRef agregarRef = new FAgregarRef(seccion,Piso,this);
 
             if (MouseOverPoligono(e.Location))
             {
@@ -243,7 +265,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)
         {
-            FAgregarRef fseleccion = new FAgregarRef(Seccion);
+            FAgregarRef fseleccion = new FAgregarRef(seccion,Piso,this);
             fseleccion.ShowDialog();
         }
 
@@ -273,7 +295,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Color = Color.DarkRed,
                     DashStyle = DashStyle.Dash,
                     LineJoin = LineJoin.Round,
-                    Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+                    Alignment = PenAlignment.Center
                 };
             }
 
@@ -372,27 +394,53 @@ namespace DisenoColumnas.Interfaz_Seccion
                 #endregion Vertices
             }
 
+            if (seccioni.Shape == TipodeSeccion.Circle)
+            {
+                CCirculo circulo = new CCirculo(seccioni.B / 2, pCentro: new double[] { 0, 0 });
+                circulo.Set_puntos(50);
+
+                g.FillClosedCurve(br, circulo.Puntos.ToArray());
+                g.DrawClosedCurve(P1, circulo.Puntos.ToArray());
+            }
+
             if (seccioni.Shape != TipodeSeccion.Circle)
             {
-                g.FillPolygon(br, Vertices.ToArray());
                 g.DrawPolygon(P1, Vertices.ToArray());
-            }
-            else
-            {
+                g.FillPolygon(br, Vertices.ToArray());
             }
         }
 
-        private void Dibujo_Refuerzo(Graphics g, Seccion seccioni, int Height, int Width, bool seleccion)
+        private void Dibujo_Refuerzo(Graphics g, Seccion seccioni)
         {
-            double X, Y;
-
-            SolidBrush br = new SolidBrush(Color.Blue);
+            SolidBrush br = new SolidBrush(Color.Black);
             Pen P1;
+
+            P1 = new Pen(Color.Black, 2.5f)
+            {
+                Brush = Brushes.Black,
+                Color = Color.Black,
+                DashStyle = DashStyle.Solid,
+                LineJoin = LineJoin.MiterClipped,
+                Alignment = PenAlignment.Center
+            };
+
+            for (int i = 0; i < seccioni.Shapes_ref.Count; i++)
+            {
+                g.DrawPath(P1, seccioni.Shapes_ref[i]);
+                g.FillPath(br, seccioni.Shapes_ref[i]);
+            }
         }
 
         private void Grafica_MouseDown(object sender, MouseEventArgs e)
         {
             Seleccionar(sender, e);
+        }
+
+        private void lbPisos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Piso = lbPisos.SelectedItem.ToString();
+            get_section();
+            Grafica.Invalidate();
         }
     }
 }

@@ -9,9 +9,12 @@ namespace DisenoColumnas.Interfaz_Seccion
     {
         private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion();
         private Seccion Seccion { get; set; }
+        private string piso { get; set; }
 
-        public FAgregarRef(Seccion pseccion)
+        public FAgregarRef(Seccion pseccion, string ppiso, FInterfaz_Seccion pInterfaz)
         {
+            piso = ppiso;
+            FInterfaz_ = pInterfaz;
             Seccion = pseccion;
             InitializeComponent();
         }
@@ -93,10 +96,9 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 data.Rows[i].Cells[0].Value = Seccion.Refuerzos[i].id;
                 data.Rows[i].Cells[1].Value = Seccion.Refuerzos[i].Diametro;
-                data.Rows[i].Cells[2].Value = Math.Round (Seccion.Refuerzos[i].Coord[0],2);
+                data.Rows[i].Cells[2].Value = Math.Round(Seccion.Refuerzos[i].Coord[0], 2);
                 data.Rows[i].Cells[3].Value = Math.Round(Seccion.Refuerzos[i].Coord[1], 2);
             }
-
         }
 
         private void Crear_tabla(int CapasX, int CapasY, int CapasXw, int CapasYw, DataGridView data)
@@ -164,7 +166,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             CRefuerzo refuerzo;
             DataGridViewComboBoxCell boxCell;
             string diametro;
-            int id;
+            int id, indice;
             double x, y;
             double[] coord;
 
@@ -183,7 +185,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Seccion.Refuerzos.Add(refuerzo);
             }
 
-
+            indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == piso);
+            Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
             Close();
         }
 

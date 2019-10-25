@@ -173,6 +173,7 @@
             this.lbPisos.Name = "lbPisos";
             this.lbPisos.Size = new System.Drawing.Size(154, 454);
             this.lbPisos.TabIndex = 0;
+            this.lbPisos.SelectedIndexChanged += new System.EventHandler(this.lbPisos_SelectedIndexChanged);
             // 
             // FInterfaz_Seccion
             // 

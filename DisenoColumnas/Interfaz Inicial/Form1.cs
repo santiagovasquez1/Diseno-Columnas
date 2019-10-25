@@ -270,6 +270,8 @@ namespace DisenoColumnas
 
         private void CreateDidctonaries()
         {
+            #region Area refuerzo
+            //Unidades en m²
             Proyecto_.AceroBarras = new Dictionary<int, double>();
             Proyecto_.AceroBarras.Add(2, 0.32 / 10000);
             Proyecto_.AceroBarras.Add(3, 0.71 / 10000);
@@ -279,6 +281,7 @@ namespace DisenoColumnas
             Proyecto_.AceroBarras.Add(7, 3.87 / 10000);
             Proyecto_.AceroBarras.Add(8, 5.10 / 10000);
             Proyecto_.AceroBarras.Add(10, 8.09 / 10000);
+            #endregion
 
             Proyecto_.Ld_210 = new Dictionary<int, float>();
             Proyecto_.Ld_210.Add(2, 0.55f);
@@ -358,7 +361,20 @@ namespace DisenoColumnas
             Proyecto_.Ld_560.Add(11, 1.6f);
             Proyecto_.Ld_560.Add(14, 1.9f);
 
-
+            #region Diccionario diametro barras 
+            //Diametros en centimetros
+            Proyecto_.Diametro_ref = new Dictionary<int, float>();
+            Proyecto_.Diametro_ref.Add(3, 0.95f);
+            Proyecto_.Diametro_ref.Add(4, 1.27f);
+            Proyecto_.Diametro_ref.Add(5, 1.59f);
+            Proyecto_.Diametro_ref.Add(6, 1.91f);
+            Proyecto_.Diametro_ref.Add(7, 2.22f);
+            Proyecto_.Diametro_ref.Add(8, 2.54f);
+            Proyecto_.Diametro_ref.Add(9, 2.87f);
+            Proyecto_.Diametro_ref.Add(10, 3.23f);
+            Proyecto_.Diametro_ref.Add(11, 3.58f);
+            Proyecto_.Diametro_ref.Add(14, 4.30f);
+            #endregion
         }
 
         private string AbrirE2K2009yCSV2009()
@@ -646,7 +662,7 @@ namespace DisenoColumnas
                 {
                     if (mAT_.Name == Material_Aux)
                     {
-                        Seccion seccion = new Seccion(Nombre, B, H, TF, TW, mAT_, tipodeSeccion, Coord);
+                        Seccion seccion = new Seccion(Nombre, "", B, H, TF, TW, mAT_, tipodeSeccion, Coord);
                         Proyecto_.Lista_Secciones.Add(seccion);
                     }
                 }
@@ -772,6 +788,8 @@ namespace DisenoColumnas
                             }
                             Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
                             colum.Seccions.Add(tuple_aux);
+                            seccion.Piso = Story;
+                            colum.Secciones2.Add(seccion);
                         }
                     }
                 }
@@ -792,7 +810,7 @@ namespace DisenoColumnas
                 }
 
                 Viga VigaMayor = new Viga("Viga con Mayor H Por Piso");
-                Seccion seccionMayor = new Seccion("Inicial", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
+                Seccion seccionMayor = new Seccion("Inicial","", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
                 Tuple<Seccion, string> tuple_Seccion_Mayor = null;
 
                 for (int i = 0; i < column.Seccions.Count; i++)
@@ -946,6 +964,7 @@ namespace DisenoColumnas
                 {
                     mIntefazSeccion.Get_Columna();
                     mIntefazSeccion.Load_Pisos();
+                    mIntefazSeccion.get_section();
                     mIntefazSeccion.Invalidate();
                 }
             }

@@ -122,6 +122,7 @@ namespace DisenoColumnas.DefinirColumnas
                     {
                         Form1.mIntefazSeccion.Get_Columna();
                         Form1.mIntefazSeccion.Load_Pisos();
+                        Form1.mIntefazSeccion.get_section();
                         Form1.mIntefazSeccion.Invalidate();
                     }
 
