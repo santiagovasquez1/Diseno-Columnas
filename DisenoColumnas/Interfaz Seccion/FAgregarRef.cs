@@ -186,8 +186,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
 
             indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == piso);
-            //Form1.Proyecto_.ColumnaSelect.Seccions.Add(new Tuple<Seccion, string>(Seccion, piso));
-            //Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
+            Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
             Close();
         }
 

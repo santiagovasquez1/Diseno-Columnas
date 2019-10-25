@@ -20,7 +20,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private static double Ymax { get; set; } = 75;  //[cm]
         private List<PointF> Vertices { get; set; } = new List<PointF>();
         private static FAgregarRef Fseleccion_Columnas { get; set; }
-        private static Seccion Seccion { get; set; }
+        private static Seccion seccion { get; set; }
         private static Columna Columna_i { get; set; }
         private static int Width { get; set; }
         private static int Height { get; set; }
@@ -63,9 +63,9 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_grilla(g, Grafica.Height, Grafica.Width);
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
-                Dibujo_Seccion(g, Seccion, Grafica.Height, Grafica.Width, Over);
-                Seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
-                Dibujo_Refuerzo(g, Seccion);
+                Dibujo_Seccion(g, seccion, Grafica.Height, Grafica.Width, Over);
+                seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
+                Dibujo_Refuerzo(g, seccion);
             }
         }
 
@@ -139,7 +139,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             int indice;
             indice = Columna_i.Seccions.FindIndex(x => x.Item2 == Piso);
-            Seccion = (Seccion)Columna_i.Seccions[indice].Item1.Clone();
+            seccion = Seccion.DeepClone(Columna_i.Seccions[indice].Item1);
             Grafica.Invalidate();
         }
 
@@ -232,7 +232,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             Over = false;
             Seleccionado = false;
-            FAgregarRef agregarRef = new FAgregarRef(Seccion,Piso,this);
+            FAgregarRef agregarRef = new FAgregarRef(seccion,Piso,this);
 
             if (MouseOverPoligono(e.Location))
             {
@@ -260,7 +260,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)
         {
-            FAgregarRef fseleccion = new FAgregarRef(Seccion,Piso,this);
+            FAgregarRef fseleccion = new FAgregarRef(seccion,Piso,this);
             fseleccion.ShowDialog();
         }
 

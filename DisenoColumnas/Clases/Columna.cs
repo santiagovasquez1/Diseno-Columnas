@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
@@ -12,6 +13,7 @@ namespace DisenoColumnas.Clases
         public Columna(string Nombre)
         {
             Name = Nombre;
+            Prueba.AddRange(new int[] { 1, 2, 3, 4, 5 });
         }
         #endregion
 
@@ -48,7 +50,7 @@ namespace DisenoColumnas.Clases
 
         public List<Alzado> Alzados { get; set; } = new List<Alzado>();
 
-
+        public List<int> Prueba=new List<int>();
 
         #endregion
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace DisenoColumnas.Clases
 {
@@ -36,7 +38,7 @@ namespace DisenoColumnas.Clases
 
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
 
-        public List<GraphicsPath> Shapes_ref { get; set; } = new List<GraphicsPath>();
+        [NonSerialized]public List<GraphicsPath> Shapes_ref  = new List<GraphicsPath>();
 
         private List<float[]> CoordenadasSeccion { get; set; }
 
@@ -116,7 +118,16 @@ namespace DisenoColumnas.Clases
             double[] Centro;
             double xc, yc;
             CCirculo circulo;
-            Shapes_ref.Clear();
+
+            if (Shapes_ref != null)
+            {
+                Shapes_ref.Clear();
+            }
+            else
+            {
+                Shapes_ref = new List<GraphicsPath>();
+            }
+
 
             foreach (CRefuerzo refuerzoi in Refuerzos)
             {
@@ -145,6 +156,18 @@ namespace DisenoColumnas.Clases
                 Area = Area
             };
             return temp;
+        }
+
+        public static T DeepClone<T>(T obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Position = 0;
+
+                return (T)formatter.Deserialize(ms);
+            }
         }
 
         public override bool Equals(object obj)
