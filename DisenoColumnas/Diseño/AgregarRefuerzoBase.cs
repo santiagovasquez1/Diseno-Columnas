@@ -1,0 +1,154 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace DisenoColumnas.Diseño
+{
+    public partial class AgregarRefuerzoBase : Form
+    {
+
+        public static int IndiceC { get; set; }
+        public AgregarRefuerzoBase()
+        {
+            InitializeComponent();
+        }
+
+        private void AgregarRefuerzoBase_MouseDown(object sender, MouseEventArgs e)
+        {
+            Utilidades.MoveWindow.ReleaseCapture();
+            Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
+        }
+
+     
+
+        private void Cb_Aceptar_Click(object sender, EventArgs e)
+        {
+            float r;
+            bool IsNumeric = Single.TryParse(CantBarras.Text, out r);
+            if (NoBarra.Text != "" && r != 0 && IsNumeric) {
+                string Nomenclatura =r+"#" +NoBarra.Text;
+                if (TP1.Checked)
+                {
+
+                    for (int i = 0; i < Form1.mAgregarAlzado.D_Alzado.Rows.Count; i++)
+                    {
+                        Form1.mAgregarAlzado.D_Alzado.Rows[i].Cells[IndiceC].Value = "";
+                    }
+
+                    Form1.mAgregarAlzado.D_Alzado.Rows[Form1.mAgregarAlzado.D_Alzado.Rows.Count - 1].Cells[IndiceC].Value = Nomenclatura+"T1";
+                    if (Form1.mAgregarAlzado.D_Alzado.Rows.Count % 2 != 0)
+                    {
+                        Form1.mAgregarAlzado.D_Alzado.Rows[0].Cells[IndiceC].Value = Nomenclatura + "T1";
+                    }
+                    else
+                    {
+                        Form1.mAgregarAlzado.D_Alzado.Rows[0].Cells[IndiceC].Value = Nomenclatura + "T3";
+                    }
+
+                    for (int i= Form1.mAgregarAlzado.D_Alzado.Rows.Count-2; i> 0; i--)
+                    {
+                        if ((Form1.mAgregarAlzado.D_Alzado.Rows.Count-i) % 2 != 0) {
+                            Form1.mAgregarAlzado.D_Alzado.Rows[i].Cells[IndiceC].Value = Nomenclatura;
+                        }
+                        else
+                        {
+                            Form1.mAgregarAlzado.D_Alzado.Rows[i].Cells[IndiceC].Value = Nomenclatura+"T2";
+                        }
+                    }
+
+                    BarraPersonalizada2.Width = 0;
+                    BarraPersonalizada.Visible = true;
+                    BarraPersonalizada2.Visible = true;
+                    int D_Pro = BarraPersonalizada.Width / Form1.mAgregarAlzado.D_Alzado.Rows.Count-1;
+
+                    for (int i = Form1.mAgregarAlzado.D_Alzado.Rows.Count - 1; i >= 0; i--)
+                    {
+                        Form1.mAgregarAlzado.EndCellEdit(IndiceC, i, false);
+                        BarraPersonalizada2.Width += D_Pro;
+                    }
+
+                    Form1.mAgregarAlzado.Invalidate();
+
+                }
+                else if (TP2.Checked)
+                {
+
+                    for (int i = 0; i < Form1.mAgregarAlzado.D_Alzado.Rows.Count; i++)
+                    {
+                        Form1.mAgregarAlzado.D_Alzado.Rows[i].Cells[IndiceC].Value = "";
+                    }
+
+                    Form1.mAgregarAlzado.D_Alzado.Rows[Form1.mAgregarAlzado.D_Alzado.Rows.Count - 1].Cells[IndiceC].Value = Nomenclatura + "T3";
+                    if (Form1.mAgregarAlzado.D_Alzado.Rows.Count % 2 != 0)
+                    {
+                        Form1.mAgregarAlzado.D_Alzado.Rows[0].Cells[IndiceC].Value = Nomenclatura + "T3";
+                    }
+                    else
+                    {
+                        Form1.mAgregarAlzado.D_Alzado.Rows[0].Cells[IndiceC].Value = Nomenclatura + "T1";
+                    }
+
+                    for (int i = Form1.mAgregarAlzado.D_Alzado.Rows.Count - 2; i > 0; i--)
+                    {
+                        if ((Form1.mAgregarAlzado.D_Alzado.Rows.Count - i) % 2 != 0)
+                        {
+                            Form1.mAgregarAlzado.D_Alzado.Rows[i].Cells[IndiceC].Value = Nomenclatura+"T2";
+                        }
+                        else
+                        {
+                            Form1.mAgregarAlzado.D_Alzado.Rows[i].Cells[IndiceC].Value = Nomenclatura ;
+                        }
+                    }
+
+                    BarraPersonalizada2.Width = 0;
+                    BarraPersonalizada.Visible = true;
+                    BarraPersonalizada2.Visible = true;
+                    int D_Pro = BarraPersonalizada.Width / Form1.mAgregarAlzado.D_Alzado.Rows.Count - 1;
+
+                    for (int i = Form1.mAgregarAlzado.D_Alzado.Rows.Count - 1; i >= 0; i--)
+                    {
+                        Form1.mAgregarAlzado.EndCellEdit(IndiceC, i, false);
+                        BarraPersonalizada2.Width += D_Pro;
+                    }
+
+                    Form1.mAgregarAlzado.Invalidate();
+
+
+
+
+
+
+                }
+
+
+                for (int i = 0; i < Form1.mAgregarAlzado.D_Alzado.Rows.Count; i++)
+                {
+                    Form1.mAgregarAlzado.D_Alzado.Rows[i].Cells[IndiceC].Value = Nomenclatura;
+                }
+
+
+            }
+            BarraPersonalizada.Visible = false;
+            BarraPersonalizada2.Visible = false;
+
+            Close();
+        }
+
+        private void GroupBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Utilidades.MoveWindow.ReleaseCapture();
+            Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
+}

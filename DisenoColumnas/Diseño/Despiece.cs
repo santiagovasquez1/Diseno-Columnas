@@ -17,6 +17,7 @@ namespace DisenoColumnas.Diseño
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
             if (ColumnaSelect != null)
             {
+                
                 float MaxB = -999999;
                 for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
                 {
@@ -69,7 +70,7 @@ namespace DisenoColumnas.Diseño
 
             if (ColumnaSelect != null)
             {
-
+                
                 float Altura = 0;
 
                 for (int i = 0; i < ColumnaSelect.LuzLibre.Count; i++)
@@ -92,33 +93,61 @@ namespace DisenoColumnas.Diseño
                 }
 
 
-
-
                 SX = (Width - 15) / 10;
                 SY = (Height - 5) / Altura;
-                YI = 7.5f;
-                XI = 0;
+                YI = 5f;
+                XI = 30;
 
 
+                //Crear Lineas Divisorias
+                Pen P_LD = new Pen(Color.LightGray);
+                P_LD.StartCap = System.Drawing.Drawing2D.LineCap.Triangle;
+                P_LD.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+                P_LD.Width = 1;
+                float TamanoFuente = 0.07f * (SX + SY);
+                if (ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY < TamanoFuente)
+                    {
+                    TamanoFuente = ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY;
+                }
+                Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
+                e.Graphics.DrawLine(P_LD, 0, Height - YI - Form1.Proyecto_.e_Fundacion * SY, Width, Height - YI - Form1.Proyecto_.e_Fundacion*SY);
+                PointF PointStringF = new PointF(0.01f * SX, Height - YI - Form1.Proyecto_.e_Fundacion/2*SY - Fuente.Height / 2);
+                e.Graphics.DrawString("Fund.", Fuente, Brushes.Black, PointStringF);
+
+                for (int i = 0; i < ColumnaSelect.LuzAcum.Count; i++)
+                {
+                    //Pisos
+                    PointF PointString = new PointF(0.01f * SX, Height - YI - ColumnaSelect.LuzAcum[i] * SY+ColumnaSelect.VigaMayor.Seccions[i].Item1.H*SY/2- Fuente.Height/2);
+                    e.Graphics.DrawString(ColumnaSelect.Seccions[i].Item2, Fuente, Brushes.Black, PointString);
+
+                    e.Graphics.DrawLine(P_LD, 0, Height - YI - ColumnaSelect.LuzAcum[i] * SY, Width, Height - YI - ColumnaSelect.LuzAcum[i] * SY);
+                    e.Graphics.DrawLine(P_LD, 0, Height - YI - (ColumnaSelect.LuzAcum[i] - ColumnaSelect.VigaMayor.Seccions[i].Item1.H) * SY, Width, Height - YI - (ColumnaSelect.LuzAcum[i] - ColumnaSelect.VigaMayor.Seccions[i].Item1.H) * SY);
+
+                }
+
+
+
+                //Graficar Alzado
                 for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
                 {
-                    if (ColumnaSelect.Alzados.Count >= 2)
-                    {
-                        if (i == ColumnaSelect.Alzados.Count-1)
-                        {
-                            XI = XI + Width - 0.4f*SX;
-                            }
-                    }
                     for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
                     {
-                
+
                         if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
                         {
-                            ColumnaSelect.Alzados[i].Colum_Alzado[j].Paint(e, SX, SY, Height, YI,XI);
+                            ColumnaSelect.Alzados[i].Colum_Alzado[j].Paint(e, SX, SY, Height, YI, XI);
                         }
                     }
 
                 }
+
+            
+
+
+
+
+
+
 
 
 
@@ -165,36 +194,6 @@ namespace DisenoColumnas.Diseño
 
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

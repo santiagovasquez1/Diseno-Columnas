@@ -130,8 +130,11 @@
   <data name="Arriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Arriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="zoom-out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zoom-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Openx16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Openx16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SaveX13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SaveX13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Restaurar14x11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Restaurar14x11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,8 +145,8 @@
   <data name="Czoom-increasing-symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Czoom-increasing-symbol.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="x16Blanca" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\x16Blanca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Abajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Abajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="image" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,14 +160,14 @@
   <data name="move" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\move.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="anadir" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\anadir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vcsadded_93506x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vcsadded_93506x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Minimizex16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Minimizex16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SaveAllx13" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SaveAllx13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Openx16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Openx16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Csearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Csearch.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,8 +175,8 @@
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SaveX13" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SaveX13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="x16Blanca" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\x16Blanca.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Newx16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Newx16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,19 +184,19 @@
   <data name="Czoom-out" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Czoom-out.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="anadir" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\anadir.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="zoom-increasing-symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom-increasing-symbol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoom-out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SaveAllx13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SaveAllx13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Czoom-increasing-symbol-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Czoom-increasing-symbol-1.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="zoom-increasing-symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\zoom-increasing-symbol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Abajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Abajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="vcsadded_93506x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vcsadded_93506x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="close-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
