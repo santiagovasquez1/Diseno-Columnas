@@ -136,7 +136,7 @@ namespace DisenoColumnas.Clases
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
-                yc = refuerzoi.Coord[1] * EscalaY;
+                yc = -refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 circulo = new CCirculo(r, Centro);
