@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace DisenoColumnas.Clases
 {
@@ -17,7 +18,9 @@ namespace DisenoColumnas.Clases
     [Serializable]
     public class Seccion : ICloneable, IComparable
     {
+
         public string Name { get; set; }
+        public string Piso { get; set; }
         public MAT_CONCRETE Material { get; set; }
         public float B { get; set; }
         public float H { get; set; }
@@ -33,11 +36,14 @@ namespace DisenoColumnas.Clases
 
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
 
+        public List<GraphicsPath> Shapes_ref { get; set; } = new List<GraphicsPath>();
+
         private List<float[]> CoordenadasSeccion { get; set; }
 
-        public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
+        public Seccion(string Nombre,string pPiso, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
             Name = Nombre;
+            Piso = pPiso;
             B = B_;
             H = H_;
             Material = Material_;
@@ -103,9 +109,41 @@ namespace DisenoColumnas.Clases
             }
         }
 
+        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
+        {
+            GraphicsPath path;
+            double r = 0;
+            double[] Centro;
+            double xc, yc;
+            CCirculo circulo;
+            Shapes_ref.Clear();
+
+            foreach (CRefuerzo refuerzoi in Refuerzos)
+            {
+                path = new GraphicsPath();
+                r = Form1.Proyecto_.Diametro_ref[Convert.ToInt32(refuerzoi.Diametro.Substring(1))] / 2;
+                r = r * EscalaR;
+
+                xc = refuerzoi.Coord[0] * EscalaX;
+                yc = refuerzoi.Coord[1] * EscalaY;
+                Centro = new double[] { xc, yc };
+
+                circulo = new CCirculo(r, Centro);
+                circulo.Set_puntos(10);
+
+                path.AddClosedCurve(circulo.Puntos.ToArray());
+                Shapes_ref.Add(path);
+            }
+        }
+
         public object Clone()
         {
-            Seccion temp = new Seccion(Name, B, H, TF, TW, Material, Shape, CoordenadasSeccion);
+            Seccion temp = new Seccion(Name,Piso, B, H, TF, TW, Material, Shape, CoordenadasSeccion)
+            {
+                Refuerzos = Refuerzos,
+                Vertices = Vertices,
+                Area = Area
+            };
             return temp;
         }
 
@@ -155,7 +193,6 @@ namespace DisenoColumnas.Clases
                 return false;
                 //throw;
             }
-
         }
 
         public static bool operator <(Seccion s1, Seccion s2)

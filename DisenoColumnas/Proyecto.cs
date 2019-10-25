@@ -18,17 +18,19 @@ namespace DisenoColumnas
     [Serializable]
     public class Proyecto
     {
+        #region Diccionarios
 
         [NonSerialized]
+        public Dictionary<int, float> Diametro_ref;
         public Dictionary<int, double> AceroBarras;
-
-        [NonSerialized]
         public Dictionary<int, float> Ld_210;
         public Dictionary<int, float> Ld_280;
         public Dictionary<int, float> Ld_350;
         public Dictionary<int, float> Ld_420;
         public Dictionary<int, float> Ld_490;
         public Dictionary<int, float> Ld_560;
+        
+        #endregion
 
         public string Empresa { get; } = "efe Prima Ce";
         public string Ruta { get; set; } = "";

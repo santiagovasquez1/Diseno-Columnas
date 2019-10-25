@@ -36,6 +36,7 @@ namespace DisenoColumnas.Clases
 
 
         public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>();
+        public List<Seccion> Secciones2 { get; set; } = new List<Seccion>();
         public Viga VigaMayor { get; set; }
 
         public List<float> LuzLibre { get; set; }
