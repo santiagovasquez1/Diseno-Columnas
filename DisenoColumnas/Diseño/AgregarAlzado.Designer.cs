@@ -56,6 +56,7 @@
             this.D_Alzado.Name = "D_Alzado";
             this.D_Alzado.Size = new System.Drawing.Size(620, 441);
             this.D_Alzado.TabIndex = 1;
+            this.D_Alzado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_Alzado_CellClick);
             this.D_Alzado.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_Alzado_CellEndEdit);
             this.D_Alzado.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.D_Alzado_CellMouseClick);
             // 
@@ -132,8 +133,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView D_Alzado;
         private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column1;
         public System.Windows.Forms.Label NameColum;
         private System.Windows.Forms.DataGridViewImageColumn story;
@@ -141,5 +140,6 @@
         private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cortarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pegarToolStripMenuItem;
+        internal System.Windows.Forms.DataGridView D_Alzado;
     }
 }

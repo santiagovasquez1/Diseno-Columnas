@@ -95,6 +95,7 @@ namespace DisenoColumnas
 
         private void OpenProject()
         {
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "DMC |*.Colum";
             openFileDialog.Title = "Abrir Proyecto";
@@ -102,47 +103,33 @@ namespace DisenoColumnas
 
             if (openFileDialog.FileName != "")
             {
+                CloseWindows();
+                if (Proyecto_!= null)
+                {
+                    DialogResult box;
+                    box = MessageBox.Show("¿Desea guardar los cambios en el Proyecto?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                    if (box == DialogResult.Yes)
+                    {
+                        Save();
+                    }
+                    LColumna.Items.Clear();
+                    LColumna.Text = "";
+                }
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
-                if (m_PlantaColumnas != null)
-                {
-                    m_PlantaColumnas.DockHandler.DockPanel = null;
-                }
-                m_PlantaColumnas = new PlantaColumnas();
-                //m_PlantaColumnas.Show(PanelContenedor);
+             
+                mAgregarAlzado = new AgregarAlzado();
+                try { mAgregarAlzado.Show(PanelContenedor);}   catch { }
 
-                if (m_Informacion != null)
-                {
-                    m_Informacion.DockHandler.DockPanel = null;
-                }
-
+                mCuantiaVolumetrica = new CuantiaVolumetrica();
+                mCuantiaVolumetrica.Show(PanelContenedor);
                 m_Informacion = new Informacion();
                 try
                 {
                     m_Informacion.Show(PanelContenedor);
                 }
                 catch { }
-                if (m_Despiece != null)
-                {
-                    m_Despiece.DockHandler.DockPanel = null;
-                }
-
-                if (mCuantiaVolumetrica != null)
-                {
-                    mCuantiaVolumetrica.DockHandler.DockPanel = null;
-                }
-
-                if (mAgregarAlzado != null)
-                {
-                    mAgregarAlzado.DockHandler.DockPanel = null;
-                }
-                mAgregarAlzado = new AgregarAlzado();
-
-                mAgregarAlzado.Show(PanelContenedor);
-
-                mCuantiaVolumetrica = new CuantiaVolumetrica();
-                mCuantiaVolumetrica.Show(PanelContenedor);
-
                 mLcolumnas = LColumna;
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
@@ -157,7 +144,35 @@ namespace DisenoColumnas
                 WindowState = FormWindowState.Maximized;
             }
         }
+        private void CloseWindows()
+        {
+            if (m_PlantaColumnas != null)
+            {
+                m_PlantaColumnas.DockHandler.DockPanel = null;
+            }
+            m_PlantaColumnas = new PlantaColumnas();
+            //m_PlantaColumnas.Show(PanelContenedor);
 
+            if (m_Informacion != null)
+            {
+                m_Informacion.DockHandler.DockPanel = null;
+            }
+
+             if (m_Despiece != null)
+            {
+                m_Despiece.DockHandler.DockPanel = null;
+            }
+
+            if (mCuantiaVolumetrica != null)
+            {
+                mCuantiaVolumetrica.DockHandler.DockPanel = null;
+            }
+
+            if (mAgregarAlzado != null)
+            {
+                mAgregarAlzado.DockHandler.DockPanel = null;
+            }
+        }
         private void SaveAs()
         {
             SaveFileDialog SaveFile = new SaveFileDialog();
@@ -203,12 +218,32 @@ namespace DisenoColumnas
 
         private void NewProject()
         {
-            string Ruta1 = AbrirE2K2009yCSV2009();
-            string Ruta2 = AsingarResultadosaColumna();
+            string Ruta1, Ruta2;
+     
+
+            Ruta1 = AbrirE2K2009yCSV2009();
+            Ruta2 = AsingarResultadosaColumna();
 
             if (Ruta1 != "" && Ruta2 != "")
             {
+                if (Proyecto_ != null)
+                {
+
+                    CloseWindows();
+                    if (Proyecto_.Ruta != null)
+                    {
+                        DialogResult box;
+                        box = MessageBox.Show("¿Desea guardar cambios en el proyecto anterior?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (box == DialogResult.Yes)
+                        {
+                            Save();
+                        }
+                        LColumna.Items.Clear();
+                        LColumna.Text = "";
+                    }
+                }
                 WindowState = FormWindowState.Maximized;
+                m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
 
                 variablesdeEntrada = new VariablesdeEntrada();
                 variablesdeEntrada.ShowDialog();
@@ -792,9 +827,15 @@ namespace DisenoColumnas
                 columna1.LuzLibre = new List<float>();
                 for (int i = 0; i < columna1.Seccions.Count; i++)
                 {
-                    if (columna1.Seccions[i].Item1 != null)
-                    {
-                        columna1.LuzLibre.Add(Proyecto_.Stories[i].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
+                    columna1.LuzLibre.Add(0);
+                }
+                    for (int i = 0; i < columna1.Seccions.Count; i++)
+                {
+                    for (int j = 0; j < Proyecto_.Stories.Count;j++) {
+                        if (columna1.Seccions[i].Item2 == Proyecto_.Stories[j].Item1)
+                        {
+                            columna1.LuzLibre[i]=(Proyecto_.Stories[j].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
+                        }
                     }
                 }
             }
@@ -1075,6 +1116,13 @@ namespace DisenoColumnas
         private void Form1_Load(object sender, EventArgs e)
         {
             mIntefazSeccion = new FInterfaz_Seccion();
+        }
+
+        private void ColumnasIgualesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColSimilares colSimilares = new ColSimilares();
+            colSimilares.ShowDialog();
+
         }
     }
 }

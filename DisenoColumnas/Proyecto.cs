@@ -29,6 +29,7 @@ namespace DisenoColumnas
         public Dictionary<int, float> Ld_420;
         public Dictionary<int, float> Ld_490;
         public Dictionary<int, float> Ld_560;
+      
 
         public string Empresa { get; } = "efe Prima Ce";
         public string Ruta { get; set; } = "";
@@ -57,6 +58,13 @@ namespace DisenoColumnas
         public void AlturaEdificio_()
         {
             AlturaEdificio = Stories.Sum(x => x.Item2) + e_Fundacion;
+
         }
+
+
+
+
+        
+
     }
 }

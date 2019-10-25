@@ -40,6 +40,8 @@ namespace DisenoColumnas.Clases
 
         public List<float> LuzLibre { get; set; }
 
+        public List<float> LuzAcum { get; set; }
+
         public List<ResultadosETABS> resultadosETABs { get; set; }
 
         public List<Estribo> estribos { get; set; } = new List<Estribo>();
@@ -52,7 +54,13 @@ namespace DisenoColumnas.Clases
         #endregion
 
 
+        #region Propiedades - Auxiliares
 
+        public bool Maestro { get; set; } = false;
+
+         public string ColSimilName { get; set; }
+
+        #endregion
 
 
 

@@ -20,6 +20,7 @@ namespace DisenoColumnas.Diseño
         {
 
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
+            
 
             NameColum.Text = "Columna: " + ColumnaSelect.Name;
 
@@ -97,7 +98,7 @@ namespace DisenoColumnas.Diseño
 
             if (ColumnaSelect != null)
             {
-
+                
                 Info_Es_Col.Rows.Clear();
 
                 NameColum.Text = "Columna: " + ColumnaSelect.Name;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DisenoColumnas.Clases;
+using System;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Interfaz_Inicial
@@ -46,6 +47,23 @@ namespace DisenoColumnas.Interfaz_Inicial
                         Form1.Proyecto_.DMO_DES = GDE.DMO;
                     }
 
+
+                    //CalcularAlturaAcumulada
+                    foreach(Columna columna in Form1.Proyecto_.Lista_Columnas)
+                    {
+                        columna.LuzAcum = new System.Collections.Generic.List<float>();
+                        float DisAcum = Form1.Proyecto_.e_Fundacion;
+                        for (int i = columna.LuzLibre.Count - 1; i >= 0; i--) { columna.LuzAcum.Add(0); }  
+
+
+                        for (int i=columna.LuzLibre.Count-1; i>= 0; i--)
+                        {
+                            DisAcum += columna.LuzLibre[i] + columna.VigaMayor.Seccions[i].Item1.H ;
+                            columna.LuzAcum[i]=DisAcum;
+                        }
+
+
+                    }
 
                     Close();
                 }

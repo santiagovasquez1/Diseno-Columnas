@@ -112,8 +112,11 @@ namespace DisenoColumnas.Interfaz_Seccion
         public void Get_Columna()
         {
             Columna_i = Form1.Proyecto_.ColumnaSelect;
-            Seccion = (Seccion)Columna_i.Seccions[0].Item1.Clone();
-            Grafica.Invalidate();
+            if (Columna_i != null)
+            {
+                Seccion = (Seccion)Columna_i.Seccions[0].Item1.Clone();
+                Grafica.Invalidate();
+            }
         }
 
         public void Load_Pisos()

@@ -64,6 +64,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.Cuantia_Vol_Button = new System.Windows.Forms.Button();
+            this.columnasIgualesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -150,7 +151,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 2);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(205, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(325, 24);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -213,7 +214,8 @@
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.variablesDeEntradaToolStripMenuItem});
+            this.variablesDeEntradaToolStripMenuItem,
+            this.columnasIgualesToolStripMenuItem});
             this.editarToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
@@ -222,7 +224,7 @@
             // variablesDeEntradaToolStripMenuItem
             // 
             this.variablesDeEntradaToolStripMenuItem.Name = "variablesDeEntradaToolStripMenuItem";
-            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.variablesDeEntradaToolStripMenuItem.Text = "Variables de Entrada";
             this.variablesDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.VariablesDeEntradaToolStripMenuItem_Click);
             // 
@@ -478,6 +480,13 @@
             this.Cuantia_Vol_Button.UseVisualStyleBackColor = true;
             this.Cuantia_Vol_Button.Click += new System.EventHandler(this.Cb_cuantiavol_Click);
             // 
+            // columnasIgualesToolStripMenuItem
+            // 
+            this.columnasIgualesToolStripMenuItem.Name = "columnasIgualesToolStripMenuItem";
+            this.columnasIgualesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.columnasIgualesToolStripMenuItem.Text = "Columnas Iguales";
+            this.columnasIgualesToolStripMenuItem.Click += new System.EventHandler(this.ColumnasIgualesToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -557,5 +566,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Button_Agregar;
         private System.Windows.Forms.ToolStripMenuItem agregarAlzadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem columnasIgualesToolStripMenuItem;
     }
 }
