@@ -408,7 +408,17 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Dibujo_Refuerzo(Graphics g, Seccion seccioni)
         {
             SolidBrush br = new SolidBrush(Color.Black);
+            int cont = 1;
+            float TamanoFuente = 0;
+            PointF PS = new PointF();
+           
             Pen P1;
+            float DeltaX, DeltaY;
+
+            DeltaX = Convert.ToSingle(4 * Xmax / (Grafica.Width / 2));
+            DeltaY = Convert.ToSingle(4 * Ymax / (Grafica.Width / 2));
+            TamanoFuente = Convert.ToSingle(10 * EscalaR);
+            Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
 
             P1 = new Pen(Color.Black, 2.5f)
             {
@@ -421,9 +431,15 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             for (int i = 0; i < seccioni.Shapes_ref.Count; i++)
             {
+                PS.X = seccioni.Shapes_ref[i].PathPoints[0].X+DeltaX;
+                PS.Y= seccioni.Shapes_ref[i].PathPoints[0].Y + DeltaY;
+                g.DrawString(cont.ToString(), Font,br,PS);
+
                 g.DrawPath(P1, seccioni.Shapes_ref[i]);
                 g.FillPath(br, seccioni.Shapes_ref[i]);
+                cont++;
             }
+
         }
 
         private void Grafica_MouseDown(object sender, MouseEventArgs e)
@@ -436,6 +452,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             Piso = lbPisos.SelectedItem.ToString();
             get_section();
             Grafica.Invalidate();
+        }
+
+        private void Grafica_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

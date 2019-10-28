@@ -42,10 +42,9 @@ namespace DisenoColumnas.Clases
 
         private List<float[]> CoordenadasSeccion { get; set; }
 
-        public Seccion(string Nombre,string pPiso, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
+        public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
             Name = Nombre;
-            Piso = pPiso;
             B = B_;
             H = H_;
             Material = Material_;
@@ -136,7 +135,7 @@ namespace DisenoColumnas.Clases
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
-                yc = refuerzoi.Coord[1] * EscalaY;
+                yc = -refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 circulo = new CCirculo(r, Centro);
@@ -149,7 +148,7 @@ namespace DisenoColumnas.Clases
 
         public object Clone()
         {
-            Seccion temp = new Seccion(Name,Piso, B, H, TF, TW, Material, Shape, CoordenadasSeccion)
+            Seccion temp = new Seccion(Name, B, H, TF, TW, Material, Shape, CoordenadasSeccion)
             {
                 Refuerzos = Refuerzos,
                 Vertices = Vertices,

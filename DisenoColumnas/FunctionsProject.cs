@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DisenoColumnas.Secciones_Predefinidas;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -69,6 +70,25 @@ namespace DisenoColumnas
             streamReader.Close();
         }
 
+        public static void Serializar_Secciones(string Ruta, CLista_Secciones Secciones_predef)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(Ruta, FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, Secciones_predef);
+            stream.Close();
+        }
+
+        public static void Deserealizar_Secciones(string Ruta, ref CLista_Secciones Secciones_prede)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            Stream streamReader = new FileStream(Ruta, FileMode.Open, FileAccess.Read, FileShare.None);
+            var proyectoDeserializado = (CLista_Secciones)formatter.Deserialize(streamReader);
+
+            Secciones_prede = proyectoDeserializado;
+            streamReader.Close();
+        }
+
         public static T DeepClone<T>(T obj)
         {
             using (var ms = new MemoryStream())
@@ -81,7 +101,6 @@ namespace DisenoColumnas
             }
         }
 
-
         public static SolidBrush ColorBarra(int Barra)
         {
             SolidBrush brush = new SolidBrush(Color.Black);
@@ -89,7 +108,6 @@ namespace DisenoColumnas
             if (Barra == 2)
             {
                 brush.Color = Color.FromArgb(215, 78, 34);
-
             }
             else if (Barra == 3)
             {
@@ -97,7 +115,7 @@ namespace DisenoColumnas
             }
             else if (Barra == 4)
             {
-                brush.Color = Color.FromArgb(197, 194,10);
+                brush.Color = Color.FromArgb(197, 194, 10);
             }
             else if (Barra == 5)
             {
@@ -120,7 +138,6 @@ namespace DisenoColumnas
                 brush.Color = Color.FromArgb(38, 10, 218);
             }
             return brush;
-
         }
     }
 }

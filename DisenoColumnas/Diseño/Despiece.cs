@@ -17,7 +17,7 @@ namespace DisenoColumnas.Diseño
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
             if (ColumnaSelect != null)
             {
-                
+
                 float MaxB = -999999;
                 for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
                 {
@@ -70,7 +70,7 @@ namespace DisenoColumnas.Diseño
 
             if (ColumnaSelect != null)
             {
-                
+
                 float Altura = 0;
 
                 for (int i = 0; i < ColumnaSelect.LuzLibre.Count; i++)
@@ -106,7 +106,7 @@ namespace DisenoColumnas.Diseño
                 P_LD.Width = 1;
                 float TamanoFuente = 0.07f * (SX+SY);
                 if (ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY < TamanoFuente)
-                    {
+                {
                     TamanoFuente = ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY;
                 }
 
@@ -152,7 +152,7 @@ namespace DisenoColumnas.Diseño
 
                 }
 
-            
+
 
 
 

@@ -141,6 +141,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Secciones Predefinidas\CLista_Secciones.cs" />
+    <Compile Include="Secciones Predefinidas\Main_Secciones.cs" />
     <Compile Include="Utilidades\MovimientoPantalla.cs" />
     <EmbeddedResource Include="Diseño\AgregarAlzado.resx">
       <DependentUpon>AgregarAlzado.cs</DependentUpon>
