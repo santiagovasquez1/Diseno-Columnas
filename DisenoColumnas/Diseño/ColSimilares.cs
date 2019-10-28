@@ -124,7 +124,7 @@ namespace DisenoColumnas.Diseño
                                 for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
                                 {
                                     float[] Aux_AsAsing = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado);
-                                    float[] Aux_Porcet_Refuerzo = Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo;
+                                    float[] Aux_Porcet_Refuerzo = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo);
                                     Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = null;
                                     Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = null;
                                     Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Aux_AsAsing;
@@ -144,7 +144,7 @@ namespace DisenoColumnas.Diseño
                             for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
                             {
                                 float[] Aux_AsAsing = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado);
-                                float[] Aux_Porcet_Refuerzo = Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo;
+                                float[] Aux_Porcet_Refuerzo = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo);
                                 Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = null;
                                 Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = null;
                                 Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Aux_AsAsing;
@@ -156,7 +156,16 @@ namespace DisenoColumnas.Diseño
 
                     }
                 }
+                for(int i=0; i< Form1.Proyecto_.Lista_Columnas.Count; i++)
+                {
+                    Form1.Proyecto_.Lista_Columnas[i].ActualizarRefuerzo();
+                }
+                Form1.mFormPrincipal.Invalidate();
+
+
+
             }
+
             Close();
         }
 
@@ -198,9 +207,6 @@ namespace DisenoColumnas.Diseño
             }
         }
 
-        private void D_ColSim_DataError(object sender, DataGridViewDataErrorEventArgs e)
-        {
-        
-        }
+      
     }
 }

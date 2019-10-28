@@ -198,9 +198,6 @@
     <None Include="Resources\anadir.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\efe Prima Ce Pixelado.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\x16Blanca.png" />
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +253,8 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\efePrimaCeLogoSolo.png" />
+    <None Include="Resources\efe Prima Ce Pixelado.png" />
     <None Include="Resources\close-button.png" />
     <Content Include="Resources\Csearch.cur" />
     <None Include="Resources\vcsadded_93506x16.png" />

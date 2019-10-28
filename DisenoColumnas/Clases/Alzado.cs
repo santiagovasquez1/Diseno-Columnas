@@ -34,12 +34,16 @@ namespace DisenoColumnas.Clases
     {
 
 
-        private List<PointF> Cord_Escala { get; set; }
+
+        public AlzadoUnitario UnitarioAdicional { get; set; }
+
+
+
         public int NoStory { get; set; }
 
         public int CantBarras { get; set; }
         public int NoBarra { get; set; }
-        public string Traslapo_Nomenc { get; set; }
+        public string Tipo { get; set; }
         public List<float[]> Coord_Alzado_PB { get; set; }
 
         public float Traslapo { get; set; }
@@ -58,7 +62,7 @@ namespace DisenoColumnas.Clases
         {
             CantBarras = CantBarras_;
             NoBarra = NoBarra_;
-            Traslapo_Nomenc = Traslapo;
+            Tipo = Traslapo;
             NoStory = NoPiso_;
             H_Stroy = H;
             Hviga = Hviga_;
@@ -93,23 +97,39 @@ namespace DisenoColumnas.Clases
 
         }
 
-
-
-
-
-
-
-
-
+        
         public override string ToString()
         {
-            return $"{CantBarras}#{NoBarra}{Traslapo_Nomenc}";
+
+            if (Tipo == "Botton")
+            {
+                return $"-{CantBarras}#{NoBarra}";
+
+            }
+            else if (Tipo=="A")
+            {
+    
+                if (UnitarioAdicional != null)
+                {
+                    return $"{CantBarras}#{NoBarra}{Tipo}-{UnitarioAdicional.CantBarras}#{UnitarioAdicional.NoBarra}";
+                }
+                else
+                {
+                    return $"{CantBarras}#{NoBarra}{Tipo}";
+                }
+
+            }
+            else
+            {
+                return $"{CantBarras}#{NoBarra}{Tipo}";
+            }
         }
 
 
 
-
     }
+
+
 
 
 

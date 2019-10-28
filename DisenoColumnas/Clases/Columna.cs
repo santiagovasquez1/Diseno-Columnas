@@ -148,22 +148,71 @@ namespace DisenoColumnas.Clases
 
                     if (alzado.Colum_Alzado[i] != null)
                     {
-
-                        double AreaBarra;
-
-                        try
+                        if (alzado.Colum_Alzado[i].Tipo != "A" && alzado.Colum_Alzado[i].Tipo != "Botton")
                         {
-                            AreaBarra = Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
-                        }
-                        catch
-                        {
-                            AreaBarra = 0;
-                        }
-                        resultadosETABs[i].As_asignado[0] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
-                        resultadosETABs[i].As_asignado[1] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
-                        resultadosETABs[i].As_asignado[2] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+                            double AreaBarra;
 
+                            try
+                            {
+                                AreaBarra = Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
+                            }
+                            catch
+                            {
+                                AreaBarra = 0;
+                            }
+
+                            resultadosETABs[i].As_asignado[0] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+                            resultadosETABs[i].As_asignado[1] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+                            resultadosETABs[i].As_asignado[2] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+
+                        }
+                        else if(alzado.Colum_Alzado[i].Tipo == "A")
+                        {
+                            float AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
+                            try
+                            {
+                                resultadosETABs[i - 1].As_asignado[2] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;     //Acero Botton - Vecino
+                              
+                            }
+                            catch { }
+                            resultadosETABs[i].As_asignado[0] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;
+                            resultadosETABs[i].Porct_Refuerzo[0] = resultadosETABs[i].As_asignado[0] / ((float)resultadosETABs[i].AsTopMediumButton[0]) * 100;
+
+
+
+                            if (alzado.Colum_Alzado[i].UnitarioAdicional !=null) {
+                                AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].UnitarioAdicional.NoBarra];
+
+                                resultadosETABs[i].As_asignado[2] += AreaBarra * alzado.Colum_Alzado[i].UnitarioAdicional.CantBarras;
+                              
+                                try
+                                {
+                                    resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].UnitarioAdicional.CantBarras;    //Acero Botton - Vecino
+                                   
+                                }
+                                catch { }
+
+
+                            }
+
+                        }
+                        else if (alzado.Colum_Alzado[i].Tipo == "Botton")
+                        {
+                            float AreaBarra;
+                            AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
+
+                            resultadosETABs[i].As_asignado[2] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+                            
+                            try
+                            {
+                                resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;    //Acero Botton - Vecino
+                               
+                            }
+                            catch { }
+                        }
                     }
+
+          
 
                 }
 

@@ -24,6 +24,8 @@ namespace DisenoColumnas
         public static FInterfaz_Seccion mIntefazSeccion;
         public static AgregarAlzado mAgregarAlzado;
 
+        public static Form1 mFormPrincipal;
+
         private List<string> ArchivoE2K2009ETABS;
         private List<string> ArchivoResultados2009;
         public static Proyecto Proyecto_;
@@ -32,6 +34,9 @@ namespace DisenoColumnas
         public Form1()
         {
             InitializeComponent();
+            mFormPrincipal = this;
+        
+
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -107,14 +112,13 @@ namespace DisenoColumnas
                 if (Proyecto_!= null)
                 {
                     DialogResult box;
-                    box = MessageBox.Show("¿Desea guardar los cambios en el Proyecto?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    box = MessageBox.Show("¿Desea guardar los cambios en el Proyecto anterior?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
 
                     if (box == DialogResult.Yes)
                     {
                         Save();
                     }
-                    LColumna.Items.Clear();
-                    LColumna.Text = "";
+              
                 }
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
@@ -135,11 +139,14 @@ namespace DisenoColumnas
                 m_Despiece.Show(PanelContenedor);
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
+                LColumna.Items.Clear();
+                LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
                 if (Proyecto_.ColumnaSelect != null)
                 {
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
                 }
+    
                 CreateDidctonaries();
                 WindowState = FormWindowState.Maximized;
             }
@@ -219,29 +226,29 @@ namespace DisenoColumnas
         private void NewProject()
         {
             string Ruta1, Ruta2;
-     
 
+            if (Proyecto_ != null)
+            {
+
+                CloseWindows();
+                if (Proyecto_.Ruta == "" | Proyecto_.Ruta != "")
+                {
+                    DialogResult box;
+                    box = MessageBox.Show("¿Desea guardar cambios en el proyecto anterior?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                    if (box == DialogResult.Yes)
+                    {
+                        Save();
+                    }
+                    LColumna.Items.Clear();
+                    LColumna.Text = "";
+                }
+            }
             Ruta1 = AbrirE2K2009yCSV2009();
             Ruta2 = AsingarResultadosaColumna();
 
             if (Ruta1 != "" && Ruta2 != "")
             {
-                if (Proyecto_ != null)
-                {
-
-                    CloseWindows();
-                    if (Proyecto_.Ruta != null)
-                    {
-                        DialogResult box;
-                        box = MessageBox.Show("¿Desea guardar cambios en el proyecto anterior?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                        if (box == DialogResult.Yes)
-                        {
-                            Save();
-                        }
-                        LColumna.Items.Clear();
-                        LColumna.Text = "";
-                    }
-                }
+            
                 WindowState = FormWindowState.Maximized;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
 
@@ -262,8 +269,10 @@ namespace DisenoColumnas
                 mAgregarAlzado = new AgregarAlzado();
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
-
+                LColumna.Items.Clear();
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
+
+                
             }
         }
 
@@ -786,10 +795,11 @@ namespace DisenoColumnas
                             {
                                 seccion = null;
                             }
-                            Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
-                            colum.Seccions.Add(tuple_aux);
-                            seccion.Piso = Story;
-                            colum.Secciones2.Add(seccion);
+                            else
+                            {
+                                Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
+                                colum.Seccions.Add(tuple_aux);
+                            }
                         }
                     }
                 }
@@ -1143,5 +1153,7 @@ namespace DisenoColumnas
             colSimilares.ShowDialog();
 
         }
+
+        
     }
 }

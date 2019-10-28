@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DisenoColumnas.Clases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,6 +34,7 @@ namespace DisenoColumnas.Diseño
             bool IsNumeric = Single.TryParse(CantBarras.Text, out r);
             if (NoBarra.Text != "" && r != 0 && IsNumeric) {
                 string Nomenclatura =r+"#" +NoBarra.Text;
+                Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
                 if (TP1.Checked)
                 {
 
@@ -69,7 +71,7 @@ namespace DisenoColumnas.Diseño
 
                     for (int i = Form1.mAgregarAlzado.D_Alzado.Rows.Count - 1; i >= 0; i--)
                     {
-                        Form1.mAgregarAlzado.EndCellEdit(IndiceC, i, false);
+                        Form1.mAgregarAlzado.EndCellEdit(IndiceC, i, false, ColumnaSelect);
                         BarraPersonalizada2.Width += D_Pro;
                     }
 
@@ -113,16 +115,12 @@ namespace DisenoColumnas.Diseño
 
                     for (int i = Form1.mAgregarAlzado.D_Alzado.Rows.Count - 1; i >= 0; i--)
                     {
-                        Form1.mAgregarAlzado.EndCellEdit(IndiceC, i, false);
+                        Form1.mAgregarAlzado.EndCellEdit(IndiceC, i, false, ColumnaSelect);
                         BarraPersonalizada2.Width += D_Pro;
+       
                     }
 
                     Form1.mAgregarAlzado.Invalidate();
-
-
-
-
-
 
                 }
 
@@ -139,6 +137,23 @@ namespace DisenoColumnas.Diseño
 
             Close();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void GroupBox1_MouseDown(object sender, MouseEventArgs e)
         {

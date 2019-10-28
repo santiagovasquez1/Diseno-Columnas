@@ -160,7 +160,7 @@
             this.NameColum.AutoSize = true;
             this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NameColum.Location = new System.Drawing.Point(12, 9);
+            this.NameColum.Location = new System.Drawing.Point(12, 8);
             this.NameColum.Name = "NameColum";
             this.NameColum.Size = new System.Drawing.Size(56, 14);
             this.NameColum.TabIndex = 0;

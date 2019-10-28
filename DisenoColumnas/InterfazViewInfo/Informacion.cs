@@ -41,7 +41,7 @@ namespace DisenoColumnas.InterfazViewInfo
 
             if (ColumnaSelect != null)
             {
-                
+
                 Info_D.Rows.Clear();
                 NameColum.Text = "Columna: " + ColumnaSelect.Name;
 
@@ -245,54 +245,60 @@ namespace DisenoColumnas.InterfazViewInfo
         }
 
 
-        public void MostrarAcero(int i)
+        public void MostrarAcero()
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
-            
+
             Color Color_RefMen = Color.FromArgb(250, 99, 99);
             Color Color_RefCum = Color.FromArgb(29, 94, 243);
-            if (Info_D.Rows.Count == Form1.mAgregarAlzado.D_Alzado.Rows.Count*3)
+            if (Info_D.Rows.Count == Form1.mAgregarAlzado.D_Alzado.Rows.Count * 3)
             {
-                if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) < 95)
+                for (int i = 0; i < Form1.mAgregarAlzado.D_Alzado.Rows.Count; i++)
                 {
-                    Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
-                    Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
-                }
-                else
-                {
-                    Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
-                    Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
-                }
-                if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 3) < 95)
-                {
-                    Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
-                    Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
-                }
-                else
-                {
-                    Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
-                    Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
-                }
-                if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 3) < 95)
-                {
-                    Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
-                    Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
-                }
-                else
-                {
-                    Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
-                    Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
-                }
-                double FactorConversion = 10000;
-                Info_D.Rows[(i * 3 + 3) - 3].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[0] * FactorConversion, 2);
-                Info_D.Rows[(i * 3 + 3) - 2].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[1] * FactorConversion, 2);
-                Info_D.Rows[(i * 3 + 3) - 1].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[2] * FactorConversion, 2);
+                    if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) < 95)
+                    {
+                        Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
+                        Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
+                        Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                    }
+                    if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 3) < 95)
+                    {
+                        Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
+                        Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
+                        Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                    }
+                    if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 3) < 95)
+                    {
+                        Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
+                        Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.ForeColor = Color_RefCum;
+                        Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
+                    }
+                    double FactorConversion = 10000;
+                    Info_D.Rows[(i * 3 + 3) - 3].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[0] * FactorConversion, 2);
+                    Info_D.Rows[(i * 3 + 3) - 2].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[1] * FactorConversion, 2);
+                    Info_D.Rows[(i * 3 + 3) - 1].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[2] * FactorConversion, 2);
 
-                Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 2) + "%";
-                Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 2) + "%";
-                Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 2) + "%";
-                Info_D.Refresh();
+                    Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 2) + "%";
+                    Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 2) + "%";
+                    Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 2) + "%";
+                    // Info_D.Refresh();
+                }
             }
+
+
+
         }
 
 

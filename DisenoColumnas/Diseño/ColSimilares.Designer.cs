@@ -98,7 +98,6 @@
             this.D_ColSim.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.D_ColSim_CellBeginEdit);
             this.D_ColSim.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_ColSim_CellClick);
             this.D_ColSim.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_ColSim_CellEndEdit);
-            this.D_ColSim.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.D_ColSim_DataError);
             // 
             // Muros
             // 
