@@ -4,6 +4,7 @@ using DisenoColumnas.Diseño;
 using DisenoColumnas.Interfaz_Inicial;
 using DisenoColumnas.Interfaz_Seccion;
 using DisenoColumnas.InterfazViewInfo;
+using DisenoColumnas.Secciones_Predefinidas;
 using DisenoColumnas.Utilidades;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace DisenoColumnas
         private List<string> ArchivoResultados2009;
         public static Proyecto Proyecto_;
         public static string TColumna;
+        public static CLista_Secciones secciones_predef;
 
         public Form1()
         {
@@ -662,7 +664,7 @@ namespace DisenoColumnas
                 {
                     if (mAT_.Name == Material_Aux)
                     {
-                        Seccion seccion = new Seccion(Nombre, "", B, H, TF, TW, mAT_, tipodeSeccion, Coord);
+                        Seccion seccion = new Seccion(Nombre, B, H, TF, TW, mAT_, tipodeSeccion, Coord);
                         Proyecto_.Lista_Secciones.Add(seccion);
                     }
                 }
@@ -810,7 +812,7 @@ namespace DisenoColumnas
                 }
 
                 Viga VigaMayor = new Viga("Viga con Mayor H Por Piso");
-                Seccion seccionMayor = new Seccion("Inicial","", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
+                Seccion seccionMayor = new Seccion("Inicial", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
                 Tuple<Seccion, string> tuple_Seccion_Mayor = null;
 
                 for (int i = 0; i < column.Seccions.Count; i++)
@@ -1135,6 +1137,7 @@ namespace DisenoColumnas
         private void Form1_Load(object sender, EventArgs e)
         {
             mIntefazSeccion = new FInterfaz_Seccion();
+            Main_Secciones.Crear_archivo();
         }
 
         private void ColumnasIgualesToolStripMenuItem_Click(object sender, EventArgs e)

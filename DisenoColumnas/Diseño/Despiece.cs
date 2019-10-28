@@ -105,10 +105,12 @@ namespace DisenoColumnas.Diseño
                 P_LD.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
                 P_LD.Width = 1;
                 float TamanoFuente = 0.07f * (SX + SY);
+
                 if (ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY < TamanoFuente)
-                    {
+                {
                     TamanoFuente = ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY;
                 }
+
                 Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
                 e.Graphics.DrawLine(P_LD, 0, Height - YI - Form1.Proyecto_.e_Fundacion * SY, Width, Height - YI - Form1.Proyecto_.e_Fundacion*SY);
                 PointF PointStringF = new PointF(0.01f * SX, Height - YI - Form1.Proyecto_.e_Fundacion/2*SY - Fuente.Height / 2);

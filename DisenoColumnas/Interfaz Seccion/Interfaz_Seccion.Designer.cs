@@ -132,6 +132,7 @@
             this.Grafica.Size = new System.Drawing.Size(702, 487);
             this.Grafica.TabIndex = 1;
             this.Grafica.TabStop = false;
+            this.Grafica.Click += new System.EventHandler(this.Grafica_Click);
             this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
