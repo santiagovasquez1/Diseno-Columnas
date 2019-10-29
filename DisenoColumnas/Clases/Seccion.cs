@@ -22,7 +22,6 @@ namespace DisenoColumnas.Clases
     {
 
         public string Name { get; set; }
-        public string Piso { get; set; }
         public MAT_CONCRETE Material { get; set; }
         public float B { get; set; }
         public float H { get; set; }
@@ -40,12 +39,13 @@ namespace DisenoColumnas.Clases
 
         [NonSerialized]public List<GraphicsPath> Shapes_ref  = new List<GraphicsPath>();
 
-        private List<float[]> CoordenadasSeccion { get; set; }
+        public List<float[]> CoordenadasSeccion { get; set; }
 
         public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
+            //Unidades en metros
             Name = Nombre;
-            B = B_;
+            B = B_; 
             H = H_;
             Material = Material_;
             Shape = Shape_;
@@ -169,6 +169,11 @@ namespace DisenoColumnas.Clases
             }
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0}",Name);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is Seccion)
@@ -178,6 +183,11 @@ namespace DisenoColumnas.Clases
                 if (Name == temp.Name && Material == temp.Material && Shape == temp.Shape && Area == temp.Area && B == temp.B
                     && H == temp.H && TF == temp.TF && TW == temp.TW)
                     return true;
+
+                //Necesario para cargar secciones predefinidas
+                if (temp.Shape == TipodeSeccion.Rectangular & temp.B == B & temp.H == H || temp.Shape == TipodeSeccion.Rectangular & temp.H == B & temp.B == H)
+                    return true;
+
             }
 
             return false;

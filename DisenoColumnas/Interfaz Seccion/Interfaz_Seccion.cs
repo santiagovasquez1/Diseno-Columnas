@@ -139,7 +139,19 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             int indice;
             indice = Columna_i.Seccions.FindIndex(x => x.Item2 == Piso);
-            seccion = Seccion.DeepClone(Columna_i.Seccions[indice].Item1);
+
+            if (Form1.secciones_predef.Secciones.Exists(x => x == Columna_i.Seccions[indice].Item1)==true)
+            {
+                seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones.Find(x => x == Columna_i.Seccions[indice].Item1));
+                seccion.Name = Columna_i.Seccions[indice].Item1.Name;
+                seccion.Material = Columna_i.Seccions[indice].Item1.Material;
+                seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
+            }
+            else
+            {
+                seccion = Seccion.DeepClone(Columna_i.Seccions[indice].Item1);
+            }
+
             Grafica.Invalidate();
         }
 
