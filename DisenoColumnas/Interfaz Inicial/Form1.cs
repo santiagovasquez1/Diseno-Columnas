@@ -37,10 +37,6 @@ namespace DisenoColumnas
         {
             InitializeComponent();
             mFormPrincipal = this;
-  
-
-
-
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -104,7 +100,6 @@ namespace DisenoColumnas
 
         private void OpenProject()
         {
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "DMC |*.Colum";
             openFileDialog.Title = "Abrir Proyecto";
@@ -113,7 +108,7 @@ namespace DisenoColumnas
             if (openFileDialog.FileName != "")
             {
                 CloseWindows();
-                if (Proyecto_!= null)
+                if (Proyecto_ != null)
                 {
                     DialogResult box;
                     box = MessageBox.Show("¿Desea guardar los cambios en el Proyecto anterior?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
@@ -122,13 +117,11 @@ namespace DisenoColumnas
                     {
                         Save();
                     }
-              
                 }
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
-             
                 mAgregarAlzado = new AgregarAlzado();
-                try { mAgregarAlzado.Show(PanelContenedor);}   catch { }
+                try { mAgregarAlzado.Show(PanelContenedor); } catch { }
 
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 mCuantiaVolumetrica.Show(PanelContenedor);
@@ -150,11 +143,12 @@ namespace DisenoColumnas
                 {
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
                 }
-    
+
                 CreateDidctonaries();
                 WindowState = FormWindowState.Maximized;
             }
         }
+
         private void CloseWindows()
         {
             if (m_PlantaColumnas != null)
@@ -169,7 +163,7 @@ namespace DisenoColumnas
                 m_Informacion.DockHandler.DockPanel = null;
             }
 
-             if (m_Despiece != null)
+            if (m_Despiece != null)
             {
                 m_Despiece.DockHandler.DockPanel = null;
             }
@@ -184,6 +178,7 @@ namespace DisenoColumnas
                 mAgregarAlzado.DockHandler.DockPanel = null;
             }
         }
+
         private void SaveAs()
         {
             SaveFileDialog SaveFile = new SaveFileDialog();
@@ -233,7 +228,6 @@ namespace DisenoColumnas
 
             if (Proyecto_ != null)
             {
-
                 CloseWindows();
                 if (Proyecto_.Ruta == "" | Proyecto_.Ruta != "")
                 {
@@ -252,7 +246,6 @@ namespace DisenoColumnas
 
             if (Ruta1 != "" && Ruta2 != "")
             {
-            
                 WindowState = FormWindowState.Maximized;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
 
@@ -275,15 +268,13 @@ namespace DisenoColumnas
                 La_Column.Enabled = true;
                 LColumna.Items.Clear();
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
-
-                
             }
         }
-
 
         private void CreateDidctonaries()
         {
             #region Area refuerzo
+
             //Unidades en m²
             Proyecto_.AceroBarras = new Dictionary<int, double>();
             Proyecto_.AceroBarras.Add(2, 0.32 / 10000);
@@ -294,7 +285,8 @@ namespace DisenoColumnas
             Proyecto_.AceroBarras.Add(7, 3.87 / 10000);
             Proyecto_.AceroBarras.Add(8, 5.10 / 10000);
             Proyecto_.AceroBarras.Add(10, 8.09 / 10000);
-            #endregion
+
+            #endregion Area refuerzo
 
             Proyecto_.Ld_210 = new Dictionary<int, float>();
             Proyecto_.Ld_210.Add(2, 0.55f);
@@ -374,7 +366,8 @@ namespace DisenoColumnas
             Proyecto_.Ld_560.Add(11, 1.6f);
             Proyecto_.Ld_560.Add(14, 1.9f);
 
-            #region Diccionario diametro barras 
+            #region Diccionario diametro barras
+
             //Diametros en centimetros
             Proyecto_.Diametro_ref = new Dictionary<int, float>();
             Proyecto_.Diametro_ref.Add(3, 0.95f);
@@ -387,7 +380,8 @@ namespace DisenoColumnas
             Proyecto_.Diametro_ref.Add(10, 3.23f);
             Proyecto_.Diametro_ref.Add(11, 3.58f);
             Proyecto_.Diametro_ref.Add(14, 4.30f);
-            #endregion
+
+            #endregion Diccionario diametro barras
         }
 
         private string AbrirE2K2009yCSV2009()
@@ -861,12 +855,13 @@ namespace DisenoColumnas
                 {
                     columna1.LuzLibre.Add(0);
                 }
-                    for (int i = 0; i < columna1.Seccions.Count; i++)
+                for (int i = 0; i < columna1.Seccions.Count; i++)
                 {
-                    for (int j = 0; j < Proyecto_.Stories.Count;j++) {
+                    for (int j = 0; j < Proyecto_.Stories.Count; j++)
+                    {
                         if (columna1.Seccions[i].Item2 == Proyecto_.Stories[j].Item1)
                         {
-                            columna1.LuzLibre[i]=(Proyecto_.Stories[j].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
+                            columna1.LuzLibre[i] = (Proyecto_.Stories[j].Item2 - columna1.VigaMayor.Seccions[i].Item1.H);
                         }
                     }
                 }
@@ -1037,7 +1032,6 @@ namespace DisenoColumnas
         {
             if (Proyecto_.ColumnaSelect != null)
             {
-
                 float FD1, FD2;
 
                 if (Proyecto_.DMO_DES == GDE.DMO)
@@ -1119,7 +1113,6 @@ namespace DisenoColumnas
         {
             if (Proyecto_.ColumnaSelect != null)
             {
-
                 int CantidadPisos = 0;
                 for (int i = 0; i < Proyecto_.ColumnaSelect.Seccions.Count; i++)
                 {
@@ -1148,6 +1141,8 @@ namespace DisenoColumnas
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Proyecto_ = new Proyecto();
+            CreateDidctonaries();
             mIntefazSeccion = new FInterfaz_Seccion();
             Main_Secciones.Crear_archivo();
         }
@@ -1156,17 +1151,12 @@ namespace DisenoColumnas
         {
             ColSimilares colSimilares = new ColSimilares();
             colSimilares.ShowDialog();
-
         }
-
 
         private void Diseñar()
         {
-
-
-
             //Limpiar Todos Los Alzados En Cada Columna
-            foreach(Columna Col in Proyecto_.Lista_Columnas)
+            foreach (Columna Col in Proyecto_.Lista_Columnas)
             {
                 Col.Alzados.Clear();
             }
@@ -1184,13 +1174,10 @@ namespace DisenoColumnas
 
             //Determinar Cantidad de Barras Por Sección Predefinidas
 
-            foreach(Seccion seccion in secciones_predef.Secciones_predefinidas)
+            foreach (Seccion seccion in secciones_predef.Secciones)
             {
                 seccion.CalcNoDBarras();
             }
-
-
-
         }
 
         private void Button1_Click(object sender, EventArgs e)

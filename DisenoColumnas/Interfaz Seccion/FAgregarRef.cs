@@ -1,6 +1,7 @@
 ﻿using DisenoColumnas.Clases;
 using DisenoColumnas.Utilidades;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Interfaz_Seccion
@@ -169,7 +170,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             int id, indice;
             double x, y;
             double[] coord;
-
+            double As_total = 0;
             Seccion.Refuerzos.Clear();
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -185,8 +186,14 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Seccion.Refuerzos.Add(refuerzo);
             }
 
+            Seccion.Acero_Long = Seccion.Refuerzos.Sum(x1 => x1.As_Long);
+            Seccion.Editado = true;
             indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == piso);
             Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
+
+            FInterfaz_.Over = false;
+            FInterfaz_.Seleccionado = false;
+            FInterfaz_.Invalidate();
             Close();
         }
 

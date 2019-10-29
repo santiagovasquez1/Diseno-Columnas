@@ -1,6 +1,7 @@
 ﻿using DisenoColumnas.Clases;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace DisenoColumnas.Secciones_Predefinidas
 {
@@ -35,7 +36,6 @@ namespace DisenoColumnas.Secciones_Predefinidas
             }
 
             Form1.secciones_predef = Lista_Secciones;
-
         }
 
         public static void Crear_Secciones()
@@ -253,16 +253,18 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
         public static Seccion Crear_Seccion(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
         {
-            Seccion temp = new Seccion(Nombre_seccion, b/100, h/100, tf/100, tw/100, material, TipodeSeccion.Rectangular, new List<float[]>());
-            temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion,CapasX,CapasY,CapasXw,CapasYw,b,h,tw,tf);
+            Seccion temp = new Seccion(Nombre_seccion, b / 100, h / 100, tf / 100, tw / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
+            temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
+            temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
             return temp;
         }
 
         public static List<CRefuerzo> Set_Refuerzo_Seccion(int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw, float b, float h, float Tw, float tf)
         {
             double posx, posy;
-            int ContX, ContY;
+            int ContX, ContY, id;
             double r = 6; //1 es el espesor del estribo #3
+            double As_total = 0;
             double[] Coord_ref = new double[2];
             double DeltaX1, DeltaY1, DeltaX2, DeltaY2;
             CRefuerzo refuerzoi;
@@ -275,13 +277,14 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
             posx = -(b / 2) + r; posy = (h / 2) - r;
             ContX = CapasX - 2; ContY = CapasY;
+            id = 1;
 
             for (int i = 0; i < Diametros_Seccion.Length; i++)
             {
                 Coord_ref[0] = posx;
                 Coord_ref[1] = posy;
 
-                refuerzoi = new CRefuerzo(i, "#" + Diametros_Seccion[i], pcoord: new double[] { posx,posy}, ptipo:TipodeRefuerzo.longitudinal);
+                refuerzoi = new CRefuerzo(id, "#" + Diametros_Seccion[i], pcoord: new double[] { posx, posy }, ptipo: TipodeRefuerzo.longitudinal);
                 Refuerzos_Seccion.Add(refuerzoi);
 
                 posy -= DeltaY1;
@@ -303,6 +306,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                     posx = (b / 2) - r;
                     posy = (h / 2) - r;
                 }
+                id++;
             }
 
             return Refuerzos_Seccion;

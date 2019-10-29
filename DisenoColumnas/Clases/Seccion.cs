@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DisenoColumnas.Clases
 {
@@ -21,7 +21,6 @@ namespace DisenoColumnas.Clases
     [Serializable]
     public class Seccion : ICloneable, IComparable
     {
-
         public string Name { get; set; }
         public MAT_CONCRETE Material { get; set; }
         public float B { get; set; }
@@ -34,23 +33,23 @@ namespace DisenoColumnas.Clases
 
         public double Area { get; set; }
 
+        public double Acero_Long { get; set; }
+
         public List<Point> Vertices { get; set; } = new List<Point>();
 
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
-
-
-
-
 
         [NonSerialized] public List<GraphicsPath> Shapes_ref = new List<GraphicsPath>();
 
         public List<float[]> CoordenadasSeccion { get; set; }
 
+        public bool Editado { get; set; } = false;
+
         public Seccion(string Nombre, float B_, float H_, float Tf, float Tw, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
             //Unidades en metros
             Name = Nombre;
-            B = B_; 
+            B = B_;
             H = H_;
             Material = Material_;
             Shape = Shape_;
@@ -132,7 +131,6 @@ namespace DisenoColumnas.Clases
                 Shapes_ref = new List<GraphicsPath>();
             }
 
-
             foreach (CRefuerzo refuerzoi in Refuerzos)
             {
                 path = new GraphicsPath();
@@ -176,7 +174,7 @@ namespace DisenoColumnas.Clases
 
         public override string ToString()
         {
-            return string.Format("{0}",Name);
+            return string.Format("{0}", Name);
         }
 
         public override bool Equals(object obj)
@@ -192,7 +190,6 @@ namespace DisenoColumnas.Clases
                 //Necesario para cargar secciones predefinidas
                 if (temp.Shape == TipodeSeccion.Rectangular & temp.B == B & temp.H == H || temp.Shape == TipodeSeccion.Rectangular & temp.H == B & temp.B == H)
                     return true;
-
             }
 
             return false;
@@ -250,16 +247,12 @@ namespace DisenoColumnas.Clases
 
         #endregion Metodos - Resultados
 
-
-
-
         #region Propiedades y Metodos - Secciones Predefinidas
+
         public List<Tuple<int, int>> No_D_Barra { get; set; }
 
         public void CalcNoDBarras()
         {
-
-
             No_D_Barra = new List<Tuple<int, int>>();
 
             var results = from p in Refuerzos
@@ -268,19 +261,11 @@ namespace DisenoColumnas.Clases
 
             foreach (var Refuer in results)
             {
-
                 Tuple<int, int> TupleAux = new Tuple<int, int>(Refuer.Refuerzo.Count, Convert.ToInt32(Refuer.Diametro.Replace("#", "")));
                 No_D_Barra.Add(TupleAux);
             }
-
         }
 
-
-
-
-
-
-        #endregion
-
+        #endregion Propiedades y Metodos - Secciones Predefinidas
     }
 }
