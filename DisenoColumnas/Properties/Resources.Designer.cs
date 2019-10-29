@@ -103,6 +103,36 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap columna_de_teatro {
+            get {
+                object obj = ResourceManager.GetObject("columna-de-teatro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cOLUMNAiNVERTIDAX16 {
+            get {
+                object obj = ResourceManager.GetObject("cOLUMNAiNVERTIDAX16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap columnas {
+            get {
+                object obj = ResourceManager.GetObject("columnas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Csearch {
             get {
                 object obj = ResourceManager.GetObject("Csearch", resourceCulture);
@@ -156,6 +186,16 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap Czoom_out_option {
             get {
                 object obj = ResourceManager.GetObject("Czoom-out-option", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Diseñox13x13 {
+            get {
+                object obj = ResourceManager.GetObject("Diseñox13x13", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -37,7 +37,9 @@ namespace DisenoColumnas
         {
             InitializeComponent();
             mFormPrincipal = this;
-        
+  
+
+
 
         }
 
@@ -1157,6 +1159,43 @@ namespace DisenoColumnas
 
         }
 
-        
+
+        private void Diseñar()
+        {
+
+
+
+            //Limpiar Todos Los Alzados En Cada Columna
+            foreach(Columna Col in Proyecto_.Lista_Columnas)
+            {
+                Col.Alzados.Clear();
+            }
+
+            //Crear Alzado Base
+
+            foreach (Columna Col in Proyecto_.Lista_Columnas)
+            {
+                Col.AlzadoBaseSugerido = new string[] { "", "" };
+                Alzado alzado = new Alzado(1, Col.Seccions.Count);
+                Col.Alzados.Add(alzado);
+                Alzado alzado1 = new Alzado(2, Col.Seccions.Count);
+                Col.Alzados.Add(alzado1);
+            }
+
+            //Determinar Cantidad de Barras Por Sección Predefinidas
+
+            foreach(Seccion seccion in secciones_predef.Secciones_predefinidas)
+            {
+                seccion.CalcNoDBarras();
+            }
+
+
+
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Diseñar();
+        }
     }
 }

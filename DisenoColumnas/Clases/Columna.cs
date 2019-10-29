@@ -54,6 +54,9 @@ namespace DisenoColumnas.Clases
 
         public List<int> Prueba=new List<int>();
 
+
+        public string[] AlzadoBaseSugerido;
+
         #endregion
 
 

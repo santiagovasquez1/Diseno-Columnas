@@ -10,9 +10,12 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
         public static void Crear_archivo()
         {
-            string Ruta_Carpeta = "Z:\\svasquez\\Desarrollo_Sofware";
+
+
+
+            string Ruta_Carpeta = @"\\servidor\Dllo SW\Secciones Predefinidas - Columnas";
             string Ruta_Archivo = "Secciones.sec";
-            string Ruta_Completa = "Z:\\svasquez\\Desarrollo_Sofware\\Secciones.sec";
+            string Ruta_Completa = @"\\servidor\Dllo SW\Secciones Predefinidas - Columnas\Secciones.sec";
             bool Encuentra = false;
 
             DirectoryInfo directory_seccion = new DirectoryInfo(Ruta_Carpeta);
@@ -35,6 +38,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             }
 
             Form1.secciones_predef = Lista_Secciones;
+
         }
 
         public static void Crear_Secciones()

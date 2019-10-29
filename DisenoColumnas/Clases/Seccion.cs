@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Linq;
 
 namespace DisenoColumnas.Clases
 {
@@ -22,7 +23,6 @@ namespace DisenoColumnas.Clases
     {
 
         public string Name { get; set; }
-        public string Piso { get; set; }
         public MAT_CONCRETE Material { get; set; }
         public float B { get; set; }
         public float H { get; set; }
@@ -38,7 +38,11 @@ namespace DisenoColumnas.Clases
 
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
 
-        [NonSerialized]public List<GraphicsPath> Shapes_ref  = new List<GraphicsPath>();
+
+
+
+
+        [NonSerialized] public List<GraphicsPath> Shapes_ref = new List<GraphicsPath>();
 
         private List<float[]> CoordenadasSeccion { get; set; }
 
@@ -234,5 +238,38 @@ namespace DisenoColumnas.Clases
         }
 
         #endregion Metodos - Resultados
+
+
+
+
+        #region Propiedades y Metodos - Secciones Predefinidas
+        public List<Tuple<int, int>> No_D_Barra { get; set; }
+
+        public void CalcNoDBarras()
+        {
+
+
+            No_D_Barra = new List<Tuple<int, int>>();
+
+            var results = from p in Refuerzos
+                          group p.Diametro by p.Diametro into g
+                          select new { Diametro = g.Key, Refuerzo = g.ToList() };
+
+            foreach (var Refuer in results)
+            {
+
+                Tuple<int, int> TupleAux = new Tuple<int, int>(Refuer.Refuerzo.Count, Convert.ToInt32(Refuer.Diametro.Replace("#", "")));
+                No_D_Barra.Add(TupleAux);
+            }
+
+        }
+
+
+
+
+
+
+        #endregion
+
     }
 }
