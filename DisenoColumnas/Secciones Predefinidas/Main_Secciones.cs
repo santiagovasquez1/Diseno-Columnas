@@ -10,12 +10,9 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
         public static void Crear_archivo()
         {
-
-
-
-            string Ruta_Carpeta = @"\\servidor\Dllo SW\Secciones Predefinidas - Columnas";
+            string Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
             string Ruta_Archivo = "Secciones.sec";
-            string Ruta_Completa = @"\\servidor\Dllo SW\Secciones Predefinidas - Columnas\Secciones.sec";
+            string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
             bool Encuentra = false;
 
             DirectoryInfo directory_seccion = new DirectoryInfo(Ruta_Carpeta);
@@ -59,7 +56,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 4, 4, 4, 4, 5, 5, 4, 4, 4, 4 };
             CapasX = 3; CapasY = 4; CapasXw = 0; CapasYw = 0;
             Seccion seccion1 = Crear_Seccion(Nombre_Seccion, 35F, 40F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion1);
+            Lista_Secciones.Secciones.Add(seccion1);
 
             #endregion Seccion35X40
 
@@ -69,7 +66,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 4, 4, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4 };
             CapasX = 3; CapasY = 5; CapasXw = 0; CapasYw = 0;
             Seccion seccion2 = Crear_Seccion(Nombre_Seccion, 35F, 50F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion2);
+            Lista_Secciones.Secciones.Add(seccion2);
 
             #endregion Seccion35X50
 
@@ -79,7 +76,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4 };
             CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
             Seccion seccion3 = Crear_Seccion(Nombre_Seccion, 35F, 60F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion3);
+            Lista_Secciones.Secciones.Add(seccion3);
 
             #endregion Seccion35X60
 
@@ -89,7 +86,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
             CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
             Seccion seccion4 = Crear_Seccion(Nombre_Seccion, 35F, 80F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion4);
+            Lista_Secciones.Secciones.Add(seccion4);
 
             #endregion Seccion35X80
 
@@ -99,7 +96,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 5, 5, 4, 4, 5, 5 };
             CapasX = 2; CapasY = 6; CapasXw = 0; CapasYw = 0;
             Seccion seccion5 = Crear_Seccion(Nombre_Seccion, 30F, 70F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion5);
+            Lista_Secciones.Secciones.Add(seccion5);
 
             #endregion Seccion30X70
 
@@ -109,7 +106,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
             CapasX = 2; CapasY = 8; CapasXw = 0; CapasYw = 0;
             Seccion seccion6 = Crear_Seccion(Nombre_Seccion, 30F, 100F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion6);
+            Lista_Secciones.Secciones.Add(seccion6);
 
             #endregion Seccion30X100
 
@@ -119,7 +116,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5 };
             CapasX = 2; CapasY = 10; CapasXw = 0; CapasYw = 0;
             Seccion seccion7 = Crear_Seccion(Nombre_Seccion, 30F, 120F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion7);
+            Lista_Secciones.Secciones.Add(seccion7);
 
             #endregion Seccion30X120
 
@@ -129,7 +126,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
             CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
             Seccion seccion8 = Crear_Seccion(Nombre_Seccion, 40F, 70F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion8);
+            Lista_Secciones.Secciones.Add(seccion8);
 
             #endregion Seccion40X70
 
@@ -139,7 +136,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 6, 6, 5, 5, 6, 6, 5, 5, 6, 6, 5, 5 };
             CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
             Seccion seccion9 = Crear_Seccion(Nombre_Seccion, 40F, 80F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion9);
+            Lista_Secciones.Secciones.Add(seccion9);
 
             #endregion Seccion40X80
 
@@ -149,7 +146,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5 };
             CapasX = 3; CapasY = 7; CapasXw = 0; CapasYw = 0;
             Seccion seccion10 = Crear_Seccion(Nombre_Seccion, 40F, 90F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion10);
+            Lista_Secciones.Secciones.Add(seccion10);
 
             #endregion Seccion40X90
 
@@ -159,7 +156,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 6, 6 };
             CapasX = 3; CapasY = 9; CapasXw = 0; CapasYw = 0;
             Seccion seccion11 = Crear_Seccion(Nombre_Seccion, 40F, 120F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion11);
+            Lista_Secciones.Secciones.Add(seccion11);
 
             #endregion Seccion40X120
 
@@ -169,7 +166,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 6, 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6, 6 };
             CapasX = 3; CapasY = 10; CapasXw = 0; CapasYw = 0;
             Seccion seccion12 = Crear_Seccion(Nombre_Seccion, 40F, 140F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion12);
+            Lista_Secciones.Secciones.Add(seccion12);
 
             #endregion Seccion40X140
 
@@ -179,7 +176,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6 };
             CapasX = 4; CapasY = 8; CapasXw = 0; CapasYw = 0;
             Seccion seccion13 = Crear_Seccion(Nombre_Seccion, 45F, 110F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion13);
+            Lista_Secciones.Secciones.Add(seccion13);
 
             #endregion Seccion45X110
 
@@ -189,7 +186,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5 };
             CapasX = 5; CapasY = 6; CapasXw = 0; CapasYw = 0;
             Seccion seccion14 = Crear_Seccion(Nombre_Seccion, 50F, 60F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion14);
+            Lista_Secciones.Secciones.Add(seccion14);
 
             #endregion Seccion50X60
 
@@ -199,7 +196,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 6, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 6 };
             CapasX = 4; CapasY = 5; CapasXw = 0; CapasYw = 0;
             Seccion seccion15 = Crear_Seccion(Nombre_Seccion, 50F, 70F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion15);
+            Lista_Secciones.Secciones.Add(seccion15);
 
             #endregion Seccion50X70
 
@@ -209,7 +206,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
             CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
             Seccion seccion16 = Crear_Seccion(Nombre_Seccion, 50F, 80F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion16);
+            Lista_Secciones.Secciones.Add(seccion16);
 
             #endregion Seccion50X80
 
@@ -219,7 +216,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 5, 5, 5, 6, 6 };
             CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
             Seccion seccion17 = Crear_Seccion(Nombre_Seccion, 50F, 100F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion17);
+            Lista_Secciones.Secciones.Add(seccion17);
 
             #endregion Seccion50X100
 
@@ -229,7 +226,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
             CapasX = 5; CapasY = 8; CapasXw = 0; CapasYw = 0;
             Seccion seccion18 = Crear_Seccion(Nombre_Seccion, 50F, 120F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion18);
+            Lista_Secciones.Secciones.Add(seccion18);
 
             #endregion Seccion50X120
 
@@ -239,7 +236,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5 };
             CapasX = 5; CapasY = 5; CapasXw = 0; CapasYw = 0;
             Seccion seccion19 = Crear_Seccion(Nombre_Seccion, 60F, 60F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion19);
+            Lista_Secciones.Secciones.Add(seccion19);
 
             #endregion Seccion60X60
 
@@ -249,15 +246,15 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Diametros_seccion = new int[] { 6, 6, 6, 5, 6, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 6, 5, 6, 6, 6 };
             CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
             Seccion seccion20 = Crear_Seccion(Nombre_Seccion, 60F, 90F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones_predefinidas.Add(seccion20);
+            Lista_Secciones.Secciones.Add(seccion20);
 
             #endregion Seccion60X90
         }
 
         public static Seccion Crear_Seccion(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
         {
-            Seccion temp = new Seccion(Nombre_seccion, b, h, tf, tw, material, TipodeSeccion.Rectangular, new List<float[]>());
-            temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasXw, CapasYw, CapasY, temp.B, temp.H, temp.TW, temp.TF);
+            Seccion temp = new Seccion(Nombre_seccion, b/100, h/100, tf/100, tw/100, material, TipodeSeccion.Rectangular, new List<float[]>());
+            temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion,CapasX,CapasY,CapasXw,CapasYw,b,h,tw,tf);
             return temp;
         }
 
@@ -279,12 +276,12 @@ namespace DisenoColumnas.Secciones_Predefinidas
             posx = -(b / 2) + r; posy = (h / 2) - r;
             ContX = CapasX - 2; ContY = CapasY;
 
-            for (int i = 0; i < Diametros_Seccion.Length - 1; i++)
+            for (int i = 0; i < Diametros_Seccion.Length; i++)
             {
                 Coord_ref[0] = posx;
                 Coord_ref[1] = posy;
 
-                refuerzoi = new CRefuerzo(i, "#" + Diametros_Seccion[i], Coord_ref, TipodeRefuerzo.longitudinal);
+                refuerzoi = new CRefuerzo(i, "#" + Diametros_Seccion[i], pcoord: new double[] { posx,posy}, ptipo:TipodeRefuerzo.longitudinal);
                 Refuerzos_Seccion.Add(refuerzoi);
 
                 posy -= DeltaY1;
