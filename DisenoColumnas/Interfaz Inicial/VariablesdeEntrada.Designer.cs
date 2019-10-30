@@ -35,6 +35,7 @@
             this.T_Vf = new System.Windows.Forms.TextBox();
             this.Label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Radio_Des = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.Radio_Dmo = new System.Windows.Forms.RadioButton();
@@ -44,17 +45,19 @@
             this.label4 = new System.Windows.Forms.Label();
             this.R_Box = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel1
             // 
             this.Panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel1.Controls.Add(this.PictureBox1);
             this.Panel1.Controls.Add(this.Label6);
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel1.Location = new System.Drawing.Point(0, 0);
@@ -134,6 +137,20 @@
             this.panel2.TabIndex = 27;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel2_MouseDown);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.Label7);
+            this.groupBox2.Controls.Add(this.T_Vf);
+            this.groupBox2.Controls.Add(this.T_arranque);
+            this.groupBox2.Controls.Add(this.Label2);
+            this.groupBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(11, 163);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(288, 81);
+            this.groupBox2.TabIndex = 81;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Fundación";
+            // 
             // Radio_Des
             // 
             this.Radio_Des.AutoSize = true;
@@ -177,7 +194,7 @@
             this.cb_Aceptar.BackColor = System.Drawing.Color.White;
             this.cb_Aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Aceptar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_Aceptar.Location = new System.Drawing.Point(122, 252);
+            this.cb_Aceptar.Location = new System.Drawing.Point(122, 250);
             this.cb_Aceptar.Name = "cb_Aceptar";
             this.cb_Aceptar.Size = new System.Drawing.Size(71, 24);
             this.cb_Aceptar.TabIndex = 7;
@@ -245,19 +262,21 @@
             this.label3.TabIndex = 77;
             this.label3.Text = "Recubrimiento (cm):";
             // 
-            // groupBox2
+            // PictureBox1
             // 
-            this.groupBox2.Controls.Add(this.Label7);
-            this.groupBox2.Controls.Add(this.T_Vf);
-            this.groupBox2.Controls.Add(this.T_arranque);
-            this.groupBox2.Controls.Add(this.Label2);
-            this.groupBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(11, 163);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(288, 81);
-            this.groupBox2.TabIndex = 81;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Fundación";
+            this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBox1.Image = global::DisenoColumnas.Properties.Resources.close_button;
+            this.PictureBox1.Location = new System.Drawing.Point(294, 8);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(10, 10);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBox1.TabIndex = 23;
+            this.PictureBox1.TabStop = false;
+            this.PictureBox1.Visible = false;
+            this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
+            this.PictureBox1.MouseLeave += new System.EventHandler(this.PictureBox1_MouseLeave);
+            this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
             // 
             // VariablesdeEntrada
             // 
@@ -273,14 +292,16 @@
             this.Name = "VariablesdeEntrada";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "VariablesdeEntrada";
+            this.Load += new System.EventHandler(this.VariablesdeEntrada_Load);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -303,5 +324,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.RadioButton Radio_Dmo;
         internal System.Windows.Forms.RadioButton Radio_Des;
+        internal System.Windows.Forms.PictureBox PictureBox1;
     }
 }

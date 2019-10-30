@@ -128,35 +128,42 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         public void Load_Pisos()
         {
-            var pisos = Columna_i.Seccions.Select(x => x.Item2).ToArray();
-            lbPisos.Items.Clear();
-            lbPisos.Items.AddRange(pisos);
-            lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
-            Piso = lbPisos.SelectedItem.ToString();
+            if (Columna_i != null)
+            {
+                var pisos = Columna_i.Seccions.Select(x => x.Item2).ToArray();
+                lbPisos.Items.Clear();
+                lbPisos.Items.AddRange(pisos);
+                lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
+                Piso = lbPisos.SelectedItem.ToString();
+            }
         }
 
         public void Get_section()
         {
             int indice;
-            indice = Columna_i.Seccions.FindIndex(x => x.Item2 == Piso);
-
-            if (Form1.secciones_predef.Secciones.Exists(x => x == Columna_i.Seccions[indice].Item1)==true & Columna_i.Seccions[indice].Item1.Editado==false)
+            if (Columna_i != null)
             {
-                seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones.Find(x => x == Columna_i.Seccions[indice].Item1));
-                seccion.Name = Columna_i.Seccions[indice].Item1.Name;
-                seccion.Material = Columna_i.Seccions[indice].Item1.Material;
-                seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
-            }
-            else
-            {
-                seccion = Seccion.DeepClone(Columna_i.Seccions[indice].Item1);
-            }
+                indice = Columna_i.Seccions.FindIndex(x => x.Item2 == Piso);
 
-            Grafica.Invalidate();
+                if (Form1.secciones_predef.Secciones.Exists(x => x == Columna_i.Seccions[indice].Item1) == true & Columna_i.Seccions[indice].Item1.Editado == false)
+                {
+                    seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones.Find(x => x == Columna_i.Seccions[indice].Item1));
+                    seccion.Name = Columna_i.Seccions[indice].Item1.Name;
+                    seccion.Material = Columna_i.Seccions[indice].Item1.Material;
+                    seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
+                }
+                else
+                {
+                    seccion = Seccion.DeepClone(Columna_i.Seccions[indice].Item1);
+                }
+
+                Grafica.Invalidate();
+            }
         }
 
         private bool MouseOverPoligono(PointF mouse_pt)
         {
+
             GraphicsPath path = new GraphicsPath();
             PointF Temp;
             float X_r, Y_r;

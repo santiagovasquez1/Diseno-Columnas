@@ -17,6 +17,7 @@ namespace DisenoColumnas.Interfaz_Inicial
             InitializeComponent();
             TransparencyKey = Color.Crimson;
             BackColor = Color.Crimson;
+            
         }
 
         private void OK_Click(object sender, EventArgs e)

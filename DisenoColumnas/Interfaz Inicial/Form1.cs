@@ -37,6 +37,7 @@ namespace DisenoColumnas
         {
             InitializeComponent();
             mFormPrincipal = this;
+            CargarToolTips();
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -133,6 +134,7 @@ namespace DisenoColumnas
                 catch { }
                 mLcolumnas = LColumna;
                 m_Despiece = new Despiece();
+                variablesdeEntrada = new VariablesdeEntrada(true);
                 m_Despiece.Show(PanelContenedor);
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
@@ -148,6 +150,22 @@ namespace DisenoColumnas
                 WindowState = FormWindowState.Maximized;
             }
         }
+
+
+
+
+
+        private void CargarToolTips()
+        {
+            ToolTip tool = new ToolTip();
+            tool.SetToolTip(Save_B, "Guardar (Ctrl + S)");
+            tool.SetToolTip(SaveAs_B, "Guardar (Ctrl + Mayús + S)");
+            tool.SetToolTip(Cuantia_Vol_Button, "Calcular Cuantía Volumétrica");
+            tool.SetToolTip(Button_Agregar, "Agregar Nuevo Alzado (Ctrl + A)");
+            tool.SetToolTip(Disenar, "Diseñar Columnas (Ctrl + D)");
+
+        }
+
 
         private void CloseWindows()
         {
@@ -249,7 +267,7 @@ namespace DisenoColumnas
                 WindowState = FormWindowState.Maximized;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
 
-                variablesdeEntrada = new VariablesdeEntrada();
+                variablesdeEntrada = new VariablesdeEntrada(true);
                 variablesdeEntrada.ShowDialog();
                 mLcolumnas = LColumna;
                 m_PlantaColumnas = new PlantaColumnas();
@@ -939,7 +957,7 @@ namespace DisenoColumnas
                     {
                         variablesdeEntrada.Radio_Dmo.Checked = true;
                     }
-                    else if (Proyecto_.DMO_DES == GDE.DES)
+                    else if (Form1.Proyecto_.DMO_DES == GDE.DES)
                     {
                         variablesdeEntrada.Radio_Des.Checked = true;
                     }
@@ -948,12 +966,12 @@ namespace DisenoColumnas
                     variablesdeEntrada.T_arranque.Text = Proyecto_.Nivel_Fundacion.ToString();
                     variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
                 }
-
+                variablesdeEntrada.PictureBox1.Visible = true;
                 variablesdeEntrada.ShowDialog();
             }
             else
             {
-                variablesdeEntrada = new VariablesdeEntrada();
+                variablesdeEntrada = new VariablesdeEntrada(true);
                 variablesdeEntrada.ShowDialog();
             }
         }
@@ -1250,8 +1268,6 @@ namespace DisenoColumnas
 
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
-
-
                 col.AgregarAlzadoSugerido();
                 if (col.Alzados.Count != 0)
                 {
@@ -1304,5 +1320,7 @@ namespace DisenoColumnas
         {
 
         }
+
+       
     }
 }
