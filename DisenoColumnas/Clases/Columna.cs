@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
@@ -10,12 +9,12 @@ namespace DisenoColumnas.Clases
     public class Columna
     {
         #region Constructor
+
         public Columna(string Nombre)
         {
             Name = Nombre;
             Prueba.AddRange(new int[] { 1, 2, 3, 4, 5 });
         }
-        #endregion
 
         #region Propeidades Para el Diseño
          public List<string[]> AlzadoBaseSugerido { get; set; }
@@ -28,6 +27,7 @@ namespace DisenoColumnas.Clases
 
         [NonSerialized]
         public Brush BrushesColor = Brushes.Black;
+
         private float w;
         private float h;
         private float X_Colum;
@@ -36,12 +36,12 @@ namespace DisenoColumnas.Clases
         private ColumnaAlzadoDrawing CoordForAlzado1 { get; set; }
         public int StoryMostrar { get; set; } = -1;
         public double[] CoordXY { get; set; } = new double[2];   /// Cordenadas en Planta
-        #endregion
 
+        #endregion Propiedades- Paint
 
         #region Propeidades - Calculos
-        public string Name { get; set; }
 
+        public string Name { get; set; }
 
         public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>();
         public Viga VigaMayor { get; set; }
@@ -54,16 +54,13 @@ namespace DisenoColumnas.Clases
 
         public List<Estribo> estribos { get; set; } = new List<Estribo>();
 
-
         public List<Alzado> Alzados { get; set; } = new List<Alzado>();
 
-        public List<int> Prueba=new List<int>();
+        public List<int> Prueba = new List<int>();
 
 
-      
 
-        #endregion
-
+        #endregion Propeidades - Calculos
 
         #region Propiedades - Auxiliares
 
@@ -82,17 +79,12 @@ namespace DisenoColumnas.Clases
 
             for (int i = 0; i < Seccions.Count; i++)
             {
-
-
                 if (Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
                 {
-
-
                     //VERTICAL
                     float Ach = (Seccions[i].Item1.B - 2 * r) * (Seccions[i].Item1.H - 2 * r);
                     float bc = Seccions[i].Item1.B - 2 * r;
                     float S = estribos[i].Separacion / 100;
-
 
                     Ash1 = (FactorDisipacion1 * S * bc * Seccions[i].Item1.Material.FC / FY) * (Seccions[i].Item1.Area / Ach - 1);  //C.21-2
 
@@ -125,31 +117,21 @@ namespace DisenoColumnas.Clases
                         estribos[i].NoRamasH1 = 0;
                     }
                 }
-
-
             }
         }
 
-
-
-
         public void ActualizarRefuerzo()
         {
-
             for (int i = 0; i < resultadosETABs.Count; i++)
             {
                 resultadosETABs[i].As_asignado[0] = 0;
                 resultadosETABs[i].As_asignado[1] = 0;
                 resultadosETABs[i].As_asignado[2] = 0;
-
             }
             foreach (Alzado alzado in Alzados)
             {
-
-
                 for (int i = 0; i < alzado.Colum_Alzado.Count; i++)
                 {
-
                     if (alzado.Colum_Alzado[i] != null)
                     {
                         if (alzado.Colum_Alzado[i].Tipo != "A" && alzado.Colum_Alzado[i].Tipo != "Botton")
@@ -168,37 +150,30 @@ namespace DisenoColumnas.Clases
                             resultadosETABs[i].As_asignado[0] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
                             resultadosETABs[i].As_asignado[1] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
                             resultadosETABs[i].As_asignado[2] += (float)AreaBarra * alzado.Colum_Alzado[i].CantBarras;
-
                         }
-                        else if(alzado.Colum_Alzado[i].Tipo == "A")
+                        else if (alzado.Colum_Alzado[i].Tipo == "A")
                         {
                             float AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
                             try
                             {
                                 resultadosETABs[i - 1].As_asignado[2] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;     //Acero Botton - Vecino
-                              
                             }
                             catch { }
                             resultadosETABs[i].As_asignado[0] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;
                             resultadosETABs[i].Porct_Refuerzo[0] = resultadosETABs[i].As_asignado[0] / ((float)resultadosETABs[i].AsTopMediumButton[0]) * 100;
 
-
-
-                            if (alzado.Colum_Alzado[i].UnitarioAdicional !=null) {
+                            if (alzado.Colum_Alzado[i].UnitarioAdicional != null)
+                            {
                                 AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].UnitarioAdicional.NoBarra];
 
                                 resultadosETABs[i].As_asignado[2] += AreaBarra * alzado.Colum_Alzado[i].UnitarioAdicional.CantBarras;
-                              
+
                                 try
                                 {
                                     resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].UnitarioAdicional.CantBarras;    //Acero Botton - Vecino
-                                   
                                 }
                                 catch { }
-
-
                             }
-
                         }
                         else if (alzado.Colum_Alzado[i].Tipo == "Botton")
                         {
@@ -206,60 +181,34 @@ namespace DisenoColumnas.Clases
                             AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
 
                             resultadosETABs[i].As_asignado[2] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;
-                            
+
                             try
                             {
                                 resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;    //Acero Botton - Vecino
-                               
                             }
                             catch { }
                         }
                     }
-
-          
-
                 }
-
             }
 
             for (int i = 0; i < resultadosETABs.Count; i++)
             {
-
                 resultadosETABs[i].Porct_Refuerzo[0] = (resultadosETABs[i].As_asignado[0] / (float)resultadosETABs[i].AsTopMediumButton[0]) * 100;
                 resultadosETABs[i].Porct_Refuerzo[1] = (resultadosETABs[i].As_asignado[1] / (float)resultadosETABs[i].AsTopMediumButton[1]) * 100;
                 resultadosETABs[i].Porct_Refuerzo[2] = (resultadosETABs[i].As_asignado[2] / (float)resultadosETABs[i].AsTopMediumButton[2]) * 100;
             }
-
-
-
-
         }
-
-
-
-
-
-
 
         public void AsignarAsTopMediumButton_()
         {
             for (int i = 0; i < resultadosETABs.Count; i++) { resultadosETABs[i].AsignarAsTopMediumButton(); }
         }
 
-
-
-
-
-
-
-
-
-
-
-        #endregion
-
+        #endregion Metodos-Calculos
 
         #region MetodosPaint
+
         public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI)
         {
             if (CoordXY[0] < 0)
@@ -295,7 +244,6 @@ namespace DisenoColumnas.Clases
 
             graphics.FillRectangle(BrushesColor, X_Colum, Y_Colum, w, h);
 
-
             float Tamano_Text = (SX + SY) * 0.6f * 0.3f;
             float X_string = X_Colum + w;
 
@@ -323,12 +271,10 @@ namespace DisenoColumnas.Clases
             }
         }
 
-
         private void CoordAlzado()
         {
             CoordForAlzado1 = new ColumnaAlzadoDrawing(this);
         }
-
 
         public void Paint_Alzado1(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float X, float Y)
         {
@@ -412,7 +358,6 @@ namespace DisenoColumnas.Clases
             e.Graphics.DrawLine(Pen_Nivel, x5, y5, x6, y6);
         }
 
-
-        #endregion
+        #endregion MetodosPaint
     }
 }
