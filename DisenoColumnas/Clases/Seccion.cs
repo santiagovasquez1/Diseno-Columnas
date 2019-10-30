@@ -35,6 +35,8 @@ namespace DisenoColumnas.Clases
 
         public double Acero_Long { get; set; }
 
+        public Estribo Estribo { get; set; }
+
         public List<Point> Vertices { get; set; } = new List<Point>();
 
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();

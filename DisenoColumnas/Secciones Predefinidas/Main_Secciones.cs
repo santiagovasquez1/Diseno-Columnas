@@ -43,212 +43,232 @@ namespace DisenoColumnas.Secciones_Predefinidas
             string Nombre_Seccion = "";
             int[] Diametros_seccion;
             int CapasX, CapasY, CapasXw, CapasYw;
+            Seccion seccioni;
 
-            MAT_CONCRETE Material = new MAT_CONCRETE
+            List<MAT_CONCRETE> Lista_materiales = new List<MAT_CONCRETE>();
+
+            MAT_CONCRETE Material1 = new MAT_CONCRETE
             {
                 Name = "H350",
                 FC = 350
             };
 
-            #region Seccion35X40
+            MAT_CONCRETE Material2 = new MAT_CONCRETE
+            {
+                Name = "H280",
+                FC = 280
+            };
 
-            Nombre_Seccion = "C35x40";
-            Diametros_seccion = new int[] { 4, 4, 4, 4, 5, 5, 4, 4, 4, 4 };
-            CapasX = 3; CapasY = 4; CapasXw = 0; CapasYw = 0;
-            Seccion seccion1 = Crear_Seccion(Nombre_Seccion, 35F, 40F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion1);
+            MAT_CONCRETE Material3 = new MAT_CONCRETE
+            {
+                Name = "H210",
+                FC = 210
+            };
 
-            #endregion Seccion35X40
+            Lista_materiales.AddRange(new MAT_CONCRETE[] { Material1, Material2, Material3 });
 
-            #region Seccion35X50
+            foreach (MAT_CONCRETE material in Lista_materiales)
+            {
+                #region Seccion35X40
 
-            Nombre_Seccion = "C35x50";
-            Diametros_seccion = new int[] { 4, 4, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4 };
-            CapasX = 3; CapasY = 5; CapasXw = 0; CapasYw = 0;
-            Seccion seccion2 = Crear_Seccion(Nombre_Seccion, 35F, 50F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion2);
+                Nombre_Seccion = "C35x40" + material.Name;
+                Diametros_seccion = new int[] { 4, 4, 4, 4, 5, 5, 4, 4, 4, 4 };
+                CapasX = 3; CapasY = 4; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 40F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion35X50
+                #endregion Seccion35X40
 
-            #region Seccion35X60
+                #region Seccion35X50
 
-            Nombre_Seccion = "C35x60";
-            Diametros_seccion = new int[] { 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4 };
-            CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-            Seccion seccion3 = Crear_Seccion(Nombre_Seccion, 35F, 60F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion3);
+                Nombre_Seccion = "C35x50" + material.Name;
+                Diametros_seccion = new int[] { 4, 4, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4 };
+                CapasX = 3; CapasY = 5; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 50F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion35X60
+                #endregion Seccion35X50
 
-            #region Seccion35X80
+                #region Seccion35X60
 
-            Nombre_Seccion = "C35x80";
-            Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-            CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-            Seccion seccion4 = Crear_Seccion(Nombre_Seccion, 35F, 80F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion4);
+                Nombre_Seccion = "C35x60" + material.Name;
+                Diametros_seccion = new int[] { 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4 };
+                CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion35X80
+                #endregion Seccion35X60
 
-            #region Seccion30X70
+                #region Seccion35X80
 
-            Nombre_Seccion = "C30x70";
-            Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 5, 5, 4, 4, 5, 5 };
-            CapasX = 2; CapasY = 6; CapasXw = 0; CapasYw = 0;
-            Seccion seccion5 = Crear_Seccion(Nombre_Seccion, 30F, 70F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion5);
+                Nombre_Seccion = "C35x80" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+                CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion30X70
+                #endregion Seccion35X80
 
-            #region Seccion30X100
+                #region Seccion30X70
 
-            Nombre_Seccion = "C30x100";
-            Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-            CapasX = 2; CapasY = 8; CapasXw = 0; CapasYw = 0;
-            Seccion seccion6 = Crear_Seccion(Nombre_Seccion, 30F, 100F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion6);
+                Nombre_Seccion = "C30x70" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 5, 5, 4, 4, 5, 5 };
+                CapasX = 2; CapasY = 6; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 30F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion30X100
+                #endregion Seccion30X70
 
-            #region Seccion30X120
+                #region Seccion30X100
 
-            Nombre_Seccion = "C30x120";
-            Diametros_seccion = new int[] { 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5 };
-            CapasX = 2; CapasY = 10; CapasXw = 0; CapasYw = 0;
-            Seccion seccion7 = Crear_Seccion(Nombre_Seccion, 30F, 120F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion7);
+                Nombre_Seccion = "C30x100" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+                CapasX = 2; CapasY = 8; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 30F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion30X120
+                #endregion Seccion30X100
 
-            #region Seccion40X70
+                #region Seccion30X120
 
-            Nombre_Seccion = "C40x70";
-            Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-            CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-            Seccion seccion8 = Crear_Seccion(Nombre_Seccion, 40F, 70F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion8);
+                Nombre_Seccion = "C30x120" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5 };
+                CapasX = 2; CapasY = 10; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 30F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion40X70
+                #endregion Seccion30X120
 
-            #region Seccion40X80
+                #region Seccion40X70
 
-            Nombre_Seccion = "C40x80";
-            Diametros_seccion = new int[] { 5, 5, 6, 6, 5, 5, 6, 6, 5, 5, 6, 6, 5, 5 };
-            CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-            Seccion seccion9 = Crear_Seccion(Nombre_Seccion, 40F, 80F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion9);
+                Nombre_Seccion = "C40x70" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+                CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion40X80
+                #endregion Seccion40X70
 
-            #region Seccion40X90
+                #region Seccion40X80
 
-            Nombre_Seccion = "C40x90";
-            Diametros_seccion = new int[] { 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5 };
-            CapasX = 3; CapasY = 7; CapasXw = 0; CapasYw = 0;
-            Seccion seccion10 = Crear_Seccion(Nombre_Seccion, 40F, 90F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion10);
+                Nombre_Seccion = "C40x80" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 6, 6, 5, 5, 6, 6, 5, 5, 6, 6, 5, 5 };
+                CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion40X90
+                #endregion Seccion40X80
 
-            #region Seccion40X120
+                #region Seccion40X90
 
-            Nombre_Seccion = "C40x120";
-            Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 6, 6 };
-            CapasX = 3; CapasY = 9; CapasXw = 0; CapasYw = 0;
-            Seccion seccion11 = Crear_Seccion(Nombre_Seccion, 40F, 120F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion11);
+                Nombre_Seccion = "C40x90" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5 };
+                CapasX = 3; CapasY = 7; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion40X120
+                #endregion Seccion40X90
 
-            #region Seccion40X140
+                #region Seccion40X120
 
-            Nombre_Seccion = "C40x140";
-            Diametros_seccion = new int[] { 6, 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6, 6 };
-            CapasX = 3; CapasY = 10; CapasXw = 0; CapasYw = 0;
-            Seccion seccion12 = Crear_Seccion(Nombre_Seccion, 40F, 140F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion12);
+                Nombre_Seccion = "C40x120" + material.Name;
+                Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 6, 6 };
+                CapasX = 3; CapasY = 9; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion40X140
+                #endregion Seccion40X120
 
-            #region Seccion45X110
+                #region Seccion40X140
 
-            Nombre_Seccion = "C45x110";
-            Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6 };
-            CapasX = 4; CapasY = 8; CapasXw = 0; CapasYw = 0;
-            Seccion seccion13 = Crear_Seccion(Nombre_Seccion, 45F, 110F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion13);
+                Nombre_Seccion = "C40x140" + material.Name;
+                Diametros_seccion = new int[] { 6, 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6, 6 };
+                CapasX = 3; CapasY = 10; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 140F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion45X110
+                #endregion Seccion40X140
 
-            #region Seccion50X60
+                #region Seccion45X110
 
-            Nombre_Seccion = "C50x60";
-            Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5 };
-            CapasX = 5; CapasY = 6; CapasXw = 0; CapasYw = 0;
-            Seccion seccion14 = Crear_Seccion(Nombre_Seccion, 50F, 60F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion14);
+                Nombre_Seccion = "C45x110" + material.Name;
+                Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6 };
+                CapasX = 4; CapasY = 8; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 45F, 110F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion50X60
+                #endregion Seccion45X110
 
-            #region Seccion50X70
+                #region Seccion50X60
 
-            Nombre_Seccion = "C50x70";
-            Diametros_seccion = new int[] { 6, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 6 };
-            CapasX = 4; CapasY = 5; CapasXw = 0; CapasYw = 0;
-            Seccion seccion15 = Crear_Seccion(Nombre_Seccion, 50F, 70F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion15);
+                Nombre_Seccion = "C50x60" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5 };
+                CapasX = 5; CapasY = 6; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion50X70
+                #endregion Seccion50X60
 
-            #region Seccion50X80
+                #region Seccion50X70
 
-            Nombre_Seccion = "C50x80";
-            Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-            CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
-            Seccion seccion16 = Crear_Seccion(Nombre_Seccion, 50F, 80F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion16);
+                Nombre_Seccion = "C50x70" + material.Name;
+                Diametros_seccion = new int[] { 6, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 6 };
+                CapasX = 4; CapasY = 5; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion50X80
+                #endregion Seccion50X70
 
-            #region Seccion50X100
+                #region Seccion50X80
 
-            Nombre_Seccion = "C50x100";
-            Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 5, 5, 5, 6, 6 };
-            CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
-            Seccion seccion17 = Crear_Seccion(Nombre_Seccion, 50F, 100F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion17);
+                Nombre_Seccion = "C50x80" + material.Name;
+                Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+                CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion50X100
+                #endregion Seccion50X80
 
-            #region Seccion50X120
+                #region Seccion50X100
 
-            Nombre_Seccion = "C50x100";
-            Diametros_seccion = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
-            CapasX = 5; CapasY = 8; CapasXw = 0; CapasYw = 0;
-            Seccion seccion18 = Crear_Seccion(Nombre_Seccion, 50F, 120F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion18);
+                Nombre_Seccion = "C50x100" + material.Name;
+                Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 5, 5, 5, 6, 6 };
+                CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion50X120
+                #endregion Seccion50X100
 
-            #region Seccion60X60
+                #region Seccion50X120
 
-            Nombre_Seccion = "C60x60";
-            Diametros_seccion = new int[] { 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5 };
-            CapasX = 5; CapasY = 5; CapasXw = 0; CapasYw = 0;
-            Seccion seccion19 = Crear_Seccion(Nombre_Seccion, 60F, 60F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion19);
+                Nombre_Seccion = "C50x120" + material.Name;
+                Diametros_seccion = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
+                CapasX = 5; CapasY = 8; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion60X60
+                #endregion Seccion50X120
 
-            #region Seccion60X90
+                #region Seccion60X60
 
-            Nombre_Seccion = "C60x90";
-            Diametros_seccion = new int[] { 6, 6, 6, 5, 6, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 6, 5, 6, 6, 6 };
-            CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
-            Seccion seccion20 = Crear_Seccion(Nombre_Seccion, 60F, 90F, 0, 0, Material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw);
-            Lista_Secciones.Secciones.Add(seccion20);
+                Nombre_Seccion = "C60x60" + material.Name;
+                Diametros_seccion = new int[] { 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5 };
+                CapasX = 5; CapasY = 5; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 60F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
 
-            #endregion Seccion60X90
+                #endregion Seccion60X60
+
+                #region Seccion60X90
+
+                Nombre_Seccion = "C60x90" + material.Name;
+                Diametros_seccion = new int[] { 6, 6, 6, 5, 6, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 6, 5, 6, 6, 6 };
+                CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 60F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones.Add(seccioni);
+
+                #endregion Seccion60X90
+            }
         }
 
         public static Seccion Crear_Seccion(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
@@ -256,6 +276,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Seccion temp = new Seccion(Nombre_seccion, b / 100, h / 100, tf / 100, tw / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
             temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
             temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
+            temp.Estribo = Set_estribo(temp, temp.Material);
             return temp;
         }
 
@@ -309,6 +330,321 @@ namespace DisenoColumnas.Secciones_Predefinidas
             }
 
             return Refuerzos_Seccion;
+        }
+
+        public static Estribo Set_estribo(Seccion Seccioni, MAT_CONCRETE material)
+        {
+            Estribo Temp = new Estribo(3);
+            int pos = 0;
+            string Nombre_Seccion="";
+         
+            pos = Seccioni.Name.IndexOf(material.Name);
+            Nombre_Seccion = Seccioni.Name.Substring(0, pos);
+
+            switch (Nombre_Seccion)
+            {
+                case "C30x70":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 7.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.5f };
+                    }
+                    return Temp;
+
+                case "C30x100":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.0f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    return Temp;
+
+                case "C30x120":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13f };
+                    }
+                    return Temp;
+
+                case "C35x40":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.0f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 7.5f };
+                    }
+                    return Temp;
+
+                case "C35x50":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.0f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 11.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.5f };
+                    }
+                    return Temp;
+
+                case "C35x60":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 11.0f };
+                    }
+                    return Temp;
+
+                case "C35x80":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 7.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 12.5f };
+                    }
+                    return Temp;
+
+                case "C40x70":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 11.0f };
+                    }
+                    return Temp;
+
+                case "C40x80":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 7.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.5f };
+                    }
+                    return Temp;
+
+                case "C40x90":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 12.0f };
+                    }
+                    return Temp;
+
+                case "C40x120":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.0f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13.0f };
+                    }
+                    return Temp;
+
+                case "C40x140":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.0f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13.0f };
+                    }
+                    return Temp;
+
+                case "C45x110":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 7.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 12.5f };
+                    }
+                    return Temp;
+
+                case "C50x60":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13f };
+                    }
+                    return Temp;
+
+                case "C50x70":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 7.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10f };
+                    }
+                    return Temp;
+
+                case "C50x80":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 11.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13f };
+                    }
+                    return Temp;
+
+                case "C50x100":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13f };
+                    }
+                    return Temp;
+
+                case "C50x120":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13.0f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13f };
+                    }
+                    return Temp;
+
+                case "C60x60":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 7.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 9.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 12.5f };
+                    }
+                    return Temp;
+
+                case "C60x90":
+                    if (material.FC == 350)
+                    {
+                        Temp = new Estribo(3) { Separacion = 8.5f };
+                    }
+                    if (material.FC == 280)
+                    {
+                        Temp = new Estribo(3) { Separacion = 10.5f };
+                    }
+                    if (material.FC == 210)
+                    {
+                        Temp = new Estribo(3) { Separacion = 13.0f };
+                    }
+                    return Temp;
+            }
+
+            return Temp;
         }
     }
 }
