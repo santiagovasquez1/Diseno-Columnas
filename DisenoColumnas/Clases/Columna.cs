@@ -17,6 +17,12 @@ namespace DisenoColumnas.Clases
         }
         #endregion
 
+        #region Propeidades Para el Diseño
+         public List<string[]> AlzadoBaseSugerido { get; set; }
+
+        public List<List<string>> Col_Row_AlzadoBaseSugerido { get; set; }
+
+        #endregion
 
         #region Propiedades- Paint
 
@@ -38,7 +44,6 @@ namespace DisenoColumnas.Clases
 
 
         public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>();
-        public List<Seccion> Secciones2 { get; set; } = new List<Seccion>();
         public Viga VigaMayor { get; set; }
 
         public List<float> LuzLibre { get; set; }
@@ -55,7 +60,7 @@ namespace DisenoColumnas.Clases
         public List<int> Prueba=new List<int>();
 
 
-        public string[] AlzadoBaseSugerido;
+      
 
         #endregion
 
@@ -67,10 +72,6 @@ namespace DisenoColumnas.Clases
          public string ColSimilName { get; set; }
 
         #endregion
-
-
-
-
 
 
         #region Metodos-Calculos

@@ -97,6 +97,12 @@
     <Compile Include="Diseño\Despiece.Designer.cs">
       <DependentUpon>Despiece.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz Inicial\CuadroDialogoDiseño.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Inicial\CuadroDialogoDiseño.Designer.cs">
+      <DependentUpon>CuadroDialogoDiseño.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz Inicial\VariablesdeEntrada.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Diseño\Despiece.resx">
       <DependentUpon>Despiece.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Inicial\CuadroDialogoDiseño.resx">
+      <DependentUpon>CuadroDialogoDiseño.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Inicial\VariablesdeEntrada.resx">
       <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
