@@ -15,9 +15,9 @@ namespace DisenoColumnas.Clases
             Name = Nombre;
             Prueba.AddRange(new int[] { 1, 2, 3, 4, 5 });
         }
-
+        #endregion
         #region Propeidades Para el Diseño
-         public List<string[]> AlzadoBaseSugerido { get; set; }
+        public List<string[]> AlzadoBaseSugerido { get; set; }
 
         public List<List<string>> Col_Row_AlzadoBaseSugerido { get; set; }
 
@@ -37,7 +37,7 @@ namespace DisenoColumnas.Clases
         public int StoryMostrar { get; set; } = -1;
         public double[] CoordXY { get; set; } = new double[2];   /// Cordenadas en Planta
 
-        #endregion Propiedades- Paint
+        #endregion
 
         #region Propeidades - Calculos
 
@@ -60,7 +60,7 @@ namespace DisenoColumnas.Clases
 
 
 
-        #endregion Propeidades - Calculos
+        #endregion
 
         #region Propiedades - Auxiliares
 
@@ -358,6 +358,6 @@ namespace DisenoColumnas.Clases
             e.Graphics.DrawLine(Pen_Nivel, x5, y5, x6, y6);
         }
 
-        #endregion MetodosPaint
+        #endregion 
     }
 }

@@ -1141,8 +1141,7 @@ namespace DisenoColumnas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Proyecto_ = new Proyecto();
-            CreateDidctonaries();
+           
             mIntefazSeccion = new FInterfaz_Seccion();
             Main_Secciones.Crear_archivo();
         }
