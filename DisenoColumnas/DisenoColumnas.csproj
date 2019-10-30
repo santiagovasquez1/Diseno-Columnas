@@ -265,6 +265,9 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\VarEntrada.png" />
+    <None Include="Resources\SameCol1.png" />
+    <None Include="Resources\SameCol.png" />
     <None Include="Resources\Diseñox13x13.png" />
     <None Include="Resources\efePrimaCeLogoSolo.png" />
     <None Include="Resources\efe Prima Ce Pixelado.png" />
@@ -272,6 +275,7 @@
     <None Include="Resources\columna-de-teatro.png" />
     <None Include="Resources\columnas.png" />
     <None Include="Resources\cOLUMNAiNVERTIDAX16.png" />
+    <None Include="Resources\bloquear.png" />
     <Content Include="Resources\Csearch.cur" />
     <None Include="Resources\vcsadded_93506x16.png" />
     <None Include="Resources\vcsadded_93506.png" />
