@@ -7,7 +7,6 @@ namespace DisenoColumnas.Clases
     {
         public Estribo(int noEstribo)
         {
-
             NoEstribo = noEstribo;
             CalcularArea();
         }
@@ -24,6 +23,13 @@ namespace DisenoColumnas.Clases
         public void CalcularArea()
         {
             Area = Form1.Proyecto_.AceroBarras[NoEstribo];
+        }
+
+        public override string ToString()
+        {
+            string Texto = "";
+            Texto = $"E#{NoEstribo} a {Separacion}cm";
+            return string.Format("{0}", Texto);
         }
     }
 }

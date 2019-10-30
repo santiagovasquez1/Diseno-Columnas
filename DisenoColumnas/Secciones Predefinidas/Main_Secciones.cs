@@ -264,7 +264,6 @@ namespace DisenoColumnas.Secciones_Predefinidas
             double posx, posy;
             int ContX, ContY, id;
             double r = 6; //1 es el espesor del estribo #3
-            double As_total = 0;
             double[] Coord_ref = new double[2];
             double DeltaX1, DeltaY1, DeltaX2, DeltaY2;
             CRefuerzo refuerzoi;

@@ -28,17 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FInterfaz_Seccion));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.BSeleccionar_columna = new System.Windows.Forms.ToolStripButton();
-            this.BSeleccion = new System.Windows.Forms.ToolStripButton();
-            this.Mover = new System.Windows.Forms.ToolStripButton();
-            this.BAcercar = new System.Windows.Forms.ToolStripButton();
-            this.BAlejar = new System.Windows.Forms.ToolStripButton();
-            this.BReestablecer = new System.Windows.Forms.ToolStripButton();
             this.Grafica = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbPisos = new System.Windows.Forms.ListBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -49,11 +46,7 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BSeleccionar_columna,
-            this.BSeleccion,
-            this.Mover,
-            this.BAcercar,
-            this.BAlejar,
-            this.BReestablecer});
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(24, 528);
@@ -67,59 +60,8 @@
             this.BSeleccionar_columna.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BSeleccionar_columna.Name = "BSeleccionar_columna";
             this.BSeleccionar_columna.Size = new System.Drawing.Size(21, 20);
-            this.BSeleccionar_columna.Text = "Selecciona la columna para el dibujo de la seccion";
+            this.BSeleccionar_columna.Text = "Editar refuerzo de seccion";
             this.BSeleccionar_columna.Click += new System.EventHandler(this.BSeleccionar_columna_Click);
-            // 
-            // BSeleccion
-            // 
-            this.BSeleccion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BSeleccion.Image = global::DisenoColumnas.Properties.Resources.cursor;
-            this.BSeleccion.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BSeleccion.Name = "BSeleccion";
-            this.BSeleccion.Size = new System.Drawing.Size(21, 20);
-            this.BSeleccion.Text = "toolStripButton1";
-            this.BSeleccion.ToolTipText = "Seleccion";
-            this.BSeleccion.Click += new System.EventHandler(this.BSeleccion_Click);
-            // 
-            // Mover
-            // 
-            this.Mover.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Mover.Image = global::DisenoColumnas.Properties.Resources.move;
-            this.Mover.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Mover.Name = "Mover";
-            this.Mover.Size = new System.Drawing.Size(21, 20);
-            this.Mover.Text = "toolStripButton1";
-            this.Mover.ToolTipText = "Mover";
-            this.Mover.Click += new System.EventHandler(this.Mover_Click);
-            // 
-            // BAcercar
-            // 
-            this.BAcercar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BAcercar.Image = global::DisenoColumnas.Properties.Resources.zoom_increasing_symbol;
-            this.BAcercar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BAcercar.Name = "BAcercar";
-            this.BAcercar.Size = new System.Drawing.Size(21, 20);
-            this.BAcercar.Text = "Zoom +";
-            this.BAcercar.Click += new System.EventHandler(this.BAcercar_Click);
-            // 
-            // BAlejar
-            // 
-            this.BAlejar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BAlejar.Image = global::DisenoColumnas.Properties.Resources.zoom_out;
-            this.BAlejar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BAlejar.Name = "BAlejar";
-            this.BAlejar.Size = new System.Drawing.Size(21, 20);
-            this.BAlejar.Text = "Zoom -";
-            // 
-            // BReestablecer
-            // 
-            this.BReestablecer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BReestablecer.Image = global::DisenoColumnas.Properties.Resources.search;
-            this.BReestablecer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BReestablecer.Name = "BReestablecer";
-            this.BReestablecer.Size = new System.Drawing.Size(21, 20);
-            this.BReestablecer.Text = "toolStripButton1";
-            this.BReestablecer.ToolTipText = "Reestablecer";
             // 
             // Grafica
             // 
@@ -176,6 +118,15 @@
             this.lbPisos.TabIndex = 0;
             this.lbPisos.SelectedIndexChanged += new System.EventHandler(this.lbPisos_SelectedIndexChanged);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(21, 20);
+            this.toolStripButton1.Text = "Agregar Estribos";
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,13 +156,9 @@
         public  System.Windows.Forms.PictureBox Grafica;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton BSeleccionar_columna;
-        private System.Windows.Forms.ToolStripButton BSeleccion;
-        private System.Windows.Forms.ToolStripButton Mover;
-        private System.Windows.Forms.ToolStripButton BAcercar;
-        private System.Windows.Forms.ToolStripButton BAlejar;
-        private System.Windows.Forms.ToolStripButton BReestablecer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox lbPisos;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

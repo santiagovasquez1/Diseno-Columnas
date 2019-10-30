@@ -973,7 +973,7 @@ namespace DisenoColumnas
                 {
                     mIntefazSeccion.Get_Columna();
                     mIntefazSeccion.Load_Pisos();
-                    mIntefazSeccion.get_section();
+                    mIntefazSeccion.Get_section();
                     mIntefazSeccion.Invalidate();
                 }
             }

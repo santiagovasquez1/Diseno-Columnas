@@ -11,6 +11,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion();
         private Seccion Seccion { get; set; }
         private string piso { get; set; }
+        private int index { get; set; } = -1;
 
         public FAgregarRef(Seccion pseccion, string ppiso, FInterfaz_Seccion pInterfaz)
         {
@@ -164,13 +165,22 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Reload_Seccion();
+
+            FInterfaz_.Over = false;
+            FInterfaz_.Seleccionado = false;
+            FInterfaz_.Invalidate();
+            Close();
+        }
+
+        private void Reload_Seccion()
+        {
             CRefuerzo refuerzo;
             DataGridViewComboBoxCell boxCell;
             string diametro;
             int id, indice;
             double x, y;
             double[] coord;
-            double As_total = 0;
             Seccion.Refuerzos.Clear();
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
@@ -190,11 +200,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             Seccion.Editado = true;
             indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == piso);
             Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
-
-            FInterfaz_.Over = false;
-            FInterfaz_.Seleccionado = false;
-            FInterfaz_.Invalidate();
-            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -275,6 +280,42 @@ namespace DisenoColumnas.Interfaz_Seccion
             CYw = Convert.ToInt32(nuCYw.Value);
 
             Crear_tabla(CX, Cy, CXw, CYw, dataGridView1);
+        }
+
+        private void agregarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var Tabla_madre = (DataGridView)cmEditar.SourceControl;
+            int id,Last_index;
+            
+            Tabla_madre.Rows.Add();
+            Last_index = Tabla_madre.Rows.Count - 1;
+            id = Convert.ToInt32(Tabla_madre.Rows[Last_index - 1].Cells[0].Value) + 1;
+
+            Tabla_madre.Rows[Last_index].Cells[0].Value=id;
+            Tabla_madre.Rows[Last_index].Cells[1].Value = Seccion.Refuerzos.Last().Diametro;
+        } 
+
+        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                dataGridView1.ContextMenuStrip = cmEditar;
+                cmEditar.Enabled = true;
+                index = e.RowIndex;
+            }
+            else
+                index = -1;
+        }
+
+        private void eliminarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var Tabla_madre = (DataGridView)cmEditar.SourceControl;
+            Tabla_madre.Rows.RemoveAt(index);
+
+            for(int i = index; i < Tabla_madre.RowCount; i++)
+            {
+                Tabla_madre.Rows[i].Cells[0].Value = i+1;
+            }
         }
     }
 }

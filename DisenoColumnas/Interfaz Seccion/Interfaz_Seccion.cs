@@ -135,7 +135,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             Piso = lbPisos.SelectedItem.ToString();
         }
 
-        public void get_section()
+        public void Get_section()
         {
             int indice;
             indice = Columna_i.Seccions.FindIndex(x => x.Item2 == Piso);
@@ -461,7 +461,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void lbPisos_SelectedIndexChanged(object sender, EventArgs e)
         {
             Piso = lbPisos.SelectedItem.ToString();
-            get_section();
+            Get_section();
             Grafica.Invalidate();
         }
 
