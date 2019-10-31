@@ -1326,5 +1326,48 @@ namespace DisenoColumnas
             CUsuario usuario = new CUsuario();
             usuario.Get_user();
         }
+
+
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            if (persistString == typeof(Informacion).ToString())
+                return m_Informacion;
+            else if (persistString == typeof(AgregarAlzado).ToString())
+                return mAgregarAlzado;
+            else if (persistString == typeof(PlantaColumnas).ToString())
+                return m_PlantaColumnas;
+            else if (persistString == typeof(Despiece).ToString())
+                return m_Despiece;
+            else if (persistString == typeof(CuantiaVolumetrica).ToString())
+                return mCuantiaVolumetrica;
+            else
+            {
+                // DummyDoc overrides GetPersistString to add extra information into persistString.
+                // Any DockContent may override this value to add any needed information for deserialization.
+
+                string[] parsedStrings = persistString.Split(new char[] { ',' });
+                if (parsedStrings.Length != 3)
+                    return null;
+
+                if (parsedStrings[0] != typeof(Informacion).ToString())
+                    return null;
+
+                Informacion dummyDoc = new Informacion();
+               if (parsedStrings[2] != string.Empty)
+                    dummyDoc.Text = parsedStrings[2];
+
+                return dummyDoc;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }
