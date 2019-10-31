@@ -151,10 +151,6 @@ namespace DisenoColumnas
             }
         }
 
-
-
-
-
         private void CargarToolTips()
         {
             ToolTip tool = new ToolTip();
@@ -163,9 +159,7 @@ namespace DisenoColumnas
             tool.SetToolTip(Cuantia_Vol_Button, "Calcular Cuantía Volumétrica");
             tool.SetToolTip(Button_Agregar, "Agregar Nuevo Alzado (Ctrl + A)");
             tool.SetToolTip(Disenar, "Diseñar Columnas (Ctrl + D)");
-
         }
-
 
         private void CloseWindows()
         {
@@ -255,7 +249,6 @@ namespace DisenoColumnas
                     {
                         Save();
                     }
-                   
                 }
             }
             Ruta1 = AbrirE2K2009yCSV2009();
@@ -263,7 +256,6 @@ namespace DisenoColumnas
 
             if (Ruta1 != "" && Ruta2 != "")
             {
-             
                 WindowState = FormWindowState.Maximized;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
 
@@ -1071,7 +1063,6 @@ namespace DisenoColumnas
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-          
         }
 
         private void PanelContenedor_ActivePaneChanged(object sender, EventArgs e)
@@ -1119,7 +1110,6 @@ namespace DisenoColumnas
             }
             if (Proyecto_ != null)
             {
-
                 Disenar.Enabled = true;
             }
         }
@@ -1166,7 +1156,6 @@ namespace DisenoColumnas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
             mIntefazSeccion = new FInterfaz_Seccion();
             Main_Secciones.Crear_archivo();
         }
@@ -1190,7 +1179,6 @@ namespace DisenoColumnas
             foreach (Columna Col in Proyecto_.Lista_Columnas)
             {
                 Col.AlzadoBaseSugerido = new List<string[]>();
-
             }
 
             foreach (Columna Col in Proyecto_.Lista_Columnas)
@@ -1199,7 +1187,6 @@ namespace DisenoColumnas
                 {
                     Col.AlzadoBaseSugerido.Add(new string[] { });
                 }
-
             }
 
             //Determinar Cantidad de Barras Por Sección Predefinidas
@@ -1211,17 +1198,14 @@ namespace DisenoColumnas
 
             foreach (Columna Col in Proyecto_.Lista_Columnas)
             {
-
-                for (int i = Col.Seccions.Count-1; i >= 0; i--)
+                for (int i = Col.Seccions.Count - 1; i >= 0; i--)
                 {
-
                     string[] Base = new string[0];
 
                     foreach (Seccion seccionP in secciones_predef.Secciones)
                     {
                         if (Col.Seccions[i].Item1.B == seccionP.B && Col.Seccions[i].Item1.H == seccionP.H || Col.Seccions[i].Item1.H == seccionP.B && Col.Seccions[i].Item1.B == seccionP.H)
                         {
-
                             if (seccionP.No_D_Barra.Count == 2)
                             {
                                 Base = new string[4];
@@ -1229,7 +1213,6 @@ namespace DisenoColumnas
                                 Base[1] = $"{ Convert.ToString(seccionP.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[0].Item2)}";
                                 Base[2] = $"{ Convert.ToString(seccionP.No_D_Barra[1].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[1].Item2)}";
                                 Base[3] = $"{ Convert.ToString(seccionP.No_D_Barra[1].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[1].Item2)}";
-
                             }
 
                             if (seccionP.No_D_Barra.Count == 1)
@@ -1240,19 +1223,12 @@ namespace DisenoColumnas
                             }
 
                             break;
-
                         }
-
                     }
 
-
                     Col.AlzadoBaseSugerido[i] = Base;
-
                 }
-
-
             }
-
 
             CuadroDialogoDiseño Cuadro_diseño = new CuadroDialogoDiseño();
             Cuadro_diseño.WindowState = FormWindowState.Maximized;
@@ -1261,9 +1237,9 @@ namespace DisenoColumnas
             Cuadro_diseño.BarraPersonalizada2.Width = 0;
             Cuadro_diseño.BarraPersonalizada.Visible = true;
             Cuadro_diseño.BarraPersonalizada2.Visible = true;
-            double Delta = (Cuadro_diseño.BarraPersonalizada.Width) / (Proyecto_.Lista_Columnas.Count-4);
+            double Delta = (Cuadro_diseño.BarraPersonalizada.Width) / (Proyecto_.Lista_Columnas.Count - 4);
             int CantCol = 1;
-            double D_Pro =Math.Ceiling(Delta);
+            double D_Pro = Math.Ceiling(Delta);
             bool HabilitarReporte = false;
 
             foreach (Columna col in Proyecto_.Lista_Columnas)
@@ -1290,37 +1266,24 @@ namespace DisenoColumnas
 
             Cuadro_diseño.Reporte_RichText.Visible = HabilitarReporte;
 
-
-
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
                 if (col.Alzados.Count == 0)
                 {
-
                     Cuadro_diseño.Reporte_RichText.Text += "\n" + "✘" + col.Name;
                 }
             }
-
-
-
-
-
         }
-
-
-        
 
         private void Button1_Click(object sender, EventArgs e)
         {
-           
             Diseñar();
         }
 
         private void EditarSeccionesPredeterminadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            CUsuario usuario = new CUsuario();
+            usuario.Get_user();
         }
-
-       
     }
 }
