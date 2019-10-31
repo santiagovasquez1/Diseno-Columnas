@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Informacion));
             this.Info_D = new System.Windows.Forms.DataGridView();
             this.Column1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
             this.Column2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
@@ -176,6 +177,7 @@
             this.Controls.Add(this.Info_D);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Informacion";
             this.Text = "Informacion";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Informacion_Paint);

@@ -266,6 +266,7 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\info.png" />
     <None Include="Resources\VarEntrada.png" />
     <None Include="Resources\SameCol1.png" />
     <None Include="Resources\SameCol.png" />
@@ -277,6 +278,8 @@
     <None Include="Resources\columnas.png" />
     <None Include="Resources\cOLUMNAiNVERTIDAX16.png" />
     <None Include="Resources\bloquear.png" />
+    <None Include="Resources\anteproyecto.png" />
+    <None Include="Resources\columna.png" />
     <Content Include="Resources\Csearch.cur" />
     <None Include="Resources\vcsadded_93506x16.png" />
     <None Include="Resources\vcsadded_93506.png" />

@@ -10,6 +10,7 @@ namespace DisenoColumnas.Diseño
         public Despiece()
         {
             InitializeComponent();
+            
         }
 
         private void Draw_Column_Paint(object sender, PaintEventArgs e)
