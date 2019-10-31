@@ -101,6 +101,7 @@ namespace DisenoColumnas
             }
         }
 
+
         public static SolidBrush ColorBarra(int Barra)
         {
             SolidBrush brush = new SolidBrush(Color.Black);
@@ -139,5 +140,14 @@ namespace DisenoColumnas
             }
             return brush;
         }
+
+
+      
+
+
+
+
+
+
     }
 }

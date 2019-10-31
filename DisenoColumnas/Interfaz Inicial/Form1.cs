@@ -8,6 +8,7 @@ using DisenoColumnas.Secciones_Predefinidas;
 using DisenoColumnas.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -24,6 +25,7 @@ namespace DisenoColumnas
         public static CuantiaVolumetrica mCuantiaVolumetrica;
         public static FInterfaz_Seccion mIntefazSeccion;
         public static AgregarAlzado mAgregarAlzado;
+        private DeserializeDockContent m_deserializeDockContent;
 
         public static Form1 mFormPrincipal;
 
@@ -33,11 +35,17 @@ namespace DisenoColumnas
         public static string TColumna;
         public static CLista_Secciones secciones_predef;
 
+
+
         public Form1()
         {
             InitializeComponent();
             mFormPrincipal = this;
             CargarToolTips();
+
+            m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+
+
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -106,6 +114,8 @@ namespace DisenoColumnas
             openFileDialog.Title = "Abrir Proyecto";
             openFileDialog.ShowDialog();
 
+
+
             if (openFileDialog.FileName != "")
             {
                 CloseWindows();
@@ -121,34 +131,48 @@ namespace DisenoColumnas
                 }
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
-                mAgregarAlzado = new AgregarAlzado();
-                try { mAgregarAlzado.Show(PanelContenedor); } catch { }
 
-                mCuantiaVolumetrica = new CuantiaVolumetrica();
-                mCuantiaVolumetrica.Show(PanelContenedor);
+                m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
+
+
+
+
+                string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+
+                PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent);
                 m_Informacion = new Informacion();
                 try
                 {
                     m_Informacion.Show(PanelContenedor);
                 }
                 catch { }
+                mAgregarAlzado = new AgregarAlzado();
+                try { mAgregarAlzado.Show(PanelContenedor); } catch { }
+
+                mCuantiaVolumetrica = new CuantiaVolumetrica();
+                mCuantiaVolumetrica.Show(PanelContenedor);
                 mLcolumnas = LColumna;
                 m_Despiece = new Despiece();
-                variablesdeEntrada = new VariablesdeEntrada(true);
                 m_Despiece.Show(PanelContenedor);
-                LColumna.Enabled = true;
-                La_Column.Enabled = true;
-                LColumna.Items.Clear();
-                LColumna.Text = "";
-                LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
-                if (Proyecto_.ColumnaSelect != null)
-                {
-                    LColumna.Text = Proyecto_.ColumnaSelect.Name;
-                }
 
-                CreateDidctonaries();
-                WindowState = FormWindowState.Maximized;
+
+
+
             }
+            variablesdeEntrada = new VariablesdeEntrada(true);
+            LColumna.Enabled = true;
+            La_Column.Enabled = true;
+            LColumna.Items.Clear();
+            LColumna.Text = "";
+            LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
+            if (Proyecto_.ColumnaSelect != null)
+            {
+                LColumna.Text = Proyecto_.ColumnaSelect.Name;
+            }
+
+            CreateDidctonaries();
+            WindowState = FormWindowState.Maximized;
+
         }
 
 
@@ -211,6 +235,9 @@ namespace DisenoColumnas
                     Proyecto_.Ruta = SaveFile.FileName;
 
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
+                    string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+                    PanelContenedor.SaveAsXml(configFile);
+
                 }
             }
         }
@@ -222,6 +249,9 @@ namespace DisenoColumnas
                 if (Proyecto_.Ruta != "")
                 {
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
+                    string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+
+                    PanelContenedor.SaveAsXml(configFile);
                 }
                 else
                 {
@@ -263,12 +293,20 @@ namespace DisenoColumnas
 
             if (Ruta1 != "" && Ruta2 != "")
             {
-             
+
+
                 WindowState = FormWindowState.Maximized;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
 
-                variablesdeEntrada = new VariablesdeEntrada(true);
+                variablesdeEntrada = new VariablesdeEntrada(false);
                 variablesdeEntrada.ShowDialog();
+
+
+
+                m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
+                string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+                PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent);
+
                 mLcolumnas = LColumna;
                 m_PlantaColumnas = new PlantaColumnas();
                 //   m_PlantaColumnas.Show(PanelContenedor);
@@ -287,6 +325,8 @@ namespace DisenoColumnas
                 LColumna.Items.Clear();
                 LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
+
+
             }
         }
 
@@ -1307,8 +1347,39 @@ namespace DisenoColumnas
 
         }
 
+        private IDockContent GetContentFromPersistString(string persistString)
+        {
+            if (persistString == typeof(CuantiaVolumetrica).ToString())
+                return mCuantiaVolumetrica;
+            else if (persistString == typeof(Informacion).ToString())
+                return m_Informacion;
+            else if (persistString == typeof(PlantaColumnas).ToString())
+                return m_PlantaColumnas;
+            else if (persistString == typeof(Despiece).ToString())
+                return m_Despiece;
+            else if (persistString == typeof(AgregarAlzado).ToString())
+                return mAgregarAlzado;
+            else
+            {
+                // DummyDoc overrides GetPersistString to add extra information into persistString.
+                // Any DockContent may override this value to add any needed information for deserialization.
 
-        
+                string[] parsedStrings = persistString.Split(new char[] { ',' });
+                if (parsedStrings.Length != 3)
+                    return null;
+
+                if (parsedStrings[0] != typeof(Informacion).ToString())
+                    return null;
+
+                Informacion dummyDoc = new Informacion();
+                if (parsedStrings[2] != string.Empty)
+                    dummyDoc.Text = parsedStrings[2];
+
+                return dummyDoc;
+            }
+        }
+
+
 
         private void Button1_Click(object sender, EventArgs e)
         {
