@@ -75,8 +75,8 @@ namespace DisenoColumnas.Diseño
                         BarraPersonalizada2.Width += D_Pro;
                     }
 
-                    Form1.mAgregarAlzado.Invalidate();
-
+                    Form1.mAgregarAlzado.CrearDataGrid(true);
+                   
                 }
                 else if (TP2.Checked)
                 {
@@ -120,7 +120,7 @@ namespace DisenoColumnas.Diseño
        
                     }
 
-                    Form1.mAgregarAlzado.Invalidate();
+                  
 
                 }
 
@@ -134,7 +134,7 @@ namespace DisenoColumnas.Diseño
             }
             BarraPersonalizada.Visible = false;
             BarraPersonalizada2.Visible = false;
-
+            Form1.mAgregarAlzado.CrearDataGrid(true);
             Close();
         }
 

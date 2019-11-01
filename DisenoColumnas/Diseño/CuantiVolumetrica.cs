@@ -13,7 +13,7 @@ namespace DisenoColumnas.Diseño
         {
             InitializeComponent();
         }
-
+        private Columna ColumnaSelectAnt;
         private void CambiosDataGridView()
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
@@ -67,77 +67,81 @@ namespace DisenoColumnas.Diseño
 
             if (ColumnaSelect != null)
             {
-                Info_Es_Col.Rows.Clear();
-
-                NameColum.Text = "Columna: " + ColumnaSelect.Name;
-
-                float FCMetros = 100;
-                Info_Es_Col.Rows.Add();
-
-                EncabezadosDataGridView();
-
-                for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
+                if (ColumnaSelectAnt != ColumnaSelect)
                 {
-                    if (ColumnaSelect.Seccions[i].Item1 != null)
+                    Info_Es_Col.Rows.Clear();
+
+                    NameColum.Text = "Columna: " + ColumnaSelect.Name;
+
+                    float FCMetros = 100;
+                    Info_Es_Col.Rows.Add();
+
+                    EncabezadosDataGridView();
+
+                    for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
                     {
-                        Info_Es_Col.Rows.Add(ColumnaSelect.Seccions[i].Item2);
-                        Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
-                        Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].Value = ColumnaSelect.Seccions[i].Item1.Material.FC.ToString();
-
-                        Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].ReadOnly = true;
-                        Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].ReadOnly = true;
-                        if (ColumnaSelect.estribos[i].NoEstribo != 0)
+                        if (ColumnaSelect.Seccions[i].Item1 != null)
                         {
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].Value = ColumnaSelect.estribos[i].NoEstribo.ToString();
-                        }
-                        Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = ColumnaSelect.estribos[i].Separacion.ToString();
+                            Info_Es_Col.Rows.Add(ColumnaSelect.Seccions[i].Item2);
+                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
+                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].Value = ColumnaSelect.Seccions[i].Item1.Material.FC.ToString();
 
-                        Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].ReadOnly = false;
-                        Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].ReadOnly = false;
+                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].ReadOnly = true;
+                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].ReadOnly = true;
+                            if (ColumnaSelect.estribos[i].NoEstribo != 0)
+                            {
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].Value = ColumnaSelect.estribos[i].NoEstribo.ToString();
+                            }
+                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = ColumnaSelect.estribos[i].Separacion.ToString();
 
-                        if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
-                        {
-                            DataGridViewTextBoxCellEx cell0 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", 0];
-                            cell0.ColumnSpan = 2;
-                            DataGridViewTextBoxCellEx cell00 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", 0];
-                            cell00.ColumnSpan = 2;
+                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].ReadOnly = false;
+                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].ReadOnly = false;
 
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Style.BackColor = Color.LightGray;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
+                            if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
+                            {
+                                DataGridViewTextBoxCellEx cell0 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", 0];
+                                cell0.ColumnSpan = 2;
+                                DataGridViewTextBoxCellEx cell00 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", 0];
+                                cell00.ColumnSpan = 2;
 
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_1"].Value = ColumnaSelect.estribos[i].NoRamasV1;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_2"].Value = ColumnaSelect.estribos[i].NoRamasV1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Style.BackColor = Color.LightGray;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
 
-                            DataGridViewTextBoxCellEx cell1 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", Info_Es_Col.Rows.Count - 1];
-                            cell1.ColumnSpan = 2;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_1"].Value = ColumnaSelect.estribos[i].NoRamasV1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_2"].Value = ColumnaSelect.estribos[i].NoRamasV1;
 
-                            Info_Es_Col.Rows[0].Cells["NoRamasV_1"].Value = "No. Ramas Vertical";
-                            Info_Es_Col.Rows[0].Cells["NoRamas_H1"].Value = "No. Ramas Horizontal";
+                                DataGridViewTextBoxCellEx cell1 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", Info_Es_Col.Rows.Count - 1];
+                                cell1.ColumnSpan = 2;
 
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H1"].Value = ColumnaSelect.estribos[i].NoRamasH1;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H2"].Value = ColumnaSelect.estribos[i].NoRamasH1;
-                            DataGridViewTextBoxCellEx cell2 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", Info_Es_Col.Rows.Count - 1];
-                            cell2.ColumnSpan = 2;
-                        }
+                                Info_Es_Col.Rows[0].Cells["NoRamasV_1"].Value = "No. Ramas Vertical";
+                                Info_Es_Col.Rows[0].Cells["NoRamas_H1"].Value = "No. Ramas Horizontal";
 
-                        if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Circle)
-                        {
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Style.BackColor = Color.LightGray;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Style.BackColor = Color.LightGray;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
-                        }
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H1"].Value = ColumnaSelect.estribos[i].NoRamasH1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H2"].Value = ColumnaSelect.estribos[i].NoRamasH1;
+                                DataGridViewTextBoxCellEx cell2 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", Info_Es_Col.Rows.Count - 1];
+                                cell2.ColumnSpan = 2;
+                            }
 
-                        if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
-                        {
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
+                            if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Circle)
+                            {
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Style.BackColor = Color.LightGray;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Style.BackColor = Color.LightGray;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
+                            }
+
+                            if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
+                            {
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
+                            }
                         }
                     }
+                    ColumnaSelectAnt = ColumnaSelect;
                 }
                 EstiloDatGridView();
             }

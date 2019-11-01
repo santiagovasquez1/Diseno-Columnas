@@ -14,15 +14,22 @@ namespace DisenoColumnas.Interfaz_Inicial
     {
         public CuadroDialogoDiseño()
         {
-            InitializeComponent();
             TransparencyKey = Color.Crimson;
             BackColor = Color.Crimson;
+            InitializeComponent();
+          
             
         }
 
         private void OK_Click(object sender, EventArgs e)
         {
             Close();
+            
+        }
+
+        private void CuadroDialogoDiseño_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -51,6 +51,9 @@ namespace DisenoColumnas
             return tuple_aux;
         }
 
+
+
+
         public static void Serializar(string Ruta, Proyecto proyecto)
         {
             BinaryFormatter formatter = new BinaryFormatter();

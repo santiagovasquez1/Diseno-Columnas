@@ -65,6 +65,7 @@ namespace DisenoColumnas.Clases
         #region Propiedades - Auxiliares
 
         public bool Maestro { get; set; } = false;
+        public bool Disenar { get; set; } = false;
 
          public string ColSimilName { get; set; }
 
@@ -204,6 +205,15 @@ namespace DisenoColumnas.Clases
         {
             for (int i = 0; i < resultadosETABs.Count; i++) { resultadosETABs[i].AsignarAsTopMediumButton(); }
         }
+
+
+
+
+
+
+
+
+
 
         #endregion Metodos-Calculos
 
