@@ -10,7 +10,6 @@ namespace DisenoColumnas.DefinirColumnas
     [Serializable]
     public partial class PlantaColumnas : DockContent
     {
-
         public PlantaColumnas()
         {
             InitializeComponent();
@@ -21,7 +20,6 @@ namespace DisenoColumnas.DefinirColumnas
         private void PlantaColumnas_Load(object sender, EventArgs e)
         {
             Grafica.Invalidate();
-
         }
 
         private void Grafica_Paint(object sender, PaintEventArgs e)
@@ -73,10 +71,8 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void PlantaColumnas_Paint(object sender, PaintEventArgs e)
         {
-
             foreach (Columna columna1 in Form1.Proyecto_.Lista_Columnas)
             {
-
                 if (columna1 != Form1.Proyecto_.ColumnaSelect)
                 {
                     columna1.BrushesColor = Brushes.Black;
@@ -87,7 +83,6 @@ namespace DisenoColumnas.DefinirColumnas
                 {
                     columna1.BrushesColor = Brushes.Red;
                 }
-
             }
 
             Grafica.Invalidate();
@@ -106,12 +101,10 @@ namespace DisenoColumnas.DefinirColumnas
 
                     break;
                 }
-
             }
 
             foreach (Columna columna1 in Form1.Proyecto_.Lista_Columnas)
             {
-
                 if (columna1 != Form1.Proyecto_.ColumnaSelect)
                 {
                     columna1.BrushesColor = Brushes.Black;
@@ -125,13 +118,8 @@ namespace DisenoColumnas.DefinirColumnas
                         Form1.mIntefazSeccion.Get_section();
                         Form1.mIntefazSeccion.Invalidate();
                     }
-
-
-
                 }
             }
-
-
         }
     }
 }

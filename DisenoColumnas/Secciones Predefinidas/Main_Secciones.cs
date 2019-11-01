@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
 
 namespace DisenoColumnas.Secciones_Predefinidas
 {
@@ -18,8 +17,6 @@ namespace DisenoColumnas.Secciones_Predefinidas
             bool Encuentra = false;
 
             DirectoryInfo directory_seccion = new DirectoryInfo(Ruta_Carpeta);
-
-           var prueba = directory_seccion.GetAccessControl(AccessControlSections.Owner);         
 
             foreach (FileInfo Archivo in directory_seccion.GetFiles())
             {
@@ -339,8 +336,8 @@ namespace DisenoColumnas.Secciones_Predefinidas
         {
             Estribo Temp = new Estribo(3);
             int pos = 0;
-            string Nombre_Seccion="";
-         
+            string Nombre_Seccion = "";
+
             pos = Seccioni.Name.IndexOf(material.Name);
             Nombre_Seccion = Seccioni.Name.Substring(0, pos);
 

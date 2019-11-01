@@ -8,7 +8,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 {
     public partial class FAgregarRef : Form
     {
-        private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion();
+        private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
         private Seccion Seccion { get; set; }
         private string piso { get; set; }
         private int index { get; set; } = -1;
@@ -166,7 +166,6 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void button1_Click(object sender, EventArgs e)
         {
             Reload_Seccion();
-
             FInterfaz_.Over = false;
             FInterfaz_.Seleccionado = false;
             FInterfaz_.Invalidate();
@@ -198,8 +197,18 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             Seccion.Acero_Long = Seccion.Refuerzos.Sum(x1 => x1.As_Long);
             Seccion.Editado = true;
-            indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == piso);
-            Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
+
+            if (FInterfaz_.edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == piso);
+                Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
+            }
+
+            if (FInterfaz_.edicion == Tipo_Edicion.Secciones_predef)
+            {
+                indice = Form1.secciones_predef.Secciones.FindIndex(x1 => x1.ToString() == Seccion.ToString());
+                Form1.secciones_predef.Secciones[indice] = Seccion;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

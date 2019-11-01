@@ -35,8 +35,6 @@ namespace DisenoColumnas
         public static string TColumna;
         public static CLista_Secciones secciones_predef;
 
-
-
         public Form1()
         {
             InitializeComponent();
@@ -44,8 +42,6 @@ namespace DisenoColumnas
             CargarToolTips();
 
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-
-
         }
 
         private void Close_Click(object sender, EventArgs e)
@@ -114,8 +110,6 @@ namespace DisenoColumnas
             openFileDialog.Title = "Abrir Proyecto";
             openFileDialog.ShowDialog();
 
-
-
             if (openFileDialog.FileName != "")
             {
                 CloseWindows();
@@ -131,11 +125,7 @@ namespace DisenoColumnas
                 }
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
 
-
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
-
-
-
 
                 string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
 
@@ -154,10 +144,6 @@ namespace DisenoColumnas
                 mLcolumnas = LColumna;
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
-
-
-
-
             }
             variablesdeEntrada = new VariablesdeEntrada(true);
             LColumna.Enabled = true;
@@ -172,7 +158,6 @@ namespace DisenoColumnas
 
             CreateDidctonaries();
             WindowState = FormWindowState.Maximized;
-
         }
 
         private void CargarToolTips()
@@ -231,7 +216,6 @@ namespace DisenoColumnas
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                     string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
                     PanelContenedor.SaveAsXml(configFile);
-
                 }
             }
         }
@@ -286,15 +270,11 @@ namespace DisenoColumnas
 
             if (Ruta1 != "" && Ruta2 != "")
             {
-
-
                 WindowState = FormWindowState.Maximized;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
 
                 variablesdeEntrada = new VariablesdeEntrada(false);
                 variablesdeEntrada.ShowDialog();
-
-
 
                 m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
                 string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
@@ -318,8 +298,6 @@ namespace DisenoColumnas
                 LColumna.Items.Clear();
                 LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
-
-
             }
         }
 
@@ -1057,12 +1035,12 @@ namespace DisenoColumnas
             {
                 if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
                 {
-                    mIntefazSeccion = new FInterfaz_Seccion();
+                    mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
                 }
             }
             else
             {
-                mIntefazSeccion = new FInterfaz_Seccion();
+                mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             }
             mIntefazSeccion.Show(PanelContenedor);
         }
@@ -1197,7 +1175,9 @@ namespace DisenoColumnas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            mIntefazSeccion = new FInterfaz_Seccion();
+            Proyecto_ = new Proyecto();
+            CreateDidctonaries();
+            mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
             Main_Secciones.Crear_archivo();
         }
 
@@ -1325,8 +1305,15 @@ namespace DisenoColumnas
         {
             CUsuario usuario = new CUsuario();
             usuario.Get_user();
-        }
 
+            if (usuario.Permiso==true)
+            {
+                mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_predef);
+                mIntefazSeccion.Show(PanelContenedor);
+                mIntefazSeccion.Get_Predef_Secction();
+                mIntefazSeccion.Invalidate();
+            }
+        }
 
         private IDockContent GetContentFromPersistString(string persistString)
         {
@@ -1353,21 +1340,11 @@ namespace DisenoColumnas
                     return null;
 
                 Informacion dummyDoc = new Informacion();
-               if (parsedStrings[2] != string.Empty)
+                if (parsedStrings[2] != string.Empty)
                     dummyDoc.Text = parsedStrings[2];
 
                 return dummyDoc;
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }

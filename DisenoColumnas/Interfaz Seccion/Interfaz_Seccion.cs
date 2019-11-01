@@ -9,6 +9,12 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace DisenoColumnas.Interfaz_Seccion
 {
+    public enum Tipo_Edicion
+    {
+        Secciones_predef,
+        Secciones_modelo
+    }
+
     public delegate void Paint_box(object sender, PaintEventArgs e);
 
     public partial class FInterfaz_Seccion : DockContent
@@ -28,9 +34,11 @@ namespace DisenoColumnas.Interfaz_Seccion
         public double EscalaY { get; set; }
         public double EscalaR { get; set; }
         public static string Piso { get; set; }
+        public Tipo_Edicion edicion { get; set; }
 
-        public FInterfaz_Seccion()
+        public FInterfaz_Seccion(Tipo_Edicion pedicion)
         {
+            edicion = pedicion;
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
             Grafica.Invalidate();
@@ -38,7 +46,8 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Interfaz_Seccion_Load(object sender, EventArgs e)
         {
-            Load_Pisos();
+            if (edicion == Tipo_Edicion.Secciones_modelo) Load_Pisos();
+            if (edicion == Tipo_Edicion.Secciones_predef) Load_predef();
             Grafica.Invalidate();
         }
 
@@ -52,7 +61,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             EscalaY = Grafica.Height / (2 * Ymax);
             EscalaR = 0.30 * EscalaX * EscalaY;
 
-            if (Columna_i != null)
+            if (seccion != null)
             {
                 Graphics g = e.Graphics;
                 Grafica.CreateGraphics().Clear(Color.White);
@@ -138,6 +147,14 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
         }
 
+        private void Load_predef()
+        {
+            var Secciones = Form1.secciones_predef.Secciones.ToArray();
+            lbPisos.Items.Clear();
+            lbPisos.Items.AddRange(Secciones);
+            lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
+        }
+
         public void Get_section()
         {
             int indice;
@@ -159,6 +176,17 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 Grafica.Invalidate();
             }
+        }
+
+        public void Get_Predef_Secction()
+        {
+            int indice;
+            string Seccion_name = "";
+
+            Seccion_name = lbPisos.SelectedItem.ToString();
+
+            indice = Form1.secciones_predef.Secciones.FindIndex(x => x.ToString() == Seccion_name);
+            seccion = Seccion.DeepClone(Form1.secciones_predef.Secciones[indice]);
         }
 
         private bool MouseOverPoligono(PointF mouse_pt)
@@ -468,7 +496,14 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void lbPisos_SelectedIndexChanged(object sender, EventArgs e)
         {
             Piso = lbPisos.SelectedItem.ToString();
-            Get_section();
+            if (edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                Get_section();
+            }
+            else
+            {
+                Get_Predef_Secction();
+            }
             Grafica.Invalidate();
         }
 
