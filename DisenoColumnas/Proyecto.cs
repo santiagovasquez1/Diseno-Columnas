@@ -29,6 +29,7 @@ namespace DisenoColumnas
         #endregion Diccionarios
 
         public string Empresa { get; } = "efe Prima Ce";
+        public string Name { get; set; } = "New";
         public string Ruta { get; set; } = "";
         public float e_Fundacion { get; set; }
         public float Nivel_Fundacion { get; set; }

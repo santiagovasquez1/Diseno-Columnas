@@ -33,6 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autodesk.AutoCAD.Interop">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2020\Autodesk.AutoCAD.Interop.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Autodesk.AutoCAD.Interop.Common">
+      <HintPath>..\..\..\..\..\Program Files\Autodesk\AutoCAD 2020\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="FunctionsAutoCAD">
+      <HintPath>..\..\FunctionsAutoCAD\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
+    </Reference>
     <Reference Include="MathNet.Numerics, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MathNet.Numerics.4.8.1\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
@@ -86,6 +97,12 @@
     <Compile Include="Diseño\ColSimilares.Designer.cs">
       <DependentUpon>ColSimilares.cs</DependentUpon>
     </Compile>
+    <Compile Include="Diseño\ColumnasaDiseñar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diseño\ColumnasaDiseñar.Designer.cs">
+      <DependentUpon>ColumnasaDiseñar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Diseño\CuantiVolumetrica.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +114,12 @@
     </Compile>
     <Compile Include="Diseño\Despiece.Designer.cs">
       <DependentUpon>Despiece.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Diseño\FuerzasEnElementos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diseño\FuerzasEnElementos.Designer.cs">
+      <DependentUpon>FuerzasEnElementos.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaz Inicial\CuadroDialogoDiseño.cs">
       <SubType>Form</SubType>
@@ -161,11 +184,17 @@
     <EmbeddedResource Include="Diseño\ColSimilares.resx">
       <DependentUpon>ColSimilares.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Diseño\ColumnasaDiseñar.resx">
+      <DependentUpon>ColumnasaDiseñar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Diseño\CuantiVolumetrica.resx">
       <DependentUpon>CuantiVolumetrica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Diseño\Despiece.resx">
       <DependentUpon>Despiece.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Diseño\FuerzasEnElementos.resx">
+      <DependentUpon>FuerzasEnElementos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Inicial\CuadroDialogoDiseño.resx">
       <DependentUpon>CuadroDialogoDiseño.cs</DependentUpon>
@@ -266,6 +295,9 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Editar x16%282%29.png" />
+    <None Include="Resources\editarx16.png" />
+    <None Include="Resources\Fuerzas.png" />
     <None Include="Resources\info.png" />
     <None Include="Resources\VarEntrada.png" />
     <None Include="Resources\SameCol1.png" />

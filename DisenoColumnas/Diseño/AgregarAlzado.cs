@@ -15,7 +15,10 @@ namespace DisenoColumnas.Diseño
         }
 
 
-        public void CrearDataGrid()
+        private Columna ColumnaSelectAnt;
+
+
+        public void CrearDataGrid(bool BotonAgregar = false)
         {
 
 
@@ -25,63 +28,65 @@ namespace DisenoColumnas.Diseño
             if (ColumnaSelect != null)
             {
 
-
-
-                D_Alzado.Columns.Clear();
-                D_Alzado.Rows.Clear();
-                NameColum.Text = "Columna: " + ColumnaSelect.Name;
-
-
-                DataGridViewCell dataGridView = new DataGridViewTextBoxCell();
-                DataGridViewColumn NewColumStory = new DataGridViewColumn();
-                NewColumStory.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                NewColumStory.SortMode = DataGridViewColumnSortMode.NotSortable;
-                NewColumStory.Name = "story";
-                NewColumStory.HeaderText = "Story ";
-                NewColumStory.CellTemplate = dataGridView;
-                NewColumStory.ReadOnly = true;
-                D_Alzado.Columns.Add(NewColumStory);
-
-                for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
+                if (ColumnaSelectAnt != ColumnaSelect | BotonAgregar)
                 {
-                    if (ColumnaSelect.Seccions[i].Item1 != null)
+
+                    D_Alzado.Columns.Clear();
+                    D_Alzado.Rows.Clear();
+                    NameColum.Text = "Columna: " + ColumnaSelect.Name;
+
+
+                    DataGridViewCell dataGridView = new DataGridViewTextBoxCell();
+                    DataGridViewColumn NewColumStory = new DataGridViewColumn();
+                    NewColumStory.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    NewColumStory.SortMode = DataGridViewColumnSortMode.NotSortable;
+                    NewColumStory.Name = "story";
+                    NewColumStory.HeaderText = "Story ";
+                    NewColumStory.CellTemplate = dataGridView;
+                    NewColumStory.ReadOnly = true;
+                    D_Alzado.Columns.Add(NewColumStory);
+
+                    for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
                     {
-                        D_Alzado.Rows.Add();
-                        D_Alzado.Rows[D_Alzado.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
+                        if (ColumnaSelect.Seccions[i].Item1 != null)
+                        {
+                            D_Alzado.Rows.Add();
+                            D_Alzado.Rows[D_Alzado.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
+
+                        }
+                    }
+
+
+                    for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
+                    {
+
+                        DataGridViewColumn NewColum = new DataGridViewColumn(D_Alzado.Rows[0].Cells[0]);
+                        NewColum.Name = ColumnaSelect.Alzados[i].ID.ToString();
+                        NewColum.HeaderText = "Alzado " + ColumnaSelect.Alzados[i].ID.ToString();
+                        NewColum.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        NewColum.SortMode = DataGridViewColumnSortMode.NotSortable;
+                        D_Alzado.Columns.Add(NewColum);
+
 
                     }
-                }
 
 
-                for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
-                {
-
-                    DataGridViewColumn NewColum = new DataGridViewColumn(D_Alzado.Rows[0].Cells[0]);
-                    NewColum.Name = ColumnaSelect.Alzados[i].ID.ToString();
-                    NewColum.HeaderText = "Alzado " + ColumnaSelect.Alzados[i].ID.ToString();
-                    NewColum.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    NewColum.SortMode = DataGridViewColumnSortMode.NotSortable;
-                    D_Alzado.Columns.Add(NewColum);
-
-
-                }
-
-
-                for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
-                {
-
-                    for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
+                    for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
                     {
-                        if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
+
+                        for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
                         {
-                            D_Alzado.Rows[j].Cells[ColumnaSelect.Alzados[i].ID].Value = ColumnaSelect.Alzados[i].Colum_Alzado[j].ToString();
+                            if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
+                            {
+                                D_Alzado.Rows[j].Cells[ColumnaSelect.Alzados[i].ID].Value = ColumnaSelect.Alzados[i].Colum_Alzado[j].ToString();
+                            }
+
                         }
 
                     }
+                    ColumnaSelectAnt = ColumnaSelect;
 
                 }
-
-
 
 
                 EstiloDatGridView();

@@ -38,8 +38,8 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agregarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.PanelContenedor = new WeifenLuo.WinFormsUI.Docking.DockPanel();
@@ -50,7 +50,9 @@
             this.La_Column = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.L_NameProject = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.Disenar = new System.Windows.Forms.Button();
             this.Button_Agregar = new System.Windows.Forms.Button();
             this.SaveAs_B = new System.Windows.Forms.Button();
@@ -63,15 +65,18 @@
             this.Button_MaxRest = new System.Windows.Forms.Button();
             this.Button_Cerrar = new System.Windows.Forms.Button();
             this.variablesDeEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dibujoDeSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.columnasIgualesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuantíaVolumétricaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarSeccionesPredeterminadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plantaDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infromaciónDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dibujoSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.estribosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fuerzasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.toolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -165,7 +170,9 @@
             // 
             this.editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.variablesDeEntradaToolStripMenuItem,
+            this.dibujoDeSecciónToolStripMenuItem,
             this.columnasIgualesToolStripMenuItem,
+            this.cuantíaVolumétricaToolStripMenuItem,
             this.editarSeccionesPredeterminadasToolStripMenuItem});
             this.editarToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
@@ -177,21 +184,12 @@
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.plantaDeColumnasToolStripMenuItem,
             this.infromaciónDeColumnasToolStripMenuItem,
-            this.dibujoSecciónToolStripMenuItem,
-            this.estribosToolStripMenuItem,
-            this.agregarAlzadoToolStripMenuItem});
+            this.agregarAlzadoToolStripMenuItem,
+            this.fuerzasToolStripMenuItem});
             this.verToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
             this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.verToolStripMenuItem.Text = "Ver";
-            // 
-            // agregarAlzadoToolStripMenuItem
-            // 
-            this.agregarAlzadoToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.vcsadded_93506;
-            this.agregarAlzadoToolStripMenuItem.Name = "agregarAlzadoToolStripMenuItem";
-            this.agregarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.agregarAlzadoToolStripMenuItem.Text = "Agregar Alzado";
-            this.agregarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregarAlzadoToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -201,6 +199,12 @@
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
+            // 
+            // acercaDeToolStripMenuItem
+            // 
+            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.acercaDeToolStripMenuItem.Text = "Acerca de Column Disigner";
             // 
             // panel1
             // 
@@ -216,6 +220,8 @@
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.L_NameProject});
             this.statusStrip1.Location = new System.Drawing.Point(0, 711);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1069, 22);
@@ -309,11 +315,44 @@
             this.label2.TabIndex = 48;
             this.label2.Text = "|";
             // 
-            // acercaDeToolStripMenuItem
+            // L_NameProject
             // 
-            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.acercaDeToolStripMenuItem.Text = "Acerca de Column Disigner";
+            this.L_NameProject.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.L_NameProject.Name = "L_NameProject";
+            this.L_NameProject.Size = new System.Drawing.Size(60, 17);
+            this.L_NameProject.Text = "Proyecto1";
+            this.L_NameProject.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label4.Location = new System.Drawing.Point(715, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 19);
+            this.label4.TabIndex = 52;
+            this.label4.Text = "|";
+            // 
+            // button4
+            // 
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(224)))), ((int)(((byte)(247)))));
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(222)))), ((int)(((byte)(245)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button4.Image = global::DisenoColumnas.Properties.Resources.Editar_x16_2_;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(735, 26);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(82, 24);
+            this.button4.TabIndex = 51;
+            this.button4.Text = "      AutoCAD";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // Disenar
             // 
@@ -493,60 +532,84 @@
             // 
             // variablesDeEntradaToolStripMenuItem
             // 
+            this.variablesDeEntradaToolStripMenuItem.Enabled = false;
             this.variablesDeEntradaToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.VarEntrada;
             this.variablesDeEntradaToolStripMenuItem.Name = "variablesDeEntradaToolStripMenuItem";
-            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.variablesDeEntradaToolStripMenuItem.Text = "Variables de Entrada";
             this.variablesDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.VariablesDeEntradaToolStripMenuItem_Click);
             // 
+            // dibujoDeSecciónToolStripMenuItem
+            // 
+            this.dibujoDeSecciónToolStripMenuItem.Enabled = false;
+            this.dibujoDeSecciónToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.columna;
+            this.dibujoDeSecciónToolStripMenuItem.Name = "dibujoDeSecciónToolStripMenuItem";
+            this.dibujoDeSecciónToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.dibujoDeSecciónToolStripMenuItem.Text = "Dibujo de Sección";
+            this.dibujoDeSecciónToolStripMenuItem.Click += new System.EventHandler(this.DibujoDeSecciónToolStripMenuItem_Click);
+            // 
             // columnasIgualesToolStripMenuItem
             // 
+            this.columnasIgualesToolStripMenuItem.Enabled = false;
             this.columnasIgualesToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.SameCol1;
             this.columnasIgualesToolStripMenuItem.Name = "columnasIgualesToolStripMenuItem";
-            this.columnasIgualesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.columnasIgualesToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.columnasIgualesToolStripMenuItem.Text = "Columnas Iguales";
             this.columnasIgualesToolStripMenuItem.Click += new System.EventHandler(this.ColumnasIgualesToolStripMenuItem_Click);
+            // 
+            // cuantíaVolumétricaToolStripMenuItem
+            // 
+            this.cuantíaVolumétricaToolStripMenuItem.Enabled = false;
+            this.cuantíaVolumétricaToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.image;
+            this.cuantíaVolumétricaToolStripMenuItem.Name = "cuantíaVolumétricaToolStripMenuItem";
+            this.cuantíaVolumétricaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.cuantíaVolumétricaToolStripMenuItem.Text = "Cuantía Volumétrica";
+            this.cuantíaVolumétricaToolStripMenuItem.Click += new System.EventHandler(this.CuantíaVolumétricaToolStripMenuItem_Click);
             // 
             // editarSeccionesPredeterminadasToolStripMenuItem
             // 
             this.editarSeccionesPredeterminadasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.bloquear;
             this.editarSeccionesPredeterminadasToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.TopRight;
             this.editarSeccionesPredeterminadasToolStripMenuItem.Name = "editarSeccionesPredeterminadasToolStripMenuItem";
-            this.editarSeccionesPredeterminadasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarSeccionesPredeterminadasToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.editarSeccionesPredeterminadasToolStripMenuItem.Text = "Editar Secciones";
             this.editarSeccionesPredeterminadasToolStripMenuItem.Click += new System.EventHandler(this.EditarSeccionesPredeterminadasToolStripMenuItem_Click);
             // 
             // plantaDeColumnasToolStripMenuItem
             // 
+            this.plantaDeColumnasToolStripMenuItem.Enabled = false;
             this.plantaDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.anteproyecto;
             this.plantaDeColumnasToolStripMenuItem.Name = "plantaDeColumnasToolStripMenuItem";
-            this.plantaDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.plantaDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.plantaDeColumnasToolStripMenuItem.Text = "Planta de Columnas";
             this.plantaDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.PlantaDeColumnasToolStripMenuItem_Click);
             // 
             // infromaciónDeColumnasToolStripMenuItem
             // 
+            this.infromaciónDeColumnasToolStripMenuItem.Enabled = false;
             this.infromaciónDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.info;
             this.infromaciónDeColumnasToolStripMenuItem.Name = "infromaciónDeColumnasToolStripMenuItem";
-            this.infromaciónDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.infromaciónDeColumnasToolStripMenuItem.Text = "Infromación de Columnas";
+            this.infromaciónDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.infromaciónDeColumnasToolStripMenuItem.Text = "Infromación";
             this.infromaciónDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.InfromaciónDeColumnasToolStripMenuItem_Click);
             // 
-            // dibujoSecciónToolStripMenuItem
+            // agregarAlzadoToolStripMenuItem
             // 
-            this.dibujoSecciónToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.columna;
-            this.dibujoSecciónToolStripMenuItem.Name = "dibujoSecciónToolStripMenuItem";
-            this.dibujoSecciónToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.dibujoSecciónToolStripMenuItem.Text = "Dibujo Sección";
-            this.dibujoSecciónToolStripMenuItem.Click += new System.EventHandler(this.dibujoSecciónToolStripMenuItem_Click);
+            this.agregarAlzadoToolStripMenuItem.Enabled = false;
+            this.agregarAlzadoToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.vcsadded_93506;
+            this.agregarAlzadoToolStripMenuItem.Name = "agregarAlzadoToolStripMenuItem";
+            this.agregarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarAlzadoToolStripMenuItem.Text = "Agregar Alzado";
+            this.agregarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregarAlzadoToolStripMenuItem_Click);
             // 
-            // estribosToolStripMenuItem
+            // fuerzasToolStripMenuItem
             // 
-            this.estribosToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.image;
-            this.estribosToolStripMenuItem.Name = "estribosToolStripMenuItem";
-            this.estribosToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.estribosToolStripMenuItem.Text = "Cuantía Volumétrica";
-            this.estribosToolStripMenuItem.Click += new System.EventHandler(this.EstribosToolStripMenuItem_Click);
+            this.fuerzasToolStripMenuItem.Enabled = false;
+            this.fuerzasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.Fuerzas;
+            this.fuerzasToolStripMenuItem.Name = "fuerzasToolStripMenuItem";
+            this.fuerzasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fuerzasToolStripMenuItem.Text = "Fuerzas";
+            this.fuerzasToolStripMenuItem.Click += new System.EventHandler(this.FuerzasToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -554,6 +617,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
             this.ClientSize = new System.Drawing.Size(1069, 733);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Disenar);
             this.Controls.Add(this.label1);
@@ -583,6 +648,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -624,8 +691,6 @@
         private System.Windows.Forms.Button Save_B;
         internal System.Windows.Forms.ComboBox LColumna;
         internal System.Windows.Forms.Label La_Column;
-        private System.Windows.Forms.ToolStripMenuItem dibujoSecciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem estribosToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Button_Agregar;
         private System.Windows.Forms.ToolStripMenuItem agregarAlzadoToolStripMenuItem;
@@ -634,5 +699,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem editarSeccionesPredeterminadasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cuantíaVolumétricaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dibujoDeSecciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fuerzasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel L_NameProject;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label4;
     }
 }

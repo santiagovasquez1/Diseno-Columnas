@@ -195,6 +195,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CuadroDialogoDiseño";
+            this.Load += new System.EventHandler(this.CuadroDialogoDiseño_Load);
             this.Panel2.ResumeLayout(false);
             this.Panel2.PerformLayout();
             this.BarraPersonalizada.ResumeLayout(false);

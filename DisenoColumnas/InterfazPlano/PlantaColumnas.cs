@@ -111,12 +111,14 @@ namespace DisenoColumnas.DefinirColumnas
                     Form1.m_Informacion.Invalidate();
                     Form1.m_Despiece.Invalidate();
                     Form1.mCuantiaVolumetrica.Invalidate();
+                    Form1.mFuerzasEnElmentos.Invalidate();
                     if (Form1.mIntefazSeccion != null)
                     {
                         Form1.mIntefazSeccion.Get_Columna();
                         Form1.mIntefazSeccion.Load_Pisos();
                         Form1.mIntefazSeccion.Get_section();
                         Form1.mIntefazSeccion.Invalidate();
+                        
                     }
                 }
             }
