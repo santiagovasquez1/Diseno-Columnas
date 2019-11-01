@@ -1537,12 +1537,12 @@ namespace DisenoColumnas
             {
                 if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
                 {
-                    mIntefazSeccion = new FInterfaz_Seccion();
+                    mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
                 }
             }
             else
             {
-                mIntefazSeccion = new FInterfaz_Seccion();
+                mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
             }
             mIntefazSeccion.Show(PanelContenedor);
         }
