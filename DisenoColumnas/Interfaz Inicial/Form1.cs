@@ -1133,6 +1133,7 @@ namespace DisenoColumnas
 
                 if (mIntefazSeccion != null)
                 {
+                    mIntefazSeccion.edicion = Tipo_Edicion.Secciones_modelo;
                     mIntefazSeccion.Get_Columna();
                     mIntefazSeccion.Load_Pisos();
                     mIntefazSeccion.Get_section();
