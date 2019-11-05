@@ -116,6 +116,48 @@ namespace DisenoColumnas.Clases
             }
         }
 
+        public void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY)
+        {
+            double Ash1, Ash2, Ash;
+            if (Shape == TipodeSeccion.Rectangular)
+            {
+                //VERTICAL
+                float Ach = (B - 2 * r) * (H - 2 * r);
+                float bc = B - 2 * r;
+                float S = Estribo.Separacion / 100;
+
+                Ash1 = FactorDisipacion1 * S * bc * Material.FC / FY * (Area / Ach - 1);  //C.21-2
+                Ash2 = FactorDisipacion2 * S * bc * Material.FC / FY;  //C.21-3
+
+                Ash = Ash1 > Ash2 ? Ash1 : Ash2;
+                if (S != 0 && Estribo.Area != 0)
+                {
+                    Estribo.NoRamasV1 = Convert.ToInt32(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                }
+                else
+                {
+                    Estribo.NoRamasV1 = 0;
+                }
+
+                //HORIZONTAL
+                bc =H - 2 * r;
+
+                Ash1 = (FactorDisipacion1 * S * bc * Material.FC / FY) * (Area / Ach - 1);  //C.21-2
+                Ash2 = FactorDisipacion2 * S * bc *Material.FC / FY;  //C.21-3
+
+                Ash = Ash1 > Ash2 ? Ash1 : Ash2;
+
+                if (S != 0 && Estribo.Area != 0)
+                {
+                    Estribo.NoRamasH1 = Convert.ToInt32(Math.Round(Ash /Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                }
+                else
+                {
+                    Estribo.NoRamasH1 = 0;
+                }
+            }
+        }
+
         public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
         {
             GraphicsPath path;
@@ -149,6 +191,46 @@ namespace DisenoColumnas.Clases
                 path.AddClosedCurve(circulo.Puntos.ToArray());
                 Shapes_ref.Add(path);
             }
+        }
+
+        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec)
+        {
+            GraphicsPath path = new GraphicsPath();
+            List<PointF> Vertices = new List<PointF>();
+            List<PointF> Vertices2 = new List<PointF>();
+            float x = 0; float y = 0;
+            float x1 = 0; float y1 = 0;
+
+            if (Shape == TipodeSeccion.Rectangular)
+            {
+                x = Convert.ToSingle(((B / 2) - rec) * 100 * EscalaX);
+                y = Convert.ToSingle(((H / 2) - rec) * 100 * EscalaY);
+
+                x1 = Convert.ToSingle(x + (Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo]) * EscalaX);
+                y1 = Convert.ToSingle(y + (Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo]) * EscalaY);
+
+                Vertices.Add(new PointF(-x, -y));
+                Vertices.Add(new PointF(x, -y));
+                Vertices.Add(new PointF(x, y));
+                Vertices.Add(new PointF(-x, y));
+
+                Vertices2.Add(new PointF(-x1, -y1));
+                Vertices2.Add(new PointF(x1, -y1));
+                Vertices2.Add(new PointF(x1, y1));
+                Vertices2.Add(new PointF(-x1, y1));
+
+                path.AddPolygon(Vertices.ToArray());
+                path.AddPolygon(Vertices2.ToArray());
+
+                return path;
+            }
+
+            if (Shape == TipodeSeccion.Tee)
+            {
+                return path;
+            }
+
+            return path;
         }
 
         public object Clone()
@@ -186,11 +268,16 @@ namespace DisenoColumnas.Clases
                 Seccion temp = (Seccion)obj;
 
                 if (Name == temp.Name && Material == temp.Material && Shape == temp.Shape && Area == temp.Area && B == temp.B
-                    && H == temp.H && TF == temp.TF && TW == temp.TW)
+                    && H == temp.H && TF == temp.TF && TW == temp.TW && temp.Shape != TipodeSeccion.Rectangular)
                     return true;
 
                 //Necesario para cargar secciones predefinidas
-                if (temp.Shape == TipodeSeccion.Rectangular & temp.B == B & temp.H == H || temp.Shape == TipodeSeccion.Rectangular & temp.H == B & temp.B == H)
+
+                if (Shape == TipodeSeccion.Rectangular & B == 0.35f & H == 0.80f & Material.FC == 280)
+                {
+                }
+
+                if (temp.Shape == TipodeSeccion.Rectangular & temp.B == B & temp.H == H & Material == temp.Material || temp.Shape == TipodeSeccion.Rectangular & temp.H == B & temp.B == H & Material == temp.Material)
                     return true;
             }
 

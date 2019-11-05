@@ -172,7 +172,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 #region Seccion40X120
 
                 Nombre_Seccion = "C40x120" + material.Name;
-                Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 6, 6 };
+                Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 6, 6 };
                 CapasX = 3; CapasY = 9; CapasXw = 0; CapasYw = 0;
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones.Add(seccioni);
@@ -192,7 +192,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 #region Seccion45X110
 
                 Nombre_Seccion = "C45x110" + material.Name;
-                Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6 };
+                Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6 };
                 CapasX = 4; CapasY = 8; CapasXw = 0; CapasYw = 0;
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 45F, 110F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones.Add(seccioni);
@@ -266,7 +266,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 60F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones.Add(seccioni);
-
+                
                 #endregion Seccion60X90
             }
         }
@@ -277,6 +277,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
             temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
             temp.Estribo = Set_estribo(temp, temp.Material);
+            //temp.CalcNoDBarras();
             return temp;
         }
 

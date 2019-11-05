@@ -13,6 +13,7 @@ namespace DisenoColumnas.Diseño
         {
             InitializeComponent();
         }
+
         private Columna ColumnaSelectAnt;
         private void CambiosDataGridView()
         {
@@ -64,6 +65,7 @@ namespace DisenoColumnas.Diseño
         private void CreateDataGridView()
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
+            Seccion seccioni;
 
             if (ColumnaSelect != null)
             {
@@ -82,12 +84,16 @@ namespace DisenoColumnas.Diseño
                     {
                         if (ColumnaSelect.Seccions[i].Item1 != null)
                         {
+
+                            CalCuantiaVol();   
+
                             Info_Es_Col.Rows.Add(ColumnaSelect.Seccions[i].Item2);
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].Value = ColumnaSelect.Seccions[i].Item1.Material.FC.ToString();
 
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].ReadOnly = true;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].ReadOnly = true;
+
                             if (ColumnaSelect.estribos[i].NoEstribo != 0)
                             {
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].Value = ColumnaSelect.estribos[i].NoEstribo.ToString();
@@ -279,6 +285,11 @@ namespace DisenoColumnas.Diseño
         private void Info_Es_Col_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             EditEndCell(e.RowIndex, e.ColumnIndex);
+        }
+
+        private void CuantiaVolumetrica_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

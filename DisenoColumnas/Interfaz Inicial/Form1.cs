@@ -939,7 +939,18 @@ namespace DisenoColumnas
                     {
                         if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
                         {
-                            Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            Seccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            Seccion seccion = null;
+
+                            if (secciones_predef.Secciones.Exists(x => x == temp) == true)
+                            {
+                                seccion = secciones_predef.Secciones.Find(x => x == temp);
+                            }
+                            else
+                            {
+                                seccion = temp;
+                            }
+
                             if (seccion.Shape == TipodeSeccion.None)
                             {
                                 seccion = null;
@@ -1558,10 +1569,10 @@ namespace DisenoColumnas
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
-            FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
-            double[] Coord = new double[] { 0,0,10,0,10,10,0,10};
-            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Coord, "FC_MURO CONCRETO", "SOILD", "FC_HATCH MUROS",1);
+            //FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
+            //FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
+            //double[] Coord = new double[] { 0,0,10,0,10,10,0,10};
+            //FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Coord, "FC_MURO CONCRETO", "SOILD", "FC_HATCH MUROS",1);
 
         }
     }

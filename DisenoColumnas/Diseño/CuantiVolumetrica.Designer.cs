@@ -204,6 +204,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CuantiaVolumetrica";
             this.Text = "Cuantía Volumétrica";
+            this.Load += new System.EventHandler(this.CuantiaVolumetrica_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CuantiaVolumetrica_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.Info_Es_Col)).EndInit();
             this.ResumeLayout(false);

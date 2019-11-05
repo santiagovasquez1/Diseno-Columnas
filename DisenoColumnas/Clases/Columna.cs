@@ -100,6 +100,7 @@ namespace DisenoColumnas.Clases
                     {
                         estribos[i].NoRamasV1 = 0;
                     }
+
                     //HORIZONTAL
                     bc = Seccions[i].Item1.H - 2 * r;
 
