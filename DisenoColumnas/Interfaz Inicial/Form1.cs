@@ -1183,7 +1183,6 @@ namespace DisenoColumnas
         }
 
 
-
         private void Cb_cuantiavol_Click(object sender, EventArgs e)
         {
             if (Proyecto_.ColumnaSelect != null)
@@ -1200,8 +1199,12 @@ namespace DisenoColumnas
                     FD1 = 0.30f;
                     FD2 = 0.09f;
                 }
+                
+                for (int i=0;i< Proyecto_.ColumnaSelect.Seccions.Count; i++)
+                {
+                    Proyecto_.ColumnaSelect.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, Proyecto_.FY);
+                }
 
-                Proyecto_.ColumnaSelect.CalcularCuantiaVolumetrica(FD1, FD2, Proyecto_.R / 100, Proyecto_.FY);
                 mCuantiaVolumetrica.Invalidate();
             }
         }

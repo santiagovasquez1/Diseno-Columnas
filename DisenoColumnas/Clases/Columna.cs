@@ -72,55 +72,7 @@ namespace DisenoColumnas.Clases
         #endregion
 
 
-        #region Metodos-Calculos
-
-        public void CalcularCuantiaVolumetrica(float FactorDisipacion1, float FactorDisipacion2, float r, float FY)
-        {
-            double Ash1, Ash2, Ash;
-
-            for (int i = 0; i < Seccions.Count; i++)
-            {
-                if (Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
-                {
-                    //VERTICAL
-                    float Ach = (Seccions[i].Item1.B - 2 * r) * (Seccions[i].Item1.H - 2 * r);
-                    float bc = Seccions[i].Item1.B - 2 * r;
-                    float S = estribos[i].Separacion / 100;
-
-                    Ash1 = (FactorDisipacion1 * S * bc * Seccions[i].Item1.Material.FC / FY) * (Seccions[i].Item1.Area / Ach - 1);  //C.21-2
-
-                    Ash2 = FactorDisipacion2 * S * bc * Seccions[i].Item1.Material.FC / FY;  //C.21-3
-
-                    Ash = Ash1 > Ash2 ? Ash1 : Ash2;
-                    if (S != 0 && estribos[i].Area != 0)
-                    {
-                        estribos[i].NoRamasV1 = Convert.ToInt32(Math.Round(Ash / estribos[i].Area < 2 ? 2 : (float)Math.Round(Ash / estribos[i].Area, 2), 2));
-                    }
-                    else
-                    {
-                        estribos[i].NoRamasV1 = 0;
-                    }
-
-                    //HORIZONTAL
-                    bc = Seccions[i].Item1.H - 2 * r;
-
-                    Ash1 = (FactorDisipacion1 * S * bc * Seccions[i].Item1.Material.FC / FY) * (Seccions[i].Item1.Area / Ach - 1);  //C.21-2
-
-                    Ash2 = FactorDisipacion2 * S * bc * Seccions[i].Item1.Material.FC / FY;  //C.21-3
-
-                    Ash = Ash1 > Ash2 ? Ash1 : Ash2;
-
-                    if (S != 0 && estribos[i].Area != 0)
-                    {
-                        estribos[i].NoRamasH1 = Convert.ToInt32(Math.Round(Ash / estribos[i].Area < 2 ? 2 : (float)Math.Round(Ash / estribos[i].Area, 2), 2));
-                    }
-                    else
-                    {
-                        estribos[i].NoRamasH1 = 0;
-                    }
-                }
-            }
-        }
+        #region Metodos-Calculos      
 
         public void ActualizarRefuerzo()
         {
