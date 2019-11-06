@@ -168,6 +168,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones.Find(x => x == Columna_i.Seccions[indice].Item1));
                     seccion.Name = Columna_i.Seccions[indice].Item1.Name;
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
+                    seccion.B = Columna_i.Seccions[indice].Item1.B;
+                    seccion.H = Columna_i.Seccions[indice].Item1.H;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
                 }
                 else

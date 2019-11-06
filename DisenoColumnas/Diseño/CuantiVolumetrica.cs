@@ -209,7 +209,7 @@ namespace DisenoColumnas.Diseño
                     FD2 = 0.09f;
                 }
 
-                if (seccioni.Estribo == null)
+                if (seccioni.Estribo == null & seccioni.Shape==TipodeSeccion.Rectangular)
                 {
                     seccioni.Calc_vol_inex(FD1, FD2, Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
                 }

@@ -945,6 +945,8 @@ namespace DisenoColumnas
                             if (secciones_predef.Secciones.Exists(x => x == temp) == true)
                             {
                                 seccion = secciones_predef.Secciones.Find(x => x == temp);
+                                seccion.B = temp.B;
+                                seccion.H = temp.H;
                             }
                             else
                             {
