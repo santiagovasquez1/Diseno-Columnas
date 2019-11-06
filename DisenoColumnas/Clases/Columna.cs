@@ -1260,7 +1260,7 @@ namespace DisenoColumnas.Clases
             //Agregar Cuadro, Nombre Columnas
 
             //Caso cuando las secciones son Rectangulares
-            string Dimensiones = "(" + Seccions[Seccions.Count - 1].Item1.B * 100 + "," + Seccions[Seccions.Count - 1].Item1.H * 100 + ")";
+            string Dimensiones = "(" + Seccions[Seccions.Count - 1].Item1.B * 100 + "x" + Seccions[Seccions.Count - 1].Item1.H * 100 + ")";
             string NamesColumns = Names + @"\P" + Dimensiones;
 
             float Altu_Names = 1f;
@@ -1277,6 +1277,7 @@ namespace DisenoColumnas.Clases
                                       X+B_DrawI,Y };
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vert_CI, LayerCuadro, false);
             FunctionsAutoCAD.FunctionsAutoCAD.AddText(NamesColumns, P_XYZ, 0.75, 0.10, LayerTitiles, "FC_TEXT1", 0,justifyText: FunctionsAutoCAD.JustifyText.Center);
+
 
 
             #endregion

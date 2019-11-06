@@ -104,8 +104,6 @@ namespace DisenoColumnas.Diseño
                         {
                             if (D_ColSim.Rows[i].Cells[2].Value.ToString() != "")
                             {
-                                Form1.Proyecto_.Lista_Columnas[i].ColSimilName = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Name;
-                                Form1.Proyecto_.Lista_Columnas[i].Alzados = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Alzados;
 
                                 try
                                 {
@@ -118,9 +116,16 @@ namespace DisenoColumnas.Diseño
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("La columna" + Form1.Proyecto_.Lista_Columnas[i].Name + " que quiere asignar como similitud de la Columna" + D_ColSim.Rows[i].Cells[2].Value.ToString() + " no tiene la misma cantidad de pisos.",Form1.Proyecto_.Empresa,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                                    MessageBox.Show("La columna " + Form1.Proyecto_.Lista_Columnas[i].Name + " que quiere asignar como similitud de la Columna " + D_ColSim.Rows[i].Cells[2].Value.ToString() + " no tiene la misma cantidad de pisos.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    return;
                                 }
-                         
+
+
+
+                                Form1.Proyecto_.Lista_Columnas[i].ColSimilName = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Name;
+                                Form1.Proyecto_.Lista_Columnas[i].Alzados = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Alzados;
+
+                  
 
                             }
                             else

@@ -26,12 +26,36 @@ namespace DisenoColumnas.Diseño
 
         private void Button1_Click(object sender, EventArgs e)
         {
+
+            bool MsgInfo1 = false;
+           
             for (int i = 0; i < D_ColGraficar.Rows.Count; i++)
             {
-
                 Form1.Proyecto_.Lista_Columnas[i].aGraficar = (bool)D_ColGraficar.Rows[i].Cells[1].Value;
-
             }
+
+            foreach(Columna columna in Form1.Proyecto_.Lista_Columnas)
+            {
+                if (columna.aGraficar)
+                {
+                    if (columna.ColSimilName != null)
+                    {
+                        if (columna.ColSimilName != "")
+                        {
+                            MsgInfo1 = true;
+                        }
+                    }
+                }
+                
+            }
+
+
+            if (MsgInfo1)
+            {
+                MessageBox.Show("Columnas asignadas una similitud no serán graficadas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+     
+
 
             Form1.mFormPrincipal.CancelDiseño = false;
             Close();

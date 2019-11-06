@@ -892,16 +892,19 @@ namespace DisenoColumnas
             {
                 for (int j = 0; j < LineAssingns.Count; j++)
                 {
+                    if (LineAssingns[j].Count > 8)
+                    { 
                     string Story = LineAssingns[j][3].Replace("\"", "");
                     string NameBeam = LineAssingns[j][1].Replace("\"", "");
                     string NameSeccion = LineAssingns[j][5].Replace("\"", "");
-                    foreach (Viga viga in Proyecto_.Lista_Vigas)
-                    {
-                        if (viga.Name == NameBeam && Story == Proyecto_.Stories[i].Item1)
+                        foreach (Viga viga in Proyecto_.Lista_Vigas)
                         {
-                            Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                            Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
-                            viga.Seccions.Add(tuple_aux);
+                            if (viga.Name == NameBeam && Story == Proyecto_.Stories[i].Item1)
+                            {
+                                Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                                Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
+                                viga.Seccions.Add(tuple_aux);
+                            }
                         }
                     }
                 }
@@ -932,33 +935,36 @@ namespace DisenoColumnas
             {
                 for (int j = 0; j < LineAssingns.Count; j++)
                 {
-                    string Story = LineAssingns[j][3].Replace("\"", "");
-                    string NameColum = LineAssingns[j][1].Replace("\"", "");
-                    string NameSeccion = LineAssingns[j][5].Replace("\"", "");
-                    foreach (Columna colum in Proyecto_.Lista_Columnas)
+                    if (LineAssingns[j].Count > 8)
                     {
-                        if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
+                        string Story = LineAssingns[j][3].Replace("\"", "");
+                        string NameColum = LineAssingns[j][1].Replace("\"", "");
+                        string NameSeccion = LineAssingns[j][5].Replace("\"", "");
+                        foreach (Columna colum in Proyecto_.Lista_Columnas)
                         {
-                            Seccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                            Seccion seccion = null;
+                            if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
+                            {
+                                Seccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                                Seccion seccion = null;
 
-                            if (secciones_predef.Secciones.Exists(x => x == temp) == true)
-                            {
-                                seccion = secciones_predef.Secciones.Find(x => x == temp);
-                            }
-                            else
-                            {
-                                seccion = temp;
-                            }
+                                if (secciones_predef.Secciones.Exists(x => x == temp) == true)
+                                {
+                                    seccion = secciones_predef.Secciones.Find(x => x == temp);
+                                }
+                                else
+                                {
+                                    seccion = temp;
+                                }
 
-                            if (seccion.Shape == TipodeSeccion.None)
-                            {
-                                seccion = null;
-                            }
-                            else
-                            {
-                                Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
-                                colum.Seccions.Add(tuple_aux);
+                                if (seccion.Shape == TipodeSeccion.None)
+                                {
+                                    seccion = null;
+                                }
+                                else
+                                {
+                                    Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
+                                    colum.Seccions.Add(tuple_aux);
+                                }
                             }
                         }
                     }
@@ -997,10 +1003,14 @@ namespace DisenoColumnas
                         {
                             if (viga1.Seccions[i].Item2 == VigaMayor.Seccions[j].Item2)
                             {
-                                if (viga1.Seccions[i].Item1.H > VigaMayor.Seccions[j].Item1.H)
+                                try
                                 {
-                                    VigaMayor.Seccions[j] = viga1.Seccions[i];
+                                    if (viga1.Seccions[i].Item1.H > VigaMayor.Seccions[j].Item1.H)
+                                    {
+                                        VigaMayor.Seccions[j] = viga1.Seccions[i];
+                                    }
                                 }
+                                catch { }
                             }
                         }
                     }
@@ -1260,6 +1270,7 @@ namespace DisenoColumnas
             if (Proyecto_ != null)
             {
                 Disenar.Enabled = true;
+                B_AutoCAD.Enabled = true;
                 infromaciónDeColumnasToolStripMenuItem.Enabled = true;
                 plantaDeColumnasToolStripMenuItem.Enabled = true;
                 agregarAlzadoToolStripMenuItem.Enabled = true;
@@ -1590,7 +1601,7 @@ namespace DisenoColumnas
             }
             
             foreach(Columna col in Proyecto_.Lista_Columnas)
-            {
+             {
                 
                 if(col.ColSimilName != null)
                 {
@@ -1599,29 +1610,16 @@ namespace DisenoColumnas
                         columnasDrawing.Remove(col);
                     }
 
-                    Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.ColSimilName);
+                    Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.Name);
                 }
 
              }
-            
 
 
-
-            //double[] XY = new double[] { };
-            //FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
-            //FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
-
-            //FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
-            //foreach (Columna col in Proyecto_.Lista_Columnas)
-            //{
-
-            //    if (col.Name == "C1")
-            //    {
-            //        col.DrawColumAutoCAD(XY[0], XY[1],col.Name,1);
-            //    }
-
-            //}
-
+            if(CancelDiseño== false && columnasDrawing.Count != 0)
+            {
+                GraficarAlzadoColumnas(ref columnasDrawing);
+            }
 
 
         }
@@ -1631,8 +1629,30 @@ namespace DisenoColumnas
         private void GraficarAlzadoColumnas(ref List<Columna> ColumnsDrawing)
         {
 
+            double[] XY = new double[] { };
+            FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
+            FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
 
+            MessageBox.Show("Posicione el puntero en AutoCAD.",Proyecto_.Empresa,MessageBoxButtons.OK,MessageBoxIcon.Information);
 
+            FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
+            double DeltaX = 0;
+            int NoDes = 1;
+            foreach (Columna col in ColumnsDrawing)
+            {
+                if (col.Alzados.Count != 0)
+                {
+                    string Names = col.Name;
+                    for (int i = 0; i < col.NamesSimilares.Count; i++)
+                    {
+                        Names += "," + col.NamesSimilares[i];
+                    }
+                    col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
+                    DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
+                    NoDes += 1;
+                }
+            }
+            MessageBox.Show("Alzado graficado con éxito.", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
     }

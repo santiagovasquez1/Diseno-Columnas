@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Button3 = new System.Windows.Forms.Button();
             this.Button2 = new System.Windows.Forms.Button();
             this.Button1 = new System.Windows.Forms.Button();
             this.D_ColGraficar = new System.Windows.Forms.DataGridView();
+            this.Columnas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Disenar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Panel1 = new System.Windows.Forms.Panel();
             this.PictureBox2 = new System.Windows.Forms.PictureBox();
             this.Label9 = new System.Windows.Forms.Label();
-            this.Columnas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Disenar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.D_ColGraficar)).BeginInit();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
@@ -92,6 +92,21 @@
             this.D_ColGraficar.Size = new System.Drawing.Size(267, 343);
             this.D_ColGraficar.TabIndex = 20;
             // 
+            // Columnas
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.Columnas.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Columnas.HeaderText = "Columna";
+            this.Columnas.Name = "Columnas";
+            this.Columnas.ReadOnly = true;
+            // 
+            // Disenar
+            // 
+            this.Disenar.HeaderText = "Graficar";
+            this.Disenar.Name = "Disenar";
+            this.Disenar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Disenar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // Panel1
             // 
             this.Panel1.BackColor = System.Drawing.Color.Gainsboro;
@@ -131,21 +146,6 @@
             this.Label9.Text = "Columnas a Graficar Alzado";
             this.Label9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label9_MouseDown);
             // 
-            // Columnas
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.Columnas.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Columnas.HeaderText = "Columna";
-            this.Columnas.Name = "Columnas";
-            this.Columnas.ReadOnly = true;
-            // 
-            // Disenar
-            // 
-            this.Disenar.HeaderText = "Graficar";
-            this.Disenar.Name = "Disenar";
-            this.Disenar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Disenar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // ColumnasaGraficar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,6 +158,7 @@
             this.Controls.Add(this.Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ColumnasaGraficar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ColumnasaGraficar";
             this.Load += new System.EventHandler(this.ColumnasaGraficar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.D_ColGraficar)).EndInit();
