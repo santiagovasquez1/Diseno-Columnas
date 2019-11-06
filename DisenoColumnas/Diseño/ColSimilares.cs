@@ -107,10 +107,18 @@ namespace DisenoColumnas.Diseño
                                 Form1.Proyecto_.Lista_Columnas[i].ColSimilName = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Name;
                                 Form1.Proyecto_.Lista_Columnas[i].Alzados = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Alzados;
 
-                                for(int j=0; j< Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
+                                try
                                 {
-                                    Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].As_asignado;
-                                    Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].Porct_Refuerzo;
+                                    for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
+                                    {
+
+                                        Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].As_asignado;
+                                        Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].Porct_Refuerzo;
+                                    }
+                                }
+                                catch
+                                {
+                                    MessageBox.Show("La columna" + Form1.Proyecto_.Lista_Columnas[i].Name + " que quiere asignar como similitud de la Columna" + D_ColSim.Rows[i].Cells[2].Value.ToString() + " no tiene la misma cantidad de pisos.",Form1.Proyecto_.Empresa,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                                 }
                          
 

@@ -66,6 +66,12 @@ namespace DisenoColumnas.Clases
 
         public bool Maestro { get; set; } = false;
         public bool Disenar { get; set; } = false;
+        public bool aGraficar { get; set; } = false;
+
+        /// <summary>
+        /// Propiedad util para saber todos los similares que tiene la columna maestra.
+        /// </summary>
+        public List<string> NamesSimilares { get; set; } = new List<string>();
 
          public string ColSimilName { get; set; }
 
