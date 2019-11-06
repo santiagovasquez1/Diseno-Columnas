@@ -79,7 +79,7 @@ namespace DisenoColumnas.Diseño
                     {
                         if (ColumnaSelect.Seccions[i].Item1 != null)
                         {
-                            CalCuantiaVol(ColumnaSelect.Seccions[i].Item1, false,i);
+                            CalCuantiaVol(ColumnaSelect.Seccions[i].Item1, false, i);
 
                             Info_Es_Col.Rows.Add(ColumnaSelect.Seccions[i].Item2);
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
@@ -192,7 +192,7 @@ namespace DisenoColumnas.Diseño
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"] = CelldaEstribo;
         }
 
-        private void CalCuantiaVol(Seccion seccioni, bool Cambio_Data,int index)
+        private void CalCuantiaVol(Seccion seccioni, bool Cambio_Data, int index)
         {
             if (Form1.Proyecto_.ColumnaSelect != null)
             {
@@ -244,47 +244,32 @@ namespace DisenoColumnas.Diseño
 
         private void EditEndCell(int IndiceR, int IndiceC)
         {
-            #region Modficiación No. y Area del Estribo
-
             Seccion seccioni = null;
+            string piso = "";
 
-            if (Info_Es_Col.Columns[IndiceC].Name == "NoEstribo" && IndiceR != 0)
+            float Separacion;
+            try
             {
-                if (Form1.Proyecto_.ColumnaSelect != null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value != null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value.ToString() != "")
-                {
-                    int NoBarra = Convert.ToInt32(Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value);
-                    string Story = Info_Es_Col.Rows[IndiceR].Cells[0].Value.ToString();
-                    int IndiceaM = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x => x.Item2 == Story);
-
-                    seccioni = Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM].Item1;
-                    seccioni.Estribo.NoEstribo = NoBarra;
-                    seccioni.Estribo.CalcularArea();
-                    CalCuantiaVol(seccioni, true, IndiceaM);
-                }
+                Separacion = Convert.ToSingle(Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value);
+            }
+            catch
+            {
+                Separacion = 0;
             }
 
-            #endregion Modficiación No. y Area del Estribo
+            int NoBarra = Convert.ToInt32(Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value);
+            string Story = Info_Es_Col.Rows[IndiceR].Cells[0].Value.ToString();
+            int IndiceaM = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x => x.Item2 == Story);
+            piso = Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM].Item2;
+            seccioni = FunctionsProject.DeepClone(Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM].Item1);
 
-            if (Info_Es_Col.Columns[IndiceC].Name == "S_value" && IndiceR != 0)
-            {
-                if (Form1.Proyecto_.ColumnaSelect != null && Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value != null && Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value.ToString() != "")
-                {
-                    float Separacion;
-                    try
-                    {
-                        Separacion = Convert.ToSingle(Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value);
-                    }
-                    catch
-                    {
-                        Separacion = 0;
-                    }
-                    string Story = Info_Es_Col.Rows[IndiceR].Cells[0].Value.ToString();
-                    int IndiceaM = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x => x.Item2 == Story);
-                    seccioni = Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM].Item1;
-                    seccioni.Estribo.Separacion = Separacion;
-                    CalCuantiaVol(seccioni, true, IndiceaM);
-                }
-            }
+            seccioni.Estribo.NoEstribo = NoBarra;
+            seccioni.Estribo.Separacion = Separacion;
+            seccioni.Estribo.CalcularArea();
+            CalCuantiaVol(seccioni, false, IndiceaM);
+
+            Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM] = new Tuple<Seccion, string>(seccioni, piso);
+            CambiosDataGridView(IndiceaM);
         }
 
         private void Info_Es_Col_CellEndEdit(object sender, DataGridViewCellEventArgs e)
