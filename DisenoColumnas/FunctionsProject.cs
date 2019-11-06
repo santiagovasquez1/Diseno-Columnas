@@ -51,9 +51,6 @@ namespace DisenoColumnas
             return tuple_aux;
         }
 
-
-
-
         public static void Serializar(string Ruta, Proyecto proyecto)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -104,7 +101,6 @@ namespace DisenoColumnas
             }
         }
 
-
         public static SolidBrush ColorBarra(int Barra)
         {
             SolidBrush brush = new SolidBrush(Color.Black);
@@ -144,13 +140,20 @@ namespace DisenoColumnas
             return brush;
         }
 
+        public static int Redondear_Decimales(int N_decimal, int multiplo)
+        {
+            int valor = 0;
 
-      
+            valor = N_decimal / multiplo;
 
-
-
-
-
-
+            if (valor < (N_decimal / multiplo))
+            {
+                return (valor + 1) * multiplo;
+            }
+            else
+            {
+                return valor * multiplo;
+            }
+        }
     }
 }
