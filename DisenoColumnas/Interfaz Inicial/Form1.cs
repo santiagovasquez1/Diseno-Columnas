@@ -27,7 +27,7 @@ namespace DisenoColumnas
         public static AgregarAlzado mAgregarAlzado;
         public static FuerzasEnElementos mFuerzasEnElmentos;
         public  bool CancelDiseño = false;
-
+        public bool CancelGarfica = false;
 
         private DeserializeDockContent m_deserializeDockContent;
 
@@ -1559,24 +1559,66 @@ namespace DisenoColumnas
         private void Button4_Click(object sender, EventArgs e)
         {
 
-            double[] XY = new double[] { };
-            FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
-            FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
-            FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
+
+            ColumnasaGraficar columnasaGraficar = new ColumnasaGraficar();
+            List<Columna> columnasDrawing = new List<Columna>();
+
+            columnasaGraficar.ShowDialog();
+
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
-
-                if (col.Name == "C1")
+                col.NamesSimilares.Clear();
+                if (col.aGraficar)
                 {
-                    col.DrawColumAutoCAD(XY[0], XY[1],col.Name,1);
+                    columnasDrawing.Add(col);
+                }
+            }
+            
+            foreach(Columna col in Proyecto_.Lista_Columnas)
+            {
+                
+                if(col.ColSimilName != null)
+                {
+                    if(columnasDrawing.Exists(x=> x.Name == col.Name))
+                    {
+                        columnasDrawing.Remove(col);
+                    }
+
+                    Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.ColSimilName);
                 }
 
-            }
+             }
+            
+
+
+
+            //double[] XY = new double[] { };
+            //FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
+            //FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
+
+            //FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
+            //foreach (Columna col in Proyecto_.Lista_Columnas)
+            //{
+
+            //    if (col.Name == "C1")
+            //    {
+            //        col.DrawColumAutoCAD(XY[0], XY[1],col.Name,1);
+            //    }
+
+            //}
+
+
 
         }
 
 
 
+        private void GraficarAlzadoColumnas(ref List<Columna> ColumnsDrawing)
+        {
+
+
+
+        }
 
     }
 }
