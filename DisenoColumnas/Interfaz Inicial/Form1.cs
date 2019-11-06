@@ -1558,11 +1558,25 @@ namespace DisenoColumnas
 
         private void Button4_Click(object sender, EventArgs e)
         {
+
+            double[] XY = new double[] { };
             FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
             FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
-            double[] Coord = new double[] { 0,0,10,0,10,10,0,10};
-            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Coord, "FC_MURO CONCRETO", "SOILD", "FC_HATCH MUROS",1);
+            FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
+            foreach (Columna col in Proyecto_.Lista_Columnas)
+            {
+
+                if (col.Name == "C1")
+                {
+                    col.DrawColumAutoCAD(XY[0], XY[1],col.Name,1);
+                }
+
+            }
 
         }
+
+
+
+
     }
 }
