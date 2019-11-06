@@ -35,7 +35,7 @@ namespace DisenoColumnas.Clases
 
         private void PuntosPorPiso(Columna columna)
         {
-            float H_S = Form1.Proyecto_.Nivel_Fundacion + Form1.Proyecto_.e_Fundacion;
+            float H_S = Form1.Proyecto_.e_Fundacion;
 
             float AlturaAcum = 0;
 
