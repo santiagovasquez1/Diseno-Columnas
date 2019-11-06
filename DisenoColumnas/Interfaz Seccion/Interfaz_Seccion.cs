@@ -75,6 +75,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Dibujo_Seccion(g, seccion, Grafica.Height, Grafica.Width, Over);
                 seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
                 Dibujo_Refuerzo(g, seccion);
+                Dibujo_Estribo(g, seccion);
             }
         }
 
@@ -449,6 +450,26 @@ namespace DisenoColumnas.Interfaz_Seccion
                 g.DrawPolygon(P1, Vertices.ToArray());
                 g.FillPolygon(br, Vertices.ToArray());
             }
+        }
+
+        private void Dibujo_Estribo(Graphics g, Seccion seccioni)
+        {
+            GraphicsPath path = new GraphicsPath();
+            SolidBrush br = new SolidBrush(Color.FromArgb(100, Color.Black));
+            Pen P1;
+
+            P1 = new Pen(Color.Black, 2.5f)
+            {
+                Brush = Brushes.DarkGray,
+                Color = Color.DarkGray,
+                DashStyle = DashStyle.Solid,
+                LineJoin = LineJoin.Round,
+                Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+            };
+
+            path=seccioni.Add_Estribos(EscalaX, EscalaY, 0.04f);
+            g.DrawPath(P1, path);
+            g.FillPath(br, path);
         }
 
         private void Dibujo_Refuerzo(Graphics g, Seccion seccioni)

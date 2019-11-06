@@ -939,7 +939,18 @@ namespace DisenoColumnas
                     {
                         if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
                         {
-                            Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            Seccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            Seccion seccion = null;
+
+                            if (secciones_predef.Secciones.Exists(x => x == temp) == true)
+                            {
+                                seccion = secciones_predef.Secciones.Find(x => x == temp);
+                            }
+                            else
+                            {
+                                seccion = temp;
+                            }
+
                             if (seccion.Shape == TipodeSeccion.None)
                             {
                                 seccion = null;
@@ -1122,6 +1133,7 @@ namespace DisenoColumnas
 
                 if (mIntefazSeccion != null)
                 {
+                    mIntefazSeccion.edicion = Tipo_Edicion.Secciones_modelo;
                     mIntefazSeccion.Get_Columna();
                     mIntefazSeccion.Load_Pisos();
                     mIntefazSeccion.Get_section();
@@ -1172,7 +1184,6 @@ namespace DisenoColumnas
         }
 
 
-
         private void Cb_cuantiavol_Click(object sender, EventArgs e)
         {
             if (Proyecto_.ColumnaSelect != null)
@@ -1190,7 +1201,11 @@ namespace DisenoColumnas
                     FD2 = 0.09f;
                 }
 
-                Proyecto_.ColumnaSelect.CalcularCuantiaVolumetrica(FD1, FD2, Proyecto_.R / 100, Proyecto_.FY);
+                for (int i=0;i< Proyecto_.ColumnaSelect.Seccions.Count; i++)
+                {
+                    Proyecto_.ColumnaSelect.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, Proyecto_.FY);
+                }
+
                 mCuantiaVolumetrica.Invalidate();
             }
         }

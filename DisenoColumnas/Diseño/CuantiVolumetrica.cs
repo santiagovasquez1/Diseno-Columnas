@@ -13,50 +13,47 @@ namespace DisenoColumnas.Diseño
         {
             InitializeComponent();
         }
+
         private Columna ColumnaSelectAnt;
-        private void CambiosDataGridView()
+
+        private void CambiosDataGridView(int i)
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
-
             NameColum.Text = "Columna: " + ColumnaSelect.Name;
 
-            for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
+            if (ColumnaSelect.Seccions[i].Item1 != null)
             {
-                if (ColumnaSelect.Seccions[i].Item1 != null)
+                int IndiceRow = 0;
+                for (int j = 0; j < Info_Es_Col.Rows.Count; j++) { if (Info_Es_Col.Rows[j].Cells[0].Value.ToString() == ColumnaSelect.Seccions[i].Item2) { IndiceRow = j; } }
+
+                Info_Es_Col.Rows[IndiceRow].Cells["NoEstribo"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoEstribo.ToString();
+                Info_Es_Col.Rows[IndiceRow].Cells["S_value"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.Separacion.ToString();
+
+                if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
                 {
-                    int IndiceRow = 0;
-                    for (int j = 0; j < Info_Es_Col.Rows.Count; j++) { if (Info_Es_Col.Rows[j].Cells[0].Value.ToString() == ColumnaSelect.Seccions[i].Item2) { IndiceRow = j; } }
+                    DataGridViewTextBoxCellEx cell0 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", 0];
+                    cell0.ColumnSpan = 2;
+                    DataGridViewTextBoxCellEx cell00 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", 0];
+                    cell00.ColumnSpan = 2;
 
-                    Info_Es_Col.Rows[IndiceRow].Cells["NoEstribo"].Value = ColumnaSelect.estribos[i].NoEstribo.ToString();
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV1;
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV1;
 
-                    Info_Es_Col.Rows[IndiceRow].Cells["S_value"].Value = ColumnaSelect.estribos[i].Separacion.ToString();
+                    DataGridViewTextBoxCellEx cell1 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", Info_Es_Col.Rows.Count - 1];
+                    cell1.ColumnSpan = 2;
 
-                    if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
-                    {
-                        DataGridViewTextBoxCellEx cell0 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", 0];
-                        cell0.ColumnSpan = 2;
-                        DataGridViewTextBoxCellEx cell00 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", 0];
-                        cell00.ColumnSpan = 2;
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH1;
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH1;
+                    DataGridViewTextBoxCellEx cell2 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", Info_Es_Col.Rows.Count - 1];
+                    cell2.ColumnSpan = 2;
+                }
 
-                        Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_1"].Value = ColumnaSelect.estribos[i].NoRamasV1;
-                        Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_2"].Value = ColumnaSelect.estribos[i].NoRamasV1;
+                if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Circle)
+                {
+                }
 
-                        DataGridViewTextBoxCellEx cell1 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", Info_Es_Col.Rows.Count - 1];
-                        cell1.ColumnSpan = 2;
-
-                        Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H1"].Value = ColumnaSelect.estribos[i].NoRamasH1;
-                        Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H2"].Value = ColumnaSelect.estribos[i].NoRamasH1;
-                        DataGridViewTextBoxCellEx cell2 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", Info_Es_Col.Rows.Count - 1];
-                        cell2.ColumnSpan = 2;
-                    }
-
-                    if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Circle)
-                    {
-                    }
-
-                    if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.L)
-                    {
-                    }
+                if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.L)
+                {
                 }
             }
         }
@@ -82,18 +79,24 @@ namespace DisenoColumnas.Diseño
                     {
                         if (ColumnaSelect.Seccions[i].Item1 != null)
                         {
+                            CalCuantiaVol(ColumnaSelect.Seccions[i].Item1, false, i);
+
                             Info_Es_Col.Rows.Add(ColumnaSelect.Seccions[i].Item2);
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].Value = ColumnaSelect.Seccions[i].Item1.Material.FC.ToString();
 
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].ReadOnly = true;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].ReadOnly = true;
-                            if (ColumnaSelect.estribos[i].NoEstribo != 0)
-                            {
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].Value = ColumnaSelect.estribos[i].NoEstribo.ToString();
-                            }
-                            Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = ColumnaSelect.estribos[i].Separacion.ToString();
 
+                            if (ColumnaSelect.Seccions[i].Item1.Estribo != null)
+                            {
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoEstribo.ToString();
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.Separacion.ToString();
+                            }
+                            else
+                            {
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = 0;
+                            }
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].ReadOnly = false;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].ReadOnly = false;
 
@@ -109,8 +112,8 @@ namespace DisenoColumnas.Diseño
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Style.BackColor = Color.LightGray;
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
 
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_1"].Value = ColumnaSelect.estribos[i].NoRamasV1;
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_2"].Value = ColumnaSelect.estribos[i].NoRamasV1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV2;
 
                                 DataGridViewTextBoxCellEx cell1 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamasV_1", Info_Es_Col.Rows.Count - 1];
                                 cell1.ColumnSpan = 2;
@@ -118,9 +121,10 @@ namespace DisenoColumnas.Diseño
                                 Info_Es_Col.Rows[0].Cells["NoRamasV_1"].Value = "No. Ramas Vertical";
                                 Info_Es_Col.Rows[0].Cells["NoRamas_H1"].Value = "No. Ramas Horizontal";
 
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H1"].Value = ColumnaSelect.estribos[i].NoRamasH1;
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H2"].Value = ColumnaSelect.estribos[i].NoRamasH1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH2;
                                 DataGridViewTextBoxCellEx cell2 = (DataGridViewTextBoxCellEx)Info_Es_Col["NoRamas_H1", Info_Es_Col.Rows.Count - 1];
+
                                 cell2.ColumnSpan = 2;
                             }
 
@@ -188,7 +192,7 @@ namespace DisenoColumnas.Diseño
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"] = CelldaEstribo;
         }
 
-        private void CalCuantiaVol()
+        private void CalCuantiaVol(Seccion seccioni, bool Cambio_Data, int index)
         {
             if (Form1.Proyecto_.ColumnaSelect != null)
             {
@@ -204,9 +208,12 @@ namespace DisenoColumnas.Diseño
                     FD1 = 0.30f;
                     FD2 = 0.09f;
                 }
+                seccioni.Cuanti_Vol(FD1, FD2, Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
 
-                Form1.Proyecto_.ColumnaSelect.CalcularCuantiaVolumetrica(FD1, FD2, Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
-                CambiosDataGridView();
+                if (Cambio_Data == true)
+                {
+                    CambiosDataGridView(index);
+                }
             }
         }
 
@@ -237,43 +244,32 @@ namespace DisenoColumnas.Diseño
 
         private void EditEndCell(int IndiceR, int IndiceC)
         {
-            #region Modficiación No. y Area del Estribo
+            Seccion seccioni = null;
+            string piso = "";
 
-            if (Info_Es_Col.Columns[IndiceC].Name == "NoEstribo" && IndiceR != 0)
+            float Separacion;
+            try
             {
-                if (Form1.Proyecto_.ColumnaSelect != null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value != null && Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value.ToString() != "")
-                {
-                    int NoBarra = Convert.ToInt32(Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value);
-
-                    string Story = Info_Es_Col.Rows[IndiceR].Cells[0].Value.ToString();
-                    int IndiceaM = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x => x.Item2 == Story);
-                    Form1.Proyecto_.ColumnaSelect.estribos[IndiceaM].NoEstribo = NoBarra;
-                    Form1.Proyecto_.ColumnaSelect.estribos[IndiceaM].CalcularArea();
-                    CalCuantiaVol();
-                }
+                Separacion = Convert.ToSingle(Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value);
+            }
+            catch
+            {
+                Separacion = 0;
             }
 
-            #endregion Modficiación No. y Area del Estribo
+            int NoBarra = Convert.ToInt32(Info_Es_Col.Rows[IndiceR].Cells["NoEstribo"].Value);
+            string Story = Info_Es_Col.Rows[IndiceR].Cells[0].Value.ToString();
+            int IndiceaM = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x => x.Item2 == Story);
+            piso = Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM].Item2;
+            seccioni = FunctionsProject.DeepClone(Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM].Item1);
 
-            if (Info_Es_Col.Columns[IndiceC].Name == "S_value" && IndiceR != 0)
-            {
-                if (Form1.Proyecto_.ColumnaSelect != null && Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value != null && Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value.ToString() != "")
-                {
-                    float Separacion;
-                    try
-                    {
-                        Separacion = Convert.ToSingle(Info_Es_Col.Rows[IndiceR].Cells["S_value"].Value);
-                    }
-                    catch
-                    {
-                        Separacion = 0;
-                    }
-                    string Story = Info_Es_Col.Rows[IndiceR].Cells[0].Value.ToString();
-                    int IndiceaM = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x => x.Item2 == Story);
-                    Form1.Proyecto_.ColumnaSelect.estribos[IndiceaM].Separacion = Separacion;
-                    CalCuantiaVol();
-                }
-            }
+            seccioni.Estribo.NoEstribo = NoBarra;
+            seccioni.Estribo.Separacion = Separacion;
+            seccioni.Estribo.CalcularArea();
+            CalCuantiaVol(seccioni, false, IndiceaM);
+
+            Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM] = new Tuple<Seccion, string>(seccioni, piso);
+            CambiosDataGridView(IndiceaM);
         }
 
         private void Info_Es_Col_CellEndEdit(object sender, DataGridViewCellEventArgs e)
