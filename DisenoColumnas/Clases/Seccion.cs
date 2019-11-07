@@ -163,8 +163,20 @@ namespace DisenoColumnas.Clases
             }
         }
 
-        public void Calc_vol_inex(float FactorDisipacion1, float FactorDisipacion2, float r, float FY)
+        public void Calc_vol_inex(float r, float FY)
         {
+            float FD1, FD2;
+            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            {
+                FD1 = 0.20f;
+                FD2 = 0.06f;
+            }
+            else
+            {
+                FD1 = 0.30f;
+                FD2 = 0.09f;
+            }
+
             double s_max, s_min;
             double s_d;
             string[] Vector_decimales = { };
@@ -221,7 +233,7 @@ namespace DisenoColumnas.Clases
                 };
 
                 Num_Ramas_V.Add(Convert.ToInt32(Math.Round((100) / s_d, 0) + 1));
-                Cuanti_Vol(FactorDisipacion1, FactorDisipacion2, r, FY);
+                Cuanti_Vol(FD1, FD2, r, FY);
 
                 GT_As1.Add(Num_Ramas_V.Last() * (G_As1 * Estribo.NoRamasH1 + LG_As1 * Estribo.NoRamasV1));
                 P_As1.Add(GT_As1.Last() * Ast1 * 7850 / Math.Pow(100, 3));
@@ -235,7 +247,7 @@ namespace DisenoColumnas.Clases
                     Separacion = Convert.ToSingle(s_d)
                 };
 
-                Cuanti_Vol(FactorDisipacion1, FactorDisipacion2, r, FY);
+                Cuanti_Vol(FD1, FD2, r, FY);
                 GT_As2.Add(Num_Ramas_V.Last() * (G_As2 * Estribo.NoRamasH1 + LG_As2 * Estribo.NoRamasV1));
                 P_As2.Add(GT_As2.Last() * Ast2 * 7850 / Math.Pow(100, 3));
 
@@ -364,7 +376,9 @@ namespace DisenoColumnas.Clases
 
         public override string ToString()
         {
-            return string.Format("{0}", Name);
+            string Nombre_seccion;
+            Nombre_seccion = $"C{B * 100}X{H * 100}{Material.Name}";
+            return string.Format("{0}",Nombre_seccion);
         }
 
         public override bool Equals(object obj)

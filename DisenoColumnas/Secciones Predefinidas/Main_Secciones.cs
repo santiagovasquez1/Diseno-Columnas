@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace DisenoColumnas.Secciones_Predefinidas
 {
@@ -11,9 +12,13 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
         public static void Crear_archivo()
         {
-            string Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
-            string Ruta_Archivo = "Secciones.sec";
-            string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            string Ruta_Carpeta = Application.StartupPath;
+            string Ruta_Archivo = @"\\Secciones.sec";
+            string Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
+
+            //string Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
+            //string Ruta_Archivo = "Secciones.sec";
+            //string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
             bool Encuentra = false;
 
             DirectoryInfo directory_seccion = new DirectoryInfo(Ruta_Carpeta);
@@ -65,7 +70,19 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 FC = 210
             };
 
-            Lista_materiales.AddRange(new MAT_CONCRETE[] { Material1, Material2, Material3 });
+            MAT_CONCRETE Material4 = new MAT_CONCRETE
+            {
+                Name = "H420",
+                FC = 420
+            };
+
+            MAT_CONCRETE Material5 = new MAT_CONCRETE
+            {
+                Name = "H490",
+                FC = 490
+            };
+
+            Lista_materiales.AddRange(new MAT_CONCRETE[] { Material1, Material2, Material3,Material4,Material5 });
 
             foreach (MAT_CONCRETE material in Lista_materiales)
             {
@@ -276,7 +293,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             Seccion temp = new Seccion(Nombre_seccion, b / 100, h / 100, tf / 100, tw / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
             temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
             temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
-            temp.Estribo = Set_estribo(temp, temp.Material);
+            //temp.Estribo = Set_estribo(temp, temp.Material);
             //temp.CalcNoDBarras();
             return temp;
         }
@@ -333,319 +350,319 @@ namespace DisenoColumnas.Secciones_Predefinidas
             return Refuerzos_Seccion;
         }
 
-        public static Estribo Set_estribo(Seccion Seccioni, MAT_CONCRETE material)
-        {
-            Estribo Temp = new Estribo(3);
-            int pos = 0;
-            string Nombre_Seccion = "";
+        //public static Estribo Set_estribo(Seccion Seccioni, MAT_CONCRETE material)
+        //{   
+        //    //Estribo Temp = new Estribo(3);
+        //    //int pos = 0;
+        //    //string Nombre_Seccion = "";
 
-            pos = Seccioni.Name.IndexOf(material.Name);
-            Nombre_Seccion = Seccioni.Name.Substring(0, pos);
+        //    //pos = Seccioni.Name.IndexOf(material.Name);
+        //    //Nombre_Seccion = Seccioni.Name.Substring(0, pos);
 
-            switch (Nombre_Seccion)
-            {
-                case "C30x70":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 7.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.5f };
-                    }
-                    return Temp;
+        //    //switch (Nombre_Seccion)
+        //    //{
+        //    //    case "C30x70":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 7.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.5f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C30x100":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.0f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    return Temp;
+        //    //    case "C30x100":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.0f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C30x120":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13f };
-                    }
-                    return Temp;
+        //    //    case "C30x120":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C35x40":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.0f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 7.5f };
-                    }
-                    return Temp;
+        //    //    case "C35x40":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.0f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 7.5f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C35x50":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.0f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 11.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.5f };
-                    }
-                    return Temp;
+        //    //    case "C35x50":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.0f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 11.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.5f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C35x60":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 11.0f };
-                    }
-                    return Temp;
+        //    //    case "C35x60":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 11.0f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C35x80":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 7.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 12.5f };
-                    }
-                    return Temp;
+        //    //    case "C35x80":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 7.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 12.5f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C40x70":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 11.0f };
-                    }
-                    return Temp;
+        //    //    case "C40x70":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 11.0f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C40x80":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 7.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.5f };
-                    }
-                    return Temp;
+        //    //    case "C40x80":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 7.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.5f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C40x90":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 12.0f };
-                    }
-                    return Temp;
+        //    //    case "C40x90":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 12.0f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C40x120":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.0f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13.0f };
-                    }
-                    return Temp;
+        //    //    case "C40x120":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.0f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13.0f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C40x140":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.0f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13.0f };
-                    }
-                    return Temp;
+        //    //    case "C40x140":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.0f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13.0f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C45x110":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 7.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 12.5f };
-                    }
-                    return Temp;
+        //    //    case "C45x110":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 7.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 12.5f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C50x60":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13f };
-                    }
-                    return Temp;
+        //    //    case "C50x60":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C50x70":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 7.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10f };
-                    }
-                    return Temp;
+        //    //    case "C50x70":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 7.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C50x80":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 11.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13f };
-                    }
-                    return Temp;
+        //    //    case "C50x80":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 11.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C50x100":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13f };
-                    }
-                    return Temp;
+        //    //    case "C50x100":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C50x120":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13.0f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13f };
-                    }
-                    return Temp;
+        //    //    case "C50x120":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13.0f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C60x60":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 7.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 9.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 12.5f };
-                    }
-                    return Temp;
+        //    //    case "C60x60":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 7.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 9.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 12.5f };
+        //    //        }
+        //    //        return Temp;
 
-                case "C60x90":
-                    if (material.FC == 350)
-                    {
-                        Temp = new Estribo(3) { Separacion = 8.5f };
-                    }
-                    if (material.FC == 280)
-                    {
-                        Temp = new Estribo(3) { Separacion = 10.5f };
-                    }
-                    if (material.FC == 210)
-                    {
-                        Temp = new Estribo(3) { Separacion = 13.0f };
-                    }
-                    return Temp;
-            }
+        //    //    case "C60x90":
+        //    //        if (material.FC == 350)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 8.5f };
+        //    //        }
+        //    //        if (material.FC == 280)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 10.5f };
+        //    //        }
+        //    //        if (material.FC == 210)
+        //    //        {
+        //    //            Temp = new Estribo(3) { Separacion = 13.0f };
+        //    //        }
+        //    //        return Temp;
+        //    //}
 
-            return Temp;
-        }
+        //    //return Temp;
+        //}
     }
 }

@@ -75,7 +75,14 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Dibujo_Seccion(g, seccion, Grafica.Height, Grafica.Width, Over);
                 seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
                 Dibujo_Refuerzo(g, seccion);
+
+                if (seccion.Estribo == null)
+                {
+                    seccion.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
+                }
+
                 Dibujo_Estribo(g, seccion);
+                Add_Texto_Seccion(g, seccion);
             }
         }
 
@@ -474,6 +481,21 @@ namespace DisenoColumnas.Interfaz_Seccion
             g.FillPath(br, path);
         }
 
+        private void Add_Texto_Seccion(Graphics g, Seccion seccioni)
+        {
+            float TamanoFuente = 0;
+            SolidBrush br = new SolidBrush(Color.Black);
+            PointF PS = new PointF();
+
+            TamanoFuente = Convert.ToSingle(5 * EscalaR);
+            Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
+
+            PS.X = (-Grafica.Width / 2)+30;
+            PS.Y= (-Grafica.Height / 2) + 30;
+
+            g.DrawString(seccioni.ToString(), Fuente, br, PS);
+        }
+
         private void Dibujo_Refuerzo(Graphics g, Seccion seccioni)
         {
             SolidBrush br = new SolidBrush(Color.Black);
@@ -485,7 +507,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             float DeltaX, DeltaY;
 
             DeltaX = Convert.ToSingle(4 * Xmax / (Grafica.Width / 2));
-            DeltaY = Convert.ToSingle(4 * Ymax / (Grafica.Width / 2));
+            DeltaY = Convert.ToSingle(4 * Ymax / (Grafica.Height / 2));
             TamanoFuente = Convert.ToSingle(10 * EscalaR);
             Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
 
