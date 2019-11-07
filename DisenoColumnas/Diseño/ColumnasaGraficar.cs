@@ -57,7 +57,7 @@ namespace DisenoColumnas.Diseño
      
 
 
-            Form1.mFormPrincipal.CancelDiseño = false;
+            Form1.mFormPrincipal.CancelGarfica = false;
             Close();
 
         }

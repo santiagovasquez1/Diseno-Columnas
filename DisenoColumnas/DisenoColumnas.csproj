@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FunctionsAutoCAD">
-      <HintPath>Y:\Bibliotecas\FunctionsAutoCAD\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
+    <Reference Include="FunctionsAutoCAD, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FunctionsAutoCAD\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MathNet.Numerics.4.8.1\lib\net40\MathNet.Numerics.dll</HintPath>

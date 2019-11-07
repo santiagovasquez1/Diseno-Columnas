@@ -278,7 +278,9 @@ namespace DisenoColumnas
 
         private void NewProject()
         {
-            string Ruta1, Ruta2, Ruta3;
+            string Ruta1;
+            string Ruta2 = "";
+            string Ruta3 = "";
 
             if (Proyecto_ != null)
             {
@@ -298,10 +300,17 @@ namespace DisenoColumnas
                 }
             }
             Ruta1 = AbrirE2K2009yCSV2009();
-            Ruta2 = AsingarResultadosaColumna();
-            Ruta3 = AsingarFuerzasColumnas();
+         
+            if (Ruta1 != "")
+            {
+                Ruta2 = AsingarResultadosaColumna();
+            }
+            if (Ruta2 != "")
+            {
+                Ruta3 = AsingarFuerzasColumnas();
+            }
 
-            if (Ruta1 != "" && Ruta2 != "" & Ruta3 != "")
+            if (Ruta1 != "" & Ruta2!="" & Ruta3 !="")
             {
 
                 L_NameProject.Visible = true;
@@ -1429,16 +1438,6 @@ namespace DisenoColumnas
             }
 
 
-            if (mAgregarAlzado != null)
-            {
-                mAgregarAlzado.CrearDataGrid(true);
-                m_Informacion.CrearDataGriedView(true);
-
-            }
-            if (m_Despiece != null)
-            {
-                m_Despiece.Invalidate();
-            }
             int CantCol = 1;
             double D_Pro = Math.Ceiling(Delta);
             bool HabilitarReporte = false;
@@ -1475,7 +1474,20 @@ namespace DisenoColumnas
                 }
             }
 
+            if (m_Informacion != null)
+            {
+                m_Informacion.Invalidate();
+            }
+            if (mAgregarAlzado != null)
+            {
+                mAgregarAlzado.CrearDataGrid(true);
+                
 
+            }
+            if (m_Despiece != null)
+            {
+                m_Despiece.Invalidate();
+            }
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -1616,7 +1628,7 @@ namespace DisenoColumnas
              }
 
 
-            if(CancelDiseño== false && columnasDrawing.Count != 0)
+            if(CancelGarfica == false && columnasDrawing.Count != 0)
             {
                 GraficarAlzadoColumnas(ref columnasDrawing);
             }
