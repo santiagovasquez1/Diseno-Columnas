@@ -138,10 +138,10 @@ namespace DisenoColumnas.Diseño
 
                             if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
                             {
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
+                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
+                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
+                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
+                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
                             }
                         }
                     }
@@ -192,7 +192,7 @@ namespace DisenoColumnas.Diseño
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"] = CelldaEstribo;
         }
 
-        private void CalCuantiaVol(Seccion seccioni, bool Cambio_Data, int index)
+        private void CalCuantiaVol(ISeccion seccioni, bool Cambio_Data, int index)
         {
             if (Form1.Proyecto_.ColumnaSelect != null)
             {
@@ -250,7 +250,7 @@ namespace DisenoColumnas.Diseño
 
         private void EditEndCell(int IndiceR, int IndiceC)
         {
-            Seccion seccioni = null;
+            ISeccion seccioni = null;
             string piso = "";
 
             float Separacion;
@@ -274,7 +274,7 @@ namespace DisenoColumnas.Diseño
             seccioni.Estribo.CalcularArea();
             CalCuantiaVol(seccioni, false, IndiceaM);
 
-            Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM] = new Tuple<Seccion, string>(seccioni, piso);
+            Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM] = new Tuple<ISeccion, string>(seccioni, piso);
             CambiosDataGridView(IndiceaM);
         }
 

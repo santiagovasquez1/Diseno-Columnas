@@ -9,11 +9,11 @@ namespace DisenoColumnas.Interfaz_Seccion
     public partial class FAgregarRef : Form
     {
         private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
-        private Seccion Seccion { get; set; }
+        private ISeccion Seccion { get; set; }
         private string piso { get; set; }
         private int index { get; set; } = -1;
 
-        public FAgregarRef(Seccion pseccion, string ppiso, FInterfaz_Seccion pInterfaz)
+        public FAgregarRef(ISeccion pseccion, string ppiso, FInterfaz_Seccion pInterfaz)
         {
             piso = ppiso;
             FInterfaz_ = pInterfaz;
@@ -110,12 +110,27 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             double H = Seccion.H * 100;
             double b = Seccion.B * 100;
-            double Tw = Seccion.TW * 100;
-            double tf = Seccion.TF * 100;
+            double Tw = 0;
+            double tf = 0;
             double r = Form1.Proyecto_.R + 1; //1 es el espesor del estribo #3
             double posx, posy;
             double DeltaX1, DeltaY1, DeltaX2, DeltaY2;
             int ContX, ContY;
+
+             if (Seccion.Shape==TipodeSeccion.L | Seccion.Shape == TipodeSeccion.Tee)
+            {
+                if (Seccion.Shape == TipodeSeccion.L)
+                {
+                    //Tw = Seccion.TW * 100;
+                    //tf = Seccion.TF * 100;
+                }
+                else
+                {
+
+                }
+               
+
+            }
 
             data.Rows.Clear();
             data.Rows.Add(numero_barras);
@@ -201,13 +216,13 @@ namespace DisenoColumnas.Interfaz_Seccion
             if (FInterfaz_.edicion == Tipo_Edicion.Secciones_modelo)
             {
                 indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == piso);
-                Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<Seccion, string>(Seccion, piso);
+                Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<ISeccion, string>(Seccion, piso);
             }
 
             if (FInterfaz_.edicion == Tipo_Edicion.Secciones_predef)
             {
-                indice = Form1.secciones_predef.Secciones.FindIndex(x1 => x1.ToString() == Seccion.ToString());
-                Form1.secciones_predef.Secciones[indice] = Seccion;
+                //indice = Form1.secciones_predef.Secciones.FindIndex(x1 => x1.ToString() == Seccion.ToString());
+                //Form1.secciones_predef.Secciones[indice] = Seccion;
             }
         }
 

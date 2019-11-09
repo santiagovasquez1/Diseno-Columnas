@@ -26,7 +26,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private static double Ymax { get; set; } = 75;  //[cm]
         private List<PointF> Vertices { get; set; } = new List<PointF>();
         private static FAgregarRef Fseleccion_Columnas { get; set; }
-        private static Seccion seccion { get; set; }
+        private static ISeccion seccion { get; set; }
         private static Columna Columna_i { get; set; }
         private static int Width { get; set; }
         private static int Height { get; set; }
@@ -72,7 +72,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_grilla(g, Grafica.Height, Grafica.Width);
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
-                Dibujo_Seccion(g, seccion, Grafica.Height, Grafica.Width, Over);
+                Dibujo_Seccion(g,seccion);
                 seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
                 Dibujo_Refuerzo(g, seccion);
 
@@ -177,11 +177,11 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
-                    seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
+                    //seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
                 }
                 else
                 {
-                    seccion = Seccion.DeepClone(Columna_i.Seccions[indice].Item1);
+                    seccion = (CRectangulo)FunctionsProject.DeepClone(Columna_i.Seccions[indice].Item1);
                 }
 
                 Grafica.Invalidate();
@@ -196,7 +196,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             Seccion_name = lbPisos.SelectedItem.ToString();
 
             indice = Form1.secciones_predef.Secciones.FindIndex(x => x.ToString() == Seccion_name);
-            seccion = Seccion.DeepClone(Form1.secciones_predef.Secciones[indice]);
+            seccion = CRectangulo.DeepClone(Form1.secciones_predef.Secciones[indice]);
         }
 
         private bool MouseOverPoligono(PointF mouse_pt)
@@ -320,148 +320,148 @@ namespace DisenoColumnas.Interfaz_Seccion
             fseleccion.ShowDialog();
         }
 
-        private void Dibujo_Seccion(Graphics g, Seccion seccioni, int Height, int Width, bool seleccion)
+        private void Dibujo_Seccion(Graphics g, ISeccion seccioni)
         {
-            double X, Y;
+            //double X, Y;
 
-            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
-            Pen P1;
+            //SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            //Pen P1;
 
-            if (Over == false)
-            {
-                P1 = new Pen(Color.Black, 2.5f)
-                {
-                    Brush = Brushes.Gray,
-                    Color = Color.Black,
-                    DashStyle = DashStyle.Solid,
-                    LineJoin = LineJoin.MiterClipped,
-                    Alignment = System.Drawing.Drawing2D.PenAlignment.Center
-                };
-            }
-            else
-            {
-                P1 = new Pen(Color.Black, 3f)
-                {
-                    Brush = Brushes.DarkRed,
-                    Color = Color.DarkRed,
-                    DashStyle = DashStyle.Dash,
-                    LineJoin = LineJoin.Round,
-                    Alignment = PenAlignment.Center
-                };
-            }
+            //if (Over == false)
+            //{
+            //    P1 = new Pen(Color.Black, 2.5f)
+            //    {
+            //        Brush = Brushes.Gray,
+            //        Color = Color.Black,
+            //        DashStyle = DashStyle.Solid,
+            //        LineJoin = LineJoin.MiterClipped,
+            //        Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+            //    };
+            //}
+            //else
+            //{
+            //    P1 = new Pen(Color.Black, 3f)
+            //    {
+            //        Brush = Brushes.DarkRed,
+            //        Color = Color.DarkRed,
+            //        DashStyle = DashStyle.Dash,
+            //        LineJoin = LineJoin.Round,
+            //        Alignment = PenAlignment.Center
+            //    };
+            //}
 
-            Vertices = new List<PointF>();
+            //Vertices = new List<PointF>();
 
-            if (seccioni.Shape == TipodeSeccion.Rectangular)
-            {
-                #region Vertices
+            //if (seccioni.Shape == TipodeSeccion.Rectangular)
+            //{
+            //    #region Vertices
 
-                X = -((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
-                Y = -((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+            //    Y = -((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = ((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
-                Y = -((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = ((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+            //    Y = -((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = ((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
-                Y = ((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = ((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+            //    Y = ((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = -((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
-                Y = ((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -((seccioni.B * 100 / 2) * (Width / 2)) / Xmax;
+            //    Y = ((seccioni.H * 100 / 2) * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                #endregion Vertices
-            }
+            //    #endregion Vertices
+            //}
 
-            if (seccioni.Shape == TipodeSeccion.Tee)
-            {
-                #region Vertices
+            //if (seccioni.Shape == TipodeSeccion.Tee)
+            //{
+            //    #region Vertices
 
-                X = -(seccioni.TW * 100 / 2 * (Width / 2)) / Xmax;
-                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -(seccioni.TW * 100 / 2 * (Width / 2)) / Xmax;
+            //    Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
-                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
-                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = -seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = -seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = -seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
-                Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -seccioni.TW * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = ((seccioni.H / 2) - seccioni.TF) * 100 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                #endregion Vertices
-            }
+            //    #endregion Vertices
+            //}
 
-            if (seccioni.Shape == TipodeSeccion.L)
-            {
-                #region Vertices
+            //if (seccioni.Shape == TipodeSeccion.L)
+            //{
+            //    #region Vertices
 
-                X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
-                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
+            //    Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = -(seccioni.H * 100 / 2 * (Height / 2)) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
-                Y = ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = seccioni.B * 100 / 2 * (Width / 2) / Xmax;
+            //    Y = ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;
-                Y = ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;
+            //    Y = ((-seccioni.H / 2) + seccioni.TF) * 100 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;
-                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = ((-seccioni.B / 2) + seccioni.TW) * 100 * (Width / 2) / Xmax;
+            //    Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
-                Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
-                Vertices.Add(new PointF((float)X, (float)Y));
+            //    X = -(seccioni.B * 100 / 2 * (Width / 2)) / Xmax;
+            //    Y = seccioni.H * 100 / 2 * (Height / 2) / Ymax;
+            //    Vertices.Add(new PointF((float)X, (float)Y));
 
-                #endregion Vertices
-            }
+            //    #endregion Vertices
+            //}
 
-            if (seccioni.Shape == TipodeSeccion.Circle)
-            {
-                CCirculo circulo = new CCirculo(seccioni.B / 2, pCentro: new double[] { 0, 0 });
-                circulo.Set_puntos(50);
+            //if (seccioni.Shape == TipodeSeccion.Circle)
+            //{
+            //    //CCirculo circulo = new CCirculo(seccioni.B / 2, pCentro: new double[] { 0, 0 });
+            //    //circulo.Set_puntos(50);
 
-                g.FillClosedCurve(br, circulo.Puntos.ToArray());
-                g.DrawClosedCurve(P1, circulo.Puntos.ToArray());
-            }
+            //    //g.FillClosedCurve(br, circulo.Puntos.ToArray());
+            //    //g.DrawClosedCurve(P1, circulo.Puntos.ToArray());
+            //}
 
-            if (seccioni.Shape != TipodeSeccion.Circle)
-            {
-                g.DrawPolygon(P1, Vertices.ToArray());
-                g.FillPolygon(br, Vertices.ToArray());
-            }
+            //if (seccioni.Shape != TipodeSeccion.Circle)
+            //{
+            //    g.DrawPolygon(P1, Vertices.ToArray());
+            //    g.FillPolygon(br, Vertices.ToArray());
+            //}
         }
 
-        private void Dibujo_Estribo(Graphics g, Seccion seccioni)
+        private void Dibujo_Estribo(Graphics g,ISeccion seccioni)
         {
             GraphicsPath path = new GraphicsPath();
             SolidBrush br = new SolidBrush(Color.FromArgb(100, Color.Black));
@@ -481,7 +481,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             g.FillPath(br, path);
         }
 
-        private void Add_Texto_Seccion(Graphics g, Seccion seccioni)
+        private void Add_Texto_Seccion(Graphics g, ISeccion seccioni)
         {
             float TamanoFuente = 0;
             SolidBrush br = new SolidBrush(Color.Black);
@@ -496,7 +496,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             g.DrawString(seccioni.ToString(), Fuente, br, PS);
         }
 
-        private void Dibujo_Refuerzo(Graphics g, Seccion seccioni)
+        private void Dibujo_Refuerzo(Graphics g, ISeccion seccioni)
         {
             SolidBrush br = new SolidBrush(Color.Black);
             int cont = 1;

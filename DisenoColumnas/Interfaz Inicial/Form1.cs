@@ -698,7 +698,7 @@ namespace DisenoColumnas
 
             //Secciones
 
-            Proyecto_.Lista_Secciones = new List<Seccion>();
+            Proyecto_.Lista_Secciones = new List<ISeccion>();
 
             int Inicio_FrameSecctions = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ FRAME SECTIONS")) + 1;
             int Final_FrameSecctions = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ REBAR DEFINITIONS")) - 1;
@@ -820,7 +820,18 @@ namespace DisenoColumnas
                 {
                     if (mAT_.Name == Material_Aux)
                     {
-                        Seccion seccion = new Seccion(Nombre, B, H, TF, TW, mAT_, tipodeSeccion, Coord);
+                        ISeccion seccion= new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
+
+                        if (tipodeSeccion == TipodeSeccion.Rectangular)
+                        {
+                            seccion = new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
+                        }
+
+                        if (tipodeSeccion == TipodeSeccion.Circle)
+                        {
+                            seccion = new CCirculo(Nombre,B/2,pCentro: new double[] { 0,0},Material_:mAT_,Shape_:tipodeSeccion);
+                        }
+
                         Proyecto_.Lista_Secciones.Add(seccion);
                     }
                 }
@@ -899,8 +910,8 @@ namespace DisenoColumnas
                     {
                         if (viga.Name == NameBeam && Story == Proyecto_.Stories[i].Item1)
                         {
-                            Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                            Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
+                            ISeccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            Tuple<CRectangulo, string> tuple_aux = new Tuple<CRectangulo, string>((CRectangulo)seccion, Story);
                             viga.Seccions.Add(tuple_aux);
                         }
                     }
@@ -939,8 +950,8 @@ namespace DisenoColumnas
                     {
                         if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
                         {
-                            Seccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                            Seccion seccion = null;
+                            ISeccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            ISeccion seccion = null;
 
                             if (secciones_predef.Secciones.Exists(x => x == temp) == true)
                             {
@@ -959,7 +970,7 @@ namespace DisenoColumnas
                             }
                             else
                             {
-                                Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
+                                Tuple<ISeccion, string> tuple_aux = new Tuple<ISeccion, string>(seccion, Story);
                                 colum.Seccions.Add(tuple_aux);
                             }
                         }
@@ -982,12 +993,12 @@ namespace DisenoColumnas
                 }
 
                 Viga VigaMayor = new Viga("Viga con Mayor H Por Piso");
-                Seccion seccionMayor = new Seccion("Inicial", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
-                Tuple<Seccion, string> tuple_Seccion_Mayor = null;
+                ISeccion seccionMayor = new CRectangulo("Inicial", 0, -99999, new MAT_CONCRETE(), TipodeSeccion.None);
+                Tuple<CRectangulo, string> tuple_Seccion_Mayor = null;
 
                 for (int i = 0; i < column.Seccions.Count; i++)
                 {
-                    tuple_Seccion_Mayor = new Tuple<Seccion, string>(seccionMayor, column.Seccions[i].Item2);
+                    tuple_Seccion_Mayor = new Tuple<CRectangulo, string>((CRectangulo)seccionMayor, column.Seccions[i].Item2);
                     VigaMayor.Seccions.Add(tuple_Seccion_Mayor);
                 }
 
@@ -1363,7 +1374,7 @@ namespace DisenoColumnas
 
             //Determinar Cantidad de Barras Por Sección Predefinidas
 
-            foreach (Seccion seccion in secciones_predef.Secciones)
+            foreach (CRectangulo seccion in secciones_predef.Secciones)
             {
                 seccion.CalcNoDBarras();
             }
@@ -1374,7 +1385,7 @@ namespace DisenoColumnas
                 {
                     string[] Base = new string[0];
 
-                    foreach (Seccion seccionP in secciones_predef.Secciones)
+                    foreach (CRectangulo seccionP in secciones_predef.Secciones)
                     {
                         if (Col.Seccions[i].Item1.B == seccionP.B && Col.Seccions[i].Item1.H == seccionP.H || Col.Seccions[i].Item1.H == seccionP.B && Col.Seccions[i].Item1.B == seccionP.H)
                         {

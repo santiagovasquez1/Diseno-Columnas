@@ -48,7 +48,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             string Nombre_Seccion = "";
             int[] Diametros_seccion;
             int CapasX, CapasY, CapasXw, CapasYw;
-            Seccion seccioni;
+            CRectangulo seccioni;
 
             List<MAT_CONCRETE> Lista_materiales = new List<MAT_CONCRETE>();
 
@@ -288,9 +288,9 @@ namespace DisenoColumnas.Secciones_Predefinidas
             }
         }
 
-        public static Seccion Crear_Seccion(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
+        public static CRectangulo Crear_Seccion(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
         {
-            Seccion temp = new Seccion(Nombre_seccion, b / 100, h / 100, tf / 100, tw / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
+            CRectangulo temp = new CRectangulo(Nombre_seccion, b / 100, h / 100, tf / 100, tw / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
             temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
             temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
             //temp.Estribo = Set_estribo(temp, temp.Material);
