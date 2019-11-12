@@ -29,40 +29,28 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Despiece));
-            this.Draw_Colum_Alzado = new System.Windows.Forms.PictureBox();
             this.Label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Draw_Column = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.KgRefuerzo_L = new System.Windows.Forms.Label();
             this.Title_Colum_Model = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).BeginInit();
+            this.Draw_Colum_Alzado = new System.Windows.Forms.PictureBox();
+            this.Draw_Column = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Draw_Colum_Alzado
-            // 
-            this.Draw_Colum_Alzado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Draw_Colum_Alzado.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Draw_Colum_Alzado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Draw_Colum_Alzado.Location = new System.Drawing.Point(12, 35);
-            this.Draw_Colum_Alzado.Name = "Draw_Colum_Alzado";
-            this.Draw_Colum_Alzado.Size = new System.Drawing.Size(450, 580);
-            this.Draw_Colum_Alzado.TabIndex = 12;
-            this.Draw_Colum_Alzado.TabStop = false;
-            this.Draw_Colum_Alzado.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw_Colum_Alzado_Paint);
             // 
             // Label5
             // 
             this.Label5.AutoSize = true;
             this.Label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
+            this.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Label5.Location = new System.Drawing.Point(5, 6);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(43, 15);
@@ -83,30 +71,27 @@
             this.panel1.Size = new System.Drawing.Size(258, 628);
             this.panel1.TabIndex = 27;
             // 
-            // Draw_Column
-            // 
-            this.Draw_Column.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Draw_Column.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Draw_Column.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Draw_Column.Location = new System.Drawing.Point(11, 36);
-            this.Draw_Column.Name = "Draw_Column";
-            this.Draw_Column.Size = new System.Drawing.Size(232, 581);
-            this.Draw_Column.TabIndex = 12;
-            this.Draw_Column.TabStop = false;
-            this.Draw_Column.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw_Column_Paint);
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gainsboro;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.KgRefuerzo_L);
             this.panel2.Controls.Add(this.Title_Colum_Model);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(256, 29);
             this.panel2.TabIndex = 19;
+            // 
+            // KgRefuerzo_L
+            // 
+            this.KgRefuerzo_L.AutoSize = true;
+            this.KgRefuerzo_L.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
+            this.KgRefuerzo_L.ForeColor = System.Drawing.Color.Maroon;
+            this.KgRefuerzo_L.Location = new System.Drawing.Point(206, 7);
+            this.KgRefuerzo_L.Name = "KgRefuerzo_L";
+            this.KgRefuerzo_L.Size = new System.Drawing.Size(0, 15);
+            this.KgRefuerzo_L.TabIndex = 2;
             // 
             // Title_Colum_Model
             // 
@@ -144,6 +129,34 @@
             this.panel4.Size = new System.Drawing.Size(472, 29);
             this.panel4.TabIndex = 19;
             // 
+            // Draw_Colum_Alzado
+            // 
+            this.Draw_Colum_Alzado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Draw_Colum_Alzado.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Draw_Colum_Alzado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Draw_Colum_Alzado.Location = new System.Drawing.Point(12, 35);
+            this.Draw_Colum_Alzado.Name = "Draw_Colum_Alzado";
+            this.Draw_Colum_Alzado.Size = new System.Drawing.Size(450, 580);
+            this.Draw_Colum_Alzado.TabIndex = 12;
+            this.Draw_Colum_Alzado.TabStop = false;
+            this.Draw_Colum_Alzado.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw_Colum_Alzado_Paint);
+            // 
+            // Draw_Column
+            // 
+            this.Draw_Column.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Draw_Column.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Draw_Column.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Draw_Column.Location = new System.Drawing.Point(11, 36);
+            this.Draw_Column.Name = "Draw_Column";
+            this.Draw_Column.Size = new System.Drawing.Size(232, 581);
+            this.Draw_Column.TabIndex = 12;
+            this.Draw_Column.TabStop = false;
+            this.Draw_Column.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw_Column_Paint);
+            // 
             // Despiece
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,20 +166,21 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Despiece";
             this.Text = "Despiece";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Despiece_Paint);
-            ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -180,5 +194,6 @@
         internal System.Windows.Forms.Label Title_Colum_Model;
         internal System.Windows.Forms.Panel panel3;
         internal System.Windows.Forms.Panel panel4;
+        internal System.Windows.Forms.Label KgRefuerzo_L;
     }
 }

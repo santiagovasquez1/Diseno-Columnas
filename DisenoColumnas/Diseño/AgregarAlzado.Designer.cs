@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarAlzado));
             this.D_Alzado = new System.Windows.Forms.DataGridView();
             this.story = new System.Windows.Forms.DataGridViewImageColumn();
             this.NameColum = new System.Windows.Forms.Label();
@@ -121,7 +122,9 @@
             this.Controls.Add(this.NameColum);
             this.Controls.Add(this.D_Alzado);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarAlzado";
             this.Text = "Agregar Alzado";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AgregarAlzado_Paint);

@@ -143,6 +143,16 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap columna2 {
+            get {
+                object obj = ResourceManager.GetObject("columna2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cOLUMNAiNVERTIDAX16 {
             get {
                 object obj = ResourceManager.GetObject("cOLUMNAiNVERTIDAX16", resourceCulture);
@@ -253,6 +263,16 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap efe_Prima_ce_negative_left {
+            get {
+                object obj = ResourceManager.GetObject("efe-Prima-ce-negative-left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap efe_Prima_Ce_Pixelado {
             get {
                 object obj = ResourceManager.GetObject("efe Prima Ce Pixelado", resourceCulture);
@@ -266,6 +286,16 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap efe_Prima_Ce_Pixelado1 {
             get {
                 object obj = ResourceManager.GetObject("efe Prima Ce Pixelado1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap efe_Prima_Ce_Pixelado2 {
+            get {
+                object obj = ResourceManager.GetObject("efe Prima Ce Pixelado2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,6 +323,36 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap herramienta_de_recorte {
+            get {
+                object obj = ResourceManager.GetObject("herramienta-de-recorte", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_acerca_de_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-acerca-de-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_dibujados_a_mano_a_color_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-dibujados-a-mano-a-color-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap image {
             get {
                 object obj = ResourceManager.GetObject("image", resourceCulture);
@@ -306,6 +366,26 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap info {
             get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_horizontal_bmp {
+            get {
+                object obj = ResourceManager.GetObject("logo horizontal bmp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LogoColumnas1 {
+            get {
+                object obj = ResourceManager.GetObject("LogoColumnas1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

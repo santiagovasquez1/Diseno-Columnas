@@ -158,6 +158,8 @@
             this.Controls.Add(this.Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ColumnasaGraficar";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ColumnasaGraficar";
             this.Load += new System.EventHandler(this.ColumnasaGraficar_Load);

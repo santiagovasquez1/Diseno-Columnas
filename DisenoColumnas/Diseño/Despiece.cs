@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -18,6 +19,10 @@ namespace DisenoColumnas.Diseño
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
             if (ColumnaSelect != null)
             {
+
+                KgRefuerzo_L.Text = Math.Round(ColumnaSelect.KgRefuerzo,2) + " kg";
+
+                KgRefuerzo_L.Location = new Point(250- KgRefuerzo_L.Width, 7);
 
                 float MaxB = -999999;
                 for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)

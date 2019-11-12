@@ -341,7 +341,7 @@
             this.agregarRefuerzoToolStripMenuItem,
             this.eliminarRefuerzoToolStripMenuItem});
             this.cmEditar.Name = "contextMenuStrip1";
-            this.cmEditar.Size = new System.Drawing.Size(181, 70);
+            this.cmEditar.Size = new System.Drawing.Size(164, 48);
             // 
             // agregarRefuerzoToolStripMenuItem
             // 
@@ -353,7 +353,7 @@
             // eliminarRefuerzoToolStripMenuItem
             // 
             this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
-            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
             this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
             // 
@@ -366,6 +366,9 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FAgregarRef";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Fseleccion_Columnas";
             this.Load += new System.EventHandler(this.FAgregarRef_Load);
             this.panel1.ResumeLayout(false);

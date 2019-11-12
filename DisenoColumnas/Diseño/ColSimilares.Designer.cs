@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel2 = new System.Windows.Forms.Panel();
             this.Button2 = new System.Windows.Forms.Button();
             this.Button1 = new System.Windows.Forms.Button();
@@ -101,8 +101,8 @@
             // 
             // Muros
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.Muros.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.Muros.DefaultCellStyle = dataGridViewCellStyle3;
             this.Muros.HeaderText = "Columna";
             this.Muros.Name = "Muros";
             this.Muros.ReadOnly = true;
@@ -142,6 +142,7 @@
             this.Label9.Size = new System.Drawing.Size(100, 15);
             this.Label9.TabIndex = 12;
             this.Label9.Text = "Columnas Iguales";
+            this.Label9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label9_MouseDown);
             // 
             // ColSimilares
             // 
@@ -152,6 +153,9 @@
             this.Controls.Add(this.Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ColSimilares";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ColSimilares";
             this.Load += new System.EventHandler(this.ColSimilares_Load);
             this.Panel2.ResumeLayout(false);

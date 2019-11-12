@@ -8,10 +8,12 @@ using DisenoColumnas.Secciones_Predefinidas;
 using DisenoColumnas.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+
 
 namespace DisenoColumnas
 {
@@ -26,8 +28,9 @@ namespace DisenoColumnas
         public static FInterfaz_Seccion mIntefazSeccion;
         public static AgregarAlzado mAgregarAlzado;
         public static FuerzasEnElementos mFuerzasEnElmentos;
-        public  bool CancelDiseño = false;
+        public bool CancelDiseño = false;
         public bool CancelGarfica = false;
+        private string NameProgram = "DMC";
 
         private DeserializeDockContent m_deserializeDockContent;
 
@@ -137,12 +140,14 @@ namespace DisenoColumnas
 
                 L_NameProject.Visible = true;
                 L_NameProject.Text = Proyecto_.Name;
+                Text = Proyecto_.Name + " - " + NameProgram;
 
                 string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
                 try
                 {
                     PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent);
-                }catch { }
+                }
+                catch { }
                 m_Informacion = new Informacion();
                 try
                 {
@@ -157,6 +162,9 @@ namespace DisenoColumnas
                 mLcolumnas = LColumna;
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
+                CambiarSkins();
+
+
                 mFuerzasEnElmentos = new FuerzasEnElementos();
                 mFuerzasEnElmentos.Show(PanelContenedor);
 
@@ -178,11 +186,19 @@ namespace DisenoColumnas
 
 
 
-                CreateDidctonaries();
+                CreateDictonaries();
                 WindowState = FormWindowState.Maximized;
             }
         }
 
+        private void CambiarSkins()
+        {
+            m_Despiece.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.StartColor = SystemColors.Control;
+            m_Despiece.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.EndColor = SystemColors.Control;
+            m_Despiece.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.StartColor = SystemColors.ControlLight;
+            m_Despiece.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.EndColor = SystemColors.ControlLight;
+            m_Despiece.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.TextColor = SystemColors.ActiveCaptionText;
+        }
         private void CargarToolTips()
         {
             ToolTip tool = new ToolTip();
@@ -239,8 +255,9 @@ namespace DisenoColumnas
                 if (SaveFile.FileName != "")
                 {
                     Proyecto_.Ruta = SaveFile.FileName;
-                    Proyecto_.Name = Path.GetFileName(SaveFile.FileName).Replace(".Colum","");
+                    Proyecto_.Name = Path.GetFileName(SaveFile.FileName).Replace(".Colum", "");
                     L_NameProject.Text = Proyecto_.Name;
+                    Text = Proyecto_.Name + " - " + NameProgram;
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                     string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
                     PanelContenedor.SaveAsXml(configFile);
@@ -291,7 +308,7 @@ namespace DisenoColumnas
                     if (Proyecto_.Ruta == "" | Proyecto_.Ruta != "")
                     {
                         DialogResult box;
-                        box = MessageBox.Show("¿Desea guardar cambios en el Proyecto: "+ Proyecto_.Name+"?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        box = MessageBox.Show("¿Desea guardar cambios en el Proyecto: " + Proyecto_.Name + "?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                         if (box == DialogResult.Yes)
                         {
                             Save();
@@ -300,7 +317,7 @@ namespace DisenoColumnas
                 }
             }
             Ruta1 = AbrirE2K2009yCSV2009();
-         
+
             if (Ruta1 != "")
             {
                 Ruta2 = AsingarResultadosaColumna();
@@ -310,7 +327,7 @@ namespace DisenoColumnas
                 Ruta3 = AsingarFuerzasColumnas();
             }
 
-            if (Ruta1 != "" & Ruta2!="" & Ruta3 !="")
+            if (Ruta1 != "" & Ruta2 != "" & Ruta3 != "")
             {
 
                 L_NameProject.Visible = true;
@@ -338,7 +355,7 @@ namespace DisenoColumnas
 
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
-
+                CambiarSkins();
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
@@ -357,7 +374,7 @@ namespace DisenoColumnas
             }
         }
 
-        private void CreateDidctonaries()
+        private void CreateDictonaries()
         {
             #region Area refuerzo
 
@@ -468,6 +485,26 @@ namespace DisenoColumnas
             Proyecto_.Diametro_ref.Add(14, 4.30f);
 
             #endregion Diccionario diametro barras
+
+
+            #region Diccionario -> Masa Nominal Barras
+            Proyecto_.MasaNominalBarras = new Dictionary<int, float>();
+            Proyecto_.MasaNominalBarras.Add(2, 0.249f);
+            Proyecto_.MasaNominalBarras.Add(3, 0.560f);
+            Proyecto_.MasaNominalBarras.Add(4, 0.994f);
+            Proyecto_.MasaNominalBarras.Add(5, 1.552f);
+            Proyecto_.MasaNominalBarras.Add(6, 2.235f);
+            Proyecto_.MasaNominalBarras.Add(7, 3.042f);
+            Proyecto_.MasaNominalBarras.Add(8, 3.973f);
+            Proyecto_.MasaNominalBarras.Add(9, 5.060f);
+            Proyecto_.MasaNominalBarras.Add(10, 6.404f);
+            Proyecto_.MasaNominalBarras.Add(11, 7.907f);
+            Proyecto_.MasaNominalBarras.Add(14, 8.938f);
+
+            #endregion
+
+
+
         }
 
         private string AbrirE2K2009yCSV2009()
@@ -628,7 +665,7 @@ namespace DisenoColumnas
         private void CrearObjetosNecesarios()
         {
             //STORIES
-            CreateDidctonaries();
+            CreateDictonaries();
 
             List<List<string>> Stories = new List<List<string>>();
 
@@ -902,10 +939,10 @@ namespace DisenoColumnas
                 for (int j = 0; j < LineAssingns.Count; j++)
                 {
                     if (LineAssingns[j].Count > 8)
-                    { 
-                    string Story = LineAssingns[j][3].Replace("\"", "");
-                    string NameBeam = LineAssingns[j][1].Replace("\"", "");
-                    string NameSeccion = LineAssingns[j][5].Replace("\"", "");
+                    {
+                        string Story = LineAssingns[j][3].Replace("\"", "");
+                        string NameBeam = LineAssingns[j][1].Replace("\"", "");
+                        string NameSeccion = LineAssingns[j][5].Replace("\"", "");
                         foreach (Viga viga in Proyecto_.Lista_Vigas)
                         {
                             if (viga.Name == NameBeam && Story == Proyecto_.Stories[i].Item1)
@@ -1188,7 +1225,7 @@ namespace DisenoColumnas
             {
                 if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
                 {
-                    mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+                    mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
                 }
             }
             else
@@ -1220,7 +1257,7 @@ namespace DisenoColumnas
                     FD2 = 0.09f;
                 }
 
-                for (int i=0;i< Proyecto_.ColumnaSelect.Seccions.Count; i++)
+                for (int i = 0; i < Proyecto_.ColumnaSelect.Seccions.Count; i++)
                 {
                     Proyecto_.ColumnaSelect.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, Proyecto_.FY);
                 }
@@ -1288,13 +1325,14 @@ namespace DisenoColumnas
                 variablesDeEntradaToolStripMenuItem.Enabled = true;
                 columnasIgualesToolStripMenuItem.Enabled = true;
                 fuerzasToolStripMenuItem.Enabled = true;
+                despieceToolStripMenuItem.Enabled = true;
 
             }
-            if(WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
                 Button_MaxRest.Image = Properties.Resources.Maximizar14X11;
             }
-            else if(WindowState == FormWindowState.Maximized)
+            else if (WindowState == FormWindowState.Maximized)
             {
                 Button_MaxRest.Image = Properties.Resources.Restaurar14x11;
             }
@@ -1343,8 +1381,8 @@ namespace DisenoColumnas
         private void Form1_Load(object sender, EventArgs e)
         {
             Proyecto_ = new Proyecto();
-            CreateDidctonaries();
-            mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+            CreateDictonaries();
+            mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             Main_Secciones.Crear_archivo();
         }
 
@@ -1481,7 +1519,7 @@ namespace DisenoColumnas
             if (mAgregarAlzado != null)
             {
                 mAgregarAlzado.CrearDataGrid(true);
-                
+
 
             }
             if (m_Despiece != null)
@@ -1506,7 +1544,7 @@ namespace DisenoColumnas
                 }
             }
 
-            if (ColumnasADiseñar.Count != 0 & CancelDiseño==false)
+            if (ColumnasADiseñar.Count != 0 & CancelDiseño == false)
             {
                 Diseñar(ref ColumnasADiseñar);
             }
@@ -1517,9 +1555,9 @@ namespace DisenoColumnas
             CUsuario usuario = new CUsuario();
             usuario.Get_user();
 
-            if (usuario.Permiso==true)
+            if (usuario.Permiso == true)
             {
-                mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_predef);
+                mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_predef);
                 mIntefazSeccion.Show(PanelContenedor);
                 mIntefazSeccion.Get_Predef_Secction();
                 mIntefazSeccion.Invalidate();
@@ -1575,12 +1613,12 @@ namespace DisenoColumnas
             {
                 if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
                 {
-                    mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+                    mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
                 }
             }
             else
             {
-                mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+                mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             }
             mIntefazSeccion.Show(PanelContenedor);
         }
@@ -1611,13 +1649,13 @@ namespace DisenoColumnas
                     columnasDrawing.Add(col);
                 }
             }
-            
-            foreach(Columna col in Proyecto_.Lista_Columnas)
-             {
-                
-                if(col.ColSimilName != null)
+
+            foreach (Columna col in Proyecto_.Lista_Columnas)
+            {
+
+                if (col.ColSimilName != null)
                 {
-                    if(columnasDrawing.Exists(x=> x.Name == col.Name))
+                    if (columnasDrawing.Exists(x => x.Name == col.Name))
                     {
                         columnasDrawing.Remove(col);
                     }
@@ -1625,17 +1663,66 @@ namespace DisenoColumnas
                     Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.Name);
                 }
 
-             }
+            }
 
-
-            if(CancelGarfica == false && columnasDrawing.Count != 0)
+            bool Activar_CuantiMax = false;
+            List<string> NamesColumsMax = new List<string>();
+            if (CancelGarfica == false && columnasDrawing.Count != 0)
             {
-                GraficarAlzadoColumnas(ref columnasDrawing);
+
+
+                foreach (Columna col in columnasDrawing)
+                {
+                    for (int i = col.resultadosETABs.Count - 1; i >= 0; i--)
+                    {
+
+                        if (col.resultadosETABs[i].AsTopMediumButton[0] / (col.Seccions[i].Item1.Area) > 0.04)
+                        {
+                            Activar_CuantiMax = true;
+                            NamesColumsMax.Add(col.Name);
+                        }
+                        else if (col.resultadosETABs[i].AsTopMediumButton[1] / (col.Seccions[i].Item1.Area) > 0.04)
+                        {
+                            Activar_CuantiMax = true;
+                            NamesColumsMax.Add(col.Name);
+                        }
+                        else if (col.resultadosETABs[i].AsTopMediumButton[2] / (col.Seccions[i].Item1.Area) > 0.04)
+                        {
+                            Activar_CuantiMax = true;
+                            NamesColumsMax.Add(col.Name);
+                        }
+
+                    }
+
+
+
+                }
+
+                List<string> NamesColumMax = NamesColumsMax.Distinct().ToList();
+                string ColumnasMaximas = "";
+                foreach (string Name in NamesColumMax)
+                {
+                    ColumnasMaximas += Name + ",";
+                }
+
+                string MensajeColumnasMaxMaxima = "La(s) columna(s): " + ColumnasMaximas + "  en el acero requerido superan la cuantía máxima permisible.";
+                DialogResult messageBox;
+                messageBox = DialogResult.Yes;
+                if (Activar_CuantiMax)
+                {
+                    MessageBox.Show(MensajeColumnasMaxMaxima, Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    messageBox = MessageBox.Show("¿Desea continuar? ", Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                }
+
+                if (messageBox == DialogResult.Yes)
+                {
+                    GraficarAlzadoColumnas(ref columnasDrawing);
+                }
             }
 
 
         }
-
 
 
         private void GraficarAlzadoColumnas(ref List<Columna> ColumnsDrawing)
@@ -1645,7 +1732,7 @@ namespace DisenoColumnas
             FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
             FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
 
-            MessageBox.Show("Posicione el puntero en AutoCAD.",Proyecto_.Empresa,MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("Posicione el puntero en AutoCAD.", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
             double DeltaX = 0;
@@ -1666,6 +1753,191 @@ namespace DisenoColumnas
             }
             MessageBox.Show("Alzado graficado con éxito.", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void AcercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Interfaz_Inicial.Derechos_de_Autor.Autores autores = new Interfaz_Inicial.Derechos_de_Autor.Autores();
+
+            autores.ShowDialog();
+        }
+
+        private void DespieceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_Despiece.Created == false)
+            {
+                m_Despiece = new Despiece();
+            }
+            m_Despiece.Show(PanelContenedor);
+        }
+
+
+
+
+
+
+        private void PanelContenedor_ActiveContentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+        //#region Redimensionar Form
+
+        //public enum ResizeDirection
+        //{
+        //    None, Left, TopLeft, Top, TopRight, Right, BottomRight, Bottom, BottomLeft
+        //}
+
+
+        //private const int BorderWidth = 6;
+        //private ResizeDirection _resizeDir = ResizeDirection.None;
+
+        //private const int WM_NCLBUTTONDOWN = 0xA1;
+        //private const int HTBORDER = 18;
+        //private const int HTBOTTOM = 15;
+        //private const int HTBOTTOMLEFT = 16;
+        //private const int HTBOTTOMRIGHT = 17;
+        //private const int HTCAPTION = 2;
+        //private const int HTLEFT = 10;
+        //private const int HTRIGTH = 11;
+        //private const int HTTOP = 12;
+        //private const int HTTOPLEFT = 13;
+        //private const int HTTOPRIGHT = 14;
+        //public ResizeDirection resizeDir {
+        //    get { return _resizeDir; }
+        //    set
+        //    {
+        //        switch (value)
+        //        {
+        //            case ResizeDirection.Left:
+        //                Cursor = Cursors.SizeWE;
+        //                break;
+        //            case ResizeDirection.Right:
+        //                Cursor = Cursors.SizeWE;
+        //                break;
+        //            case ResizeDirection.Top:
+        //                Cursor = Cursors.SizeNS;
+        //                break;
+        //            case ResizeDirection.Bottom:
+        //                Cursor = Cursors.SizeNS;
+        //                break;
+        //            case ResizeDirection.BottomLeft:
+        //                Cursor = Cursors.SizeNESW;
+        //                break;
+        //            case ResizeDirection.TopRight:
+        //                Cursor = Cursors.SizeNESW;
+        //                break;
+        //            case ResizeDirection.BottomRight:
+        //                Cursor = Cursors.SizeNWSE;
+        //                break;
+        //            case ResizeDirection.TopLeft:
+        //                Cursor = Cursors.SizeNWSE;
+        //                break;
+        //            default:
+        //                Cursor = Cursors.Default;
+        //                break;
+        //        }
+
+        //    }
+
+        //}
+
+
+        //private void ResizeForm(ResizeDirection direction)
+        //{
+        //    int dir = -1;
+        //    switch (direction)
+        //    {
+        //        case ResizeDirection.Left:
+        //            dir = HTLEFT;
+        //            break;
+        //        case ResizeDirection.Right:
+        //            dir = HTRIGTH;
+        //            break;
+        //        case ResizeDirection.Top:
+        //            dir = HTTOP;
+        //            break;
+        //        case ResizeDirection.Bottom:
+        //            dir = HTBOTTOM;
+        //            break;
+        //        case ResizeDirection.BottomLeft:
+        //            dir = HTBOTTOMLEFT;
+        //            break;
+        //        case ResizeDirection.TopRight:
+        //            dir= HTTOPRIGHT;
+        //            break;
+        //        case ResizeDirection.BottomRight:
+        //            dir = HTBOTTOMRIGHT;
+        //            break;
+        //        case ResizeDirection.TopLeft:
+        //            dir = HTTOPLEFT;
+        //            break;
+        //    }
+
+        //    if(dir!= -1)
+        //    {
+        //        MoveWindow.SendMessage(Handle, WM_NCLBUTTONDOWN, dir, 0);
+        //    }
+        //}
+
+        //private void Form1_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    if(e.Button == MouseButtons.Left && WindowState != FormWindowState.Maximized)
+        //    {
+        //        ResizeForm(resizeDir);
+        //    }
+        //}
+
+
+        //private void Form1_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (e.Location.X < BorderWidth & e.Location.Y < BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.TopLeft;
+        //    }
+        //    else if (e.Location.X < BorderWidth & e.Location.Y > Height - BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.BottomLeft;
+        //    }
+        //    else if (e.Location.X > Width - BorderWidth && e.Location.Y > Height - BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.BottomRight;
+        //    }
+        //    else if (e.Location.X > Width - BorderWidth & e.Location.Y < BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.TopRight;
+
+        //    }
+        //    else if (e.Location.X < BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.Left;
+        //    }
+        //    else if (e.Location.X > Width - BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.Right;
+        //    }
+        //    else if (e.Location.Y < BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.Top;
+        //    }
+        //    else if (e.Location.Y > Height - BorderWidth)
+        //    {
+        //        resizeDir = ResizeDirection.Bottom;
+        //    }
+        //    else
+        //    {
+        //        resizeDir = ResizeDirection.None;
+        //    }
+
+
+        //}
+        //#endregion
 
     }
 }
