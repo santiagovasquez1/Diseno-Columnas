@@ -30,11 +30,12 @@ namespace DisenoColumnas.Clases
         public double Area { get; set; }
         public double Acero_Long { get; set; }
         public Estribo Estribo { get; set; }
-        public List<Point> Vertices { get; set; } = new List<Point>();
+        public List<PointF> Vertices { get; set; } = new List<PointF>();
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
-        [NonSerialized] public List<GraphicsPath> Shapes_ref = new List<GraphicsPath>();
+        [NonSerialized] private List<GraphicsPath> pShapes_ref = new List<GraphicsPath>();
         public List<float[]> CoordenadasSeccion { get; set; }
         public bool Editado { get; set; } = false;
+        public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
         public CRectangulo(string Nombre, float B_, float H_, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
@@ -187,11 +188,11 @@ namespace DisenoColumnas.Clases
             s_min = 7.5;
             Separador_decimal = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
-            G_As1 = B * 100 - 2 * 2 + 2 * 17; //'Longitud del gancho transversal
-            G_As2 = B * 100 - 2 * 2 + 2 * 20.5; //'Longitud del gancho transversal
+            G_As1 = B * 100 - 2 * 2 + 2 * 17; //'Longitud del gancho transversal para Ast1
+            G_As2 = B * 100 - 2 * 2 + 2 * 20.5; //'Longitud del gancho transversal para Ast2
 
-            LG_As1 = H * 100 - 2 * r * 100 + 2 * 17; //'Longitud del gancho longitudinal
-            LG_As2 = H * 100 - 2 * r * 100 + 2 * 20.5; //'Longitud del gancho longitudinal
+            LG_As1 = H * 100 - 2 * r * 100 + 2 * 17; //'Longitud del gancho longitudinal para Ast1
+            LG_As2 = H * 100 - 2 * r * 100 + 2 * 20.5; //'Longitud del gancho longitudinal para Ast2
 
             if (Form1.Proyecto_.DMO_DES == GDE.DMO)
             {
@@ -222,7 +223,7 @@ namespace DisenoColumnas.Clases
                 GT_As1.Add(Num_Ramas_V.Last() * (G_As1 * Estribo.NoRamasH1 + LG_As1 * Estribo.NoRamasV1));
                 P_As1.Add(GT_As1.Last() * Ast1 * 7850 / Math.Pow(100, 3));
 
-                #endregion 
+                #endregion Estribo #3
 
                 #region Estribo #4
 
@@ -278,7 +279,6 @@ namespace DisenoColumnas.Clases
 
             foreach (CRefuerzo refuerzoi in Refuerzos)
             {
-     
                 path = new GraphicsPath();
                 r = Form1.Proyecto_.Diametro_ref[Convert.ToInt32(refuerzoi.Diametro.Substring(1))] / 2;
                 r = r * EscalaR;
@@ -293,7 +293,7 @@ namespace DisenoColumnas.Clases
                     Name = "FY4220"
                 };
 
-                circulo = new CCirculo("Refuerzo",r, Centro,material,TipodeSeccion.Circle);
+                circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle);
                 circulo.Set_puntos(10);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
@@ -340,18 +340,6 @@ namespace DisenoColumnas.Clases
                 Area = Area
             };
             return temp;
-        }
-
-        public static T DeepClone<T>(T obj)
-        {
-            using (var ms = new MemoryStream())
-            {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, obj);
-                ms.Position = 0;
-
-                return (T)formatter.Deserialize(ms);
-            }
         }
 
         public override string ToString()
@@ -447,6 +435,59 @@ namespace DisenoColumnas.Clases
                 Tuple<int, int> TupleAux = new Tuple<int, int>(Refuer.Refuerzo.Count, Convert.ToInt32(Refuer.Diametro.Replace("#", "")));
                 No_D_Barra.Add(TupleAux);
             }
+        }
+
+        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
+        {
+            double X, Y;
+            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            Pen P1;
+
+            if (seleccion == false)
+            {
+                P1 = new Pen(Color.Black, 2.5f)
+                {
+                    Brush = Brushes.Gray,
+                    Color = Color.Black,
+                    DashStyle = DashStyle.Solid,
+                    LineJoin = LineJoin.MiterClipped,
+                    Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+                };
+            }
+            else
+            {
+                P1 = new Pen(Color.Black, 3f)
+                {
+                    Brush = Brushes.DarkRed,
+                    Color = Color.DarkRed,
+                    DashStyle = DashStyle.Dash,
+                    LineJoin = LineJoin.Round,
+                    Alignment = PenAlignment.Center
+                };
+            }
+
+            #region Vertices
+
+            X = -(B * 100 / 2) * EscalaX;
+            Y = -(H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X, (float)Y));
+
+            X = (B * 100 / 2) * EscalaX;
+            Y = -(H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X, (float)Y));
+
+            X = (B * 100 / 2) * EscalaX;
+            Y = (H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X, (float)Y));
+
+            X = -(B * 100 / 2) * EscalaX;
+            Y = (H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X, (float)Y));
+
+            #endregion Vertices
+
+            g.DrawPolygon(P1, Vertices.ToArray());
+            g.FillPolygon(br, Vertices.ToArray());
         }
 
         #endregion Propiedades y Metodos - Secciones Predefinidas

@@ -19,12 +19,13 @@ namespace DisenoColumnas.Clases
         public double Acero_Long { get; set; }
         public Estribo Estribo { get; set; }
         public List<CRefuerzo> Refuerzos { get; set; } = new List<CRefuerzo>();
-        [NonSerialized] public List<GraphicsPath> Shapes_ref = new List<GraphicsPath>();
+        [NonSerialized] private List<GraphicsPath> pShapes_ref = new List<GraphicsPath>();
         public List<float[]> CoordenadasSeccion { get; set; }
         public bool Editado { get; set; } = false;
         public List<Tuple<int, int>> No_D_Barra { get; set; }
-        public float B { get { return 2 * (float)radio; } set { B=value; } }
-        public float H { get { return 2 * (float)radio; } set { H = value; } }        
+        public float B { get { return 2 * (float)radio; } set { B = value; } }
+        public float H { get { return 2 * (float)radio; } set { H = value; } }
+        public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
         public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_)
         {
@@ -241,7 +242,36 @@ namespace DisenoColumnas.Clases
 
         public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
         {
-            throw new NotImplementedException();
+            double X, Y;
+            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            Pen P1;
+
+            if (seleccion == false)
+            {
+                P1 = new Pen(Color.Black, 2.5f)
+                {
+                    Brush = Brushes.Gray,
+                    Color = Color.Black,
+                    DashStyle = DashStyle.Solid,
+                    LineJoin = LineJoin.MiterClipped,
+                    Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+                };
+            }
+            else
+            {
+                P1 = new Pen(Color.Black, 3f)
+                {
+                    Brush = Brushes.DarkRed,
+                    Color = Color.DarkRed,
+                    DashStyle = DashStyle.Dash,
+                    LineJoin = LineJoin.Round,
+                    Alignment = PenAlignment.Center
+                };
+            }
+
+            Set_puntos(50);
+            g.DrawClosedCurve(P1, Puntos.ToArray());
+            g.FillClosedCurve(br, Puntos.ToArray());
         }
     }
 }

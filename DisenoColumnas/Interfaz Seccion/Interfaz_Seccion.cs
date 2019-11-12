@@ -72,7 +72,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_grilla(g, Grafica.Height, Grafica.Width);
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
-                Dibujo_Seccion(g,seccion);
+                seccion.Dibujo_Seccion(g, EscalaX, EscalaY, Over);
                 seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
                 Dibujo_Refuerzo(g, seccion);
 
