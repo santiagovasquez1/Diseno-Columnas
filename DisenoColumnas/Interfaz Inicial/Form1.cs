@@ -991,29 +991,32 @@ namespace DisenoColumnas
                         string NameSeccion = LineAssingns[j][5].Replace("\"", "");
                         foreach (Columna colum in Proyecto_.Lista_Columnas)
                         {
-                            ISeccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                            ISeccion seccion = null;
+                            if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
+                            {
+                                ISeccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                                ISeccion seccion = null;
 
-                            if (secciones_predef.Secciones.Exists(x => x == temp) == true)
-                            {
-                                seccion = secciones_predef.Secciones.Find(x => x == temp);
-                                seccion.B = temp.B;
-                                seccion.H = temp.H;
-                            }
-                            else
-                            {
-                                seccion = temp;
-                            }
+                                if (secciones_predef.Secciones.Exists(x => x == temp) == true)
+                                {
+                                    seccion = secciones_predef.Secciones.Find(x => x == temp);
+                                    seccion.B = temp.B;
+                                    seccion.H = temp.H;
+                                }
+                                else
+                                {
+                                    seccion = temp;
+                                }
 
-                            if (seccion.Shape == TipodeSeccion.None)
-                            {
-                                seccion = null;
-                            }
-                            else
-                            {
-                                Tuple<ISeccion, string> tuple_aux = new Tuple<ISeccion, string>(seccion, Story);
-                                colum.Seccions.Add(tuple_aux);
-                            }
+                                if (seccion.Shape == TipodeSeccion.None)
+                                {
+                                    seccion = null;
+                                }
+                                else
+                                {
+                                    Tuple<ISeccion, string> tuple_aux = new Tuple<ISeccion, string>(seccion, Story);
+                                    colum.Seccions.Add(tuple_aux);
+                                }
+                            }                            
                         }
                     }
                 }
