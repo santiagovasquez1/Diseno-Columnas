@@ -286,24 +286,55 @@ namespace DisenoColumnas.Secciones
             List<PointF> Vertices = new List<PointF>();
             List<PointF> Vertices2 = new List<PointF>();
 
-            double X1, Y1, X2, Y2;
-            double Xr1, Yr1, Xr2, Yr2;
+            double X1, Y1, X2, Y2, X3, X4, Y3, Y4;
+            double Xr1, Yr1, Xr2, Yr2, Xr3, Xr4, Yr3, Yr4;
 
-            X1 = B * 100 / 2 * EscalaX;
-            Y1 = H * 100 / 2 * EscalaY;
-            X2 = TW * 100 / 2 * EscalaX;
-            Y2 = (H - TF) * 100 * EscalaY;
+            X1 = 0;
+            Y1 = 0;
+            X2 = 0;
+            Y2 = 0;
+
+            X3 = 0;
+            Y3 = 0;
+            X4 = 0;
+            Y4 = 0;
 
             var Xunicos = CoordenadasSeccion.Select(x => x[0]).Distinct().ToList();
             var Yunicos = CoordenadasSeccion.Select(x => x[1]).Distinct().ToList();
 
             if (Shape == TipodeSeccion.L)
             {
-                //X1 = Xunicos.Min()*EscalaX;
-                //X2 = (Xunicos.Min() + B) * EscalaX;
-                //Y1 = Yunicos.Min() * EscalaX;
-                //Y2= (Yunicos.Min() + H) * EscalaX;
+                //Aleta seccion
+                X1 = (Xunicos.Min() + rec) * 100 * EscalaX;
+                X2 = (Xunicos.Min() + B - rec) * 100 * EscalaX;
+                
+                var aux = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList();
+                var aux2 = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min()).ToList();
 
+                if (aux.Exists(x=>x[0]==Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
+                {
+                    Y1 = (Yunicos.Min() - rec) * 100 * EscalaY;
+                    Y2 = (Yunicos.Min() + TF + rec) * 100 * EscalaY;
+                }
+                else
+                {
+                    Y1 = (Yunicos.Max() - rec) * 100 * EscalaY;
+                    Y2 = (Yunicos.Max() - TF + rec) * 100 * EscalaY;
+                }
+
+                if (aux2.Exists(x => x[1] == Yunicos.Min()) & aux.Exists(x => x[1] == Yunicos.Max()))
+                {
+                    X3 = (Xunicos.Min() + rec+0.02) * 100 * EscalaX;
+                    X4 = (Xunicos.Min() + TW + rec) * 100 * EscalaX;
+                }
+                else
+                {
+                    X3 = (Xunicos.Max() - rec-0.02) * 100 * EscalaX;
+                    X4 = (Xunicos.Max() - TW + rec) * 100 * EscalaX;
+                }
+
+                Y3 = (Yunicos.Min() + rec) * 100 * EscalaY;
+                Y4 = (Yunicos.Max() - rec-0.02) * 100 * EscalaY;
             }
 
             //Dibujo estribo en el alma
@@ -312,15 +343,21 @@ namespace DisenoColumnas.Secciones
             Xr2 = X2 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
             Yr2 = Y2 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
 
-            Vertices.Add(new PointF((float)-X2, (float)-Y1));
-            Vertices.Add(new PointF((float)X2, (float)-Y1));
-            Vertices.Add(new PointF((float)X2, (float)(Y1 - Y2)));
-            Vertices.Add(new PointF((float)-X2, (float)(Y1 - Y2)));
+            Xr3 = X3 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
+            Yr3 = Y3 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
+            Xr4 = X4 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
+            Yr4 = Y4 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
 
-            Vertices2.Add(new PointF((float)-Xr2, (float)-Yr1));
-            Vertices2.Add(new PointF((float)Xr2, (float)-Yr1));
-            Vertices2.Add(new PointF((float)Xr2, (float)(Yr1 - Yr2)));
-            Vertices2.Add(new PointF((float)-Xr2, (float)(Yr1 - Yr2)));
+
+            Vertices.Add(new PointF((float)X1, (float)Y1));
+            Vertices.Add(new PointF((float)X2, (float)Y1));
+            Vertices.Add(new PointF((float)X2, (float)Y2));
+            Vertices.Add(new PointF((float)X1, (float)Y2));
+
+            Vertices2.Add(new PointF((float)Xr1, (float)Yr1));
+            Vertices2.Add(new PointF((float)Xr2, (float)Yr1));
+            Vertices2.Add(new PointF((float)Xr2, (float)Yr2));
+            Vertices2.Add(new PointF((float)Xr1, (float)Yr2));
 
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
@@ -330,15 +367,15 @@ namespace DisenoColumnas.Secciones
             Vertices = new List<PointF>();
             Vertices2 = new List<PointF>();
 
-            Vertices.Add(new PointF((float)-X1, (float)(Y1 - Y2)));
-            Vertices.Add(new PointF((float)X1, (float)(Y1 - Y2)));
-            Vertices.Add(new PointF((float)X1, (float)Y1));
-            Vertices.Add(new PointF((float)-X1, (float)Y1));
+            Vertices.Add(new PointF((float)X3, (float)Y3));
+            Vertices.Add(new PointF((float)X4, (float)Y3));
+            Vertices.Add(new PointF((float)X4, (float)Y4));
+            Vertices.Add(new PointF((float)X3, (float)Y4));
 
-            Vertices2.Add(new PointF((float)-Xr1, (float)(Yr1 - Yr2)));
-            Vertices2.Add(new PointF((float)Xr1, (float)(Yr1 - Yr2)));
-            Vertices2.Add(new PointF((float)Xr1, (float)Yr1));
-            Vertices2.Add(new PointF((float)-Xr1, (float)Yr1));
+            Vertices2.Add(new PointF((float)Xr3, (float)Yr3));
+            Vertices2.Add(new PointF((float)Xr4, (float)Yr3));
+            Vertices2.Add(new PointF((float)Xr4, (float)Yr4));
+            Vertices2.Add(new PointF((float)Xr3, (float)Yr4));
 
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
