@@ -145,7 +145,7 @@ namespace DisenoColumnas.Clases
                 if (Coord_Alzado_PB_Escal.Count == 2)
                 {
 
-                    if (Tipo == "T2")
+                    if (Tipo == "T2" | Tipo =="A")
                     {
                         if (e.X >= Coord_Alzado_PB_Escal[0][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                             e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
@@ -226,13 +226,41 @@ namespace DisenoColumnas.Clases
                         }
                     }
                 }
-                else
+
+                if (Coord_Alzado_PB_Escal.Count == 4)
                 {
 
+                    if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
+                              e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
+                    {
+
+                        MouseX = Cursor.Position.X;
+                        MouseY = Cursor.Position.Y;
+                        MoveBarra = true;
+                    }
+                    else if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[0][0] &&
+                              e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB[0][1] + EsBarra)
+                    {
+                        MouseX = Cursor.Position.X;
+                        MouseY = Cursor.Position.Y;
+                        MoveBarra = true;
+                    }
+                    else if (e.X >= Coord_Alzado_PB_Escal[2][0] && e.X <= Coord_Alzado_PB_Escal[3][0] &&
+                     e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB[2][1] + EsBarra)
+                    {
+                        MouseX = Cursor.Position.X;
+                        MouseY = Cursor.Position.Y;
+                        MoveBarra = true;
+                    }
+
+                    else
+                    {
+                        MoveBarra = false;
+                    }
+
+
                 }
-
             }
-
         }
 
 
