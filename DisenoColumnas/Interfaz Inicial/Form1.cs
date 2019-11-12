@@ -4,6 +4,7 @@ using DisenoColumnas.Diseño;
 using DisenoColumnas.Interfaz_Inicial;
 using DisenoColumnas.Interfaz_Seccion;
 using DisenoColumnas.InterfazViewInfo;
+using DisenoColumnas.Secciones;
 using DisenoColumnas.Secciones_Predefinidas;
 using DisenoColumnas.Utilidades;
 using System;
@@ -121,7 +122,6 @@ namespace DisenoColumnas
 
             if (openFileDialog.FileName != "")
             {
-
                 if (Proyecto_ != null)
                 {
                     DialogResult box;
@@ -168,14 +168,12 @@ namespace DisenoColumnas
                 mFuerzasEnElmentos = new FuerzasEnElementos();
                 mFuerzasEnElmentos.Show(PanelContenedor);
 
-
                 LColumna.Items.Clear();
                 LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
                 if (Proyecto_.ColumnaSelect != null)
                 {
-
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
                 }
 
@@ -301,10 +299,8 @@ namespace DisenoColumnas
 
             if (Proyecto_ != null)
             {
-
                 if (Proyecto_.AlturaEdificio != 0)
                 {
-
                     if (Proyecto_.Ruta == "" | Proyecto_.Ruta != "")
                     {
                         DialogResult box;
@@ -329,7 +325,6 @@ namespace DisenoColumnas
 
             if (Ruta1 != "" & Ruta2 != "" & Ruta3 != "")
             {
-
                 L_NameProject.Visible = true;
                 L_NameProject.Text = Proyecto_.Name = "Proyecto1";
                 CloseWindows();
@@ -339,9 +334,6 @@ namespace DisenoColumnas
 
                 variablesdeEntrada = new VariablesdeEntrada(false);
                 variablesdeEntrada.ShowDialog();
-
-
-
 
                 m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
                 string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
@@ -359,11 +351,8 @@ namespace DisenoColumnas
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
-
                 mFuerzasEnElmentos = new FuerzasEnElementos();
                 mFuerzasEnElmentos.Show(PanelContenedor);
-
-
 
                 mAgregarAlzado = new AgregarAlzado();
                 LColumna.Enabled = true;
@@ -521,16 +510,12 @@ namespace DisenoColumnas
                 Proyecto_ = new Proyecto();
                 ArchivoE2K2009ETABS = FunctionsProject.AbrirArchivoE2K2009(openFileDialog1.FileName);
                 CrearObjetosNecesarios();
-
             }
             return openFileDialog1.FileName;
         }
 
-
-
         private string AsingarFuerzasColumnas()
         {
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.Title = "Fuerzas en Columnas";
@@ -553,9 +538,7 @@ namespace DisenoColumnas
             }
 
             return openFileDialog.FileName;
-
         }
-
 
         private string AsingarResultadosaColumna()
         {
@@ -583,8 +566,6 @@ namespace DisenoColumnas
             return openFileDialog.FileName;
         }
 
-
-
         private void CargarFuerzasColumnas()
         {
             List<List<string>> Resultados2 = new List<List<string>>();
@@ -599,14 +580,12 @@ namespace DisenoColumnas
 
             foreach (Columna columna in Proyecto_.Lista_Columnas)
             {
-
                 for (int i = 1; i < Resultados2.Count; i++)
                 {
                     for (int j = 0; j < columna.Seccions.Count; j++)
                     {
                         if (columna.Name == Resultados2[i][1] && columna.Seccions[j].Item2 == Resultados2[i][0])
                         {
-
                             columna.resultadosETABs[j].Story_Result.Add(Resultados2[i][0]);
                             columna.resultadosETABs[j].Load.Add(Resultados2[i][2]);
                             columna.resultadosETABs[j].Loc.Add(Convert.ToSingle(Resultados2[i][3]));
@@ -616,17 +595,11 @@ namespace DisenoColumnas
                             columna.resultadosETABs[j].T.Add(Convert.ToSingle(Resultados2[i][7]));
                             columna.resultadosETABs[j].M2.Add(Convert.ToSingle(Resultados2[i][8]));
                             columna.resultadosETABs[j].M3.Add(Convert.ToSingle(Resultados2[i][9]));
-
                         }
-
                     }
                 }
-
-
             }
         }
-
-
 
         private void AsignarResultados()
         {
@@ -744,7 +717,7 @@ namespace DisenoColumnas
 
             //Secciones
 
-            Proyecto_.Lista_Secciones = new List<Seccion>();
+            Proyecto_.Lista_Secciones = new List<ISeccion>();
 
             int Inicio_FrameSecctions = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ FRAME SECTIONS")) + 1;
             int Final_FrameSecctions = ArchivoE2K2009ETABS.FindIndex(x => x.Contains("$ REBAR DEFINITIONS")) - 1;
@@ -755,6 +728,9 @@ namespace DisenoColumnas
             {
                 if (ArchivoE2K2009ETABS[i].Contains("Rectangular") | ArchivoE2K2009ETABS[i].Contains("Circle") | ArchivoE2K2009ETABS[i].Contains("Te") | ArchivoE2K2009ETABS[i].Contains("Angle") | ArchivoE2K2009ETABS[i].Contains("SD Section"))
                 {
+                    if (ArchivoE2K2009ETABS[i].Contains("SD Section"))
+                    {
+                    }
                     Lista_Secciones_Aux.Add(ArchivoE2K2009ETABS[i].Split().ToList());
                 }
             }
@@ -866,7 +842,34 @@ namespace DisenoColumnas
                 {
                     if (mAT_.Name == Material_Aux)
                     {
-                        Seccion seccion = new Seccion(Nombre, B, H, TF, TW, mAT_, tipodeSeccion, Coord);
+                        ISeccion seccion = new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
+
+                        if (tipodeSeccion == TipodeSeccion.Rectangular)
+                        {
+                            seccion = new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
+                        }
+
+                        if (tipodeSeccion == TipodeSeccion.Circle)
+                        {
+                            seccion = new CCirculo(Nombre, B / 2, pCentro: new double[] { 0, 0 }, Material_: mAT_, Shape_: tipodeSeccion, pCoord: Coord);
+                        }
+
+                        if (tipodeSeccion == TipodeSeccion.Tee | tipodeSeccion == TipodeSeccion.L)
+                        {
+                            float pTw, pTf;
+                            float pH, pB;
+
+                            var Xunicos = Coord.Select(x => x[0]).Distinct().ToList();
+                            var Yunicos = Coord.Select(x => x[1]).Distinct().ToList();
+
+                            pTw = FunctionsProject.Dimension(Xunicos, false);
+                            pTf = FunctionsProject.Dimension(Yunicos, false);
+                            pB = FunctionsProject.Dimension(Xunicos, true);
+                            pH = FunctionsProject.Dimension(Yunicos, true);
+
+                            seccion = new CSD(Nombre, pB, pH, pTw, pTf, mAT_, tipodeSeccion, Coord);
+                        }
+
                         Proyecto_.Lista_Secciones.Add(seccion);
                     }
                 }
@@ -947,9 +950,9 @@ namespace DisenoColumnas
                         {
                             if (viga.Name == NameBeam && Story == Proyecto_.Stories[i].Item1)
                             {
-                                Seccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                                Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
-                                viga.Seccions.Add(tuple_aux);
+                              ISeccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                              Tuple<CRectangulo, string> tuple_aux = new Tuple<CRectangulo, string>((CRectangulo)seccion, Story);
+                              viga.Seccions.Add(tuple_aux);
                             }
                         }
                     }
@@ -988,29 +991,28 @@ namespace DisenoColumnas
                         string NameSeccion = LineAssingns[j][5].Replace("\"", "");
                         foreach (Columna colum in Proyecto_.Lista_Columnas)
                         {
-                            if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
+                            ISeccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                            ISeccion seccion = null;
+
+                            if (secciones_predef.Secciones.Exists(x => x == temp) == true)
                             {
-                                Seccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                                Seccion seccion = null;
+                                seccion = secciones_predef.Secciones.Find(x => x == temp);
+                                seccion.B = temp.B;
+                                seccion.H = temp.H;
+                            }
+                            else
+                            {
+                                seccion = temp;
+                            }
 
-                                if (secciones_predef.Secciones.Exists(x => x == temp) == true)
-                                {
-                                    seccion = secciones_predef.Secciones.Find(x => x == temp);
-                                }
-                                else
-                                {
-                                    seccion = temp;
-                                }
-
-                                if (seccion.Shape == TipodeSeccion.None)
-                                {
-                                    seccion = null;
-                                }
-                                else
-                                {
-                                    Tuple<Seccion, string> tuple_aux = new Tuple<Seccion, string>(seccion, Story);
-                                    colum.Seccions.Add(tuple_aux);
-                                }
+                            if (seccion.Shape == TipodeSeccion.None)
+                            {
+                                seccion = null;
+                            }
+                            else
+                            {
+                                Tuple<ISeccion, string> tuple_aux = new Tuple<ISeccion, string>(seccion, Story);
+                                colum.Seccions.Add(tuple_aux);
                             }
                         }
                     }
@@ -1032,12 +1034,12 @@ namespace DisenoColumnas
                 }
 
                 Viga VigaMayor = new Viga("Viga con Mayor H Por Piso");
-                Seccion seccionMayor = new Seccion("Inicial", 0, -99999, 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
-                Tuple<Seccion, string> tuple_Seccion_Mayor = null;
+                ISeccion seccionMayor = new CRectangulo("Inicial", 0, -99999, new MAT_CONCRETE(), TipodeSeccion.None);
+                Tuple<CRectangulo, string> tuple_Seccion_Mayor = null;
 
                 for (int i = 0; i < column.Seccions.Count; i++)
                 {
-                    tuple_Seccion_Mayor = new Tuple<Seccion, string>(seccionMayor, column.Seccions[i].Item2);
+                    tuple_Seccion_Mayor = new Tuple<CRectangulo, string>((CRectangulo)seccionMayor, column.Seccions[i].Item2);
                     VigaMayor.Seccions.Add(tuple_Seccion_Mayor);
                 }
 
@@ -1239,7 +1241,6 @@ namespace DisenoColumnas
         {
         }
 
-
         private void Cb_cuantiavol_Click(object sender, EventArgs e)
         {
             if (Proyecto_.ColumnaSelect != null)
@@ -1394,8 +1395,6 @@ namespace DisenoColumnas
 
         private void Diseñar(ref List<Columna> Lista_ColumnasDiseñar)
         {
-
-
             //Limpiar Todos Los Alzados En Cada Columna
             foreach (Columna Col in Lista_ColumnasDiseñar)
             {
@@ -1419,7 +1418,7 @@ namespace DisenoColumnas
 
             //Determinar Cantidad de Barras Por Sección Predefinidas
 
-            foreach (Seccion seccion in secciones_predef.Secciones)
+            foreach (CRectangulo seccion in secciones_predef.Secciones)
             {
                 seccion.CalcNoDBarras();
             }
@@ -1430,7 +1429,7 @@ namespace DisenoColumnas
                 {
                     string[] Base = new string[0];
 
-                    foreach (Seccion seccionP in secciones_predef.Secciones)
+                    foreach (CRectangulo seccionP in secciones_predef.Secciones)
                     {
                         if (Col.Seccions[i].Item1.B == seccionP.B && Col.Seccions[i].Item1.H == seccionP.H || Col.Seccions[i].Item1.H == seccionP.B && Col.Seccions[i].Item1.B == seccionP.H)
                         {
@@ -1530,7 +1529,6 @@ namespace DisenoColumnas
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
             ColumnasaDiseñar SelecColumnsDisenar = new ColumnasaDiseñar();
             List<Columna> ColumnasADiseñar = new List<Columna>();
 
@@ -1598,13 +1596,11 @@ namespace DisenoColumnas
 
         private void CuantíaVolumétricaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (mCuantiaVolumetrica.Created == false)
             {
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
             }
             mCuantiaVolumetrica.Show(PanelContenedor);
-
         }
 
         private void DibujoDeSecciónToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1634,8 +1630,6 @@ namespace DisenoColumnas
 
         private void Button4_Click(object sender, EventArgs e)
         {
-
-
             ColumnasaGraficar columnasaGraficar = new ColumnasaGraficar();
             List<Columna> columnasDrawing = new List<Columna>();
 
@@ -1779,7 +1773,7 @@ namespace DisenoColumnas
 
 
 
-       
+
 
     }
 }

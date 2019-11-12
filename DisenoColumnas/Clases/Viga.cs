@@ -15,7 +15,7 @@ namespace DisenoColumnas.Clases
         public string Name { get; set; }
         public string[] Points { get; set; }
 
-        public List<Tuple<Seccion, string>> Seccions { get; set; } = new List<Tuple<Seccion, string>>();
+        public List<Tuple<CRectangulo, string>> Seccions { get; set; } = new List<Tuple<CRectangulo, string>>();
 
 
 

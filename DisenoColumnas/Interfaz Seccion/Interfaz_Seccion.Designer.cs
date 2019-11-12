@@ -86,6 +86,7 @@
             this.Grafica.Click += new System.EventHandler(this.Grafica_Click);
             this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
+            this.Grafica.MouseHover += new System.EventHandler(this.Grafica_MouseHover);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
             // 
             // label1

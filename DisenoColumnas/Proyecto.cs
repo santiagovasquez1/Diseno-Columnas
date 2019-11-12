@@ -36,7 +36,7 @@ namespace DisenoColumnas
         public float Nivel_Fundacion { get; set; }
         public List<Tuple<string, float>> Stories { get; set; }
         public List<MAT_CONCRETE> Lista_Materiales { get; set; }
-        public List<Seccion> Lista_Secciones { get; set; }
+        public List<ISeccion> Lista_Secciones { get; set; }
         public List<Columna> Lista_Columnas { get; set; }
         public List<Viga> Lista_Vigas { get; set; }
         public Columna ColumnaSelect { get; set; }

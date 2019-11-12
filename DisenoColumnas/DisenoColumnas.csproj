@@ -63,16 +63,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alzado.cs" />
-    <Compile Include="Clases\CCirculo.cs" />
+    <Compile Include="Secciones\CCirculo.cs" />
     <Compile Include="Clases\Columna.cs" />
     <Compile Include="Clases\ColumnaAlzadoDrawing.cs" />
     <Compile Include="Clases\CRefuerzo.cs" />
     <Compile Include="Clases\CUsuario.cs" />
     <Compile Include="Clases\Estribo.cs" />
-    <Compile Include="Clases\IEventosSeccion.cs" />
+    <Compile Include="Secciones\CSD.cs" />
+    <Compile Include="Secciones\ISeccion.cs" />
     <Compile Include="Clases\ResultadosETABS.cs" />
     <Compile Include="Clases\Material.cs" />
-    <Compile Include="Clases\Seccion.cs" />
+    <Compile Include="Secciones\CRectangulo.cs" />
     <Compile Include="Clases\Viga.cs" />
     <Compile Include="Diseño\AgregarAlzado.cs">
       <SubType>Form</SubType>

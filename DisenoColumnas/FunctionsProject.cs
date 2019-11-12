@@ -155,5 +155,40 @@ namespace DisenoColumnas
                 return valor * multiplo;
             }
         }
+
+        public static float Dimension(List<float> P_unicos,bool lado)
+        {
+            float Max = -(float)Math.Pow(10, 6);
+            float Min = (float)Math.Pow(10, 6);
+
+            for (int i = 0; i < P_unicos.Count; i++)
+            {
+                for (int j = 0; j < P_unicos.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        if (Math.Abs(P_unicos[i] - P_unicos[j]) >= Max)
+                        {
+                            Max = Math.Abs(P_unicos[i] - P_unicos[j]);
+                        }
+
+                        if (Math.Abs(P_unicos[i] - P_unicos[j]) <= Min)
+                        {
+                            Min = Math.Abs(P_unicos[i] - P_unicos[j]);
+                        }
+                    }
+
+                }
+            }
+
+            if (lado == true)
+            {
+                return Max;
+            }
+            else
+            {
+                return Min;
+            }
+        }
     }
 }

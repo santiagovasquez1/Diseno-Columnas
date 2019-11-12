@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisenoColumnas", "DisenoCol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpannedDataGridViewNet2", "..\SpannedDataGridViewNet2\SpannedDataGridViewNet2.csproj", "{2AB3E335-0E47-4EF6-B6A2-9EBF4B1967D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagrama de Interacción", "..\..\Proyectos Visual Studio\Diagrama de Interacción\Diagrama de Interacción\Diagrama de Interacción.csproj", "{7543EB5D-5A54-4EC1-A293-6D96F2C0C943}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{2AB3E335-0E47-4EF6-B6A2-9EBF4B1967D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AB3E335-0E47-4EF6-B6A2-9EBF4B1967D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AB3E335-0E47-4EF6-B6A2-9EBF4B1967D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7543EB5D-5A54-4EC1-A293-6D96F2C0C943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7543EB5D-5A54-4EC1-A293-6D96F2C0C943}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7543EB5D-5A54-4EC1-A293-6D96F2C0C943}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7543EB5D-5A54-4EC1-A293-6D96F2C0C943}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
