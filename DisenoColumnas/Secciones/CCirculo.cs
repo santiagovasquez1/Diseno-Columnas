@@ -24,7 +24,7 @@ namespace DisenoColumnas.Clases
         public bool Editado { get; set; } = false;
         public List<Tuple<int, int>> No_D_Barra { get; set; }
         public float B { get { return 2 * (float)radio; } set { B=value; } }
-        public float H { get { return 2 * (float)radio; } set { H = value; } }
+        public float H { get { return 2 * (float)radio; } set { H = value; } }        
 
         public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_)
         {
@@ -237,6 +237,11 @@ namespace DisenoColumnas.Clases
         public void CalcularArea()
         {
             Area = Math.PI * Math.Pow(radio, 2);
+        }
+
+        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
+        {
+            throw new NotImplementedException();
         }
     }
 }
