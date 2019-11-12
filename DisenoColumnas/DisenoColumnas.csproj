@@ -66,7 +66,7 @@
     <Compile Include="Clases\CRefuerzo.cs" />
     <Compile Include="Clases\CUsuario.cs" />
     <Compile Include="Clases\Estribo.cs" />
-    <Compile Include="Secciones\CTee.cs" />
+    <Compile Include="Secciones\CSD.cs" />
     <Compile Include="Secciones\ISeccion.cs" />
     <Compile Include="Clases\ResultadosETABS.cs" />
     <Compile Include="Clases\Material.cs" />

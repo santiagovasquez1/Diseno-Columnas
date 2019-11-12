@@ -15,6 +15,8 @@ namespace DisenoColumnas.Clases
         public double[] Centro { get; set; } = { };
         public List<PointF> Puntos { get; set; } = new List<PointF>();
         public TipodeSeccion Shape { get; set; }
+        [NonSerialized] private GraphicsPath pSeccion_path;
+        public GraphicsPath Seccion_path { get { return pSeccion_path; } set { pSeccion_path = value; } }
         public double Area { get; set; }
         public double Acero_Long { get; set; }
         public Estribo Estribo { get; set; }
@@ -27,7 +29,7 @@ namespace DisenoColumnas.Clases
         public float H { get { return 2 * (float)radio; } set { H = value; } }
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
-        public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_)
+        public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_,List<float[]>pCoord)
         {
             Name = Nombre;
             Material = Material_;
@@ -35,6 +37,7 @@ namespace DisenoColumnas.Clases
             CalcularArea();
             radio = pradio;
             Centro = pCentro;
+            CoordenadasSeccion = pCoord;
         }
 
         public void Set_puntos(int numero_puntos)
@@ -45,6 +48,8 @@ namespace DisenoColumnas.Clases
             PointF pi = new PointF();
             double xc = Centro[0];
             double yc = Centro[1];
+
+            Puntos = new List<PointF>();
 
             for (int i = 0; i < numero_puntos; i++)
             {
@@ -187,7 +192,7 @@ namespace DisenoColumnas.Clases
                     Name = "FY4220"
                 };
 
-                circulo = new CCirculo("Refuerzo", r, pcentro, material, TipodeSeccion.Circle);
+                circulo = new CCirculo("Refuerzo", r, pcentro, material, TipodeSeccion.Circle,pCoord:null);
                 circulo.Set_puntos(10);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
@@ -208,10 +213,10 @@ namespace DisenoColumnas.Clases
                 Name = "FY4220"
             };
 
-            circulo1 = new CCirculo("Refuerzo", r1, Centro, material, TipodeSeccion.Circle);
+            circulo1 = new CCirculo("Refuerzo", r1, Centro, material, TipodeSeccion.Circle,pCoord:null);
             circulo1.Set_puntos(50);
 
-            circulo2 = new CCirculo("Refuerzo", r2, Centro, material, TipodeSeccion.Circle);
+            circulo2 = new CCirculo("Refuerzo", r2, Centro, material, TipodeSeccion.Circle,pCoord:null);
             circulo2.Set_puntos(50);
 
             path.AddClosedCurve(circulo1.Puntos.ToArray());
@@ -242,9 +247,9 @@ namespace DisenoColumnas.Clases
 
         public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
         {
-            double X, Y;
             SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
             Pen P1;
+            Seccion_path = new GraphicsPath();
 
             if (seleccion == false)
             {
@@ -272,6 +277,7 @@ namespace DisenoColumnas.Clases
             Set_puntos(50);
             g.DrawClosedCurve(P1, Puntos.ToArray());
             g.FillClosedCurve(br, Puntos.ToArray());
+            Seccion_path.AddClosedCurve(Puntos.ToArray());
         }
     }
 }

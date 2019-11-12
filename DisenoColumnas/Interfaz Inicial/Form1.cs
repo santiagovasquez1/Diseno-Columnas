@@ -4,6 +4,7 @@ using DisenoColumnas.Diseño;
 using DisenoColumnas.Interfaz_Inicial;
 using DisenoColumnas.Interfaz_Seccion;
 using DisenoColumnas.InterfazViewInfo;
+using DisenoColumnas.Secciones;
 using DisenoColumnas.Secciones_Predefinidas;
 using DisenoColumnas.Utilidades;
 using System;
@@ -26,7 +27,7 @@ namespace DisenoColumnas
         public static FInterfaz_Seccion mIntefazSeccion;
         public static AgregarAlzado mAgregarAlzado;
         public static FuerzasEnElementos mFuerzasEnElmentos;
-        public  bool CancelDiseño = false;
+        public bool CancelDiseño = false;
         public bool CancelGarfica = false;
 
         private DeserializeDockContent m_deserializeDockContent;
@@ -118,7 +119,6 @@ namespace DisenoColumnas
 
             if (openFileDialog.FileName != "")
             {
-
                 if (Proyecto_ != null)
                 {
                     DialogResult box;
@@ -142,7 +142,8 @@ namespace DisenoColumnas
                 try
                 {
                     PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent);
-                }catch { }
+                }
+                catch { }
                 m_Informacion = new Informacion();
                 try
                 {
@@ -160,23 +161,18 @@ namespace DisenoColumnas
                 mFuerzasEnElmentos = new FuerzasEnElementos();
                 mFuerzasEnElmentos.Show(PanelContenedor);
 
-
                 LColumna.Items.Clear();
                 LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
                 if (Proyecto_.ColumnaSelect != null)
                 {
-
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
                 }
 
                 variablesdeEntrada = new VariablesdeEntrada(true);
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
-
-
-
 
                 CreateDidctonaries();
                 WindowState = FormWindowState.Maximized;
@@ -239,7 +235,7 @@ namespace DisenoColumnas
                 if (SaveFile.FileName != "")
                 {
                     Proyecto_.Ruta = SaveFile.FileName;
-                    Proyecto_.Name = Path.GetFileName(SaveFile.FileName).Replace(".Colum","");
+                    Proyecto_.Name = Path.GetFileName(SaveFile.FileName).Replace(".Colum", "");
                     L_NameProject.Text = Proyecto_.Name;
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                     string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
@@ -282,14 +278,12 @@ namespace DisenoColumnas
 
             if (Proyecto_ != null)
             {
-
                 if (Proyecto_.AlturaEdificio != 0)
                 {
-
                     if (Proyecto_.Ruta == "" | Proyecto_.Ruta != "")
                     {
                         DialogResult box;
-                        box = MessageBox.Show("¿Desea guardar cambios en el Proyecto: "+ Proyecto_.Name+"?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        box = MessageBox.Show("¿Desea guardar cambios en el Proyecto: " + Proyecto_.Name + "?", Proyecto_.Empresa, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                         if (box == DialogResult.Yes)
                         {
                             Save();
@@ -303,7 +297,6 @@ namespace DisenoColumnas
 
             if (Ruta1 != "" && Ruta2 != "" & Ruta3 != "")
             {
-
                 L_NameProject.Visible = true;
                 L_NameProject.Text = Proyecto_.Name = "Proyecto1";
                 CloseWindows();
@@ -313,9 +306,6 @@ namespace DisenoColumnas
 
                 variablesdeEntrada = new VariablesdeEntrada(false);
                 variablesdeEntrada.ShowDialog();
-
-
-
 
                 m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
                 string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
@@ -333,11 +323,8 @@ namespace DisenoColumnas
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
-
                 mFuerzasEnElmentos = new FuerzasEnElementos();
                 mFuerzasEnElmentos.Show(PanelContenedor);
-
-
 
                 mAgregarAlzado = new AgregarAlzado();
                 LColumna.Enabled = true;
@@ -475,16 +462,12 @@ namespace DisenoColumnas
                 Proyecto_ = new Proyecto();
                 ArchivoE2K2009ETABS = FunctionsProject.AbrirArchivoE2K2009(openFileDialog1.FileName);
                 CrearObjetosNecesarios();
-
             }
             return openFileDialog1.FileName;
         }
 
-
-
         private string AsingarFuerzasColumnas()
         {
-
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.Title = "Fuerzas en Columnas";
@@ -507,9 +490,7 @@ namespace DisenoColumnas
             }
 
             return openFileDialog.FileName;
-
         }
-
 
         private string AsingarResultadosaColumna()
         {
@@ -537,8 +518,6 @@ namespace DisenoColumnas
             return openFileDialog.FileName;
         }
 
-
-
         private void CargarFuerzasColumnas()
         {
             List<List<string>> Resultados2 = new List<List<string>>();
@@ -553,14 +532,12 @@ namespace DisenoColumnas
 
             foreach (Columna columna in Proyecto_.Lista_Columnas)
             {
-
                 for (int i = 1; i < Resultados2.Count; i++)
                 {
                     for (int j = 0; j < columna.Seccions.Count; j++)
                     {
                         if (columna.Name == Resultados2[i][1] && columna.Seccions[j].Item2 == Resultados2[i][0])
                         {
-
                             columna.resultadosETABs[j].Story_Result.Add(Resultados2[i][0]);
                             columna.resultadosETABs[j].Load.Add(Resultados2[i][2]);
                             columna.resultadosETABs[j].Loc.Add(Convert.ToSingle(Resultados2[i][3]));
@@ -570,17 +547,11 @@ namespace DisenoColumnas
                             columna.resultadosETABs[j].T.Add(Convert.ToSingle(Resultados2[i][7]));
                             columna.resultadosETABs[j].M2.Add(Convert.ToSingle(Resultados2[i][8]));
                             columna.resultadosETABs[j].M3.Add(Convert.ToSingle(Resultados2[i][9]));
-
                         }
-
                     }
                 }
-
-
             }
         }
-
-
 
         private void AsignarResultados()
         {
@@ -709,6 +680,9 @@ namespace DisenoColumnas
             {
                 if (ArchivoE2K2009ETABS[i].Contains("Rectangular") | ArchivoE2K2009ETABS[i].Contains("Circle") | ArchivoE2K2009ETABS[i].Contains("Te") | ArchivoE2K2009ETABS[i].Contains("Angle") | ArchivoE2K2009ETABS[i].Contains("SD Section"))
                 {
+                    if (ArchivoE2K2009ETABS[i].Contains("SD Section"))
+                    {
+                    }
                     Lista_Secciones_Aux.Add(ArchivoE2K2009ETABS[i].Split().ToList());
                 }
             }
@@ -820,7 +794,7 @@ namespace DisenoColumnas
                 {
                     if (mAT_.Name == Material_Aux)
                     {
-                        ISeccion seccion= new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
+                        ISeccion seccion = new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
 
                         if (tipodeSeccion == TipodeSeccion.Rectangular)
                         {
@@ -829,7 +803,23 @@ namespace DisenoColumnas
 
                         if (tipodeSeccion == TipodeSeccion.Circle)
                         {
-                            seccion = new CCirculo(Nombre,B/2,pCentro: new double[] { 0,0},Material_:mAT_,Shape_:tipodeSeccion);
+                            seccion = new CCirculo(Nombre, B / 2, pCentro: new double[] { 0, 0 }, Material_: mAT_, Shape_: tipodeSeccion, pCoord: Coord);
+                        }
+
+                        if (tipodeSeccion == TipodeSeccion.Tee | tipodeSeccion == TipodeSeccion.L)
+                        {
+                            float pTw, pTf;
+                            float pH, pB;
+
+                            var Xunicos = Coord.Select(x => x[0]).Distinct().ToList();
+                            var Yunicos = Coord.Select(x => x[1]).Distinct().ToList();
+
+                            pTw = FunctionsProject.Dimension(Xunicos, false);
+                            pTf = FunctionsProject.Dimension(Yunicos, false);
+                            pB = FunctionsProject.Dimension(Xunicos, true);
+                            pH = FunctionsProject.Dimension(Yunicos, true);
+
+                            seccion = new CSD(Nombre, pB, pH, pTw, pTf, mAT_, tipodeSeccion, Coord);
                         }
 
                         Proyecto_.Lista_Secciones.Add(seccion);
@@ -1182,7 +1172,7 @@ namespace DisenoColumnas
             {
                 if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
                 {
-                    mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+                    mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
                 }
             }
             else
@@ -1195,7 +1185,6 @@ namespace DisenoColumnas
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
         }
-
 
         private void Cb_cuantiavol_Click(object sender, EventArgs e)
         {
@@ -1214,7 +1203,7 @@ namespace DisenoColumnas
                     FD2 = 0.09f;
                 }
 
-                for (int i=0;i< Proyecto_.ColumnaSelect.Seccions.Count; i++)
+                for (int i = 0; i < Proyecto_.ColumnaSelect.Seccions.Count; i++)
                 {
                     Proyecto_.ColumnaSelect.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, Proyecto_.FY);
                 }
@@ -1281,13 +1270,12 @@ namespace DisenoColumnas
                 variablesDeEntradaToolStripMenuItem.Enabled = true;
                 columnasIgualesToolStripMenuItem.Enabled = true;
                 fuerzasToolStripMenuItem.Enabled = true;
-
             }
-            if(WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal)
             {
                 Button_MaxRest.Image = Properties.Resources.Maximizar14X11;
             }
-            else if(WindowState == FormWindowState.Maximized)
+            else if (WindowState == FormWindowState.Maximized)
             {
                 Button_MaxRest.Image = Properties.Resources.Restaurar14x11;
             }
@@ -1337,7 +1325,7 @@ namespace DisenoColumnas
         {
             Proyecto_ = new Proyecto();
             CreateDidctonaries();
-            mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+            mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             Main_Secciones.Crear_archivo();
         }
 
@@ -1349,8 +1337,6 @@ namespace DisenoColumnas
 
         private void Diseñar(ref List<Columna> Lista_ColumnasDiseñar)
         {
-
-
             //Limpiar Todos Los Alzados En Cada Columna
             foreach (Columna Col in Lista_ColumnasDiseñar)
             {
@@ -1430,12 +1416,10 @@ namespace DisenoColumnas
                 Delta = (Cuadro_diseño.BarraPersonalizada.Width) / (Lista_ColumnasDiseñar.Count);
             }
 
-
             if (mAgregarAlzado != null)
             {
                 mAgregarAlzado.CrearDataGrid(true);
                 m_Informacion.CrearDataGriedView(true);
-
             }
             if (m_Despiece != null)
             {
@@ -1476,13 +1460,10 @@ namespace DisenoColumnas
                     Cuadro_diseño.Reporte_RichText.Text += "\n" + " - " + col.Name;
                 }
             }
-
-
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
             ColumnasaDiseñar SelecColumnsDisenar = new ColumnasaDiseñar();
             List<Columna> ColumnasADiseñar = new List<Columna>();
 
@@ -1496,7 +1477,7 @@ namespace DisenoColumnas
                 }
             }
 
-            if (ColumnasADiseñar.Count != 0 & CancelDiseño==false)
+            if (ColumnasADiseñar.Count != 0 & CancelDiseño == false)
             {
                 Diseñar(ref ColumnasADiseñar);
             }
@@ -1507,9 +1488,9 @@ namespace DisenoColumnas
             CUsuario usuario = new CUsuario();
             usuario.Get_user();
 
-            if (usuario.Permiso==true)
+            if (usuario.Permiso == true)
             {
-                mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_predef);
+                mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_predef);
                 mIntefazSeccion.Show(PanelContenedor);
                 mIntefazSeccion.Get_Predef_Secction();
                 mIntefazSeccion.Invalidate();
@@ -1550,13 +1531,11 @@ namespace DisenoColumnas
 
         private void CuantíaVolumétricaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (mCuantiaVolumetrica.Created == false)
             {
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
             }
             mCuantiaVolumetrica.Show(PanelContenedor);
-
         }
 
         private void DibujoDeSecciónToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1565,12 +1544,12 @@ namespace DisenoColumnas
             {
                 if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
                 {
-                    mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+                    mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
                 }
             }
             else
             {
-                mIntefazSeccion = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+                mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             }
             mIntefazSeccion.Show(PanelContenedor);
         }
@@ -1586,8 +1565,6 @@ namespace DisenoColumnas
 
         private void Button4_Click(object sender, EventArgs e)
         {
-
-
             ColumnasaGraficar columnasaGraficar = new ColumnasaGraficar();
             List<Columna> columnasDrawing = new List<Columna>();
 
@@ -1601,24 +1578,19 @@ namespace DisenoColumnas
                     columnasDrawing.Add(col);
                 }
             }
-            
-            foreach(Columna col in Proyecto_.Lista_Columnas)
+
+            foreach (Columna col in Proyecto_.Lista_Columnas)
             {
-                
-                if(col.ColSimilName != null)
+                if (col.ColSimilName != null)
                 {
-                    if(columnasDrawing.Exists(x=> x.Name == col.Name))
+                    if (columnasDrawing.Exists(x => x.Name == col.Name))
                     {
                         columnasDrawing.Remove(col);
                     }
 
                     Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.ColSimilName);
                 }
-
-             }
-            
-
-
+            }
 
             //double[] XY = new double[] { };
             //FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
@@ -1627,26 +1599,16 @@ namespace DisenoColumnas
             //FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
             //foreach (Columna col in Proyecto_.Lista_Columnas)
             //{
-
             //    if (col.Name == "C1")
             //    {
             //        col.DrawColumAutoCAD(XY[0], XY[1],col.Name,1);
             //    }
 
             //}
-
-
-
         }
-
-
 
         private void GraficarAlzadoColumnas(ref List<Columna> ColumnsDrawing)
         {
-
-
-
         }
-
     }
 }

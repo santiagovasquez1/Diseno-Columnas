@@ -26,6 +26,8 @@ namespace DisenoColumnas.Clases
         public MAT_CONCRETE Material { get; set; }
         public float B { get; set; }
         public float H { get; set; }
+        [NonSerialized] private GraphicsPath pSeccion_path;
+        public GraphicsPath Seccion_path { get { return pSeccion_path; } set { pSeccion_path = value; } }
         public TipodeSeccion Shape { get; set; }
         public double Area { get; set; }
         public double Acero_Long { get; set; }
@@ -54,55 +56,6 @@ namespace DisenoColumnas.Clases
         public void CalcularArea()
         {
             Area = B * H;
-            //if (TW == 0 && TF == 0 && H != 0)
-            //{
-            //    Area = B * H;
-            //}
-            //else if (TW == 0 && TF == 0 && H == 0 && B != 0)
-            //{
-            //    Area = Math.PI * Math.Pow(B, 2) / 4;
-            //}
-            //else if (TW != 0 | TF != 0)
-            //{
-            //    Area = (H * TW) + ((B - TW) * TF);
-            //}
-            //else if (CoordenadasSeccion != null)
-            //{
-            //    double SumA1 = 0; double SumA2 = 0;
-
-            //    for (int i = 0; i < CoordenadasSeccion.Count; i++)
-            //    {
-            //        try
-            //        {
-            //            SumA1 = SumA1 + CoordenadasSeccion[i][0] * CoordenadasSeccion[i + 1][1];
-            //            SumA2 = SumA2 + CoordenadasSeccion[i][1] * CoordenadasSeccion[i + 1][0];
-            //        }
-            //        catch
-            //        {
-            //            SumA1 = SumA1 + CoordenadasSeccion[i][0] * CoordenadasSeccion[0][1];
-            //            SumA2 = SumA2 + CoordenadasSeccion[i][1] * CoordenadasSeccion[0][0];
-            //        }
-            //    }
-
-            //    ///CORREGIR B Y H PARA T CON COORDENADAS
-            //    Area = Math.Abs(SumA1 - SumA2) / 2;
-            //    double DistMayor = -99999;
-            //    for (int i = 0; i < CoordenadasSeccion.Count; i++)
-            //    {
-            //        try
-            //        {
-            //            double Distancia = Math.Sqrt(Math.Pow(CoordenadasSeccion[i][0] - CoordenadasSeccion[i + 1][0], 2) + Math.Pow(CoordenadasSeccion[i][1] - CoordenadasSeccion[i + 1][1], 2));
-            //            if (Distancia > DistMayor)
-            //            {
-            //                DistMayor = Distancia;
-            //            }
-            //        }
-            //        catch
-            //        { }
-            //    }
-
-            //    B = (float)DistMayor;
-            //}
         }
 
         public void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY)
@@ -293,7 +246,7 @@ namespace DisenoColumnas.Clases
                     Name = "FY4220"
                 };
 
-                circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle);
+                circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle,pCoord:null);
                 circulo.Set_puntos(10);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
@@ -442,6 +395,8 @@ namespace DisenoColumnas.Clases
             double X, Y;
             SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
             Pen P1;
+            Vertices = new List<PointF>();
+            Seccion_path = new GraphicsPath();
 
             if (seleccion == false)
             {
@@ -464,6 +419,7 @@ namespace DisenoColumnas.Clases
                     LineJoin = LineJoin.Round,
                     Alignment = PenAlignment.Center
                 };
+                br = new SolidBrush(Color.FromArgb(150, Color.Gray));
             }
 
             #region Vertices
@@ -488,6 +444,8 @@ namespace DisenoColumnas.Clases
 
             g.DrawPolygon(P1, Vertices.ToArray());
             g.FillPolygon(br, Vertices.ToArray());
+            Seccion_path.AddPolygon(Vertices.ToArray());
+
         }
 
         #endregion Propiedades y Metodos - Secciones Predefinidas
