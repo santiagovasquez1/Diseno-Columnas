@@ -760,7 +760,6 @@
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarComoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel PanelContenedor;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStrip toolBar;
@@ -790,5 +789,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripMenuItem despieceToolStripMenuItem;
+        internal WeifenLuo.WinFormsUI.Docking.DockPanel PanelContenedor;
     }
 }

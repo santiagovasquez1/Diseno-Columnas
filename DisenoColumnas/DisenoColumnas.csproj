@@ -116,6 +116,12 @@
     <Compile Include="Diseño\Despiece.Designer.cs">
       <DependentUpon>Despiece.cs</DependentUpon>
     </Compile>
+    <Compile Include="Diseño\Form_Barra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diseño\Form_Barra.Designer.cs">
+      <DependentUpon>Form_Barra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Diseño\FuerzasEnElementos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Diseño\Despiece.resx">
       <DependentUpon>Despiece.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Diseño\Form_Barra.resx">
+      <DependentUpon>Form_Barra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Diseño\FuerzasEnElementos.resx">
       <DependentUpon>FuerzasEnElementos.cs</DependentUpon>

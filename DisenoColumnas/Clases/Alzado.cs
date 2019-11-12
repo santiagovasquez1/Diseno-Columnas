@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DisenoColumnas.Diseño;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -58,6 +59,16 @@ namespace DisenoColumnas.Clases
         public bool UltPiso { get; set; }
 
         public float e_Fu { get; set; }
+
+
+
+
+        #region Metodos Auxiliares
+        private bool MoveBarra = false;
+        private float MouseX = 0;
+        private float MouseY = 0;
+#endregion
+
         public AlzadoUnitario(int CantBarras_, int NoBarra_, string Traslapo, int NoPiso_, int NoAlzado_, float H, float Hviga_, float e_fund_, bool UltPiso_, float Hacum_)
         {
             CantBarras = CantBarras_;
@@ -73,16 +84,24 @@ namespace DisenoColumnas.Clases
 
 
 
+        [NonSerialized]
+        Form_Barra FormBarra = new Form_Barra();
+
+        private List<float[]> Coord_Alzado_PB_Escal { get; set; }
         public void Paint(PaintEventArgs e, float SX, float SY, float HeighForm, float YI, float XI)
         {
 
             if (Coord_Alzado_PB != null)
             {
+
                 List<PointF> Cord_Escala = new List<PointF>();
+                Coord_Alzado_PB_Escal = new List<float[]>();
 
                 for (int i = 0; i < Coord_Alzado_PB.Count; i++)
                 {
                     PointF point = new PointF(XI + Coord_Alzado_PB[i][0] * SX, HeighForm - Coord_Alzado_PB[i][1] * SY - YI);
+                    float[] XY = new float[] { XI + Coord_Alzado_PB[i][0] * SX, HeighForm - Coord_Alzado_PB[i][1] * SY - YI };
+                    Coord_Alzado_PB_Escal.Add(XY);
                     Cord_Escala.Add(point);
                 }
 
@@ -93,11 +112,134 @@ namespace DisenoColumnas.Clases
                 }
 
 
+
+                if (FormBarra == null)
+                {
+                    FormBarra = new Form_Barra();
+                }
+
+                FormBarra.Location = new Point((int)MouseX, (int)MouseY);
+                FormBarra.CantBarras.Text = Convert.ToString(CantBarras);
+                FormBarra.D_Barra.Text = Convert.ToString(NoBarra);
+                FormBarra.Ld_Barra.Text = Convert.ToString(Traslapo);
+                FormBarra.L_Barra.Text = String.Format("{0:0.00}", CalcularLongitudRefuerzo(Coord_Alzado_PB));
+
+                if (MoveBarra)
+                {
+                    FormBarra.Visible = true;
+                }
+                else
+                {
+                    FormBarra.Visible = false;
+                }
+
+            }
+        }
+
+
+        public void MouseMove(MouseEventArgs e)
+        {
+            float EsBarra = 4f;
+            if (Coord_Alzado_PB_Escal != null)
+            {
+                if (Coord_Alzado_PB_Escal.Count == 2)
+                {
+
+                    if (Tipo == "T2")
+                    {
+                        if (e.X >= Coord_Alzado_PB_Escal[0][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
+                            e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
+                        {
+
+                            MouseX = Cursor.Position.X;
+                            MouseY = Cursor.Position.Y;
+                            MoveBarra = true;
+                        }
+                        else
+                        {
+                            MoveBarra = false;
+                        }
+                    }
+                    else
+                    {
+                        if (e.X >= Coord_Alzado_PB_Escal[0][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
+                       e.Y >= Coord_Alzado_PB_Escal[1][1] && e.Y <= Coord_Alzado_PB_Escal[0][1])
+                        {
+
+                            MouseX = Cursor.Position.X;
+                            MouseY = Cursor.Position.Y;
+                            MoveBarra = true;
+                        }
+                        else
+                        {
+                            MoveBarra = false;
+                        }
+                    }
+
+                }
+
+                if (Coord_Alzado_PB_Escal.Count == 3)
+                {
+
+                    if (NoStory == 1)
+                    {
+                        if (e.X >= Coord_Alzado_PB_Escal[2][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
+                                e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
+                        {
+
+                            MouseX = Cursor.Position.X;
+                            MouseY = Cursor.Position.Y;
+                            MoveBarra = true;
+                        }
+                        else if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[0][0] &&
+                              e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB[0][1] + EsBarra)  //Entre Puntos 1 y 2
+                        {
+                            MouseX = Cursor.Position.X;
+                            MouseY = Cursor.Position.Y;
+                            MoveBarra = true;
+                        }
+                        else
+                        {
+                            MoveBarra = false;
+                        }
+                    }
+                    else
+                    {
+                        if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
+                               e.Y >= Coord_Alzado_PB_Escal[1][1] && e.Y <= Coord_Alzado_PB_Escal[0][1])
+                        {
+
+                            MouseX = Cursor.Position.X;
+                            MouseY = Cursor.Position.Y;
+                            MoveBarra = true;
+                        }
+                        else if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[2][0] &&
+                              e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB[2][1] + EsBarra)  //Entre Puntos 1 y 2
+                        {
+                            MouseX = Cursor.Position.X;
+                            MouseY = Cursor.Position.Y;
+                            MoveBarra = true;
+                        }
+                        else
+                        {
+                            MoveBarra = false;
+                        }
+                    }
+                }
+                else
+                {
+
+                }
+
             }
 
         }
 
-        
+
+
+
+
+
         public override string ToString()
         {
 
@@ -125,7 +267,24 @@ namespace DisenoColumnas.Clases
             }
         }
 
+        private float CalcularLongitudRefuerzo(List<float[]> Coordenadas)
+        {
 
+            float Longitud = 0;
+            for (int i = 0; i < Coordenadas.Count; i++)
+            {
+
+                try
+                {
+                    Longitud += (float)Math.Sqrt(Math.Pow(Coordenadas[i][0] - Coordenadas[i - 1][0], 2) + Math.Pow(Coordenadas[i][1] - Coordenadas[i - 1][1], 2));
+
+                }
+                catch { }
+
+            }
+            return Longitud;
+
+        }
 
     }
 

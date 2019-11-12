@@ -317,16 +317,5 @@ namespace DisenoColumnas.Diseño
             Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
-
-
-
-
-
-
-
-
-
-
-
     }
 }

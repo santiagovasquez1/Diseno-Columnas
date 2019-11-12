@@ -1142,7 +1142,7 @@ namespace DisenoColumnas.Clases
 
 
 
-        #region Metodo - Dibujo Automático AutoCAD
+        #region Metodos - Dibujo Automático AutoCAD
 
         public void DrawColumAutoCAD(double X, double Y, string Names, int NoDespiece)
         {

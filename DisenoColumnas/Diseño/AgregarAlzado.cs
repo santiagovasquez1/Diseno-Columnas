@@ -278,24 +278,23 @@ namespace DisenoColumnas.Diseño
                         {
                             if (ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR + 1].Tipo == "A")
                             {
-                                if (ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR].UnitarioAdicional != null)
+
+                                if (ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] != null)
                                 {
-                                    D_Alzado.Rows[IndiceR].Cells[IndiceC].Value = ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR].UnitarioAdicional.ToString();
+                                    D_Alzado.Rows[IndiceR].Cells[IndiceC].Value = ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR].ToString();
                                 }
                                 else
                                 {
                                     D_Alzado.Rows[IndiceR].Cells[IndiceC].Value = "";
                                 }
+                                DeterminarCoordAlzado(IndiceC);
 
-
-
-
-                                MessageBox.Show("Existe superposición de refuerzo en el mismo punto.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("El Refuerzo adicional asignado no se puede agregar debido a que existe superposición de refuerzo en el mismo punto.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
 
                         }
-
+                        catch { }
 
 
 

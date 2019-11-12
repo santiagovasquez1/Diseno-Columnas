@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -21,7 +17,7 @@ namespace DisenoColumnas.Diseño
 
         private void FuerzasEnElementos_Load(object sender, EventArgs e)
         {
-           
+
 
         }
 
@@ -36,9 +32,9 @@ namespace DisenoColumnas.Diseño
         private void CargarDataGrideView()
         {
 
-  //          EstiloDatGridView(D_Fuerzas);
+            //          EstiloDatGridView(D_Fuerzas);
             Clases.Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
-            
+
             if (ColumnaSelect != null)
             {
                 NameColum.Text = "Columna: " + ColumnaSelect.Name;
@@ -86,7 +82,7 @@ namespace DisenoColumnas.Diseño
                 }
 
 
-                for(int i=0; i < ColumnaSelect.resultadosETABs.Count; i++)
+                for (int i = 0; i < ColumnaSelect.resultadosETABs.Count; i++)
                 {
                     for (int j = 0; j < ColumnaSelect.resultadosETABs[i].Load.Count; j++)
                     {
@@ -107,10 +103,6 @@ namespace DisenoColumnas.Diseño
 
                 }
 
-                
-
-
-
             }
 
 
@@ -123,9 +115,9 @@ namespace DisenoColumnas.Diseño
             DataGridViewCellStyle StyleC = new DataGridViewCellStyle();
             StyleC.Alignment = DataGridViewContentAlignment.MiddleCenter;
             StyleC.Font = new Font("Vderdana", 8, FontStyle.Bold);
-            
 
-             DataGridViewCellStyle StyleR = new DataGridViewCellStyle();
+
+            DataGridViewCellStyle StyleR = new DataGridViewCellStyle();
             StyleR.Alignment = DataGridViewContentAlignment.MiddleCenter;
             StyleR.Font = new Font("Vderdana", 8, FontStyle.Regular);
 

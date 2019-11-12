@@ -138,23 +138,6 @@ namespace DisenoColumnas.Diseño
             Close();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void GroupBox1_MouseDown(object sender, MouseEventArgs e)
         {
             Utilidades.MoveWindow.ReleaseCapture();
