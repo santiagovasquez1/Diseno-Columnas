@@ -9,7 +9,6 @@ namespace DisenoColumnas.Clases
     [Serializable]
     public class Alzado
     {
-
         public Alzado(int ID_, int NoPisos)
         {
             ID = ID_;
@@ -24,21 +23,12 @@ namespace DisenoColumnas.Clases
         public int ID { get; set; }
         public float DistX { get; set; }
         public List<AlzadoUnitario> Colum_Alzado { get; set; }
-
-
-
-
     }
 
     [Serializable]
     public class AlzadoUnitario
     {
-
-
-
         public AlzadoUnitario UnitarioAdicional { get; set; }
-
-
 
         public int NoStory { get; set; }
 
@@ -60,14 +50,13 @@ namespace DisenoColumnas.Clases
 
         public float e_Fu { get; set; }
 
-
-
-
         #region Metodos Auxiliares
+
         private bool MoveBarra = false;
         private float MouseX = 0;
         private float MouseY = 0;
-#endregion
+
+        #endregion Metodos Auxiliares
 
         public AlzadoUnitario(int CantBarras_, int NoBarra_, string Traslapo, int NoPiso_, int NoAlzado_, float H, float Hviga_, float e_fund_, bool UltPiso_, float Hacum_)
         {
@@ -82,18 +71,15 @@ namespace DisenoColumnas.Clases
             Hacum = Hacum_;
         }
 
-
-
         [NonSerialized]
-        Form_Barra FormBarra = new Form_Barra();
+        private Form_Barra FormBarra = new Form_Barra();
 
         private List<float[]> Coord_Alzado_PB_Escal { get; set; }
+
         public void Paint(PaintEventArgs e, float SX, float SY, float HeighForm, float YI, float XI)
         {
-
             if (Coord_Alzado_PB != null)
             {
-
                 List<PointF> Cord_Escala = new List<PointF>();
                 Coord_Alzado_PB_Escal = new List<float[]>();
 
@@ -110,8 +96,6 @@ namespace DisenoColumnas.Clases
                     SolidBrush brush = FunctionsProject.ColorBarra(NoBarra);
                     e.Graphics.DrawLines(new Pen(brush, 2), Cord_Escala.ToArray());
                 }
-
-
 
                 if (FormBarra == null)
                 {
@@ -132,10 +116,8 @@ namespace DisenoColumnas.Clases
                 {
                     FormBarra.Visible = false;
                 }
-
             }
         }
-
 
         public void MouseMove(MouseEventArgs e)
         {
@@ -144,13 +126,11 @@ namespace DisenoColumnas.Clases
             {
                 if (Coord_Alzado_PB_Escal.Count == 2)
                 {
-
-                    if (Tipo == "T2" | Tipo =="A")
+                    if (Tipo == "T2" | Tipo == "A")
                     {
                         if (e.X >= Coord_Alzado_PB_Escal[0][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                             e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
                         {
-
                             MouseX = Cursor.Position.X;
                             MouseY = Cursor.Position.Y;
                             MoveBarra = true;
@@ -165,7 +145,6 @@ namespace DisenoColumnas.Clases
                         if (e.X >= Coord_Alzado_PB_Escal[0][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                        e.Y >= Coord_Alzado_PB_Escal[1][1] && e.Y <= Coord_Alzado_PB_Escal[0][1])
                         {
-
                             MouseX = Cursor.Position.X;
                             MouseY = Cursor.Position.Y;
                             MoveBarra = true;
@@ -175,18 +154,15 @@ namespace DisenoColumnas.Clases
                             MoveBarra = false;
                         }
                     }
-
                 }
 
                 if (Coord_Alzado_PB_Escal.Count == 3)
                 {
-
                     if (NoStory == 1)
                     {
                         if (e.X >= Coord_Alzado_PB_Escal[2][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                                 e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
                         {
-
                             MouseX = Cursor.Position.X;
                             MouseY = Cursor.Position.Y;
                             MoveBarra = true;
@@ -208,7 +184,6 @@ namespace DisenoColumnas.Clases
                         if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                                e.Y >= Coord_Alzado_PB_Escal[1][1] && e.Y <= Coord_Alzado_PB_Escal[0][1])
                         {
-
                             MouseX = Cursor.Position.X;
                             MouseY = Cursor.Position.Y;
                             MoveBarra = true;
@@ -229,11 +204,9 @@ namespace DisenoColumnas.Clases
 
                 if (Coord_Alzado_PB_Escal.Count == 4)
                 {
-
                     if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                               e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
                     {
-
                         MouseX = Cursor.Position.X;
                         MouseY = Cursor.Position.Y;
                         MoveBarra = true;
@@ -252,33 +225,22 @@ namespace DisenoColumnas.Clases
                         MouseY = Cursor.Position.Y;
                         MoveBarra = true;
                     }
-
                     else
                     {
                         MoveBarra = false;
                     }
-
-
                 }
             }
         }
 
-
-
-
-
-
         public override string ToString()
         {
-
             if (Tipo == "Botton")
             {
                 return $"-{CantBarras}#{NoBarra}";
-
             }
-            else if (Tipo=="A")
+            else if (Tipo == "A")
             {
-    
                 if (UnitarioAdicional != null)
                 {
                     return $"{CantBarras}#{NoBarra}{Tipo}-{UnitarioAdicional.CantBarras}#{UnitarioAdicional.NoBarra}";
@@ -287,7 +249,6 @@ namespace DisenoColumnas.Clases
                 {
                     return $"{CantBarras}#{NoBarra}{Tipo}";
                 }
-
             }
             else
             {
@@ -297,29 +258,16 @@ namespace DisenoColumnas.Clases
 
         private float CalcularLongitudRefuerzo(List<float[]> Coordenadas)
         {
-
             float Longitud = 0;
             for (int i = 0; i < Coordenadas.Count; i++)
             {
-
                 try
                 {
                     Longitud += (float)Math.Sqrt(Math.Pow(Coordenadas[i][0] - Coordenadas[i - 1][0], 2) + Math.Pow(Coordenadas[i][1] - Coordenadas[i - 1][1], 2));
-
                 }
                 catch { }
-
             }
             return Longitud;
-
         }
-
     }
-
-
-
-
-
-
-
 }

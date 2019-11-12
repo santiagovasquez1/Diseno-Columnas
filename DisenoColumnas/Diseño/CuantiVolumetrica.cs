@@ -209,11 +209,11 @@ namespace DisenoColumnas.Diseño
                     FD2 = 0.09f;
                 }
 
-                if (seccioni.Estribo == null & seccioni.Shape==TipodeSeccion.Rectangular)
+                if (seccioni.Estribo == null & seccioni.Shape == TipodeSeccion.Rectangular)
                 {
                     seccioni.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
                 }
-                
+
                 seccioni.Cuanti_Vol(FD1, FD2, Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
 
                 if (Cambio_Data == true)

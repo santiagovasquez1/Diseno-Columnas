@@ -1,12 +1,6 @@
 ﻿using DisenoColumnas.Clases;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Diseño
@@ -45,28 +39,16 @@ namespace DisenoColumnas.Diseño
             LoadDataGridView();
         }
 
-
-
-
-
         private void LoadDataGridView()
         {
-
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
-
                 D_ColDiseno.Rows.Add();
 
                 D_ColDiseno.Rows[D_ColDiseno.Rows.Count - 1].Cells[0].Value = columna.Name;
                 D_ColDiseno.Rows[D_ColDiseno.Rows.Count - 1].Cells[1].Value = columna.Disenar;
-
             }
-
         }
-
-
-
-
 
         private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -82,25 +64,18 @@ namespace DisenoColumnas.Diseño
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
-            for(int i=0; i< D_ColDiseno.Rows.Count; i++)
+            for (int i = 0; i < D_ColDiseno.Rows.Count; i++)
             {
-
-             Form1.Proyecto_.Lista_Columnas[i].Disenar = (bool)D_ColDiseno.Rows[i].Cells[1].Value;
-              
+                Form1.Proyecto_.Lista_Columnas[i].Disenar = (bool)D_ColDiseno.Rows[i].Cells[1].Value;
             }
 
             Form1.mFormPrincipal.CancelDiseño = false;
             Close();
-
-
-
-
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            bool TodasSonSelect=false;
+            bool TodasSonSelect = false;
 
             for (int i = 0; i < D_ColDiseno.Rows.Count; i++)
             {
@@ -122,7 +97,6 @@ namespace DisenoColumnas.Diseño
                 }
             }
 
-
             if (TodasSonSelect)
             {
                 if (D_ColDiseno.Rows.Count != 0)
@@ -132,10 +106,7 @@ namespace DisenoColumnas.Diseño
                         D_ColDiseno.Rows[i].Cells[1].Value = false;
                     }
                 }
-
             }
-
-
         }
     }
 }

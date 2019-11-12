@@ -1,12 +1,6 @@
 ﻿using DisenoColumnas.Clases;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Diseño
@@ -18,23 +12,16 @@ namespace DisenoColumnas.Diseño
             InitializeComponent();
         }
 
-
-
-
-
-
-
         private void Button1_Click(object sender, EventArgs e)
         {
-
             bool MsgInfo1 = false;
-           
+
             for (int i = 0; i < D_ColGraficar.Rows.Count; i++)
             {
                 Form1.Proyecto_.Lista_Columnas[i].aGraficar = (bool)D_ColGraficar.Rows[i].Cells[1].Value;
             }
 
-            foreach(Columna columna in Form1.Proyecto_.Lista_Columnas)
+            foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 if (columna.aGraficar)
                 {
@@ -46,20 +33,15 @@ namespace DisenoColumnas.Diseño
                         }
                     }
                 }
-                
             }
-
 
             if (MsgInfo1)
             {
                 MessageBox.Show("Columnas asignadas una similitud no serán graficadas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-     
-
 
             Form1.mFormPrincipal.CancelGarfica = false;
             Close();
-
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -98,7 +80,6 @@ namespace DisenoColumnas.Diseño
                 }
             }
 
-
             if (TodasSonSelect)
             {
                 if (D_ColGraficar.Rows.Count != 0)
@@ -108,31 +89,24 @@ namespace DisenoColumnas.Diseño
                         D_ColGraficar.Rows[i].Cells[1].Value = false;
                     }
                 }
-
             }
         }
 
         private void ColumnasaGraficar_Load(object sender, EventArgs e)
         {
             LoadDataGridView();
-
         }
+
         private void LoadDataGridView()
         {
-
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
-
                 D_ColGraficar.Rows.Add();
 
                 D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[0].Value = columna.Name;
                 D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[1].Value = columna.aGraficar;
-
             }
-
         }
-
-
 
         private void PictureBox2_MouseLeave(object sender, EventArgs e)
         {

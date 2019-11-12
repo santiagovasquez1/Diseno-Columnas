@@ -13,25 +13,17 @@ namespace DisenoColumnas.Diseño
         {
             InitializeComponent();
         }
+
         private DataSet DataVirtual;
 
         private void FuerzasEnElementos_Load(object sender, EventArgs e)
         {
-
-
         }
 
-
-
-
-        Clases.Columna columnaAnte;
-
-
-
+        private Clases.Columna columnaAnte;
 
         private void CargarDataGrideView()
         {
-
             //          EstiloDatGridView(D_Fuerzas);
             Clases.Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
 
@@ -49,23 +41,12 @@ namespace DisenoColumnas.Diseño
             columnaAnte = ColumnaSelect;
         }
 
-
-
-
-
-
-
-
-
         private void CreateNewDataVirutal()
         {
-
             Clases.Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
 
             if (ColumnaSelect != null)
             {
-
-
                 DataVirtual = new DataSet("DS_Fuerzas");
 
                 DataVirtual.Tables.Clear();
@@ -74,19 +55,16 @@ namespace DisenoColumnas.Diseño
                 DataTable T_Fuerzas = new DataTable("Fuerzas");
                 DataVirtual.Tables.Add(T_Fuerzas);
 
-
                 for (int i = 0; i < Encabezados.Count; i++)
                 {
                     DataColumn dataColumn = new DataColumn(Encabezados[i]);
                     T_Fuerzas.Columns.Add(dataColumn);
                 }
 
-
                 for (int i = 0; i < ColumnaSelect.resultadosETABs.Count; i++)
                 {
                     for (int j = 0; j < ColumnaSelect.resultadosETABs[i].Load.Count; j++)
                     {
-
                         DataRow dataRow = T_Fuerzas.NewRow();
 
                         dataRow[0] = ColumnaSelect.resultadosETABs[i].Story_Result[j];
@@ -99,16 +77,9 @@ namespace DisenoColumnas.Diseño
                         dataRow[7] = ColumnaSelect.resultadosETABs[i].M3[j];
                         T_Fuerzas.Rows.Add(dataRow);
                     }
-
-
                 }
-
             }
-
-
         }
-
-
 
         private void EstiloDatGridView(DataGridView dataGridView)
         {
@@ -116,19 +87,15 @@ namespace DisenoColumnas.Diseño
             StyleC.Alignment = DataGridViewContentAlignment.MiddleCenter;
             StyleC.Font = new Font("Vderdana", 8, FontStyle.Bold);
 
-
             DataGridViewCellStyle StyleR = new DataGridViewCellStyle();
             StyleR.Alignment = DataGridViewContentAlignment.MiddleCenter;
             StyleR.Font = new Font("Vderdana", 8, FontStyle.Regular);
 
-
             foreach (DataGridViewColumn column in dataGridView.Columns)
             {
-
                 column.HeaderCell.Style = StyleC;
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
-
             }
             foreach (DataGridViewRow row in dataGridView.Rows)
             {

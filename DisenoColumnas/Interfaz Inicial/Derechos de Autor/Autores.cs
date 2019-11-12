@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
@@ -17,7 +10,6 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
         {
             m_aeroEnabled = false;
             InitializeComponent();
-
         }
 
         private void Panel1_MouseDown(object sender, MouseEventArgs e)
@@ -31,14 +23,11 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             Close();
         }
 
-
-
-
-
-
         #region Sombra Formulario
+
         //SOMBRA
         private const int WM_NCHITTEST = 0x84;
+
         private const int HTCLIENT = 0x1;
         private const int HTCAPTION = 0x2;
         private bool m_aeroEnabled;
@@ -66,7 +55,6 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             int nHeightEllipse
          );
 
-  
         public struct MARGINS
         {
             public int leftWidth;
@@ -129,11 +117,6 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
                 m.Result = (IntPtr)HTCAPTION;
         }
 
-
-
-        #endregion
-
-
-
+        #endregion Sombra Formulario
     }
 }

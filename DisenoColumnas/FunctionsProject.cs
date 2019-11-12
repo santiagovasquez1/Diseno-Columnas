@@ -156,7 +156,7 @@ namespace DisenoColumnas
             }
         }
 
-        public static float Dimension(List<float> P_unicos,bool lado)
+        public static float Dimension(List<float> P_unicos, bool lado)
         {
             float Max = -(float)Math.Pow(10, 6);
             float Min = (float)Math.Pow(10, 6);
@@ -177,7 +177,6 @@ namespace DisenoColumnas
                             Min = Math.Abs(P_unicos[i] - P_unicos[j]);
                         }
                     }
-
                 }
             }
 

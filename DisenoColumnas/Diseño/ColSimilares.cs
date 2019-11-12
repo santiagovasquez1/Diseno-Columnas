@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-
 namespace DisenoColumnas.Diseño
 {
     public partial class ColSimilares : Form
@@ -13,7 +12,6 @@ namespace DisenoColumnas.Diseño
         {
             InitializeComponent();
         }
-
 
         private void Button2_Click(object sender, EventArgs e)
         {
@@ -37,18 +35,12 @@ namespace DisenoColumnas.Diseño
             LoadSimilitudCol();
         }
 
-
-
-
         private void LoadSimilitudCol()
         {
             if (Form1.Proyecto_ != null)
             {
                 if (Form1.Proyecto_.Lista_Columnas != null)
                 {
-
-
-
                     for (int i = 0; i < Form1.Proyecto_.Lista_Columnas.Count; i++)
                     {
                         D_ColSim.Rows.Add();
@@ -64,9 +56,7 @@ namespace DisenoColumnas.Diseño
                             {
                                 D_ColSim.Rows[i].Cells[2].Value = Form1.Proyecto_.Lista_Columnas[i].ColSimilName;
                             }
-
                         }
-
                     }
 
                     List<string> NameMaestro = new List<string>();
@@ -83,13 +73,10 @@ namespace DisenoColumnas.Diseño
                         D_ColSim.Rows[i].Cells[2].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         BoxCell.Items.Clear();
                         BoxCell.Items.AddRange(NameMaestro.ToArray());
-
                     }
-
                 }
             }
         }
-
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -99,29 +86,22 @@ namespace DisenoColumnas.Diseño
                 {
                     for (int i = 0; i < D_ColSim.Rows.Count; i++)
                     {
-                      Form1.Proyecto_.Lista_Columnas[i].Maestro =(bool) D_ColSim.Rows[i].Cells[1].Value;
+                        Form1.Proyecto_.Lista_Columnas[i].Maestro = (bool)D_ColSim.Rows[i].Cells[1].Value;
 
-                        if (D_ColSim.Rows[i].Cells[2].Value != null  )
+                        if (D_ColSim.Rows[i].Cells[2].Value != null)
                         {
                             if (D_ColSim.Rows[i].Cells[2].Value.ToString() != "")
                             {
-
                                 if (Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count == Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs.Count)
                                 {
-
                                     for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
                                     {
-
                                         Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].As_asignado;
                                         Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].Porct_Refuerzo;
                                     }
 
-
-
                                     Form1.Proyecto_.Lista_Columnas[i].ColSimilName = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Name;
                                     Form1.Proyecto_.Lista_Columnas[i].Alzados = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Alzados;
-
-
                                 }
                                 else
                                 {
@@ -131,9 +111,6 @@ namespace DisenoColumnas.Diseño
 
                                     return;
                                 }
-
-
-
                             }
                             else
                             {
@@ -150,11 +127,7 @@ namespace DisenoColumnas.Diseño
                                     Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Aux_AsAsing;
                                     Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = Aux_Porcet_Refuerzo;
                                 }
-
-
                             }
-
-
                         }
                         else
                         {
@@ -170,20 +143,14 @@ namespace DisenoColumnas.Diseño
                                 Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Aux_AsAsing;
                                 Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = Aux_Porcet_Refuerzo;
                             }
-
                         }
-
-
                     }
                 }
-                for(int i=0; i< Form1.Proyecto_.Lista_Columnas.Count; i++)
+                for (int i = 0; i < Form1.Proyecto_.Lista_Columnas.Count; i++)
                 {
                     Form1.Proyecto_.Lista_Columnas[i].ActualizarRefuerzo();
                 }
                 Form1.mFormPrincipal.Invalidate();
-
-
-
             }
 
             Close();
@@ -191,12 +158,10 @@ namespace DisenoColumnas.Diseño
 
         private void D_ColSim_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-       
         }
 
         private void D_ColSim_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-      
         }
 
         private void D_ColSim_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -210,7 +175,7 @@ namespace DisenoColumnas.Diseño
             }
 
             List<string> NameMaestro = new List<string>();
-            for(int i=0;i< D_ColSim.Rows.Count;i++)
+            for (int i = 0; i < D_ColSim.Rows.Count; i++)
             {
                 if ((bool)D_ColSim.Rows[i].Cells[1].Value)
                 {
@@ -219,17 +184,18 @@ namespace DisenoColumnas.Diseño
             }
             for (int i = 0; i < D_ColSim.Rows.Count; i++)
             {
-                DataGridViewComboBoxCell BoxCell =(DataGridViewComboBoxCell)D_ColSim.Rows[i].Cells[2];
+                DataGridViewComboBoxCell BoxCell = (DataGridViewComboBoxCell)D_ColSim.Rows[i].Cells[2];
                 D_ColSim.Rows[i].Cells[2].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 BoxCell.Items.Clear();
                 BoxCell.Items.AddRange(NameMaestro.ToArray());
-                
             }
         }
 
         #region Sombra Formulario
+
         //SOMBRA
         private const int WM_NCHITTEST = 0x84;
+
         private const int HTCLIENT = 0x1;
         private const int HTCAPTION = 0x2;
         private bool m_aeroEnabled;
@@ -245,7 +211,7 @@ namespace DisenoColumnas.Diseño
 
         [DllImport("dwmapi.dll")]
         public static extern int DwmIsCompositionEnabled(ref int pfEnabled);
-  
+
         public struct MARGINS
         {
             public int leftWidth;
@@ -308,14 +274,12 @@ namespace DisenoColumnas.Diseño
                 m.Result = (IntPtr)HTCAPTION;
         }
 
-
-        #endregion
+        #endregion Sombra Formulario
 
         private void Label9_MouseDown(object sender, MouseEventArgs e)
         {
             Utilidades.MoveWindow.ReleaseCapture();
             Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
         }
-
     }
 }

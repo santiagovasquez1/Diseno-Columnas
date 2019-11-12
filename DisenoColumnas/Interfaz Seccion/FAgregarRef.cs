@@ -8,7 +8,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 {
     public partial class FAgregarRef : Form
     {
-        private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion(pedicion:Tipo_Edicion.Secciones_modelo);
+        private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
         private ISeccion Seccion { get; set; }
         private string piso { get; set; }
         private int index { get; set; } = -1;
@@ -117,7 +117,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             double DeltaX1, DeltaY1, DeltaX2, DeltaY2;
             int ContX, ContY;
 
-             if (Seccion.Shape==TipodeSeccion.L | Seccion.Shape == TipodeSeccion.Tee)
+            if (Seccion.Shape == TipodeSeccion.L | Seccion.Shape == TipodeSeccion.Tee)
             {
                 if (Seccion.Shape == TipodeSeccion.L)
                 {
@@ -126,10 +126,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 }
                 else
                 {
-
                 }
-               
-
             }
 
             data.Rows.Clear();
@@ -309,15 +306,15 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void agregarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var Tabla_madre = (DataGridView)cmEditar.SourceControl;
-            int id,Last_index;
-            
+            int id, Last_index;
+
             Tabla_madre.Rows.Add();
             Last_index = Tabla_madre.Rows.Count - 1;
             id = Convert.ToInt32(Tabla_madre.Rows[Last_index - 1].Cells[0].Value) + 1;
 
-            Tabla_madre.Rows[Last_index].Cells[0].Value=id;
+            Tabla_madre.Rows[Last_index].Cells[0].Value = id;
             Tabla_madre.Rows[Last_index].Cells[1].Value = Seccion.Refuerzos.Last().Diametro;
-        } 
+        }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -336,9 +333,9 @@ namespace DisenoColumnas.Interfaz_Seccion
             var Tabla_madre = (DataGridView)cmEditar.SourceControl;
             Tabla_madre.Rows.RemoveAt(index);
 
-            for(int i = index; i < Tabla_madre.RowCount; i++)
+            for (int i = index; i < Tabla_madre.RowCount; i++)
             {
-                Tabla_madre.Rows[i].Cells[0].Value = i+1;
+                Tabla_madre.Rows[i].Cells[0].Value = i + 1;
             }
         }
     }

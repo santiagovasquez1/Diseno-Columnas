@@ -29,7 +29,7 @@ namespace DisenoColumnas.Clases
         public float H { get { return 2 * (float)radio; } set { H = value; } }
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
-        public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_,List<float[]>pCoord)
+        public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> pCoord)
         {
             Name = Nombre;
             Material = Material_;
@@ -192,7 +192,7 @@ namespace DisenoColumnas.Clases
                     Name = "FY4220"
                 };
 
-                circulo = new CCirculo("Refuerzo", r, pcentro, material, TipodeSeccion.Circle,pCoord:null);
+                circulo = new CCirculo("Refuerzo", r, pcentro, material, TipodeSeccion.Circle, pCoord: null);
                 circulo.Set_puntos(10);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
@@ -213,10 +213,10 @@ namespace DisenoColumnas.Clases
                 Name = "FY4220"
             };
 
-            circulo1 = new CCirculo("Refuerzo", r1, Centro, material, TipodeSeccion.Circle,pCoord:null);
+            circulo1 = new CCirculo("Refuerzo", r1, Centro, material, TipodeSeccion.Circle, pCoord: null);
             circulo1.Set_puntos(50);
 
-            circulo2 = new CCirculo("Refuerzo", r2, Centro, material, TipodeSeccion.Circle,pCoord:null);
+            circulo2 = new CCirculo("Refuerzo", r2, Centro, material, TipodeSeccion.Circle, pCoord: null);
             circulo2.Set_puntos(50);
 
             path.AddClosedCurve(circulo1.Puntos.ToArray());

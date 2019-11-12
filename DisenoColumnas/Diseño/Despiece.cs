@@ -11,7 +11,6 @@ namespace DisenoColumnas.Diseño
         public Despiece()
         {
             InitializeComponent();
-            
         }
 
         private void Draw_Column_Paint(object sender, PaintEventArgs e)
@@ -19,10 +18,9 @@ namespace DisenoColumnas.Diseño
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
             if (ColumnaSelect != null)
             {
+                KgRefuerzo_L.Text = Math.Round(ColumnaSelect.KgRefuerzo, 2) + " kg";
 
-                KgRefuerzo_L.Text = Math.Round(ColumnaSelect.KgRefuerzo,2) + " kg";
-
-                KgRefuerzo_L.Location = new Point(250- KgRefuerzo_L.Width, 7);
+                KgRefuerzo_L.Location = new Point(250 - KgRefuerzo_L.Width, 7);
 
                 float MaxB = -999999;
                 for (int i = 0; i < ColumnaSelect.Seccions.Count; i++)
@@ -43,8 +41,6 @@ namespace DisenoColumnas.Diseño
                 for (int i = 0; i < ColumnaSelect.LuzLibre.Count; i++)
                 {
                     Altura += ColumnaSelect.LuzLibre[i] + ColumnaSelect.VigaMayor.Seccions[i].Item1.H;
-
-
                 }
                 Altura += Form1.Proyecto_.e_Fundacion;
                 float SY = (Draw_Column.Height - 5) / (Altura);
@@ -61,12 +57,10 @@ namespace DisenoColumnas.Diseño
         {
             Draw_Column.Invalidate();
             Draw_Colum_Alzado.Invalidate();
-
         }
 
         private void Draw_Colum_Alzado_Paint(object sender, PaintEventArgs e)
         {
-
             float Height = Draw_Colum_Alzado.Height;
             float Width = Draw_Colum_Alzado.Width;
             float MaxB = -99999;
@@ -76,14 +70,11 @@ namespace DisenoColumnas.Diseño
 
             if (ColumnaSelect != null)
             {
-
                 float Altura = 0;
 
                 for (int i = 0; i < ColumnaSelect.LuzLibre.Count; i++)
                 {
                     Altura += ColumnaSelect.LuzLibre[i] + ColumnaSelect.VigaMayor.Seccions[i].Item1.H;
-
-
                 }
                 Altura += Form1.Proyecto_.e_Fundacion;
 
@@ -98,43 +89,39 @@ namespace DisenoColumnas.Diseño
                     }
                 }
 
-
                 SX = (Width - 15) / 10;
                 SY = (Height - 5) / Altura;
                 YI = 5f;
                 XI = 30;
-
 
                 //Crear Lineas Divisorias
                 Pen P_LD = new Pen(Color.LightGray);
                 P_LD.StartCap = System.Drawing.Drawing2D.LineCap.Triangle;
                 P_LD.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
                 P_LD.Width = 1;
-                float TamanoFuente = 0.07f * (SX+SY);
+                float TamanoFuente = 0.07f * (SX + SY);
                 if (ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY < TamanoFuente)
                 {
                     TamanoFuente = ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY;
                 }
-
 
                 Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
                 if (Fuente.Height > 0.4f * SX)
                 {
                     Fuente = new Font("Calibri", 0.05f * (SX + SY), FontStyle.Bold);
                 }
-                e.Graphics.DrawLine(P_LD, 0, Height - YI - Form1.Proyecto_.e_Fundacion * SY, Width, Height - YI - Form1.Proyecto_.e_Fundacion*SY);
-                PointF PointStringF = new PointF(0.01f * SX, Height - YI - Form1.Proyecto_.e_Fundacion/2*SY - Fuente.Height / 2);
+                e.Graphics.DrawLine(P_LD, 0, Height - YI - Form1.Proyecto_.e_Fundacion * SY, Width, Height - YI - Form1.Proyecto_.e_Fundacion * SY);
+                PointF PointStringF = new PointF(0.01f * SX, Height - YI - Form1.Proyecto_.e_Fundacion / 2 * SY - Fuente.Height / 2);
                 e.Graphics.DrawString("Fund.", Fuente, Brushes.Black, PointStringF);
 
                 for (int i = 0; i < ColumnaSelect.LuzAcum.Count; i++)
                 {
                     //Pisos
-                    PointF PointString = new PointF(0.01f * SX, Height - YI - ColumnaSelect.LuzAcum[i] * SY+ColumnaSelect.VigaMayor.Seccions[i].Item1.H*SY/2- Fuente.Height/2);
+                    PointF PointString = new PointF(0.01f * SX, Height - YI - ColumnaSelect.LuzAcum[i] * SY + ColumnaSelect.VigaMayor.Seccions[i].Item1.H * SY / 2 - Fuente.Height / 2);
                     e.Graphics.DrawString(ColumnaSelect.Seccions[i].Item2, Fuente, Brushes.Black, PointString);
 
                     e.Graphics.DrawLine(P_LD, 0, Height - YI - ColumnaSelect.LuzAcum[i] * SY, Width, Height - YI - ColumnaSelect.LuzAcum[i] * SY);
                     e.Graphics.DrawLine(P_LD, 0, Height - YI - (ColumnaSelect.LuzAcum[i] - ColumnaSelect.VigaMayor.Seccions[i].Item1.H) * SY, Width, Height - YI - (ColumnaSelect.LuzAcum[i] - ColumnaSelect.VigaMayor.Seccions[i].Item1.H) * SY);
-
                 }
 
                 //Graficar Alzado
@@ -142,27 +129,18 @@ namespace DisenoColumnas.Diseño
                 {
                     for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
                     {
-
                         if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
                         {
-                             ColumnaSelect.Alzados[i].Colum_Alzado[j].Paint(e, SX, SY, Height, YI, XI);
+                            ColumnaSelect.Alzados[i].Colum_Alzado[j].Paint(e, SX, SY, Height, YI, XI);
 
                             if (ColumnaSelect.Alzados[i].Colum_Alzado[j].UnitarioAdicional != null)
                             {
-                                 ColumnaSelect.Alzados[i].Colum_Alzado[j].UnitarioAdicional.Paint(e, SX, SY, Height, YI, XI);
+                                ColumnaSelect.Alzados[i].Colum_Alzado[j].UnitarioAdicional.Paint(e, SX, SY, Height, YI, XI);
                             }
                         }
                     }
-
                 }
-
-
-      
-
-
             }
-
-
         }
 
         private void Draw_Colum_Alzado_MouseMove(object sender, MouseEventArgs e)
@@ -173,7 +151,6 @@ namespace DisenoColumnas.Diseño
             {
                 for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
                 {
-
                     if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
                     {
                         ColumnaSelect.Alzados[i].Colum_Alzado[j].MouseMove(e);
@@ -186,26 +163,19 @@ namespace DisenoColumnas.Diseño
                         }
                     }
                 }
-
             }
         }
-
-
-
-
 
         private void MaxXyY(Columna ColumnaSelect, ref float MaxX, ref float MaxY)
         {
             for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
             {
-
                 for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
                 {
                     if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB != null)
                     {
                         for (int s = 0; s < ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB.Count; s++)
                         {
-
                             if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0] > MaxX)
                             {
                                 MaxX = ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0];
@@ -215,16 +185,10 @@ namespace DisenoColumnas.Diseño
                             {
                                 MaxY = ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0];
                             }
-
                         }
                     }
                 }
             }
-
-
-
         }
-
-    
     }
 }

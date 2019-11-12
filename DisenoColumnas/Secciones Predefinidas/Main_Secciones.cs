@@ -82,7 +82,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 FC = 490
             };
 
-            Lista_materiales.AddRange(new MAT_CONCRETE[] { Material1, Material2, Material3,Material4,Material5 });
+            Lista_materiales.AddRange(new MAT_CONCRETE[] { Material1, Material2, Material3, Material4, Material5 });
 
             foreach (MAT_CONCRETE material in Lista_materiales)
             {
@@ -283,7 +283,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 60F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones.Add(seccioni);
-                
+
                 #endregion Seccion60X90
             }
         }
@@ -351,7 +351,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
         }
 
         //public static Estribo Set_estribo(Seccion Seccioni, MAT_CONCRETE material)
-        //{   
+        //{
         //    //Estribo Temp = new Estribo(3);
         //    //int pos = 0;
         //    //string Nombre_Seccion = "";
