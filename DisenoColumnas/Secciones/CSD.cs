@@ -272,7 +272,7 @@ namespace DisenoColumnas.Secciones
                     Name = "FY4220"
                 };
 
-                circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle,pCoord:null);
+                circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle, pCoord: null);
                 circulo.Set_puntos(10);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
@@ -307,11 +307,11 @@ namespace DisenoColumnas.Secciones
                 //Aleta seccion
                 X1 = (Xunicos.Min() + rec) * 100 * EscalaX;
                 X2 = (Xunicos.Min() + B - rec) * 100 * EscalaX;
-                
+
                 var aux = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList();
                 var aux2 = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min()).ToList();
 
-                if (aux.Exists(x=>x[0]==Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
+                if (aux.Exists(x => x[0] == Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
                 {
                     Y1 = (Yunicos.Min() - rec) * 100 * EscalaY;
                     Y2 = (Yunicos.Min() + TF + rec) * 100 * EscalaY;
@@ -324,17 +324,17 @@ namespace DisenoColumnas.Secciones
 
                 if (aux2.Exists(x => x[1] == Yunicos.Min()) & aux.Exists(x => x[1] == Yunicos.Max()))
                 {
-                    X3 = (Xunicos.Min() + rec+0.02) * 100 * EscalaX;
+                    X3 = (Xunicos.Min() + rec + 0.02) * 100 * EscalaX;
                     X4 = (Xunicos.Min() + TW + rec) * 100 * EscalaX;
                 }
                 else
                 {
-                    X3 = (Xunicos.Max() - rec-0.02) * 100 * EscalaX;
+                    X3 = (Xunicos.Max() - rec - 0.02) * 100 * EscalaX;
                     X4 = (Xunicos.Max() - TW + rec) * 100 * EscalaX;
                 }
 
                 Y3 = (Yunicos.Min() + rec) * 100 * EscalaY;
-                Y4 = (Yunicos.Max() - rec-0.02) * 100 * EscalaY;
+                Y4 = (Yunicos.Max() - rec - 0.02) * 100 * EscalaY;
             }
 
             //Dibujo estribo en el alma
@@ -347,7 +347,6 @@ namespace DisenoColumnas.Secciones
             Yr3 = Y3 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
             Xr4 = X4 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
             Yr4 = Y4 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
-
 
             Vertices.Add(new PointF((float)X1, (float)Y1));
             Vertices.Add(new PointF((float)X2, (float)Y1));
@@ -417,8 +416,8 @@ namespace DisenoColumnas.Secciones
             for (int i = 0; i < CoordenadasSeccion.Count; i++)
             {
                 Vertices.Add(new PointF(CoordenadasSeccion[i][0] * 100 * (float)EscalaX, CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
-            }          
-            
+            }
+
             #endregion Vertices
 
             g.DrawPolygon(P1, Vertices.ToArray());

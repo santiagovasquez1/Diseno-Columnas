@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 
 namespace DisenoColumnas.Clases
@@ -246,7 +244,7 @@ namespace DisenoColumnas.Clases
                     Name = "FY4220"
                 };
 
-                circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle,pCoord:null);
+                circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle, pCoord: null);
                 circulo.Set_puntos(10);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
@@ -445,7 +443,6 @@ namespace DisenoColumnas.Clases
             g.DrawPolygon(P1, Vertices.ToArray());
             g.FillPolygon(br, Vertices.ToArray());
             Seccion_path.AddPolygon(Vertices.ToArray());
-
         }
 
         #endregion Propiedades y Metodos - Secciones Predefinidas

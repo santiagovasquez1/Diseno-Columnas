@@ -15,7 +15,6 @@ using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-
 namespace DisenoColumnas
 {
     public partial class Form1 : Form
@@ -164,7 +163,6 @@ namespace DisenoColumnas
                 m_Despiece.Show(PanelContenedor);
                 CambiarSkins();
 
-
                 mFuerzasEnElmentos = new FuerzasEnElementos();
                 mFuerzasEnElmentos.Show(PanelContenedor);
 
@@ -181,9 +179,6 @@ namespace DisenoColumnas
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
 
-
-
-
                 CreateDictonaries();
                 WindowState = FormWindowState.Maximized;
             }
@@ -197,6 +192,7 @@ namespace DisenoColumnas
             m_Despiece.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.EndColor = SystemColors.ControlLight;
             m_Despiece.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.TextColor = SystemColors.ActiveCaptionText;
         }
+
         private void CargarToolTips()
         {
             ToolTip tool = new ToolTip();
@@ -475,8 +471,8 @@ namespace DisenoColumnas
 
             #endregion Diccionario diametro barras
 
-
             #region Diccionario -> Masa Nominal Barras
+
             Proyecto_.MasaNominalBarras = new Dictionary<int, float>();
             Proyecto_.MasaNominalBarras.Add(2, 0.249f);
             Proyecto_.MasaNominalBarras.Add(3, 0.560f);
@@ -490,10 +486,7 @@ namespace DisenoColumnas
             Proyecto_.MasaNominalBarras.Add(11, 7.907f);
             Proyecto_.MasaNominalBarras.Add(14, 8.938f);
 
-            #endregion
-
-
-
+            #endregion Diccionario -> Masa Nominal Barras
         }
 
         private string AbrirE2K2009yCSV2009()
@@ -950,9 +943,9 @@ namespace DisenoColumnas
                         {
                             if (viga.Name == NameBeam && Story == Proyecto_.Stories[i].Item1)
                             {
-                              ISeccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                              Tuple<CRectangulo, string> tuple_aux = new Tuple<CRectangulo, string>((CRectangulo)seccion, Story);
-                              viga.Seccions.Add(tuple_aux);
+                                ISeccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                                Tuple<CRectangulo, string> tuple_aux = new Tuple<CRectangulo, string>((CRectangulo)seccion, Story);
+                                viga.Seccions.Add(tuple_aux);
                             }
                         }
                     }
@@ -1016,7 +1009,7 @@ namespace DisenoColumnas
                                     Tuple<ISeccion, string> tuple_aux = new Tuple<ISeccion, string>(seccion, Story);
                                     colum.Seccions.Add(tuple_aux);
                                 }
-                            }                            
+                            }
                         }
                     }
                 }
@@ -1330,7 +1323,6 @@ namespace DisenoColumnas
                 columnasIgualesToolStripMenuItem.Enabled = true;
                 fuerzasToolStripMenuItem.Enabled = true;
                 despieceToolStripMenuItem.Enabled = true;
-
             }
             if (WindowState == FormWindowState.Normal)
             {
@@ -1477,7 +1469,6 @@ namespace DisenoColumnas
                 Delta = (Cuadro_diseño.BarraPersonalizada.Width) / (Lista_ColumnasDiseñar.Count);
             }
 
-
             int CantCol = 1;
             double D_Pro = Math.Ceiling(Delta);
             bool HabilitarReporte = false;
@@ -1521,8 +1512,6 @@ namespace DisenoColumnas
             if (mAgregarAlzado != null)
             {
                 mAgregarAlzado.CrearDataGrid(true);
-
-
             }
             if (m_Despiece != null)
             {
@@ -1649,7 +1638,6 @@ namespace DisenoColumnas
 
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
-
                 if (col.ColSimilName != null)
                 {
                     if (columnasDrawing.Exists(x => x.Name == col.Name))
@@ -1659,20 +1647,16 @@ namespace DisenoColumnas
 
                     Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.Name);
                 }
-
             }
 
             bool Activar_CuantiMax = false;
             List<string> NamesColumsMax = new List<string>();
             if (CancelGarfica == false && columnasDrawing.Count != 0)
             {
-
-
                 foreach (Columna col in columnasDrawing)
                 {
                     for (int i = col.resultadosETABs.Count - 1; i >= 0; i--)
                     {
-
                         if (col.resultadosETABs[i].AsTopMediumButton[0] / (col.Seccions[i].Item1.Area) > 0.04)
                         {
                             Activar_CuantiMax = true;
@@ -1688,11 +1672,7 @@ namespace DisenoColumnas
                             Activar_CuantiMax = true;
                             NamesColumsMax.Add(col.Name);
                         }
-
                     }
-
-
-
                 }
 
                 List<string> NamesColumMax = NamesColumsMax.Distinct().ToList();
@@ -1717,14 +1697,10 @@ namespace DisenoColumnas
                     GraficarAlzadoColumnas(ref columnasDrawing);
                 }
             }
-
-
         }
-
 
         private void GraficarAlzadoColumnas(ref List<Columna> ColumnsDrawing)
         {
-
             double[] XY = new double[] { };
             FunctionsAutoCAD.FunctionsAutoCAD.OpenAutoCAD();
             FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
@@ -1767,16 +1743,8 @@ namespace DisenoColumnas
             m_Despiece.Show(PanelContenedor);
         }
 
-
-
         private void PanelContenedor_ActiveContentChanged(object sender, EventArgs e)
         {
-
         }
-
-
-
-
-
     }
 }

@@ -63,8 +63,7 @@ namespace DisenoColumnas.Clases
 
         public float KgRefuerzo { get; set; }
 
-
-        #endregion
+        #endregion Propeidades - Calculos
 
         #region Propiedades - Auxiliares
 
@@ -145,7 +144,8 @@ namespace DisenoColumnas.Clases
                             {
                                 AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
                             }
-                            catch {
+                            catch
+                            {
                                 AreaBarra = 0;
                             }
                             resultadosETABs[i].As_asignado[2] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;
@@ -327,7 +327,6 @@ namespace DisenoColumnas.Clases
         }
 
         #endregion MetodosPaint
-
 
         #region Metodos - Agregar Alzado Sugerido
 
@@ -519,8 +518,6 @@ namespace DisenoColumnas.Clases
                 }
             }
             CalcularPesoAcero();
-
-
         }
 
         private void CrearAlzado(int IndiceC, int IndiceR, bool isNotPaste, Columna ColumnaSelect, string ValorCelda)
@@ -960,12 +957,6 @@ namespace DisenoColumnas.Clases
 
         #endregion Metodos - Agregar Alzado Sugerido
 
-
-        #endregion
-
-
-
-
         #region Metodos - Dibujo Automático AutoCAD
 
         public void DrawColumAutoCAD(double X, double Y, string Names, int NoDespiece)
@@ -1029,10 +1020,6 @@ namespace DisenoColumnas.Clases
                 P2_CotaT = new double[] { X, Y + LuzAcum[i], 0 };
                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
 
-
-
-
-
                 if (i != 0)
                 {
                     //Lineas entre Piso
@@ -1050,39 +1037,34 @@ namespace DisenoColumnas.Clases
             }
 
             #region Resitencia
-            //Agregar Cotas de Resistencia
 
+            //Agregar Cotas de Resistencia
 
             float Fc = Seccions[Seccions.Count - 1].Item1.Material.FC;
             List<float> Resitencias = new List<float>();
             Resitencias.Add(Fc);
-            for (int i=Seccions.Count-1;i>=0; i--)
+            for (int i = Seccions.Count - 1; i >= 0; i--)
             {
                 if (Fc != Seccions[i].Item1.Material.FC)
                 {
                     Resitencias.Add(Seccions[i].Item1.Material.FC);
                     Fc = Seccions[i].Item1.Material.FC;
                 }
-
             }
-
 
             for (int i = 0; i < Resitencias.Count; i++)
             {
-
-
                 int IndiceI = Seccions.FindLastIndex(x => x.Item1.Material.FC == Resitencias[i]);
                 int IndiceF = Seccions.FindIndex(x => x.Item1.Material.FC == Resitencias[i]);
 
-
                 float B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.B) / MaxB) + DPR;
-                double[]  CotaFc1 = new double[] { X + B_Draw, Y + LuzAcum[IndiceI] - VigaMayor.Seccions[IndiceI].Item1.H - LuzLibre[IndiceI], 0 };
+                double[] CotaFc1 = new double[] { X + B_Draw, Y + LuzAcum[IndiceI] - VigaMayor.Seccions[IndiceI].Item1.H - LuzLibre[IndiceI], 0 };
                 B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceF].Item1.B) / MaxB) + DPR;
                 double[] CotaFc2 = new double[] { X + B_Draw, Y + LuzAcum[IndiceF], 0 };
-                string TextCota;float DesplazCota = 0.5f;
+                string TextCota; float DesplazCota = 0.5f;
                 if (IndiceI - IndiceF > 2)
                 {
-                   TextCota = @"{\H1.33333x;\C11; Resistencia a la compresión del concreto a los 28 días\Pf'c=" + Resitencias[i] + @"kgf/cm²\C256; }";
+                    TextCota = @"{\H1.33333x;\C11; Resistencia a la compresión del concreto a los 28 días\Pf'c=" + Resitencias[i] + @"kgf/cm²\C256; }";
                 }
                 else
                 {
@@ -1090,7 +1072,7 @@ namespace DisenoColumnas.Clases
                     TextCota = @"{\H1.33333x;\C11; Resistencia a la compresión del\Pconcreto a los 28 días\Pf'c=" + Resitencias[i] + @"kgf/cm²\C256; }";
                 }
                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(CotaFc1, CotaFc2, "FC_COTAS", "FC_TEXT1", DesplazCota, headType1: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, Text: TextCota,
-                    headType2: FunctionsAutoCAD.ArrowHeadType.ArrowDefault,TextRotation:90,ArrowheadSize:0.002);
+                    headType2: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, TextRotation: 90, ArrowheadSize: 0.002);
 
                 double[] P_XYZRes = new double[] { CotaFc1[0] + 0.4f, CotaFc1[1] + (CotaFc2[1] - CotaFc1[1]) / 2 - 3f / 2, 0 };
 
@@ -1098,14 +1080,9 @@ namespace DisenoColumnas.Clases
                 // 90, justifyText: FunctionsAutoCAD.JustifyText.Center, Width2: 3f);
             }
 
-
-            #endregion
-
-
-
+            #endregion Resitencia
 
             // Espesor  Losa Final
-
 
             double B_DrawF = ((Alzados[Alzados.Count - 1].DistX * Seccions[0].Item1.B) / MaxB) + DPR;
             double[] VerLosa_Final = new double[] {X,Y+LuzAcum[0] -VigaMayor.Seccions[0].Item1.H,
@@ -1123,8 +1100,8 @@ namespace DisenoColumnas.Clases
                                       X+B_DrawF,Y+ LuzAcum[0]};
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vert_CT, LayerCuadro, false);
             string TitleDespi = "DESPIECE " + NoDespiece;
-            double DistCorrerTextB = 0.15 * (TitleDespi.Length-1);
-            double[] P_XYZ = new double[] { X + B_DrawF / 2 - DistCorrerTextB / 2, Y + LuzAcum[0] +DistCT/2+0.05, 0 };
+            double DistCorrerTextB = 0.15 * (TitleDespi.Length - 1);
+            double[] P_XYZ = new double[] { X + B_DrawF / 2 - DistCorrerTextB / 2, Y + LuzAcum[0] + DistCT / 2 + 0.05, 0 };
             FunctionsAutoCAD.FunctionsAutoCAD.AddText(TitleDespi, P_XYZ, 0.75, 0.10, LayerTitiles, "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
 
             //Agregar Cuadro, Nombre Columnas
@@ -1134,7 +1111,7 @@ namespace DisenoColumnas.Clases
             string NamesColumns = Names + @"\P" + Dimensiones;
 
             float Altu_Names = 1f;
-            DistCorrerTextB = 0.15 * (Dimensiones.Length+1.5);
+            DistCorrerTextB = 0.15 * (Dimensiones.Length + 1.5);
 
             double B_DrawI = ((Alzados[Alzados.Count - 1].DistX * Seccions[Seccions.Count - 1].Item1.B) / MaxB) + DPR;
 
@@ -1145,13 +1122,11 @@ namespace DisenoColumnas.Clases
                                       X+B_DrawI,Y-Altu_Names,
                                       X+B_DrawI,Y };
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vert_CI, LayerCuadro, false);
-            FunctionsAutoCAD.FunctionsAutoCAD.AddText(NamesColumns, P_XYZ, 0.75, 0.10, LayerTitiles, "FC_TEXT1", 0,justifyText: FunctionsAutoCAD.JustifyText.Center);
-
-
-
-            #endregion
+            FunctionsAutoCAD.FunctionsAutoCAD.AddText(NamesColumns, P_XYZ, 0.75, 0.10, LayerTitiles, "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
 
             #endregion Dibujar Columna
+
+            #endregion Metodos - Dibujo Automático AutoCAD
 
             #region Dibujar Refuerzo
 
@@ -1162,40 +1137,22 @@ namespace DisenoColumnas.Clases
                     AlzadoUnitario aux = a.Colum_Alzado[i];
                     if (aux != null)
                     {
-
                         DrawAutoCAD_Refuerzo(a, aux, X, Y, i);
 
-                        if(aux.UnitarioAdicional != null)
+                        if (aux.UnitarioAdicional != null)
                         {
                             DrawAutoCAD_Refuerzo(a, aux.UnitarioAdicional, X, Y, i);
                         }
-
-
-
                     }
-
-
-
                 }
-
-
-
-
-
-
-
-
-
-
             }
 
-            #endregion
+            #endregion Dibujar Refuerzo
 
             #region Agregar Nivel de Sección
 
-
             float N_F = Form1.Proyecto_.Nivel_Fundacion;
-            float eF= Form1.Proyecto_.e_Fundacion;
+            float eF = Form1.Proyecto_.e_Fundacion;
             string NivelFund = N_F >= 0 ? "N+" + String.Format("{0:0.00}", N_F) + @"\P" + "Fundación" : "N" + String.Format("{0:0.00}", N_F) + @"\P" + "Fundación";
 
             FunctionsAutoCAD.FunctionsAutoCAD.B_NivelSeccion(new double[] { X, Y + eF, 0 }, NivelFund, 1.08, 1.90, false, "FC_COTAS", 75, 75, 75, 0);
@@ -1203,16 +1160,12 @@ namespace DisenoColumnas.Clases
             int NoLosa = 0;
             for (int i = LuzAcum.Count - 1; i >= 0; i--)
             {
-
                 NoLosa += 1;
                 string Nivel;
                 double[] PXYZ;
 
-
                 PXYZ = new double[] { X, Y + LuzAcum[i], 0 };
                 NivelN += LuzLibre[i] + VigaMayor.Seccions[i].Item1.H;
-
-
 
                 if (NivelN >= 0)
                 {
@@ -1223,24 +1176,14 @@ namespace DisenoColumnas.Clases
                     Nivel = "N" + String.Format("{0:0.00}", NivelN) + @"\P" + "Losa " + NoLosa;
                 }
 
-
                 FunctionsAutoCAD.FunctionsAutoCAD.B_NivelSeccion(PXYZ, Nivel, 1.08, 1.90, false, "FC_COTAS", 75, 75, 75, 0);
-
-
             }
 
-
-
-
-
-            #endregion
-
-
+            #endregion Agregar Nivel de Sección
         }
 
         private void DrawAutoCAD_Refuerzo(Alzado a, AlzadoUnitario aux, double X, double Y, int i)
         {
-
             float DPR = 0.6f;
             string LayerRefuerzo = "FC_REFUERZO";
             string LayerString = "FC_R-80";
@@ -1257,12 +1200,10 @@ namespace DisenoColumnas.Clases
                 if (aux.x1 != 0)
                 {
                     DesCota = -0.4f;
-
                 }
 
                 if (Alzados.Count == 2 && a.ID == 1)
                 {
-
                     DesCota = 0.3f;
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1] };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText - DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
@@ -1275,7 +1216,6 @@ namespace DisenoColumnas.Clases
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText + DPR / 3, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 3, Y + aux.Coord_Alzado_PB[1][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 3, Y + aux.Coord_Alzado_PB[1][1] + aux.Traslapo, 0 };
-
                 }
                 else
                 {
@@ -1286,34 +1226,25 @@ namespace DisenoColumnas.Clases
 
                     if (aux.Tipo == "A")
                     {
-
                         try
                         {
                             if (a.Colum_Alzado[i + 1] != null)
                             {
-
                                 if (a.Colum_Alzado[i + 1].Tipo == "A" && a.Colum_Alzado[i + 1].ToString() == aux.ToString() && a.Colum_Alzado[i + 1].Traslapo + aux.Traslapo + LdAd * 2 >= aux.H_Stroy)
                                 {
-
-
-
                                     DesCota = -0.2f;
                                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum, 0 };
                                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
 
                                     FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
 
-
                                     DesCota = -0.2f;
                                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
                                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + a.Colum_Alzado[i + 1].Hacum - a.Colum_Alzado[i + 1].Hviga, 0 };
-
-
                                 }
                                 else
                                 {
-
                                     DesCota = -0.2f;
                                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum, 0 };
                                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
@@ -1322,35 +1253,26 @@ namespace DisenoColumnas.Clases
                             }
                             else if (aux.UnitarioAdicional != null)
                             {
-
                                 if (aux.UnitarioAdicional.CantBarras + "#" + aux.UnitarioAdicional.NoBarra == aux.CantBarras + "#" + aux.NoBarra && aux.Traslapo + aux.Traslapo + LdAd * 2 >= aux.H_Stroy)
                                 {
-
                                     DesCota = -0.2f;
                                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum, 0 };
                                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
 
                                     FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
 
-
                                     DesCota = -0.2f;
                                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
                                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + LuzAcum[i + 1] - VigaMayor.Seccions[i + 1].Item1.H, 0 };
-
-
                                 }
                                 else
                                 {
-
                                     DesCota = -0.2f;
                                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum, 0 };
                                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
                                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga, 0 };
                                 }
-
-
-
                             }
                             else
                             {
@@ -1360,7 +1282,8 @@ namespace DisenoColumnas.Clases
                                 P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga, 0 };
                             }
                         }
-                        catch {
+                        catch
+                        {
                             DesCota = -0.2f;
                             P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum, 0 };
                             P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
@@ -1376,12 +1299,9 @@ namespace DisenoColumnas.Clases
                     }
                 }
 
-
-
                 FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2DWithLengthText(Coord_Refuerz, LayerRefuerzo, NomeRefuerz, P_XYZ_Text, 0.75, 0.10, LayerString, "FC_TEXT1", 90, 1.1);
 
                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-
             }
 
             if (aux.Coord_Alzado_PB.Count == 3)
@@ -1393,20 +1313,14 @@ namespace DisenoColumnas.Clases
                 double[] Coord_Refuerz; double[] P_XYZ_Text;
                 double[] P1_CotaT, P2_CotaT; float DesCota = -0.2f;
 
-
-
                 if (aux.Tipo == "T1" && aux.NoStory != 1 || aux.Tipo == "A" && aux.NoStory != 1)
                 {
                     Ytext = Y + aux.Coord_Alzado_PB[0][1] + (aux.Coord_Alzado_PB[2][1] - aux.Coord_Alzado_PB[0][1]) / 2;
-
                 }
                 else if (aux.Tipo == "T1" && aux.NoStory == 1 || aux.Tipo == "Botton" && aux.NoStory == 1 || aux.Tipo == "ABotton" && aux.NoStory == 1)
                 {
                     Ytext = Y + aux.Coord_Alzado_PB[0][1] + Form1.Proyecto_.e_Fundacion;
                 }
-
-
-
 
                 if (Alzados.Count == 2 && a.ID == 1)
                 {
@@ -1418,11 +1332,9 @@ namespace DisenoColumnas.Clases
                     {
                         if (aux.Tipo == "A")
                         {
-
                         }
                         else
                         {
-
                         }
                         P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
                         P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1] + aux.Traslapo, 0 };
@@ -1434,9 +1346,7 @@ namespace DisenoColumnas.Clases
                         P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
                         P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
                         FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-
                     }
-
                 }
                 else if (Alzados.Count == 2 && a.ID == 2)
                 {
@@ -1445,7 +1355,6 @@ namespace DisenoColumnas.Clases
 
                     if (aux.NoStory != 1)
                     {
-
                         P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 3, Y + aux.Coord_Alzado_PB[0][1], 0 };
                         P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 3, Y + aux.Coord_Alzado_PB[0][1] + aux.Traslapo, 0 };
                         FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
@@ -1457,7 +1366,6 @@ namespace DisenoColumnas.Clases
                         P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 3, Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
                         FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
                     }
-
                 }
                 else
                 {
@@ -1466,13 +1374,10 @@ namespace DisenoColumnas.Clases
 
                     if (aux.NoStory != 1)
                     {
-
                         if (aux.Tipo == "A")
                         {
-
                             if (a.Colum_Alzado[i + 1] != null)
                             {
-
                                 if (a.Colum_Alzado[i + 1].ToString() == aux.ToString())
                                 {
                                     if (a.Colum_Alzado[i + 1].Traslapo + LdAd + aux.Traslapo + LdAd >= aux.H_Stroy)
@@ -1495,21 +1400,16 @@ namespace DisenoColumnas.Clases
                                     FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
                                 }
                             }
-                            else if(aux.UnitarioAdicional != null)
+                            else if (aux.UnitarioAdicional != null)
                             {
-                                if (aux.UnitarioAdicional.CantBarras + "#" + aux.UnitarioAdicional.NoBarra== aux.CantBarras + "#" + aux.NoBarra)
+                                if (aux.UnitarioAdicional.CantBarras + "#" + aux.UnitarioAdicional.NoBarra == aux.CantBarras + "#" + aux.NoBarra)
                                 {
                                     if (aux.Traslapo + LdAd + aux.Traslapo + LdAd >= aux.H_Stroy)
                                     {
                                         P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[2][0], Y + aux.Coord_Alzado_PB[2][1], 0 };
-                                        P2_CotaT =new double[] { X + aux.Coord_Alzado_PB[2][0], Y + LuzAcum[i + 1] - VigaMayor.Seccions[i + 1].Item1.H, 0 };
-
-
+                                        P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[2][0], Y + LuzAcum[i + 1] - VigaMayor.Seccions[i + 1].Item1.H, 0 };
 
                                         FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-
-
-
                                     }
                                     else
                                     {
@@ -1525,14 +1425,12 @@ namespace DisenoColumnas.Clases
                                     FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
                                 }
                             }
-
                             else
                             {
                                 P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[2][0], Y + aux.Coord_Alzado_PB[2][1], 0 };
                                 P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[2][0], Y + aux.Hacum - aux.Hviga, 0 };
                                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
                             }
-
                         }
                         else
                         {
@@ -1547,19 +1445,10 @@ namespace DisenoColumnas.Clases
                         P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
                         P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
                         FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-
                     }
                 }
 
-
-
-
-
                 FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2DWithLengthText(Coord_Refuerz, LayerRefuerzo, NomeRefuerz, P_XYZ_Text, 0.75, 0.10, LayerString, "FC_TEXT1", 90, 1.1);
-
-
-
-
             }
 
             if (aux.Coord_Alzado_PB.Count == 4)
@@ -1579,8 +1468,6 @@ namespace DisenoColumnas.Clases
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText - DPR / 2, Ytext, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
-
-
                 }
                 else if (Alzados.Count == 2 && a.ID == 2)
                 {
@@ -1594,99 +1481,56 @@ namespace DisenoColumnas.Clases
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0], Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0], Y + aux.Coord_Alzado_PB[2][1], X + aux.Coord_Alzado_PB[3][0], Y + aux.Coord_Alzado_PB[3][1] };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText, Ytext, 0 };
 
-
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
-
-
-
                 }
-
-
-
 
                 FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2DWithLengthText(Coord_Refuerz, LayerRefuerzo, NomeRefuerz, P_XYZ_Text, 0.75, 0.10, LayerString, "FC_TEXT1", 90, 1.1);
 
                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-
-
-
-
             }
-
         }
-        #endregion
-
-
-
-
-
-
 
         #region Metodos - Calcular Peso de Acero
+
         public void CalcularPesoAcero()
         {
-
             KgRefuerzo = 0;
-            foreach(Alzado a in Alzados)
+            foreach (Alzado a in Alzados)
             {
-
-                for(int i = a.Colum_Alzado.Count - 1; i>= 0; i--)
+                for (int i = a.Colum_Alzado.Count - 1; i >= 0; i--)
                 {
-
                     AlzadoUnitario aux = a.Colum_Alzado[i];
 
-                    if(aux != null)
+                    if (aux != null)
                     {
-
                         if (aux.Coord_Alzado_PB.Count != 0)
                         {
-                            KgRefuerzo += CalcularLongitudRefuerzo(aux.Coord_Alzado_PB)* Form1.Proyecto_.MasaNominalBarras[aux.NoBarra]*aux.CantBarras;
-
+                            KgRefuerzo += CalcularLongitudRefuerzo(aux.Coord_Alzado_PB) * Form1.Proyecto_.MasaNominalBarras[aux.NoBarra] * aux.CantBarras;
                         }
                         if (aux.UnitarioAdicional != null)
                         {
                             KgRefuerzo += CalcularLongitudRefuerzo(aux.UnitarioAdicional.Coord_Alzado_PB) * Form1.Proyecto_.MasaNominalBarras[aux.UnitarioAdicional.NoBarra] * aux.UnitarioAdicional.CantBarras;
-
                         }
-
-
                     }
-
                 }
-
-
             }
-
         }
-
-
 
         private float CalcularLongitudRefuerzo(List<float[]> Coordenadas)
         {
-
             float Longitud = 0;
-            for(int i=0; i< Coordenadas.Count; i++)
+            for (int i = 0; i < Coordenadas.Count; i++)
             {
-
                 try
                 {
-                    Longitud+= (float)Math.Sqrt(Math.Pow(Coordenadas[i][0] - Coordenadas[i-1][0], 2) + Math.Pow(Coordenadas[i][1] - Coordenadas[i-1][1], 2));
-
+                    Longitud += (float)Math.Sqrt(Math.Pow(Coordenadas[i][0] - Coordenadas[i - 1][0], 2) + Math.Pow(Coordenadas[i][1] - Coordenadas[i - 1][1], 2));
                 }
-                catch{              }
-
+                catch { }
             }
             return Longitud;
-
         }
-        #endregion
 
-
-
-
-
-
-
+        #endregion Metodos - Calcular Peso de Acero
     }
 }
