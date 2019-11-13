@@ -48,7 +48,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
             string Nombre_Seccion = "";
             int[] Diametros_seccion;
             int CapasX, CapasY, CapasXw, CapasYw;
-            CRectangulo seccioni;
+            ISeccion seccioni;
 
             List<MAT_CONCRETE> Lista_materiales = new List<MAT_CONCRETE>();
 
@@ -91,8 +91,8 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C35x40" + material.Name;
                 Diametros_seccion = new int[] { 4, 4, 4, 4, 5, 5, 4, 4, 4, 4 };
                 CapasX = 3; CapasY = 4; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 40F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 35F, 40F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
 
                 #endregion Seccion35X40
 
@@ -101,8 +101,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C35x50" + material.Name;
                 Diametros_seccion = new int[] { 4, 4, 5, 4, 4, 5, 5, 4, 4, 5, 4, 4 };
                 CapasX = 3; CapasY = 5; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 50F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 35F, 50F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 35F, 50F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion35X50
 
@@ -111,8 +113,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C35x60" + material.Name;
                 Diametros_seccion = new int[] { 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4 };
                 CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 35F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 35F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion35X60
 
@@ -121,8 +125,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C35x80" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
                 CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 35F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 35F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 35F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion35X80
 
@@ -131,8 +137,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C30x70" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 5, 5, 4, 4, 5, 5 };
                 CapasX = 2; CapasY = 6; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 30F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 30F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 30F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion30X70
 
@@ -141,8 +149,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C30x100" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
                 CapasX = 2; CapasY = 8; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 30F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 30F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 30F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion30X100
 
@@ -151,8 +161,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C30x120" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 5, 4, 5, 4, 5, 5, 5 };
                 CapasX = 2; CapasY = 10; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 30F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 30F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 30F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion30X120
 
@@ -161,8 +173,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C40x70" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
                 CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 40F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion40X70
 
@@ -171,8 +185,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C40x80" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 6, 6, 5, 5, 6, 6, 5, 5, 6, 6, 5, 5 };
                 CapasX = 3; CapasY = 6; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 40F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion40X80
 
@@ -181,8 +197,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C40x90" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5 };
                 CapasX = 3; CapasY = 7; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 40F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion40X90
 
@@ -191,8 +209,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C40x120" + material.Name;
                 Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 5, 6, 6 };
                 CapasX = 3; CapasY = 9; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 40F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion40X120
 
@@ -201,8 +221,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C40x140" + material.Name;
                 Diametros_seccion = new int[] { 6, 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6, 6 };
                 CapasX = 3; CapasY = 10; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 40F, 140F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 40F, 140F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 140F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion40X140
 
@@ -211,8 +233,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C45x110" + material.Name;
                 Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 5, 5, 5, 5, 6, 6 };
                 CapasX = 4; CapasY = 8; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 45F, 110F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 45F, 110F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 45F, 110F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion45X110
 
@@ -221,8 +245,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C50x60" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5, 4, 4, 5, 5 };
                 CapasX = 5; CapasY = 6; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 50F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 50F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion50X60
 
@@ -231,8 +257,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C50x70" + material.Name;
                 Diametros_seccion = new int[] { 6, 5, 5, 5, 6, 6, 6, 6, 6, 6, 5, 5, 5, 6 };
                 CapasX = 4; CapasY = 5; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 50F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 50F, 70F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion50X70
 
@@ -241,8 +269,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C50x80" + material.Name;
                 Diametros_seccion = new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
                 CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 50F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 50F, 80F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion50X80
 
@@ -251,8 +281,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C50x100" + material.Name;
                 Diametros_seccion = new int[] { 6, 6, 5, 5, 5, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 5, 5, 5, 6, 6 };
                 CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 50F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 50F, 100F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion50X100
 
@@ -261,8 +293,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C50x120" + material.Name;
                 Diametros_seccion = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
                 CapasX = 5; CapasY = 8; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 50F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 50F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 50F, 120F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion50X120
 
@@ -271,8 +305,10 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C60x60" + material.Name;
                 Diametros_seccion = new int[] { 5, 6, 6, 6, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5 };
                 CapasX = 5; CapasY = 5; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 60F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 60F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 60F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion60X60
 
@@ -281,20 +317,30 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Nombre_Seccion = "C60x90" + material.Name;
                 Diametros_seccion = new int[] { 6, 6, 6, 5, 6, 6, 6, 6, 6, 5, 5, 6, 6, 6, 6, 6, 5, 6, 6, 6 };
                 CapasX = 5; CapasY = 7; CapasXw = 0; CapasYw = 0;
-                seccioni = FunctionsProject.DeepClone(Crear_Seccion(Nombre_Seccion, 60F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
-                Lista_Secciones.Secciones.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 60F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DMO.Add(seccioni);
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 60F, 90F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
 
                 #endregion Seccion60X90
             }
         }
 
-        public static CRectangulo Crear_Seccion(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
+        public static CRectangulo Crear_Seccion_DMO(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
         {
             CRectangulo temp = new CRectangulo(Nombre_seccion, b / 100, h / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
             temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
             temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
-            //temp.Estribo = Set_estribo(temp, temp.Material);
-            //temp.CalcNoDBarras();
+            temp.Calc_vol_inex(r: 0.04f, FY: 4220, gDE: GDE.DMO);
+            return temp;
+        }
+
+        public static CRectangulo Crear_Seccion_DES(string Nombre_seccion, float b, float h, float tw, float tf, MAT_CONCRETE material, int[] Diametros_Seccion, int CapasX, int CapasY, int CapasXw, int CapasYw)
+        {
+            CRectangulo temp = new CRectangulo(Nombre_seccion, b / 100, h / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
+            temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
+            temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
+            temp.Calc_vol_inex(r: 0.04f, FY: 4220, gDE: GDE.DES);
             return temp;
         }
 

@@ -78,7 +78,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (seccion.Estribo == null)
                 {
-                    seccion.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
+                    seccion.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY, Form1.Proyecto_.DMO_DES);
                 }
 
                 Dibujo_Estribo(g, seccion);
@@ -157,7 +157,17 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Load_predef()
         {
-            var Secciones = Form1.secciones_predef.Secciones.ToArray();
+            ISeccion[] Secciones = { };
+
+            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            {
+                Secciones = Form1.secciones_predef.Secciones_DMO.ToArray();
+            }
+            else
+            {
+                Secciones = Form1.secciones_predef.Secciones_DES.ToArray();
+            }
+
             lbPisos.Items.Clear();
             lbPisos.Items.AddRange(Secciones);
             lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
@@ -170,9 +180,20 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 indice = Columna_i.Seccions.FindIndex(x => x.Item2 == Piso);
 
-                if (Form1.secciones_predef.Secciones.Exists(x => x == Columna_i.Seccions[indice].Item1) == true & Columna_i.Seccions[indice].Item1.Editado == false)
+                List<ISeccion> Temp = new List<ISeccion>();
+
+                if (Form1.Proyecto_.DMO_DES == GDE.DMO)
                 {
-                    seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones.Find(x => x == Columna_i.Seccions[indice].Item1));
+                    Temp = Form1.secciones_predef.Secciones_DMO;
+                }
+                else
+                {
+                    Temp = Form1.secciones_predef.Secciones_DES;
+                }
+
+                if (Temp.Exists(x => x == Columna_i.Seccions[indice].Item1) == true & Columna_i.Seccions[indice].Item1.Editado == false)
+                {
+                    seccion = FunctionsProject.DeepClone(Temp.Find(x => x == Columna_i.Seccions[indice].Item1));
                     seccion.Name = Columna_i.Seccions[indice].Item1.Name;
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
@@ -195,8 +216,16 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             Seccion_name = lbPisos.SelectedItem.ToString();
 
-            indice = Form1.secciones_predef.Secciones.FindIndex(x => x.ToString() == Seccion_name);
-            seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones[indice]);
+            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            {
+                indice = Form1.secciones_predef.Secciones_DMO.FindIndex(x => x.ToString() == Seccion_name);
+                seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones_DMO[indice]);
+            }
+            else
+            {
+                indice = Form1.secciones_predef.Secciones_DES.FindIndex(x => x.ToString() == Seccion_name);
+                seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones_DES[indice]);
+            }
         }
 
         private bool MouseOverPoligono(PointF mouse_pt)

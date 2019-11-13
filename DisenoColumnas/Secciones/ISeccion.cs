@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -18,6 +19,7 @@ namespace DisenoColumnas.Clases
         List<GraphicsPath> Shapes_ref { get; set; }
         List<CRefuerzo> Refuerzos { get; set; }
         List<float[]> CoordenadasSeccion { get; set; }
+        List<Tuple<int, int>> No_D_Barra { get; set; }
 
         double Acero_Long { get; set; }
 
@@ -25,7 +27,7 @@ namespace DisenoColumnas.Clases
 
         void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY);
 
-        void Calc_vol_inex(float r, float FY);
+        void Calc_vol_inex(float r, float FY,GDE gDE);
 
         void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR);
 

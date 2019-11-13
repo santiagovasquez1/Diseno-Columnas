@@ -136,7 +136,7 @@
         }
 
         #endregion
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column1;
+        private WeifenLuo.DataGridViewTextBoxColumnEx Column1;
         public System.Windows.Forms.Label NameColum;
         private System.Windows.Forms.DataGridViewImageColumn story;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;

@@ -1,5 +1,5 @@
 ﻿using DisenoColumnas.Clases;
-using SpannedDataGridViewNet2;
+using WeifenLuo;
 using System;
 using System.Drawing;
 using System.Windows.Forms;

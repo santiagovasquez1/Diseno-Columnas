@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
 
-namespace SpannedDataGridViewNet2
+namespace WeifenLuo
 {
     public class DataGridViewImageCellEx : DataGridViewImageCell, ISpannedCell
     {

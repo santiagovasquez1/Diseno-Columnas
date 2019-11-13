@@ -99,10 +99,10 @@ namespace DisenoColumnas.Clases
             }
         }
 
-        public void Calc_vol_inex(float r, float FY)
+        public void Calc_vol_inex(float r, float FY,GDE gDE)
         {
             float FD1, FD2;
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (gDE == GDE.DMO)
             {
                 FD1 = 0.20f;
                 FD2 = 0.06f;
@@ -306,11 +306,7 @@ namespace DisenoColumnas.Clases
             {
                 CRectangulo temp = (CRectangulo)obj;
 
-                if (Name == temp.Name && Material == temp.Material && Shape == temp.Shape && Area == temp.Area && B == temp.B
-                    && H == temp.H)
-                    return true;
-
-                if (temp.Shape == TipodeSeccion.Rectangular & temp.B == B & temp.H == H & Material == temp.Material || temp.Shape == TipodeSeccion.Rectangular & temp.H == B & temp.B == H & Material == temp.Material)
+                if (temp.B == B & temp.H == H & Material == temp.Material || temp.H == B & temp.B == H & Material == temp.Material)
                     return true;
             }
 

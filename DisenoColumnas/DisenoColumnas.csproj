@@ -35,7 +35,7 @@
   <ItemGroup>
     <Reference Include="FunctionsAutoCAD, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\FunctionsAutoCAD\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
+      <HintPath>Y:\Bibliotecas\FunctionsAutoCAD\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MathNet.Numerics.4.8.1\lib\net40\MathNet.Numerics.dll</HintPath>
@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Jrosales\.NET\Extensiones Auxiliares\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <HintPath>Y:\Bibliotecas\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

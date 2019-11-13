@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace SpannedDataGridViewNet2
+namespace WeifenLuo
 {
     static class DataGridViewCellExHelper
     {

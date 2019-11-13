@@ -1,5 +1,5 @@
 ﻿using DisenoColumnas.Clases;
-using SpannedDataGridViewNet2;
+using WeifenLuo;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -211,7 +211,7 @@ namespace DisenoColumnas.Diseño
 
                 if (seccioni.Estribo == null & seccioni.Shape == TipodeSeccion.Rectangular)
                 {
-                    seccioni.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
+                    seccioni.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY,Form1.Proyecto_.DMO_DES);
                 }
 
                 seccioni.Cuanti_Vol(FD1, FD2, Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
