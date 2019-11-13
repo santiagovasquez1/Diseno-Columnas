@@ -70,7 +70,7 @@ namespace DisenoColumnas.Clases
         public bool Maestro { get; set; } = false;
         public bool Disenar { get; set; } = false;
         public bool aGraficar { get; set; } = false;
-
+        public bool Ready { get; set; } = false;
         /// <summary>
         /// Propiedad util para saber todos los similares que tiene la columna maestra.
         /// </summary>
@@ -208,6 +208,7 @@ namespace DisenoColumnas.Clases
             {
                 BrushesColor = Brushes.Black;
             }
+        
 
             Graphics graphics = e.Graphics;
 
@@ -228,6 +229,7 @@ namespace DisenoColumnas.Clases
 
         public Columna MouseDown(MouseEventArgs mouse)
         {
+
             if (X_Colum <= mouse.X && X_Colum + w >= mouse.X && Y_Colum <= mouse.Y && Y_Colum + h >= mouse.Y)
             {
                 BrushesColor = Brushes.Red;
@@ -238,6 +240,22 @@ namespace DisenoColumnas.Clases
                 BrushesColor = Brushes.Black;
                 return null;
             }
+
+        }
+
+        public void MouseDobleClick(MouseEventArgs mouse)
+        {
+            if (X_Colum <= mouse.X && X_Colum + w >= mouse.X && Y_Colum <= mouse.Y && Y_Colum + h >= mouse.Y)
+            {
+                if (Ready == true)
+                {
+                    Ready = false;
+                    BrushesColor = Brushes.Black;
+                }
+                else { Ready = true; BrushesColor = Brushes.Blue; }
+         
+            }
+
         }
 
         private void CoordAlzado()

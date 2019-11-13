@@ -45,6 +45,7 @@
             this.Grafica.TabIndex = 0;
             this.Grafica.TabStop = false;
             this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
+            this.Grafica.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDoubleClick);
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             // 
             // PlantaColumnas

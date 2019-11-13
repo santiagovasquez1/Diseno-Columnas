@@ -308,10 +308,6 @@
     <None Include="Resources\image.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpannedDataGridViewNet2\SpannedDataGridViewNet2.csproj">
-      <Project>{2ab3e335-0e47-4ef6-b6a2-9ebf4b1967d0}</Project>
-      <Name>SpannedDataGridViewNet2</Name>
-    </ProjectReference>
     <None Include="Resources\cursor.png" />
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +363,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Czoom-out-option.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpannedDataGridViewNet2\SpannedDataGridViewNet2.csproj">
+      <Project>{2ab3e335-0e47-4ef6-b6a2-9ebf4b1967d0}</Project>
+      <Name>SpannedDataGridViewNet2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

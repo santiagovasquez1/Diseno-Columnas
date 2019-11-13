@@ -128,5 +128,15 @@ namespace DisenoColumnas.DefinirColumnas
                 }
             }
         }
+
+        private void Grafica_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
+            {
+                columna.MouseDobleClick(e);
+                Grafica.Invalidate();
+
+            }
+        }
     }
 }
