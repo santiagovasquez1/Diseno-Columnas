@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using B_Operaciones_Matricialesl;
 
 namespace DisenoColumnas.Interfaz_Seccion
 {
@@ -193,12 +194,29 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Temp.Exists(x => x.Equals(Columna_i.Seccions[indice].Item1)) == true & Columna_i.Seccions[indice].Item1.Editado == false)
                 {
+                    if (Columna_i.Name=="C22" & Columna_i.Seccions[indice].Item2 == "PISO19")
+                    {
+                        int prueba = 1;
+                    }
+
                     seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Columna_i.Seccions[indice].Item1)));
                     seccion.Name = Columna_i.Seccions[indice].Item1.Name;
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
+
+                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H)
+                    {
+                        double[] Rotacion;
+
+                        foreach (CRefuerzo refuerzo in seccion.Refuerzos)
+                        {
+                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                            refuerzo.Coord[0] = Rotacion[0];
+                            refuerzo.Coord[1] = Rotacion[1];
+                        }
+                    }
                 }
                 else
                 {

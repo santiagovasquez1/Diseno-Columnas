@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="B_Operaciones_Matricialesl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Y:\Bibliotecas\B_Operaciones_Matriciales\B_Operaciones_Matricialesl.dll</HintPath>
+    </Reference>
     <Reference Include="FunctionsAutoCAD, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Y:\Bibliotecas\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
