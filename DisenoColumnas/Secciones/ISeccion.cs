@@ -27,7 +27,7 @@ namespace DisenoColumnas.Clases
 
         void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY);
 
-        void Calc_vol_inex(float r, float FY,GDE gDE);
+        void Calc_vol_inex(float r, float FY, GDE gDE);
 
         void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR);
 
@@ -36,5 +36,13 @@ namespace DisenoColumnas.Clases
         void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion);
 
         void CalcNoDBarras();
+
+        #region SobreCargas
+
+        bool Equals(object obj);
+
+        int CompareTo(object obj);
+
+        #endregion SobreCargas
     }
 }

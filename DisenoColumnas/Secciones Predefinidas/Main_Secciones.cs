@@ -12,13 +12,13 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
         public static void Crear_archivo()
         {
-            string Ruta_Carpeta = Application.StartupPath;
-            string Ruta_Archivo = @"\\Secciones.sec";
-            string Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
+            //string Ruta_Carpeta = Application.StartupPath;
+            //string Ruta_Archivo = @"\\Secciones.sec";
+            //string Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
 
-            //string Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
-            //string Ruta_Archivo = "Secciones.sec";
-            //string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            string Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
+            string Ruta_Archivo = "Secciones.sec";
+            string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
             bool Encuentra = false;
 
             DirectoryInfo directory_seccion = new DirectoryInfo(Ruta_Carpeta);

@@ -191,9 +191,9 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Temp = Form1.secciones_predef.Secciones_DES;
                 }
 
-                if (Temp.Exists(x => x == Columna_i.Seccions[indice].Item1) == true & Columna_i.Seccions[indice].Item1.Editado == false)
+                if (Temp.Exists(x => x.Equals(Columna_i.Seccions[indice].Item1)) == true & Columna_i.Seccions[indice].Item1.Editado == false)
                 {
-                    seccion = FunctionsProject.DeepClone(Temp.Find(x => x == Columna_i.Seccions[indice].Item1));
+                    seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Columna_i.Seccions[indice].Item1)));
                     seccion.Name = Columna_i.Seccions[indice].Item1.Name;
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
