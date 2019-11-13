@@ -146,7 +146,7 @@ namespace DisenoColumnas.Diseño
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Style.BackColor = Color.LightGray;
                             }
 
-                            if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
+                            if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.L)
                             {
                                 CSD SeccionTL = (CSD)ColumnaSelect.Seccions[i].Item1;
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = SeccionTL.B * FCMetros;

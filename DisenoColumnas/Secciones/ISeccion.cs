@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DisenoColumnas.Clases;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace DisenoColumnas.Clases
+namespace DisenoColumnas.Secciones
 {
 
     public interface ISeccion
