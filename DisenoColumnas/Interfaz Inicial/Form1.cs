@@ -989,9 +989,20 @@ namespace DisenoColumnas
                                 ISeccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
                                 ISeccion seccion = null;
 
-                                if (secciones_predef.Secciones.Exists(x => x == temp) == true)
+                                List<ISeccion> Temp2 = new List<ISeccion>();
+
+                                if (Proyecto_.DMO_DES == GDE.DMO)
                                 {
-                                    seccion = secciones_predef.Secciones.Find(x => x == temp);
+                                    Temp2 = secciones_predef.Secciones_DMO;
+                                }
+                                else
+                                {
+                                    Temp2 = secciones_predef.Secciones_DES;
+                                }
+
+                                if (Temp2.Exists(x => x == temp) == true)
+                                {
+                                    seccion = Temp2.Find(x => x == temp);
                                     seccion.B = temp.B;
                                     seccion.H = temp.H;
                                 }
@@ -1414,7 +1425,18 @@ namespace DisenoColumnas
 
             //Determinar Cantidad de Barras Por Sección Predefinidas
 
-            foreach (CRectangulo seccion in secciones_predef.Secciones)
+            List<ISeccion> Temp = new List<ISeccion>();
+
+            if (Proyecto_.DMO_DES == GDE.DMO)
+            {
+                Temp = secciones_predef.Secciones_DMO;
+            }
+            else
+            {
+                Temp = secciones_predef.Secciones_DES;
+            }
+
+            foreach (ISeccion seccion in Temp)
             {
                 seccion.CalcNoDBarras();
             }
@@ -1425,7 +1447,7 @@ namespace DisenoColumnas
                 {
                     string[] Base = new string[0];
 
-                    foreach (CRectangulo seccionP in secciones_predef.Secciones)
+                    foreach (ISeccion seccionP in Temp)
                     {
                         if (Col.Seccions[i].Item1.B == seccionP.B && Col.Seccions[i].Item1.H == seccionP.H || Col.Seccions[i].Item1.H == seccionP.B && Col.Seccions[i].Item1.B == seccionP.H)
                         {

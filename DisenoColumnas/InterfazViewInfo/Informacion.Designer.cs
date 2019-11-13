@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Informacion));
             this.Info_D = new System.Windows.Forms.DataGridView();
-            this.Column1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.Column2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.B = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.H = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.TW = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.TF = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
+            this.Column1 = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.Column2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.B = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.H = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.TW = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.TF = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.Locali = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AceroR = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Asasign = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -190,12 +190,12 @@
         #endregion
         public  System.Windows.Forms.Label NameColum;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column1;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx Column2;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx B;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx H;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx TW;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx TF;
+        private WeifenLuo.DataGridViewTextBoxColumnEx Column1;
+        private WeifenLuo.DataGridViewTextBoxColumnEx Column2;
+        private WeifenLuo.DataGridViewTextBoxColumnEx B;
+        private WeifenLuo.DataGridViewTextBoxColumnEx H;
+        private WeifenLuo.DataGridViewTextBoxColumnEx TW;
+        private WeifenLuo.DataGridViewTextBoxColumnEx TF;
         private System.Windows.Forms.DataGridViewTextBoxColumn Locali;
         private System.Windows.Forms.DataGridViewTextBoxColumn AceroR;
         private System.Windows.Forms.DataGridViewTextBoxColumn Asasign;

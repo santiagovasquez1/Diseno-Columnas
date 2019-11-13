@@ -39,10 +39,10 @@
             this.TF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NoEstribo = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.S_value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NoRamasV_1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.NoRamasV_2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.NoRamas_H1 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
-            this.NoRamas_H2 = new SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx();
+            this.NoRamasV_1 = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.NoRamasV_2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.NoRamas_H1 = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.NoRamas_H2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             ((System.ComponentModel.ISupportInitialize)(this.Info_Es_Col)).BeginInit();
             this.SuspendLayout();
             // 
@@ -226,9 +226,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TF;
         private System.Windows.Forms.DataGridViewComboBoxColumn NoEstribo;
         private System.Windows.Forms.DataGridViewTextBoxColumn S_value;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamasV_1;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamasV_2;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamas_H1;
-        private SpannedDataGridViewNet2.DataGridViewTextBoxColumnEx NoRamas_H2;
+        private WeifenLuo.DataGridViewTextBoxColumnEx NoRamasV_1;
+        private WeifenLuo.DataGridViewTextBoxColumnEx NoRamasV_2;
+        private WeifenLuo.DataGridViewTextBoxColumnEx NoRamas_H1;
+        private WeifenLuo.DataGridViewTextBoxColumnEx NoRamas_H2;
     }
 }

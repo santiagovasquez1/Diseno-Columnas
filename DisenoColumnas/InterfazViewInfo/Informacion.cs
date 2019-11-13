@@ -162,7 +162,7 @@ namespace DisenoColumnas.InterfazViewInfo
 
                             if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Circle)
                             {
-                                
+
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Style.BackColor = Color.LightGray;
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Style.BackColor = Color.LightGray;

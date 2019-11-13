@@ -7,7 +7,7 @@ using System.Linq;
 namespace DisenoColumnas.Clases
 {
     [Serializable]
-    public class CCirculo : ISeccion
+    public class CCirculo : ISeccion, IComparable
     {
         public string Name { get; set; }
         public MAT_CONCRETE Material { get; set; }
@@ -69,10 +69,10 @@ namespace DisenoColumnas.Clases
             Estribo.NoRamasV1 = S != 0 && Estribo.Area != 0 ? Convert.ToInt32(Ash / Estribo.Area) : 0;
         }
 
-        public void Calc_vol_inex(float r, float FY)
+        public void Calc_vol_inex(float r, float FY,GDE gDE)
         {
             float FD1, FD2;
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (gDE == GDE.DMO)
             {
                 FD1 = 0.08f;
                 FD2 = 0.08f;
@@ -278,6 +278,70 @@ namespace DisenoColumnas.Clases
             g.DrawClosedCurve(P1, Puntos.ToArray());
             g.FillClosedCurve(br, Puntos.ToArray());
             Seccion_path.AddClosedCurve(Puntos.ToArray());
+        }
+
+        public override string ToString()
+        {
+            string Nombre_seccion;
+            Nombre_seccion = $"C{radio * 2 * 100}{Material.Name}";
+            return string.Format("{0}", Nombre_seccion);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is CCirculo)
+            {
+                CCirculo temp = (CCirculo)obj;
+
+                if (temp.radio == radio & Material == temp.Material)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is CCirculo)
+            {
+                CCirculo temp = (CCirculo)obj;
+                if (Area > temp.Area) return 1;
+                if (Area < temp.Area) return -1;
+            }
+            return 0;
+        }
+
+        public static bool operator ==(CCirculo s1, CCirculo s2)
+        {
+            return s1.Equals(s2);
+        }
+
+        public static bool operator !=(CCirculo s1, CCirculo s2)
+        {
+            try
+            {
+                return !s1.Equals(s2);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool operator <(CCirculo s1, CCirculo s2)
+        {
+            if (s1.CompareTo(s2) < 0)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator >(CCirculo s1, CCirculo s2)
+        {
+            if (s1.CompareTo(s2) > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

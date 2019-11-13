@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace SpannedDataGridViewNet2
+namespace WeifenLuo
 {
     static class DataGridViewHelper
     {

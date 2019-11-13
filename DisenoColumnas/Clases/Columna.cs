@@ -1091,8 +1091,8 @@ namespace DisenoColumnas.Clases
                     DesplazCota = 0.7f;
                     TextCota = @"{\H1.33333x;\C11; Resistencia a la compresión del\Pconcreto a los 28 días\Pf'c=" + Resitencias[i] + @"kgf/cm²\C256; }";
                 }
-                FunctionsAutoCAD.FunctionsAutoCAD.AddCota(CotaFc1, CotaFc2, "FC_COTAS", "FC_TEXT1", DesplazCota, headType1: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, Text: TextCota,
-                    headType2: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, TextRotation: 90, ArrowheadSize: 0.002);
+                //FunctionsAutoCAD.FunctionsAutoCAD.AddCota(CotaFc1, CotaFc2, "FC_COTAS", "FC_TEXT1", DesplazCota, headType1: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, Text: TextCota,
+                //    headType2: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, TextRotation: 90, ArrowheadSize: 0.002);
 
                 double[] P_XYZRes = new double[] { CotaFc1[0] + 0.4f, CotaFc1[1] + (CotaFc2[1] - CotaFc1[1]) / 2 - 3f / 2, 0 };
 

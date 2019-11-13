@@ -8,7 +8,7 @@ using System.Linq;
 namespace DisenoColumnas.Secciones
 {
     [Serializable]
-    public class CSD : ISeccion
+    public class CSD : ISeccion, IComparable
     {
         public string Name { get; set; }
         public MAT_CONCRETE Material { get; set; }
@@ -117,7 +117,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public void Calc_vol_inex(float r, float FY)
+        public void Calc_vol_inex(float r, float FY,GDE gDE)
         {
             float FD1, FD2;
             double s_max, s_min;
@@ -139,7 +139,7 @@ namespace DisenoColumnas.Secciones
             var Sep = new List<double>();
             float delta = 0.50f;
 
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (gDE == GDE.DMO)
             {
                 FD1 = 0.20f;
                 FD2 = 0.06f;
@@ -337,6 +337,41 @@ namespace DisenoColumnas.Secciones
                 Y4 = (Yunicos.Max() - rec - 0.02) * 100 * EscalaY;
             }
 
+            if (Shape == TipodeSeccion.Tee)
+            {
+                //Aleta seccion
+                X1 = (Xunicos.Min() + rec) * 100 * EscalaX;
+                X2 = (Xunicos.Min() + B - rec) * 100 * EscalaX;
+
+                var aux = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList();
+                var aux2 = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min()).ToList();
+
+                if (aux.Exists(x => x[0] == Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
+                {
+                    Y1 = (Yunicos.Min() - rec) * 100 * EscalaY;
+                    Y2 = (Yunicos.Min() + TF + rec) * 100 * EscalaY;
+                }
+                else
+                {
+                    Y1 = (Yunicos.Max() - rec) * 100 * EscalaY;
+                    Y2 = (Yunicos.Max() - TF + rec) * 100 * EscalaY;
+                }
+
+                var Xmax1 = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList().Select(x => x[0]).ToList();
+                var Xmax2 = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Max()).ToList().Select(x => x[0]).ToList();
+
+                if (Math.Abs(Xmax2[1] - Xmax2[0]) <= Math.Abs(Xmax1[1] - Xmax1[0]))
+                {
+                    X3 = (Math.Min(Xmax2[1], Xmax2[0]) + rec) * 100 * EscalaX;
+                    X4 = (X3 + TW - rec) * 100 * EscalaX;
+                }
+                else
+                {
+                    X3 = (Math.Min(Xmax1[1], Xmax1[0]) + rec) * 100 * EscalaX;
+                    X4 = (X3 + TW - rec) * 100 * EscalaX;
+                }
+            }
+
             //Dibujo estribo en el alma
             Xr1 = X1 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
             Yr1 = Y1 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
@@ -438,6 +473,70 @@ namespace DisenoColumnas.Secciones
                 Tuple<int, int> TupleAux = new Tuple<int, int>(Refuer.Refuerzo.Count, Convert.ToInt32(Refuer.Diametro.Replace("#", "")));
                 No_D_Barra.Add(TupleAux);
             }
+        }
+
+        public override string ToString()
+        {
+            string Nombre_seccion;
+            Nombre_seccion = $"C{B * 100}X{H * 100}X{TW * 100}X{TF * 100}{Shape}{Material.Name}";
+            return string.Format("{0}", Nombre_seccion);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is CSD)
+            {
+                CSD temp = (CSD)obj;
+
+                if (temp.B == B & temp.H == H & Material == temp.Material & temp.TF == TF & temp.TW == TW || temp.H == B & temp.B == H & Material == temp.Material & temp.TF == TW & temp.TW == TF)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is CSD)
+            {
+                CSD temp = (CSD)obj;
+                if (Area > temp.Area) return 1;
+                if (Area < temp.Area) return -1;
+            }
+            return 0;
+        }
+
+        public static bool operator ==(CSD s1, CSD s2)
+        {
+            return s1.Equals(s2);
+        }
+
+        public static bool operator !=(CSD s1, CSD s2)
+        {
+            try
+            {
+                return !s1.Equals(s2);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool operator <(CSD s1, CSD s2)
+        {
+            if (s1.CompareTo(s2) < 0)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator >(CSD s1, CSD s2)
+        {
+            if (s1.CompareTo(s2) > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

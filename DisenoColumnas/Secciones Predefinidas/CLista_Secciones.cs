@@ -8,6 +8,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
     [Serializable]
     public class CLista_Secciones
     {
-        public List<CRectangulo> Secciones = new List<CRectangulo>();
+        public List<ISeccion> Secciones_DMO = new List<ISeccion>();
+        public List<ISeccion> Secciones_DES = new List<ISeccion>();
     }
 }
