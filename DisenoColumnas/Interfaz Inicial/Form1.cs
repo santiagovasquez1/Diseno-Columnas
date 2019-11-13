@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using B_Operaciones_Matricialesl;
 
 namespace DisenoColumnas
 {
@@ -1000,11 +1001,24 @@ namespace DisenoColumnas
                                     Temp2 = secciones_predef.Secciones_DES;
                                 }
 
-                                if (Temp2.Exists(x => x == temp) == true)
+                                if (Temp2.Exists(x => x.Equals(temp)) == true)
                                 {
-                                    seccion = Temp2.Find(x => x == temp);
+                                    seccion = Temp2.Find(x => x.Equals(temp));
                                     seccion.B = temp.B;
                                     seccion.H = temp.H;
+
+                                    if (seccion.Refuerzos.Count>0 & seccion.B > seccion.H)
+                                    {
+                                        double[] Rotacion;
+
+                                        foreach (CRefuerzo refuerzo in seccion.Refuerzos)
+                                        {
+                                            Rotacion= Operaciones.Rotacion(refuerzo.Coord[0],refuerzo.Coord[1],Math.PI/2).ToArray();
+                                            refuerzo.Coord[0] = Rotacion[0];
+                                            refuerzo.Coord[1] = Rotacion[1];
+                                        }
+                                    }
+
                                 }
                                 else
                                 {

@@ -71,7 +71,6 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
                 {
                 }
 
-
                 List<IPAddressCollection> ListaIPS = new List<IPAddressCollection>();
 
                 foreach (NetworkInterface adapter in NetworkInterface.GetAllNetworkInterfaces())
@@ -97,7 +96,10 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
                     }
                 }
 
-                ComprobarEntrada = ComprobarAccesoPorMac();
+                if (ComprobarEntrada != "CORRECT")
+                {
+                    ComprobarEntrada = ComprobarAccesoPorMac();
+                }
 
                 if (ComprobarEntrada == "CORRECT")
                 {
@@ -115,7 +117,7 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             }
             else
             {
-                ComprobarEntrada= ComprobarAccesoPorMac();
+                ComprobarEntrada = ComprobarAccesoPorMac();
                 if (ComprobarEntrada == "CORRECT")
                 {
                     //MessageBox.Show("BIENVENIDO", "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -132,11 +134,10 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             }
         }
 
-
         private static string ComprobarAccesoPorMac()
         {
             // Por Dirección Mac
-            string ComprobarEntrada="FAIL";
+            string ComprobarEntrada = "FAIL";
             NetworkInterface[] Interfaces = NetworkInterface.GetAllNetworkInterfaces();
             List<string> MacAdress = new List<string>();
             foreach (NetworkInterface adapter in Interfaces)
@@ -159,6 +160,7 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             }
             return ComprobarEntrada;
         }
+
         private static List<string> ListMacAdress()
         {
             List<string> AuxMacs = new List<string>();
@@ -167,7 +169,6 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             AuxMacs.Add("64006AFC2C84");
             AuxMacs.Add("309C2328F381");
             return AuxMacs;
-
         }
     }
 }
