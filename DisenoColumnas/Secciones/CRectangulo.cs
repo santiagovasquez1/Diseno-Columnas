@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DisenoColumnas.Clases;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Threading;
 
-namespace DisenoColumnas.Clases
+namespace DisenoColumnas.Secciones
 {
     [Serializable]
     public enum TipodeSeccion

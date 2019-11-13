@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using B_Operaciones_Matricialesl;
+using DisenoColumnas.Secciones;
 
 namespace DisenoColumnas.Interfaz_Seccion
 {

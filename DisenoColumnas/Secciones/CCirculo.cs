@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DisenoColumnas.Clases;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 
-namespace DisenoColumnas.Clases
+namespace DisenoColumnas.Secciones
 {
     [Serializable]
     public class CCirculo : ISeccion, IComparable

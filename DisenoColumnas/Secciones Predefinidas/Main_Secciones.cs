@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Secciones;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

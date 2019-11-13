@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Secciones;
 using DisenoColumnas.Utilidades;
 using System;
 using System.Linq;
