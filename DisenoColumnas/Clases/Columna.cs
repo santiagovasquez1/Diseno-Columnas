@@ -71,6 +71,7 @@ namespace DisenoColumnas.Clases
         public bool Disenar { get; set; } = false;
         public bool aGraficar { get; set; } = false;
         public bool Ready { get; set; } = false;
+
         /// <summary>
         /// Propiedad util para saber todos los similares que tiene la columna maestra.
         /// </summary>
@@ -208,8 +209,22 @@ namespace DisenoColumnas.Clases
             {
                 BrushesColor = Brushes.Black;
             }
-        
 
+            if (Ready)
+            {
+                BrushesColor = Brushes.Blue;
+            }
+            else
+            {
+                if (BrushesColor != Brushes.Red)
+                {
+                    BrushesColor = Brushes.Black;
+                }
+            }
+          
+
+            
+      
             Graphics graphics = e.Graphics;
 
             graphics.FillRectangle(BrushesColor, X_Colum, Y_Colum, w, h);
@@ -233,6 +248,7 @@ namespace DisenoColumnas.Clases
             if (X_Colum <= mouse.X && X_Colum + w >= mouse.X && Y_Colum <= mouse.Y && Y_Colum + h >= mouse.Y)
             {
                 BrushesColor = Brushes.Red;
+                Ready = false;
                 return this;
             }
             else
@@ -250,9 +266,9 @@ namespace DisenoColumnas.Clases
                 if (Ready == true)
                 {
                     Ready = false;
-                    BrushesColor = Brushes.Black;
+;
                 }
-                else { Ready = true; BrushesColor = Brushes.Blue; }
+                else { Ready = true; }
          
             }
 

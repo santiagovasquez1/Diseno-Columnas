@@ -165,15 +165,19 @@ namespace DisenoColumnas
                 CambiarSkins();
 
                 mFuerzasEnElmentos = new FuerzasEnElementos();
-                mFuerzasEnElmentos.Show(PanelContenedor);
-
+         
                 LColumna.Items.Clear();
                 LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
+                
                 if (Proyecto_.ColumnaSelect != null)
                 {
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
+                }
+                else
+                {
+                    LColumna.Text = Proyecto_.Lista_Columnas[0].Name;
                 }
 
                 variablesdeEntrada = new VariablesdeEntrada(true);
@@ -349,7 +353,7 @@ namespace DisenoColumnas
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
                 mFuerzasEnElmentos = new FuerzasEnElementos();
-                mFuerzasEnElmentos.Show(PanelContenedor);
+                
 
                 mAgregarAlzado = new AgregarAlzado();
                 LColumna.Enabled = true;
@@ -357,6 +361,7 @@ namespace DisenoColumnas
                 LColumna.Items.Clear();
                 LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
+                LColumna.Text = Proyecto_.Lista_Columnas[0].Name;
             }
         }
 
