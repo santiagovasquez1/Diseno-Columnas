@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 
 namespace DisenoColumnas.Clases
 {
+
     public interface ISeccion
     {
         float B { get; set; }

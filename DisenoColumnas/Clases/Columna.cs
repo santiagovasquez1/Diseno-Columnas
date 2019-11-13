@@ -175,6 +175,7 @@ namespace DisenoColumnas.Clases
 
         #endregion Metodos-Calculos
 
+
         #region MetodosPaint
 
         public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI)
@@ -1034,6 +1035,25 @@ namespace DisenoColumnas.Clases
 
                     FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa2, LayerCuadro, false);
                 }
+
+
+                try
+                {
+                    if(Seccions[i].Item1.B != Seccions[i - 1].Item1.B)
+                    {
+                        float B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i-1].Item1.B) / MaxB) + DPR;
+
+                        double[] LineaFaltante1 = new double[] { X+B_Draw, Y + LuzAcum[i],
+                                                                 X+B_Draw2,Y+ LuzAcum[i]};
+                        FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(LineaFaltante1, LayerCuadro, false);
+
+
+                    }
+
+
+                }
+                catch { }
+
             }
 
             #region Resitencia
@@ -1059,7 +1079,7 @@ namespace DisenoColumnas.Clases
 
                 float B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.B) / MaxB) + DPR;
                 double[] CotaFc1 = new double[] { X + B_Draw, Y + LuzAcum[IndiceI] - VigaMayor.Seccions[IndiceI].Item1.H - LuzLibre[IndiceI], 0 };
-                B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceF].Item1.B) / MaxB) + DPR;
+                B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.B) / MaxB) + DPR;
                 double[] CotaFc2 = new double[] { X + B_Draw, Y + LuzAcum[IndiceF], 0 };
                 string TextCota; float DesplazCota = 0.5f;
                 if (IndiceI - IndiceF > 2)
@@ -1126,12 +1146,27 @@ namespace DisenoColumnas.Clases
 
             #endregion Dibujar Columna
 
-            #endregion Metodos - Dibujo Automático AutoCAD
+        
 
             #region Dibujar Refuerzo
 
             foreach (Alzado a in Alzados)
             {
+                double[] PXYZ = new double[] { X + a.DistX - 0.15, Y - 0.12, 0 };
+
+                //Agregar Nomenclatura de Refuerzo
+                if (Alzados.Count == 2  & a.ID == 1)
+                {
+                    PXYZ = new double[] { X + a.DistX -DPR/2-0.15, Y - 0.12, 0 };
+                }
+                else if (Alzados.Count == 2 & a.ID == 2)
+                {
+                    PXYZ = new double[] { X + a.DistX  + DPR / 3-0.15, Y - 0.12, 0 };
+                }
+               
+
+                FunctionsAutoCAD.FunctionsAutoCAD.AddText(Convert.ToString(a.ID), PXYZ, 0.5, 0.08, "FC_R-100", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center,Width2: 0.5);
+
                 for (int i = a.Colum_Alzado.Count - 1; i >= 0; i--)
                 {
                     AlzadoUnitario aux = a.Colum_Alzado[i];
@@ -1490,6 +1525,8 @@ namespace DisenoColumnas.Clases
                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
             }
         }
+
+        #endregion Metodos - Dibujo Automático AutoCAD
 
         #region Metodos - Calcular Peso de Acero
 

@@ -97,7 +97,7 @@ namespace DisenoColumnas.Diseño
                                     for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
                                     {
                                         Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].As_asignado;
-                                        Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].Porct_Refuerzo;
+                                       // Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].Porct_Refuerzo = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).resultadosETABs[j].Porct_Refuerzo;
                                     }
 
                                     Form1.Proyecto_.Lista_Columnas[i].ColSimilName = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Name;
@@ -117,6 +117,7 @@ namespace DisenoColumnas.Diseño
                                 List<Alzado> Aux = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].Alzados);
                                 Form1.Proyecto_.Lista_Columnas[i].Alzados = null;
                                 Form1.Proyecto_.Lista_Columnas[i].Alzados = Aux;
+                                Form1.Proyecto_.Lista_Columnas[i].ColSimilName = "";
 
                                 for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
                                 {
@@ -132,6 +133,7 @@ namespace DisenoColumnas.Diseño
                         else
                         {
                             List<Alzado> Aux = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].Alzados);
+                            Form1.Proyecto_.Lista_Columnas[i].ColSimilName = "";
                             Form1.Proyecto_.Lista_Columnas[i].Alzados = null;
                             Form1.Proyecto_.Lista_Columnas[i].Alzados = Aux;
                             for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
@@ -149,8 +151,11 @@ namespace DisenoColumnas.Diseño
                 for (int i = 0; i < Form1.Proyecto_.Lista_Columnas.Count; i++)
                 {
                     Form1.Proyecto_.Lista_Columnas[i].ActualizarRefuerzo();
+                    Form1.Proyecto_.Lista_Columnas[i].CalcularPesoAcero();
                 }
                 Form1.mFormPrincipal.Invalidate();
+                Form1.m_Informacion.Invalidate();
+
             }
 
             Close();

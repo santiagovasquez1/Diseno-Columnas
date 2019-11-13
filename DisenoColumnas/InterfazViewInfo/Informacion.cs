@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Secciones;
 using SpannedDataGridViewNet2;
 using System;
 using System.Drawing;
@@ -159,8 +160,9 @@ namespace DisenoColumnas.InterfazViewInfo
                                 cell3.RowSpan = 3; cell4.RowSpan = 3; cell5.RowSpan = 3; ; cell6.RowSpan = 3;
                             }
 
-                            if (ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.Circle)
+                            if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Circle)
                             {
+                                
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Style.BackColor = Color.LightGray;
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Style.BackColor = Color.LightGray;
@@ -183,22 +185,24 @@ namespace DisenoColumnas.InterfazViewInfo
                                 cell3.RowSpan = 3; cell4.RowSpan = 3; cell5.RowSpan = 3; ; cell6.RowSpan = 3;
                             }
 
-                            if (ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
+                            if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.L)
                             {
-                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
-                                //Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
-                                //Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
+                                CSD SeccionTL = (CSD)ColumnaSelect.Seccions[i].Item1;
 
-                                Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                                Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
-                                //Info_D.Rows[Info_D.Rows.Count - 2].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
-                                //Info_D.Rows[Info_D.Rows.Count - 2].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = SeccionTL.B * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = SeccionTL.H * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value =SeccionTL.TW * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value =SeccionTL.TF * FCMetros;
 
-                                Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                                Info_D.Rows[Info_D.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
-                                //Info_D.Rows[Info_D.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
-                                //Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = SeccionTL.B * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = SeccionTL.H * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 2].Cells["TW"].Value = SeccionTL.TW * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 2].Cells["TF"].Value = SeccionTL.TF * FCMetros;
+
+                                Info_D.Rows[Info_D.Rows.Count - 1].Cells["B"].Value = SeccionTL.B * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 1].Cells["H"].Value = SeccionTL.H * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 1].Cells["TW"].Value = SeccionTL.TW * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 1].Cells["TF"].Value = SeccionTL.TF * FCMetros;
 
                                 DataGridViewTextBoxCellEx cell3 = (DataGridViewTextBoxCellEx)Info_D["B", Info_D.Rows.Count - 3];
                                 DataGridViewTextBoxCellEx cell4 = (DataGridViewTextBoxCellEx)Info_D["H", Info_D.Rows.Count - 3];

@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Secciones;
 using SpannedDataGridViewNet2;
 using System;
 using System.Drawing;
@@ -54,6 +55,14 @@ namespace DisenoColumnas.Diseño
 
                 if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.L)
                 {
+
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV1;
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV2;
+
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH1;
+                    Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH2;
+
+
                 }
             }
         }
@@ -138,10 +147,25 @@ namespace DisenoColumnas.Diseño
 
                             if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == Clases.TipodeSeccion.L)
                             {
-                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
-                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = ColumnaSelect.Seccions[i].Item1.H * FCMetros;
-                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Value = ColumnaSelect.Seccions[i].Item1.TW * FCMetros;
-                                //Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value = ColumnaSelect.Seccions[i].Item1.TF * FCMetros;
+                                CSD SeccionTL = (CSD)ColumnaSelect.Seccions[i].Item1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = SeccionTL.B * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = SeccionTL.H * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Value = SeccionTL.TW * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value =SeccionTL.TF * FCMetros;
+
+                                Info_Es_Col.Rows[0].Cells["NoRamasV_1"].Value = "No. Ramas Vertical";
+                                Info_Es_Col.Rows[0].Cells["NoRamas_H1"].Value = "No. Ramas Horizontal";
+
+                                Info_Es_Col.Rows[0].Cells["NoRamasV_2"].Value = "No. Ramas Vertical";
+                                Info_Es_Col.Rows[0].Cells["NoRamas_H2"].Value = "No. Ramas Horizontal";
+
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamasV_2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV2;
+
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH1;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH2;
+
+
                             }
                         }
                     }
@@ -209,7 +233,7 @@ namespace DisenoColumnas.Diseño
                     FD2 = 0.09f;
                 }
 
-                if (seccioni.Estribo == null & seccioni.Shape == TipodeSeccion.Rectangular)
+                if (seccioni.Estribo == null)
                 {
                     seccioni.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
                 }

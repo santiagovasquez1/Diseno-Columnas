@@ -146,20 +146,22 @@ namespace DisenoColumnas.Diseño
         private void Draw_Colum_Alzado_MouseMove(object sender, MouseEventArgs e)
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
-
-            for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
+            if (ColumnaSelect != null)
             {
-                for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
+                for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
                 {
-                    if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
+                    for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
                     {
-                        ColumnaSelect.Alzados[i].Colum_Alzado[j].MouseMove(e);
-                        Draw_Colum_Alzado.Invalidate();
-
-                        if (ColumnaSelect.Alzados[i].Colum_Alzado[j].UnitarioAdicional != null)
+                        if (ColumnaSelect.Alzados[i].Colum_Alzado[j] != null)
                         {
-                            ColumnaSelect.Alzados[i].Colum_Alzado[j].UnitarioAdicional.MouseMove(e);
+                            ColumnaSelect.Alzados[i].Colum_Alzado[j].MouseMove(e);
                             Draw_Colum_Alzado.Invalidate();
+
+                            if (ColumnaSelect.Alzados[i].Colum_Alzado[j].UnitarioAdicional != null)
+                            {
+                                ColumnaSelect.Alzados[i].Colum_Alzado[j].UnitarioAdicional.MouseMove(e);
+                                Draw_Colum_Alzado.Invalidate();
+                            }
                         }
                     }
                 }

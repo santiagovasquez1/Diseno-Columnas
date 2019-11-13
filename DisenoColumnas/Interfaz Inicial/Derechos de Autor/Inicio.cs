@@ -61,10 +61,16 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
                     IP_Servidor = address.ToString();
                 }
 
-                PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
+                try
+                {
+                    PrincipalContext ctx = new PrincipalContext(ContextType.Domain);
+                    if (ctx.ConnectedServer.ToLower() == "servidor.fcsas.com".ToLower())
+                        ComprobarEntrada = "CORRECT";
+                }
+                catch
+                {
+                }
 
-                if (ctx.ConnectedServer.ToLower() == "servidor.fcsas.com".ToLower())
-                    ComprobarEntrada = "CORRECT";
 
                 List<IPAddressCollection> ListaIPS = new List<IPAddressCollection>();
 
@@ -91,6 +97,8 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
                     }
                 }
 
+                ComprobarEntrada = ComprobarAccesoPorMac();
+
                 if (ComprobarEntrada == "CORRECT")
                 {
                     //MessageBox.Show("BIENVENIDO", "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -107,24 +115,7 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             }
             else
             {
-                NetworkInterface[] Interfaces = NetworkInterface.GetAllNetworkInterfaces();
-
-                List<string> MacAdress = new List<string>();
-                foreach (NetworkInterface adapter in Interfaces)
-                {
-                    IPInterfaceProperties properties = adapter.GetIPProperties();
-                    MacAdress.Add(adapter.GetPhysicalAddress().ToString());
-                }
-
-                for (int i = 0; i < MacAdress.Count; i++)
-                {
-                    if (MacAdress[i] == "00D8610657A5" | MacAdress[i] == "448A5BF11455" | MacAdress[i] == "64006AFC2C84")
-                    {
-                        ComprobarEntrada = "CORRECT";
-                        break;
-                    }
-                }
-
+                ComprobarEntrada= ComprobarAccesoPorMac();
                 if (ComprobarEntrada == "CORRECT")
                 {
                     //MessageBox.Show("BIENVENIDO", "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -139,6 +130,44 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
                     Application.Exit();
                 }
             }
+        }
+
+
+        private static string ComprobarAccesoPorMac()
+        {
+            // Por Dirección Mac
+            string ComprobarEntrada="FAIL";
+            NetworkInterface[] Interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            List<string> MacAdress = new List<string>();
+            foreach (NetworkInterface adapter in Interfaces)
+            {
+                IPInterfaceProperties properties = adapter.GetIPProperties();
+                MacAdress.Add(adapter.GetPhysicalAddress().ToString());
+            }
+            List<string> ListaMacs = ListMacAdress();
+
+            for (int i = 0; i < MacAdress.Count; i++)
+            {
+                for (int j = 0; j < ListaMacs.Count; j++)
+                {
+                    if (MacAdress[i] == ListaMacs[j])
+                    {
+                        ComprobarEntrada = "CORRECT";
+                        break;
+                    }
+                }
+            }
+            return ComprobarEntrada;
+        }
+        private static List<string> ListMacAdress()
+        {
+            List<string> AuxMacs = new List<string>();
+            AuxMacs.Add("00D8610657A5");
+            AuxMacs.Add("448A5BF11455");
+            AuxMacs.Add("64006AFC2C84");
+            AuxMacs.Add("309C2328F381");
+            return AuxMacs;
+
         }
     }
 }

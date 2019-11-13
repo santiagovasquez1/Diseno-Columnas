@@ -1181,6 +1181,7 @@ namespace DisenoColumnas
                 Proyecto_.ColumnaSelect = Proyecto_.Lista_Columnas.Find(x => x.Name == LColumna.Text);
                 m_Informacion.Invalidate();
                 m_PlantaColumnas.Invalidate();
+                m_PlantaColumnas.Grafica.Invalidate();
                 m_Despiece.Invalidate();
                 mCuantiaVolumetrica.Invalidate();
                 mAgregarAlzado.Invalidate();
@@ -1638,7 +1639,7 @@ namespace DisenoColumnas
 
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
-                if (col.ColSimilName != null)
+                if (col.ColSimilName != null & col.ColSimilName != "")
                 {
                     if (columnasDrawing.Exists(x => x.Name == col.Name))
                     {
@@ -1719,11 +1720,13 @@ namespace DisenoColumnas
                     {
                         Names += "," + col.NamesSimilares[i];
                     }
+
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
                     DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }
             }
+
             MessageBox.Show("Alzado graficado con éxito.", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

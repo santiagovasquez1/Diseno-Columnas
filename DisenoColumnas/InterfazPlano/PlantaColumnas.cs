@@ -76,8 +76,14 @@ namespace DisenoColumnas.DefinirColumnas
                 if (columna1 != Form1.Proyecto_.ColumnaSelect)
                 {
                     columna1.BrushesColor = Brushes.Black;
-                    Form1.m_Informacion.Invalidate();
-                    Form1.m_Despiece.Invalidate();
+                    if (Form1.m_Informacion != null)
+                    {
+                        Form1.m_Informacion.Invalidate();
+                    }
+                    if (Form1.m_Despiece != null)
+                    {
+                        Form1.m_Despiece.Invalidate();
+                      }
                 }
                 else
                 {
