@@ -206,7 +206,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
 
-                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H)
+                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H & seccion.Shape==TipodeSeccion.Rectangular)
                     {
                         double[] Rotacion;
 
