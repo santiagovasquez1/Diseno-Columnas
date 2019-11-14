@@ -27,14 +27,25 @@ namespace DisenoColumnas.DefinirColumnas
             Grafica.CreateGraphics().Clear(Color.White);
             float Height = Grafica.Height - 30;
             float Width = Grafica.Width - 30;
+            int No_CuadrosX, No_CuadrosY;
+            float Ancho_Cuadro, Alto_Cuadro;
 
+          
             //Graficar Cuadicula
 
-            int No_CuadrosX = 25;
-            int No_CuadrosY = 25;
+       
+            float AnchoCuadroD = 20;
+            float AltoCuadroD = 20;
+            No_CuadrosX = (int)(Grafica.Width / AnchoCuadroD)+1;
+            No_CuadrosY= (int)(Grafica.Width / AltoCuadroD);
 
-            float Ancho_Cuadro = Grafica.Width / No_CuadrosX;
-            float Alto_Cuadro = Grafica.Height / No_CuadrosY;
+            Ancho_Cuadro = AnchoCuadroD;
+            Alto_Cuadro = AltoCuadroD;
+
+            // No_CuadrosX = 
+
+
+
             for (int i = 1; i < No_CuadrosX; i++)
             {
                 e.Graphics.DrawLine(new Pen(Brushes.LightGray, 1), Ancho_Cuadro * i, 0, Ancho_Cuadro * i, Grafica.Height);
@@ -96,17 +107,21 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void Grafica_MouseDown(object sender, MouseEventArgs e)
         {
+
+            Columna ColumaSelectInPlantas;
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
-                Form1.Proyecto_.ColumnaSelect = columna.MouseDown(e);
+                ColumaSelectInPlantas = columna.MouseDown(e);
                 Grafica.Invalidate();
 
-                if (Form1.Proyecto_.ColumnaSelect != null)
+                if (ColumaSelectInPlantas != null)
                 {
+                    Form1.Proyecto_.ColumnaSelect = ColumaSelectInPlantas;
                     Form1.mLcolumnas.Text = Form1.Proyecto_.ColumnaSelect.Name;
 
                     break;
                 }
+        
             }
 
             foreach (Columna columna1 in Form1.Proyecto_.Lista_Columnas)
@@ -134,9 +149,10 @@ namespace DisenoColumnas.DefinirColumnas
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 columna.MouseDobleClick(e);
-                Grafica.Invalidate();
-
+       
             }
+            Grafica.Invalidate();
+            Invalidate();
         }
     }
 }

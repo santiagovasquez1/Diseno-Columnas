@@ -38,6 +38,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.Draw_Colum_Alzado = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.Ready_CheckBox = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).BeginInit();
             this.panel2.SuspendLayout();
@@ -151,12 +152,25 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.Ready_CheckBox);
             this.panel4.Controls.Add(this.Label5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(472, 29);
             this.panel4.TabIndex = 19;
+            // 
+            // Ready_CheckBox
+            // 
+            this.Ready_CheckBox.AutoSize = true;
+            this.Ready_CheckBox.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Ready_CheckBox.Location = new System.Drawing.Point(58, 5);
+            this.Ready_CheckBox.Name = "Ready_CheckBox";
+            this.Ready_CheckBox.Size = new System.Drawing.Size(48, 19);
+            this.Ready_CheckBox.TabIndex = 2;
+            this.Ready_CheckBox.Text = "OK?";
+            this.Ready_CheckBox.UseVisualStyleBackColor = true;
+            this.Ready_CheckBox.CheckStateChanged += new System.EventHandler(this.Ready_CheckBox_CheckStateChanged);
             // 
             // Despiece
             // 
@@ -196,5 +210,6 @@
         internal System.Windows.Forms.Panel panel3;
         internal System.Windows.Forms.Panel panel4;
         internal System.Windows.Forms.Label KgRefuerzo_L;
+        private System.Windows.Forms.CheckBox Ready_CheckBox;
     }
 }

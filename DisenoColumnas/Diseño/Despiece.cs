@@ -57,6 +57,7 @@ namespace DisenoColumnas.Diseño
         {
             Draw_Column.Invalidate();
             Draw_Colum_Alzado.Invalidate();
+            
         }
 
         private void Draw_Colum_Alzado_Paint(object sender, PaintEventArgs e)
@@ -70,6 +71,7 @@ namespace DisenoColumnas.Diseño
 
             if (ColumnaSelect != null)
             {
+                Ready_CheckBox.Checked = ColumnaSelect.Ready;
                 float Altura = 0;
 
                 for (int i = 0; i < ColumnaSelect.LuzLibre.Count; i++)
@@ -168,27 +170,14 @@ namespace DisenoColumnas.Diseño
             }
         }
 
-        private void MaxXyY(Columna ColumnaSelect, ref float MaxX, ref float MaxY)
+          private void Ready_CheckBox_CheckStateChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
+            if(Form1.Proyecto_.ColumnaSelect != null)
             {
-                for (int j = 0; j < ColumnaSelect.Alzados[i].Colum_Alzado.Count; j++)
+                Form1.Proyecto_.ColumnaSelect.Ready = Ready_CheckBox.Checked;
+                if(Form1.m_PlantaColumnas != null)
                 {
-                    if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB != null)
-                    {
-                        for (int s = 0; s < ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB.Count; s++)
-                        {
-                            if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0] > MaxX)
-                            {
-                                MaxX = ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0];
-                            }
-
-                            if (ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][1] > MaxY)
-                            {
-                                MaxY = ColumnaSelect.Alzados[i].Colum_Alzado[j].Coord_Alzado_PB[s][0];
-                            }
-                        }
-                    }
+                    Form1.m_PlantaColumnas.Invalidate();
                 }
             }
         }

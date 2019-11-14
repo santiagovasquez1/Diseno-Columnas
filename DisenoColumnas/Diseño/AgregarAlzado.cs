@@ -246,6 +246,20 @@ namespace DisenoColumnas.Diseño
 
                     ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = unitario;
                     ModificarTraslapo(IndiceC - 1, ref ColumnaSelect);
+
+                    ColumnaSelect.ActualizarRefuerzo();
+
+                    Form1.m_Informacion.MostrarAcero();
+
+                    if (isNotPaste == false)
+                    {
+
+                        DeterminarCoordAlzado(IndiceC);
+                        ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
+                        Form1.m_Despiece.Invalidate();
+                    }
+
+
                 }
                 else
                 {
@@ -257,16 +271,7 @@ namespace DisenoColumnas.Diseño
             {
                 ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = null;
             }
-            ColumnaSelect.ActualizarRefuerzo();
-
-            Form1.m_Informacion.MostrarAcero();
-
-            if (isNotPaste == false)
-            {
-                DeterminarCoordAlzado(IndiceC);
-                ColumnaSelect.CalcularPesoAcero();
-                Form1.m_Despiece.Invalidate();
-            }
+       
         }
 
         public void DeterminarCoordAlzado(int Col)
@@ -274,18 +279,17 @@ namespace DisenoColumnas.Diseño
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
             float DisG = 0.2f; float r = 0.08f; float eF = Form1.Proyecto_.e_Fundacion;
             float LdAd = 0.4f;
-
+            
             Alzado a = ColumnaSelect.Alzados[Col - 1];
             float diX = 0;
             //Agregar Distancia X a cada Alzado
             for (int i = a.Colum_Alzado.Count - 1; i >= 0; i--)
             {
                 AlzadoUnitario au = a.Colum_Alzado[i];
-                try
-                {
+               if(au != null) { 
                     au.x1 = diX;
                 }
-                catch { }
+                
                 diX += 0.1f;
                 if (diX > 0.1f)
                 {
@@ -301,39 +305,38 @@ namespace DisenoColumnas.Diseño
                 {
                     for (int j = a.Colum_Alzado.Count - 1; j >= i; j--)
                     {
-                        if (i != j)
+                        AlzadoUnitario au2 = a.Colum_Alzado[j];
+
+                        if (i != j && au2 != null)
                         {
-                            try
+                            if (au.Tipo == "T2" && au2.Tipo == "T2" || au.Tipo == "T2" && au2.Tipo == "T3" || au.Tipo == "T2" && au2.Tipo == "T1" || au.Tipo == "T2" && au2.Tipo == "T4")
                             {
-                                if (au.Tipo == "T2" && a.Colum_Alzado[j].Tipo == "T2" || au.Tipo == "T2" && a.Colum_Alzado[j].Tipo == "T3" || au.Tipo == "T2" && a.Colum_Alzado[j].Tipo == "T1" || au.Tipo == "T2" && a.Colum_Alzado[j].Tipo == "T4")
+                                if (au.x1 == au2.x1)
                                 {
-                                    if (au.x1 == a.Colum_Alzado[j].x1)
-                                    {
-                                        au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
-                                    }
-                                }
-
-                                if (au.Tipo == "T4" && a.Colum_Alzado[j].Tipo == "T4")
-                                {
-                                    au.x1 = a.Colum_Alzado[j].x1;
-                                }
-
-                                if (au.Tipo == "T1" && a.Colum_Alzado[j].Tipo == "T2" || au.Tipo == "T1" && a.Colum_Alzado[j].Tipo == "T4")
-                                {
-                                    if (au.x1 == a.Colum_Alzado[j].x1)
-                                    {
-                                        au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
-                                    }
-                                }
-                                if (au.Tipo == "T3" && a.Colum_Alzado[j].Tipo == "T3" || au.Tipo == "T3" && a.Colum_Alzado[j].Tipo == "T2" || au.Tipo == "T3" && a.Colum_Alzado[j].Tipo == "T4")
-                                {
-                                    if (au.x1 == a.Colum_Alzado[j].x1)
-                                    {
-                                        au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
-                                    }
+                                    au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
                                 }
                             }
-                            catch { }
+
+                            if (au.Tipo == "T4" && au2.Tipo == "T4")
+                            {
+                                au.x1 = au2.x1;
+                            }
+
+                            if (au.Tipo == "T1" && au2.Tipo == "T2" || au.Tipo == "T1" && au2.Tipo == "T4")
+                            {
+                                if (au.x1 == au2.x1)
+                                {
+                                    au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
+                                }
+                            }
+                            if (au.Tipo == "T3" && au2.Tipo == "T3" || au.Tipo == "T3" && au2.Tipo == "T2" || au.Tipo == "T3" && au2.Tipo == "T4")
+                            {
+                                if (au.x1 == au2.x1)
+                                {
+                                    au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
+                                }
+                            }
+
                         }
                     }
                 }
@@ -809,6 +812,9 @@ namespace DisenoColumnas.Diseño
 
                 EndCellEdit(D_Alzado.SelectedCells[i].ColumnIndex, D_Alzado.SelectedCells[i].RowIndex, true, Form1.Proyecto_.ColumnaSelect);
             }
+
+
+
             for (int col = 0; col < Form1.Proyecto_.ColumnaSelect.Alzados.Count; col++)
             {
                 DeterminarCoordAlzado(col + 1);
@@ -867,11 +873,12 @@ namespace DisenoColumnas.Diseño
                         if (Form1.Proyecto_.ColumnaSelect != null)
                         {
                             EndCellEdit(Col, Row, true, Form1.Proyecto_.ColumnaSelect);
+                            
                         }
                     }
                 }
                 DeterminarCoordAlzado(Col);
-                Form1.Proyecto_.ColumnaSelect.CalcularPesoAcero();
+                Form1.Proyecto_.ColumnaSelect.CalcularPesoAcero(Col-1);
                 Form1.m_Despiece.Invalidate();
             }
         }

@@ -20,7 +20,7 @@ namespace DisenoColumnas
 {
     public partial class Form1 : Form
     {
-        private PlantaColumnas m_PlantaColumnas;
+        public static PlantaColumnas m_PlantaColumnas;
         public static Informacion m_Informacion;
         public static Despiece m_Despiece;
         public static VariablesdeEntrada variablesdeEntrada;
@@ -1389,6 +1389,7 @@ namespace DisenoColumnas
                 }
 
                 int MaximoID = -99999;
+                int CantidaAnteriorAlzados = 0;
                 for (int i = 0; i < Proyecto_.ColumnaSelect.Alzados.Count; i++)
                 {
                     if (Proyecto_.ColumnaSelect.Alzados[i].ID > MaximoID)
@@ -1397,10 +1398,10 @@ namespace DisenoColumnas
                     }
                 }
                 if (MaximoID == -99999) { MaximoID = 1; } else { MaximoID += 1; }
-
+                CantidaAnteriorAlzados = Proyecto_.ColumnaSelect.Alzados.Count;
                 Alzado alzadoN = new Alzado(MaximoID, CantidadPisos);
-
                 Proyecto_.ColumnaSelect.Alzados.Add(alzadoN);
+                Proyecto_.ColumnaSelect.CrearListaPesosRefuerzos(CantidaAnteriorAlzados);
                 mAgregarAlzado.CrearDataGrid(true);
             }
         }
@@ -1421,12 +1422,7 @@ namespace DisenoColumnas
 
         private void Diseñar(ref List<Columna> Lista_ColumnasDiseñar)
         {
-            //Limpiar Todos Los Alzados En Cada Columna
-            foreach (Columna Col in Lista_ColumnasDiseñar)
-            {
-                Col.Alzados.Clear();
-            }
-
+        
             //Crear Alzado Base
 
             foreach (Columna Col in Lista_ColumnasDiseñar)
@@ -1546,7 +1542,7 @@ namespace DisenoColumnas
                     Cuadro_diseño.Reporte_RichText.Text += "\n" + " - " + col.Name;
                 }
             }
-
+            m_Informacion.MostrarAcero();
             if (m_Informacion != null)
             {
                 m_Informacion.Invalidate();
@@ -1672,7 +1668,7 @@ namespace DisenoColumnas
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
                 col.NamesSimilares.Clear();
-                if (col.aGraficar)
+                if (col.aGraficar & col.Ready)
                 {
                     columnasDrawing.Add(col);
                 }
@@ -1680,7 +1676,7 @@ namespace DisenoColumnas
 
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
-                if (col.ColSimilName != null & col.ColSimilName != "")
+                if (col.ColSimilName != null & col.ColSimilName != "" )
                 {
                     if (columnasDrawing.Exists(x => x.Name == col.Name))
                     {
