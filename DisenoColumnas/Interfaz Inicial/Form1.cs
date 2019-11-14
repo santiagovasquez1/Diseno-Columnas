@@ -1,4 +1,5 @@
-﻿using DisenoColumnas.Clases;
+﻿using B_Operaciones_Matricialesl;
+using DisenoColumnas.Clases;
 using DisenoColumnas.DefinirColumnas;
 using DisenoColumnas.Diseño;
 using DisenoColumnas.Interfaz_Inicial;
@@ -14,7 +15,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using B_Operaciones_Matricialesl;
 
 namespace DisenoColumnas
 {
@@ -488,6 +488,38 @@ namespace DisenoColumnas
             Proyecto_.MasaNominalBarras.Add(14, 8.938f);
 
             #endregion Diccionario -> Masa Nominal Barras
+
+            #region Diccionario ganchos a 180
+
+            Proyecto_.G180 = new Dictionary<int, float>
+            {
+                { 2, 0.116f },
+                { 3, 0.14f },
+                { 4, 0.167f },
+                { 5, 0.192f },
+                { 6, 0.228f },
+                { 7, 0.266f },
+                { 8, 0.305f },
+                { 10, 0.457f }
+            };
+
+            #endregion Diccionario ganchos a 180
+
+            #region Diccionario ganchos a 135
+
+            Proyecto_.G135 = new Dictionary<int, float>
+            {
+                { 2, 0.063f },
+                { 3, 0.094f },
+                { 4, 0.125f },
+                { 5, 0.157f },
+                { 6, 0.214f },
+                { 7, 0.249f },
+                { 8, 0.286f },
+                { 10, 0.363f }
+            };
+
+            #endregion Diccionario ganchos a 135
         }
 
         private string AbrirE2K2009yCSV2009()
@@ -1007,18 +1039,17 @@ namespace DisenoColumnas
                                     seccion.B = temp.B;
                                     seccion.H = temp.H;
 
-                                    if (seccion.Refuerzos.Count>0 & seccion.B > seccion.H)
+                                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H)
                                     {
                                         double[] Rotacion;
 
                                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                                         {
-                                            Rotacion= Operaciones.Rotacion(refuerzo.Coord[0],refuerzo.Coord[1],Math.PI/2).ToArray();
+                                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
                                             refuerzo.Coord[0] = Rotacion[0];
                                             refuerzo.Coord[1] = Rotacion[1];
                                         }
                                     }
-
                                 }
                                 else
                                 {

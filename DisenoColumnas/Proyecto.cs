@@ -19,7 +19,6 @@ namespace DisenoColumnas
 
         [NonSerialized]
         public Dictionary<int, float> Diametro_ref;
-
         public Dictionary<int, double> AceroBarras;
         public Dictionary<int, float> Ld_210;
         public Dictionary<int, float> Ld_280;
@@ -27,6 +26,8 @@ namespace DisenoColumnas
         public Dictionary<int, float> Ld_420;
         public Dictionary<int, float> Ld_490;
         public Dictionary<int, float> Ld_560;
+        public Dictionary<int, float> G180;
+        public Dictionary<int, float> G135;
         public Dictionary<int, float> MasaNominalBarras;
 
         #endregion Diccionarios

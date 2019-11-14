@@ -39,6 +39,8 @@ namespace DisenoColumnas.Secciones
 
         void CalcNoDBarras();
 
+        double Peso_Estribo(float recubrimiento);
+
         #region SobreCargas
 
         bool Equals(object obj);

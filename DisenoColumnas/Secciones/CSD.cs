@@ -90,7 +90,7 @@ namespace DisenoColumnas.Secciones
                 }
 
                 //Horizontal
-                bc = (H - TF) - -2 * r;
+                bc = (H - TF) - 2 * r;
                 bwc = TF - 2 * r;
 
                 Ash1 = FactorDisipacion1 * S * bc * Material.FC / FY * (B * (H - TF) / Ach - 1);  //C.21-2
@@ -117,7 +117,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public void Calc_vol_inex(float r, float FY,GDE gDE)
+        public void Calc_vol_inex(float r, float FY, GDE gDE)
         {
             float FD1, FD2;
             double s_max, s_min;
@@ -504,6 +504,31 @@ namespace DisenoColumnas.Secciones
                 if (Area < temp.Area) return -1;
             }
             return 0;
+        }
+
+        public double Peso_Estribo(float recubrimiento)
+        {
+            double PEstribo = 0;
+            double Long_Estibo1 = 0;
+            double Long_Estibo2 = 0;
+            double Long_GanchoV1 = 0;
+            double Long_GanchoV2 = 0;
+            double Long_GanchoH1 = 0;
+            double Long_GanchoH2 = 0;
+
+            Long_Estibo1 = 2 * (B - 2 * recubrimiento) + 2 * (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo]; //Estribo aleta
+            Long_Estibo2 = 2 * (TW - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo]; //Estribo alma
+
+            Long_GanchoH1 = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Aleta
+            Long_GanchoH2 = (TW - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Alma
+
+            Long_GanchoV1 = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Aleta
+            Long_GanchoV2 = (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Alma
+
+            PEstribo = (Long_Estibo1 + Long_Estibo2 + (Estribo.NoRamasH1 - 2) * Long_GanchoH1 + (Estribo.NoRamasH2 - 2) * Long_GanchoH2 + (Estribo.NoRamasV1 - 2) * Long_GanchoV1
+                + (Estribo.NoRamasV2 - 2) * Long_GanchoV2) * Estribo.Area * 7850;
+
+            return PEstribo;
         }
 
         public static bool operator ==(CSD s1, CSD s2)
