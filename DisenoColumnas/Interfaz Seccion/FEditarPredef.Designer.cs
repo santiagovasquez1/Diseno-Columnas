@@ -30,6 +30,13 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbPeso = new System.Windows.Forms.GroupBox();
+            this.lPesoEstribo = new System.Windows.Forms.Label();
+            this.gbCuantivaVol = new System.Windows.Forms.GroupBox();
+            this.cbEstribo = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.nudSep = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.nuCYw = new System.Windows.Forms.NumericUpDown();
@@ -50,15 +57,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.Button_Cerrar = new System.Windows.Forms.Button();
             this.Label6 = new System.Windows.Forms.Label();
-            this.gbCuantivaVol = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.nudSep = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbEstribo = new System.Windows.Forms.ComboBox();
-            this.gbPeso = new System.Windows.Forms.GroupBox();
-            this.lPesoEstribo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.gbPeso.SuspendLayout();
+            this.gbCuantivaVol.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSep)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nuCYw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuCXw)).BeginInit();
@@ -67,9 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nuCX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
-            this.gbCuantivaVol.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSep)).BeginInit();
-            this.gbPeso.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -102,6 +102,84 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Refuerzo Longitudinal";
+            // 
+            // gbPeso
+            // 
+            this.gbPeso.Controls.Add(this.lPesoEstribo);
+            this.gbPeso.Location = new System.Drawing.Point(599, 31);
+            this.gbPeso.Name = "gbPeso";
+            this.gbPeso.Size = new System.Drawing.Size(174, 78);
+            this.gbPeso.TabIndex = 8;
+            this.gbPeso.TabStop = false;
+            this.gbPeso.Text = "Peso Estribos (kg/m)";
+            // 
+            // lPesoEstribo
+            // 
+            this.lPesoEstribo.AutoSize = true;
+            this.lPesoEstribo.Location = new System.Drawing.Point(6, 31);
+            this.lPesoEstribo.Name = "lPesoEstribo";
+            this.lPesoEstribo.Size = new System.Drawing.Size(102, 15);
+            this.lPesoEstribo.TabIndex = 0;
+            this.lPesoEstribo.Text = "Numero capas X :";
+            // 
+            // gbCuantivaVol
+            // 
+            this.gbCuantivaVol.Controls.Add(this.cbEstribo);
+            this.gbCuantivaVol.Controls.Add(this.label5);
+            this.gbCuantivaVol.Controls.Add(this.nudSep);
+            this.gbCuantivaVol.Controls.Add(this.label7);
+            this.gbCuantivaVol.Location = new System.Drawing.Point(11, 31);
+            this.gbCuantivaVol.Name = "gbCuantivaVol";
+            this.gbCuantivaVol.Size = new System.Drawing.Size(174, 78);
+            this.gbCuantivaVol.TabIndex = 0;
+            this.gbCuantivaVol.TabStop = false;
+            this.gbCuantivaVol.Text = "Cuantia Volumetrica";
+            // 
+            // cbEstribo
+            // 
+            this.cbEstribo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstribo.FormattingEnabled = true;
+            this.cbEstribo.Items.AddRange(new object[] {
+            "#3",
+            "#4",
+            "#5"});
+            this.cbEstribo.Location = new System.Drawing.Point(114, 23);
+            this.cbEstribo.Name = "cbEstribo";
+            this.cbEstribo.Size = new System.Drawing.Size(54, 23);
+            this.cbEstribo.TabIndex = 1;
+            this.cbEstribo.SelectedIndexChanged += new System.EventHandler(this.cbEstribo_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Estribo :";
+            // 
+            // nudSep
+            // 
+            this.nudSep.DecimalPlaces = 2;
+            this.nudSep.Increment = new decimal(new int[] {
+            50,
+            0,
+            0,
+            131072});
+            this.nudSep.Location = new System.Drawing.Point(114, 52);
+            this.nudSep.Name = "nudSep";
+            this.nudSep.Size = new System.Drawing.Size(54, 23);
+            this.nudSep.TabIndex = 2;
+            this.nudSep.ValueChanged += new System.EventHandler(this.nudSep_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 60);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(95, 15);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Separacion (m) :";
             // 
             // groupBox3
             // 
@@ -336,84 +414,6 @@
             this.Label6.TabIndex = 22;
             this.Label6.Text = "Refuerzo en Sección";
             // 
-            // gbCuantivaVol
-            // 
-            this.gbCuantivaVol.Controls.Add(this.cbEstribo);
-            this.gbCuantivaVol.Controls.Add(this.label5);
-            this.gbCuantivaVol.Controls.Add(this.nudSep);
-            this.gbCuantivaVol.Controls.Add(this.label7);
-            this.gbCuantivaVol.Location = new System.Drawing.Point(11, 31);
-            this.gbCuantivaVol.Name = "gbCuantivaVol";
-            this.gbCuantivaVol.Size = new System.Drawing.Size(174, 78);
-            this.gbCuantivaVol.TabIndex = 0;
-            this.gbCuantivaVol.TabStop = false;
-            this.gbCuantivaVol.Text = "Cuantia Volumetrica";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Estribo :";
-            // 
-            // nudSep
-            // 
-            this.nudSep.DecimalPlaces = 2;
-            this.nudSep.Increment = new decimal(new int[] {
-            50,
-            0,
-            0,
-            131072});
-            this.nudSep.Location = new System.Drawing.Point(114, 52);
-            this.nudSep.Name = "nudSep";
-            this.nudSep.Size = new System.Drawing.Size(54, 23);
-            this.nudSep.TabIndex = 2;
-            this.nudSep.ValueChanged += new System.EventHandler(this.nudSep_ValueChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 60);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 15);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Separacion (m) :";
-            // 
-            // cbEstribo
-            // 
-            this.cbEstribo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstribo.FormattingEnabled = true;
-            this.cbEstribo.Items.AddRange(new object[] {
-            "#3",
-            "#4",
-            "#5"});
-            this.cbEstribo.Location = new System.Drawing.Point(114, 23);
-            this.cbEstribo.Name = "cbEstribo";
-            this.cbEstribo.Size = new System.Drawing.Size(54, 23);
-            this.cbEstribo.TabIndex = 1;
-            this.cbEstribo.SelectedIndexChanged += new System.EventHandler(this.cbEstribo_SelectedIndexChanged);
-            // 
-            // gbPeso
-            // 
-            this.gbPeso.Controls.Add(this.lPesoEstribo);
-            this.gbPeso.Location = new System.Drawing.Point(599, 31);
-            this.gbPeso.Name = "gbPeso";
-            this.gbPeso.Size = new System.Drawing.Size(174, 78);
-            this.gbPeso.TabIndex = 8;
-            this.gbPeso.TabStop = false;
-            this.gbPeso.Text = "Peso Estribos (kg/m)";
-            // 
-            // lPesoEstribo
-            // 
-            this.lPesoEstribo.AutoSize = true;
-            this.lPesoEstribo.Location = new System.Drawing.Point(6, 31);
-            this.lPesoEstribo.Name = "lPesoEstribo";
-            this.lPesoEstribo.Size = new System.Drawing.Size(102, 15);
-            this.lPesoEstribo.TabIndex = 0;
-            this.lPesoEstribo.Text = "Numero capas X :";
-            // 
             // FEditarPredef
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,6 +426,11 @@
             this.Load += new System.EventHandler(this.FEditarPredef_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.gbPeso.ResumeLayout(false);
+            this.gbPeso.PerformLayout();
+            this.gbCuantivaVol.ResumeLayout(false);
+            this.gbCuantivaVol.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSep)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nuCYw)).EndInit();
@@ -437,11 +442,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.gbCuantivaVol.ResumeLayout(false);
-            this.gbCuantivaVol.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSep)).EndInit();
-            this.gbPeso.ResumeLayout(false);
-            this.gbPeso.PerformLayout();
             this.ResumeLayout(false);
 
         }

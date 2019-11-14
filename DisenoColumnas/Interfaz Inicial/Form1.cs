@@ -937,6 +937,7 @@ namespace DisenoColumnas
                 {
                     string Name = LineConectives[i][4].Replace("\"", "");
                     string[] PointNumber = new string[] { LineConectives[i][8].Replace("\"", ""), LineConectives[i][10].Replace("\"", "") };
+
                     Tuple<string, string[], double[]> Beam_Tu = new Tuple<string, string[], double[]>(Name, PointNumber, new double[2]);
                     AuxBeams.Add(Beam_Tu);
                 }
@@ -963,6 +964,17 @@ namespace DisenoColumnas
             {
                 Viga viga = new Viga(AuxBeams[i].Item1);
                 viga.Points = AuxBeams[i].Item2;
+                for (int j = 0; j < Points.Count; j++)
+                {
+                    if (AuxBeams[i].Item2[0] == Points[j].Item1)
+                    {
+                        viga.CoordXY1 = Points[j].Item2;
+                    }
+                    if (AuxBeams[i].Item2[1] == Points[j].Item1)
+                    {
+                        viga.CoordXY2 = Points[j].Item2;
+                    }
+                }
                 Proyecto_.Lista_Vigas.Add(viga);
             }
 

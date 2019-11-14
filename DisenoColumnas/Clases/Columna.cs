@@ -51,6 +51,7 @@ namespace DisenoColumnas.Clases
         public List<Tuple<ISeccion, string>> Seccions { get; set; } = new List<Tuple<ISeccion, string>>();
         public Viga VigaMayor { get; set; }
 
+
         public List<float> LuzLibre { get; set; }
 
         public List<float> LuzAcum { get; set; }
@@ -206,10 +207,9 @@ namespace DisenoColumnas.Clases
 
             X_Colum += XI;
             Y_Colum += YI;
-
-            w = 0.5f * (SX + SY) * 0.5f;
-            h = 0.5f * (SX + SY) * 0.5f;
-
+                w = 0.5f*(SX +SY) *0.5f;
+                h = 0.5f*(SX+SY) *0.5f;
+ 
             if (BrushesColor == null)
             {
                 BrushesColor = Brushes.Black;
@@ -237,12 +237,10 @@ namespace DisenoColumnas.Clases
                 }
             }
 
-            
-      
+
             Graphics graphics = e.Graphics;
 
-            graphics.FillRectangle(BrushesColor, X_Colum, Y_Colum, w, h);
-
+            graphics.FillRectangle(BrushesColor, X_Colum-w/2, Y_Colum-h/2, w, h);
             float Tamano_Text = (SX + SY) * 0.6f * 0.3f;
             float X_string = X_Colum + w;
 
@@ -259,7 +257,7 @@ namespace DisenoColumnas.Clases
         public Columna MouseDown(MouseEventArgs mouse)
         {
 
-            if (X_Colum <= mouse.X && X_Colum + w >= mouse.X && Y_Colum <= mouse.Y && Y_Colum + h >= mouse.Y)
+            if (X_Colum-w/2 <= mouse.X && X_Colum + w/2 >= mouse.X && Y_Colum -h/2 <= mouse.Y && Y_Colum + h/2 >= mouse.Y)
             {
                 BrushesColor = Brushes.Red;
                 return this;
@@ -274,7 +272,7 @@ namespace DisenoColumnas.Clases
 
         public void MouseDobleClick(MouseEventArgs mouse)
         {
-            if (X_Colum <= mouse.X && X_Colum + w >= mouse.X && Y_Colum <= mouse.Y && Y_Colum + h >= mouse.Y)
+            if (X_Colum-w/2 <= mouse.X && X_Colum + w/2 >= mouse.X && Y_Colum-h/2 <= mouse.Y && Y_Colum + h/2 >= mouse.Y)
             {
                 if (Ready == true)
                 {

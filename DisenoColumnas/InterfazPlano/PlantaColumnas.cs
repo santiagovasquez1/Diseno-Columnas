@@ -1,5 +1,6 @@
 ﻿using DisenoColumnas.Clases;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -30,37 +31,69 @@ namespace DisenoColumnas.DefinirColumnas
             int No_CuadrosX, No_CuadrosY;
             float Ancho_Cuadro, Alto_Cuadro;
 
-          
+
             //Graficar Cuadicula
 
-       
+
             float AnchoCuadroD = 20;
             float AltoCuadroD = 20;
-            No_CuadrosX = (int)(Grafica.Width / AnchoCuadroD)+1;
-            No_CuadrosY= (int)(Grafica.Width / AltoCuadroD);
+            No_CuadrosX = (int)(Grafica.Width / AnchoCuadroD) + 1;
+            No_CuadrosY = (int)(Grafica.Width / AltoCuadroD);
 
             Ancho_Cuadro = AnchoCuadroD;
             Alto_Cuadro = AltoCuadroD;
 
             // No_CuadrosX = 
 
-
-
-            for (int i = 1; i < No_CuadrosX; i++)
-            {
-                e.Graphics.DrawLine(new Pen(Brushes.LightGray, 1), Ancho_Cuadro * i, 0, Ancho_Cuadro * i, Grafica.Height);
-            }
-            for (int i = 1; i < No_CuadrosY; i++)
-            {
-                e.Graphics.DrawLine(new Pen(Brushes.LightGray, 1), 0, Alto_Cuadro * i, Grafica.Width, Alto_Cuadro * i);
-            }
+            //for (int i = 1; i < No_CuadrosX; i++)
+            //{
+            //    e.Graphics.DrawLine(new Pen(Brushes.LightGray, 1), Ancho_Cuadro * i, 0, Ancho_Cuadro * i, Grafica.Height);
+            //}
+            //for (int i = 1; i < No_CuadrosY; i++)
+            //{
+            //    e.Graphics.DrawLine(new Pen(Brushes.LightGray, 1), 0, Alto_Cuadro * i, Grafica.Width, Alto_Cuadro * i);
+            //}
 
             //Mayor negativo y Positivo
-            float MPX = (float)Form1.Proyecto_.Lista_Columnas.Max(x => x.CoordXY[0]);
-            float MNX = (float)Form1.Proyecto_.Lista_Columnas.Min(x => x.CoordXY[0]);
 
+            List<float> MAXX = new List<float>();
+            List<float> MINXX = new List<float>();
+            List<float> MAXY = new List<float>();
+            List<float> MINXY = new List<float>();
+
+
+            float MPX1 = (float)Form1.Proyecto_.Lista_Vigas.Max(x => x.CoordXY1[0]);
+            MAXX.Add(MPX1);
+            float MNX1 = (float)Form1.Proyecto_.Lista_Vigas.Min(x => x.CoordXY1[0]);
+            MINXX.Add(MNX1);
+            float MPY1 = (float)Form1.Proyecto_.Lista_Vigas.Max(x => x.CoordXY1[1]);
+            MAXY.Add(MPY1);
+            float MNY1 = (float)Form1.Proyecto_.Lista_Vigas.Min(x => x.CoordXY1[1]);
+            MINXY.Add(MNY1);
+            float MPX2 = (float)Form1.Proyecto_.Lista_Vigas.Max(x => x.CoordXY2[0]);
+            MAXX.Add(MPX2);
+            float MNX2 = (float)Form1.Proyecto_.Lista_Vigas.Min(x => x.CoordXY2[0]);
+            MINXX.Add(MNX2);
+            float MPY2 = (float)Form1.Proyecto_.Lista_Vigas.Max(x => x.CoordXY2[1]);
+            MAXY.Add(MPY2);
+            float MNY2 = (float)Form1.Proyecto_.Lista_Vigas.Min(x => x.CoordXY2[1]);
+            MINXY.Add(MNY2);
+            float MPX = (float)Form1.Proyecto_.Lista_Columnas.Max(x => x.CoordXY[0]);
+            MAXX.Add(MPX);
+            float MNX = (float)Form1.Proyecto_.Lista_Columnas.Min(x => x.CoordXY[0]);
+            MINXX.Add(MNX1);
             float MPY = (float)Form1.Proyecto_.Lista_Columnas.Max(x => x.CoordXY[1]);
+            MAXY.Add(MPY);
             float MNY = (float)Form1.Proyecto_.Lista_Columnas.Min(x => x.CoordXY[1]);
+            MINXY.Add(MNY);
+
+            MPX = MAXX.Max();
+            MNX = MINXX.Max();
+            MPY = MAXY .Max();
+            MNY = MINXY.Max();
+
+
+
 
             if (MNX > 0) { MNX = 0; }
             if (MPX < 0) { MPX = 0; }
@@ -74,10 +107,21 @@ namespace DisenoColumnas.DefinirColumnas
             float SX = (Width - 15) / (Math.Abs(MPX - MNX));
             float SY = (Height - 15) / (Math.Abs(MPY - MNY));
 
+
+
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
             }
+
+
+            string Nomb_PrimerPiso = Form1.Proyecto_.Lista_Columnas[0].Seccions[Form1.Proyecto_.Lista_Columnas[0].Seccions.Count - 1].Item2;
+            foreach (Viga viga in Form1.Proyecto_.Lista_Vigas)
+            {
+                if (viga.Seccions[viga.Seccions.Count - 1].Item2 == Nomb_PrimerPiso)
+                    viga.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
+            }
+
         }
 
         private void PlantaColumnas_Paint(object sender, PaintEventArgs e)
