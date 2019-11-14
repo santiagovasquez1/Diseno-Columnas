@@ -515,6 +515,7 @@ namespace DisenoColumnas.Secciones
             double Long_GanchoV2 = 0;
             double Long_GanchoH1 = 0;
             double Long_GanchoH2 = 0;
+            int Numero_Estribos = 0;
 
             Long_Estibo1 = 2 * (B - 2 * recubrimiento) + 2 * (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo]; //Estribo aleta
             Long_Estibo2 = 2 * (TW - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo]; //Estribo alma
@@ -525,8 +526,10 @@ namespace DisenoColumnas.Secciones
             Long_GanchoV1 = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Aleta
             Long_GanchoV2 = (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Alma
 
+            Numero_Estribos = Convert.ToInt32(Math.Round((100) / Estribo.Separacion, 0) + 1);
+
             PEstribo = (Long_Estibo1 + Long_Estibo2 + (Estribo.NoRamasH1 - 2) * Long_GanchoH1 + (Estribo.NoRamasH2 - 2) * Long_GanchoH2 + (Estribo.NoRamasV1 - 2) * Long_GanchoV1
-                + (Estribo.NoRamasV2 - 2) * Long_GanchoV2) * Estribo.Area * 7850;
+                + (Estribo.NoRamasV2 - 2) * Long_GanchoV2) * Estribo.Area * 7850 * Numero_Estribos;
 
             return PEstribo;
         }

@@ -14,6 +14,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private ISeccion Seccion { get; set; }
         private int index { get; set; } = -1;
         private GDE gde;
+        private bool Aplica { get; set; }
 
         public FEditarPredef(ISeccion pSeccion, FInterfaz_Seccion pInterfaz, GDE pgde)
         {
@@ -43,23 +44,36 @@ namespace DisenoColumnas.Interfaz_Seccion
                 groupBox2.Text = "Ramas Alma";
                 groupBox3.Text = "Ramas Aleta";
                 groupBox3.Enabled = true;
+                groupBox3.Visible = true;
                 gbPeso.Location = new Point(599, 31);
             }
 
-            cbEstribo.Text = cbEstribo.Items[0].ToString();
+            cbEstribo.Text = "#" + Seccion.Estribo.NoEstribo;
+            nudSep.Value = (decimal)Seccion.Estribo.Separacion;
             Cargar_Datos(dataGridView1);
         }
 
         private void Cuantia_Volumetrica()
         {
             int NumEstribo = 0;
-            int pos = 0;
+            int pos = 0;              
 
             pos = cbEstribo.Text.IndexOf('#') + 1;
             NumEstribo = Convert.ToInt32(cbEstribo.Text.Substring(pos));
 
             Estribo temp = new Estribo(NumEstribo);
-            temp.Separacion = (float)nudSep.Value;
+            
+            if (nudSep.Value > 0)
+            {
+                temp.Separacion = (float)nudSep.Value;
+            }
+            else
+            {
+                temp.Separacion = Seccion.Estribo.Separacion;
+            }
+           
+            Seccion.Estribo = temp;
+
 
             float FD1, FD2;
             if (gde == GDE.DMO)
@@ -73,7 +87,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 FD2 = 0.09f;
             }
 
-            Seccion.Estribo = temp;
             Seccion.Cuanti_Vol(FD1, FD2, 0.04f, 4220);
 
             if (Seccion.Shape == TipodeSeccion.Rectangular)
@@ -243,6 +256,14 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void button1_Click(object sender, EventArgs e)
         {
             Reload_Seccion();
+            FInterfaz_.Over = false;
+            FInterfaz_.Seleccionado = false;
+            FInterfaz_.Invalidate();
+            Close();
+        }
+
+        private void Button_Cerrar_Click(object sender, EventArgs e)
+        {
             FInterfaz_.Over = false;
             FInterfaz_.Seleccionado = false;
             FInterfaz_.Invalidate();

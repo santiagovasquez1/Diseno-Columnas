@@ -322,6 +322,7 @@
             this.Button_Cerrar.TabIndex = 27;
             this.Button_Cerrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Button_Cerrar.UseVisualStyleBackColor = false;
+            this.Button_Cerrar.Click += new System.EventHandler(this.Button_Cerrar_Click);
             // 
             // Label6
             // 
@@ -347,7 +348,6 @@
             this.gbCuantivaVol.TabIndex = 0;
             this.gbCuantivaVol.TabStop = false;
             this.gbCuantivaVol.Text = "Cuantia Volumetrica";
-            this.gbCuantivaVol.Visible = false;
             // 
             // label5
             // 
@@ -370,11 +370,6 @@
             this.nudSep.Name = "nudSep";
             this.nudSep.Size = new System.Drawing.Size(54, 23);
             this.nudSep.TabIndex = 2;
-            this.nudSep.Value = new decimal(new int[] {
-            75,
-            0,
-            0,
-            65536});
             this.nudSep.ValueChanged += new System.EventHandler(this.nudSep_ValueChanged);
             // 
             // label7
@@ -409,7 +404,6 @@
             this.gbPeso.TabIndex = 8;
             this.gbPeso.TabStop = false;
             this.gbPeso.Text = "Peso Estribos (kg/m)";
-            this.gbPeso.Visible = false;
             // 
             // lPesoEstribo
             // 

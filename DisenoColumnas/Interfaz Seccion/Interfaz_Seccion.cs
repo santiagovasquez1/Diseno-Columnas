@@ -339,15 +339,25 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             Over = false;
             Seleccionado = false;
-            FAgregarRef agregarRef;
+            FAgregarRef agregarRef=null;
+            FEditarPredef editarPredef=null;
 
             if (MouseOverPoligono(e.Location))
             {
                 Over = true;
                 Seleccionado = true;
                 Grafica.Invalidate();
-                agregarRef = new FAgregarRef(seccion, Piso, this);
-                agregarRef.ShowDialog();
+
+                if (edicion == Tipo_Edicion.Secciones_modelo)
+                {
+                    agregarRef = new FAgregarRef(seccion, Piso, this);
+                    agregarRef.ShowDialog();
+                }
+                if (edicion == Tipo_Edicion.Secciones_predef)
+                {
+                    editarPredef = new FEditarPredef(seccion, this, GDE.DMO);
+                    editarPredef.ShowDialog();
+                }
             }
         }
 
