@@ -339,15 +339,25 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             Over = false;
             Seleccionado = false;
-            FAgregarRef agregarRef;
+            FAgregarRef agregarRef=null;
+            FEditarPredef editarPredef=null;
 
             if (MouseOverPoligono(e.Location))
             {
                 Over = true;
                 Seleccionado = true;
                 Grafica.Invalidate();
-                agregarRef = new FAgregarRef(seccion, Piso, this);
-                agregarRef.ShowDialog();
+
+                if (edicion == Tipo_Edicion.Secciones_modelo)
+                {
+                    agregarRef = new FAgregarRef(seccion, Piso, this);
+                    agregarRef.ShowDialog();
+                }
+                if (edicion == Tipo_Edicion.Secciones_predef)
+                {
+                    editarPredef = new FEditarPredef(seccion, this, GDE.DMO);
+                    editarPredef.ShowDialog();
+                }
             }
         }
 
@@ -363,7 +373,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             label1.Text = "X:" + Math.Round(X_r, 2) + " Y:" + Math.Round(-Y_r, 2);
             label1.Update();
 
-            Grafica.Invalidate();
+            //Grafica.Invalidate();
         }
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)

@@ -312,6 +312,11 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
+        public double Peso_Estribo(float recubrimiento)
+        {
+            return 0;
+        }
+
         public static bool operator ==(CCirculo s1, CCirculo s2)
         {
             return s1.Equals(s2);

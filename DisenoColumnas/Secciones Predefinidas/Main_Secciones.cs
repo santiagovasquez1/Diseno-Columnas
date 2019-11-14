@@ -94,7 +94,8 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 CapasX = 3; CapasY = 4; CapasXw = 0; CapasYw = 0;
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 35F, 40F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones_DMO.Add(seccioni);
-
+                seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 35F, 40F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
+                Lista_Secciones.Secciones_DES.Add(seccioni);
                 #endregion Seccion35X40
 
                 #region Seccion35X50
