@@ -67,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alzado.cs" />
+    <Compile Include="Interfaz Seccion\FAgregarSeccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FAgregarSeccion.Designer.cs">
+      <DependentUpon>FAgregarSeccion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz Seccion\FEditarPredef.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Seccion\FAgregarRef.resx">
       <DependentUpon>FAgregarRef.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\FAgregarSeccion.resx">
+      <DependentUpon>FAgregarSeccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Seccion\FEditarPredef.resx">
       <DependentUpon>FEditarPredef.cs</DependentUpon>

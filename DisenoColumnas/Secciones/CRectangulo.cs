@@ -120,31 +120,15 @@ namespace DisenoColumnas.Secciones
             int pasos;
             float delta = 0.50f;
 
-            double Ast1, Ast2, G_As1, G_As2, LG_As1, LG_As2;
             char Separador_decimal;
-
-            var Num_Ramas_V = new List<int>();    //Numero de ramas en altura del muro para ambos casos de ast
-
-            var GT_As1 = new List<double>();   //Longitud total de los gancho para As1, bajo cada una de las variaciones de la separacion
-            var GT_As2 = new List<double>();   //Longitud total de los gancho para As2, bajo cada una de las variaciones de la separacion
-
             var P_As1 = new List<double>();     //'Peso total As1
             var P_As2 = new List<double>();     //'Peso total As2
 
             var Sep = new List<double>();
             int Indice_min;
 
-            Ast1 = 0.71; //'Estribo #3
-            Ast2 = 1.29; //'Estribo #4
-
             s_min = 7.5;
             Separador_decimal = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-
-            G_As1 = B * 100 - 2 * 2 + 2 * 17; //'Longitud del gancho transversal para Ast1
-            G_As2 = B * 100 - 2 * 2 + 2 * 20.5; //'Longitud del gancho transversal para Ast2
-
-            LG_As1 = H * 100 - 2 * r * 100 + 2 * 17; //'Longitud del gancho longitudinal para Ast1
-            LG_As2 = H * 100 - 2 * r * 100 + 2 * 20.5; //'Longitud del gancho longitudinal para Ast2
 
             if (Form1.Proyecto_.DMO_DES == GDE.DMO)
             {
@@ -169,11 +153,8 @@ namespace DisenoColumnas.Secciones
                     Separacion = Convert.ToSingle(s_d)
                 };
 
-                Num_Ramas_V.Add(Convert.ToInt32(Math.Round((100) / s_d, 0) + 1));
                 Cuanti_Vol(FD1, FD2, r, FY);
-
-                GT_As1.Add(Num_Ramas_V.Last() * (G_As1 * Estribo.NoRamasH1 + LG_As1 * Estribo.NoRamasV1));
-                P_As1.Add(GT_As1.Last() * Ast1 * 7850 / Math.Pow(100, 3));
+                P_As1.Add(Peso_Estribo(Estribo, r));
 
                 #endregion Estribo #3
 
@@ -185,8 +166,7 @@ namespace DisenoColumnas.Secciones
                 };
 
                 Cuanti_Vol(FD1, FD2, r, FY);
-                GT_As2.Add(Num_Ramas_V.Last() * (G_As2 * Estribo.NoRamasH1 + LG_As2 * Estribo.NoRamasV1));
-                P_As2.Add(GT_As2.Last() * Ast2 * 7850 / Math.Pow(100, 3));
+                P_As2.Add(Peso_Estribo(Estribo, r));
 
                 Sep.Add(s_d);
                 s_d += delta;
@@ -442,23 +422,23 @@ namespace DisenoColumnas.Secciones
             Seccion_path.AddPolygon(Vertices.ToArray());
         }
 
-        public double Peso_Estribo(float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
         {
-            double PEstribo = 0;
+            double PAuxiliar = 0;
             double Long_Estibo = 0;
             double Long_GanchoV = 0;
             double Long_GanchoH = 0;
-            int Numero_Estribos=0;
+            int Numero_Estribos = 0;
 
-            Long_Estibo = 2 * (B - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo];
-            Long_GanchoH = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo];
-            Long_GanchoV = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo];
+            Long_Estibo = 2 * (B - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[pEstribo.NoEstribo];
+            Long_GanchoH = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo];
+            Long_GanchoV = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo];
 
-            Numero_Estribos = Convert.ToInt32(Math.Round((100) / Estribo.Separacion, 0) + 1);
+            Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
 
-            PEstribo = (Long_Estibo + (Estribo.NoRamasH1 - 2) * Long_GanchoH + (Estribo.NoRamasV1 - 2) * Long_GanchoV) * Estribo.Area * 7850 * Numero_Estribos;
+            PAuxiliar = (Long_Estibo + (pEstribo.NoRamasH1 - 2) * Long_GanchoH + (pEstribo.NoRamasV1 - 2) * Long_GanchoV) * pEstribo.Area * 7850 * Numero_Estribos;
 
-            return PEstribo;
+            return PAuxiliar;
         }
 
         #endregion Propiedades y Metodos - Secciones Predefinidas

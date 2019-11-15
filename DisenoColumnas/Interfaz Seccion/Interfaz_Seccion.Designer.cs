@@ -36,9 +36,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbPisos = new System.Windows.Forms.ListBox();
+            this.gbSecciones = new System.Windows.Forms.GroupBox();
+            this.cbSecciones = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.gbSecciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -108,9 +111,9 @@
             this.groupBox1.Controls.Add(this.lbPisos);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(735, 9);
+            this.groupBox1.Location = new System.Drawing.Point(735, 61);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(166, 489);
+            this.groupBox1.Size = new System.Drawing.Size(166, 438);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de pisos";
@@ -124,9 +127,33 @@
             this.lbPisos.ItemHeight = 15;
             this.lbPisos.Location = new System.Drawing.Point(6, 24);
             this.lbPisos.Name = "lbPisos";
-            this.lbPisos.Size = new System.Drawing.Size(154, 454);
+            this.lbPisos.Size = new System.Drawing.Size(154, 409);
             this.lbPisos.TabIndex = 0;
             this.lbPisos.SelectedIndexChanged += new System.EventHandler(this.lbPisos_SelectedIndexChanged);
+            // 
+            // gbSecciones
+            // 
+            this.gbSecciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbSecciones.Controls.Add(this.cbSecciones);
+            this.gbSecciones.Enabled = false;
+            this.gbSecciones.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbSecciones.ForeColor = System.Drawing.Color.White;
+            this.gbSecciones.Location = new System.Drawing.Point(735, 8);
+            this.gbSecciones.Name = "gbSecciones";
+            this.gbSecciones.Size = new System.Drawing.Size(166, 47);
+            this.gbSecciones.TabIndex = 6;
+            this.gbSecciones.TabStop = false;
+            this.gbSecciones.Text = "Fc secciones";
+            // 
+            // cbSecciones
+            // 
+            this.cbSecciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSecciones.FormattingEnabled = true;
+            this.cbSecciones.Location = new System.Drawing.Point(6, 18);
+            this.cbSecciones.Name = "cbSecciones";
+            this.cbSecciones.Size = new System.Drawing.Size(154, 23);
+            this.cbSecciones.TabIndex = 0;
+            this.cbSecciones.SelectedIndexChanged += new System.EventHandler(this.cbSecciones_SelectedIndexChanged);
             // 
             // FInterfaz_Seccion
             // 
@@ -134,6 +161,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(904, 528);
+            this.Controls.Add(this.gbSecciones);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
@@ -149,6 +177,7 @@
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.gbSecciones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,5 +192,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox lbPisos;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.GroupBox gbSecciones;
+        private System.Windows.Forms.ComboBox cbSecciones;
     }
 }

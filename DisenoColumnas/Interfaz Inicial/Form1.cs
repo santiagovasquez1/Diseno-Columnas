@@ -29,6 +29,7 @@ namespace DisenoColumnas
         public static FInterfaz_Seccion mIntefazSeccion;
         public static AgregarAlzado mAgregarAlzado;
         public static FuerzasEnElementos mFuerzasEnElmentos;
+        public static Tipo_Edicion pEdicion=Tipo_Edicion.Secciones_modelo;
         public bool CancelDiseño = false;
         public bool CancelGarfica = false;
         private string NameProgram = "DMC";
@@ -165,12 +166,11 @@ namespace DisenoColumnas
                 CambiarSkins();
 
                 mFuerzasEnElmentos = new FuerzasEnElementos();
-         
+
                 LColumna.Items.Clear();
                 LColumna.Text = "";
                 LColumna.Items.AddRange(Proyecto_.Lista_Columnas.Select(x => x.Name).ToArray());
 
-                
                 if (Proyecto_.ColumnaSelect != null)
                 {
                     LColumna.Text = Proyecto_.ColumnaSelect.Name;
@@ -261,11 +261,24 @@ namespace DisenoColumnas
                     string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
                     PanelContenedor.SaveAsXml(configFile);
                 }
+
+                #region Guardado secciones predef
+
+                CUsuario usuario = new CUsuario();
+                string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+                usuario.Get_user();
+
+                if (usuario.Permiso == true & pEdicion == Tipo_Edicion.Secciones_predef)
+                {
+                    FunctionsProject.Serializar_Secciones(Ruta_Completa, secciones_predef);
+                }
+                #endregion
             }
         }
 
         private void Save()
         {
+            #region Guardo proyecto
             if (Proyecto_ != null)
             {
                 if (Proyecto_.Ruta != "")
@@ -280,6 +293,19 @@ namespace DisenoColumnas
                     SaveAs();
                 }
             }
+            #endregion
+
+            #region Guardado secciones predef
+
+            CUsuario usuario = new CUsuario();
+            string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            usuario.Get_user();
+
+            if (usuario.Permiso == true & pEdicion==Tipo_Edicion.Secciones_predef)
+            {
+                FunctionsProject.Serializar_Secciones(Ruta_Completa, secciones_predef);
+            }
+            #endregion
         }
 
         private void GuardarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -353,7 +379,6 @@ namespace DisenoColumnas
                 mCuantiaVolumetrica.Show(PanelContenedor);
 
                 mFuerzasEnElmentos = new FuerzasEnElementos();
-                
 
                 mAgregarAlzado = new AgregarAlzado();
                 LColumna.Enabled = true;
@@ -1465,7 +1490,6 @@ namespace DisenoColumnas
 
         private void Diseñar(ref List<Columna> Lista_ColumnasDiseñar)
         {
-        
             //Crear Alzado Base
 
             foreach (Columna Col in Lista_ColumnasDiseñar)
@@ -1628,10 +1652,31 @@ namespace DisenoColumnas
 
             if (usuario.Permiso == true)
             {
-                mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_predef);
+                if (mIntefazSeccion != null)
+                {
+                    if (mIntefazSeccion.Created == false)
+                    {
+                        pEdicion = Tipo_Edicion.Secciones_predef;
+                        mIntefazSeccion = new FInterfaz_Seccion(pEdicion);
+                    }
+
+                    if(mIntefazSeccion.Created==true  & pEdicion == Tipo_Edicion.Secciones_modelo)
+                    {
+                        pEdicion = Tipo_Edicion.Secciones_predef;
+                        mIntefazSeccion.Close();
+                        mIntefazSeccion = new FInterfaz_Seccion(pEdicion);
+                    }
+                }
+                else
+                {
+                    pEdicion = Tipo_Edicion.Secciones_predef;
+                    mIntefazSeccion = new FInterfaz_Seccion(pEdicion);
+                }
+
                 mIntefazSeccion.Show(PanelContenedor);
                 mIntefazSeccion.Get_Predef_Secction();
                 mIntefazSeccion.Invalidate();
+
             }
         }
 
@@ -1682,14 +1727,23 @@ namespace DisenoColumnas
             {
                 if (mIntefazSeccion.Created == false && Proyecto_.ColumnaSelect != null)
                 {
-                    mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
+                    pEdicion = Tipo_Edicion.Secciones_modelo;
+                    mIntefazSeccion = new FInterfaz_Seccion(pEdicion);
+                }
+                else if (mIntefazSeccion.Created == true && Proyecto_.ColumnaSelect != null && pEdicion==Tipo_Edicion.Secciones_predef)
+                {
+                    mIntefazSeccion.Close();
+                    pEdicion = Tipo_Edicion.Secciones_modelo;
+                    mIntefazSeccion = new FInterfaz_Seccion(pEdicion);
                 }
             }
             else
             {
                 mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             }
+
             mIntefazSeccion.Show(PanelContenedor);
+            mIntefazSeccion.Invalidate();
         }
 
         private void FuerzasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1719,7 +1773,7 @@ namespace DisenoColumnas
 
             foreach (Columna col in Proyecto_.Lista_Columnas)
             {
-                if (col.ColSimilName != null & col.ColSimilName != "" )
+                if (col.ColSimilName != null & col.ColSimilName != "")
                 {
                     if (columnasDrawing.Exists(x => x.Name == col.Name))
                     {

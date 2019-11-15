@@ -3,7 +3,6 @@ using DisenoColumnas.Secciones;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace DisenoColumnas.Secciones_Predefinidas
 {
@@ -55,8 +54,8 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
             MAT_CONCRETE Material1 = new MAT_CONCRETE
             {
-                Name = "H350",
-                FC = 350
+                Name = "H210",
+                FC = 210
             };
 
             MAT_CONCRETE Material2 = new MAT_CONCRETE
@@ -67,14 +66,14 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
             MAT_CONCRETE Material3 = new MAT_CONCRETE
             {
-                Name = "H210",
-                FC = 210
+                Name = "H420",
+                FC = 420
             };
 
             MAT_CONCRETE Material4 = new MAT_CONCRETE
             {
-                Name = "H420",
-                FC = 420
+                Name = "H350",
+                FC = 350
             };
 
             MAT_CONCRETE Material5 = new MAT_CONCRETE
@@ -96,6 +95,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 Lista_Secciones.Secciones_DMO.Add(seccioni);
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 35F, 40F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones_DES.Add(seccioni);
+
                 #endregion Seccion35X40
 
                 #region Seccion35X50
