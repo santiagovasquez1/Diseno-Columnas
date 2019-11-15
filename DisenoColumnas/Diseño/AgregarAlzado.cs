@@ -270,6 +270,9 @@ namespace DisenoColumnas.Diseño
             else if (IndiceR < ColumnaSelect.LuzLibre.Count)
             {
                 ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = null;
+                DeterminarCoordAlzado(IndiceC);
+                ColumnaSelect.ActualizarRefuerzo();
+                Form1.m_Informacion.MostrarAcero();
             }
        
         }
