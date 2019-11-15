@@ -506,9 +506,9 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
-        public double Peso_Estribo(float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
         {
-            double PEstribo = 0;
+            double PAuxiliar = 0;
             double Long_Estibo1 = 0;
             double Long_Estibo2 = 0;
             double Long_GanchoV1 = 0;
@@ -517,21 +517,21 @@ namespace DisenoColumnas.Secciones
             double Long_GanchoH2 = 0;
             int Numero_Estribos = 0;
 
-            Long_Estibo1 = 2 * (B - 2 * recubrimiento) + 2 * (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo]; //Estribo aleta
-            Long_Estibo2 = 2 * (TW - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo]; //Estribo alma
+            Long_Estibo1 = 2 * (B - 2 * recubrimiento) + 2 * (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[pEstribo.NoEstribo]; //Estribo aleta
+            Long_Estibo2 = 2 * (TW - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[pEstribo.NoEstribo]; //Estribo alma
 
-            Long_GanchoH1 = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Aleta
-            Long_GanchoH2 = (TW - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Alma
+            Long_GanchoH1 = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Aleta
+            Long_GanchoH2 = (TW - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Alma
 
-            Long_GanchoV1 = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Aleta
-            Long_GanchoV2 = (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo]; //Alma
+            Long_GanchoV1 = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Aleta
+            Long_GanchoV2 = (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Alma
 
-            Numero_Estribos = Convert.ToInt32(Math.Round((100) / Estribo.Separacion, 0) + 1);
+            Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
 
-            PEstribo = (Long_Estibo1 + Long_Estibo2 + (Estribo.NoRamasH1 - 2) * Long_GanchoH1 + (Estribo.NoRamasH2 - 2) * Long_GanchoH2 + (Estribo.NoRamasV1 - 2) * Long_GanchoV1
-                + (Estribo.NoRamasV2 - 2) * Long_GanchoV2) * Estribo.Area * 7850 * Numero_Estribos;
+            PAuxiliar = (Long_Estibo1 + Long_Estibo2 + (pEstribo.NoRamasH1 - 2) * Long_GanchoH1 + (pEstribo.NoRamasH2 - 2) * Long_GanchoH2 + (pEstribo.NoRamasV1 - 2) * Long_GanchoV1
+                + (pEstribo.NoRamasV2 - 2) * Long_GanchoV2) * pEstribo.Area * 7850 * Numero_Estribos;
 
-            return PEstribo;
+            return PAuxiliar;
         }
 
         public static bool operator ==(CSD s1, CSD s2)

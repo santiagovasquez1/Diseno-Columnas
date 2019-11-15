@@ -442,23 +442,23 @@ namespace DisenoColumnas.Secciones
             Seccion_path.AddPolygon(Vertices.ToArray());
         }
 
-        public double Peso_Estribo(float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo,float recubrimiento)
         {
-            double PEstribo = 0;
+            double PAuxiliar = 0;
             double Long_Estibo = 0;
             double Long_GanchoV = 0;
             double Long_GanchoH = 0;
             int Numero_Estribos=0;
 
-            Long_Estibo = 2 * (B - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[Estribo.NoEstribo];
-            Long_GanchoH = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo];
-            Long_GanchoV = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[Estribo.NoEstribo];
+            Long_Estibo = 2 * (B - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[pEstribo.NoEstribo];
+            Long_GanchoH = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo];
+            Long_GanchoV = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo];
 
-            Numero_Estribos = Convert.ToInt32(Math.Round((100) / Estribo.Separacion, 0) + 1);
+            Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
 
-            PEstribo = (Long_Estibo + (Estribo.NoRamasH1 - 2) * Long_GanchoH + (Estribo.NoRamasV1 - 2) * Long_GanchoV) * Estribo.Area * 7850 * Numero_Estribos;
+            PAuxiliar = (Long_Estibo + (pEstribo.NoRamasH1 - 2) * Long_GanchoH + (pEstribo.NoRamasV1 - 2) * Long_GanchoV) * pEstribo.Area * 7850 * Numero_Estribos;
 
-            return PEstribo;
+            return PAuxiliar;
         }
 
         #endregion Propiedades y Metodos - Secciones Predefinidas
