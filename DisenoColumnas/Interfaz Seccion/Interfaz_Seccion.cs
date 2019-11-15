@@ -48,8 +48,17 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Interfaz_Seccion_Load(object sender, EventArgs e)
         {
-            if (edicion == Tipo_Edicion.Secciones_modelo) Load_Pisos();
-            if (edicion == Tipo_Edicion.Secciones_predef) Load_predef();
+            if (edicion == Tipo_Edicion.Secciones_modelo) 
+            {
+                groupBox1.Text = "Lista de pisos";
+                Load_Pisos();
+            }
+            if (edicion == Tipo_Edicion.Secciones_predef)
+            {
+                groupBox1.Text = "Secciones predefinidas";
+                Load_predef();
+            }
+
             Grafica.Invalidate();
         }
 

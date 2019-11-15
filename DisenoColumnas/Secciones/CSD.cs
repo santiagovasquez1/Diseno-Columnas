@@ -122,7 +122,7 @@ namespace DisenoColumnas.Secciones
             float FD1, FD2;
             double s_max, s_min;
             double s_d;
-            double Ast1, Ast2, G_As1, G_As2, LG_As1, LG_As2; //Variables en la aleta
+            double G_As1, G_As2, LG_As1, LG_As2; //Variables en la aleta
             double Gw_As1, Gw_As2, LGw_As1, LGw_As2; //Variables en el alma
             int pasos;
             int Indice_min;
@@ -149,9 +149,6 @@ namespace DisenoColumnas.Secciones
                 FD1 = 0.30f;
                 FD2 = 0.09f;
             }
-
-            Ast1 = 0.71; //'Estribo #3
-            Ast2 = 1.29; //'Estribo #4
 
             s_min = 7.5;
 
@@ -190,13 +187,8 @@ namespace DisenoColumnas.Secciones
                     Separacion = Convert.ToSingle(s_d)
                 };
 
-                Num_Ramas_V.Add(Convert.ToInt32(Math.Round((100) / s_d, 0) + 1));
                 Cuanti_Vol(FD1, FD2, r, FY);
-
-                GT_As1.Add(Num_Ramas_V.Last() * (G_As1 * Estribo.NoRamasH1 + LG_As1 * Estribo.NoRamasV1));
-                GTw_As1.Add(Num_Ramas_V.Last() * (Gw_As1 * Estribo.NoRamasH2 + LGw_As1 * Estribo.NoRamasV2));
-
-                P_As1.Add((GT_As1.Last() + GTw_As1.Last()) * Ast1 * 7850 / Math.Pow(100, 3));
+                P_As1.Add(Peso_Estribo(Estribo, r));
 
                 #endregion Estribo #3
 
@@ -207,13 +199,8 @@ namespace DisenoColumnas.Secciones
                     Separacion = Convert.ToSingle(s_d)
                 };
 
-                Num_Ramas_V.Add(Convert.ToInt32(Math.Round((100) / s_d, 0) + 1));
                 Cuanti_Vol(FD1, FD2, r, FY);
-
-                GT_As2.Add(Num_Ramas_V.Last() * (G_As2 * Estribo.NoRamasH1 + LG_As2 * Estribo.NoRamasV1));
-                GTw_As2.Add(Num_Ramas_V.Last() * (Gw_As2 * Estribo.NoRamasH2 + LGw_As2 * Estribo.NoRamasV2));
-
-                P_As2.Add((GT_As2.Last() + GTw_As2.Last()) * Ast2 * 7850 / Math.Pow(100, 3));
+                P_As2.Add(Peso_Estribo(Estribo, r));
 
                 #endregion Estribo #4
 

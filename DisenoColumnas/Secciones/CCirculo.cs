@@ -312,7 +312,7 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
-        public double Peso_Estribo(float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo,float recubrimiento)
         {
             return 0;
         }

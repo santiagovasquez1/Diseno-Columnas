@@ -118,7 +118,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private double Peso_Estribos()
         {
-            return Seccion.Peso_Estribo(0.04f);
+            return Seccion.Peso_Estribo(Seccion.Estribo,0.04f);
         }
 
         private void Cargar_Datos(DataGridView data)
