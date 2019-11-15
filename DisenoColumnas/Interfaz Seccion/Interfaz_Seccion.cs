@@ -1,4 +1,6 @@
-﻿using DisenoColumnas.Clases;
+﻿using B_Operaciones_Matricialesl;
+using DisenoColumnas.Clases;
+using DisenoColumnas.Secciones;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,8 +8,6 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using B_Operaciones_Matricialesl;
-using DisenoColumnas.Secciones;
 
 namespace DisenoColumnas.Interfaz_Seccion
 {
@@ -48,18 +48,35 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Interfaz_Seccion_Load(object sender, EventArgs e)
         {
-            if (edicion == Tipo_Edicion.Secciones_modelo) 
+            Paint_Formulario();
+            Grafica.Invalidate();
+        }
+
+        private void Paint_Formulario()
+        {
+            if (edicion == Tipo_Edicion.Secciones_modelo)
             {
-                groupBox1.Text = "Lista de pisos";
                 Load_Pisos();
+
+                groupBox1.Text = "Lista de pisos";
+                gbSecciones.Visible = false;
+                gbSecciones.Enabled = false;
+
+                groupBox1.Size = new Size(new Point(166, 489));
+                groupBox1.Location = new Point(735, 9);
             }
             if (edicion == Tipo_Edicion.Secciones_predef)
             {
-                groupBox1.Text = "Secciones predefinidas";
                 Load_predef();
-            }
 
-            Grafica.Invalidate();
+                groupBox1.Text = "Secciones predefinidas";
+                gbSecciones.Visible = true;
+                gbSecciones.Enabled = true;
+                gbSecciones.Size = new Size(new Point(166, 47));
+
+                groupBox1.Size = new Size(new Point(166, 438));
+                groupBox1.Location = new Point(735, 61);
+            }
         }
 
         #region Metodos de picture box
@@ -169,6 +186,8 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Load_predef()
         {
             ISeccion[] Secciones = { };
+            string[] Fc_secciones = { };
+            cbSecciones.Items.Clear();
 
             if (Form1.Proyecto_.DMO_DES == GDE.DMO)
             {
@@ -179,9 +198,15 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Secciones = Form1.secciones_predef.Secciones_DES.ToArray();
             }
 
-            lbPisos.Items.Clear();
-            lbPisos.Items.AddRange(Secciones);
-            lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
+            Fc_secciones = Secciones.Select(x => x.Material.Name).Distinct().ToArray();
+            cbSecciones.Items.Clear();
+            cbSecciones.Items.AddRange(Fc_secciones);
+            cbSecciones.Text = cbSecciones.Items[0].ToString();
+                       
+
+            //lbPisos.Items.Clear();
+            //lbPisos.Items.AddRange(Secciones);
+            //lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
         }
 
         public void Get_section()
@@ -204,9 +229,8 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Temp.Exists(x => x.Equals(Columna_i.Seccions[indice].Item1)) == true & Columna_i.Seccions[indice].Item1.Editado == false)
                 {
-                    if (Columna_i.Name=="C22" & Columna_i.Seccions[indice].Item2 == "PISO19")
+                    if (Columna_i.Name == "C22" & Columna_i.Seccions[indice].Item2 == "PISO19")
                     {
-                        int prueba = 1;
                     }
 
                     seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Columna_i.Seccions[indice].Item1)));
@@ -216,7 +240,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
 
-                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H & seccion.Shape==TipodeSeccion.Rectangular)
+                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H & seccion.Shape == TipodeSeccion.Rectangular)
                     {
                         double[] Rotacion;
 
@@ -348,8 +372,8 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             Over = false;
             Seleccionado = false;
-            FAgregarRef agregarRef=null;
-            FEditarPredef editarPredef=null;
+            FAgregarRef agregarRef = null;
+            FEditarPredef editarPredef = null;
 
             if (MouseOverPoligono(e.Location))
             {
@@ -487,6 +511,27 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Grafica_MouseHover(object sender, EventArgs e)
         {
+        }
+
+        private void cbSecciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ISeccion[] Secciones = { };
+            string Fc_secciones = "";
+
+            Fc_secciones = cbSecciones.Text;
+
+            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            {
+                Secciones = Form1.secciones_predef.Secciones_DMO.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
+            }
+            else
+            {
+                Secciones = Form1.secciones_predef.Secciones_DES.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
+            }
+
+            lbPisos.Items.Clear();
+            lbPisos.Items.AddRange(Secciones);
+            lbPisos.SelectedItem = lbPisos.Items[0];
         }
     }
 }
