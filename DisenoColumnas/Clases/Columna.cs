@@ -177,7 +177,11 @@ namespace DisenoColumnas.Clases
 
         public void AsignarAsTopMediumButton_()
         {
-            for (int i = 0; i < resultadosETABs.Count; i++) { resultadosETABs[i].AsignarAsTopMediumButton(); }
+            try
+            {
+                for (int i = 0; i < resultadosETABs.Count; i++) { resultadosETABs[i].AsignarAsTopMediumButton(); }
+            }
+            catch { }
         }
 
         #endregion Metodos-Calculos
@@ -237,11 +241,25 @@ namespace DisenoColumnas.Clases
                 }
             }
 
+            if (w > 15)
+            {
+                w = 15;
+            }
+            if (h > 15)
+            {
+                h = 15;
+            }
 
             Graphics graphics = e.Graphics;
 
             graphics.FillRectangle(BrushesColor, X_Colum-w/2, Y_Colum-h/2, w, h);
             float Tamano_Text = (SX + SY) * 0.6f * 0.3f;
+
+            if (Tamano_Text > 15)
+            {
+                Tamano_Text = 15;
+            }
+
             float X_string = X_Colum + w;
 
             if (X_string + 3 * Tamano_Text >= WidthForm)
@@ -602,21 +620,30 @@ namespace DisenoColumnas.Clases
                 No_BarraaDecidir.Add(Dmenor);
                 No_BarraaDecidir.Add(Dmenor + 1);
                 No_BarraaDecidir.Add(Dmenor + 2);
+                No_BarraaDecidir.Add(Dmenor - 1);
+                No_BarraaDecidir.Add(Dmenor);
+                No_BarraaDecidir.Add(Dmenor + 1);
+                No_BarraaDecidir.Add(Dmenor + 2);
                 if (No_BarraaDecidir[0] < 4)
                 {
-                    No_BarraaDecidir[0] = 0;
+                    No_BarraaDecidir[0] = 4;
+                }
+                if (No_BarraaDecidir[4] < 4)
+                {
+                    No_BarraaDecidir[0] = 4;
                 }
 
-                List<string> AcerosAdicionales_Sugerdio = new List<string>();
+                List<string[]> AcerosAdicionales_Sugerdio = new List<string[]>();
                 List<float> AceroMayorPorPiso = new List<float>();
                 List<int[]> NoBarras8DecisionesPorPiso = new List<int[]>();
 
 
                 for (int i = resultadosETABs.Count - 1; i >= 0; i--)
                 {
-                    AcerosAdicionales_Sugerdio.Add("");
+                    string[] vs = new string[] { "", "" };
+                    AcerosAdicionales_Sugerdio.Add(vs);
                     AceroMayorPorPiso.Add(0);
-                    NoBarras8DecisionesPorPiso.Add(new int[4]);
+                    NoBarras8DecisionesPorPiso.Add(new int[8]);
                 }
 
 
@@ -631,7 +658,10 @@ namespace DisenoColumnas.Clases
                         float AceroQueFalta1 = (float)(resultadosETABs[i].AsTopMediumButton[0] - resultadosETABs[i].As_asignado[0]);
                         float AceroQueFalta2 = (float)(resultadosETABs[i - 1].AsTopMediumButton[2] - resultadosETABs[i - 1].As_asignado[2]);
 
+
+
                         AceroMayorPorPiso[i] = AceroQueFalta1 > AceroQueFalta2 ? AceroQueFalta1 : AceroQueFalta2;
+
                     }
                     catch
                     {
@@ -646,10 +676,10 @@ namespace DisenoColumnas.Clases
                     int Sdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[1]], 4);
                     int Tdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[2]], 4);
                     int Cdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[3]], 4);
-                    int Qdecision = (int)(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[0]]);
-                    int Sxdecision = (int)(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[1]]);
-                    int Spdecision = (int)(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[2]]);
-                    int Odecision = (int)(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[3]]);
+                    int Qdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[0]], 4, true);
+                    int Sxdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[1]], 4, true);
+                    int Spdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[2]], 4, true);
+                    int Odecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[3]],4,true);
 
                     NoBarras8DecisionesPorPiso[i] = new int[] { Pdecision, Sdecision, Tdecision, Cdecision, Qdecision , Sxdecision , Spdecision , Odecision };
 
@@ -661,24 +691,70 @@ namespace DisenoColumnas.Clases
                     float DeltaAceroMenor = 99999;
                     int BarraAdeci = 0;
                     int CantBarrasaDecidir = 0;
+                    List<Tuple<int, float, int>> NoBarras_Delta_Posibles_Barra = new List<Tuple<int, float,int>>();
+                    if (AceroMayorPorPiso[i] != 0)
 
-                    for (int j = 0; j < NoBarras8DecisionesPorPiso.Count; j++)
+                    {
+                        for (int j = 0; j < NoBarras8DecisionesPorPiso[i].Length; j++)
+                        {
+
+
+                            float DeltaAcero = Math.Abs((float)(NoBarras8DecisionesPorPiso[i][j] * Form1.Proyecto_.AceroBarras[No_BarraaDecidir[j]] - AceroMayorPorPiso[i]));
+                            if (NoBarras8DecisionesPorPiso[i][j] == 0)
+                            {
+                                DeltaAcero = 99999;
+                            }
+                      
+                                DeltaAceroMenor = DeltaAcero;
+                                BarraAdeci = No_BarraaDecidir[j];
+                                CantBarrasaDecidir = NoBarras8DecisionesPorPiso[i][j];
+                            if (CantBarrasaDecidir <= CantBarras)
+                            {
+                                NoBarras_Delta_Posibles_Barra.Add(new Tuple<int, float,int>(CantBarrasaDecidir, DeltaAceroMenor,BarraAdeci));
+                            }
+                        }
+                    }
+                    try
+                    {
+                        DeltaAceroMenor = NoBarras_Delta_Posibles_Barra.Min(x => x.Item2);
+                    }
+                    catch
+                    {
+                        DeltaAceroMenor = 999999;
+                    }
+                    try
+                    {
+                        CantBarrasaDecidir = NoBarras_Delta_Posibles_Barra.Find(x => x.Item2 == DeltaAceroMenor).Item1;
+                        BarraAdeci= NoBarras_Delta_Posibles_Barra.Find(x => x.Item2 == DeltaAceroMenor).Item3;
+                    }
+                    catch { CantBarrasaDecidir = 0; }
+
+
+                    if (CantBarrasaDecidir != 0)
                     {
 
-                        float DeltaAcero = Math.Abs((float)(NoBarras8DecisionesPorPiso[i][j] * Form1.Proyecto_.AceroBarras[No_BarraaDecidir[j]] - AceroMayorPorPiso[i]));
-
-                        if (DeltaAceroMenor >= DeltaAcero)
+                        if (BarraAdeci > 4 & CantBarrasaDecidir>4)
                         {
-                            DeltaAceroMenor = DeltaAcero;
-                            BarraAdeci = No_BarraaDecidir[j];
-                            CantBarrasaDecidir = NoBarras8DecisionesPorPiso[i][j];
+                           float DeltaAceroMenor2 = Math.Abs((float)((CantBarrasaDecidir / 2) * (BarraAdeci - 1) + (BarraAdeci * CantBarrasaDecidir / 2)- AceroMayorPorPiso[i]));
+
+                            if (DeltaAceroMenor2 < DeltaAceroMenor)
+                            {
+                                AcerosAdicionales_Sugerdio[i][0] = CantBarrasaDecidir / 2 + "#" + (BarraAdeci-1) + "A";
+                                AcerosAdicionales_Sugerdio[i][1] = CantBarrasaDecidir / 2 + "#" + (BarraAdeci ) + "A";
+                            }
+                            else
+                            {
+                                AcerosAdicionales_Sugerdio[i][0] = CantBarrasaDecidir + "#" + BarraAdeci + "A";
+                            }
+
+
+                        }
+                        else
+                        {
+                            AcerosAdicionales_Sugerdio[i][0] = CantBarrasaDecidir + "#" + BarraAdeci + "A";
                         }
 
-                    }
 
-                    if (CantBarrasaDecidir != 0 && CantBarrasaDecidir <= CantBarras)
-                    {
-                        AcerosAdicionales_Sugerdio[i] = CantBarrasaDecidir + "#" + BarraAdeci + "A";
                     }
 
                 }
@@ -686,7 +762,7 @@ namespace DisenoColumnas.Clases
                 bool CrearNuevoAalzado = false;
                 for (int i = 0; i < AcerosAdicionales_Sugerdio.Count; i++)
                 {
-                    if (AcerosAdicionales_Sugerdio[i] != "")
+                    if (AcerosAdicionales_Sugerdio[i][0] != "")
                     {
                         Alzado alzado = new Alzado(Alzados[Alzados.Count - 1].ID + 1, NoBarras8DecisionesPorPiso.Count);
                         Alzados.Add(alzado);
@@ -699,9 +775,32 @@ namespace DisenoColumnas.Clases
                 {
                     for (int i = AcerosAdicionales_Sugerdio.Count - 1; i >= 0; i--)
                     {
-                        CrearAlzado(Alzados.Count - 1, i, this, AcerosAdicionales_Sugerdio[i]);
+                        CrearAlzado(Alzados.Count - 1, i, this, AcerosAdicionales_Sugerdio[i][0]);
                     }
                 }
+                CrearNuevoAalzado = false;
+
+                for (int i = 0; i < AcerosAdicionales_Sugerdio.Count; i++)
+                {
+                    if (AcerosAdicionales_Sugerdio[i][1] != "")
+                    {
+                        Alzado alzado = new Alzado(Alzados[Alzados.Count - 1].ID + 1, NoBarras8DecisionesPorPiso.Count);
+                        Alzados.Add(alzado);
+                        CrearNuevoAalzado = true;
+                        break;
+                    }
+                }
+                if (CrearNuevoAalzado)
+                {
+                    for (int i = AcerosAdicionales_Sugerdio.Count - 1; i >= 0; i--)
+                    {
+                        CrearAlzado(Alzados.Count - 1, i, this, AcerosAdicionales_Sugerdio[i][1]);
+                    }
+                }
+
+
+
+
 
                 ActualizarRefuerzo();
 

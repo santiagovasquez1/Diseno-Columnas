@@ -140,11 +140,16 @@ namespace DisenoColumnas
             return brush;
         }
 
-        public static int Redondear_Decimales(double N_decimal, int multiplo)
+        public static int Redondear_Decimales(double N_decimal, int multiplo, bool RedondInferior = false)
         {
             int valor = 0;
 
+
             valor = (int)(N_decimal / multiplo);
+            if (RedondInferior)
+            {
+                return valor * multiplo;
+            }
 
             if (valor < (N_decimal / multiplo))
             {
@@ -154,6 +159,8 @@ namespace DisenoColumnas
             {
                 return valor * multiplo;
             }
+
+
         }
 
         public static float Dimension(List<float> P_unicos, bool lado)
