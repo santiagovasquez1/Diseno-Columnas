@@ -140,11 +140,11 @@ namespace DisenoColumnas
             return brush;
         }
 
-        public static int Redondear_Decimales(int N_decimal, int multiplo)
+        public static int Redondear_Decimales(double N_decimal, int multiplo)
         {
             int valor = 0;
 
-            valor = N_decimal / multiplo;
+            valor = (int)(N_decimal / multiplo);
 
             if (valor < (N_decimal / multiplo))
             {
