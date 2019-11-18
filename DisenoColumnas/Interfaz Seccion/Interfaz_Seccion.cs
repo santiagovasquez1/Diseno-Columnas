@@ -411,8 +411,18 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)
         {
-            FAgregarRef fseleccion = new FAgregarRef(seccion, Piso, this);
-            fseleccion.ShowDialog();
+            if (edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                FAgregarRef fseleccion = new FAgregarRef(seccion, Piso, this);
+                fseleccion.ShowDialog();
+            }
+
+            if (edicion == Tipo_Edicion.Secciones_predef)
+            {
+                FAgregarSeccion fseccion = new FAgregarSeccion();
+                fseccion.ShowDialog();
+            }
+
         }
 
         private void Dibujo_Estribo(Graphics g, ISeccion seccioni)
