@@ -51,7 +51,6 @@ namespace DisenoColumnas.Clases
         public List<Tuple<ISeccion, string>> Seccions { get; set; } = new List<Tuple<ISeccion, string>>();
         public Viga VigaMayor { get; set; }
 
-
         public List<float> LuzLibre { get; set; }
 
         public List<float> LuzAcum { get; set; }
@@ -67,7 +66,6 @@ namespace DisenoColumnas.Clases
         private List<float> KgRefuerzoforColumAlzado { get; set; } = new List<float>();
 
         public float KgRefuerzo { get; set; }
-
 
         #endregion Propeidades - Calculos
 
@@ -186,7 +184,6 @@ namespace DisenoColumnas.Clases
 
         #endregion Metodos-Calculos
 
-
         #region MetodosPaint
 
         public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI)
@@ -211,9 +208,9 @@ namespace DisenoColumnas.Clases
 
             X_Colum += XI;
             Y_Colum += YI;
-                w = 0.5f*(SX +SY) *0.5f;
-                h = 0.5f*(SX+SY) *0.5f;
- 
+            w = 0.5f * (SX + SY) * 0.5f;
+            h = 0.5f * (SX + SY) * 0.5f;
+
             if (BrushesColor == null)
             {
                 BrushesColor = Brushes.Black;
@@ -252,7 +249,7 @@ namespace DisenoColumnas.Clases
 
             Graphics graphics = e.Graphics;
 
-            graphics.FillRectangle(BrushesColor, X_Colum-w/2, Y_Colum-h/2, w, h);
+            graphics.FillRectangle(BrushesColor, X_Colum - w / 2, Y_Colum - h / 2, w, h);
             float Tamano_Text = (SX + SY) * 0.6f * 0.3f;
 
             if (Tamano_Text > 15)
@@ -274,8 +271,7 @@ namespace DisenoColumnas.Clases
 
         public Columna MouseDown(MouseEventArgs mouse)
         {
-
-            if (X_Colum-w/2 <= mouse.X && X_Colum + w/2 >= mouse.X && Y_Colum -h/2 <= mouse.Y && Y_Colum + h/2 >= mouse.Y)
+            if (X_Colum - w / 2 <= mouse.X && X_Colum + w / 2 >= mouse.X && Y_Colum - h / 2 <= mouse.Y && Y_Colum + h / 2 >= mouse.Y)
             {
                 BrushesColor = Brushes.Red;
                 return this;
@@ -285,23 +281,20 @@ namespace DisenoColumnas.Clases
                 BrushesColor = Brushes.Black;
                 return null;
             }
-
         }
 
         public void MouseDobleClick(MouseEventArgs mouse)
         {
-            if (X_Colum-w/2 <= mouse.X && X_Colum + w/2 >= mouse.X && Y_Colum-h/2 <= mouse.Y && Y_Colum + h/2 >= mouse.Y)
+            if (X_Colum - w / 2 <= mouse.X && X_Colum + w / 2 >= mouse.X && Y_Colum - h / 2 <= mouse.Y && Y_Colum + h / 2 >= mouse.Y)
             {
                 if (Ready == true)
                 {
-
                     Ready = false;
-;
+                    ;
                 }
                 else { Ready = true; }
                 Form1.m_Despiece.Invalidate();
             }
-
         }
 
         private void CoordAlzado()
@@ -397,7 +390,6 @@ namespace DisenoColumnas.Clases
 
         public void AgregarAlzadoSugerido()
         {
-      
             Columna columna = this;
 
             Alzados.Clear();
@@ -588,14 +580,12 @@ namespace DisenoColumnas.Clases
 
             ActualizarRefuerzo();
 
-
-
             // Acero Adiciónal
-            int CantBarras=0;
+            int CantBarras = 0;
             int Dmenor = 99999;
             int MenorAux = 0;
 
-            for (int i= 0; i<Alzados.Count; i++)
+            for (int i = 0; i < Alzados.Count; i++)
             {
                 try
                 {
@@ -603,14 +593,12 @@ namespace DisenoColumnas.Clases
                 }
                 catch { }
 
-                MenorAux = Alzados[i].Colum_Alzado.FindAll(X => X != null).ToList().Min(x=>x.NoBarra);
-           
+                MenorAux = Alzados[i].Colum_Alzado.FindAll(X => X != null).ToList().Min(x => x.NoBarra);
+
                 if (Dmenor > MenorAux)
                 {
                     Dmenor = MenorAux;
-
                 }
-
             }
             if (Alzados.Count != 0)
             {
@@ -637,7 +625,6 @@ namespace DisenoColumnas.Clases
                 List<float> AceroMayorPorPiso = new List<float>();
                 List<int[]> NoBarras8DecisionesPorPiso = new List<int[]>();
 
-
                 for (int i = resultadosETABs.Count - 1; i >= 0; i--)
                 {
                     string[] vs = new string[] { "", "" };
@@ -646,27 +633,19 @@ namespace DisenoColumnas.Clases
                     NoBarras8DecisionesPorPiso.Add(new int[8]);
                 }
 
-
                 for (int i = resultadosETABs.Count - 1; i >= 0; i--)
                 {
-
-
                     //Econtrar Acero Mayor Entre Top del mismo piso y Bottom del piso vecino
                     try
                     {
-
                         float AceroQueFalta1 = (float)(resultadosETABs[i].AsTopMediumButton[0] - resultadosETABs[i].As_asignado[0]);
                         float AceroQueFalta2 = (float)(resultadosETABs[i - 1].AsTopMediumButton[2] - resultadosETABs[i - 1].As_asignado[2]);
 
-
-
                         AceroMayorPorPiso[i] = AceroQueFalta1 > AceroQueFalta2 ? AceroQueFalta1 : AceroQueFalta2;
-
                     }
                     catch
                     {
                         AceroMayorPorPiso[i] = (float)(resultadosETABs[i].AsTopMediumButton[0] - resultadosETABs[i].As_asignado[0]);
-
                     }
                     if (AceroMayorPorPiso[i] < Form1.Proyecto_.AceroBarras[2])
                     {
@@ -679,11 +658,9 @@ namespace DisenoColumnas.Clases
                     int Qdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[0]], 4, true);
                     int Sxdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[1]], 4, true);
                     int Spdecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[2]], 4, true);
-                    int Odecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[3]],4,true);
+                    int Odecision = FunctionsProject.Redondear_Decimales(AceroMayorPorPiso[i] / Form1.Proyecto_.AceroBarras[No_BarraaDecidir[3]], 4, true);
 
-                    NoBarras8DecisionesPorPiso[i] = new int[] { Pdecision, Sdecision, Tdecision, Cdecision, Qdecision , Sxdecision , Spdecision , Odecision };
-
-
+                    NoBarras8DecisionesPorPiso[i] = new int[] { Pdecision, Sdecision, Tdecision, Cdecision, Qdecision, Sxdecision, Spdecision, Odecision };
                 }
 
                 for (int i = NoBarras8DecisionesPorPiso.Count - 1; i >= 0; i--)
@@ -691,26 +668,24 @@ namespace DisenoColumnas.Clases
                     float DeltaAceroMenor = 99999;
                     int BarraAdeci = 0;
                     int CantBarrasaDecidir = 0;
-                    List<Tuple<int, float, int>> NoBarras_Delta_Posibles_Barra = new List<Tuple<int, float,int>>();
+                    List<Tuple<int, float, int>> NoBarras_Delta_Posibles_Barra = new List<Tuple<int, float, int>>();
                     if (AceroMayorPorPiso[i] != 0)
 
                     {
                         for (int j = 0; j < NoBarras8DecisionesPorPiso[i].Length; j++)
                         {
-
-
                             float DeltaAcero = Math.Abs((float)(NoBarras8DecisionesPorPiso[i][j] * Form1.Proyecto_.AceroBarras[No_BarraaDecidir[j]] - AceroMayorPorPiso[i]));
                             if (NoBarras8DecisionesPorPiso[i][j] == 0)
                             {
                                 DeltaAcero = 99999;
                             }
-                      
-                                DeltaAceroMenor = DeltaAcero;
-                                BarraAdeci = No_BarraaDecidir[j];
-                                CantBarrasaDecidir = NoBarras8DecisionesPorPiso[i][j];
+
+                            DeltaAceroMenor = DeltaAcero;
+                            BarraAdeci = No_BarraaDecidir[j];
+                            CantBarrasaDecidir = NoBarras8DecisionesPorPiso[i][j];
                             if (CantBarrasaDecidir <= CantBarras)
                             {
-                                NoBarras_Delta_Posibles_Barra.Add(new Tuple<int, float,int>(CantBarrasaDecidir, DeltaAceroMenor,BarraAdeci));
+                                NoBarras_Delta_Posibles_Barra.Add(new Tuple<int, float, int>(CantBarrasaDecidir, DeltaAceroMenor, BarraAdeci));
                             }
                         }
                     }
@@ -725,38 +700,31 @@ namespace DisenoColumnas.Clases
                     try
                     {
                         CantBarrasaDecidir = NoBarras_Delta_Posibles_Barra.Find(x => x.Item2 == DeltaAceroMenor).Item1;
-                        BarraAdeci= NoBarras_Delta_Posibles_Barra.Find(x => x.Item2 == DeltaAceroMenor).Item3;
+                        BarraAdeci = NoBarras_Delta_Posibles_Barra.Find(x => x.Item2 == DeltaAceroMenor).Item3;
                     }
                     catch { CantBarrasaDecidir = 0; }
 
-
                     if (CantBarrasaDecidir != 0)
                     {
-
-                        if (BarraAdeci > 4 & CantBarrasaDecidir>4)
+                        if (BarraAdeci > 4 & CantBarrasaDecidir > 4)
                         {
-                           float DeltaAceroMenor2 = Math.Abs((float)((CantBarrasaDecidir / 2) * (BarraAdeci - 1) + (BarraAdeci * CantBarrasaDecidir / 2)- AceroMayorPorPiso[i]));
+                            float DeltaAceroMenor2 = Math.Abs((CantBarrasaDecidir / 2) * (BarraAdeci - 1) + (BarraAdeci * CantBarrasaDecidir / 2) - AceroMayorPorPiso[i]);
 
                             if (DeltaAceroMenor2 < DeltaAceroMenor)
                             {
-                                AcerosAdicionales_Sugerdio[i][0] = CantBarrasaDecidir / 2 + "#" + (BarraAdeci-1) + "A";
-                                AcerosAdicionales_Sugerdio[i][1] = CantBarrasaDecidir / 2 + "#" + (BarraAdeci ) + "A";
+                                AcerosAdicionales_Sugerdio[i][0] = CantBarrasaDecidir / 2 + "#" + (BarraAdeci - 1) + "A";
+                                AcerosAdicionales_Sugerdio[i][1] = CantBarrasaDecidir / 2 + "#" + (BarraAdeci) + "A";
                             }
                             else
                             {
                                 AcerosAdicionales_Sugerdio[i][0] = CantBarrasaDecidir + "#" + BarraAdeci + "A";
                             }
-
-
                         }
                         else
                         {
                             AcerosAdicionales_Sugerdio[i][0] = CantBarrasaDecidir + "#" + BarraAdeci + "A";
                         }
-
-
                     }
-
                 }
 
                 bool CrearNuevoAalzado = false;
@@ -798,20 +766,14 @@ namespace DisenoColumnas.Clases
                     }
                 }
 
-
-
-
-
                 ActualizarRefuerzo();
-
 
                 for (int i = 0; i < columna.Alzados.Count; i++)
                 {
                     ModificarTraslapo(i, this);
                     DeterminarCoordAlzado(i, this);
                 }
-
-            }         
+            }
             CrearListaPesosRefuerzos(0);
             CalcularPesoAcero();
         }
@@ -871,8 +833,6 @@ namespace DisenoColumnas.Clases
             {
                 ColumnaSelect.Alzados[IndiceC].Colum_Alzado[IndiceR] = null;
             }
-         
-
         }
 
         private object[] ClasificarCelda(string Celda)
@@ -946,7 +906,6 @@ namespace DisenoColumnas.Clases
                             }
                         }
                     }
-
                 }
                 try
                 {
@@ -1487,24 +1446,18 @@ namespace DisenoColumnas.Clases
                     FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa2, LayerCuadro, false);
                 }
 
-
                 try
                 {
-                    if(Seccions[i].Item1.B != Seccions[i - 1].Item1.B)
+                    if (Seccions[i].Item1.B != Seccions[i - 1].Item1.B)
                     {
-                        float B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i-1].Item1.B) / MaxB) + DPR;
+                        float B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i - 1].Item1.B) / MaxB) + DPR;
 
                         double[] LineaFaltante1 = new double[] { X+B_Draw, Y + LuzAcum[i],
                                                                  X+B_Draw2,Y+ LuzAcum[i]};
                         FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(LineaFaltante1, LayerCuadro, false);
-
-
                     }
-
-
                 }
                 catch { }
-
             }
 
             #region Resitencia
@@ -1542,13 +1495,13 @@ namespace DisenoColumnas.Clases
                     DesplazCota = 0.7f;
                     TextCota = @"{\H1.33333x;\C11; Resistencia a la compresión del\Pconcreto a los 28 días\Pf'c=" + Resitencias[i] + @"kgf/cm²\C256; }";
                 }
-               FunctionsAutoCAD.FunctionsAutoCAD.AddCota(CotaFc1, CotaFc2, "FC_COTAS", "FC_TEXT1", DesplazCota, headType1: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, Text: TextCota,
-                    headType2: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, TextRotation: 90, ArrowheadSize: 0.002);
+                FunctionsAutoCAD.FunctionsAutoCAD.AddCota(CotaFc1, CotaFc2, "FC_COTAS", "FC_TEXT1", DesplazCota, headType1: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, Text: TextCota,
+                     headType2: FunctionsAutoCAD.ArrowHeadType.ArrowDefault, TextRotation: 90, ArrowheadSize: 0.002);
 
                 double[] P_XYZRes = new double[] { CotaFc1[0] + 0.4f, CotaFc1[1] + (CotaFc2[1] - CotaFc1[1]) / 2 - 3f / 2, 0 };
 
                 //FunctionsAutoCAD.FunctionsAutoCAD.AddText(MsgFC + Resitencias[i] + " kgf/cm²", P_XYZRes, 6f, 0.1, LayerString, "ROMANS",
-               // 90, justifyText: FunctionsAutoCAD.JustifyText.Center, Width2: 3f);
+                // 90, justifyText: FunctionsAutoCAD.JustifyText.Center, Width2: 3f);
             }
 
             #endregion Resitencia
@@ -1597,8 +1550,6 @@ namespace DisenoColumnas.Clases
 
             #endregion Dibujar Columna
 
-        
-
             #region Dibujar Refuerzo
 
             foreach (Alzado a in Alzados)
@@ -1606,17 +1557,16 @@ namespace DisenoColumnas.Clases
                 double[] PXYZ = new double[] { X + a.DistX - 0.15, Y - 0.12, 0 };
 
                 //Agregar Nomenclatura de Refuerzo
-                if (Alzados.Count == 2  & a.ID == 1)
+                if (Alzados.Count == 2 & a.ID == 1)
                 {
-                    PXYZ = new double[] { X + a.DistX -DPR/2-0.15, Y - 0.12, 0 };
+                    PXYZ = new double[] { X + a.DistX - DPR / 2 - 0.15, Y - 0.12, 0 };
                 }
                 else if (Alzados.Count == 2 & a.ID == 2)
                 {
-                    PXYZ = new double[] { X + a.DistX  + DPR / 2-0.15, Y - 0.12, 0 };
+                    PXYZ = new double[] { X + a.DistX + DPR / 2 - 0.15, Y - 0.12, 0 };
                 }
-               
 
-                FunctionsAutoCAD.FunctionsAutoCAD.AddText(Convert.ToString(a.ID), PXYZ, 0.5, 0.08, "FC_R-100", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center,Width2: 0.5);
+                FunctionsAutoCAD.FunctionsAutoCAD.AddText(Convert.ToString(a.ID), PXYZ, 0.5, 0.08, "FC_R-100", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center, Width2: 0.5);
 
                 for (int i = a.Colum_Alzado.Count - 1; i >= 0; i--)
                 {
@@ -1981,15 +1931,13 @@ namespace DisenoColumnas.Clases
 
         #region Metodos - Calcular Peso de Acero
 
-
-
         public void CrearListaPesosRefuerzos(int CantidadAnteior)
         {
-            for (int i = 0; i < Alzados.Count-CantidadAnteior;i++) {
+            for (int i = 0; i < Alzados.Count - CantidadAnteior; i++)
+            {
                 KgRefuerzoforColumAlzado.Add(0);
             }
         }
-
 
         public void CalcularPesoAcero(int Col = -1)
         {
@@ -2038,7 +1986,6 @@ namespace DisenoColumnas.Clases
             }
 
             KgRefuerzo = KgRefuerzoforColumAlzado.Sum();
-
         }
 
         private float CalcularLongitudRefuerzo(List<float[]> Coordenadas)
@@ -2047,7 +1994,6 @@ namespace DisenoColumnas.Clases
             for (int i = 1; i < Coordenadas.Count; i++)
             {
                 Longitud += (float)Math.Sqrt(Math.Pow(Coordenadas[i][0] - Coordenadas[i - 1][0], 2) + Math.Pow(Coordenadas[i][1] - Coordenadas[i - 1][1], 2));
-
             }
             return Longitud;
         }

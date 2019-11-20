@@ -37,6 +37,8 @@ namespace DisenoColumnas.Secciones
 
         void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion);
 
+        void Refuerzo_Base(double recub);
+
         void CalcNoDBarras();
 
         double Peso_Estribo(Estribo pEstribo,float recubrimiento);

@@ -89,8 +89,8 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 #region Seccion30X30
 
                 Nombre_Seccion = "C30x30" + material.Name;
-                Diametros_seccion = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
-                CapasX = 4; CapasY = 4; CapasXw = 0; CapasYw = 0;
+                Diametros_seccion = new int[] { 4, 4, 4, 4, 4, 4, 4, 4 };
+                CapasX = 3; CapasY = 3; CapasXw = 0; CapasYw = 0;
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion_DMO(Nombre_Seccion, 30F, 30F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones_DMO.Add(seccioni);
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 30F, 30F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));

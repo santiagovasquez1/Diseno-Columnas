@@ -1625,7 +1625,7 @@ namespace DisenoColumnas
 
                                 if (Temp2.Exists(x => x.Equals(temp)) == true)
                                 {
-                                    seccion = Temp2.Find(x => x.Equals(temp));
+                                    seccion = FunctionsProject.DeepClone(Temp2.Find(x => x.Equals(temp)));
                                     seccion.B = temp.B;
                                     seccion.H = temp.H;
 
