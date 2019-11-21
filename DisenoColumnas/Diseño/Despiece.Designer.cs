@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Despiece));
             this.Label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -37,13 +38,17 @@
             this.Title_Colum_Model = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.Draw_Colum_Alzado = new System.Windows.Forms.PictureBox();
+            this.Ayudas = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MostrarGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.panel4 = new System.Windows.Forms.Panel();
             this.Ready_CheckBox = new System.Windows.Forms.CheckBox();
+            this.mostrarCajonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).BeginInit();
+            this.Ayudas.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,6 +145,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Draw_Colum_Alzado.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Draw_Colum_Alzado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Draw_Colum_Alzado.ContextMenuStrip = this.Ayudas;
             this.Draw_Colum_Alzado.Location = new System.Drawing.Point(12, 35);
             this.Draw_Colum_Alzado.Name = "Draw_Colum_Alzado";
             this.Draw_Colum_Alzado.Size = new System.Drawing.Size(450, 580);
@@ -147,6 +153,24 @@
             this.Draw_Colum_Alzado.TabStop = false;
             this.Draw_Colum_Alzado.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw_Colum_Alzado_Paint);
             this.Draw_Colum_Alzado.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Draw_Colum_Alzado_MouseMove);
+            // 
+            // Ayudas
+            // 
+            this.Ayudas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MostrarGrid,
+            this.mostrarCajonToolStripMenuItem});
+            this.Ayudas.Name = "Ayudas";
+            this.Ayudas.Size = new System.Drawing.Size(150, 48);
+            // 
+            // MostrarGrid
+            // 
+            this.MostrarGrid.Checked = true;
+            this.MostrarGrid.CheckOnClick = true;
+            this.MostrarGrid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.MostrarGrid.Name = "MostrarGrid";
+            this.MostrarGrid.Size = new System.Drawing.Size(149, 22);
+            this.MostrarGrid.Text = "Mostrar Grid";
+            this.MostrarGrid.CheckedChanged += new System.EventHandler(this.MostrarGrid_CheckedChanged);
             // 
             // panel4
             // 
@@ -172,6 +196,14 @@
             this.Ready_CheckBox.UseVisualStyleBackColor = true;
             this.Ready_CheckBox.CheckStateChanged += new System.EventHandler(this.Ready_CheckBox_CheckStateChanged);
             // 
+            // mostrarCajonToolStripMenuItem
+            // 
+            this.mostrarCajonToolStripMenuItem.CheckOnClick = true;
+            this.mostrarCajonToolStripMenuItem.Name = "mostrarCajonToolStripMenuItem";
+            this.mostrarCajonToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.mostrarCajonToolStripMenuItem.Text = "Mostrar Cajón";
+            this.mostrarCajonToolStripMenuItem.CheckedChanged += new System.EventHandler(this.MostrarCajonToolStripMenuItem_CheckedChanged);
+            // 
             // Despiece
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,6 +226,7 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Colum_Alzado)).EndInit();
+            this.Ayudas.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
@@ -211,5 +244,8 @@
         internal System.Windows.Forms.Panel panel4;
         internal System.Windows.Forms.Label KgRefuerzo_L;
         private System.Windows.Forms.CheckBox Ready_CheckBox;
+        private System.Windows.Forms.ContextMenuStrip Ayudas;
+        private System.Windows.Forms.ToolStripMenuItem MostrarGrid;
+        private System.Windows.Forms.ToolStripMenuItem mostrarCajonToolStripMenuItem;
     }
 }

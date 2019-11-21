@@ -271,6 +271,8 @@ namespace DisenoColumnas.InterfazViewInfo
                     // Info_D.Refresh();
                 }
             }
+
+  
         }
 
         private void EstiloDatGridView()

@@ -76,9 +76,9 @@ namespace DisenoColumnas.Clases
             double Top = -999999; double Button = -99999; double medium = -999999;
             for (int i = 0; i < As.Count - 6; i++)
             {
-                if (Top < As[i])
+                if (Button < As[i])
                 {
-                    Top = As[i];
+                    Button = As[i];
                 }
             }
             for (int i = As.Count - 6; i < As.Count - 4; i++)
@@ -91,9 +91,9 @@ namespace DisenoColumnas.Clases
 
             for (int i = As.Count - 4; i < As.Count; i++)
             {
-                if (Button < As[i])
+                if (Top < As[i])
                 {
-                    Button = As[i];
+                    Top = As[i];
                 }
             }
             double[] AsTMB = new double[] { Top, medium, Button };
