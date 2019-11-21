@@ -263,5 +263,26 @@ namespace DisenoColumnas.DefinirColumnas
                 Invalidate();
             }
         }
+
+        private void AllReadyColumnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach(Columna col in Form1.Proyecto_.Lista_Columnas)
+            {
+                col.Ready = allReadyColumnsToolStripMenuItem.Checked;
+            }
+            Invalidate();
+        }
+
+        private void Grafica_MouseMove(object sender, MouseEventArgs e)
+        {
+           
+            foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
+            {
+                Cursor cursor= Grafica.Cursor;
+                columna.MouseMove(e,ref cursor);
+                break;
+        
+            }
+        }
     }
 }

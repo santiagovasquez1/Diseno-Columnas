@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlantaColumnas));
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Grafica = new System.Windows.Forms.PictureBox();
+            this.Ayudas2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.allReadyColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            this.Ayudas2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button2
@@ -71,6 +75,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Grafica.BackColor = System.Drawing.Color.White;
+            this.Grafica.ContextMenuStrip = this.Ayudas2;
+            this.Grafica.Cursor = System.Windows.Forms.Cursors.Default;
             this.Grafica.Location = new System.Drawing.Point(35, 12);
             this.Grafica.Name = "Grafica";
             this.Grafica.Size = new System.Drawing.Size(749, 504);
@@ -79,6 +85,22 @@
             this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
             this.Grafica.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDoubleClick);
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
+            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
+            // 
+            // Ayudas2
+            // 
+            this.Ayudas2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allReadyColumnsToolStripMenuItem});
+            this.Ayudas2.Name = "Ayudas2";
+            this.Ayudas2.Size = new System.Drawing.Size(175, 26);
+            // 
+            // allReadyColumnsToolStripMenuItem
+            // 
+            this.allReadyColumnsToolStripMenuItem.CheckOnClick = true;
+            this.allReadyColumnsToolStripMenuItem.Name = "allReadyColumnsToolStripMenuItem";
+            this.allReadyColumnsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.allReadyColumnsToolStripMenuItem.Text = "All Ready Columns";
+            this.allReadyColumnsToolStripMenuItem.Click += new System.EventHandler(this.AllReadyColumnsToolStripMenuItem_Click);
             // 
             // PlantaColumnas
             // 
@@ -99,6 +121,7 @@
             this.Load += new System.EventHandler(this.PlantaColumnas_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.PlantaColumnas_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
+            this.Ayudas2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -108,5 +131,7 @@
         internal System.Windows.Forms.PictureBox Grafica;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ContextMenuStrip Ayudas2;
+        private System.Windows.Forms.ToolStripMenuItem allReadyColumnsToolStripMenuItem;
     }
 }

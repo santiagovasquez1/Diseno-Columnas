@@ -42,6 +42,7 @@
             this.MostrarGrid = new System.Windows.Forms.ToolStripMenuItem();
             this.panel4 = new System.Windows.Forms.Panel();
             this.Ready_CheckBox = new System.Windows.Forms.CheckBox();
+            this.mostrarCajonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Draw_Column)).BeginInit();
             this.panel2.SuspendLayout();
@@ -156,9 +157,10 @@
             // Ayudas
             // 
             this.Ayudas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MostrarGrid});
+            this.MostrarGrid,
+            this.mostrarCajonToolStripMenuItem});
             this.Ayudas.Name = "Ayudas";
-            this.Ayudas.Size = new System.Drawing.Size(181, 48);
+            this.Ayudas.Size = new System.Drawing.Size(150, 48);
             // 
             // MostrarGrid
             // 
@@ -166,7 +168,7 @@
             this.MostrarGrid.CheckOnClick = true;
             this.MostrarGrid.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MostrarGrid.Name = "MostrarGrid";
-            this.MostrarGrid.Size = new System.Drawing.Size(180, 22);
+            this.MostrarGrid.Size = new System.Drawing.Size(149, 22);
             this.MostrarGrid.Text = "Mostrar Grid";
             this.MostrarGrid.CheckedChanged += new System.EventHandler(this.MostrarGrid_CheckedChanged);
             // 
@@ -193,6 +195,14 @@
             this.Ready_CheckBox.Text = "OK?";
             this.Ready_CheckBox.UseVisualStyleBackColor = true;
             this.Ready_CheckBox.CheckStateChanged += new System.EventHandler(this.Ready_CheckBox_CheckStateChanged);
+            // 
+            // mostrarCajonToolStripMenuItem
+            // 
+            this.mostrarCajonToolStripMenuItem.CheckOnClick = true;
+            this.mostrarCajonToolStripMenuItem.Name = "mostrarCajonToolStripMenuItem";
+            this.mostrarCajonToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.mostrarCajonToolStripMenuItem.Text = "Mostrar Cajón";
+            this.mostrarCajonToolStripMenuItem.CheckedChanged += new System.EventHandler(this.MostrarCajonToolStripMenuItem_CheckedChanged);
             // 
             // Despiece
             // 
@@ -236,5 +246,6 @@
         private System.Windows.Forms.CheckBox Ready_CheckBox;
         private System.Windows.Forms.ContextMenuStrip Ayudas;
         private System.Windows.Forms.ToolStripMenuItem MostrarGrid;
+        private System.Windows.Forms.ToolStripMenuItem mostrarCajonToolStripMenuItem;
     }
 }

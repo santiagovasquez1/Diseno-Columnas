@@ -1677,7 +1677,7 @@ namespace DisenoColumnas
                                     seccion = temp;
                                     seccion.Calc_vol_inex(0.04f, 4220, Proyecto_.DMO_DES);
                                     seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R, 4220);
-                                    seccion.Refuerzo_Base(0.04 * 100);
+                                    seccion.Refuerzo_Base(Proyecto_.R * 100);
                                 }
 
                                 if (seccion.Shape == TipodeSeccion.None)
@@ -2210,9 +2210,21 @@ namespace DisenoColumnas
             {
                 mAgregarAlzado.CrearDataGrid(true);
             }
+
+            DialogResult dialogResult;
+            dialogResult = MessageBox.Show("¿El alzado generado será el definitivo?",Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            
+            if(dialogResult == DialogResult.Yes)
+            {
+                Lista_ColumnasDiseñar.ForEach(x => x.Ready = true);
+            }
             if (m_Despiece != null)
             {
                 m_Despiece.Invalidate();
+            }
+            if (m_PlantaColumnas != null)
+            {
+                m_PlantaColumnas.Invalidate();
             }
         }
 

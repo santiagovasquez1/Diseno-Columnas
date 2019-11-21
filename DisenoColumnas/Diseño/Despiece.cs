@@ -134,12 +134,10 @@ namespace DisenoColumnas.Diseño
 
                 // Mostrar Cajon - AutoCAD?
 
-            
-
-
-
-
-
+                if (mostrarCajonToolStripMenuItem.Checked)
+                {
+                    MostrarCajon(XI, YI, e, SX, SY, Height);
+                }
 
 
 
@@ -187,105 +185,129 @@ namespace DisenoColumnas.Diseño
             }
         }
 
-        private void MostrarCajon(float X, float Y)
+        private void MostrarCajon(float X, float Y, PaintEventArgs e,float SX,float SY,float HeighForm)
         {
 
 
-            ////Dibujar Cuadro Fundación
-            //if (Form1.Proyecto_.ColumnaSelect != null)
-            //{
-            //    Columna col = Form1.Proyecto_.ColumnaSelect;
-            //    float B_Fund = col.Alzados[col.Alzados.Count - 1].DistX;
-            //    double[] Ver_Fund = new double[] {X,Y+Form1.Proyecto_.e_Fundacion,
-            //                                   X,Y,
-            //                                   X+B_Fund+DPR,Y,
-            //                                   X+B_Fund+DPR,Y+Form1.Proyecto_.e_Fundacion };
+            float DPR = 0.6f;
 
-            //    FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Ver_Fund, LayerCuadro, false);
+            if (Form1.Proyecto_.ColumnaSelect != null & Form1.Proyecto_.ColumnaSelect.Alzados.Count != 0)
+            {
 
-            //    //Cota espesor Fundación
-
-            //    double[] P1_CotaF = new double[] { X, Y, 0 };
-            //    double[] P2_CotaF = new double[] { X, Y + Form1.Proyecto_.e_Fundacion, 0 };
-            //    FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaF, P2_CotaF, "FC_COTAS", "FC_TEXT1", -0.3f);
-
-            //    //Dibujar Cada Entre Piso
-            //    for (int i = LuzAcum.Count - 1; i >= 0; i--)
-            //    {
-
-            //        float B_Draw;
-            //        if (ExisteCambioenB)
-            //        {
-            //            B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[i].Item1.B) / MaxB1) + DPR;
-            //        }
-            //        else
-            //        {
-            //            B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[i].Item1.H) / MaxH1) + DPR;
-            //        }
-
-            //        double[] Ver_Colum = new double[] {X,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H,
-            //                                       X,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H-LuzLibre[i],
-            //                                       X+B_Draw,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H-LuzLibre[i],
-            //                                       X+B_Draw,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H };
-            //        FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Ver_Colum, LayerCuadro);
-
-            //        float DesCota = -0.3f;
-            //        //Cotas entre piso y espesor de Viga
-
-            //        //Cotas entre Piso
-
-            //        double[] P1_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i], 0 };
-            //        double[] P2_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
-            //        FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-
-            //        //Cotas Viga
-            //        P1_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
-            //        P2_CotaT = new double[] { X, Y + LuzAcum[i], 0 };
-            //        FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-
-            //        if (i != 0)
-            //        {
-            //            //Lineas entre Piso
-
-            //            double[] VerLosa1 = new double[] {X,Y+LuzAcum[i] -VigaMayor.Seccions[i].Item1.H,
-            //                                       X,Y+LuzAcum[i] };
-
-            //            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa1, LayerCuadro, false);
-
-            //            double[] VerLosa2 = new double[] {X+B_Draw,Y+LuzAcum[i],
-            //                                       X+B_Draw,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H};
-
-            //            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa2, LayerCuadro, false);
-            //        }
+                Columna col = Form1.Proyecto_.ColumnaSelect;
 
 
-            //        try
-            //        {
-            //            if (Seccions[i].Item1.B != Seccions[i - 1].Item1.B)
-            //            {
-            //                float B_Draw2;
-            //                if (ExisteCambioenB)
-            //                {
-            //                    B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i - 1].Item1.B) / MaxB1) + DPR;
-            //                }
-            //                else
-            //                {
-            //                    B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i].Item1.H) / MaxH1) + DPR;
-            //                }
 
-            //                double[] LineaFaltante1 = new double[] { X+B_Draw, Y + LuzAcum[i],
-            //                                                     X+B_Draw2,Y+ LuzAcum[i]};
-            //                FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(LineaFaltante1, LayerCuadro, false);
+           
+
+                float MaxB1 = -999999;
+                float MaxH1 = -999999;
 
 
-            //            }
+                MaxB1 = col.Seccions.FindAll(y => y.Item1 != null).ToList().Max(x => x.Item1.B);
+
+                MaxH1 = col.Seccions.FindAll(y => y.Item1 != null).ToList().Max(x => x.Item1.H);
+
+                bool ExisteCambioenB = false;
+
+                for (int i = col.Seccions.Count - 1; i >= 0; i--)
+                {
+                    if (col.Seccions[i].Item1 != null)
+                    {
+                        try { if (col.Seccions[i].Item1.B - col.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
+                        catch { }
+                    }
+                }
+
+                float B_Fund = col.Alzados[col.Alzados.Count - 1].DistX;
+                PointF[] Ver_Fund = new PointF[] {new PointF(X,HeighForm-Y-Form1.Proyecto_.e_Fundacion*SY),
+                                               new PointF(X,HeighForm-Y),
+                                               new PointF(X+(B_Fund+DPR)*SX,HeighForm-Y),
+                                               new PointF(X+(B_Fund+DPR)*SX,HeighForm-Y-Form1.Proyecto_.e_Fundacion*SY) };
+
+                Pen pen = new Pen(Brushes.LightGray, 2);
+                pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                e.Graphics.DrawLines(pen, Ver_Fund);
+
+                //Dibujar Cada Entre Piso
+                for (int i = col.LuzAcum.Count - 1; i >= 0; i--) 
+                {
+
+                    float B_Draw;
+                    if (ExisteCambioenB)
+                    {
+                        B_Draw = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i].Item1.B) / MaxB1) + DPR;
+                    }
+                    else
+                    {
+                        B_Draw = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i].Item1.H) / MaxH1) + DPR;
+                    }
+
+                    PointF[] Ver_Colum = new PointF[] {new PointF( X,HeighForm-Y-col.LuzAcum[i]*SY+col.VigaMayor.Seccions[i].Item1.H*SY),
+                                                   new PointF(X,HeighForm-Y-col.LuzAcum[i]*SY+col.VigaMayor.Seccions[i].Item1.H*SY+col.LuzLibre[i]*SY),
+                                                   new PointF( X+B_Draw*SX,HeighForm-Y-col.LuzAcum[i]*SY+col.VigaMayor.Seccions[i].Item1.H*SY+col.LuzLibre[i]*SY),
+                                                  new PointF(X+B_Draw*SX,HeighForm-Y-col.LuzAcum[i]*SY+col.VigaMayor.Seccions[i].Item1.H*SY)};
+
+                    e.Graphics.DrawPolygon(pen, Ver_Colum);
+
+                    if (i != 0)
+                    {
+                        //Lineas entre Piso
+
+                        e.Graphics.DrawLine(pen, X, HeighForm-Y - (col.LuzAcum[i] - col.VigaMayor.Seccions[i].Item1.H) * SY, X, HeighForm-Y - col.LuzAcum[i] * SY);
+
+                        e.Graphics.DrawLine(pen, X+ B_Draw*SX, HeighForm- Y- (col.LuzAcum[i] - col.VigaMayor.Seccions[i].Item1.H) * SY, X + B_Draw * SX, HeighForm-Y - col.LuzAcum[i] * SY);
+
+                    }
 
 
-            //        }
-            //        catch { }
+                    try
+                    {
+                        if (col.Seccions[i].Item1.B != col.Seccions[i - 1].Item1.B)
+                        {
+                            float B_Draw2;
+                            if (ExisteCambioenB)
+                            {
+                                B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i - 1].Item1.B) / MaxB1) + DPR;
+                            }
+                            else
+                            {
+                                B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i].Item1.H) / MaxH1) + DPR;
+                            }
 
-            //    }
-            //}
+
+                            e.Graphics.DrawLine(pen, X + B_Draw * SX, HeighForm-Y - col.LuzAcum[i] * SY, X + B_Draw2 * SX, HeighForm- Y - col.LuzAcum[i] * SY);
+
+
+                        }
+
+
+                    }
+                    catch { }
+
+                }
+
+                float B_DrawF;
+
+                if (ExisteCambioenB)
+                {
+                    B_DrawF = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[0].Item1.B) / MaxB1) + DPR;
+                }
+                else
+                {
+                    B_DrawF = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[0].Item1.H) / MaxH1) + DPR;
+                }
+
+
+                PointF[] VerLosa_Final = new PointF[] {new PointF( X,HeighForm-Y-col.LuzAcum[0]*SY +col.VigaMayor.Seccions[0].Item1.H*SY),
+                                                   new PointF(X,HeighForm-Y-col.LuzAcum[0]*SY),
+                                                   new PointF(X+B_DrawF*SX,HeighForm-Y-col.LuzAcum[0]*SY),
+                                                   new PointF(X+B_DrawF*SX,HeighForm-Y-col.LuzAcum[0]*SY+col.VigaMayor.Seccions[0].Item1.H *SY)};
+
+
+                e.Graphics.DrawPolygon(pen, VerLosa_Final);
+
+            }
 
         }
 
@@ -305,6 +327,13 @@ namespace DisenoColumnas.Diseño
 
         private void MostrarGrid_CheckedChanged(object sender, EventArgs e)
         {
+        
+            Draw_Colum_Alzado.Invalidate();
+        }
+
+        private void MostrarCajonToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+
             Draw_Colum_Alzado.Invalidate();
         }
     }
