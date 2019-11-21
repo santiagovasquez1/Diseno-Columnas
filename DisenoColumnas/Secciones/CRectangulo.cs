@@ -257,6 +257,8 @@ namespace DisenoColumnas.Secciones
             }
             else
             {
+                Diametro1 = Barra_aux;
+                Diametro2 = 0;
                 X1 = Num_Barras;
                 X2 = 0;
             }
