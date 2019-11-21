@@ -1,4 +1,4 @@
-﻿using B_Operaciones_Matricialesl;
+﻿//using B_Operaciones_Matricialesl;
 using DisenoColumnas.Clases;
 using DisenoColumnas.DefinirColumnas;
 using DisenoColumnas.Diseño;
@@ -1104,9 +1104,9 @@ namespace DisenoColumnas
 
                                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                                         {
-                                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
-                                            refuerzo.Coord[0] = Rotacion[0];
-                                            refuerzo.Coord[1] = Rotacion[1];
+                                            //Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                                            //refuerzo.Coord[0] = Rotacion[0];
+                                            //refuerzo.Coord[1] = Rotacion[1];
                                         }
                                     }
                                 }
@@ -1635,9 +1635,9 @@ namespace DisenoColumnas
 
                                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                                         {
-                                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
-                                            refuerzo.Coord[0] = Rotacion[0];
-                                            refuerzo.Coord[1] = Rotacion[1];
+                                            //Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                                            //refuerzo.Coord[0] = Rotacion[0];
+                                            //refuerzo.Coord[1] = Rotacion[1];
                                         }
                                     }
                                 }

@@ -3,6 +3,7 @@ using DisenoColumnas.Secciones;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace DisenoColumnas.Secciones_Predefinidas
 {
@@ -12,13 +13,23 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
         public static void Crear_archivo()
         {
-            //string Ruta_Carpeta = Application.StartupPath;
-            //string Ruta_Archivo = @"\\Secciones.sec";
-            //string Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
+            string Ruta_Carpeta;
+            string Ruta_Archivo;
+            string Ruta_Completa;
 
-            string Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
-            string Ruta_Archivo = "Secciones.sec";
-            string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            try
+            {
+                Ruta_Carpeta = Application.StartupPath;
+                Ruta_Archivo = @"\\Secciones.sec";
+                Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
+            }
+            catch (System.Exception)
+            {
+                Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
+                Ruta_Archivo = "Secciones.sec";
+                Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            }
+
             bool Encuentra = false;
 
             DirectoryInfo directory_seccion = new DirectoryInfo(Ruta_Carpeta);
@@ -252,7 +263,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 40F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones_DES.Add(seccioni);
 
-                #endregion
+                #endregion Seccion40X40
 
                 #region Seccion40X50
 
@@ -264,7 +275,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 50F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones_DES.Add(seccioni);
 
-                #endregion
+                #endregion Seccion40X50
 
                 #region Seccion40X60
 
@@ -276,7 +287,7 @@ namespace DisenoColumnas.Secciones_Predefinidas
                 seccioni = FunctionsProject.DeepClone(Crear_Seccion_DES(Nombre_Seccion, 40F, 60F, 0, 0, material, Diametros_seccion, CapasX, CapasY, CapasXw, CapasYw));
                 Lista_Secciones.Secciones_DES.Add(seccioni);
 
-                #endregion
+                #endregion Seccion40X60
 
                 #region Seccion40X70
 

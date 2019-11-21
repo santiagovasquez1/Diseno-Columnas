@@ -19,6 +19,8 @@ namespace DisenoColumnas.Secciones
         L
     }
 
+    internal delegate void DRefuerzo_negativo(int Num_barras);
+
     [Serializable]
     public class CRectangulo : ISeccion, ICloneable, IComparable
     {
@@ -209,6 +211,7 @@ namespace DisenoColumnas.Secciones
             int CapasY = 0;
             int X1 = 0; //Cantidad de barras para diametro1
             int X2 = 0; //Cantida de barras para diametro2
+            bool Desc_X = true;
 
             Num_Barras = Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2);
             As_min = 0.01 * Area;
@@ -243,7 +246,7 @@ namespace DisenoColumnas.Secciones
 
                 if (Estribo.NoRamasV1 % 2 == 0)
                 {
-                    X2 = FunctionsProject.Redondear_Decimales(X2, 4, true);
+                    X2 = FunctionsProject.Redondear_Decimales(X2, 4);
                 }
                 else
                 {
@@ -282,27 +285,55 @@ namespace DisenoColumnas.Secciones
             {
                 if (Cont_Aux1 > 0)
                 {
-                    Aux_Refuerzos[i] = Diametro1;
-                    Cont_Aux1 -= 1;
-                    Aux_num_barras -= 1;
-                    Aux_Refuerzos[i + (Num_Barras / 2) + CapasX - 2] = Diametro1;
-                    Cont_Aux1 -= 1;
-                    Aux_num_barras -= 1;
-                    Aux_Refuerzos[Num_Barras - 1 - i - (Num_Barras / 2) - (CapasX - 2)] = Diametro1;
-                    Cont_Aux1 -= 1;
-                    Aux_num_barras -= 1;
-                    Aux_Refuerzos[Num_Barras - 1 - i] = Diametro1;
-                    Cont_Aux1 -= 1;
-                    Aux_num_barras -= 1;
+                    if (Cont_Aux1 > 0)
+                    {
+                        Aux_Refuerzos[i] = Diametro1;
+                        Cont_Aux1 -= 1;
+                        Aux_num_barras -= 1;
+                    }
+
+                    if (Cont_Aux1 > 0)
+                    {
+                        Aux_Refuerzos[i + (Num_Barras / 2) + CapasX - 2] = Diametro1;
+                        Cont_Aux1 -= 1;
+                        Aux_num_barras -= 1;
+                    }
+
+                    if (Cont_Aux1 > 0)
+                    {
+                        Aux_Refuerzos[Num_Barras - 1 - i - (Num_Barras / 2) - (CapasX - 2)] = Diametro1;
+                        Cont_Aux1 -= 1;
+                        Aux_num_barras -= 1;
+                    }
+
+                    if (Cont_Aux1 > 0)
+                    {
+                        Aux_Refuerzos[Num_Barras - 1 - i] = Diametro1;
+                        Cont_Aux1 -= 1;
+                        Aux_num_barras -= 1;
+                    }
 
                     if (CapasX - 2 > 0)
                     {
-                        for (int j = 0; j < (CapasX-2) * 2; j++)
+                        if (Desc_X == true)
                         {
-                            Aux_Refuerzos[i + 1 + CapasX + j] = Diametro1;
-                            Cont_Aux1 -= 1;
-                            Aux_num_barras -= 1;
+                            for (int j = 0; j < (CapasX - 2) * 2; j++)
+                            {
+                                if (Cont_Aux1 > 0)
+                                {
+                                    Aux_Refuerzos[CapasY + j] = Diametro1;
+                                    Cont_Aux1 -= 1;
+                                }
+                                else
+                                {
+                                    Aux_Refuerzos[CapasY + j] = Diametro2;
+                                    Cont_Aux2 -= 1;
+                                }
+                                Aux_num_barras -= 1;
+                            }
                         }
+
+                        Desc_X = false;
                     }
                 }
                 else
@@ -310,6 +341,7 @@ namespace DisenoColumnas.Secciones
                     if (Aux_Refuerzos[i] == 0)
                     {
                         Aux_Refuerzos[i] = Diametro2;
+                        Cont_Aux2 -= 1;
                         Aux_num_barras -= 1;
                     }
                 }

@@ -1,4 +1,4 @@
-﻿using B_Operaciones_Matricialesl;
+﻿//using B_Operaciones_Matricialesl;
 using DisenoColumnas.Clases;
 using DisenoColumnas.Secciones;
 using System;
@@ -237,9 +237,9 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                         {
-                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
-                            refuerzo.Coord[0] = Rotacion[0];
-                            refuerzo.Coord[1] = Rotacion[1];
+                            //Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                            //refuerzo.Coord[0] = Rotacion[0];
+                            //refuerzo.Coord[1] = Rotacion[1];
                         }
                     }
                 }
