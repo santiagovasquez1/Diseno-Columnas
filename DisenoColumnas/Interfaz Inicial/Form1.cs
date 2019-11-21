@@ -1067,7 +1067,7 @@ namespace DisenoColumnas
             }
 
             //Asignar Secciones a Columnas por Piso
-            float FD1 = 0; float FD2 = 0;
+
 
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
@@ -1082,49 +1082,8 @@ namespace DisenoColumnas
                         {
                             if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
                             {
-                                ISeccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                                ISeccion seccion = null;
-
-                                List<ISeccion> Temp2 = new List<ISeccion>();
-
-                                if (Proyecto_.DMO_DES == GDE.DMO)
-                                {
-                                    FD1 = 0.20f;
-                                    FD2 = 0.06f;
-                                    Temp2 = secciones_predef.Secciones_DMO;
-                                }
-                                else
-                                {
-                                    FD1 = 0.30f;
-                                    FD2 = 0.09f;
-                                    Temp2 = secciones_predef.Secciones_DES;
-                                }
-
-                                if (Temp2.Exists(x => x.Equals(temp)) == true)
-                                {
-                                    seccion = Temp2.Find(x => x.Equals(temp));
-                                    seccion.B = temp.B;
-                                    seccion.H = temp.H;
-
-                                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H)
-                                    {
-                                        double[] Rotacion;
-
-                                        foreach (CRefuerzo refuerzo in seccion.Refuerzos)
-                                        {
-                                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
-                                            refuerzo.Coord[0] = Rotacion[0];
-                                            refuerzo.Coord[1] = Rotacion[1];
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    seccion = temp;
-                                    seccion.Calc_vol_inex(0.04f, 4220, Proyecto_.DMO_DES);
-                                    seccion.Refuerzo_Base(0.04 * 100);
-                                }
-
+                                ISeccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
+                                
                                 if (seccion.Shape == TipodeSeccion.None)
                                 {
                                     seccion = null;
@@ -1615,49 +1574,7 @@ namespace DisenoColumnas
                         {
                             if (colum.Name == NameColum && Story == Proyecto_.Stories[i].Item1)
                             {
-                                ISeccion temp = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
-                                ISeccion seccion = null;
-
-                                List<ISeccion> Temp2 = new List<ISeccion>();
-
-                                if (Proyecto_.DMO_DES == GDE.DMO)
-                                {
-                                    FD1 = 0.20f;
-                                    FD2 = 0.06f;
-                                    Temp2 = secciones_predef.Secciones_DMO;
-                                }
-                                else
-                                {
-                                    FD1 = 0.30f;
-                                    FD2 = 0.09f;
-                                    Temp2 = secciones_predef.Secciones_DES;
-                                }
-
-                                if (Temp2.Exists(x => x.Equals(temp)) == true)
-                                {
-                                    seccion = FunctionsProject.DeepClone(Temp2.Find(x => x.Equals(temp)));
-                                    seccion.B = temp.B;
-                                    seccion.H = temp.H;
-
-                                    if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H)
-                                    {
-                                        double[] Rotacion;
-
-                                        foreach (CRefuerzo refuerzo in seccion.Refuerzos)
-                                        {
-                                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
-                                            refuerzo.Coord[0] = Rotacion[0];
-                                            refuerzo.Coord[1] = Rotacion[1];
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    seccion = temp;
-                                    seccion.Calc_vol_inex(0.04f, 4220, Proyecto_.DMO_DES);
-                                    seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R, 4220);
-                                    seccion.Refuerzo_Base(0.04 * 100);
-                                }
+                                ISeccion seccion = Proyecto_.Lista_Secciones.Find(x => x.Name == NameSeccion);
 
                                 if (seccion.Shape == TipodeSeccion.None)
                                 {
@@ -1667,7 +1584,7 @@ namespace DisenoColumnas
                                 {
                                     Tuple<ISeccion, string> tuple_aux = new Tuple<ISeccion, string>(seccion, Story);
                                     colum.Seccions.Add(tuple_aux);
-                                }
+                                }                              
                             }
                         }
                     }
@@ -2070,52 +1987,76 @@ namespace DisenoColumnas
             //Determinar Cantidad de Barras Por Sección Predefinidas
 
             List<ISeccion> Temp = new List<ISeccion>();
+            ISeccion Temp_seccion = null;
+            float FD1 = 0; float FD2 = 0;
+            string piso = "";
 
             if (Proyecto_.DMO_DES == GDE.DMO)
             {
+                FD1 = 0.20f;
+                FD2 = 0.06f;
                 Temp = secciones_predef.Secciones_DMO;
             }
             else
             {
+                FD1 = 0.30f;
+                FD2 = 0.09f;
                 Temp = secciones_predef.Secciones_DES;
-            }
-
-            foreach (ISeccion seccion in Temp)
-            {
-                seccion.CalcNoDBarras();
             }
 
             foreach (Columna Col in Lista_ColumnasDiseñar)
             {
                 for (int i = Col.Seccions.Count - 1; i >= 0; i--)
                 {
-                    string[] Base = new string[0];
+                    //Asignar seccion predefinida a las columnas
+                    piso = Col.Seccions[i].Item2;
 
-                    foreach (ISeccion seccionP in Temp)
+                    if (Temp.Exists(x => x.Equals(Col.Seccions[i].Item1)) == true)
                     {
-                        if (Col.Seccions[i].Item1.B == seccionP.B && Col.Seccions[i].Item1.H == seccionP.H || Col.Seccions[i].Item1.H == seccionP.B && Col.Seccions[i].Item1.B == seccionP.H)
+                        Temp_seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Col.Seccions[i].Item1)));
+                        Temp_seccion.B = Col.Seccions[i].Item1.B;
+                        Temp_seccion.H = Col.Seccions[i].Item1.H;
+
+                        if (Temp_seccion.Refuerzos.Count > 0 & Temp_seccion.B >Temp_seccion.H)
                         {
-                            if (seccionP.No_D_Barra.Count == 2)
-                            {
-                                Base = new string[4];
-                                Base[0] = $"{ Convert.ToString(seccionP.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[0].Item2)}";
-                                Base[1] = $"{ Convert.ToString(seccionP.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[0].Item2)}";
-                                Base[2] = $"{ Convert.ToString(seccionP.No_D_Barra[1].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[1].Item2)}";
-                                Base[3] = $"{ Convert.ToString(seccionP.No_D_Barra[1].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[1].Item2)}";
-                            }
+                            double[] Rotacion;
 
-                            if (seccionP.No_D_Barra.Count == 1)
+                            foreach (CRefuerzo refuerzo in Temp_seccion.Refuerzos)
                             {
-                                Base = new string[2];
-                                Base[0] = $"{ Convert.ToString(seccionP.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[0].Item2)}";
-                                Base[1] = $"{ Convert.ToString(seccionP.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(seccionP.No_D_Barra[0].Item2)}";
+                                Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                                refuerzo.Coord[0] = Rotacion[0];
+                                refuerzo.Coord[1] = Rotacion[1];
                             }
-
-                            break;
                         }
+                        Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion, piso);
+                    }
+                    else
+                    {
+                        Col.Seccions[i].Item1.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
+                        Col.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
+                        Col.Seccions[i].Item1.Refuerzo_Base(Proyecto_.R);
+                    }
+
+                    string[] Base = new string[0];
+                    Col.Seccions[i].Item1.CalcNoDBarras();
+                    if (Col.Seccions[i].Item1.No_D_Barra.Count == 2)
+                    {
+                        Base = new string[4];
+                        Base[0] = $"{ Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item2)}";
+                        Base[1] = $"{ Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item2)}";
+                        Base[2] = $"{ Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[1].Item1 / 2)}#{Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[1].Item2)}";
+                        Base[3] = $"{ Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[1].Item1 / 2)}#{Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[1].Item2)}";
+                    }
+
+                    if (Col.Seccions[i].Item1.No_D_Barra.Count == 1)
+                    {
+                        Base = new string[2];
+                        Base[0] = $"{ Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item2)}";
+                        Base[1] = $"{ Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item2)}";
                     }
 
                     Col.AlzadoBaseSugerido[i] = Base;
+
                 }
             }
 
