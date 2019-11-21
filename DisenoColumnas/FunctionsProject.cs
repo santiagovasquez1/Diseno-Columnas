@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DisenoColumnas
@@ -144,7 +145,6 @@ namespace DisenoColumnas
         {
             int valor = 0;
 
-
             valor = (int)(N_decimal / multiplo);
             if (RedondInferior)
             {
@@ -159,8 +159,6 @@ namespace DisenoColumnas
             {
                 return valor * multiplo;
             }
-
-
         }
 
         public static float Dimension(List<float> P_unicos, bool lado)
@@ -195,6 +193,26 @@ namespace DisenoColumnas
             {
                 return Min;
             }
+        }
+
+        public static int Find_Barra(double Asi)
+        {
+            double p_error = 0;
+            int indice = 0;
+            int Barra_def = 0;
+            List<double> Dif = new List<double>();
+            List<int> Diametros = new List<int>();
+
+            foreach (KeyValuePair<int, double> As_d in Form1.Proyecto_.AceroBarras)
+            {
+                p_error = Math.Abs((Asi - As_d.Value) / As_d.Value) * 100;
+                Dif.Add(p_error);
+                Diametros.Add(As_d.Key);
+            }
+
+            indice = Dif.FindIndex(x => x == Dif.Min());
+            Barra_def = Diametros[indice];
+            return Barra_def;
         }
     }
 }

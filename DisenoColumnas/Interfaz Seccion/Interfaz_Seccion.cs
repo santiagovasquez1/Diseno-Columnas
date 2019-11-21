@@ -126,7 +126,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 Brush = Brushes.LightGray,
                 Color = Color.LightGray,
-                Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+                Alignment = PenAlignment.Center
             };
 
             SolidBrush br = new SolidBrush(Color.LightGray);
@@ -202,11 +202,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             cbSecciones.Items.Clear();
             cbSecciones.Items.AddRange(Fc_secciones);
             cbSecciones.Text = cbSecciones.Items[0].ToString();
-                       
-
-            //lbPisos.Items.Clear();
-            //lbPisos.Items.AddRange(Secciones);
-            //lbPisos.SelectedItem = lbPisos.Items[lbPisos.Items.Count - 1];
         }
 
         public void Get_section()
@@ -229,10 +224,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Temp.Exists(x => x.Equals(Columna_i.Seccions[indice].Item1)) == true & Columna_i.Seccions[indice].Item1.Editado == false)
                 {
-                    if (Columna_i.Name == "C22" & Columna_i.Seccions[indice].Item2 == "PISO19")
-                    {
-                    }
-
                     seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Columna_i.Seccions[indice].Item1)));
                     seccion.Name = Columna_i.Seccions[indice].Item1.Name;
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
@@ -411,8 +402,17 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)
         {
-            FAgregarRef fseleccion = new FAgregarRef(seccion, Piso, this);
-            fseleccion.ShowDialog();
+            if (edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                FAgregarRef fseleccion = new FAgregarRef(seccion, Piso, this);
+                fseleccion.ShowDialog();
+            }
+
+            if (edicion == Tipo_Edicion.Secciones_predef)
+            {
+                FAgregarSeccion fseccion = new FAgregarSeccion();
+                fseccion.ShowDialog();
+            }
         }
 
         private void Dibujo_Estribo(Graphics g, ISeccion seccioni)

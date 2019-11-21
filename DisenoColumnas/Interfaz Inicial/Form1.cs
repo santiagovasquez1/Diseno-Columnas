@@ -940,6 +940,9 @@ namespace DisenoColumnas
                         if (tipodeSeccion == TipodeSeccion.Rectangular)
                         {
                             seccion = new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
+                            seccion.Calc_vol_inex(Proyecto_.R, 4220, Proyecto_.DMO_DES);
+                            seccion.Refuerzo_Base(Proyecto_.R * 100);
+
                         }
 
                         if (tipodeSeccion == TipodeSeccion.Circle)
@@ -1084,6 +1087,7 @@ namespace DisenoColumnas
             }
 
             //Asignar Secciones a Columnas por Piso
+            float FD1 = 0; float FD2 = 0;
 
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
@@ -1105,10 +1109,14 @@ namespace DisenoColumnas
 
                                 if (Proyecto_.DMO_DES == GDE.DMO)
                                 {
+                                    FD1 = 0.20f;
+                                    FD2 = 0.06f;
                                     Temp2 = secciones_predef.Secciones_DMO;
                                 }
                                 else
                                 {
+                                    FD1 = 0.30f;
+                                    FD2 = 0.09f;
                                     Temp2 = secciones_predef.Secciones_DES;
                                 }
 
@@ -1134,6 +1142,8 @@ namespace DisenoColumnas
                                 else
                                 {
                                     seccion = temp;
+                                    seccion.Calc_vol_inex(0.04f, 4220, Proyecto_.DMO_DES);
+                                    seccion.Refuerzo_Base(0.04 * 100);
                                 }
 
                                 if (seccion.Shape == TipodeSeccion.None)
@@ -1235,12 +1245,7 @@ namespace DisenoColumnas
             }
 
         }
-
-
-
-
-
-
+        
         private void CrearObjetosNecesarios2009()
         {
             //STORIES
@@ -1616,6 +1621,7 @@ namespace DisenoColumnas
             }
 
             //Asignar Secciones a Columnas por Piso
+            float FD1 = 0; float FD2 = 0;
 
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
@@ -1637,16 +1643,20 @@ namespace DisenoColumnas
 
                                 if (Proyecto_.DMO_DES == GDE.DMO)
                                 {
+                                    FD1 = 0.20f;
+                                    FD2 = 0.06f;
                                     Temp2 = secciones_predef.Secciones_DMO;
                                 }
                                 else
                                 {
+                                    FD1 = 0.30f;
+                                    FD2 = 0.09f;
                                     Temp2 = secciones_predef.Secciones_DES;
                                 }
 
                                 if (Temp2.Exists(x => x.Equals(temp)) == true)
                                 {
-                                    seccion = Temp2.Find(x => x.Equals(temp));
+                                    seccion = FunctionsProject.DeepClone(Temp2.Find(x => x.Equals(temp)));
                                     seccion.B = temp.B;
                                     seccion.H = temp.H;
 
@@ -1665,6 +1675,9 @@ namespace DisenoColumnas
                                 else
                                 {
                                     seccion = temp;
+                                    seccion.Calc_vol_inex(0.04f, 4220, Proyecto_.DMO_DES);
+                                    seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R, 4220);
+                                    seccion.Refuerzo_Base(0.04 * 100);
                                 }
 
                                 if (seccion.Shape == TipodeSeccion.None)
@@ -1882,6 +1895,7 @@ namespace DisenoColumnas
 
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {
+
             NewProject();
         }
 

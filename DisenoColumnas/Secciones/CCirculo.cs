@@ -34,14 +34,14 @@ namespace DisenoColumnas.Secciones
         {
             Name = Nombre;
             Material = Material_;
-            Shape = Shape_;
-            CalcularArea();
+            Shape = Shape_;            
             radio = pradio;
             Centro = pCentro;
             CoordenadasSeccion = pCoord;
+            CalcularArea();
         }
 
-        public void Set_puntos(int numero_puntos)
+        public void Set_puntos(int numero_puntos,double pradio)
         {
             double delta_angulo = 2 * Math.PI / numero_puntos;
             double angulo = 0;
@@ -54,20 +54,20 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < numero_puntos; i++)
             {
-                pi.X = Convert.ToSingle(xc + Math.Cos(angulo) * radio);
-                pi.Y = Convert.ToSingle(yc + Math.Sin(angulo) * radio);
+                pi.X = Convert.ToSingle(xc + Math.Cos(angulo) * pradio);
+                pi.Y = Convert.ToSingle(yc + Math.Sin(angulo) * pradio);
                 Puntos.Add(pi);
                 angulo += delta_angulo;
             }
         }
 
-        public void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY)
+        public void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY=4220)
         {
             double Ash;
             float S = Estribo.Separacion / 100;
 
             Ash = FactorDisipacion1 * (Material.FC / FY) * (2 * (radio - r) * S * 0.25);
-            Estribo.NoRamasV1 = S != 0 && Estribo.Area != 0 ? Convert.ToInt32(Ash / Estribo.Area) : 0;
+            Estribo.NoRamasV1 = 1;
         }
 
         public void Calc_vol_inex(float r, float FY,GDE gDE)
@@ -103,7 +103,7 @@ namespace DisenoColumnas.Secciones
             Ast2 = 1.29; //Estribo #4
 
             s_min = 7.5;
-            s_max = Form1.Proyecto_.DMO_DES == GDE.DMO ? 2 * radio / 3 : 2 * radio / 4;
+            s_max = Form1.Proyecto_.DMO_DES == GDE.DMO ? 2 * radio*100 / 3 : 2 * radio*100 / 4;
 
             G_As1 = 2 * Math.PI * 2 * (radio - r) * 100 + 2 * 14; //Longitud de gancho a 180 de #3
             G_As2 = 2 * Math.PI * 2 * (radio - r) * 100 + 2 * 16.7; //Longitud de gancho a 180 de #3
@@ -123,7 +123,7 @@ namespace DisenoColumnas.Secciones
                 Num_Ramas_V.Add(Convert.ToInt32(100 / s_d) + 1);
                 Cuanti_Vol(FD1, FD2, r, FY);
 
-                GT_As1.Add(Num_Ramas_V.Last() * (G_As1 * Estribo.NoRamasH1));
+                GT_As1.Add(Num_Ramas_V.Last() * (G_As1 * Estribo.NoRamasV1));
                 P_As1.Add(GT_As1.Last() * Ast1 * 7850 / Math.Pow(100, 3));
 
                 #endregion Estribo #3
@@ -136,10 +136,13 @@ namespace DisenoColumnas.Secciones
                 };
                 Cuanti_Vol(FD1, FD2, r, FY);
 
-                GT_As2.Add(Num_Ramas_V.Last() * (G_As2 * Estribo.NoRamasH1));
+                GT_As2.Add(Num_Ramas_V.Last() * (G_As2 * Estribo.NoRamasV1));
                 P_As2.Add(GT_As2.Last() * Ast2 * 7850 / Math.Pow(100, 3));
 
                 #endregion Estribo #4
+
+                Sep.Add(s_d);
+                s_d += delta;
             }
 
             if (P_As1.Min() < P_As2.Min())
@@ -158,6 +161,11 @@ namespace DisenoColumnas.Secciones
                     Separacion = Convert.ToSingle(Sep[Indice_min])
                 };
             }
+        }
+
+        public  void Refuerzo_Base(double recub)
+        {
+
         }
 
         public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
@@ -194,7 +202,7 @@ namespace DisenoColumnas.Secciones
                 };
 
                 circulo = new CCirculo("Refuerzo", r, pcentro, material, TipodeSeccion.Circle, pCoord: null);
-                circulo.Set_puntos(10);
+                circulo.Set_puntos(10,r);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
                 Shapes_ref.Add(path);
@@ -215,10 +223,10 @@ namespace DisenoColumnas.Secciones
             };
 
             circulo1 = new CCirculo("Refuerzo", r1, Centro, material, TipodeSeccion.Circle, pCoord: null);
-            circulo1.Set_puntos(50);
+            circulo1.Set_puntos(50,r1);
 
             circulo2 = new CCirculo("Refuerzo", r2, Centro, material, TipodeSeccion.Circle, pCoord: null);
-            circulo2.Set_puntos(50);
+            circulo2.Set_puntos(50,r2);
 
             path.AddClosedCurve(circulo1.Puntos.ToArray());
             path.AddClosedCurve(circulo2.Puntos.ToArray());
@@ -275,7 +283,7 @@ namespace DisenoColumnas.Secciones
                 };
             }
 
-            Set_puntos(50);
+            Set_puntos(50, radio * 100);
             g.DrawClosedCurve(P1, Puntos.ToArray());
             g.FillClosedCurve(br, Puntos.ToArray());
             Seccion_path.AddClosedCurve(Puntos.ToArray());
