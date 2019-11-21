@@ -523,55 +523,55 @@ namespace DisenoColumnas.Secciones
 
         public void Refuerzo_Base(double recub)
         {
-            int Num_Barras = 0;
-            int Barra_aux = 0;
-            int Diametro1 = 0;
-            int Diametro2 = 0;
-            double As_min;
-            double As_i;
-            double p_error;
+            //int Num_Barras = 0;
+            //int Barra_aux = 0;
+            //int Diametro1 = 0;
+            //int Diametro2 = 0;
+            //double As_min;
+            //double As_i;
+            //double p_error;
 
-            Num_Barras = Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2);
-            As_min = 0.01 * Area;
-            As_i = As_min / Num_Barras;
+            //Num_Barras = Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2);
+            //As_min = 0.01 * Area;
+            //As_i = As_min / Num_Barras;
 
-            while (As_i > Form1.Proyecto_.AceroBarras[6])
-            {
-                Num_Barras += 2;
-                As_i = (As_min / Num_Barras);
-            }
+            //while (As_i > Form1.Proyecto_.AceroBarras[6])
+            //{
+            //    Num_Barras += 2;
+            //    As_i = (As_min / Num_Barras);
+            //}
 
-            //Asociar As_i a un diametro de barra
-            Barra_aux = FunctionsProject.Find_Barra(As_i);
+            ////Asociar As_i a un diametro de barra
+            //Barra_aux = FunctionsProject.Find_Barra(As_i);
 
-            //Encontrar Combinatoria optima para el acero base mas aproximado al 1%
-            p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
+            ////Encontrar Combinatoria optima para el acero base mas aproximado al 1%
+            //p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
 
-            if (p_error >= 1.05)
-            {
-                int X1 = 0; //Cantidad de barras para diametro1
-                int X2 = 0; //Cantida de barras para diametro2
+            //if (p_error >= 1.05)
+            //{
+            //    int X1 = 0; //Cantidad de barras para diametro1
+            //    int X2 = 0; //Cantida de barras para diametro2
 
-                if (Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras > As_min)
-                {
-                    Diametro1 = Barra_aux;
-                    Diametro2 = Barra_aux - 1;
-                }
-                else
-                {
-                    Diametro1 = Barra_aux;
-                    Diametro2 = Barra_aux + 1;
-                }
+            //    if (Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras > As_min)
+            //    {
+            //        Diametro1 = Barra_aux;
+            //        Diametro2 = Barra_aux - 1;
+            //    }
+            //    else
+            //    {
+            //        Diametro1 = Barra_aux;
+            //        Diametro2 = Barra_aux + 1;
+            //    }
 
-                X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
+            //    X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
 
-                if (X2 % 2 != 0)
-                {
-                    X2 += 1;
-                }
+            //    if (X2 % 2 != 0)
+            //    {
+            //        X2 += 1;
+            //    }
 
-                X1 = Num_Barras - X2;
-            }
+            //    X1 = Num_Barras - X2;
+            //}
         }
 
         public static bool operator ==(CSD s1, CSD s2)

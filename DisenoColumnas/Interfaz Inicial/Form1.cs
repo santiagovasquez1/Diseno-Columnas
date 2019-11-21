@@ -1,4 +1,4 @@
-﻿//using B_Operaciones_Matricialesl;
+﻿using B_Operaciones_Matricialesl;
 using DisenoColumnas.Clases;
 using DisenoColumnas.DefinirColumnas;
 using DisenoColumnas.Diseño;
@@ -920,6 +920,9 @@ namespace DisenoColumnas
                         if (tipodeSeccion == TipodeSeccion.Rectangular)
                         {
                             seccion = new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
+                            seccion.Calc_vol_inex(Proyecto_.R, 4220, Proyecto_.DMO_DES);
+                            seccion.Refuerzo_Base(Proyecto_.R * 100);
+
                         }
 
                         if (tipodeSeccion == TipodeSeccion.Circle)
@@ -1064,6 +1067,7 @@ namespace DisenoColumnas
             }
 
             //Asignar Secciones a Columnas por Piso
+            float FD1 = 0; float FD2 = 0;
 
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
@@ -1085,10 +1089,14 @@ namespace DisenoColumnas
 
                                 if (Proyecto_.DMO_DES == GDE.DMO)
                                 {
+                                    FD1 = 0.20f;
+                                    FD2 = 0.06f;
                                     Temp2 = secciones_predef.Secciones_DMO;
                                 }
                                 else
                                 {
+                                    FD1 = 0.30f;
+                                    FD2 = 0.09f;
                                     Temp2 = secciones_predef.Secciones_DES;
                                 }
 
@@ -1104,15 +1112,17 @@ namespace DisenoColumnas
 
                                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                                         {
-                                            //Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
-                                            //refuerzo.Coord[0] = Rotacion[0];
-                                            //refuerzo.Coord[1] = Rotacion[1];
+                                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                                            refuerzo.Coord[0] = Rotacion[0];
+                                            refuerzo.Coord[1] = Rotacion[1];
                                         }
                                     }
                                 }
                                 else
                                 {
                                     seccion = temp;
+                                    seccion.Calc_vol_inex(0.04f, 4220, Proyecto_.DMO_DES);
+                                    seccion.Refuerzo_Base(0.04 * 100);
                                 }
 
                                 if (seccion.Shape == TipodeSeccion.None)
@@ -1214,12 +1224,7 @@ namespace DisenoColumnas
             }
 
         }
-
-
-
-
-
-
+        
         private void CrearObjetosNecesarios2009()
         {
             //STORIES
@@ -1595,6 +1600,7 @@ namespace DisenoColumnas
             }
 
             //Asignar Secciones a Columnas por Piso
+            float FD1 = 0; float FD2 = 0;
 
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
@@ -1616,10 +1622,14 @@ namespace DisenoColumnas
 
                                 if (Proyecto_.DMO_DES == GDE.DMO)
                                 {
+                                    FD1 = 0.20f;
+                                    FD2 = 0.06f;
                                     Temp2 = secciones_predef.Secciones_DMO;
                                 }
                                 else
                                 {
+                                    FD1 = 0.30f;
+                                    FD2 = 0.09f;
                                     Temp2 = secciones_predef.Secciones_DES;
                                 }
 
@@ -1635,15 +1645,18 @@ namespace DisenoColumnas
 
                                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                                         {
-                                            //Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
-                                            //refuerzo.Coord[0] = Rotacion[0];
-                                            //refuerzo.Coord[1] = Rotacion[1];
+                                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                                            refuerzo.Coord[0] = Rotacion[0];
+                                            refuerzo.Coord[1] = Rotacion[1];
                                         }
                                     }
                                 }
                                 else
                                 {
                                     seccion = temp;
+                                    seccion.Calc_vol_inex(0.04f, 4220, Proyecto_.DMO_DES);
+                                    seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R, 4220);
+                                    seccion.Refuerzo_Base(0.04 * 100);
                                 }
 
                                 if (seccion.Shape == TipodeSeccion.None)
@@ -1861,6 +1874,7 @@ namespace DisenoColumnas
 
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {
+
             NewProject();
         }
 
