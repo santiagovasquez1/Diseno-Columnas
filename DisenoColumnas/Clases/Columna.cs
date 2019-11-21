@@ -282,6 +282,8 @@ namespace DisenoColumnas.Clases
                 return null;
             }
         }
+
+ 
         public void MouseMove(MouseEventArgs mouse, ref Cursor cursor)
         {
             if (X_Colum - w / 2 <= mouse.X && X_Colum + w / 2 >= mouse.X && Y_Colum - h / 2 <= mouse.Y && Y_Colum + h / 2 >= mouse.Y)

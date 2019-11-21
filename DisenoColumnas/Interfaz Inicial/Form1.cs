@@ -29,7 +29,7 @@ namespace DisenoColumnas
         public static FInterfaz_Seccion mIntefazSeccion;
         public static AgregarAlzado mAgregarAlzado;
         public static FuerzasEnElementos mFuerzasEnElmentos;
-        public static Tipo_Edicion pEdicion=Tipo_Edicion.Secciones_modelo;
+        public static Tipo_Edicion pEdicion = Tipo_Edicion.Secciones_modelo;
         public bool CancelDiseño = false;
         public bool CancelGarfica = false;
         private string NameProgram = "DMC";
@@ -157,14 +157,12 @@ namespace DisenoColumnas
                 mAgregarAlzado.DockAreas = DockAreas.DockBottom;
                 mAgregarAlzado.Show(PanelContenedor);
 
-
                 mLcolumnas = LColumna;
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
                 //   mCuantiaVolumetrica.Show(PanelContenedor);
 
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
-
 
                 CambiarSkins();
 
@@ -275,13 +273,15 @@ namespace DisenoColumnas
                 {
                     FunctionsProject.Serializar_Secciones(Ruta_Completa, secciones_predef);
                 }
-                #endregion
+
+                #endregion Guardado secciones predef
             }
         }
 
         private void Save()
         {
             #region Guardo proyecto
+
             if (Proyecto_ != null)
             {
                 if (Proyecto_.Ruta != "")
@@ -296,7 +296,8 @@ namespace DisenoColumnas
                     SaveAs();
                 }
             }
-            #endregion
+
+            #endregion Guardo proyecto
 
             #region Guardado secciones predef
 
@@ -304,11 +305,12 @@ namespace DisenoColumnas
             string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
             usuario.Get_user();
 
-            if (usuario.Permiso == true & pEdicion==Tipo_Edicion.Secciones_predef)
+            if (usuario.Permiso == true & pEdicion == Tipo_Edicion.Secciones_predef)
             {
                 FunctionsProject.Serializar_Secciones(Ruta_Completa, secciones_predef);
             }
-            #endregion
+
+            #endregion Guardado secciones predef
         }
 
         private void GuardarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -379,14 +381,13 @@ namespace DisenoColumnas
                 m_Despiece.Show(PanelContenedor);
                 CambiarSkins();
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
-              //  mCuantiaVolumetrica.Show(PanelContenedor);
+                //  mCuantiaVolumetrica.Show(PanelContenedor);
 
                 mFuerzasEnElmentos = new FuerzasEnElementos();
 
                 mAgregarAlzado = new AgregarAlzado();
                 mAgregarAlzado.DockAreas = DockAreas.DockBottom;
                 mAgregarAlzado.Show(PanelContenedor);
-
 
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
@@ -559,6 +560,7 @@ namespace DisenoColumnas
             #endregion Diccionario ganchos a 135
 
             #region Diccionario Ganchos a 90
+
             Proyecto_.G90 = new Dictionary<int, float>
             {
                 { 2, 0.09f },
@@ -570,7 +572,8 @@ namespace DisenoColumnas
                 { 8, 0.36f },
                 { 10, 0.47f }
             };
-            #endregion
+
+            #endregion Diccionario Ganchos a 90
         }
 
         private string AbrirE2K2009yCSV2009()
@@ -720,8 +723,6 @@ namespace DisenoColumnas
             }
         }
 
-
-
         private void CrearObjetosNecesarios2016_2017()
         {
             //STORIES
@@ -803,7 +804,7 @@ namespace DisenoColumnas
                 MAT_CONCRETE material = new MAT_CONCRETE();
                 material.Name = Lista_Materiales_Aux2[i][4].Replace("\"", "");
 
-               material.FC = (float)Convert.ToDouble(Lista_Materiales_Aux2[i][9]) / 10;
+                material.FC = (float)Convert.ToDouble(Lista_Materiales_Aux2[i][9]) / 10;
                 Proyecto_.Lista_Materiales.Add(material);
             }
 
@@ -940,9 +941,6 @@ namespace DisenoColumnas
                         if (tipodeSeccion == TipodeSeccion.Rectangular)
                         {
                             seccion = new CRectangulo(Nombre, B, H, mAT_, tipodeSeccion, Coord);
-                            seccion.Calc_vol_inex(Proyecto_.R, 4220, Proyecto_.DMO_DES);
-                            seccion.Refuerzo_Base(Proyecto_.R * 100);
-
                         }
 
                         if (tipodeSeccion == TipodeSeccion.Circle)
@@ -1088,7 +1086,6 @@ namespace DisenoColumnas
 
             //Asignar Secciones a Columnas por Piso
 
-
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
                 for (int j = 0; j < LineAssingns.Count; j++)
@@ -1201,7 +1198,6 @@ namespace DisenoColumnas
                     columna2.estribos.Add(estribo);
                 }
             }
-
         }
 
         private void CrearObjetosNecesarios2009()
@@ -1303,12 +1299,10 @@ namespace DisenoColumnas
 
             int Final_FrameSecctions = ArchivoE2KETABS.FindIndex(x => x.Contains("$ REBAR DEFINITIONS")) - 1;
 
-            if(Final_FrameSecctions- Inicio_FrameSecctions< 0)
+            if (Final_FrameSecctions - Inicio_FrameSecctions < 0)
             {
-                Final_FrameSecctions= ArchivoE2KETABS.FindIndex(x => x.Contains("$ CONCRETE SECTIONS")) - 1;
-
+                Final_FrameSecctions = ArchivoE2KETABS.FindIndex(x => x.Contains("$ CONCRETE SECTIONS")) - 1;
             }
-
 
             List<List<string>> Lista_Secciones_Aux = new List<List<string>>();
 
@@ -1811,7 +1805,6 @@ namespace DisenoColumnas
 
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {
-
             NewProject();
         }
 
@@ -1898,7 +1891,6 @@ namespace DisenoColumnas
                         ExistFlotante = true;
                     }
                 }
-
 
                 foreach (DockContent Panels in PanelContenedor.Contents)
                 {
@@ -2046,7 +2038,7 @@ namespace DisenoColumnas
                         Temp_seccion.B = Col.Seccions[i].Item1.B;
                         Temp_seccion.H = Col.Seccions[i].Item1.H;
 
-                        if (Temp_seccion.Refuerzos.Count > 0 & Temp_seccion.B >Temp_seccion.H)
+                        if (Temp_seccion.Refuerzos.Count > 0 & Temp_seccion.B > Temp_seccion.H)
                         {
                             double[] Rotacion;
 
@@ -2085,7 +2077,6 @@ namespace DisenoColumnas
                     }
 
                     Col.AlzadoBaseSugerido[i] = Base;
-
                 }
             }
 
@@ -2152,9 +2143,9 @@ namespace DisenoColumnas
             }
 
             DialogResult dialogResult;
-            dialogResult = MessageBox.Show("¿El alzado generado será el definitivo?",Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            dialogResult = MessageBox.Show("¿El alzado generado será el definitivo?", Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-            if(dialogResult == DialogResult.Yes)
+            if (dialogResult == DialogResult.Yes)
             {
                 Lista_ColumnasDiseñar.ForEach(x => x.Ready = true);
             }
@@ -2204,7 +2195,7 @@ namespace DisenoColumnas
                         mIntefazSeccion = new FInterfaz_Seccion(pEdicion);
                     }
 
-                    if(mIntefazSeccion.Created==true  & pEdicion == Tipo_Edicion.Secciones_modelo)
+                    if (mIntefazSeccion.Created == true & pEdicion == Tipo_Edicion.Secciones_modelo)
                     {
                         pEdicion = Tipo_Edicion.Secciones_predef;
                         mIntefazSeccion.Close();
@@ -2220,7 +2211,6 @@ namespace DisenoColumnas
                 mIntefazSeccion.Show(PanelContenedor);
                 mIntefazSeccion.Get_Predef_Secction();
                 mIntefazSeccion.Invalidate();
-
             }
         }
 
@@ -2274,7 +2264,7 @@ namespace DisenoColumnas
                     pEdicion = Tipo_Edicion.Secciones_modelo;
                     mIntefazSeccion = new FInterfaz_Seccion(pEdicion);
                 }
-                else if (mIntefazSeccion.Created == true && Proyecto_.ColumnaSelect != null && pEdicion==Tipo_Edicion.Secciones_predef)
+                else if (mIntefazSeccion.Created == true && Proyecto_.ColumnaSelect != null && pEdicion == Tipo_Edicion.Secciones_predef)
                 {
                     mIntefazSeccion.Close();
                     pEdicion = Tipo_Edicion.Secciones_modelo;
