@@ -280,7 +280,7 @@ namespace DisenoColumnas.Diseño
         public void DeterminarCoordAlzado(int Col)
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
-            float DisG = 0.2f; float r = 0.08f; float eF = Form1.Proyecto_.e_Fundacion;
+             float r = 0.05f; float eF = Form1.Proyecto_.e_Fundacion;
             float LdAd = 0.4f;
             
             Alzado a = ColumnaSelect.Alzados[Col - 1];
@@ -405,7 +405,7 @@ namespace DisenoColumnas.Diseño
                     catch { }
 
                     #endregion Determinar Variables de Pisos Vecinos
-
+                    float DisG = Form1.Proyecto_.G90[au.NoBarra];
                     if (au.NoStory == 1 && au.Tipo == "T1") //Si es Primer Piso y  Si Tiene Traslapo Tipo1
                     {
                         float[] XY1 = new float[] { au.x1 + a.DistX + DisG, r };
@@ -557,6 +557,7 @@ namespace DisenoColumnas.Diseño
                             au.UnitarioAdicional.Coord_Alzado_PB.Add(XY1); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY2); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY3);
                         }
                     }
+
 
                     if (au.UltPiso && au.Tipo == "A")   // Ultimo Piso Con Refuerzo Adicional Parte Superior
                     {
@@ -817,13 +818,15 @@ namespace DisenoColumnas.Diseño
             }
 
 
-
+            
             for (int col = 0; col < Form1.Proyecto_.ColumnaSelect.Alzados.Count; col++)
             {
                 DeterminarCoordAlzado(col + 1);
                 Form1.Proyecto_.ColumnaSelect.CalcularPesoAcero();
                 Form1.m_Despiece.Invalidate();
             }
+            Form1.Proyecto_.ColumnaSelect.ActualizarRefuerzo();
+            Form1.m_Informacion.MostrarAcero();
         }
 
         private void PasteClipboard(DataGridView data)

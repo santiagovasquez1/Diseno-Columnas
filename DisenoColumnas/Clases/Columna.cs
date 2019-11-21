@@ -603,7 +603,10 @@ namespace DisenoColumnas.Clases
                 }
                 catch { }
 
-                MenorAux = Alzados[i].Colum_Alzado.FindAll(X => X != null).ToList().Min(x=>x.NoBarra);
+                if (Alzados[i].Colum_Alzado.FindAll(X => X != null).ToList().Count != 0)
+                {
+                    MenorAux = Alzados[i].Colum_Alzado.FindAll(X => X != null).ToList().Min(x => x.NoBarra);
+                }
            
                 if (Dmenor > MenorAux)
                 {
@@ -612,7 +615,7 @@ namespace DisenoColumnas.Clases
                 }
 
             }
-            if (Alzados.Count != 0)
+            if (Alzados.Count != 0   && Dmenor!=0)
             {
                 List<int> No_BarraaDecidir = new List<int>();
 
@@ -969,7 +972,7 @@ namespace DisenoColumnas.Clases
 
         public void DeterminarCoordAlzado(int Col, Columna ColumnaSelect)
         {
-            float DisG = 0.2f; float r = 0.08f; float eF = Form1.Proyecto_.e_Fundacion;
+             float r = 0.05f; float eF = Form1.Proyecto_.e_Fundacion;
             float LdAd = 0.4f;
 
             Alzado a = ColumnaSelect.Alzados[Col];
@@ -1093,7 +1096,7 @@ namespace DisenoColumnas.Clases
                         H2 = ColumnaSelect.LuzLibre[i - 1];
                     }
                     catch { }
-
+                    float DisG = Form1.Proyecto_.G90[au.NoBarra];
                     #endregion Determinar Variables de Pisos Vecinos
 
                     if (au.NoStory == 1 && au.Tipo == "T1") //Si es Primer Piso y  Si Tiene Traslapo Tipo1
@@ -1419,17 +1422,26 @@ namespace DisenoColumnas.Clases
             string LayerCuadro = "FC_BORDE COLUMNA";
             string LayerTitiles = "FC_R-100";
 
-            float MaxB = -999999;
-            for (int i = 0; i < Seccions.Count; i++)
+            float MaxB1 = -999999;
+            float MaxH1 = -999999;
+
+
+            MaxB1 = Seccions.FindAll(y => y.Item1 != null).ToList().Max(x => x.Item1.B);
+
+            MaxH1  = Seccions.FindAll(y => y.Item1 != null).ToList().Max(x => x.Item1.H);
+
+            bool ExisteCambioenB = false;
+
+            for (int i = Seccions.Count - 1; i >= 0; i--)
             {
                 if (Seccions[i].Item1 != null)
                 {
-                    if (Seccions[i].Item1.B > MaxB)
-                    {
-                        MaxB = Seccions[i].Item1.B;
-                    }
+                    try { if (Seccions[i].Item1.B - Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
+                    catch { }
                 }
             }
+
+
 
             //Dibujar Cuadro Fundación
 
@@ -1450,7 +1462,16 @@ namespace DisenoColumnas.Clases
             //Dibujar Cada Entre Piso
             for (int i = LuzAcum.Count - 1; i >= 0; i--)
             {
-                float B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[i].Item1.B) / MaxB) + DPR;
+
+                float B_Draw;
+                if (ExisteCambioenB)
+                {
+                    B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[i].Item1.B) / MaxB1) + DPR;
+                }
+                else
+                {
+                    B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[i].Item1.H) / MaxH1) + DPR;
+                }
 
                 double[] Ver_Colum = new double[] {X,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H,
                                                    X,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H-LuzLibre[i],
@@ -1492,7 +1513,15 @@ namespace DisenoColumnas.Clases
                 {
                     if(Seccions[i].Item1.B != Seccions[i - 1].Item1.B)
                     {
-                        float B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i-1].Item1.B) / MaxB) + DPR;
+                        float B_Draw2;
+                        if (ExisteCambioenB)
+                        {
+                            B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i - 1].Item1.B) / MaxB1) + DPR;
+                        }
+                        else
+                        {
+                            B_Draw2 = ((Alzados[Alzados.Count - 1].DistX * Seccions[i].Item1.H) / MaxH1) + DPR;
+                        }
 
                         double[] LineaFaltante1 = new double[] { X+B_Draw, Y + LuzAcum[i],
                                                                  X+B_Draw2,Y+ LuzAcum[i]};
@@ -1528,9 +1557,27 @@ namespace DisenoColumnas.Clases
                 int IndiceI = Seccions.FindLastIndex(x => x.Item1.Material.FC == Resitencias[i]);
                 int IndiceF = Seccions.FindIndex(x => x.Item1.Material.FC == Resitencias[i]);
 
-                float B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.B) / MaxB) + DPR;
+                float B_Draw;
+                if (ExisteCambioenB)
+                {
+                    B_Draw  = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.B) / MaxB1) + DPR;
+                }
+                else
+                {
+                    B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.H) / MaxH1) + DPR;
+                }
+
                 double[] CotaFc1 = new double[] { X + B_Draw, Y + LuzAcum[IndiceI] - VigaMayor.Seccions[IndiceI].Item1.H - LuzLibre[IndiceI], 0 };
-                B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.B) / MaxB) + DPR;
+
+                if (ExisteCambioenB)
+                {
+                    B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.B) / MaxB1) + DPR;
+                }
+                else
+                {
+                    B_Draw = ((Alzados[Alzados.Count - 1].DistX * Seccions[IndiceI].Item1.H) / MaxH1) + DPR;
+                }
+ 
                 double[] CotaFc2 = new double[] { X + B_Draw, Y + LuzAcum[IndiceF], 0 };
                 string TextCota; float DesplazCota = 0.5f;
                 if (IndiceI - IndiceF > 2)
@@ -1554,8 +1601,18 @@ namespace DisenoColumnas.Clases
             #endregion Resitencia
 
             // Espesor  Losa Final
+            double B_DrawF;
 
-            double B_DrawF = ((Alzados[Alzados.Count - 1].DistX * Seccions[0].Item1.B) / MaxB) + DPR;
+            if (ExisteCambioenB)
+            {
+                B_DrawF = ((Alzados[Alzados.Count - 1].DistX * Seccions[0].Item1.B) / MaxB1) + DPR;
+            }
+            else
+            {
+                B_DrawF = ((Alzados[Alzados.Count - 1].DistX * Seccions[0].Item1.H) / MaxH1) + DPR;
+            }
+
+
             double[] VerLosa_Final = new double[] {X,Y+LuzAcum[0] -VigaMayor.Seccions[0].Item1.H,
                                                    X,Y+LuzAcum[0],
                                                    X+B_DrawF,Y+LuzAcum[0],
@@ -1584,7 +1641,15 @@ namespace DisenoColumnas.Clases
             float Altu_Names = 1f;
             DistCorrerTextB = 0.15 * (Dimensiones.Length + 1.5);
 
-            double B_DrawI = ((Alzados[Alzados.Count - 1].DistX * Seccions[Seccions.Count - 1].Item1.B) / MaxB) + DPR;
+            double B_DrawI;
+            if (ExisteCambioenB)
+            {
+                B_DrawI = ((Alzados[Alzados.Count - 1].DistX * Seccions[Seccions.Count - 1].Item1.B) / MaxB1) + DPR;
+            }
+            else
+            {
+                B_DrawI = ((Alzados[Alzados.Count - 1].DistX * Seccions[Seccions.Count - 1].Item1.H) / MaxH1) + DPR;
+            }
 
             P_XYZ = new double[] { X + B_DrawI / 2 - DistCorrerTextB / 2, Y - Altu_Names / 2 + 0.2, 0 };
 
@@ -1799,7 +1864,7 @@ namespace DisenoColumnas.Clases
                 double[] Coord_Refuerz; double[] P_XYZ_Text;
                 double[] P1_CotaT, P2_CotaT; float DesCota = -0.2f;
 
-                if (aux.Tipo == "T1" && aux.NoStory != 1 || aux.Tipo == "A" && aux.NoStory != 1)
+                if (aux.Tipo == "T1" && aux.NoStory != 1 || aux.Tipo == "A" && aux.NoStory != 1 || aux.NoStory == 1 && aux.UltPiso)
                 {
                     Ytext = Y + aux.Coord_Alzado_PB[0][1] + (aux.Coord_Alzado_PB[2][1] - aux.Coord_Alzado_PB[0][1]) / 2;
                 }
@@ -1858,7 +1923,7 @@ namespace DisenoColumnas.Clases
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0], Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0], Y + aux.Coord_Alzado_PB[2][1] };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText, Ytext, 0 };
 
-                    if (aux.NoStory != 1)
+                    if (aux.NoStory != 1 )
                     {
                         if (aux.Tipo == "A")
                         {
@@ -1927,10 +1992,19 @@ namespace DisenoColumnas.Clases
                     }
                     else
                     {
-                        DesCota = 0;
-                        P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
-                        P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
-                        FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
+                        if (aux.UltPiso & aux.Tipo == "A")
+                        {
+                            P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[2][0], Y + aux.Coord_Alzado_PB[2][1], 0 };
+                            P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[2][0], Y + aux.Hacum - aux.Hviga, 0 };
+                            FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
+                        }
+                        else
+                        {
+                            DesCota = 0;
+                            P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
+                            P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
+                            FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
+                        }
                     }
                 }
 
@@ -1943,9 +2017,9 @@ namespace DisenoColumnas.Clases
                 string NomeRefuerz = aux.CantBarras + "#" + aux.NoBarra + " L=";
                 double DistCorrerTextY = 0.15 * (NomeRefuerz.Length + 3);
                 double[] Coord_Refuerz; double[] P_XYZ_Text; double[] P1_CotaT, P2_CotaT;
-                double Ytext = Y + aux.Coord_Alzado_PB[0][1] + Form1.Proyecto_.e_Fundacion;
+                double Ytext = Y + aux.Hacum-aux.Hviga - aux.H_Stroy/2- DistCorrerTextY/2;
 
-                double XCota = X + aux.Coord_Alzado_PB[0][0];
+      
                 float DesCota = 0;
 
                 if (Alzados.Count == 2 && a.ID == 1)

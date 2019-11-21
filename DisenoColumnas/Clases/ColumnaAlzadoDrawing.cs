@@ -17,9 +17,22 @@ namespace DisenoColumnas.Clases
         {
             float[] P1_ = new float[] { 0, 0 }; var P1 = Vector<float>.Build.Dense(P1_);
 
-            var P2 = Vector<float>.Build.Dense(new float[] { columna.Seccions[columna.Seccions.Count - 1].Item1.B, 0 });
+            float Bdibujar = 0;
 
-            var P3 = Vector<float>.Build.Dense(new float[] { columna.Seccions[columna.Seccions.Count - 1].Item1.B, Form1.Proyecto_.e_Fundacion });
+            if(columna.Seccions[columna.Seccions.Count-1].Item1.B > columna.Seccions[columna.Seccions.Count - 1].Item1.H)
+            {
+                Bdibujar = columna.Seccions[columna.Seccions.Count - 1].Item1.B;
+
+            }
+            else
+            {
+                Bdibujar = columna.Seccions[columna.Seccions.Count - 1].Item1.H;
+            }
+
+
+            var P2 = Vector<float>.Build.Dense(new float[] { Bdibujar, 0 });
+
+            var P3 = Vector<float>.Build.Dense(new float[] { Bdibujar, Form1.Proyecto_.e_Fundacion });
 
             var P4 = Vector<float>.Build.Dense(new float[] { 0, Form1.Proyecto_.e_Fundacion });
 
@@ -52,19 +65,30 @@ namespace DisenoColumnas.Clases
             {
                 if (columna.Seccions[i].Item1 != null)
                 {
+
+                    float Bdibujar = 0;
+                    if (columna.Seccions[i].Item1.B > columna.Seccions[i].Item1.H)
+                    {
+                        Bdibujar = columna.Seccions[i].Item1.B;
+
+                    }
+                    else
+                    {
+                        Bdibujar = columna.Seccions[i].Item1.H;
+                    }
                     var P1 = Vector<float>.Build.Dense(new float[] { 0, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
 
-                    var P2 = Vector<float>.Build.Dense(new float[] { columna.Seccions[i].Item1.B, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
+                    var P2 = Vector<float>.Build.Dense(new float[] { Bdibujar, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
 
-                    var P3 = Vector<float>.Build.Dense(new float[] { columna.Seccions[i].Item1.B, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H - columna.LuzLibre[i] });
+                    var P3 = Vector<float>.Build.Dense(new float[] { Bdibujar, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H - columna.LuzLibre[i] });
 
                     var P4 = Vector<float>.Build.Dense(new float[] { 0, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H - columna.LuzLibre[i] });
 
                     //Para Vigas
 
                     var P5 = Vector<float>.Build.Dense(new float[] { 0, AlturaAcum });
-                    var P6 = Vector<float>.Build.Dense(new float[] { columna.Seccions[i].Item1.B, AlturaAcum });
-                    var P7 = Vector<float>.Build.Dense(new float[] { columna.Seccions[i].Item1.B, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
+                    var P6 = Vector<float>.Build.Dense(new float[] { Bdibujar, AlturaAcum });
+                    var P7 = Vector<float>.Build.Dense(new float[] { Bdibujar, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
                     var P8 = Vector<float>.Build.Dense(new float[] { 0, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
 
                     AlturaAcum = AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H - columna.LuzLibre[i];

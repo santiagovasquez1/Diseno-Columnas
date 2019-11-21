@@ -151,19 +151,21 @@ namespace DisenoColumnas
                 }
                 catch { }
                 m_Informacion = new Informacion();
-                try
-                {
-                    m_Informacion.Show(PanelContenedor);
-                }
-                catch { }
-                mAgregarAlzado = new AgregarAlzado();
-                try { mAgregarAlzado.Show(PanelContenedor); } catch { }
+                m_Informacion.Show(PanelContenedor);
 
-                mCuantiaVolumetrica = new CuantiaVolumetrica();
-                mCuantiaVolumetrica.Show(PanelContenedor);
+                mAgregarAlzado = new AgregarAlzado();
+                mAgregarAlzado.DockAreas = DockAreas.DockBottom;
+                mAgregarAlzado.Show(PanelContenedor);
+
+
                 mLcolumnas = LColumna;
+                mCuantiaVolumetrica = new CuantiaVolumetrica();
+                //   mCuantiaVolumetrica.Show(PanelContenedor);
+                
                 m_Despiece = new Despiece();
                 m_Despiece.Show(PanelContenedor);
+
+
                 CambiarSkins();
 
                 mFuerzasEnElmentos = new FuerzasEnElementos();
@@ -377,11 +379,15 @@ namespace DisenoColumnas
                 m_Despiece.Show(PanelContenedor);
                 CambiarSkins();
                 mCuantiaVolumetrica = new CuantiaVolumetrica();
-                mCuantiaVolumetrica.Show(PanelContenedor);
+              //  mCuantiaVolumetrica.Show(PanelContenedor);
 
                 mFuerzasEnElmentos = new FuerzasEnElementos();
 
                 mAgregarAlzado = new AgregarAlzado();
+                mAgregarAlzado.DockAreas = DockAreas.DockBottom;
+                mAgregarAlzado.Show(PanelContenedor);
+
+
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
                 LColumna.Items.Clear();
@@ -551,6 +557,20 @@ namespace DisenoColumnas
             };
 
             #endregion Diccionario ganchos a 135
+
+            #region Diccionario Ganchos a 90
+            Proyecto_.G90 = new Dictionary<int, float>
+            {
+                { 2, 0.09f },
+                { 3, 0.14f },
+                { 4, 0.18f },
+                { 5, 0.23f },
+                { 6, 0.27f },
+                { 7, 0.32f },
+                { 8, 0.36f },
+                { 10, 0.47f }
+            };
+            #endregion
         }
 
         private string AbrirE2K2009yCSV2009()
@@ -1094,7 +1114,8 @@ namespace DisenoColumnas
 
                                 if (Temp2.Exists(x => x.Equals(temp)) == true)
                                 {
-                                    seccion = Temp2.Find(x => x.Equals(temp));
+                                    seccion = FunctionsProject.DeepClone(Temp2.Find(x => x.Equals(temp)));
+                                    seccion.Name = temp.Name;
                                     seccion.B = temp.B;
                                     seccion.H = temp.H;
 
@@ -1948,7 +1969,16 @@ namespace DisenoColumnas
                     }
                 }
 
-                if (PanelContenedor.ActiveDocument == mAgregarAlzado | ExistFlotante)
+
+                foreach (DockContent Panels in PanelContenedor.Contents)
+                {
+                    if (Panels.Text == mAgregarAlzado.Text)
+                    {
+                        ExistFlotante = true;
+                    }
+                }
+
+                if (ExistFlotante)
                 {
                     Button_Agregar.Enabled = true;
                 }

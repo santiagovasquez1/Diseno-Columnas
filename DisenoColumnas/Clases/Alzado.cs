@@ -158,7 +158,7 @@ namespace DisenoColumnas.Clases
 
                 if (Coord_Alzado_PB_Escal.Count == 3)
                 {
-                    if (NoStory == 1)
+                    if (NoStory == 1 & UltPiso == false)
                     {
                         if (e.X >= Coord_Alzado_PB_Escal[2][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                                 e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])

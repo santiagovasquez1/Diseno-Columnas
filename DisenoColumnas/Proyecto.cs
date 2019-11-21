@@ -28,6 +28,7 @@ namespace DisenoColumnas
         public Dictionary<int, float> Ld_560;
         public Dictionary<int, float> G180;
         public Dictionary<int, float> G135;
+        public Dictionary<int, float> G90;
         public Dictionary<int, float> MasaNominalBarras;
 
         #endregion Diccionarios

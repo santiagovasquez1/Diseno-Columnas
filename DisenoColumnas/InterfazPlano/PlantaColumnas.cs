@@ -16,11 +16,17 @@ namespace DisenoColumnas.DefinirColumnas
             InitializeComponent();
             AutoScaleMode = AutoScaleMode.Dpi;
             Grafica.Invalidate();
+
+            if (Form1.Proyecto_.ColumnaSelect != null)
+            {
+                NoPiso = Form1.Proyecto_.Lista_Columnas[0].Seccions.Count - 1;
+            }
         }
 
         private void PlantaColumnas_Load(object sender, EventArgs e)
         {
             Grafica.Invalidate();
+          
         }
 
         private void Grafica_Paint(object sender, PaintEventArgs e)
@@ -115,11 +121,29 @@ namespace DisenoColumnas.DefinirColumnas
             }
 
 
-            string Nomb_PrimerPiso = Form1.Proyecto_.Lista_Columnas[0].Seccions[Form1.Proyecto_.Lista_Columnas[0].Seccions.Count - 1].Item2;
+            string Nomb_PrimerPiso = "";
+            float DisAcum = 0;
+
+             try
+            {
+                Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[NoPiso].Item2;
+            }
+            catch { Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count-1].Item2; }
+            try
+            {
+                DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[NoPiso];
+            }
+            catch { DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1]; }
+
+
+            Text = "Planta de Columnas - " + Nomb_PrimerPiso + "- Elevación: " + Math.Round(DisAcum,2);
             foreach (Viga viga in Form1.Proyecto_.Lista_Vigas)
             {
-                if (viga.Seccions[viga.Seccions.Count - 1].Item2 == Nomb_PrimerPiso)
-                    viga.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
+                for (int i = viga.Seccions.Count-1; i >= 0; i--)
+                {
+                    if (viga.Seccions[i].Item2 == Nomb_PrimerPiso)
+                        viga.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
+                }
             }
 
         }
@@ -197,6 +221,47 @@ namespace DisenoColumnas.DefinirColumnas
             }
             Grafica.Invalidate();
             Invalidate();
+        }
+
+
+        private int NoPiso = 0;
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (Form1.Proyecto_.ColumnaSelect != null)
+            {
+                if (NoPiso == 0)
+                {
+                    NoPiso = Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1;
+                }
+                else if (NoPiso > Form1.Proyecto_.ColumnaSelect.Seccions.Count-1)
+                {
+                    NoPiso = Form1.Proyecto_.ColumnaSelect.Seccions.Count-1;
+                }
+                else
+                {
+                    NoPiso -= 1;
+                }
+
+                Invalidate();
+            }
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (Form1.Proyecto_.ColumnaSelect != null)
+            {
+              
+                if (NoPiso >= Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1)
+                {
+                    NoPiso = 0;
+                }
+                else
+                {
+                    NoPiso += 1;
+                }
+
+                Invalidate();
+            }
         }
     }
 }
