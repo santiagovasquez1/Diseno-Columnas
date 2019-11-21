@@ -664,7 +664,7 @@ namespace DisenoColumnas.Clases
                     {
                         AceroMayorPorPiso[i] = (float)(resultadosETABs[i].AsTopMediumButton[0] - resultadosETABs[i].As_asignado[0]);
                     }
-                    if (AceroMayorPorPiso[i] < Form1.Proyecto_.AceroBarras[2])
+                    if (resultadosETABs[i].Porct_Refuerzo[0] <= 105f & resultadosETABs[i].Porct_Refuerzo[0]>=95f)
                     {
                         AceroMayorPorPiso[i] = 0;
                     }

@@ -114,27 +114,33 @@ namespace DisenoColumnas.DefinirColumnas
             float SY = (Height - 15) / (Math.Abs(MPY - MNY));
 
 
-
-            foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
-            {
-                columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
-            }
-
-
             string Nomb_PrimerPiso = "";
             float DisAcum = 0;
-
-             try
+            try
             {
                 Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[NoPiso].Item2;
             }
-            catch { Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count-1].Item2; }
+            catch { Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1].Item2; }
             try
             {
                 DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[NoPiso];
             }
             catch { DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1]; }
 
+            foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
+            {
+                for (int i = columna.Seccions.Count - 1; i >= 0; i--)
+                {
+                    if (columna.Seccions[i].Item2 == Nomb_PrimerPiso)
+                    {
+                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
+                    }
+                }
+
+
+                    
+            }
+            
 
             Text = "Planta de Columnas - " + Nomb_PrimerPiso + "- Elevación: " + Math.Round(DisAcum,2);
             foreach (Viga viga in Form1.Proyecto_.Lista_Vigas)
@@ -225,7 +231,9 @@ namespace DisenoColumnas.DefinirColumnas
 
 
         private int NoPiso = 0;
-        private void Button1_Click(object sender, EventArgs e)
+
+
+        private void Up()
         {
             if (Form1.Proyecto_.ColumnaSelect != null)
             {
@@ -233,9 +241,9 @@ namespace DisenoColumnas.DefinirColumnas
                 {
                     NoPiso = Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1;
                 }
-                else if (NoPiso > Form1.Proyecto_.ColumnaSelect.Seccions.Count-1)
+                else if (NoPiso > Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1)
                 {
-                    NoPiso = Form1.Proyecto_.ColumnaSelect.Seccions.Count-1;
+                    NoPiso = Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1;
                 }
                 else
                 {
@@ -246,11 +254,11 @@ namespace DisenoColumnas.DefinirColumnas
             }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void Down()
         {
             if (Form1.Proyecto_.ColumnaSelect != null)
             {
-              
+
                 if (NoPiso >= Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1)
                 {
                     NoPiso = 0;
@@ -262,6 +270,15 @@ namespace DisenoColumnas.DefinirColumnas
 
                 Invalidate();
             }
+        }
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Up();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            Down();
         }
 
         private void AllReadyColumnsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -276,12 +293,31 @@ namespace DisenoColumnas.DefinirColumnas
         private void Grafica_MouseMove(object sender, MouseEventArgs e)
         {
            
-            foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
-            {
-                Cursor cursor= Grafica.Cursor;
-                columna.MouseMove(e,ref cursor);
-                break;
+            //foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
+            //{
+            //    Cursor cursor= Grafica.Cursor;
+            //    columna.MouseMove(e,ref cursor);
+            //    break;
         
+            //}
+        }
+
+        private void PlantaColumnas_KeyDown(object sender, KeyEventArgs e)
+        {
+      
+        }
+
+        private void PlantaColumnas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case (char)Keys.Up:
+                    Up();
+                    break;
+                case (char)Keys.Down:
+                    Down();
+                    break;
+
             }
         }
     }

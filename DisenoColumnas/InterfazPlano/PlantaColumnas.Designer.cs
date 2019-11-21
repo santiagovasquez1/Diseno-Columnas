@@ -116,10 +116,13 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "PlantaColumnas";
             this.Text = "Planta de Columnas";
             this.Load += new System.EventHandler(this.PlantaColumnas_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.PlantaColumnas_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PlantaColumnas_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PlantaColumnas_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.Ayudas2.ResumeLayout(false);
             this.ResumeLayout(false);
