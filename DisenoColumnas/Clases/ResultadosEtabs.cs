@@ -72,29 +72,36 @@ namespace DisenoColumnas.Clases
         {
             As_asignado = new float[] { 0, 0, 0 };
             Porct_Refuerzo = new float[] { 0, 0, 0 };
-
             double Top = -999999; double Button = -99999; double medium = -999999;
-            for (int i = 0; i < As.Count - 6; i++)
+            try
             {
-                if (Button < As[i])
+             
+                for (int i = 0; i < As.Count - 6; i++)
                 {
-                    Button = As[i];
+                    if (Button < As[i])
+                    {
+                        Button = As[i];
+                    }
                 }
-            }
-            for (int i = As.Count - 6; i < As.Count - 4; i++)
-            {
-                if (medium < As[i])
+                for (int i = As.Count - 6; i < As.Count - 4; i++)
                 {
-                    medium = As[i];
+                    if (medium < As[i])
+                    {
+                        medium = As[i];
+                    }
                 }
-            }
 
-            for (int i = As.Count - 4; i < As.Count; i++)
-            {
-                if (Top < As[i])
+                for (int i = As.Count - 4; i < As.Count; i++)
                 {
-                    Top = As[i];
+                    if (Top < As[i])
+                    {
+                        Top = As[i];
+                    }
                 }
+            }
+            catch
+            {
+             
             }
             double[] AsTMB = new double[] { Top, medium, Button };
             AsTopMediumButton = AsTMB;

@@ -74,7 +74,10 @@ namespace DisenoColumnas.Clases
 
             Graphics graphics = e.Graphics;
 
-            graphics.DrawLine(Pens.Black, X_Colum1, Y_Colum1, X_Colum2, Y_Colum2);
+
+            Pen pen = new Pen(Color.FromArgb(108, 121, 180));
+
+            graphics.DrawLine(pen, X_Colum1, Y_Colum1, X_Colum2, Y_Colum2);
 
 
 

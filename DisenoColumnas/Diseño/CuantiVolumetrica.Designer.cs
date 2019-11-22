@@ -43,6 +43,7 @@
             this.NoRamasV_2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.NoRamas_H1 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.NoRamas_H2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
+            this.CantEstribos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Info_Es_Col)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +80,8 @@
             this.NoRamasV_1,
             this.NoRamasV_2,
             this.NoRamas_H1,
-            this.NoRamas_H2});
+            this.NoRamas_H2,
+            this.CantEstribos});
             this.Info_Es_Col.GridColor = System.Drawing.Color.DarkGray;
             this.Info_Es_Col.Location = new System.Drawing.Point(12, 32);
             this.Info_Es_Col.Name = "Info_Es_Col";
@@ -193,6 +195,11 @@
             this.NoRamas_H2.ReadOnly = true;
             this.NoRamas_H2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // CantEstribos
+            // 
+            this.CantEstribos.HeaderText = "Cantidad de Estribos";
+            this.CantEstribos.Name = "CantEstribos";
+            // 
             // CuantiaVolumetrica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,5 +237,6 @@
         private WeifenLuo.DataGridViewTextBoxColumnEx NoRamasV_2;
         private WeifenLuo.DataGridViewTextBoxColumnEx NoRamas_H1;
         private WeifenLuo.DataGridViewTextBoxColumnEx NoRamas_H2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantEstribos;
     }
 }

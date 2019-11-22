@@ -20,6 +20,9 @@ namespace DisenoColumnas.Clases
         public int NoRamasH1 { get; set; }
         public int NoRamasH2 { get; set; }
 
+
+        public float S_NC { get; set; }
+
         public void CalcularArea()
         {
             Area = Form1.Proyecto_.AceroBarras[NoEstribo];

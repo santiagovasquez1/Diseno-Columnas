@@ -116,17 +116,31 @@ namespace DisenoColumnas.DefinirColumnas
 
             string Nomb_PrimerPiso = "";
             float DisAcum = 0;
-            try
+            if (Form1.Proyecto_.ColumnaSelect != null)
             {
-                Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[NoPiso].Item2;
-            }
-            catch { Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1].Item2; }
-            try
-            {
-                DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[NoPiso];
-            }
-            catch { DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1]; }
 
+                try
+                {
+                    Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[NoPiso].Item2;
+                }
+                catch { Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1].Item2; }
+                try
+                {
+                    DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[NoPiso];
+                }
+                catch { DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1]; }
+
+
+            }
+
+            foreach (Viga viga in Form1.Proyecto_.Lista_Vigas)
+            {
+                for (int i = viga.Seccions.Count - 1; i >= 0; i--)
+                {
+                    if (viga.Seccions[i].Item2 == Nomb_PrimerPiso)
+                        viga.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
+                }
+            }
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 for (int i = columna.Seccions.Count - 1; i >= 0; i--)
@@ -140,17 +154,10 @@ namespace DisenoColumnas.DefinirColumnas
 
                     
             }
-            
+         
 
             Text = "Planta de Columnas - " + Nomb_PrimerPiso + "- Elevación: " + Math.Round(DisAcum,2);
-            foreach (Viga viga in Form1.Proyecto_.Lista_Vigas)
-            {
-                for (int i = viga.Seccions.Count-1; i >= 0; i--)
-                {
-                    if (viga.Seccions[i].Item2 == Nomb_PrimerPiso)
-                        viga.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
-                }
-            }
+  
 
         }
 
@@ -186,13 +193,14 @@ namespace DisenoColumnas.DefinirColumnas
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 ColumaSelectInPlantas = columna.MouseDown(e);
+                
                 Grafica.Invalidate();
 
                 if (ColumaSelectInPlantas != null)
                 {
                     Form1.Proyecto_.ColumnaSelect = ColumaSelectInPlantas;
                     Form1.mLcolumnas.Text = Form1.Proyecto_.ColumnaSelect.Name;
-
+                    NoPiso = Form1.Proyecto_.ColumnaSelect.LuzAcum.Count-1;
                     break;
                 }
         
@@ -230,7 +238,7 @@ namespace DisenoColumnas.DefinirColumnas
         }
 
 
-        private int NoPiso = 0;
+        public int NoPiso = 0;
 
 
         private void Up()

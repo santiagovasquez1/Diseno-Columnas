@@ -33,7 +33,6 @@ namespace DisenoColumnas.Diseño
                     MaxB = MaxH;
                 }
 
-
                 float SX = (Draw_Column.Width - 15) / MaxB;
 
                 float Altura = 0;
@@ -57,7 +56,6 @@ namespace DisenoColumnas.Diseño
         {
             Draw_Column.Invalidate();
             Draw_Colum_Alzado.Invalidate();
-
         }
 
         private void Draw_Colum_Alzado_Paint(object sender, PaintEventArgs e)
@@ -127,10 +125,7 @@ namespace DisenoColumnas.Diseño
                         e.Graphics.DrawLine(P_LD, 0, Height - YI - ColumnaSelect.LuzAcum[i] * SY, Width, Height - YI - ColumnaSelect.LuzAcum[i] * SY);
                         e.Graphics.DrawLine(P_LD, 0, Height - YI - (ColumnaSelect.LuzAcum[i] - ColumnaSelect.VigaMayor.Seccions[i].Item1.H) * SY, Width, Height - YI - (ColumnaSelect.LuzAcum[i] - ColumnaSelect.VigaMayor.Seccions[i].Item1.H) * SY);
                     }
-
-
                 }
-
 
                 // Mostrar Cajon - AutoCAD?
 
@@ -138,8 +133,6 @@ namespace DisenoColumnas.Diseño
                 {
                     MostrarCajon(XI, YI, e, SX, SY, Height);
                 }
-
-
 
                 //Graficar Alzado
                 for (int i = 0; i < ColumnaSelect.Alzados.Count; i++)
@@ -185,24 +178,16 @@ namespace DisenoColumnas.Diseño
             }
         }
 
-        private void MostrarCajon(float X, float Y, PaintEventArgs e,float SX,float SY,float HeighForm)
+        private void MostrarCajon(float X, float Y, PaintEventArgs e, float SX, float SY, float HeighForm)
         {
-
-
             float DPR = 0.6f;
 
             if (Form1.Proyecto_.ColumnaSelect != null & Form1.Proyecto_.ColumnaSelect.Alzados.Count != 0)
             {
-
                 Columna col = Form1.Proyecto_.ColumnaSelect;
-
-
-
-           
 
                 float MaxB1 = -999999;
                 float MaxH1 = -999999;
-
 
                 MaxB1 = col.Seccions.FindAll(y => y.Item1 != null).ToList().Max(x => x.Item1.B);
 
@@ -230,9 +215,8 @@ namespace DisenoColumnas.Diseño
                 e.Graphics.DrawLines(pen, Ver_Fund);
 
                 //Dibujar Cada Entre Piso
-                for (int i = col.LuzAcum.Count - 1; i >= 0; i--) 
+                for (int i = col.LuzAcum.Count - 1; i >= 0; i--)
                 {
-
                     float B_Draw;
                     if (ExisteCambioenB)
                     {
@@ -254,37 +238,33 @@ namespace DisenoColumnas.Diseño
                     {
                         //Lineas entre Piso
 
-                        e.Graphics.DrawLine(pen, X, HeighForm-Y - (col.LuzAcum[i] - col.VigaMayor.Seccions[i].Item1.H) * SY, X, HeighForm-Y - col.LuzAcum[i] * SY);
+                        e.Graphics.DrawLine(pen, X, HeighForm - Y - (col.LuzAcum[i] - col.VigaMayor.Seccions[i].Item1.H) * SY, X, HeighForm - Y - col.LuzAcum[i] * SY);
 
-                        e.Graphics.DrawLine(pen, X+ B_Draw*SX, HeighForm- Y- (col.LuzAcum[i] - col.VigaMayor.Seccions[i].Item1.H) * SY, X + B_Draw * SX, HeighForm-Y - col.LuzAcum[i] * SY);
-
+                        e.Graphics.DrawLine(pen, X + B_Draw * SX, HeighForm - Y - (col.LuzAcum[i] - col.VigaMayor.Seccions[i].Item1.H) * SY, X + B_Draw * SX, HeighForm - Y - col.LuzAcum[i] * SY);
                     }
-
 
                     try
                     {
-                        if (col.Seccions[i].Item1.B != col.Seccions[i - 1].Item1.B)
+                        if (ExisteCambioenB)
                         {
-                            float B_Draw2;
-                            if (ExisteCambioenB)
+                            if (col.Seccions[i].Item1.B != col.Seccions[i - 1].Item1.B)
                             {
-                                B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i - 1].Item1.B) / MaxB1) + DPR;
+                                float B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i - 1].Item1.B) / MaxB1) + DPR;
+
+                                e.Graphics.DrawLine(pen, X + B_Draw * SX, HeighForm - Y - col.LuzAcum[i] * SY, X + B_Draw2 * SX, HeighForm - Y - col.LuzAcum[i] * SY);
                             }
-                            else
-                            {
-                                B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i].Item1.H) / MaxH1) + DPR;
-                            }
-
-
-                            e.Graphics.DrawLine(pen, X + B_Draw * SX, HeighForm-Y - col.LuzAcum[i] * SY, X + B_Draw2 * SX, HeighForm- Y - col.LuzAcum[i] * SY);
-
-
                         }
+                        else
+                        {
+                            if (col.Seccions[i].Item1.H != col.Seccions[i - 1].Item1.H)
+                            {
+                                float B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i-1].Item1.H) / MaxH1) + DPR;
 
-
+                                e.Graphics.DrawLine(pen, X + B_Draw * SX, HeighForm - Y - col.LuzAcum[i] * SY, X + B_Draw2 * SX, HeighForm - Y - col.LuzAcum[i] * SY);
+                            }
+                        }
                     }
                     catch { }
-
                 }
 
                 float B_DrawF;
@@ -298,20 +278,14 @@ namespace DisenoColumnas.Diseño
                     B_DrawF = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[0].Item1.H) / MaxH1) + DPR;
                 }
 
-
                 PointF[] VerLosa_Final = new PointF[] {new PointF( X,HeighForm-Y-col.LuzAcum[0]*SY +col.VigaMayor.Seccions[0].Item1.H*SY),
                                                    new PointF(X,HeighForm-Y-col.LuzAcum[0]*SY),
                                                    new PointF(X+B_DrawF*SX,HeighForm-Y-col.LuzAcum[0]*SY),
                                                    new PointF(X+B_DrawF*SX,HeighForm-Y-col.LuzAcum[0]*SY+col.VigaMayor.Seccions[0].Item1.H *SY)};
 
-
                 e.Graphics.DrawPolygon(pen, VerLosa_Final);
-
             }
-
         }
-
-
 
         private void Ready_CheckBox_CheckStateChanged(object sender, EventArgs e)
         {
@@ -327,13 +301,11 @@ namespace DisenoColumnas.Diseño
 
         private void MostrarGrid_CheckedChanged(object sender, EventArgs e)
         {
-        
             Draw_Colum_Alzado.Invalidate();
         }
 
         private void MostrarCajonToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
-
             Draw_Colum_Alzado.Invalidate();
         }
     }

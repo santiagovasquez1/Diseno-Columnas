@@ -10,6 +10,7 @@ using DisenoColumnas.Secciones_Predefinidas;
 using DisenoColumnas.Utilidades;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -1186,18 +1187,9 @@ namespace DisenoColumnas
 
             //Crear Lista de Estribos;
 
-            foreach (Columna columna2 in Proyecto_.Lista_Columnas)
-            {
-                for (int i = 0; i < columna2.Seccions.Count; i++)
-                {
-                    Estribo estribo = null;
-                    if (columna2.Seccions[i].Item1 != null)
-                    {
-                        estribo = new Estribo(3);
-                    }
-                    columna2.estribos.Add(estribo);
-                }
-            }
+
+            //Depurar Columnas con Area Menor a 400cm2
+            Proyecto_.Lista_Columnas.RemoveAll(x => x.Seccions[x.Seccions.Count - 1].Item1.Area < 0.04f);
         }
 
         private void CrearObjetosNecesarios2009()
@@ -1673,20 +1665,11 @@ namespace DisenoColumnas
                 }
             }
 
-            //Crear Lista de Estribos;
 
-            foreach (Columna columna2 in Proyecto_.Lista_Columnas)
-            {
-                for (int i = 0; i < columna2.Seccions.Count; i++)
-                {
-                    Estribo estribo = null;
-                    if (columna2.Seccions[i].Item1 != null)
-                    {
-                        estribo = new Estribo(3);
-                    }
-                    columna2.estribos.Add(estribo);
-                }
-            }
+     
+            //Depurar Columnas con Area Menor a 400cm2
+            Proyecto_.Lista_Columnas.RemoveAll(x => x.Seccions[x.Seccions.Count - 1].Item1.Area < 0.04f);
+
         }
 
         private void PlantaDeColumnasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1871,6 +1854,15 @@ namespace DisenoColumnas
                     }
                 }
 
+                foreach (DockContent Panels in PanelContenedor.Contents)
+                {
+                    if (Panels.Text == mCuantiaVolumetrica.Text)
+                    {
+                        ExistFlotante = true;
+                    }
+                }
+
+
                 if (PanelContenedor.ActiveDocument == mCuantiaVolumetrica | ExistFlotante)
                 {
                     Cuantia_Vol_Button.Enabled = true;
@@ -1922,6 +1914,7 @@ namespace DisenoColumnas
                 columnasIgualesToolStripMenuItem.Enabled = true;
                 fuerzasToolStripMenuItem.Enabled = true;
                 despieceToolStripMenuItem.Enabled = true;
+                resultadosToolStripMenuItem.Enabled = true;
             }
             if (WindowState == FormWindowState.Normal)
             {
@@ -2101,6 +2094,17 @@ namespace DisenoColumnas
             double D_Pro = Math.Ceiling(Delta);
             bool HabilitarReporte = false;
 
+
+            foreach(Columna col in Lista_ColumnasDiseñar)
+            {
+                col.CantEstribos = new List<int[]>();
+                for (int i= col.LuzAcum.Count-1; i >= 0; i--)
+                {
+                    col.CantEstribos.Add(new int[] { 0, 0, 0, 0 });
+                }
+            }
+
+
             foreach (Columna col in Lista_ColumnasDiseñar)
             {
                 col.AgregarAlzadoSugerido();
@@ -2113,11 +2117,16 @@ namespace DisenoColumnas
                     Cuadro_diseño.Label_Progress.Text = "✘ Columna: " + col.Name;
                     HabilitarReporte = true;
                 }
-                Cuadro_diseño.Canti_Colum.Text = $"{ CantCol}/{Lista_ColumnasDiseñar.Count}";
+                      Cuadro_diseño.Canti_Colum.Text = $"{ CantCol}/{Lista_ColumnasDiseñar.Count}";
                 CantCol += 1;
                 Cuadro_diseño.BarraPersonalizada2.Width += (int)D_Pro;
                 Cuadro_diseño.Refresh();
             }
+
+
+           
+
+
             Cuadro_diseño.OK.Enabled = true;
             Cuadro_diseño.Reporte_RichText.Text = "-------------------------------------------------------------------------------------------";
             Cuadro_diseño.Reporte_RichText.Text += "\n" + "                                 Columnas No Diseñadas:";
@@ -2127,6 +2136,10 @@ namespace DisenoColumnas
 
             foreach (Columna col in Lista_ColumnasDiseñar)
             {
+                for (int i = col.LuzAcum.Count - 1; i >= 0; i--)
+                {
+                    col.CantidadEstribos(i);
+                }
                 if (col.Alzados.Count == 0)
                 {
                     Cuadro_diseño.Reporte_RichText.Text += "\n" + " - " + col.Name;
@@ -2144,7 +2157,7 @@ namespace DisenoColumnas
 
             DialogResult dialogResult;
             dialogResult = MessageBox.Show("¿El alzado generado será el definitivo?", Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
+            
             if (dialogResult == DialogResult.Yes)
             {
                 Lista_ColumnasDiseñar.ForEach(x => x.Ready = true);
@@ -2157,6 +2170,86 @@ namespace DisenoColumnas
             {
                 m_PlantaColumnas.Invalidate();
             }
+
+
+
+            //"Mostrar Reporte"
+            List<string> Reporte = new List<string>();
+            Reporte.Add("-----REPORTE DE DISEÑO -------"); Reporte.Add("");
+
+            Reporte.Add("Columna\tPiso\tObservación");
+
+            foreach(Columna col in Lista_ColumnasDiseñar)
+            {
+
+                for(int i=0; i < col.resultadosETABs.Count; i++)
+                {
+                    string LineReporte = $"{col.Name}\t{col.Seccions[i].Item2}\t";
+
+                    if (col.resultadosETABs[i].Porct_Refuerzo[0]> 115f)
+                    {
+                        LineReporte += "|Top - > 115%|";
+                    }
+                    else if (col.resultadosETABs[i].Porct_Refuerzo[0] < 95f)
+                    {
+                        LineReporte += "|Top - < 95%|";
+                    }
+                    else
+                    {
+                        LineReporte += "|Top - ✓OK|";
+
+                    }
+
+     
+                    if (col.resultadosETABs[i].Porct_Refuerzo[1] > 105f)
+                    {
+                        LineReporte += " |Medium - > 105%|";
+                    }
+                    else if (col.resultadosETABs[i].Porct_Refuerzo[1] < 95f)
+                    {
+                        LineReporte += " |Medium - < 95%|";
+                    }
+                    else
+                    {
+                        LineReporte += " |Medium - ✓OK|";
+
+                    }
+
+                    if (col.resultadosETABs[i].Porct_Refuerzo[2] > 115f)
+                    {
+                        LineReporte += "  |Bottom - > 115%|";
+                    }
+                    else if (col.resultadosETABs[i].Porct_Refuerzo[2] < 95f)
+                    {
+                        LineReporte += "  |Bottom - < 95%|";
+                    }
+                    else
+                    {
+                        LineReporte += " |Bottom - ✓OK|";
+
+                    }
+
+                    Reporte.Add(LineReporte);
+
+                }
+            }
+
+            Reporte.Add(""); Reporte.Add("---------------------------------------");  Reporte.Add("Diseño de Columnas"); Reporte.Add("Versión 1.0");
+            Reporte.Add("© 2019 efe- Prima – Ce"); Reporte.Add("Todos los Derechos Reservados.");
+            string Ruta_ArchivoTemporal = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporte.txt");
+
+
+            StreamWriter writer = new StreamWriter(Ruta_ArchivoTemporal);
+            for(int i=0; i < Reporte.Count; i++)
+            {
+                writer.WriteLine(Reporte[i]);
+            }
+            writer.Close();
+            Process Proc = new Process();
+            Proc.StartInfo.FileName = Ruta_ArchivoTemporal;
+            Proc.Start();
+
+
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -2416,6 +2509,13 @@ namespace DisenoColumnas
 
         private void PanelContenedor_ActiveContentChanged(object sender, EventArgs e)
         {
+        }
+
+        private void ResultadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Resultados.Resultados_ resultados_ = new Resultados.Resultados_();
+            resultados_.ShowDialog();
+
         }
     }
 }

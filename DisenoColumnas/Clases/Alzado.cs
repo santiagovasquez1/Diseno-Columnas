@@ -97,11 +97,11 @@ namespace DisenoColumnas.Clases
                     e.Graphics.DrawLines(new Pen(brush, 2), Cord_Escala.ToArray());
                 }
 
-                if (FormBarra == null)
+                if (FormBarra == null )
                 {
                     FormBarra = new Form_Barra();
                 }
-
+         
                 FormBarra.Location = new Point((int)MouseX, (int)MouseY);
                 FormBarra.CantBarras.Text = Convert.ToString(CantBarras);
                 FormBarra.D_Barra.Text = Convert.ToString(NoBarra);

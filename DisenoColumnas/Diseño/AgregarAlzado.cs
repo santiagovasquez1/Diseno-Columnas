@@ -263,16 +263,23 @@ namespace DisenoColumnas.Diseño
                 }
                 else
                 {
+                    
                     ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = null;
                     D_Alzado.Rows[IndiceR].Cells[IndiceC].Value = "";
+                    ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
+                    Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
+                    Form1.m_Despiece.Invalidate();
                 }
             }
             else if (IndiceR < ColumnaSelect.LuzLibre.Count)
             {
                 ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = null;
                 DeterminarCoordAlzado(IndiceC);
+                ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
                 ColumnaSelect.ActualizarRefuerzo();
                 Form1.m_Informacion.MostrarAcero();
+                Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
+                Form1.m_Despiece.Invalidate();
             }
        
         }
