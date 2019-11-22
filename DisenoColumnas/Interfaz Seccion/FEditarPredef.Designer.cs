@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbPeso = new System.Windows.Forms.GroupBox();
+            this.lBase = new System.Windows.Forms.Label();
             this.lPesoEstribo = new System.Windows.Forms.Label();
             this.gbCuantivaVol = new System.Windows.Forms.GroupBox();
             this.cbEstribo = new System.Windows.Forms.ComboBox();
@@ -55,8 +56,8 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Label6 = new System.Windows.Forms.Label();
             this.Button_Cerrar = new System.Windows.Forms.Button();
+            this.Label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbPeso.SuspendLayout();
@@ -105,18 +106,28 @@
             // 
             // gbPeso
             // 
+            this.gbPeso.Controls.Add(this.lBase);
             this.gbPeso.Controls.Add(this.lPesoEstribo);
             this.gbPeso.Location = new System.Drawing.Point(599, 31);
             this.gbPeso.Name = "gbPeso";
             this.gbPeso.Size = new System.Drawing.Size(174, 78);
             this.gbPeso.TabIndex = 8;
             this.gbPeso.TabStop = false;
-            this.gbPeso.Text = "Peso Estribos (kg/m)";
+            this.gbPeso.Text = "Info refuerzo";
+            // 
+            // lBase
+            // 
+            this.lBase.AutoSize = true;
+            this.lBase.Location = new System.Drawing.Point(6, 60);
+            this.lBase.Name = "lBase";
+            this.lBase.Size = new System.Drawing.Size(40, 15);
+            this.lBase.TabIndex = 1;
+            this.lBase.Text = "Labe1";
             // 
             // lPesoEstribo
             // 
             this.lPesoEstribo.AutoSize = true;
-            this.lPesoEstribo.Location = new System.Drawing.Point(6, 31);
+            this.lPesoEstribo.Location = new System.Drawing.Point(6, 26);
             this.lPesoEstribo.Name = "lPesoEstribo";
             this.lPesoEstribo.Size = new System.Drawing.Size(102, 15);
             this.lPesoEstribo.TabIndex = 0;
@@ -383,18 +394,6 @@
             this.panel2.TabIndex = 14;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
-            // Label6
-            // 
-            this.Label6.AutoSize = true;
-            this.Label6.BackColor = System.Drawing.Color.Transparent;
-            this.Label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label6.ForeColor = System.Drawing.Color.Black;
-            this.Label6.Location = new System.Drawing.Point(3, 4);
-            this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(130, 15);
-            this.Label6.TabIndex = 22;
-            this.Label6.Text = "Secciones predefinidas";
-            // 
             // Button_Cerrar
             // 
             this.Button_Cerrar.BackColor = System.Drawing.Color.Gray;
@@ -413,6 +412,18 @@
             this.Button_Cerrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Button_Cerrar.UseVisualStyleBackColor = false;
             this.Button_Cerrar.Click += new System.EventHandler(this.Button_Cerrar_Click);
+            // 
+            // Label6
+            // 
+            this.Label6.AutoSize = true;
+            this.Label6.BackColor = System.Drawing.Color.Transparent;
+            this.Label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label6.ForeColor = System.Drawing.Color.Black;
+            this.Label6.Location = new System.Drawing.Point(3, 4);
+            this.Label6.Name = "Label6";
+            this.Label6.Size = new System.Drawing.Size(130, 15);
+            this.Label6.TabIndex = 22;
+            this.Label6.Text = "Secciones predefinidas";
             // 
             // FEditarPredef
             // 
@@ -477,5 +488,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox gbPeso;
         private System.Windows.Forms.Label lPesoEstribo;
+        private System.Windows.Forms.Label lBase;
     }
 }

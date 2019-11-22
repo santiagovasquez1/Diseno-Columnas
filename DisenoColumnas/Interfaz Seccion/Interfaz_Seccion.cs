@@ -102,6 +102,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
                 seccion.Dibujo_Seccion(g, EscalaX, EscalaY, Over);
                 seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
+                seccion.CalcNoDBarras();
                 Dibujo_Refuerzo(g, seccion);
 
                 if (seccion.Estribo == null)
@@ -438,6 +439,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Add_Texto_Seccion(Graphics g, ISeccion seccioni)
         {
             float TamanoFuente = 0;
+            string Ref_Seccion = "Refuerzo Sección :";
             SolidBrush br = new SolidBrush(Color.Black);
             PointF PS = new PointF();
 
@@ -448,6 +450,43 @@ namespace DisenoColumnas.Interfaz_Seccion
             PS.Y = (-Grafica.Height / 2) + 30;
 
             g.DrawString(seccioni.ToString(), Fuente, br, PS);
+
+            #region Texto refuerzo
+
+            PS.Y += 20;
+
+            for (int i = 0; i < seccioni.No_D_Barra.Count; i++)
+            {
+                if (i == seccioni.No_D_Barra.Count - 1)
+                {
+                    Ref_Seccion += $"{seccioni.No_D_Barra[i].Item1}#{seccioni.No_D_Barra[i].Item2}";
+                }
+                else
+                {
+                    Ref_Seccion += $"{seccioni.No_D_Barra[i].Item1}#{seccioni.No_D_Barra[i].Item2}+";
+                }
+            }
+
+            g.DrawString(Ref_Seccion, Fuente, br, PS);
+
+            #endregion Texto refuerzo
+
+            #region Info Estribos
+
+            PS.Y += 20;
+
+            Ref_Seccion = seccioni.Estribo.ToString();
+            g.DrawString(Ref_Seccion, Fuente, br, PS);
+
+            PS.Y += 20;
+            Ref_Seccion = $"Ramas dir X: {seccioni.Estribo.NoRamasV1 + seccioni.Estribo.NoRamasV2}";
+            g.DrawString(Ref_Seccion, Fuente, br, PS);
+
+            PS.Y += 20;
+            Ref_Seccion = $"Ramas dir Y: {seccioni.Estribo.NoRamasH1 + seccioni.Estribo.NoRamasH2}";
+            g.DrawString(Ref_Seccion, Fuente, br, PS);
+
+            #endregion Info Estribos
         }
 
         private void Dibujo_Refuerzo(Graphics g, ISeccion seccioni)

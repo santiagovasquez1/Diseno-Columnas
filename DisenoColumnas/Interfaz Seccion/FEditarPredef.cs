@@ -20,6 +20,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             FInterfaz_ = pInterfaz;
             Seccion = pSeccion;
+            Seccion.CalcNoDBarras();
             gde = pgde;
             InitializeComponent();
         }
@@ -32,6 +33,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void FEditarPredef_Load(object sender, EventArgs e)
         {
+            string Ref_Base = "Refuerzo Base ";
             if (Seccion.Shape == TipodeSeccion.Rectangular | Seccion.Shape == TipodeSeccion.Circle)
             {
                 groupBox2.Text = "Ramas Sección";
@@ -51,6 +53,21 @@ namespace DisenoColumnas.Interfaz_Seccion
             cbEstribo.Text = "#" + Seccion.Estribo.NoEstribo;
             nudSep.Value = (decimal)Seccion.Estribo.Separacion;
             Cargar_Datos(dataGridView1);
+
+            for (int i = 0; i < Seccion.No_D_Barra.Count; i++)
+            {
+                if (i == Seccion.No_D_Barra.Count-1)
+                {
+                    Ref_Base += $"{Seccion.No_D_Barra[i].Item1}#{Seccion.No_D_Barra[i].Item2}";
+                }
+                else
+                {
+                    Ref_Base += $"{Seccion.No_D_Barra[i].Item1}#{Seccion.No_D_Barra[i].Item2}+";
+                }
+            }
+
+            lBase.Text = Ref_Base;
+            lBase.Update();
         }
 
         private void Cuantia_Volumetrica()
@@ -107,13 +124,13 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void cbEstribo_SelectedIndexChanged(object sender, EventArgs e)
         {
             Cuantia_Volumetrica();
-            lPesoEstribo.Text = Math.Round(Peso_Estribos(), 2).ToString() + " kg/m";
+            lPesoEstribo.Text = "Peso estribos conf :" + Math.Round(Peso_Estribos(), 2).ToString() + " kg/m";
         }
 
         private void nudSep_ValueChanged(object sender, EventArgs e)
         {
             Cuantia_Volumetrica();
-            lPesoEstribo.Text = Math.Round(Peso_Estribos(), 2).ToString() + " kg/m";
+            lPesoEstribo.Text = "Peso estribos conf :" + Math.Round(Peso_Estribos(), 2).ToString() + " kg/m";
         }
 
         private double Peso_Estribos()
@@ -269,5 +286,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             FInterfaz_.Invalidate();
             Close();
         }
+
     }
 }
