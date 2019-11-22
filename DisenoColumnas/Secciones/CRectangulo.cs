@@ -230,6 +230,7 @@ namespace DisenoColumnas.Secciones
             p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
 
             if (p_error >= 1.05)
+
             {
                 if (Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras > As_min)
                 {
@@ -244,13 +245,9 @@ namespace DisenoColumnas.Secciones
 
                 X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
 
-                if (Estribo.NoRamasV1 % 2 == 0)
+                if (X2 % 2 != 0)
                 {
                     X2 = FunctionsProject.Redondear_Decimales(X2, 4);
-                }
-                else
-                {
-                    X2 += 1;
                 }
 
                 X1 = Num_Barras - X2;
@@ -269,14 +266,17 @@ namespace DisenoColumnas.Secciones
             CapasX = Estribo.NoRamasV1;
             CapasY = (Num_Barras - 2 * (Estribo.NoRamasV1 - 2)) / 2;
 
-            DeltaX = (B * 100 - 2 * recub) / (CapasX - 1);
-            DeltaY = (H * 100 - 2 * recub) / (CapasY - 1);
-
-            while (DeltaY <= 12)
+            if (Num_Barras != Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2))
             {
-                CapasX += 1;
-                CapasY -= 1;
+                DeltaX = (B * 100 - 2 * recub) / (CapasX - 1);
                 DeltaY = (H * 100 - 2 * recub) / (CapasY - 1);
+
+                while (DeltaY <= 12)
+                {
+                    CapasX += 1;
+                    CapasY -= 1;
+                    DeltaY = (H * 100 - 2 * recub) / (CapasY - 1);
+                }
             }
 
             int[] Aux_Refuerzos = new int[Num_Barras];

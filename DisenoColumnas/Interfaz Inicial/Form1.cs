@@ -2009,6 +2009,7 @@ namespace DisenoColumnas
 
             List<ISeccion> Temp = new List<ISeccion>();
             ISeccion Temp_seccion = null;
+            ISeccion Temp_seccion2 = null;
             float FD1 = 0; float FD2 = 0;
             string piso = "";
 
@@ -2027,35 +2028,47 @@ namespace DisenoColumnas
 
             foreach (Columna Col in Lista_ColumnasDiseñar)
             {
+                //Seleccionar Diferentes secciones
+
+                var Secciones_col = Col.Seccions.Select(x => x.Item1).Distinct().ToList();
+                List<ISeccion> Secciones_def = new List<ISeccion>();
+
+                Secciones_tipicas(Secciones_col, Secciones_def);
+
                 for (int i = Col.Seccions.Count - 1; i >= 0; i--)
                 {
                     //Asignar seccion predefinida a las columnas
                     piso = Col.Seccions[i].Item2;
+                    Temp_seccion = FunctionsProject.DeepClone (Secciones_def.Find(x => x.Area == Col.Seccions[i].Item1.Area));
 
-                    if (Temp.Exists(x => x.Equals(Col.Seccions[i].Item1)) == true)
+                    if (Temp.Exists(x => x.Equals(Temp_seccion)) == true)
                     {
-                        Temp_seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Col.Seccions[i].Item1)));
-                        Temp_seccion.B = Col.Seccions[i].Item1.B;
-                        Temp_seccion.H = Col.Seccions[i].Item1.H;
+                        Temp_seccion2 = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Temp_seccion)));
+                        Temp_seccion2.B = Temp_seccion.B;
+                        Temp_seccion2.H = Temp_seccion.H;
+                        Temp_seccion2.Material = Col.Seccions[i].Item1.Material;
 
-                        if (Temp_seccion.Refuerzos.Count > 0 & Temp_seccion.B > Temp_seccion.H)
+                        if (Temp_seccion2.Refuerzos.Count > 0 & Temp_seccion2.B > Temp_seccion2.H)
                         {
                             double[] Rotacion;
 
-                            foreach (CRefuerzo refuerzo in Temp_seccion.Refuerzos)
+                            foreach (CRefuerzo refuerzo in Temp_seccion2.Refuerzos)
                             {
                                 Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
                                 refuerzo.Coord[0] = Rotacion[0];
                                 refuerzo.Coord[1] = Rotacion[1];
                             }
                         }
-                        Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion, piso);
+                        Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion2, piso);
                     }
                     else
                     {
-                        Col.Seccions[i].Item1.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
-                        Col.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
-                        Col.Seccions[i].Item1.Refuerzo_Base(Proyecto_.R);
+                        Temp_seccion.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
+                        Temp_seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
+                        Temp_seccion.Refuerzo_Base(Proyecto_.R);
+                        Temp_seccion.Material = Col.Seccions[i].Item1.Material;
+                        Temp_seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
+                        Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion, piso);
                     }
 
                     string[] Base = new string[0];
@@ -2156,6 +2169,19 @@ namespace DisenoColumnas
             if (m_PlantaColumnas != null)
             {
                 m_PlantaColumnas.Invalidate();
+            }
+        }
+
+        private static void Secciones_tipicas(List<ISeccion> Secciones_col, List<ISeccion> Secciones_def)
+        {
+            var Agrupacion_areas = from p in Secciones_col
+                                   group p by p.Area into g
+                                   select new { seccionI = g.Select(x1 => x1) };
+
+            foreach (var aux in Agrupacion_areas)
+            {
+                var Fc_max = aux.seccionI.ToList().Select(x => x.Material.FC).Max();
+                Secciones_def.Add(aux.seccionI.ToList().Find(x => x.Material.FC == Fc_max));
             }
         }
 

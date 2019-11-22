@@ -169,6 +169,7 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             AuxMacs.Add("64006AFC2C84");
             AuxMacs.Add("309C2328F381");
             AuxMacs.Add("E0D55E66DDBF");
+            AuxMacs.Add("309C2328F34A");
             return AuxMacs;
         }
     }
