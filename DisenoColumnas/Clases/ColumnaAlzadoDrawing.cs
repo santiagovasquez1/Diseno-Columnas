@@ -17,9 +17,19 @@ namespace DisenoColumnas.Clases
         {
             float[] P1_ = new float[] { 0, 0 }; var P1 = Vector<float>.Build.Dense(P1_);
 
-            float Bdibujar = 0;
+            float Bdibujar;
 
-            if(columna.Seccions[columna.Seccions.Count-1].Item1.B > columna.Seccions[columna.Seccions.Count - 1].Item1.H)
+            bool ExisteCambioenB = false;
+
+            for (int i = columna.Seccions.Count - 1; i >= 0; i--)
+            {
+                if (columna.Seccions[i].Item1 != null)
+                {
+                    try { if (columna.Seccions[i].Item1.B - columna.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
+                    catch { }
+                }
+            }
+            if (ExisteCambioenB)
             {
                 Bdibujar = columna.Seccions[columna.Seccions.Count - 1].Item1.B;
 
@@ -61,13 +71,27 @@ namespace DisenoColumnas.Clases
             }
             AlturaAcum += H_S;
 
+    
+
+            bool ExisteCambioenB = false;
+
+            for (int i = columna.Seccions.Count - 1; i >= 0; i--)
+            {
+                if (columna.Seccions[i].Item1 != null)
+                {
+                    try { if (columna.Seccions[i].Item1.B - columna.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
+                    catch { }
+                }
+            }
+     
+
             for (int i = 0; i < columna.LuzLibre.Count; i++)
             {
                 if (columna.Seccions[i].Item1 != null)
                 {
 
-                    float Bdibujar = 0;
-                    if (columna.Seccions[i].Item1.B > columna.Seccions[i].Item1.H)
+                    float Bdibujar;
+                    if (ExisteCambioenB)
                     {
                         Bdibujar = columna.Seccions[i].Item1.B;
 
@@ -76,6 +100,7 @@ namespace DisenoColumnas.Clases
                     {
                         Bdibujar = columna.Seccions[i].Item1.H;
                     }
+
                     var P1 = Vector<float>.Build.Dense(new float[] { 0, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
 
                     var P2 = Vector<float>.Build.Dense(new float[] { Bdibujar, AlturaAcum - columna.VigaMayor.Seccions[i].Item1.H });
