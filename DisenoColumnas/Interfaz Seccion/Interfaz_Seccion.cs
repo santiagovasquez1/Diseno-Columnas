@@ -84,10 +84,21 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Grafica_Paint(object sender, PaintEventArgs e)
         {
             int X, Y;
+            //EscalaX = Grafica.Width / (2 * Xmax);
+            //EscalaY = Grafica.Height / (2 * Ymax);
 
-            EscalaX = Grafica.Width / (2 * Xmax);
-            EscalaY = Grafica.Height / (2 * Ymax);
-            EscalaR = 0.30 * EscalaX * EscalaY;
+            if (Grafica.Width / (2 * Xmax) < Grafica.Height / (2 * Ymax))
+            {
+                EscalaX = Grafica.Width / (2 * Xmax);
+                EscalaY = EscalaX;
+            }
+            else
+            {
+                EscalaX = Grafica.Height / (2 * Ymax);
+                EscalaY = EscalaX;
+            }
+
+            EscalaR = EscalaX;
 
             if (seccion != null)
             {
@@ -392,8 +403,8 @@ namespace DisenoColumnas.Interfaz_Seccion
             float Y = e.Y - Grafica.Height / 2;
             double X_r, Y_r;
 
-            X_r = Xmax * X / (Grafica.Width / 2);
-            Y_r = Ymax * Y / (Grafica.Height / 2);
+            X_r = X / EscalaX;
+            Y_r = Y / EscalaX;
 
             label1.Text = "X:" + Math.Round(X_r, 2) + " Y:" + Math.Round(-Y_r, 2);
             label1.Update();
@@ -480,11 +491,11 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             PS.Y += 20;
 
-            Ref_Seccion = $"Ramas dir X: {seccioni.Estribo.NoRamasH1 + seccioni.Estribo.NoRamasH2}";
+            Ref_Seccion = $"Ramas dir X: {seccioni.Estribo.NoRamasV1 + seccioni.Estribo.NoRamasV2}";
             g.DrawString(Ref_Seccion, Fuente, br, PS);
 
             PS.Y += 20;
-            Ref_Seccion = $"Ramas dir Y: {seccioni.Estribo.NoRamasV1 + seccioni.Estribo.NoRamasV2}";
+            Ref_Seccion = $"Ramas dir Y: {seccioni.Estribo.NoRamasH1 + seccioni.Estribo.NoRamasH2}";
             g.DrawString(Ref_Seccion, Fuente, br, PS);
 
             #endregion Info Estribos
