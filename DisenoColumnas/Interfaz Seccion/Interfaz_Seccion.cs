@@ -479,6 +479,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             g.DrawString(Ref_Seccion, Fuente, br, PS);
 
             PS.Y += 20;
+
             Ref_Seccion = $"Ramas dir X: {seccioni.Estribo.NoRamasV1 + seccioni.Estribo.NoRamasV2}";
             g.DrawString(Ref_Seccion, Fuente, br, PS);
 

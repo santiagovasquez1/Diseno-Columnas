@@ -182,7 +182,7 @@ namespace DisenoColumnas.Secciones
                 Indice_min = P_As1.FindIndex(x => x == P_As1.Min());
                 Estribo = new Estribo(3)
                 {
-                    Separacion = Convert.ToSingle(Sep[Indice_min])
+                    Separacion = Convert.ToSingle(Sep[Indice_min]),                    
                 };
             }
             else
@@ -193,6 +193,8 @@ namespace DisenoColumnas.Secciones
                     Separacion = Convert.ToSingle(Sep[Indice_min])
                 };
             }
+
+            Cuanti_Vol(FD1, FD2, r, 4220);
         }
 
         public void Refuerzo_Base(double recub)
