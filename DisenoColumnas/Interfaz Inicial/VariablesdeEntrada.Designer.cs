@@ -46,6 +46,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.R_Box = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.P_R = new System.Windows.Forms.TextBox();
+            this.e_acabados = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -99,7 +103,7 @@
             this.Label7.BackColor = System.Drawing.Color.Transparent;
             this.Label7.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label7.ForeColor = System.Drawing.Color.Black;
-            this.Label7.Location = new System.Drawing.Point(11, 26);
+            this.Label7.Location = new System.Drawing.Point(11, 55);
             this.Label7.Name = "Label7";
             this.Label7.Size = new System.Drawing.Size(137, 15);
             this.Label7.TabIndex = 26;
@@ -110,7 +114,7 @@
             this.T_arranque.BackColor = System.Drawing.Color.White;
             this.T_arranque.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_arranque.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_arranque.Location = new System.Drawing.Point(204, 18);
+            this.T_arranque.Location = new System.Drawing.Point(204, 47);
             this.T_arranque.Name = "T_arranque";
             this.T_arranque.Size = new System.Drawing.Size(66, 23);
             this.T_arranque.TabIndex = 5;
@@ -120,7 +124,7 @@
             this.T_Vf.BackColor = System.Drawing.Color.White;
             this.T_Vf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_Vf.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_Vf.Location = new System.Drawing.Point(204, 49);
+            this.T_Vf.Location = new System.Drawing.Point(204, 104);
             this.T_Vf.Name = "T_Vf";
             this.T_Vf.Size = new System.Drawing.Size(66, 23);
             this.T_Vf.TabIndex = 6;
@@ -131,7 +135,7 @@
             this.Label2.BackColor = System.Drawing.Color.Transparent;
             this.Label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.Black;
-            this.Label2.Location = new System.Drawing.Point(11, 51);
+            this.Label2.Location = new System.Drawing.Point(11, 112);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(171, 15);
             this.Label2.TabIndex = 25;
@@ -149,12 +153,16 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(317, 289);
+            this.panel2.Size = new System.Drawing.Size(317, 346);
             this.panel2.TabIndex = 27;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel2_MouseDown);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.e_acabados);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.P_R);
+            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.Label7);
             this.groupBox2.Controls.Add(this.T_Vf);
             this.groupBox2.Controls.Add(this.T_arranque);
@@ -162,7 +170,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(11, 163);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(288, 81);
+            this.groupBox2.Size = new System.Drawing.Size(288, 142);
             this.groupBox2.TabIndex = 81;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fundación";
@@ -210,7 +218,7 @@
             this.cb_Aceptar.BackColor = System.Drawing.Color.White;
             this.cb_Aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Aceptar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_Aceptar.Location = new System.Drawing.Point(122, 250);
+            this.cb_Aceptar.Location = new System.Drawing.Point(122, 311);
             this.cb_Aceptar.Name = "cb_Aceptar";
             this.cb_Aceptar.Size = new System.Drawing.Size(71, 24);
             this.cb_Aceptar.TabIndex = 7;
@@ -278,12 +286,56 @@
             this.label3.TabIndex = 77;
             this.label3.Text = "Recubrimiento (cm):";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(11, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(175, 15);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Profundidad del Refuerzo (m) :";
+            // 
+            // P_R
+            // 
+            this.P_R.BackColor = System.Drawing.Color.White;
+            this.P_R.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.P_R.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.P_R.Location = new System.Drawing.Point(204, 75);
+            this.P_R.Name = "P_R";
+            this.P_R.Size = new System.Drawing.Size(66, 23);
+            this.P_R.TabIndex = 28;
+            // 
+            // e_acabados
+            // 
+            this.e_acabados.BackColor = System.Drawing.Color.White;
+            this.e_acabados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e_acabados.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.e_acabados.Location = new System.Drawing.Point(204, 19);
+            this.e_acabados.Name = "e_acabados";
+            this.e_acabados.Size = new System.Drawing.Size(66, 23);
+            this.e_acabados.TabIndex = 30;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(11, 27);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(146, 15);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Espesor de Acabados (m):";
+            // 
             // VariablesdeEntrada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(317, 289);
+            this.ClientSize = new System.Drawing.Size(317, 346);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -327,5 +379,9 @@
         internal System.Windows.Forms.RadioButton Radio_Dmo;
         internal System.Windows.Forms.RadioButton Radio_Des;
         internal System.Windows.Forms.PictureBox PictureBox1;
+        internal System.Windows.Forms.TextBox e_acabados;
+        internal System.Windows.Forms.Label label8;
+        internal System.Windows.Forms.TextBox P_R;
+        internal System.Windows.Forms.Label label5;
     }
 }

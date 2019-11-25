@@ -51,19 +51,19 @@ namespace DisenoColumnas.Resultados
                 foreach (Columna col in Form1.Proyecto_.Lista_Columnas)
                 {
                
-                    if (col.CantEstribos != null)
+                    if (col.CantEstribos_Sepa != null)
                     {
-                        for (int i = 0; i < col.CantEstribos.Count; i++)
+                        for (int i = 0; i < col.CantEstribos_Sepa.Count; i++)
                         {
                             DataRow dataRow = table.NewRow();
 
                             dataRow[0] = col.Name;
                             dataRow[1] = col.Seccions[i].Item2;
                             dataRow[2] = String.Format("{0:0.00}", col.LuzLibre[i]);
-                            dataRow[3] = col.CantEstribos[i][0] == 0? "-": (object)(col.CantEstribos[i][0] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
-                            dataRow[4] = col.CantEstribos[i][1] == 0 ?"-" : (object)(col.CantEstribos[i][1] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
-                            dataRow[5] = col.CantEstribos[i][2] == 0 ?"-" : (object)(col.CantEstribos[i][2] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
-                            dataRow[6] = col.CantEstribos[i][3] == 0 ?"-" : (object)(col.CantEstribos[i][3] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
+                            dataRow[3] = (int)col.CantEstribos_Sepa[i][0] == 0? "-": (col.CantEstribos_Sepa[i][0] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
+                            dataRow[4] = (int)col.CantEstribos_Sepa[i][1] == 0 ?"-" : (col.CantEstribos_Sepa[i][1] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
+                            dataRow[5] = (int)col.CantEstribos_Sepa[i][2] == 0 ?"-" : (col.CantEstribos_Sepa[i][2] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + Math.Round((float)col.CantEstribos_Sepa[i][5]*100,2) + "cm");
+                            dataRow[6] = (int)col.CantEstribos_Sepa[i][3] == 0 ?"-" : (col.CantEstribos_Sepa[i][3] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
 
                             table.Rows.Add(dataRow);
                         }
