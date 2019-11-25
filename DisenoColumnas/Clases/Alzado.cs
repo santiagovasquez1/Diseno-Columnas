@@ -30,6 +30,8 @@ namespace DisenoColumnas.Clases
     {
         public AlzadoUnitario UnitarioAdicional { get; set; }
 
+        public string Tipo2 { get; set; }
+
         public int NoStory { get; set; }
 
         public int CantBarras { get; set; }

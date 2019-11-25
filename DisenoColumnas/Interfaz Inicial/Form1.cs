@@ -47,6 +47,7 @@ namespace DisenoColumnas
         public static string TColumna;
         public static CLista_Secciones secciones_predef;
 
+
         public Form1()
         {
             InitializeComponent();
@@ -1735,6 +1736,9 @@ namespace DisenoColumnas
                     variablesdeEntrada.T_Vf.Text = Proyecto_.e_Fundacion.ToString();
                     variablesdeEntrada.T_arranque.Text = Proyecto_.Nivel_Fundacion.ToString();
                     variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
+                    variablesdeEntrada.P_R.Text = Proyecto_.P_R.ToString();
+                    variablesdeEntrada.e_acabados.Text = Proyecto_.e_acabados.ToString();
+
                 }
                 variablesdeEntrada.PictureBox1.Visible = true;
                 variablesdeEntrada.ShowDialog();
@@ -2111,10 +2115,10 @@ namespace DisenoColumnas
 
             foreach(Columna col in Lista_ColumnasDiseñar)
             {
-                col.CantEstribos = new List<int[]>();
+                col.CantEstribos_Sepa = new List<object[]>();
                 for (int i= col.LuzAcum.Count-1; i >= 0; i--)
                 {
-                    col.CantEstribos.Add(new int[] { 0, 0, 0, 0 });
+                    col.CantEstribos_Sepa.Add(new object[] { 0, 0, 0, 0,0,0 });
                 }
             }
 

@@ -49,7 +49,7 @@ namespace DisenoColumnas.Clases
         public string Name { get; set; }
 
         public List<Tuple<ISeccion, string>> Seccions { get; set; } = new List<Tuple<ISeccion, string>>();
-        public List<int[]> CantEstribos { get; set; }
+        public List<object[]> CantEstribos_Sepa { get; set; }
 
         public Viga VigaMayor { get; set; }
 
@@ -126,10 +126,19 @@ namespace DisenoColumnas.Clases
                             float AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
                             try
                             {
-                                resultadosETABs[i - 1].As_asignado[2] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;     //Acero Botton - Vecino
+                                if (alzado.Colum_Alzado[i].Tipo2 == "+" | alzado.Colum_Alzado[i].Tipo2 == "" | alzado.Colum_Alzado[i].Tipo2==null)
+                                {
+                                    resultadosETABs[i - 1].As_asignado[2] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;//Acero Botton - Vecino
+                                }
+                                    
                             }
                             catch { }
-                            resultadosETABs[i].As_asignado[0] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;
+                            if (alzado.Colum_Alzado[i].Tipo2 == "" | alzado.Colum_Alzado[i].Tipo2 == "-"|alzado.Colum_Alzado[i].Tipo2 == null)
+                            {
+                                resultadosETABs[i].As_asignado[0] += alzado.Colum_Alzado[i].CantBarras * AreaBarra;
+
+                            }
+
                             resultadosETABs[i].Porct_Refuerzo[0] = resultadosETABs[i].As_asignado[0] / ((float)resultadosETABs[i].AsTopMediumButton[0]) * 100;
 
                             if (alzado.Colum_Alzado[i].UnitarioAdicional != null)
@@ -412,7 +421,7 @@ namespace DisenoColumnas.Clases
             KgRefuerzoforColumAlzado.Clear();
             Col_Row_AlzadoBaseSugerido = new List<List<string>>();
 
-            int CantAlzadosaCrear = 0;
+
             int CantAlzadosCrearPrimerPiso = 0;
             List<int> CambiosSeccion_CantAlzados = new List<int>();
 
@@ -827,6 +836,7 @@ namespace DisenoColumnas.Clases
                     ModificarTraslapo(i, this);
                     DeterminarCoordAlzado(i, this);
                 }
+                ActualizarRefuerzo();
             }
             CrearListaPesosRefuerzos(0);
             CalcularPesoAcero();
@@ -982,7 +992,8 @@ namespace DisenoColumnas.Clases
 
         public void DeterminarCoordAlzado(int Col, Columna ColumnaSelect)
         {
-            float r = 0.05f; float eF = Form1.Proyecto_.e_Fundacion;
+            float PR = Form1.Proyecto_.P_R; float eF = Form1.Proyecto_.e_Fundacion;
+            float r = eF - PR;
             float LdAd = 0.4f;
 
             Alzado a = ColumnaSelect.Alzados[Col];
@@ -1047,7 +1058,7 @@ namespace DisenoColumnas.Clases
                     }
                 }
             }
-
+            ActualizarRefuerzo();
             for (int i = a.Colum_Alzado.Count - 1; i >= 0; i--)
             {
                 AlzadoUnitario au = a.Colum_Alzado[i];
@@ -1057,11 +1068,23 @@ namespace DisenoColumnas.Clases
                     float Hacum1 = 0; float Hviga1 = 0; float Hacum2 = 0; float Hviga2 = 0; float H1 = 0; float H2 = 0; string Nom3 = "Not"; string Nom4 = "Not"; float x31 = 0; float x41 = 0;
                     string Nom1 = "Not"; string Nom2 = "Not"; float x11 = 0; float x12 = 0;
                     au.Coord_Alzado_PB = new List<float[]>();
+                    float Porce_Top = 0; float Porce_V2_Bottom = 0;
 
                     #region Determinar Variables de Pisos Vecinos
 
                     //Determinar Variables de Pisos Vecinos
 
+                    Porce_Top = ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0] - (float)((Form1.Proyecto_.AceroBarras[au.NoBarra] * au.CantBarras) / ((float)ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0])) * 100;
+
+                    try
+                    {
+                        Porce_V2_Bottom = (float)ColumnaSelect.resultadosETABs[i - 1].Porct_Refuerzo[2] - (float)((Form1.Proyecto_.AceroBarras[au.NoBarra] * au.CantBarras) / ((float)ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0])) * 100; ;
+
+                    }
+                    catch
+                    {
+                        Porce_V2_Bottom = 0;
+                    }
                     try
                     {
                         Nom3 = a.Colum_Alzado[i + 2].Tipo;
@@ -1106,9 +1129,10 @@ namespace DisenoColumnas.Clases
                         H2 = ColumnaSelect.LuzLibre[i - 1];
                     }
                     catch { }
+                    #endregion
                     float DisG = Form1.Proyecto_.G90[au.NoBarra];
+           
 
-                    #endregion Determinar Variables de Pisos Vecinos
 
                     if (au.NoStory == 1 && au.Tipo == "T1") //Si es Primer Piso y  Si Tiene Traslapo Tipo1
                     {
@@ -1166,7 +1190,7 @@ namespace DisenoColumnas.Clases
                             au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); au.Coord_Alzado_PB.Add(XY3); au.Coord_Alzado_PB.Add(XY4);
                         }
                     }
-
+                 
                     if (au.UltPiso == false && au.Tipo == "A")  //Refuerzo Adicional Parte Superior "Cualquier Piso"
                     {
                         if (Nom1 == "A")
@@ -1196,9 +1220,26 @@ namespace DisenoColumnas.Clases
                         }
                         else
                         {
-                            float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
-                            float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
-                            au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            if (Porce_Top < 95f & Porce_V2_Bottom > 95f)
+                            {
+                                au.Tipo2 = "-";
+                                float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga };
+                                au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            }
+                            else if (Porce_Top > 95f & Porce_V2_Bottom < 95f)
+                            {
+                                au.Tipo2 = "+";
+                                float[] XY1 = new float[] { a.DistX, au.Hacum };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            }
+                            else
+                            {
+                                float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            }
                         }
                     }
 
@@ -1831,9 +1872,26 @@ namespace DisenoColumnas.Clases
                             else
                             {
                                 DesCota = -0.2f;
-                                P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum, 0 };
-                                P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
-                                P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga, 0 };
+                                float DistAd = 0.3f;
+                                if (aux.Tipo2 == "+")
+                                {
+                                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0]+DistAd - DistCorrerText, Y +aux.Coord_Alzado_PB[1][1] - DistCorrerTextY/2, 0 };
+                                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
+                                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0],  Y + aux.Coord_Alzado_PB[1][1], 0 };
+                                }
+                                else if(aux.Tipo2=="-")
+                                {
+                                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] + DistAd - DistCorrerText, Y+aux.Coord_Alzado_PB[0][1] - DistCorrerTextY / 2, 0 };
+                                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
+                                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
+                                }
+                                else
+                                {
+                                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum, 0 };
+                                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
+                                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum - aux.Hviga, 0 };
+                                }
+                           
                             }
                         }
                         catch
@@ -2188,21 +2246,21 @@ namespace DisenoColumnas.Clases
                 }
             }
 
-            C_Viga = (int)Math.Ceiling(VigaMayor.Seccions[i].Item1.H / S1);
+            C_Viga = (int)Math.Round((VigaMayor.Seccions[i].Item1.H-0.10) / S1)+1;
 
             if (2 * Lo >= LuzLibre[i])
             {
                 ZNC = 0;
                 ZC2 = 0;
-                ZC1 = (int)Math.Ceiling(LuzLibre[i] / S1);
+                ZC1 = (int)Math.Round((LuzLibre[i]-0.10) / S1)+1;
             }
             else
             {
-                ZC2 = (int)Math.Ceiling(Lo / S1);
-                ZC1 = (int)Math.Ceiling(Lo / S1);
-                ZNC = (int)Math.Ceiling((LuzLibre[i] - 2 * Lo) / S2);
+                ZC2 = (int)Math.Round((Lo-0.05) / S1)+1;
+                ZC1 = (int)Math.Round((Lo -0.05)/ S1)+1;
+                ZNC = (int)Math.Round((LuzLibre[i] - 2 * Lo) / S2)-1;
             }
-            CantEstribos[i] = new int[] { C_Viga, ZC1, ZNC, ZC2 };
+            CantEstribos_Sepa[i] = new object[] { C_Viga, ZC1, ZNC, ZC2,S1,S2 };
         }
 
         #endregion

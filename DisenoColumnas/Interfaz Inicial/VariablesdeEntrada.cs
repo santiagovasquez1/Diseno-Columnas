@@ -25,18 +25,19 @@ namespace DisenoColumnas.Interfaz_Inicial
             if (Radio_Des.Checked | Radio_Dmo.Checked)
             {
                 float r;
-                bool IsNumeric = Single.TryParse(T_Vf.Text, out r);
+                bool IsNumeric = Single.TryParse(P_R.Text, out r);
 
-                if (T_Vf.Text == "" | IsNumeric == false | r == 0)
+                if (P_R.Text == "" | IsNumeric == false | r == 0)
                 {
-                    MessageBox.Show("El espesor asignado en la fundación es incorrecto.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("La profundidad asignada es incorrecta.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
-                    Form1.Proyecto_.Nivel_Fundacion = Convert.ToSingle(T_arranque.Text);
-                    if (Convert.ToSingle(T_Vf.Text) != Form1.Proyecto_.e_Fundacion)
+                
+                    Form1.Proyecto_.P_R = Convert.ToSingle(P_R.Text);
+                    if (Convert.ToSingle(P_R.Text) != Form1.Proyecto_.P_R)
                     {
-                        Form1.Proyecto_.e_Fundacion = Convert.ToSingle(T_Vf.Text);
+                        Form1.Proyecto_.P_R = Convert.ToSingle(P_R.Text);
                         if (ProyectoPV)
                         {
                             MessageBox.Show("Debido al cambio realizado deberá volver a diseñar las Columnas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -45,6 +46,8 @@ namespace DisenoColumnas.Interfaz_Inicial
 
                     Form1.Proyecto_.R = Convert.ToSingle(R_Box.Text);
                     Form1.Proyecto_.FY = Convert.ToSingle(Fy_Box.Text);
+                    Form1.Proyecto_.e_Fundacion = Convert.ToSingle(T_Vf.Text);
+                    Form1.Proyecto_.Nivel_Fundacion = Convert.ToSingle(T_arranque.Text);
 
                     Form1.Proyecto_.AlturaEdificio_();
                     if (Radio_Des.Checked)

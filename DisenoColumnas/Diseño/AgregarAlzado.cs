@@ -231,7 +231,9 @@ namespace DisenoColumnas.Diseño
                                 {
                                     D_Alzado.Rows[IndiceR].Cells[IndiceC].Value = "";
                                 }
+                                
                                 DeterminarCoordAlzado(IndiceC);
+                                ColumnaSelect.ActualizarRefuerzo();
 
                                 MessageBox.Show("El Refuerzo adicional asignado no se puede agregar debido a que existe superposición de refuerzo en el mismo punto.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
@@ -247,7 +249,7 @@ namespace DisenoColumnas.Diseño
                     ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = unitario;
                     ModificarTraslapo(IndiceC - 1, ref ColumnaSelect);
 
-                    ColumnaSelect.ActualizarRefuerzo();
+       
 
                     Form1.m_Informacion.MostrarAcero();
 
@@ -255,6 +257,8 @@ namespace DisenoColumnas.Diseño
                     {
 
                         DeterminarCoordAlzado(IndiceC);
+                        ColumnaSelect.ActualizarRefuerzo();
+                        Form1.m_Informacion.MostrarAcero();
                         ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
                         Form1.m_Despiece.Invalidate();
                     }
@@ -275,8 +279,8 @@ namespace DisenoColumnas.Diseño
             {
                 ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = null;
                 DeterminarCoordAlzado(IndiceC);
-                ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
                 ColumnaSelect.ActualizarRefuerzo();
+                ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
                 Form1.m_Informacion.MostrarAcero();
                 Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
                 Form1.m_Despiece.Invalidate();
@@ -287,7 +291,10 @@ namespace DisenoColumnas.Diseño
         public void DeterminarCoordAlzado(int Col)
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
-             float r = 0.05f; float eF = Form1.Proyecto_.e_Fundacion;
+           float PR = Form1.Proyecto_.P_R;
+           float eF = Form1.Proyecto_.e_Fundacion;
+           float r = eF - PR;
+
             float LdAd = 0.4f;
             
             Alzado a = ColumnaSelect.Alzados[Col - 1];
@@ -352,6 +359,7 @@ namespace DisenoColumnas.Diseño
                 }
             }
 
+            ColumnaSelect.ActualizarRefuerzo();
             for (int i = a.Colum_Alzado.Count - 1; i >= 0; i--)
             {
                 AlzadoUnitario au = a.Colum_Alzado[i];
@@ -362,9 +370,25 @@ namespace DisenoColumnas.Diseño
                     string Nom1 = "Not"; string Nom2 = "Not"; float x11 = 0; float x12 = 0;
                     au.Coord_Alzado_PB = new List<float[]>();
 
+                    float Porce_Top = 0; float Porce_V2_Bottom = 0;
+
+
                     #region Determinar Variables de Pisos Vecinos
 
                     //Determinar Variables de Pisos Vecinos
+
+
+                    Porce_Top = ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0] - (float)((Form1.Proyecto_.AceroBarras[au.NoBarra] * au.CantBarras) / ((float)ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0])) * 100;
+
+                    try
+                    {
+                        Porce_V2_Bottom = (float)ColumnaSelect.resultadosETABs[i - 1].Porct_Refuerzo[2] - (float)((Form1.Proyecto_.AceroBarras[au.NoBarra] * au.CantBarras) / ((float)ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0])) * 100; ;
+
+                    }
+                    catch
+                    {
+                        Porce_V2_Bottom = 0;
+                    }
 
                     try
                     {
@@ -484,6 +508,7 @@ namespace DisenoColumnas.Diseño
                                     au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                                 }
                                 else
+
                                 {
                                     float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
                                     float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
@@ -499,9 +524,26 @@ namespace DisenoColumnas.Diseño
                         }
                         else
                         {
-                            float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
-                            float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
-                            au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            if (Porce_Top < 95f & Porce_V2_Bottom > 95f)
+                            {
+                                au.Tipo2 = "-";
+                                float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga };
+                                au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            }
+                            else if (Porce_Top > 95f & Porce_V2_Bottom < 95f)
+                            {
+                                au.Tipo2 = "+";
+                                float[] XY1 = new float[] { a.DistX, au.Hacum };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            }
+                            else
+                            {
+                                float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                            }
                         }
                     }
 
@@ -665,6 +707,7 @@ namespace DisenoColumnas.Diseño
                         }
                         else
                         {
+
                             float[] XY1 = new float[] { a.DistX, Hacum1 - Hviga1 - au.Traslapo - LdAd };
                             float[] XY2 = new float[] { a.DistX, Hacum1 + au.Traslapo + LdAd };
                             au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
@@ -829,10 +872,11 @@ namespace DisenoColumnas.Diseño
             for (int col = 0; col < Form1.Proyecto_.ColumnaSelect.Alzados.Count; col++)
             {
                 DeterminarCoordAlzado(col + 1);
+                Form1.Proyecto_.ColumnaSelect.ActualizarRefuerzo();
                 Form1.Proyecto_.ColumnaSelect.CalcularPesoAcero();
                 Form1.m_Despiece.Invalidate();
             }
-            Form1.Proyecto_.ColumnaSelect.ActualizarRefuerzo();
+       
             Form1.m_Informacion.MostrarAcero();
         }
 
@@ -891,6 +935,7 @@ namespace DisenoColumnas.Diseño
                     }
                 }
                 DeterminarCoordAlzado(Col);
+                Form1.Proyecto_.ColumnaSelect.ActualizarRefuerzo();
                 Form1.Proyecto_.ColumnaSelect.CalcularPesoAcero(Col-1);
                 Form1.m_Despiece.Invalidate();
             }
