@@ -411,32 +411,56 @@ namespace DisenoColumnas.Clases
             Alzados.Clear();
             KgRefuerzoforColumAlzado.Clear();
             Col_Row_AlzadoBaseSugerido = new List<List<string>>();
-            for (int i = 0; i < columna.AlzadoBaseSugerido[0].Length; i++)
-            {
-                Alzado alzado = new Alzado(i + 1, columna.Seccions.Count);
-                Alzados.Add(alzado);
-                Col_Row_AlzadoBaseSugerido.Add(new List<string>());
-            }
 
-            for (int i = columna.Seccions.Count - 1; i >= 0; i--)
+            int CantAlzadosaCrear = 0;
+            int CantAlzadosCrearPrimerPiso = 0;
+            List<int> CambiosSeccion_CantAlzados = new List<int>();
+
+            for (int i = columna.AlzadoBaseSugerido.Count - 1; i >= 0; i--)
             {
+                if(i== columna.AlzadoBaseSugerido.Count-1)
+                {
+                    CantAlzadosCrearPrimerPiso = columna.AlzadoBaseSugerido[i].Length;
+                }
+
                 try
                 {
-                    if (columna.Seccions[i].Item1.B != columna.Seccions[i - 1].Item1.B)
+                    if (columna.Seccions[i].Item1.B != columna.Seccions[i - 1].Item1.B | columna.Seccions[i].Item1.H != columna.Seccions[i - 1].Item1.H)
                     {
-                        Alzado alzado = new Alzado(columna.Alzados.Count + 1, columna.Seccions.Count);
-                        columna.Alzados.Add(alzado);
-                        columna.Col_Row_AlzadoBaseSugerido.Add(new List<string>());
-
-                        Alzado alzado2 = new Alzado(columna.Alzados.Count + 1, columna.Seccions.Count);
-                        columna.Alzados.Add(alzado2);
-                        columna.Col_Row_AlzadoBaseSugerido.Add(new List<string>());
+                        CambiosSeccion_CantAlzados.Add(columna.AlzadoBaseSugerido[i-1].Length);
                     }
+               
+
                 }
                 catch
                 {
+
+                }
+
+            }
+
+            if (CambiosSeccion_CantAlzados.Count != 0)
+            {
+
+                for (int j = 0; j < CambiosSeccion_CantAlzados.Sum()+ CantAlzadosCrearPrimerPiso; j++)
+                {
+                    Alzado alzado = new Alzado(j + 1, columna.Seccions.Count);
+                    Alzados.Add(alzado);
+                    Col_Row_AlzadoBaseSugerido.Add(new List<string>());
+                }
+
+
+            }
+            else
+            {
+                for (int i = 0; i < CantAlzadosCrearPrimerPiso; i++)
+                {
+                    Alzado alzado = new Alzado(i + 1, columna.Seccions.Count);
+                    Alzados.Add(alzado);
+                    Col_Row_AlzadoBaseSugerido.Add(new List<string>());
                 }
             }
+
 
             for (int i = 0; i < columna.Col_Row_AlzadoBaseSugerido.Count; i++)
             {
@@ -446,21 +470,18 @@ namespace DisenoColumnas.Clases
                 }
             }
 
-            for (int j = 0; j < columna.Alzados.Count; j++)
+
+
+
+
+          int CorrerAlzado = 0;
+
+            for (int i = columna.AlzadoBaseSugerido.Count - 1; i >= 0; i--)
             {
-                int CorrerAlzado = 0;
-                for (int i = columna.AlzadoBaseSugerido.Count - 1; i >= 0; i--)
+                for (int j = 0; j < columna.AlzadoBaseSugerido[i].Length; j++)
                 {
                     string Combinacion = "";
 
-                    try
-                    {
-                        if (columna.Seccions[i].Item1.B != columna.Seccions[i + 1].Item1.B)
-                        {
-                            CorrerAlzado = 2;
-                        }
-                    }
-                    catch { }
 
                     if (j % 2 == 0) //Refuerzo Base Tipo 1
                     {
@@ -503,7 +524,7 @@ namespace DisenoColumnas.Clases
 
                                 try
                                 {
-                                    if (columna.Seccions[i].Item1.B != columna.Seccions[i - 1].Item1.B && CorrerAlzado == 0)
+                                    if (columna.Seccions[i].Item1.B != columna.Seccions[i - 1].Item1.B | columna.Seccions[i].Item1.H != columna.Seccions[i - 1].Item1.H)
                                     {
                                         if ((columna.AlzadoBaseSugerido.Count - i) % 2 == 0)
                                         {
@@ -515,10 +536,6 @@ namespace DisenoColumnas.Clases
                                 }
                                 catch { }
 
-                                if (columna.Seccions[i].Item1.B != columna.Seccions[i + 1].Item1.B && CorrerAlzado == 2)
-                                {
-                                    Combinacion += "T2";
-                                }
                             }
                         }
                     }
@@ -561,7 +578,7 @@ namespace DisenoColumnas.Clases
                                     Combinacion += "T2";
                                 }
 
-                                if (columna.Seccions[i].Item1.B != columna.Seccions[i - 1].Item1.B && CorrerAlzado == 0)
+                                if (columna.Seccions[i].Item1.B != columna.Seccions[i - 1].Item1.B | columna.Seccions[i].Item1.H != columna.Seccions[i - 1].Item1.H)
                                 {
                                     if ((columna.AlzadoBaseSugerido.Count - i) % 2 == 0)
                                     {
@@ -571,10 +588,6 @@ namespace DisenoColumnas.Clases
                                     { Combinacion += "T3"; }
                                 }
 
-                                if (columna.Seccions[i].Item1.B != columna.Seccions[i + 1].Item1.B && CorrerAlzado == 2)
-                                {
-                                    Combinacion += "T2";
-                                }
                             }
                         }
                     }
@@ -582,6 +595,18 @@ namespace DisenoColumnas.Clases
                     if (j + CorrerAlzado < columna.Col_Row_AlzadoBaseSugerido.Count)
                     {
                         columna.Col_Row_AlzadoBaseSugerido[j + CorrerAlzado][i] = Combinacion;
+                    }
+                    if (j == columna.AlzadoBaseSugerido[i].Length - 1)
+                    {
+                        try
+                        {
+                            if (columna.Seccions[i].Item1.B != columna.Seccions[i - 1].Item1.B | columna.Seccions[i].Item1.H != columna.Seccions[i - 1].Item1.H)
+                            {
+                                CorrerAlzado += columna.AlzadoBaseSugerido[i].Length;
+                                break;
+                            }
+                        }
+                        catch { }
                     }
                 }
             }

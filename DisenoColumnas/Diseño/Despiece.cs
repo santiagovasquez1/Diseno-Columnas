@@ -28,10 +28,20 @@ namespace DisenoColumnas.Diseño
                 MaxB = ColumnaSelect.Seccions.FindAll(m => m != null).ToList().Max(m => m.Item1.B);
                 MaxH = ColumnaSelect.Seccions.FindAll(m => m != null).ToList().Max(m => m.Item1.H);
 
-                if (MaxH > MaxB)
+                bool ExisteCambioenB=false;
+                for (int i = ColumnaSelect.Seccions.Count - 1; i >= 0; i--)
+                {
+                    if (ColumnaSelect.Seccions[i].Item1 != null)
+                    {
+                        try { if (ColumnaSelect.Seccions[i].Item1.B - ColumnaSelect.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
+                        catch { }
+                    }
+                }
+                if (ExisteCambioenB==false)
                 {
                     MaxB = MaxH;
                 }
+           
 
                 float SX = (Draw_Column.Width - 15) / MaxB;
 
@@ -308,5 +318,7 @@ namespace DisenoColumnas.Diseño
         {
             Draw_Colum_Alzado.Invalidate();
         }
+
+     
     }
 }
