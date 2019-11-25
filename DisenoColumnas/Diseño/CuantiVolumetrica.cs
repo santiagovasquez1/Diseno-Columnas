@@ -58,14 +58,11 @@ namespace DisenoColumnas.Diseño
 
                 if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Tee | ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.L)
                 {
-
                     Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV1;
                     Info_Es_Col.Rows[IndiceRow].Cells["NoRamasV_2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasV2;
 
                     Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH1;
                     Info_Es_Col.Rows[IndiceRow].Cells["NoRamas_H2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH2;
-
-
                 }
             }
         }
@@ -74,13 +71,11 @@ namespace DisenoColumnas.Diseño
         {
             Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
 
-            
-
             if (ColumnaSelect != null)
             {
                 if (ColumnaSelect.CantEstribos == null)
                 {
-                    ColumnaSelect.CantEstribos =  new System.Collections.Generic.List<int[]>();
+                    ColumnaSelect.CantEstribos = new System.Collections.Generic.List<int[]>();
                     for (int i = ColumnaSelect.LuzAcum.Count - 1; i >= 0; i--)
                     {
                         ColumnaSelect.CantEstribos.Add(new int[] { 0, 0, 0, 0 });
@@ -106,7 +101,10 @@ namespace DisenoColumnas.Diseño
                     {
                         if (ColumnaSelect.Seccions[i].Item1 != null)
                         {
-                            CalCuantiaVol(ColumnaSelect.Seccions[i].Item1, false, i);
+                            if (ColumnaSelect.Seccions[i].Item1.Estribo == null)
+                            {
+                                CalCuantiaVol(ColumnaSelect.Seccions[i].Item1, false, i);
+                            }
 
                             Info_Es_Col.Rows.Add(ColumnaSelect.Seccions[i].Item2);
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Value = ColumnaSelect.Seccions[i].Item2;
@@ -115,21 +113,18 @@ namespace DisenoColumnas.Diseño
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].ReadOnly = true;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].ReadOnly = true;
 
-
                             if (ColumnaSelect.Seccions[i].Item1.Estribo != null)
                             {
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoEstribo.ToString();
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.Separacion.ToString();
 
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["CantEstribos"].Value = ColumnaSelect.CantEstribos[i].Sum();
-
                             }
                             else
                             {
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = 0;
                             }
 
-                            
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["CantEstribos"].ReadOnly = true;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].ReadOnly = false;
                             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].ReadOnly = false;
@@ -176,7 +171,7 @@ namespace DisenoColumnas.Diseño
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Value = SeccionTL.B * FCMetros;
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["H"].Value = SeccionTL.H * FCMetros;
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TW"].Value = SeccionTL.TW * FCMetros;
-                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value =SeccionTL.TF * FCMetros;
+                                Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["TF"].Value = SeccionTL.TF * FCMetros;
 
                                 Info_Es_Col.Rows[0].Cells["NoRamasV_1"].Value = "No. Ramas Vertical";
                                 Info_Es_Col.Rows[0].Cells["NoRamas_H1"].Value = "No. Ramas Horizontal";
@@ -189,8 +184,6 @@ namespace DisenoColumnas.Diseño
 
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H1"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH1;
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H2"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoRamasH2;
-
-
                             }
                         }
                     }
@@ -221,7 +214,6 @@ namespace DisenoColumnas.Diseño
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoEstribo"].ReadOnly = true;
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["CantEstribos"].ReadOnly = true;
 
-
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[0].Style.Font = fontBold;
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells[1].Style.Font = fontBold;
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["B"].Style.Font = fontBold;
@@ -234,7 +226,6 @@ namespace DisenoColumnas.Diseño
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["NoRamas_H2"].Style.Font = fontBold;
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Style.Font = fontBold;
             Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["CantEstribos"].Style.Font = fontBold;
-
 
             Info_Es_Col.Rows[0].Frozen = true;
 
@@ -264,7 +255,7 @@ namespace DisenoColumnas.Diseño
 
                 if (seccioni.Estribo == null)
                 {
-                    seccioni.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY,Form1.Proyecto_.DMO_DES);
+                    seccioni.Calc_vol_inex(Form1.Proyecto_.R / 100, Form1.Proyecto_.FY, Form1.Proyecto_.DMO_DES);
                 }
 
                 seccioni.Cuanti_Vol(FD1, FD2, Form1.Proyecto_.R / 100, Form1.Proyecto_.FY);
@@ -326,7 +317,7 @@ namespace DisenoColumnas.Diseño
             seccioni.Estribo.Separacion = Separacion;
             seccioni.Estribo.CalcularArea();
             CalCuantiaVol(seccioni, false, IndiceaM);
-           
+
             Form1.Proyecto_.ColumnaSelect.Seccions[IndiceaM] = new Tuple<ISeccion, string>(seccioni, piso);
             Form1.Proyecto_.ColumnaSelect.CantidadEstribos(IndiceR - 1);
             CambiosDataGridView(IndiceaM);

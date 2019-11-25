@@ -2060,6 +2060,7 @@ namespace DisenoColumnas
                         Temp_seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
                         Temp_seccion.Refuerzo_Base(Proyecto_.R);
                         Temp_seccion.Material = Col.Seccions[i].Item1.Material;
+                        Temp_seccion.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
                         Temp_seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
                         Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion, piso);
                     }

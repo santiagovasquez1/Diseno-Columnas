@@ -455,6 +455,13 @@ namespace DisenoColumnas.Secciones_Predefinidas
             CRectangulo temp = new CRectangulo(Nombre_seccion, b / 100, h / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
             temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
             temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
+
+            temp.Estribo = new Estribo(3)
+            {
+                NoRamasH1 = CapasY,
+                NoRamasV1 = CapasX
+            };
+
             temp.Calc_vol_inex(r: 0.04f, FY: 4220, gDE: GDE.DMO);
             return temp;
         }
@@ -464,6 +471,13 @@ namespace DisenoColumnas.Secciones_Predefinidas
             CRectangulo temp = new CRectangulo(Nombre_seccion, b / 100, h / 100, material, TipodeSeccion.Rectangular, new List<float[]>());
             temp.Refuerzos = Set_Refuerzo_Seccion(Diametros_Seccion, CapasX, CapasY, CapasXw, CapasYw, b, h, tw, tf);
             temp.Acero_Long = temp.Refuerzos.Sum(X => X.As_Long);
+
+            temp.Estribo = new Estribo(3)
+            {
+                NoRamasH1 = CapasY,
+                NoRamasV1 = CapasX
+            };
+
             temp.Calc_vol_inex(r: 0.04f, FY: 4220, gDE: GDE.DES);
             return temp;
         }
