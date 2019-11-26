@@ -2064,6 +2064,7 @@ namespace DisenoColumnas
                         Temp_seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
                         Temp_seccion.Refuerzo_Base(Proyecto_.R);
                         Temp_seccion.Material = Col.Seccions[i].Item1.Material;
+                        Temp_seccion.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
                         Temp_seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
                         Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion, piso);
                     }
@@ -2502,6 +2503,7 @@ namespace DisenoColumnas
             FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
             double DeltaX = 0;
             int NoDes = 1;
+
             foreach (Columna col in ColumnsDrawing)
             {
                 if (col.Alzados.Count != 0)
@@ -2513,6 +2515,7 @@ namespace DisenoColumnas
                     }
 
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
+                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60);
                     DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }

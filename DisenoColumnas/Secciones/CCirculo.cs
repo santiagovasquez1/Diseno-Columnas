@@ -213,7 +213,7 @@ namespace DisenoColumnas.Secciones
         {
             GraphicsPath path = new GraphicsPath();
             CCirculo circulo1, circulo2;
-            double r1 = (radio - Form1.Proyecto_.R);
+            double r1 = (radio - rec) * 100;
             double r2 = (r1 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo]);
 
             MAT_CONCRETE material = new MAT_CONCRETE
@@ -223,10 +223,10 @@ namespace DisenoColumnas.Secciones
             };
 
             circulo1 = new CCirculo("Refuerzo", r1, Centro, material, TipodeSeccion.Circle, pCoord: null);
-            circulo1.Set_puntos(50,r1);
+            circulo1.Set_puntos(50, r1 * EscalaX);
 
             circulo2 = new CCirculo("Refuerzo", r2, Centro, material, TipodeSeccion.Circle, pCoord: null);
-            circulo2.Set_puntos(50,r2);
+            circulo2.Set_puntos(50, r2 * EscalaX);
 
             path.AddClosedCurve(circulo1.Puntos.ToArray());
             path.AddClosedCurve(circulo2.Puntos.ToArray());
@@ -283,7 +283,7 @@ namespace DisenoColumnas.Secciones
                 };
             }
 
-            Set_puntos(50, radio * 100);
+            Set_puntos(50, radio * 100 * EscalaX);
             g.DrawClosedCurve(P1, Puntos.ToArray());
             g.FillClosedCurve(br, Puntos.ToArray());
             Seccion_path.AddClosedCurve(Puntos.ToArray());
@@ -323,6 +323,11 @@ namespace DisenoColumnas.Secciones
         public double Peso_Estribo(Estribo pEstribo,float recubrimiento)
         {
             return 0;
+        }
+
+        public void Dibujo_Autocad(double Xi, double Yi)
+        {
+            throw new NotImplementedException();
         }
 
         public static bool operator ==(CCirculo s1, CCirculo s2)

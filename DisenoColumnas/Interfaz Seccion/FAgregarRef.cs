@@ -62,11 +62,31 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
             else
             {
-                Cargar_Datos(dataGridView1);
                 nuCX.Enabled = false;
                 nuCY.Enabled = false;
                 nuCXw.Enabled = false;
                 nuCYw.Enabled = false;
+
+                nuCX.Value = Seccion.Estribo.NoRamasH1;
+                nuCY.Value = Seccion.Estribo.NoRamasV1;
+                nuCXw.Value = Seccion.Estribo.NoRamasH2;
+                nuCYw.Value = Seccion.Estribo.NoRamasV2;
+
+                if (Seccion.Shape == TipodeSeccion.Rectangular)
+                {
+                    groupBox2.Text = "Capas Sección";
+                    groupBox3.Enabled = false;
+                }
+
+                if (Seccion.Shape == TipodeSeccion.Tee | Seccion.Shape == TipodeSeccion.L)
+                {
+                    groupBox3.Visible = true;
+                    groupBox3.Enabled = true;
+                    groupBox3.Text = "Capas Aleta";
+                    groupBox2.Text = "Capas Alma";
+                }
+
+                Cargar_Datos(dataGridView1);
             }
         }
 

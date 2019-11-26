@@ -30,6 +30,15 @@ namespace DisenoColumnas.Clases
             As_Long = Form1.Proyecto_.AceroBarras[d1] * Math.Pow(100, 2);
         }
 
+        public void Dibujo_Ref_Autocad(double Xi, double Yi)
+        {
+            double[] P_XYZ;
+            string Layer = "FC_REFUERZO 2";
+
+            P_XYZ = new double[] { Xi + Coord[0] / 100, Yi + Coord[1] / 100, 0 };
+            FunctionsAutoCAD.FunctionsAutoCAD.Add_ref(P_XYZ, Layer, 1, 1, 1, 1, 0);
+        }
+
         public static double operator +(CRefuerzo r1, CRefuerzo r2)
         {
             double Suma_as;

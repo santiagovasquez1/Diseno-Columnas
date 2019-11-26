@@ -1,8 +1,8 @@
 ﻿using Autodesk.AutoCAD.Interop;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using Autodesk.AutoCAD.Interop.Common;
 using System;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace FunctionsAutoCAD
 {
@@ -15,49 +15,52 @@ namespace FunctionsAutoCAD
         /// Punta en circulo.
         /// </summary>
         ArrowDot,
+
         /// <summary>
         /// Punta en flecha.
         /// </summary>
         ArrowDefault
-
-
     }
 
-
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum PrecisionCota
     {
-       /// <summary>
-       /// 
-       /// </summary>
-       Cero,
-       /// <summary>
-        /// 
+        /// <summary>
+        ///
+        /// </summary>
+        Cero,
+
+        /// <summary>
+        ///
         /// </summary>
         Uno,
-       /// <summary>
-        /// 
+
+        /// <summary>
+        ///
         /// </summary>
         Dos,
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Tres,
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Cuatro,
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Cinco,
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Seis
-
     }
 
     /// <summary>
@@ -69,34 +72,33 @@ namespace FunctionsAutoCAD
         /// Centro
         /// </summary>
         Center,
+
         /// <summary>
         /// Izquierda.
         /// </summary>
         Left,
+
         /// <summary>
         /// Derecha.
         /// </summary>
         Right
     }
 
-
     /// <summary>
     /// Funciones basicas para la manipulación de AutoCAD - efe Prima Ce, Por: José Luis Rosales Meza
     /// </summary>
     public class FunctionsAutoCAD
     {
-
         private static AcadApplication AcadApp;
         private static AcadDocument AcadDoc;
-       
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static void OpenAutoCAD()
         {
             try
             {
-
                 AcadApp = (AcadApplication)Marshal.GetActiveObject("Autocad.Application");
                 AcadDoc = AcadApp.ActiveDocument;
             }
@@ -113,9 +115,7 @@ namespace FunctionsAutoCAD
                     AcadDoc = AcadApp.Documents.Add(openFileDialog.FileName);
                 }
             }
-
         }
-
 
         /// <summary>
         /// Establece escala especificada al documento actual.
@@ -127,7 +127,6 @@ namespace FunctionsAutoCAD
             {
                 AcadDoc.SetVariable("CANNOSCALE", Scale);
             }
-
         }
 
         /// <summary>
@@ -136,7 +135,6 @@ namespace FunctionsAutoCAD
         /// <param name="Selection">Selección específica a eliminar.</param>
         private static void DeleteESelec(string Selection)
         {
-
             foreach (AcadSelectionSet selectionSet in AcadDoc.SelectionSets)
             {
                 if (selectionSet.Name == Selection)
@@ -144,10 +142,7 @@ namespace FunctionsAutoCAD
                     selectionSet.Delete();
                     break;
                 }
-
             }
-
-
         }
 
         /// <summary>
@@ -169,9 +164,8 @@ namespace FunctionsAutoCAD
             return Selection;
         }
 
-
         /// <summary>
-        /// Obtiene un punto del documento actual. 
+        /// Obtiene un punto del documento actual.
         /// </summary>
         /// <param name="Msg">Mensaje a mostrar en el documento actual.</param>
         /// <param name="Array">Coordenadas del punto.</param>
@@ -187,7 +181,6 @@ namespace FunctionsAutoCAD
             }
         }
 
-
         /// <summary>
         /// Agrega un nuevo texto al documento actual.
         /// </summary>
@@ -202,12 +195,10 @@ namespace FunctionsAutoCAD
         /// <param name="Width2">Ancho del cuadro de Texto.</param>
         /// <param name="justifyText">Justificación del Texto.</param>
 
-        public static void AddText(string TextString, double[] P_XYZ, double Width, double Height, string Layer, string Style, float Rotation, double LineTypeSacale = 1, double Width2 = 1.3,JustifyText justifyText = JustifyText.Left)
+        public static void AddText(string TextString, double[] P_XYZ, double Width, double Height, string Layer, string Style, float Rotation, double LineTypeSacale = 1, double Width2 = 1.3, JustifyText justifyText = JustifyText.Left)
         {
-
             if (AcadDoc != null)
             {
-
                 AcadMText text = AcadDoc.ModelSpace.AddMText(P_XYZ, Width, TextString);
                 text.Layer = Layer;
                 text.StyleName = Style;
@@ -217,11 +208,7 @@ namespace FunctionsAutoCAD
                 text.Width = Width2;
                 text.AttachmentPoint = Clasf_JustyText(justifyText);
                 text.Update();
-
-
-
             }
-
         }
 
         /// <summary>
@@ -241,24 +228,20 @@ namespace FunctionsAutoCAD
         /// <param name="headType1">Tipo de cabeza de la cota en la punta inicial.</param>
         /// <param name="headType2">Tipo de cabeza de la cota en la punta final.</param>
         /// <param name="TextRotation">Angulo de rotación en grados del texto.</param>
-        public static void AddCota(double[] P1_XYZ, double[] P2_XYZ, string Layer, string Style, float DesplazCota = 0, float DeplazaTextX = 0, float DeplazaTextY = 0, PrecisionCota Precision = PrecisionCota.Dos, string Text = "", double TextHeight = 0.0015, 
-            double ArrowheadSize = 0.001,ArrowHeadType headType1 = ArrowHeadType.ArrowDot, ArrowHeadType headType2= ArrowHeadType.ArrowDot,double TextRotation =0)
+        public static void AddCota(double[] P1_XYZ, double[] P2_XYZ, string Layer, string Style, float DesplazCota = 0, float DeplazaTextX = 0, float DeplazaTextY = 0, PrecisionCota Precision = PrecisionCota.Dos, string Text = "", double TextHeight = 0.0015,
+            double ArrowheadSize = 0.001, ArrowHeadType headType1 = ArrowHeadType.ArrowDot, ArrowHeadType headType2 = ArrowHeadType.ArrowDot, double TextRotation = 0)
         {
-
-
             if (AcadDoc != null && P1_XYZ.Length == 3 && P2_XYZ.Length == 3)
             {
-
                 double Rotation_Rad;
                 double X = P2_XYZ[0] - P1_XYZ[0];
                 double Y = P2_XYZ[1] - P1_XYZ[1];
-                //Encontrar Angulo 
-                Rotation_Rad = Math.Abs( Math.Atan(Y / X));
+                //Encontrar Angulo
+                Rotation_Rad = Math.Abs(Math.Atan(Y / X));
                 double DesX = (Distancia(P1_XYZ, P2_XYZ) / 2) * Math.Cos(Rotation_Rad);
                 double DesY = (Distancia(P1_XYZ, P2_XYZ) / 2) * Math.Sin(Rotation_Rad);
                 double DesplazarXCota = DesplazCota * Math.Sin(Rotation_Rad);
                 double DesplazarYCota = DesplazCota * Math.Cos(Rotation_Rad);
-
 
                 double[] LocationText = new double[] { P1_XYZ[0] + DesX + DesplazarXCota, P1_XYZ[1] + DesY + DesplazarYCota, P1_XYZ[2] + (P2_XYZ[2] - P1_XYZ[2]) / 2 };
                 double[] TextPosition = new double[] { LocationText[0] + DeplazaTextX, LocationText[1] + DeplazaTextY, LocationText[2] };
@@ -266,7 +249,7 @@ namespace FunctionsAutoCAD
                 AcadDimRotated cota = AcadDoc.ModelSpace.AddDimRotated(P1_XYZ, P2_XYZ, LocationText, Rotation_Rad);
 
                 //Cotas siempre con Puntas Redondas
-   
+
                 cota.Layer = Layer;
                 cota.StyleName = Layer;
                 cota.TextStyle = Style;
@@ -276,18 +259,14 @@ namespace FunctionsAutoCAD
                 cota.TextPosition = TextPosition;
                 cota.Arrowhead1Type = Clasf_ArrowHeadType(headType1);
                 cota.Arrowhead2Type = Clasf_ArrowHeadType(headType2);
-                cota.TextRotation = TextRotation*Math.PI/180;
+                cota.TextRotation = TextRotation * Math.PI / 180;
                 if (Text != "")
                 {
                     cota.TextOverride = Text;
-
                 }
 
                 cota.Update();
             }
-
-
-
         }
 
         /// <summary>
@@ -306,6 +285,7 @@ namespace FunctionsAutoCAD
                 polyline.Update();
             }
         }
+
         /// <summary>
         /// Crear un nuevo Polígono en 2D con su respectivo Relleno (Hatch).
         /// </summary>
@@ -326,9 +306,7 @@ namespace FunctionsAutoCAD
                 AddHatch((AcadEntity)polyline, Pattern, LayerHatch, ScaleHacth, PatternScale, PatternAngle);
                 polyline.Update();
             }
-
         }
-
 
         /// <summary>
         ///  Añadir un nuevo Poligono y un texto representado el largo de este.
@@ -344,7 +322,7 @@ namespace FunctionsAutoCAD
         /// <param name="Rotation">Ángulo de rotación del texto en grados </param>
         /// <param name="Width2">Ancho del cuadro de Texto.</param>
 
-        public static void AddPolyline2DWithLengthText(double[] VerticesPolyline, string LayerPolyline, string TextString, double[] PText_XYZ, double Width, double Height, string LayerText, string StyleText, float Rotation,double Width2 = 1.3)
+        public static void AddPolyline2DWithLengthText(double[] VerticesPolyline, string LayerPolyline, string TextString, double[] PText_XYZ, double Width, double Height, string LayerText, string StyleText, float Rotation, double Width2 = 1.3)
         {
             if (AcadDoc != null)
             {
@@ -352,13 +330,11 @@ namespace FunctionsAutoCAD
                 polyline.Layer = LayerPolyline;
                 polyline.Update();
                 TextString += @"%<\AcObjProp Object(%<\_ObjId " + polyline.ObjectID + @">%).Length \f " + (char)(34) + "%lu2%pr2" + (char)(34) + ">%";
-                AddText(TextString, PText_XYZ, Width, Height, LayerText, StyleText, Rotation,Width2:Width2);
-
-
+                AddText(TextString, PText_XYZ, Width, Height, LayerText, StyleText, Rotation, Width2: Width2);
             }
         }
 
-        //BLOQUES ESPECIFICOS DE EFE PRIMA CE 
+        //BLOQUES ESPECIFICOS DE EFE PRIMA CE
 
         /// <summary>
         /// Bloque: Nivel de Sección - Efe Prima Ce
@@ -376,18 +352,13 @@ namespace FunctionsAutoCAD
 
         public static void B_NivelSeccion(double[] P_XYZ, string Nivel, double Distance1, double Distance2, bool FlipSate1, string Layer, double Xscale, double Yscale, double Zscale, float Rotation)
         {
-
             if (AcadDoc != null)
             {
-
                 AcadBlockReference blockReference = AcadDoc.ModelSpace.InsertBlock(P_XYZ, "FC_B_Nivel seccion", Xscale, Yscale, Zscale, Rotation);
                 blockReference.Layer = Layer;
 
-
-
                 var referenceProperty = blockReference.GetDynamicBlockProperties();
                 var attributeReference = blockReference.GetAttributes();
-
 
                 referenceProperty[0].Value = Distance1;
                 referenceProperty[2].Value = Distance2;
@@ -400,10 +371,6 @@ namespace FunctionsAutoCAD
                 attributeReference[0].TextString = Nivel;
                 blockReference.Update();
             }
-
-
-
-
         }
 
         /// <summary>
@@ -423,12 +390,10 @@ namespace FunctionsAutoCAD
         /// <param name="Yscale">Escala en Y del Bloque.</param>
         /// <param name="Zscale">Escala en Z del Bloque.</param>
         /// <param name="Rotation">Ángulo de rotación en grados del Bloque.</param>
-        public static void B_Seccion(double[] P_XYZ, string X1,string X2, double Distance1, double Position1X, double Position2X, double Position1Y, double Position2Y, bool FlipSate1, string Layer, double Xscale, double Yscale, double Zscale, float Rotation)
+        public static void B_Seccion(double[] P_XYZ, string X1, string X2, double Distance1, double Position1X, double Position2X, double Position1Y, double Position2Y, bool FlipSate1, string Layer, double Xscale, double Yscale, double Zscale, float Rotation)
         {
-
             if (AcadDoc != null)
             {
-
                 AcadBlockReference blockReference = AcadDoc.ModelSpace.InsertBlock(P_XYZ, "FC_B_Seccion", Xscale, Yscale, Zscale, Rotation);
                 blockReference.Layer = Layer;
 
@@ -440,8 +405,6 @@ namespace FunctionsAutoCAD
                 referenceProperty[4].Value = Distance1;
                 referenceProperty[2].Value = Position2X;
                 referenceProperty[3].Value = Position2Y;
-              
-
 
                 if (FlipSate1 == true)
                 {
@@ -452,21 +415,64 @@ namespace FunctionsAutoCAD
                 attributeReference[1].TextString = X2;
                 blockReference.Update();
             }
+        }
 
+        /// <summary>
+        /// Bloque: Estibo de Sección - Efe Prima Ce
+        /// </summary>
+        public static void B_Estribo(double[] P_XYZ, string Layer, double Base,double Altura,double Xscale, double Yscale, double Zscale, float Rotation)
+        {
+            if (AcadDoc != null)
+            {
+                AcadBlockReference blockReference = AcadDoc.ModelSpace.InsertBlock(P_XYZ, "FC_B_Estribo tipo 1", Xscale, Yscale, Zscale, Rotation);
 
+                var referenceProperty = blockReference.GetDynamicBlockProperties();
+
+                referenceProperty[0].Value = Base;
+                referenceProperty[2].Value = Altura;
+
+                blockReference.Layer = Layer;
+                blockReference.Update();
+            }
+        }
+
+        /// <summary>
+        /// Bloque: Ganchos seccion - Efe Prima Ce
+        /// </summary>
+        public static void B_Gancho(double[] P_XYZ, string Layer, double Longitud, double Xscale, double Yscale, double Zscale, float Rotation,short FlipState)
+        {
+            if (AcadDoc != null)
+            {
+                AcadBlockReference blockReference = AcadDoc.ModelSpace.InsertBlock(P_XYZ, "FC_B_Gancho tipo 1", Xscale, Yscale, Zscale, 0);
+
+                var referenceProperty = blockReference.GetDynamicBlockProperties();
+                referenceProperty[2].Value = Longitud;
+                referenceProperty[4].Value = FlipState;
+                referenceProperty[5].Value = Math.PI * Rotation / 180;
+
+                blockReference.Layer = Layer;
+                blockReference.Update();
+            }
+        }
+
+        /// <summary>
+        /// Bloque: Refuerzo i en seccion - Efe Prima Ce
+        /// </summary>
+        public static void Add_ref(double[] P_XYZ, string Layer,int Alzado, double Xscale, double Yscale, double Zscale, float Rotation)
+        {
+            AcadBlockReference blockReference = AcadDoc.ModelSpace.InsertBlock(P_XYZ, "FC_B_Convenciones refuerzoV2", Xscale, Yscale, Zscale, Rotation);
+
+            var referenceProperty = blockReference.GetDynamicBlockProperties();
+            referenceProperty[0].Value = Alzado.ToString();
+
+            blockReference.Layer = Layer;
+            blockReference.Update();
         }
 
         
 
-
-
-
-
-
-
         private static void AddHatch(AcadEntity entity, string Pattern, string LayerHatch, double ScaleHacth, double PatternScale, double PatternAngle)
         {
-
             AcadHatch hatch = AcadDoc.ModelSpace.AddHatch(0, Pattern, true);
             AcadEntity[] entities = new AcadEntity[] { entity };
             hatch.AppendInnerLoop(entities);
@@ -475,22 +481,18 @@ namespace FunctionsAutoCAD
             hatch.PatternAngle = PatternAngle;
             BackHatch((AcadObject)hatch);
             hatch.Update();
-
         }
+
         private static void BackHatch(AcadObject AcadObject)
         {
             AcadDictionary dictionary = AcadDoc.ModelSpace.GetExtensionDictionary();
             AcadSortentsTable sentityObj = (AcadSortentsTable)dictionary.GetObject("ACAD_SORTENTS");
             AcadObject[] entities = new AcadObject[] { AcadObject };
             sentityObj.MoveToBottom(entities);
-
         }
-
 
         private static AcDimPrecision Clasf_precision(PrecisionCota presicionCota)
         {
-
-
             if (presicionCota == PrecisionCota.Cero)
             { return AcDimPrecision.acDimPrecisionZero; }
             else if (presicionCota == PrecisionCota.Uno)
@@ -506,32 +508,31 @@ namespace FunctionsAutoCAD
             else if (presicionCota == PrecisionCota.Seis)
             { return AcDimPrecision.acDimPrecisionSix; }
             else { return AcDimPrecision.acDimPrecisionTwo; }
-
         }
-
 
         private static AcAttachmentPoint Clasf_JustyText(JustifyText justify)
         {
-            if(justify == JustifyText.Center)
+            if (justify == JustifyText.Center)
             {
                 return AcAttachmentPoint.acAttachmentPointMiddleCenter;
             }
-            else if( justify == JustifyText.Right){
+            else if (justify == JustifyText.Right)
+            {
                 return AcAttachmentPoint.acAttachmentPointBottomRight;
-            }else
+            }
+            else
             {
                 return AcAttachmentPoint.acAttachmentPointBottomLeft;
             }
         }
 
-
         private static AcDimArrowheadType Clasf_ArrowHeadType(ArrowHeadType headType)
         {
-            if(headType == ArrowHeadType.ArrowDefault)
+            if (headType == ArrowHeadType.ArrowDefault)
             {
                 return AcDimArrowheadType.acArrowDefault;
             }
-            else if(headType == ArrowHeadType.ArrowDot)
+            else if (headType == ArrowHeadType.ArrowDot)
             {
                 return AcDimArrowheadType.acArrowDot;
             }
@@ -539,7 +540,6 @@ namespace FunctionsAutoCAD
             {
                 return AcDimArrowheadType.acArrowDot;
             }
-
         }
 
         private static double Distancia(double[] P1_XYZ, double[] P2_XYZ)
@@ -552,11 +552,6 @@ namespace FunctionsAutoCAD
             {
                 return 0;
             }
-
-
         }
-
-
-
     }
 }

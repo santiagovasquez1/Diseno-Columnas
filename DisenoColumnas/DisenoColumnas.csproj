@@ -35,11 +35,11 @@
   <ItemGroup>
     <Reference Include="B_Operaciones_Matricialesl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Y:\Bibliotecas\B_Operaciones_Matriciales\B_Operaciones_Matricialesl.dll</HintPath>
+      <HintPath>..\Bibliotecas proyecto\B_Operaciones_Matriciales\B_Operaciones_Matricialesl.dll</HintPath>
     </Reference>
     <Reference Include="FunctionsAutoCAD, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dlls\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
+      <HintPath>..\Bibliotecas proyecto\FunctionsAutoCAD\bin\Debug\FunctionsAutoCAD.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\MathNet.Numerics.4.8.1\lib\net40\MathNet.Numerics.dll</HintPath>
@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.4.0.16114, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Dlls\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <HintPath>..\Bibliotecas proyecto\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

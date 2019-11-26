@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Threading;
 
 namespace DisenoColumnas.Secciones
 {
@@ -87,7 +86,7 @@ namespace DisenoColumnas.Secciones
                 //HORIZONTAL
                 bc = H - 2 * r;
 
-                Ash1 = (FactorDisipacion1 * S * bc * Material.FC / FY) * (Area / Ach - 1);  //C.21-2
+                Ash1 = (FactorDisipacion1 * S * bc * Material.FC / FY) * ((Area / Ach) - 1);  //C.21-2
                 Ash2 = FactorDisipacion2 * S * bc * Material.FC / FY;  //C.21-3
 
                 Ash = Ash1 > Ash2 ? Ash1 : Ash2;
@@ -122,8 +121,6 @@ namespace DisenoColumnas.Secciones
             string[] Vector_decimales = { };
             int pasos;
             float delta = 0.50f;
-
-            char Separador_decimal;
             var P_As1 = new List<double>();     //'Peso total As1
             var P_As2 = new List<double>();     //'Peso total As2
 
@@ -131,7 +128,6 @@ namespace DisenoColumnas.Secciones
             int Indice_min;
 
             s_min = 7.5;
-            Separador_decimal = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
             if (Form1.Proyecto_.DMO_DES == GDE.DMO)
             {
@@ -147,51 +143,109 @@ namespace DisenoColumnas.Secciones
             pasos = Convert.ToInt32((s_max - s_min) / delta);
             s_d = s_min;
 
-            for (int i = 0; i < pasos; i++)
+            if (Estribo == null)
             {
-                #region Estribo #3
-
-                Estribo = new Estribo(3) //Estribo temporal
+                for (int i = 0; i < pasos; i++)
                 {
-                    Separacion = Convert.ToSingle(s_d)
-                };
+                    #region Estribo #3
 
-                Cuanti_Vol(FD1, FD2, r, FY);
-                P_As1.Add(Peso_Estribo(Estribo, r));
+                    Estribo = new Estribo(3) //Estribo temporal
+                    {
+                        Separacion = Convert.ToSingle(s_d)
+                    };
 
-                #endregion Estribo #3
+                    Cuanti_Vol(FD1, FD2, r, FY);
+                    P_As1.Add(Peso_Estribo(Estribo, r));
 
-                #region Estribo #4
+                    #endregion Estribo #3
 
-                Estribo = new Estribo(4) //Estribo temporal
+                    #region Estribo #4
+
+                    Estribo = new Estribo(4) //Estribo temporal
+                    {
+                        Separacion = Convert.ToSingle(s_d)
+                    };
+
+                    Cuanti_Vol(FD1, FD2, r, FY);
+                    P_As2.Add(Peso_Estribo(Estribo, r));
+
+                    Sep.Add(s_d);
+                    s_d += delta;
+
+                    #endregion Estribo #4
+                }
+
+                if (P_As1.Min() < P_As2.Min())
                 {
-                    Separacion = Convert.ToSingle(s_d)
-                };
-
-                Cuanti_Vol(FD1, FD2, r, FY);
-                P_As2.Add(Peso_Estribo(Estribo, r));
-
-                Sep.Add(s_d);
-                s_d += delta;
-
-                #endregion Estribo #4
-            }
-
-            if (P_As1.Min() < P_As2.Min())
-            {
-                Indice_min = P_As1.FindIndex(x => x == P_As1.Min());
-                Estribo = new Estribo(3)
+                    Indice_min = P_As1.FindIndex(x => x == P_As1.Min());
+                    Estribo = new Estribo(3)
+                    {
+                        Separacion = Convert.ToSingle(Sep[Indice_min]),
+                    };
+                }
+                else
                 {
-                    Separacion = Convert.ToSingle(Sep[Indice_min])
-                };
+                    Indice_min = P_As2.FindIndex(x => x == P_As2.Min());
+                    Estribo = new Estribo(4)
+                    {
+                        Separacion = Convert.ToSingle(Sep[Indice_min])
+                    };
+                }
+
+                Cuanti_Vol(FD1, FD2, r, 4220);
             }
             else
             {
-                Indice_min = P_As2.FindIndex(x => x == P_As2.Min());
-                Estribo = new Estribo(4)
+                double S1, S2, SH, SV, Sdef1, Sdef2;
+                double PAs1, PAs2;
+                float Ach = (B - 2 * r) * (H - 2 * r);
+
+                #region Estribo  #3
+
+                S1 = Estribo.NoRamasV1 * Form1.Proyecto_.AceroBarras[3] / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasV1 * FY * Form1.Proyecto_.AceroBarras[3] / (FD2 * (B - 2 * r) * Material.FC);
+                SV = new double[] { S1 * 100, S2 * 100, s_max }.Min();
+
+                S1 = Estribo.NoRamasH1 * Form1.Proyecto_.AceroBarras[3] / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasH1 * FY * Form1.Proyecto_.AceroBarras[3] / (FD2 * (H - 2 * r) * Material.FC);
+                SH = new double[] { S1 * 100, S2 * 100, s_max }.Min();
+
+                Sdef1 = Math.Round(Math.Min(SV, SH), 1);
+                Estribo.NoEstribo = 3;
+                Estribo.Separacion = (float)Sdef1;
+
+                PAs1 = Peso_Estribo(Estribo, r);
+
+                #endregion Estribo  #3
+
+                #region Estribo  #4
+
+                S1 = Estribo.NoRamasV1 * Form1.Proyecto_.AceroBarras[4] / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasV1 * FY * Form1.Proyecto_.AceroBarras[4] / (FD2 * (B - 2 * r) * Material.FC);
+                SV = new double[] { S1 * 100, S2 * 100, s_max }.Min();
+
+                S1 = Estribo.NoRamasH1 * Form1.Proyecto_.AceroBarras[4] / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasH1 * FY * Form1.Proyecto_.AceroBarras[4] / (FD2 * (H - 2 * r) * Material.FC);
+                SH = new double[] { S1 * 100, S2 * 100, s_max }.Min();
+
+                Sdef2 = Math.Round(Math.Min(SV, SH), 1);
+                Estribo.NoEstribo = 4;
+                Estribo.Separacion = (float)Sdef2;
+
+                PAs2 = Peso_Estribo(Estribo, r);
+
+                #endregion Estribo  #4
+
+                if (PAs1 < PAs2)
                 {
-                    Separacion = Convert.ToSingle(Sep[Indice_min])
-                };
+                    Estribo.NoEstribo = 3;
+                    Estribo.Separacion = (float)Sdef1;
+                }
+                else
+                {
+                    Estribo.NoEstribo = 4;
+                    Estribo.Separacion = (float)Sdef2;
+                }
             }
         }
 
@@ -350,6 +404,8 @@ namespace DisenoColumnas.Secciones
                 i++;
             }
 
+            Estribo.NoRamasH1 = CapasY;
+            Estribo.NoRamasV1 = CapasX;
             Refuerzos = Main_Secciones.Set_Refuerzo_Seccion(Aux_Refuerzos, CapasX, CapasY, 0, 0, B * 100, H * 100, 0, 0);
         }
 
@@ -581,6 +637,57 @@ namespace DisenoColumnas.Secciones
             g.DrawPolygon(P1, Vertices.ToArray());
             g.FillPolygon(br, Vertices.ToArray());
             Seccion_path.AddPolygon(Vertices.ToArray());
+        }
+
+        public void Dibujo_Autocad(double Xi, double Yi)
+        {
+            string LayerCuadro = "FC_BORDES";
+            double[] Vertices = new double[] { Xi, Yi, Xi, Yi - H, Xi + B, Yi - H, Xi + B, Yi };
+            double Dist1 = 0;
+            double Dist2 = 0;
+            double[] P_XYZ = { };
+            string Layer_aux = "";
+            short Flip_state = 0;
+
+            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices, LayerCuadro, true);
+            FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ: new double[] { Xi + B / 2, Yi - 0.04, 0 }, Layer: "FC_ESTRIBOS", Base: B - 0.02 * Form1.Proyecto_.R, Altura: H - 0.02 * Form1.Proyecto_.R, Xscale: 1, Yscale: 1, Zscale: 1, Rotation: 0);
+
+            #region Dibujo de refuerzo en seccion
+            foreach (CRefuerzo refi in Refuerzos)
+            {
+                refi.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2);
+            }
+            #endregion
+
+            #region Adicion de ganchos seccion
+
+            var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
+            var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
+
+            //Dibujo de Ganchos verticales
+            Dist1 = Math.Abs(Y_unicos.Max() - Y_unicos.Min()) / 100;
+            Dist2 = Math.Abs(X_unicos.Max() - X_unicos.Min()) / 100;
+            Layer_aux = "FC_GANCHOS";
+
+            for (int i = 1; i < X_unicos.Count - 1; i++)
+            {
+                P_XYZ = new double[] { Xi + (B / 2) + X_unicos[i] / 100, Yi - (H / 2) + Y_unicos.Max() / 100, 0 };
+                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270,Flip_state);
+
+                Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
+            }
+
+            Flip_state = 1;
+            for (int i = 1; i < Y_unicos.Count - 1; i++)
+            {
+                P_XYZ = new double[] { Xi + (B / 2) + X_unicos.Min() / 100, Yi - (H / 2) + Y_unicos[i] / 100, 0 };
+                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist2, 1, 1, 1, 0, Flip_state);
+
+                Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
+            }
+
+            #endregion
+
         }
 
         public double Peso_Estribo(Estribo pEstribo, float recubrimiento)

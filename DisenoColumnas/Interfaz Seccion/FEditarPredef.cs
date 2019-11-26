@@ -78,6 +78,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             pos = cbEstribo.Text.IndexOf('#') + 1;
             NumEstribo = Convert.ToInt32(cbEstribo.Text.Substring(pos));
 
+            if (Seccion.Estribo == null)
+            {
+
+            }
+
             Estribo temp = new Estribo(NumEstribo);
             
             if (nudSep.Value > 0)
