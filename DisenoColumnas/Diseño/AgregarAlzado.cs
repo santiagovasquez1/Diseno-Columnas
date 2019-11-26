@@ -528,14 +528,14 @@ namespace DisenoColumnas.Diseño
                             {
                                 au.Tipo2 = "-";
                                 float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga +au.Traslapo};
                                 au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                             }
                             else if (Porce_Top > 95f & Porce_V2_Bottom < 95f)
                             {
                                 au.Tipo2 = "+";
-                                float[] XY1 = new float[] { a.DistX, au.Hacum };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                float[] XY1 = new float[] { a.DistX, au.Hacum-au.Hviga+au.Traslapo+LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo  };
                                 au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                             }
                             else

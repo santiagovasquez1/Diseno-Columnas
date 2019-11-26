@@ -1224,14 +1224,14 @@ namespace DisenoColumnas.Clases
                             {
                                 au.Tipo2 = "-";
                                 float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga + au.Traslapo };
                                 au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                             }
                             else if (Porce_Top > 95f & Porce_V2_Bottom < 95f)
                             {
                                 au.Tipo2 = "+";
-                                float[] XY1 = new float[] { a.DistX, au.Hacum };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga + au.Traslapo + LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo };
                                 au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                             }
                             else
@@ -1534,8 +1534,21 @@ namespace DisenoColumnas.Clases
 
                 double[] P1_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i], 0 };
                 double[] P2_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
-                FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
 
+                if (Form1.Proyecto_.e_acabados != 0 & i== LuzAcum.Count-1 )
+                {
+                    P1_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i]+ Form1.Proyecto_.e_acabados, 0 };
+                    P2_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
+
+                    P1_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i], 0 };
+                    P2_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i] + Form1.Proyecto_.e_acabados, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
+                }
+                else
+                {
+                    FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
+                }
                 //Cotas Viga
                 P1_CotaT = new double[] { X, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
                 P2_CotaT = new double[] { X, Y + LuzAcum[i], 0 };
@@ -1875,14 +1888,14 @@ namespace DisenoColumnas.Clases
                                 float DistAd = 0.3f;
                                 if (aux.Tipo2 == "+")
                                 {
-                                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0]+DistAd - DistCorrerText, Y +aux.Coord_Alzado_PB[1][1] - DistCorrerTextY/2, 0 };
-                                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
-                                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0],  Y + aux.Coord_Alzado_PB[1][1], 0 };
+                                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0]+DistAd - DistCorrerText, Y +aux.Hacum - DistCorrerTextY/2, 0 };
+                                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum, 0 };
+                                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0],  Y + aux.Coord_Alzado_PB[0][1], 0 };
                                 }
                                 else if(aux.Tipo2=="-")
                                 {
-                                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] + DistAd - DistCorrerText, Y+aux.Coord_Alzado_PB[0][1] - DistCorrerTextY / 2, 0 };
-                                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
+                                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] + DistAd - DistCorrerText, Y+ aux.Hacum - DistCorrerTextY / 2, 0 };
+                                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Hacum-aux.Hviga, 0 };
                                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
                                 }
                                 else

@@ -34,20 +34,21 @@ namespace DisenoColumnas.Interfaz_Inicial
                 else
                 {
                 
-                    Form1.Proyecto_.P_R = Convert.ToSingle(P_R.Text);
+          
                     if (Convert.ToSingle(P_R.Text) != Form1.Proyecto_.P_R)
                     {
-                        Form1.Proyecto_.P_R = Convert.ToSingle(P_R.Text);
+                    
                         if (ProyectoPV)
                         {
                             MessageBox.Show("Debido al cambio realizado deberá volver a diseñar las Columnas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-
+                    Form1.Proyecto_.P_R = Convert.ToSingle(P_R.Text);
                     Form1.Proyecto_.R = Convert.ToSingle(R_Box.Text);
                     Form1.Proyecto_.FY = Convert.ToSingle(Fy_Box.Text);
                     Form1.Proyecto_.e_Fundacion = Convert.ToSingle(T_Vf.Text);
                     Form1.Proyecto_.Nivel_Fundacion = Convert.ToSingle(T_arranque.Text);
+                    Form1.Proyecto_.e_acabados = Convert.ToSingle(e_acabados.Text);
 
                     Form1.Proyecto_.AlturaEdificio_();
                     if (Radio_Des.Checked)
