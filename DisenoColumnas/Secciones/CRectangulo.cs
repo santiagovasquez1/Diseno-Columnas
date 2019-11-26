@@ -677,7 +677,6 @@ namespace DisenoColumnas.Secciones
             {
                 P_XYZ = new double[] { Xi + (B / 2) + X_unicos[i] / 100, Yi - (H / 2) + Y_unicos.Max() / 100, 0 };
                 FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270, Flip_state);
-
                 Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
             }
 
