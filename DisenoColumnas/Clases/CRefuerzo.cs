@@ -30,13 +30,38 @@ namespace DisenoColumnas.Clases
             As_Long = Form1.Proyecto_.AceroBarras[d1] * Math.Pow(100, 2);
         }
 
-        public void Dibujo_Ref_Autocad(double Xi, double Yi)
+        public void Dibujo_Ref_Autocad(double Xi, double Yi, double Xmax, double Xmin, double Ymax, double Ymin)
         {
-            double[] P_XYZ;
+            double[] P_XYZ = { };
+            double[] T_XYZ = { };
             string Layer = "FC_REFUERZO 2";
 
             P_XYZ = new double[] { Xi + Coord[0] / 100, Yi + Coord[1] / 100, 0 };
             FunctionsAutoCAD.FunctionsAutoCAD.Add_ref(P_XYZ, Layer, 1, 1, 1, 1, 0);
+
+            if (Math.Round(Coord[1], 2) == Ymax) 
+            {
+                T_XYZ = new double[] { Xi + (Coord[0] / 100) - 0.007, Yi + (Coord[1] / 100) + 0.05, 0 };
+            }
+
+            if (Math.Round(Coord[1], 2) == Ymin)
+            {
+                T_XYZ = new double[] { Xi + (Coord[0] / 100) - 0.007, Yi + (Coord[1] / 100) - 0.03, 0 };
+            }
+
+            if(Math.Round(Coord[1], 2) > Ymin & Math.Round(Coord[1], 2) < Ymax)
+            {
+                if(Math.Round(Coord[0], 2) == Xmin)
+                {
+                    T_XYZ = new double[] { Xi + (Coord[0] / 100) - 0.05, Yi + (Coord[1] / 100) - 0.007, 0 };
+                }
+                if (Math.Round(Coord[0], 2) == Xmax)
+                {
+                    T_XYZ = new double[] { Xi + (Coord[0] / 100) + 0.03, Yi + (Coord[1] / 100) - 0.007, 0 };
+                }
+            }
+
+            FunctionsAutoCAD.FunctionsAutoCAD.AddText("1", T_XYZ, 0.075, 0.0225, "FC_R-100", "FC_TEXT", 0);
         }
 
         public static double operator +(CRefuerzo r1, CRefuerzo r2)

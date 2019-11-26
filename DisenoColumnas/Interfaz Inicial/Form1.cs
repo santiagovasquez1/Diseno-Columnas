@@ -2515,7 +2515,8 @@ namespace DisenoColumnas
                     }
 
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
-                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60);
+                    FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:15");
+                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60,NoDes);
                     DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }

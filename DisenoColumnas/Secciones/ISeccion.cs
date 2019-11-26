@@ -37,7 +37,7 @@ namespace DisenoColumnas.Secciones
 
         void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion);
 
-        void Dibujo_Autocad(double Xi, double Yi);
+        void Dibujo_Autocad(double Xi, double Yi,int Num_Alzado);
 
         void Refuerzo_Base(double recub);
 

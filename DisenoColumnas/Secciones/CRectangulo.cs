@@ -639,7 +639,7 @@ namespace DisenoColumnas.Secciones
             Seccion_path.AddPolygon(Vertices.ToArray());
         }
 
-        public void Dibujo_Autocad(double Xi, double Yi)
+        public void Dibujo_Autocad(double Xi, double Yi,int Num_Despiece)
         {
             string LayerCuadro = "FC_BORDES";
             double[] Vertices = new double[] { Xi, Yi, Xi, Yi - H, Xi + B, Yi - H, Xi + B, Yi };
@@ -647,22 +647,26 @@ namespace DisenoColumnas.Secciones
             double Dist2 = 0;
             double[] P_XYZ = { };
             string Layer_aux = "";
+            string Nom_Seccion = "";
+            string Escala = "1:15";
             short Flip_state = 0;
+
+            var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
+            var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices, LayerCuadro, true);
             FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ: new double[] { Xi + B / 2, Yi - 0.04, 0 }, Layer: "FC_ESTRIBOS", Base: B - 0.02 * Form1.Proyecto_.R, Altura: H - 0.02 * Form1.Proyecto_.R, Xscale: 1, Yscale: 1, Zscale: 1, Rotation: 0);
 
             #region Dibujo de refuerzo en seccion
+
             foreach (CRefuerzo refi in Refuerzos)
             {
-                refi.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2);
+                refi.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
             }
-            #endregion
+
+            #endregion Dibujo de refuerzo en seccion
 
             #region Adicion de ganchos seccion
-
-            var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
-            var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
 
             //Dibujo de Ganchos verticales
             Dist1 = Math.Abs(Y_unicos.Max() - Y_unicos.Min()) / 100;
@@ -672,7 +676,7 @@ namespace DisenoColumnas.Secciones
             for (int i = 1; i < X_unicos.Count - 1; i++)
             {
                 P_XYZ = new double[] { Xi + (B / 2) + X_unicos[i] / 100, Yi - (H / 2) + Y_unicos.Max() / 100, 0 };
-                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270,Flip_state);
+                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270, Flip_state);
 
                 Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
             }
@@ -686,8 +690,12 @@ namespace DisenoColumnas.Secciones
                 Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
             }
 
-            #endregion
+            #endregion Adicion de ganchos seccion
 
+            #region Nombre_Seccion
+            Nom_Seccion = "%%USeccion " + Num_Despiece;
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - (H / 2) - 0.40, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
+            #endregion
         }
 
         public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
