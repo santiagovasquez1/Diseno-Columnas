@@ -574,6 +574,11 @@ namespace DisenoColumnas.Secciones
             //}
         }
 
+        public void Dibujo_Autocad(double Xi, double Yi)
+        {
+            throw new NotImplementedException();
+        }
+
         public static bool operator ==(CSD s1, CSD s2)
         {
             return s1.Equals(s2);

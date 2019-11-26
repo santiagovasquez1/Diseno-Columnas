@@ -2503,6 +2503,7 @@ namespace DisenoColumnas
             FunctionsAutoCAD.FunctionsAutoCAD.GetPoint(ref XY);
             double DeltaX = 0;
             int NoDes = 1;
+
             foreach (Columna col in ColumnsDrawing)
             {
                 if (col.Alzados.Count != 0)
@@ -2514,6 +2515,7 @@ namespace DisenoColumnas
                     }
 
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
+                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60);
                     DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }

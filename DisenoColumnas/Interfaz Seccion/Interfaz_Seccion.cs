@@ -409,7 +409,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             label1.Text = "X:" + Math.Round(X_r, 2) + " Y:" + Math.Round(-Y_r, 2);
             label1.Update();
 
-            //Grafica.Invalidate();
         }
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)

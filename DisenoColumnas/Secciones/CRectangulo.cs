@@ -639,6 +639,57 @@ namespace DisenoColumnas.Secciones
             Seccion_path.AddPolygon(Vertices.ToArray());
         }
 
+        public void Dibujo_Autocad(double Xi, double Yi)
+        {
+            string LayerCuadro = "FC_BORDES";
+            double[] Vertices = new double[] { Xi, Yi, Xi, Yi - H, Xi + B, Yi - H, Xi + B, Yi };
+            double Dist1 = 0;
+            double Dist2 = 0;
+            double[] P_XYZ = { };
+            string Layer_aux = "";
+            short Flip_state = 0;
+
+            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices, LayerCuadro, true);
+            FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ: new double[] { Xi + B / 2, Yi - 0.04, 0 }, Layer: "FC_ESTRIBOS", Base: B - 0.02 * Form1.Proyecto_.R, Altura: H - 0.02 * Form1.Proyecto_.R, Xscale: 1, Yscale: 1, Zscale: 1, Rotation: 0);
+
+            #region Dibujo de refuerzo en seccion
+            foreach (CRefuerzo refi in Refuerzos)
+            {
+                refi.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2);
+            }
+            #endregion
+
+            #region Adicion de ganchos seccion
+
+            var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
+            var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
+
+            //Dibujo de Ganchos verticales
+            Dist1 = Math.Abs(Y_unicos.Max() - Y_unicos.Min()) / 100;
+            Dist2 = Math.Abs(X_unicos.Max() - X_unicos.Min()) / 100;
+            Layer_aux = "FC_GANCHOS";
+
+            for (int i = 1; i < X_unicos.Count - 1; i++)
+            {
+                P_XYZ = new double[] { Xi + (B / 2) + X_unicos[i] / 100, Yi - (H / 2) + Y_unicos.Max() / 100, 0 };
+                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270,Flip_state);
+
+                Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
+            }
+
+            Flip_state = 1;
+            for (int i = 1; i < Y_unicos.Count - 1; i++)
+            {
+                P_XYZ = new double[] { Xi + (B / 2) + X_unicos.Min() / 100, Yi - (H / 2) + Y_unicos[i] / 100, 0 };
+                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist2, 1, 1, 1, 0, Flip_state);
+
+                Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
+            }
+
+            #endregion
+
+        }
+
         public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
         {
             double PAuxiliar = 0;

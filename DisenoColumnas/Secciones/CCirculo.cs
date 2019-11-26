@@ -325,6 +325,11 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
+        public void Dibujo_Autocad(double Xi, double Yi)
+        {
+            throw new NotImplementedException();
+        }
+
         public static bool operator ==(CCirculo s1, CCirculo s2)
         {
             return s1.Equals(s2);
