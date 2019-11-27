@@ -33,20 +33,23 @@
             this.Button2 = new System.Windows.Forms.Button();
             this.Button1 = new System.Windows.Forms.Button();
             this.D_ColGraficar = new System.Windows.Forms.DataGridView();
-            this.Columnas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Disenar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.PictureBox2 = new System.Windows.Forms.PictureBox();
             this.Label9 = new System.Windows.Forms.Label();
+            this.Columnas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColAlready = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Disenar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.PictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.D_ColGraficar)).BeginInit();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Button3
             // 
             this.Button3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button3.Location = new System.Drawing.Point(16, 380);
+            this.Button3.Location = new System.Drawing.Point(23, 378);
             this.Button3.Name = "Button3";
             this.Button3.Size = new System.Drawing.Size(115, 23);
             this.Button3.TabIndex = 23;
@@ -57,7 +60,7 @@
             // Button2
             // 
             this.Button2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button2.Location = new System.Drawing.Point(202, 380);
+            this.Button2.Location = new System.Drawing.Point(230, 378);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(65, 23);
             this.Button2.TabIndex = 22;
@@ -68,7 +71,7 @@
             // Button1
             // 
             this.Button1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button1.Location = new System.Drawing.Point(137, 380);
+            this.Button1.Location = new System.Drawing.Point(154, 378);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(59, 23);
             this.Button1.TabIndex = 21;
@@ -84,28 +87,14 @@
             this.D_ColGraficar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.D_ColGraficar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Columnas,
+            this.ColAlready,
             this.Disenar});
             this.D_ColGraficar.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.D_ColGraficar.GridColor = System.Drawing.SystemColors.Control;
-            this.D_ColGraficar.Location = new System.Drawing.Point(6, 29);
+            this.D_ColGraficar.Location = new System.Drawing.Point(8, 29);
             this.D_ColGraficar.Name = "D_ColGraficar";
-            this.D_ColGraficar.Size = new System.Drawing.Size(267, 343);
+            this.D_ColGraficar.Size = new System.Drawing.Size(306, 343);
             this.D_ColGraficar.TabIndex = 20;
-            // 
-            // Columnas
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.Columnas.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Columnas.HeaderText = "Columna";
-            this.Columnas.Name = "Columnas";
-            this.Columnas.ReadOnly = true;
-            // 
-            // Disenar
-            // 
-            this.Disenar.HeaderText = "Graficar";
-            this.Disenar.Name = "Disenar";
-            this.Disenar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Disenar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Panel1
             // 
@@ -116,24 +105,9 @@
             this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel1.Location = new System.Drawing.Point(0, 0);
             this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(285, 23);
+            this.Panel1.Size = new System.Drawing.Size(323, 23);
             this.Panel1.TabIndex = 19;
             this.Panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseDown);
-            // 
-            // PictureBox2
-            // 
-            this.PictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBox2.Image = global::DisenoColumnas.Properties.Resources.close_button;
-            this.PictureBox2.Location = new System.Drawing.Point(269, 3);
-            this.PictureBox2.Name = "PictureBox2";
-            this.PictureBox2.Size = new System.Drawing.Size(10, 10);
-            this.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBox2.TabIndex = 13;
-            this.PictureBox2.TabStop = false;
-            this.PictureBox2.Click += new System.EventHandler(this.PictureBox2_Click);
-            this.PictureBox2.MouseLeave += new System.EventHandler(this.PictureBox2_MouseLeave);
-            this.PictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox2_MouseMove);
             // 
             // Label9
             // 
@@ -146,16 +120,65 @@
             this.Label9.Text = "Columnas a Graficar Alzado";
             this.Label9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label9_MouseDown);
             // 
+            // Columnas
+            // 
+            this.Columnas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.Columnas.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Columnas.HeaderText = "Columna";
+            this.Columnas.Name = "Columnas";
+            this.Columnas.ReadOnly = true;
+            this.Columnas.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // ColAlready
+            // 
+            this.ColAlready.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ColAlready.HeaderText = "OK?";
+            this.ColAlready.Name = "ColAlready";
+            this.ColAlready.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Disenar
+            // 
+            this.Disenar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Disenar.HeaderText = "Graficar";
+            this.Disenar.Name = "Disenar";
+            this.Disenar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // PictureBox2
+            // 
+            this.PictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBox2.Image = global::DisenoColumnas.Properties.Resources.close_button;
+            this.PictureBox2.Location = new System.Drawing.Point(304, 3);
+            this.PictureBox2.Name = "PictureBox2";
+            this.PictureBox2.Size = new System.Drawing.Size(10, 10);
+            this.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBox2.TabIndex = 13;
+            this.PictureBox2.TabStop = false;
+            this.PictureBox2.Click += new System.EventHandler(this.PictureBox2_Click);
+            this.PictureBox2.MouseLeave += new System.EventHandler(this.PictureBox2_MouseLeave);
+            this.PictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox2_MouseMove);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.D_ColGraficar);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(323, 410);
+            this.panel2.TabIndex = 24;
+            // 
             // ColumnasaGraficar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 410);
+            this.ClientSize = new System.Drawing.Size(323, 410);
             this.Controls.Add(this.Button3);
             this.Controls.Add(this.Button2);
             this.Controls.Add(this.Button1);
-            this.Controls.Add(this.D_ColGraficar);
             this.Controls.Add(this.Panel1);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ColumnasaGraficar";
             this.ShowIcon = false;
@@ -167,6 +190,7 @@
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -177,10 +201,12 @@
         internal System.Windows.Forms.Button Button2;
         internal System.Windows.Forms.Button Button1;
         internal System.Windows.Forms.DataGridView D_ColGraficar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Columnas;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Disenar;
         internal System.Windows.Forms.Panel Panel1;
         internal System.Windows.Forms.PictureBox PictureBox2;
         internal System.Windows.Forms.Label Label9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Columnas;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColAlready;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Disenar;
+        private System.Windows.Forms.Panel panel2;
     }
 }

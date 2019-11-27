@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel2 = new System.Windows.Forms.Panel();
             this.Button2 = new System.Windows.Forms.Button();
             this.Button1 = new System.Windows.Forms.Button();
@@ -53,14 +53,14 @@
             this.Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel2.Location = new System.Drawing.Point(0, 23);
             this.Panel2.Name = "Panel2";
-            this.Panel2.Size = new System.Drawing.Size(388, 407);
+            this.Panel2.Size = new System.Drawing.Size(388, 392);
             this.Panel2.TabIndex = 15;
             this.Panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel2_MouseDown);
             // 
             // Button2
             // 
             this.Button2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button2.Location = new System.Drawing.Point(198, 370);
+            this.Button2.Location = new System.Drawing.Point(205, 357);
             this.Button2.Name = "Button2";
             this.Button2.Size = new System.Drawing.Size(65, 23);
             this.Button2.TabIndex = 2;
@@ -71,7 +71,7 @@
             // Button1
             // 
             this.Button1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button1.Location = new System.Drawing.Point(118, 370);
+            this.Button1.Location = new System.Drawing.Point(125, 357);
             this.Button1.Name = "Button1";
             this.Button1.Size = new System.Drawing.Size(59, 23);
             this.Button1.TabIndex = 1;
@@ -91,7 +91,7 @@
             this.ListadeMuros});
             this.D_ColSim.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.D_ColSim.GridColor = System.Drawing.SystemColors.Control;
-            this.D_ColSim.Location = new System.Drawing.Point(11, 17);
+            this.D_ColSim.Location = new System.Drawing.Point(12, 5);
             this.D_ColSim.Name = "D_ColSim";
             this.D_ColSim.Size = new System.Drawing.Size(365, 343);
             this.D_ColSim.TabIndex = 0;
@@ -101,8 +101,8 @@
             // 
             // Muros
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.Muros.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.Muros.DefaultCellStyle = dataGridViewCellStyle1;
             this.Muros.HeaderText = "Columna";
             this.Muros.Name = "Muros";
             this.Muros.ReadOnly = true;
@@ -148,7 +148,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 430);
+            this.ClientSize = new System.Drawing.Size(388, 415);
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

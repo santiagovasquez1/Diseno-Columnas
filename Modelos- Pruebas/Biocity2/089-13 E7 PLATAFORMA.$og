@@ -1,0 +1,189 @@
+                                                                                
+                                                                                
+ B E G I N   A N A L Y S I S                                2019/11/26  11:50:02
+                                                                                
+                                                                                
+ E L E M E N T   F O R M A T I O N                                      11:50:02
+
+
++NUMBER OF JOINT  ELEMENTS FORMED          =          60                        
+
++NUMBER OF SPRING ELEMENTS FORMED          =           0                        
+                                                                                
++Frame  element       0 of     224                                              
++Frame  element     100 of     224                                              
++Frame  element     200 of     224                                              
++Frame  element     224 of     224                                              
++NUMBER OF FRAME  ELEMENTS FORMED          =         224                        
+                                                                                
++Shell  element       0 of      43                                              
++Shell  element      43 of      43                                              
++NUMBER OF SHELL  ELEMENTS FORMED          =          43                        
+                                                                                
++Weld       0 of       3                                                        
++Constraint       3 of       3                                                  
++NUMBER OF CONSTRAINTS FORMED              =           3                        
+                                                                                
+ REDUCTION OF CONSTRAINTS AND RESTRAINTS:                                       
+ NUMBER OF                                                                      
+   CONSTRAINT MASTER DOF BEFORE REDUCTION  =           9                        
+   COUPLED CONSTRAINT/RESTRAINT MASTER DOF =           0                        
+   CONSTRAINT MASTER DOF AFTER REDUCTION   =           9                        
+                                                                                
+                                                                                
+ E Q U A T I O N   S O L U T I O N                                      11:50:02
+                                                                                
+ TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =         327                        
+ APPROXIMATE "EFFECTIVE" BAND WIDTH        =          60                        
+                                                                                
+ NUMBER OF EQUATION STORAGE BLOCKS         =           1                        
+ MAXIMUM BLOCK SIZE (8-BYTE TERMS)         =       18386                        
+ SIZE OF STIFFNESS FILE(S) (BYTES)         =     144.934 KB                     
+                                                                                
+ NUMBER OF EQUATIONS TO SOLVE              =         327                        
+ NUMBER OF STATIC LOAD CASES               =          10                        
+ NUMBER OF ACCELERATION LOADS              =           6                        
+ NUMBER OF NONLINEAR DEFORMATION LOADS     =           0                        
+                                                                                
+ CURRENT P-DELTA ANALYSIS ITERATION        =           0                        
+ MAXIMUM NUMBER OF ITERATIONS ALLOWED      =           5                        
+                                                                                
+ CURRENT  DISPLACEMENT MAGNITUDE           =    0.028597                        
+                                                                                
+                                                                                
+                                                                                
+ B E G I N   P - D E L T A   I T E R A T I O N                          11:50:03
+                                                                                
+                                                                                
+ E L E M E N T   F O R M A T I O N                                      11:50:03
+
+                                                                                
++Frame  element       0 of     224                                              
++Frame  element     100 of     224                                              
++Frame  element     200 of     224                                              
++Frame  element     224 of     224                                              
++NUMBER OF FRAME  ELEMENTS FORMED          =         224                        
+                                                                                
++Shell  element       0 of      43                                              
++Shell  element      43 of      43                                              
++NUMBER OF SHELL  ELEMENTS FORMED          =          43                        
+                                                                                
+                                                                                
+ E Q U A T I O N   S O L U T I O N                                      11:50:03
+                                                                                
+ TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =         327                        
+ APPROXIMATE "EFFECTIVE" BAND WIDTH        =          60                        
+                                                                                
+ NUMBER OF EQUATION STORAGE BLOCKS         =           1                        
+ MAXIMUM BLOCK SIZE (8-BYTE TERMS)         =       18386                        
+ SIZE OF STIFFNESS FILE(S) (BYTES)         =     144.934 KB                     
+                                                                                
+ NUMBER OF EQUATIONS TO SOLVE              =         327                        
+ NUMBER OF STATIC LOAD CASES               =          10                        
+ NUMBER OF ACCELERATION LOADS              =           6                        
+ NUMBER OF NONLINEAR DEFORMATION LOADS     =           0                        
+                                                                                
+ CURRENT P-DELTA ANALYSIS ITERATION        =           1                        
+ MAXIMUM NUMBER OF ITERATIONS ALLOWED      =           5                        
+                                                                                
+ CURRENT  DISPLACEMENT MAGNITUDE           =    0.028599                        
+ RELATIVE DISPLACEMENT CHANGE              =    0.000221                        
+ RELATIVE DISPLACEMENT TOLERANCE           =    0.001000                        
+                                                                                
+ ITERATION CONVERGED                                                            
+                                                                                
+                                                                                
+ P - D E L T A   I T E R A T I O N   C O M P L E T E                    11:50:03
+                                                                                
+                                                                                
+ R I T Z   A N A L Y S I S                                              11:50:03
+                                                                                
+ NUMBER OF STIFFNESS DEGREES OF FREEDOM    =         327                        
+ NUMBER OF MASS DEGREES OF FREEDOM         =          55                        
+ NUMBER OF RITZ MODES SOUGHT               =           6                        
+ NUMBER OF STARTING VECTORS                =           3                        
+ VECTOR BLOCK SIZE                         =           3                        
+ FREQUENCY SHIFT (CENTER) (CYC/TIME)       =     .000000                        
+                                                                                
+ ZERO STARTING LOAD REMOVED:           ACC =          UZ                        
+                                                                                
+ * * * W A R N I N G * * *                                                      
+ ZERO RITZ STARTING VECTORS ELIMINATED,                                         
+ NUMBER OF STARTING VECTORS REDUCED TO     =           2                        
+                                                                                
+                                                                                
+ NUMBER OF RITZ MODES FOUND                =           6                        
+ NUMBER OF GENERATION CYCLES PERFORMED     =           3                        
+                                                                                
+                                                                                
+ R E S P O N S E - S P E C T R U M   A N A L Y S I S                    11:50:03
+                                                                                
+                                                                                
+ J O I N T   O U T P U T                                                11:50:03
+                                                                                
+                                                                                
+ E L E M E N T   J O I N T - F O R C E   O U T P U T                    11:50:03
+
+                                                                                
++Joint  element       0 of      60                                              
++Joint  element      60 of      60                                              
++NUMBER OF JOINT  ELEMENTS SAVED           =          60                        
+                                                                                
++Frame  element       0 of     224                                              
++Frame  element     100 of     224                                              
++Frame  element     200 of     224                                              
++Frame  element     224 of     224                                              
++NUMBER OF FRAME  ELEMENTS SAVED           =         224                        
+                                                                                
++Shell  element       0 of      43                                              
++Shell  element      43 of      43                                              
++NUMBER OF SHELL  ELEMENTS SAVED           =          43                        
+                                                                                
+                                                                                
+ E L E M E N T   O U T P U T                                            11:50:03
+
+                                                                                
+                                                                                
+ A N A L Y S I S   C O M P L E T E                          2019/11/26  11:50:03
+                                                                                
+                                                                                
+ C E N T E R S   O F   R I G I D I T Y                                  11:50:04
+                                                                                
+ NUMBER OF LOAD CASES TO SOLVE             =           9                        
+                                                                                
+                                                                                
+ B E G I N   A N A L Y S I S                                2019/11/26  11:50:04
+                                                                                
+                                                                                
+ E L E M E N T   F O R M A T I O N                                      11:50:04
+
+
++NUMBER OF JOINT  ELEMENTS FORMED          =          60                        
+
++NUMBER OF SPRING ELEMENTS FORMED          =           0                        
+                                                                                
+                                                                                
+ L O A D   R E - S O L U T I O N                                        11:50:04
+                                                                                
+ NUMBER OF STATIC LOAD CASES               =          10                        
+                                                                                
+                                                                                
+ E L E M E N T   J O I N T - F O R C E   O U T P U T                    11:50:04
+
+                                                                                
++Joint  element       0 of      60                                              
++Joint  element      60 of      60                                              
++NUMBER OF JOINT  ELEMENTS SAVED           =          60                        
+                                                                                
++Frame  element       0 of     224                                              
++Frame  element     100 of     224                                              
++Frame  element     200 of     224                                              
++Frame  element     224 of     224                                              
++NUMBER OF FRAME  ELEMENTS SAVED           =         224                        
+                                                                                
++Shell  element       0 of      43                                              
++Shell  element      43 of      43                                              
++NUMBER OF SHELL  ELEMENTS SAVED           =          43                        
+                                                                                
+                                                                                
+ A N A L Y S I S   C O M P L E T E                          2019/11/26  11:50:04

@@ -18,7 +18,8 @@ namespace DisenoColumnas.Diseño
 
             for (int i = 0; i < D_ColGraficar.Rows.Count; i++)
             {
-                Form1.Proyecto_.Lista_Columnas[i].aGraficar = (bool)D_ColGraficar.Rows[i].Cells[1].Value;
+                Form1.Proyecto_.Lista_Columnas[i].aGraficar = (bool)D_ColGraficar.Rows[i].Cells[2].Value;
+                Form1.Proyecto_.Lista_Columnas[i].Ready = (bool)D_ColGraficar.Rows[i].Cells[1].Value;
             }
 
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
@@ -53,7 +54,7 @@ namespace DisenoColumnas.Diseño
         private void PictureBox2_Click(object sender, EventArgs e)
         {
             Close();
-            Form1.mFormPrincipal.CancelDiseño = true;
+            Form1.mFormPrincipal.CancelGarfica = true;
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace DisenoColumnas.Diseño
 
             for (int i = 0; i < D_ColGraficar.Rows.Count; i++)
             {
-                if ((bool)D_ColGraficar.Rows[i].Cells[1].Value == true)
+                if ((bool)D_ColGraficar.Rows[i].Cells[2].Value == true)
                 {
                     if (i != D_ColGraficar.Rows.Count - 1)
                     {
@@ -76,6 +77,7 @@ namespace DisenoColumnas.Diseño
             {
                 for (int i = 0; i < D_ColGraficar.Rows.Count; i++)
                 {
+                    D_ColGraficar.Rows[i].Cells[2].Value = true;
                     D_ColGraficar.Rows[i].Cells[1].Value = true;
                 }
             }
@@ -86,6 +88,7 @@ namespace DisenoColumnas.Diseño
                 {
                     for (int i = 0; i < D_ColGraficar.Rows.Count; i++)
                     {
+                        D_ColGraficar.Rows[i].Cells[2].Value = false;
                         D_ColGraficar.Rows[i].Cells[1].Value = false;
                     }
                 }
@@ -95,6 +98,12 @@ namespace DisenoColumnas.Diseño
         private void ColumnasaGraficar_Load(object sender, EventArgs e)
         {
             LoadDataGridView();
+
+            if(Form1.m_Informacion!= null)
+            {
+                Form1.m_Informacion.EstiloDatGridView(D_ColGraficar);
+            }
+
         }
 
         private void LoadDataGridView()
@@ -104,7 +113,12 @@ namespace DisenoColumnas.Diseño
                 D_ColGraficar.Rows.Add();
 
                 D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[0].Value = columna.Name;
-                D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[1].Value = columna.aGraficar;
+                D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[1].Value = columna.Ready;
+                D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[2].Value = columna.aGraficar;
+
+
+
+
             }
         }
 

@@ -99,44 +99,39 @@ namespace DisenoColumnas.Diseño
             CrearDataGrid();
         }
 
-        private void ModificarTraslapo(int Indice, ref Columna columna)
+        private void ModificarTraslapo(int Indice, Columna columna)
         {
             for (int i = columna.Alzados[Indice].Colum_Alzado.Count - 1; i >= 0; i--)
             {
                 if (columna.Alzados[Indice].Colum_Alzado[i] != null)
                 {
-                    try
+                    float TraslapoFinal;
+                    if (columna.Alzados[Indice].Colum_Alzado[i].Tipo.Contains("T"))
                     {
-                        if (columna.Alzados[Indice].Colum_Alzado[i].NoBarra > columna.Alzados[Indice].Colum_Alzado[i - 1].NoBarra)
+                        float TV1 = 0; float TV2 = 0; float TI = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i].NoBarra, columna.Seccions[i].Item1.Material.FC);
+
+                        try { TV1 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra, columna.Seccions[i + 1].Item1.Material.FC); } catch { }
+                        try { TV2 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i - 1].NoBarra, columna.Seccions[i - 1].Item1.Material.FC); } catch { }
+                        if (TV1 < TV2)
                         {
-                            float FC = columna.Seccions[i].Item1.Material.FC;
-                            if (FC == 210f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_210[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                            if (FC == 280f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_280[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                            if (FC == 350f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_350[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                            if (FC == 420f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_420[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                            if (FC == 490f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_490[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                            if (FC == 560f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_560[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
+                            TV1 = TV2;
                         }
-                        else
-                        {
-                            float FC = columna.Seccions[i].Item1.Material.FC;
-                            if (FC == 210f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_210[columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra]; }
-                            if (FC == 280f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_280[columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra]; }
-                            if (FC == 350f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_350[columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra]; }
-                            if (FC == 420f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_420[columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra]; }
-                            if (FC == 490f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_490[columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra]; }
-                            if (FC == 560f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_560[columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra]; }
-                        }
+                        TraslapoFinal = TI > TV1 ? TI : TV1;
                     }
-                    catch
+                    else
                     {
-                        float FC = columna.Seccions[i].Item1.Material.FC;
-                        if (FC == 210f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_210[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                        if (FC == 280f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_280[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                        if (FC == 350f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_350[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                        if (FC == 420f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_420[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                        if (FC == 490f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_490[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
-                        if (FC == 560f) { columna.Alzados[Indice].Colum_Alzado[i].Traslapo = Form1.Proyecto_.Ld_560[columna.Alzados[Indice].Colum_Alzado[i].NoBarra]; }
+                        TraslapoFinal = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i].NoBarra, columna.Seccions[i].Item1.Material.FC);
+
+
+                    }
+
+                    columna.Alzados[Indice].Colum_Alzado[i].Traslapo = TraslapoFinal;
+
+
+                    if (columna.Alzados[Indice].Colum_Alzado[i].UnitarioAdicional != null)
+                    {
+                        columna.Alzados[Indice].Colum_Alzado[i].UnitarioAdicional.Traslapo = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i].UnitarioAdicional.NoBarra, columna.Seccions[i].Item1.Material.FC);
+
                     }
                 }
             }
@@ -157,7 +152,7 @@ namespace DisenoColumnas.Diseño
                     float H = ColumnaSelect.LuzLibre[IndiceR];
                     float Hviga = ColumnaSelect.VigaMayor.Seccions[IndiceR].Item1.H;
                     string T = (string)Clasficiacion[3];
-
+                    string Tipo2 = (string)Clasficiacion[7];
                     float HV1, HV2, HVV1, HVV2, Hacum; bool UltimPiso = false;
                     Hacum = 0;
                     try { HV1 = ColumnaSelect.LuzLibre[IndiceR + 1]; HVV1 = ColumnaSelect.Seccions[IndiceR + 1].Item1.H; } catch { HV1 = 0; HVV1 = 0; }
@@ -212,7 +207,7 @@ namespace DisenoColumnas.Diseño
                     }
 
                     AlzadoUnitario unitario = new AlzadoUnitario(Cant_Barras, NoBarra, T, NoPiso, IndiceC, H, Hviga, Form1.Proyecto_.e_Fundacion, UltimPiso, Hacum);
-
+                    unitario.Tipo2 = Tipo2;
                     //AÑADIR REFUERZO ADICIONAL
 
                     string RefAd_Str = (string)Clasficiacion[4];
@@ -244,10 +239,12 @@ namespace DisenoColumnas.Diseño
                         int CantBarrasA = (int)Clasficiacion[5];
                         int NoBarraA = (int)Clasficiacion[6];   //Cambio de ABotton a Botton
                         unitario.UnitarioAdicional = new AlzadoUnitario(CantBarrasA, NoBarraA, "Botton", NoPiso, IndiceC, H, Hviga, Form1.Proyecto_.e_Fundacion, UltimPiso, Hacum);
+                        
                     }
 
                     ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = unitario;
-                    ModificarTraslapo(IndiceC - 1, ref ColumnaSelect);
+                    ModificarTraslapo(IndiceC - 1,  ColumnaSelect);
+      
 
        
 
@@ -270,7 +267,10 @@ namespace DisenoColumnas.Diseño
                     
                     ColumnaSelect.Alzados[IndiceC - 1].Colum_Alzado[IndiceR] = null;
                     D_Alzado.Rows[IndiceR].Cells[IndiceC].Value = "";
-                    ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
+                    if (isNotPaste == false)
+                    {
+                        ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
+                    }
                     Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
                     Form1.m_Despiece.Invalidate();
                 }
@@ -359,7 +359,7 @@ namespace DisenoColumnas.Diseño
                 }
             }
 
-            ColumnaSelect.ActualizarRefuerzo();
+         
             for (int i = a.Colum_Alzado.Count - 1; i >= 0; i--)
             {
                 AlzadoUnitario au = a.Colum_Alzado[i];
@@ -370,25 +370,13 @@ namespace DisenoColumnas.Diseño
                     string Nom1 = "Not"; string Nom2 = "Not"; float x11 = 0; float x12 = 0;
                     au.Coord_Alzado_PB = new List<float[]>();
 
-                    float Porce_Top = 0; float Porce_V2_Bottom = 0;
+
 
 
                     #region Determinar Variables de Pisos Vecinos
 
                     //Determinar Variables de Pisos Vecinos
 
-
-                    Porce_Top = ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0] - (float)((Form1.Proyecto_.AceroBarras[au.NoBarra] * au.CantBarras) / ((float)ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0])) * 100;
-
-                    try
-                    {
-                        Porce_V2_Bottom = (float)ColumnaSelect.resultadosETABs[i - 1].Porct_Refuerzo[2] - (float)((Form1.Proyecto_.AceroBarras[au.NoBarra] * au.CantBarras) / ((float)ColumnaSelect.resultadosETABs[i].AsTopMediumButton[0])) * 100; ;
-
-                    }
-                    catch
-                    {
-                        Porce_V2_Bottom = 0;
-                    }
 
                     try
                     {
@@ -498,44 +486,82 @@ namespace DisenoColumnas.Diseño
                     {
                         if (Nom1 == "A")
                         {
-                            if (a.Colum_Alzado[i + 1].ToString() == au.ToString())
+                            if (a.Colum_Alzado[i + 1].CantBarras + "#" + a.Colum_Alzado[i + 1].NoBarra == au.CantBarras + "#" + au.NoBarra)
                             {
                                 if (a.Colum_Alzado[i + 1].Traslapo + LdAd + au.Traslapo + LdAd >= au.H_Stroy)
                                 {
-                                    a.Colum_Alzado[i + 1].Coord_Alzado_PB.Clear();
-                                    float[] XY1 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
-                                    float[] XY2 = new float[] { a.DistX, a.Colum_Alzado[i + 1].Hacum - a.Colum_Alzado[i + 1].Hviga - au.Traslapo - LdAd };
-                                    au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                    if (a.Colum_Alzado[i + 1].Tipo2 == "+")
+                                    {
+                                        a.Colum_Alzado[i + 1].Coord_Alzado_PB.Clear();
+                                        float[] XY1 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                        float[] XY2 = new float[] { a.DistX, a.Colum_Alzado[i + 1].Hacum  - au.Traslapo };
+                                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                    }
+                                    else
+                                    {
+                                        a.Colum_Alzado[i + 1].Coord_Alzado_PB.Clear();
+                                        float[] XY1 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                        float[] XY2 = new float[] { a.DistX, a.Colum_Alzado[i + 1].Hacum - a.Colum_Alzado[i + 1].Hviga - au.Traslapo - LdAd };
+                                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                    }
                                 }
                                 else
 
+                                {
+                                    if (au.Tipo2 =="-")
+                                    {
+                                       float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
+                                        float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga + au.Traslapo };
+                                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                    }
+                                    else if (au.Tipo2 == "+")
+                                    {
+                                        float[] XY1 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                        float[] XY2 = new float[] { a.DistX, au.Hacum - au.Traslapo };
+                                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                    }
+                                    else
+                                    {
+                                        float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
+                                        float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (au.Tipo2 == "-")
+                                {
+                                    float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
+                                    float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga + au.Traslapo };
+                                    au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                }
+                                else if (au.Tipo2 == "+")
+                                {
+                                    float[] XY1 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                    float[] XY2 = new float[] { a.DistX, au.Hacum - au.Traslapo };
+                                    au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                                }
+                                else
                                 {
                                     float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
                                     float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
                                     au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                                 }
                             }
-                            else
-                            {
-                                float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
-                                au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
-                            }
                         }
                         else
                         {
-                            if (Porce_Top < 95f & Porce_V2_Bottom > 95f)
+                            if (au.Tipo2 == "-")
                             {
-                                au.Tipo2 = "-";
                                 float[] XY1 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo - LdAd };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga +au.Traslapo};
+                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga + au.Traslapo };
                                 au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                             }
-                            else if (Porce_Top > 95f & Porce_V2_Bottom < 95f)
+                            else if (au.Tipo2 == "+")
                             {
-                                au.Tipo2 = "+";
-                                float[] XY1 = new float[] { a.DistX, au.Hacum-au.Hviga+au.Traslapo+LdAd };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum - au.Hviga - au.Traslapo  };
+                                float[] XY1 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum  - au.Traslapo };
                                 au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                             }
                             else
@@ -551,19 +577,19 @@ namespace DisenoColumnas.Diseño
                     {
                         if (au.CantBarras + "#" + au.NoBarra == au.UnitarioAdicional.CantBarras + "#" + au.UnitarioAdicional.NoBarra & au.UnitarioAdicional.UltPiso == false)
                         {
-                            if (au.Traslapo + LdAd + au.Traslapo + LdAd >= au.H_Stroy)
+                            if (au.Traslapo + LdAd + au.UnitarioAdicional.Traslapo + LdAd >= au.H_Stroy)
                             {
                                 au.Coord_Alzado_PB = new List<float[]>();
                                 au.UnitarioAdicional.Coord_Alzado_PB = new List<float[]>();
                                 float[] XY1 = new float[] { a.DistX, Hacum1 - Hviga1 - au.Traslapo - LdAd };
-                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.Traslapo + LdAd };
+                                float[] XY2 = new float[] { a.DistX, au.Hacum + au.UnitarioAdicional.Traslapo + LdAd };
                                 au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                             }
                             else
                             {
                                 au.UnitarioAdicional.Coord_Alzado_PB = new List<float[]>();
                                 float[] XY1 = new float[] { a.DistX, Hacum1 - Hviga1 - au.Traslapo - LdAd };
-                                float[] XY2 = new float[] { a.DistX, Hacum1 + au.Traslapo + LdAd };
+                                float[] XY2 = new float[] { a.DistX, Hacum1 + au.UnitarioAdicional.Traslapo + LdAd };
                                 au.UnitarioAdicional.Coord_Alzado_PB.Add(XY1); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY2);
                             }
                         }
@@ -571,7 +597,7 @@ namespace DisenoColumnas.Diseño
                         {
                             au.UnitarioAdicional.Coord_Alzado_PB = new List<float[]>();
                             float[] XY1 = new float[] { a.DistX, Hacum1 - Hviga1 - au.Traslapo - LdAd };
-                            float[] XY2 = new float[] { a.DistX, Hacum1 + au.Traslapo + LdAd };
+                            float[] XY2 = new float[] { a.DistX, Hacum1 + au.UnitarioAdicional.Traslapo + LdAd };
                             au.UnitarioAdicional.Coord_Alzado_PB.Add(XY1); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY2);
                         }
                     }
@@ -579,7 +605,7 @@ namespace DisenoColumnas.Diseño
                     {
                         if (au.CantBarras + "#" + au.NoBarra == au.UnitarioAdicional.CantBarras + "#" + au.UnitarioAdicional.NoBarra)
                         {
-                            if (au.Traslapo + LdAd + au.Traslapo + LdAd >= au.H_Stroy)
+                            if (au.Traslapo + LdAd + au.UnitarioAdicional.Traslapo + LdAd >= au.H_Stroy)
                             {
                                 au.Coord_Alzado_PB = new List<float[]>();
                                 au.UnitarioAdicional.Coord_Alzado_PB = new List<float[]>();
@@ -593,7 +619,7 @@ namespace DisenoColumnas.Diseño
                                 au.UnitarioAdicional.Coord_Alzado_PB = new List<float[]>();
                                 float[] XY1 = new float[] { a.DistX + DisG, r };
                                 float[] XY2 = new float[] { a.DistX, r };
-                                float[] XY3 = new float[] { a.DistX, eF + au.Traslapo + LdAd };
+                                float[] XY3 = new float[] { a.DistX, eF + au.UnitarioAdicional.Traslapo + LdAd };
                                 au.UnitarioAdicional.Coord_Alzado_PB.Add(XY1); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY2); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY3);
                             }
                         }
@@ -602,7 +628,7 @@ namespace DisenoColumnas.Diseño
                             au.UnitarioAdicional.Coord_Alzado_PB = new List<float[]>();
                             float[] XY1 = new float[] { a.DistX + DisG, r };
                             float[] XY2 = new float[] { a.DistX, r };
-                            float[] XY3 = new float[] { a.DistX, eF + au.Traslapo + LdAd };
+                            float[] XY3 = new float[] { a.DistX, eF + au.UnitarioAdicional.Traslapo + LdAd };
                             au.UnitarioAdicional.Coord_Alzado_PB.Add(XY1); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY2); au.UnitarioAdicional.Coord_Alzado_PB.Add(XY3);
                         }
                     }
@@ -612,15 +638,32 @@ namespace DisenoColumnas.Diseño
                     {
                         if (Nom1 == "A")
                         {
-                            if (a.Colum_Alzado[i + 1].ToString() == au.ToString())
+                            if (a.Colum_Alzado[i + 1].CantBarras+"#" + a.Colum_Alzado[i + 1].NoBarra == au.CantBarras +"#" + au.NoBarra)
                             {
                                 if (a.Colum_Alzado[i + 1].Traslapo + LdAd + au.Traslapo + LdAd >= au.H_Stroy)
                                 {
-                                    a.Colum_Alzado[i + 1].Coord_Alzado_PB.Clear();
-                                    float[] XY1 = new float[] { a.DistX + DisG, au.Hacum - r };
-                                    float[] XY2 = new float[] { a.DistX, au.Hacum - r };
-                                    float[] XY3 = new float[] { a.DistX, a.Colum_Alzado[i + 1].Hacum - a.Colum_Alzado[i + 1].Hviga - au.Traslapo - LdAd };
-                                    au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); au.Coord_Alzado_PB.Add(XY3);
+                                    if (a.Colum_Alzado[i + 1].Tipo2 == "+")
+                                    {
+
+                                        a.Colum_Alzado[i + 1].Coord_Alzado_PB.Clear();
+                                        float[] XY1 = new float[] { a.DistX + DisG, au.Hacum - r };
+                                        float[] XY2 = new float[] { a.DistX, au.Hacum - r };
+                                        float[] XY3 = new float[] { a.DistX, a.Colum_Alzado[i + 1].Hacum - au.Traslapo };
+                                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); au.Coord_Alzado_PB.Add(XY3);
+
+                                    }
+                                    else
+                                    {
+                                        a.Colum_Alzado[i + 1].Coord_Alzado_PB.Clear();
+                                        float[] XY1 = new float[] { a.DistX + DisG, au.Hacum - r };
+                                        float[] XY2 = new float[] { a.DistX, au.Hacum - r };
+                                        float[] XY3 = new float[] { a.DistX, a.Colum_Alzado[i + 1].Hacum - a.Colum_Alzado[i + 1].Hviga - au.Traslapo - LdAd };
+                                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); au.Coord_Alzado_PB.Add(XY3);
+
+                                    }
+
+
+
                                 }
                                 else
                                 {
@@ -647,7 +690,7 @@ namespace DisenoColumnas.Diseño
                                     au.UnitarioAdicional.Coord_Alzado_PB = new List<float[]>();
                                     float[] XY1 = new float[] { a.DistX + DisG, au.Hacum - r };
                                     float[] XY2 = new float[] { a.DistX, au.Hacum - r };
-                                    float[] XY3 = new float[] { a.DistX, Hacum1 - Hviga1 - au.Traslapo - LdAd };
+                                    float[] XY3 = new float[] { a.DistX, Hacum1 - Hviga1 - au.UnitarioAdicional.Traslapo - LdAd };
                                     au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); au.Coord_Alzado_PB.Add(XY3);
                                 }
                                 else
@@ -737,6 +780,7 @@ namespace DisenoColumnas.Diseño
                 int CantidadBarrasA = 0;
                 int NoBarraA = 0;
                 string Raya = "";
+                string Tipo2 = "";
 
                 int VecesNumeral = 0;
                 for (int i = 0; i < Celda.Length; i++)
@@ -747,6 +791,11 @@ namespace DisenoColumnas.Diseño
                         try
                         {
                             CantidadBarras = Convert.ToInt32(Celda.Substring(0, i));
+                            if (Celda.Substring(0, 1) == "-" | Celda.Substring(0, 1) == "+")
+                            {
+                                Tipo2 = Celda.Substring(0, 1);
+
+                            }
                         }
                         catch
                         {
@@ -776,45 +825,57 @@ namespace DisenoColumnas.Diseño
 
                         string AuxAd = Celda.Substring(i);
 
+
+
                         if (AuxAd.Contains("-"))
                         {
+                            Raya = "-";
                             for (int j = 0; j < AuxAd.Length; j++)
                             {
-                                if (Celda.Substring(j, 1) == "-")
-                                {
-                                    Raya = Celda.Substring(j, 1);
-                                }
+                            
 
-                                if (Celda.Substring(j, 1) == "#")
+                                if (AuxAd.Substring(j, 1) == "#")
                                 {
-                                    CantidadBarrasA = Convert.ToInt32(Celda.Substring(0, j));
+                                    int InicioRaya = AuxAd.IndexOf("-") + 1;
+                                    
+                                    CantidadBarrasA = Convert.ToInt32(AuxAd.Substring(InicioRaya, j- InicioRaya));
                                     try
                                     {
-                                        NoBarraA = Convert.ToInt32(Celda.Substring(j + 1, 2));
+                                        NoBarraA = Convert.ToInt32(AuxAd.Substring(j + 1, 2));
                                     }
                                     catch
                                     {
                                         try
                                         {
-                                            NoBarraA = Convert.ToInt32(Celda.Substring(j + 1, 1));
+                                            NoBarraA = Convert.ToInt32(AuxAd.Substring(j + 1, 1));
                                         }
                                         catch { NoBarraA = 0; }
                                     }
                                 }
                             }
                         }
+
                     }
                 }
                 try
                 {
-                    var o = Form1.Proyecto_.Ld_210[NoBarra];
-                    if (Raya == "-") { var m = Form1.Proyecto_.Ld_210[NoBarraA]; }
+                    var o = Form1.Proyecto_.AceroBarras[NoBarra];
+                    if (Raya == "-") { var m = Form1.Proyecto_.AceroBarras[NoBarraA]; }
                     if (CantidadBarras < 0)
                     {
                         CantidadBarras = -CantidadBarras;
-                        Traslap = "Botton";
+                        if (Traslap != "A")
+                        {
+                            Traslap = "Botton";
+                            Tipo2 = "";
+                        }
+                        else
+                        {
+                            Traslap = "A";
+
+                        }
                     }
-                    Clasf = new object[] { "Ok", CantidadBarras, NoBarra, Traslap, Raya, CantidadBarrasA, NoBarraA };
+                    Clasf = new object[] { "Ok", CantidadBarras, NoBarra, Traslap, Raya, CantidadBarrasA, NoBarraA,Tipo2 };
                 }
                 catch
                 {
@@ -936,7 +997,9 @@ namespace DisenoColumnas.Diseño
                 }
                 DeterminarCoordAlzado(Col);
                 Form1.Proyecto_.ColumnaSelect.ActualizarRefuerzo();
-                Form1.Proyecto_.ColumnaSelect.CalcularPesoAcero(Col-1);
+                Form1.Proyecto_.ColumnaSelect.ActualizarRefuerzo();
+                Form1.m_Informacion.MostrarAcero();
+                Form1.Proyecto_.ColumnaSelect.CalcularPesoAcero();
                 Form1.m_Despiece.Invalidate();
             }
         }
