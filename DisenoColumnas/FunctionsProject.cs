@@ -227,7 +227,15 @@ namespace DisenoColumnas
             }
 
             indice = Dif.FindIndex(x => x == Dif.Min());
-            Barra_def = Diametros[indice];
+            if (Diametros[indice] < 4)
+            {
+                Barra_def = 4;
+            }
+            else
+            {
+                Barra_def = Diametros[indice];
+            }
+
             return Barra_def;
         }
     }

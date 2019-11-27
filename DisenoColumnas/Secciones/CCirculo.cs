@@ -325,7 +325,7 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
-        public void Dibujo_Autocad(double Xi, double Yi)
+        public void Dibujo_Autocad(double Xi, double Yi,int Num_Alzado)
         {
             throw new NotImplementedException();
         }

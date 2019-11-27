@@ -112,9 +112,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
                 seccion.Dibujo_Seccion(g, EscalaX, EscalaY, Over);
-                seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
-                seccion.CalcNoDBarras();
-                Dibujo_Refuerzo(g, seccion);
 
                 if (seccion.Estribo == null)
                 {
@@ -122,6 +119,11 @@ namespace DisenoColumnas.Interfaz_Seccion
                 }
 
                 Dibujo_Estribo(g, seccion);
+
+                seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
+                seccion.CalcNoDBarras();
+                Dibujo_Refuerzo(g, seccion);
+
                 Add_Texto_Seccion(g, seccion);
             }
         }
@@ -236,22 +238,26 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Temp.Exists(x => x.Equals(Columna_i.Seccions[indice].Item1)) == true & Columna_i.Seccions[indice].Item1.Editado == false)
                 {
+                    int m = 0;
+
                     seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Columna_i.Seccions[indice].Item1)));
                     seccion.Name = Columna_i.Seccions[indice].Item1.Name;
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
+                    //seccion.Refuerzos= Columna_i.Seccions[indice].Item1.Refuerzos;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
 
                     if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H & seccion.Shape == TipodeSeccion.Rectangular)
                     {
                         double[] Rotacion;
-
                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                         {
                             Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
                             refuerzo.Coord[0] = Rotacion[0];
                             refuerzo.Coord[1] = Rotacion[1];
+                            refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
+                            m++;
                         }
                     }
                 }
@@ -408,7 +414,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             label1.Text = "X:" + Math.Round(X_r, 2) + " Y:" + Math.Round(-Y_r, 2);
             label1.Update();
-
         }
 
         private void BSeleccionar_columna_Click(object sender, EventArgs e)
@@ -454,6 +459,12 @@ namespace DisenoColumnas.Interfaz_Seccion
             PointF PS = new PointF();
 
             TamanoFuente = Convert.ToSingle(5 * EscalaR);
+
+            if (TamanoFuente > 12.7f)
+            {
+                TamanoFuente = 12.7f;
+            }
+
             Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
 
             PS.X = (-Grafica.Width / 2) + 30;
@@ -503,7 +514,9 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Dibujo_Refuerzo(Graphics g, ISeccion seccioni)
         {
             SolidBrush br = new SolidBrush(Color.Black);
+            SolidBrush br_T = new SolidBrush(Color.Black);
             int cont = 1;
+            int Diametro;
             float TamanoFuente = 0;
             PointF PS = new PointF();
 
@@ -512,7 +525,18 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             DeltaX = Convert.ToSingle(4 * Xmax / (Grafica.Width / 2));
             DeltaY = Convert.ToSingle(4 * Ymax / (Grafica.Height / 2));
-            TamanoFuente = Convert.ToSingle(10 * EscalaR);
+            TamanoFuente = Convert.ToSingle(2.5 * EscalaR);
+
+            if (TamanoFuente < 6)
+            {
+                TamanoFuente = 6f;
+            }
+
+            if (TamanoFuente > 14)
+            {
+                TamanoFuente = 14f;
+            }
+
             Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
 
             P1 = new Pen(Color.Black, 2.5f)
@@ -526,9 +550,20 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             for (int i = 0; i < seccioni.Shapes_ref.Count; i++)
             {
+                Diametro = Convert.ToInt32(seccioni.Refuerzos[i].Diametro.Substring(1));
+                br = FunctionsProject.ColorBarra(Diametro);
+
                 PS.X = seccioni.Shapes_ref[i].PathPoints[0].X + DeltaX;
                 PS.Y = seccioni.Shapes_ref[i].PathPoints[0].Y + DeltaY;
-                g.DrawString(cont.ToString(), Font, br, PS);
+
+                if (edicion == Tipo_Edicion.Secciones_modelo)
+                {
+                    g.DrawString(seccion.Refuerzos[i].Alzado.ToString(), Fuente, br_T, PS);
+                }
+                else
+                {
+                    g.DrawString(cont.ToString(), Fuente, br_T, PS);
+                }                
 
                 g.DrawPath(P1, seccioni.Shapes_ref[i]);
                 g.FillPath(br, seccioni.Shapes_ref[i]);

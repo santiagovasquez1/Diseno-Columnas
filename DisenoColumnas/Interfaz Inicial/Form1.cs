@@ -48,7 +48,6 @@ namespace DisenoColumnas
         public static string TColumna;
         public static CLista_Secciones secciones_predef;
 
-
         public Form1()
         {
             InitializeComponent();
@@ -1202,7 +1201,6 @@ namespace DisenoColumnas
 
             //Crear Lista de Estribos;
 
-
             //Depurar Columnas con Area Menor a 400cm2
             Proyecto_.Lista_Columnas.RemoveAll(x => x.Seccions[x.Seccions.Count - 1].Item1.Area < 0.04f);
         }
@@ -1579,9 +1577,6 @@ namespace DisenoColumnas
                 Proyecto_.Lista_Columnas.Add(columna);
             }
 
-            //Asignar Secciones a Columnas por Piso
-            float FD1 = 0; float FD2 = 0;
-
             for (int i = 0; i < Proyecto_.Stories.Count; i++)
             {
                 for (int j = 0; j < LineAssingns.Count; j++)
@@ -1680,11 +1675,8 @@ namespace DisenoColumnas
                 }
             }
 
-
-     
             //Depurar Columnas con Area Menor a 400cm2
             Proyecto_.Lista_Columnas.RemoveAll(x => x.Seccions[x.Seccions.Count - 1].Item1.Area < 0.04f);
-
         }
 
         private void PlantaDeColumnasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1752,7 +1744,6 @@ namespace DisenoColumnas
                     variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
                     variablesdeEntrada.P_R.Text = Proyecto_.P_R.ToString();
                     variablesdeEntrada.e_acabados.Text = Proyecto_.e_acabados.ToString();
-
                 }
                 variablesdeEntrada.PictureBox1.Visible = true;
                 variablesdeEntrada.ShowDialog();
@@ -1879,7 +1870,6 @@ namespace DisenoColumnas
                         ExistFlotante = true;
                     }
                 }
-
 
                 if (PanelContenedor.ActiveDocument == mCuantiaVolumetrica | ExistFlotante)
                 {
@@ -2038,6 +2028,8 @@ namespace DisenoColumnas
                 Temp = secciones_predef.Secciones_DES;
             }
 
+           
+
             foreach (Columna Col in Lista_ColumnasDiseñar)
             {
                 //Seleccionar Diferentes secciones
@@ -2046,12 +2038,13 @@ namespace DisenoColumnas
                 List<ISeccion> Secciones_def = new List<ISeccion>();
 
                 Secciones_tipicas(Secciones_col, Secciones_def);
+                int contador = 1;
 
                 for (int i = Col.Seccions.Count - 1; i >= 0; i--)
                 {
                     //Asignar seccion predefinida a las columnas
                     piso = Col.Seccions[i].Item2;
-                    Temp_seccion = FunctionsProject.DeepClone (Secciones_def.Find(x => x.Area == Col.Seccions[i].Item1.Area));
+                    Temp_seccion = FunctionsProject.DeepClone(Secciones_def.Find(x => x.Area == Col.Seccions[i].Item1.Area));
 
                     if (Temp.Exists(x => x.Equals(Temp_seccion)) == true)
                     {
@@ -2102,6 +2095,32 @@ namespace DisenoColumnas
                         Base[1] = $"{ Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item1 / 2)}#{Convert.ToString(Col.Seccions[i].Item1.No_D_Barra[0].Item2)}";
                     }
 
+                    //Asignar #Alzado
+
+                    if (i < Col.Seccions.Count - 1)
+                    {
+                        if (Col.Seccions[i].Item1.Area != Col.Seccions[i + 1].Item1.Area)
+                        {
+                            if (Col.AlzadoBaseSugerido[i + 1].Count() == 2)
+                            {
+                                contador += 2;
+                            }
+                            else
+                            {
+                                contador += 4;
+                            }
+                            Asignar_Alzado(Col, i, Base, contador);
+                        }
+                        else
+                        {
+                            Asignar_Alzado(Col, i, Base, contador);
+                        }
+                    }
+                    else
+                    {
+                        Asignar_Alzado(Col, i, Base, contador);
+                    }
+
                     Col.AlzadoBaseSugerido[i] = Base;
                 }
             }
@@ -2127,16 +2146,14 @@ namespace DisenoColumnas
             double D_Pro = Math.Ceiling(Delta);
             bool HabilitarReporte = false;
 
-
-            foreach(Columna col in Lista_ColumnasDiseñar)
+            foreach (Columna col in Lista_ColumnasDiseñar)
             {
                 col.CantEstribos_Sepa = new List<object[]>();
-                for (int i= col.LuzAcum.Count-1; i >= 0; i--)
+                for (int i = col.LuzAcum.Count - 1; i >= 0; i--)
                 {
-                    col.CantEstribos_Sepa.Add(new object[] { 0, 0, 0, 0,0,0 });
+                    col.CantEstribos_Sepa.Add(new object[] { 0, 0, 0, 0, 0, 0 });
                 }
             }
-
 
             foreach (Columna col in Lista_ColumnasDiseñar)
             {
@@ -2150,15 +2167,11 @@ namespace DisenoColumnas
                     Cuadro_diseño.Label_Progress.Text = "✘ Columna: " + col.Name;
                     HabilitarReporte = true;
                 }
-                      Cuadro_diseño.Canti_Colum.Text = $"{ CantCol}/{Lista_ColumnasDiseñar.Count}";
+                Cuadro_diseño.Canti_Colum.Text = $"{ CantCol}/{Lista_ColumnasDiseñar.Count}";
                 CantCol += 1;
                 Cuadro_diseño.BarraPersonalizada2.Width += (int)D_Pro;
                 Cuadro_diseño.Refresh();
             }
-
-
-           
-
 
             Cuadro_diseño.OK.Enabled = true;
             Cuadro_diseño.Reporte_RichText.Text = "-------------------------------------------------------------------------------------------";
@@ -2190,7 +2203,7 @@ namespace DisenoColumnas
 
             DialogResult dialogResult;
             dialogResult = MessageBox.Show("¿El alzado generado será el definitivo?", Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            
+
             if (dialogResult == DialogResult.Yes)
             {
                 Lista_ColumnasDiseñar.ForEach(x => x.Ready = true);
@@ -2204,22 +2217,19 @@ namespace DisenoColumnas
                 m_PlantaColumnas.Invalidate();
             }
 
-
-
             //"Mostrar Reporte"
             List<string> Reporte = new List<string>();
             Reporte.Add("-----REPORTE DE DISEÑO -------"); Reporte.Add("");
 
             Reporte.Add("Columna\tPiso\tObservación");
 
-            foreach(Columna col in Lista_ColumnasDiseñar)
+            foreach (Columna col in Lista_ColumnasDiseñar)
             {
-
-                for(int i=0; i < col.resultadosETABs.Count; i++)
+                for (int i = 0; i < col.resultadosETABs.Count; i++)
                 {
                     string LineReporte = $"{col.Name}\t{col.Seccions[i].Item2}\t";
 
-                    if (col.resultadosETABs[i].Porct_Refuerzo[0]> 115f)
+                    if (col.resultadosETABs[i].Porct_Refuerzo[0] > 115f)
                     {
                         LineReporte += "|Top - > 115%|";
                     }
@@ -2230,10 +2240,8 @@ namespace DisenoColumnas
                     else
                     {
                         LineReporte += "|Top - ✓OK|";
-
                     }
 
-     
                     if (col.resultadosETABs[i].Porct_Refuerzo[1] > 105f)
                     {
                         LineReporte += " |Medium - > 105%|";
@@ -2245,7 +2253,6 @@ namespace DisenoColumnas
                     else
                     {
                         LineReporte += " |Medium - ✓OK|";
-
                     }
 
                     if (col.resultadosETABs[i].Porct_Refuerzo[2] > 115f)
@@ -2259,21 +2266,18 @@ namespace DisenoColumnas
                     else
                     {
                         LineReporte += " |Bottom - ✓OK|";
-
                     }
 
                     Reporte.Add(LineReporte);
-
                 }
             }
 
-            Reporte.Add(""); Reporte.Add("---------------------------------------");  Reporte.Add("Diseño de Columnas"); Reporte.Add("Versión 1.0");
+            Reporte.Add(""); Reporte.Add("---------------------------------------"); Reporte.Add("Diseño de Columnas"); Reporte.Add("Versión 1.0");
             Reporte.Add("© 2019 efe- Prima – Ce"); Reporte.Add("Todos los Derechos Reservados.");
             string Ruta_ArchivoTemporal = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporte.txt");
 
-
             StreamWriter writer = new StreamWriter(Ruta_ArchivoTemporal);
-            for(int i=0; i < Reporte.Count; i++)
+            for (int i = 0; i < Reporte.Count; i++)
             {
                 writer.WriteLine(Reporte[i]);
             }
@@ -2281,8 +2285,65 @@ namespace DisenoColumnas
             Process Proc = new Process();
             Proc.StartInfo.FileName = Ruta_ArchivoTemporal;
             Proc.Start();
+        }
 
+        /// <summary>
+        /// Asigna el numero de alzado a cada uno de los refuerzos bases de la seccion
+        /// </summary>
+        /// <param name="Col">Columna</param>
+        /// <param name="i">Numero de piso</param>
+        /// <param name="Base">Refuerzo base</param>
+        private static void Asignar_Alzado(Columna Col, int i, string[] Base, int Contador)
+        {
+            int m = 0;
+            int pos = 0;
 
+            foreach (CRefuerzo refuerzo in Col.Seccions[i].Item1.Refuerzos)
+            {
+                if (Base.Count() == 2)
+                {
+                    if (m % 2 == 0)
+                    {
+                        refuerzo.Alzado = Contador;
+                    }
+                    else
+                    {
+                        refuerzo.Alzado = Contador + 1;
+                    }
+                }
+                else
+                {
+                    if (m % 2 == 0)
+                    {
+                        pos = Base[0].IndexOf('#');
+                        if (refuerzo.Diametro == Base[0].Substring(pos))
+                        {
+                            refuerzo.Alzado = Contador;
+                        }
+
+                        pos = Base[2].IndexOf('#');
+                        if (refuerzo.Diametro == Base[2].Substring(pos))
+                        {
+                            refuerzo.Alzado = Contador + 2;
+                        }
+                    }
+                    else
+                    {
+                        pos = Base[1].IndexOf('#');
+                        if (refuerzo.Diametro == Base[1].Substring(pos))
+                        {
+                            refuerzo.Alzado = Contador + 1;
+                        }
+
+                        pos = Base[3].IndexOf('#');
+                        if (refuerzo.Diametro == Base[3].Substring(pos))
+                        {
+                            refuerzo.Alzado = Contador + 3;
+                        }
+                    }
+                }
+                m++;
+            }
         }
 
         private static void Secciones_tipicas(List<ISeccion> Secciones_col, List<ISeccion> Secciones_def)
@@ -2530,7 +2591,8 @@ namespace DisenoColumnas
                     }
 
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
-                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60);
+                    FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:15");
+                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);
                     DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }
@@ -2563,7 +2625,6 @@ namespace DisenoColumnas
         {
             Resultados.Resultados_ resultados_ = new Resultados.Resultados_();
             resultados_.ShowDialog();
-
         }
 
         private void EditarNombresDeColumnasToolStripMenuItem_Click(object sender, EventArgs e)

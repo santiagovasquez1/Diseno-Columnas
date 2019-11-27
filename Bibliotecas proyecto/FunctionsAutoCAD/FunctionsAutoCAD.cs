@@ -374,6 +374,27 @@ namespace FunctionsAutoCAD
         }
 
         /// <summary>
+        /// Bloque: Nombre de Sección - Efe Prima Ce
+        /// </summary>
+        public static void B_NombreSeccion(double[] P_XYZ, string Seccion,string Escala, string Layer, double Xscale, double Yscale, double Zscale, float Rotation)
+        {
+            if (AcadDoc != null)
+            {
+                AcadBlockReference blockReference = AcadDoc.ModelSpace.InsertBlock(P_XYZ, "FC_B_Titulo 1", Xscale, Yscale, Zscale, Rotation);
+                blockReference.Layer = Layer;
+
+                var referenceProperty = blockReference.GetDynamicBlockProperties();
+                var attributeReference = blockReference.GetAttributes();
+
+                attributeReference[0].TextString = Seccion;
+                attributeReference[1].TextString = Escala;
+                blockReference.Update();
+            }
+
+        }
+
+
+        /// <summary>
         /// Bloque: Corte de Sección - Efe Prima Ce
         /// </summary>
         /// <param name="P_XYZ">Coordenadas del Bloque</param>
