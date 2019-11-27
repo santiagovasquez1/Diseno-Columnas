@@ -17,6 +17,7 @@ namespace DisenoColumnas.Clases
         public string Diametro { get; set; }
         public double As_Long { get; set; }
         public double[] Coord { get; set; }
+        public int Alzado { get; set; } = 1;
         public TipodeRefuerzo TipodeRefuerzo { get; set; }
 
         public CRefuerzo(int pid, string pdiametro, double[] pcoord, TipodeRefuerzo ptipo)
@@ -61,7 +62,7 @@ namespace DisenoColumnas.Clases
                 }
             }
 
-            FunctionsAutoCAD.FunctionsAutoCAD.AddText("1", T_XYZ, 0.075, 0.0225, "FC_R-100", "FC_TEXT", 0);
+            FunctionsAutoCAD.FunctionsAutoCAD.AddText(Alzado.ToString(), T_XYZ, 0.075, 0.0225, "FC_R-100", "FC_TEXT", 0);
         }
 
         public static double operator +(CRefuerzo r1, CRefuerzo r2)

@@ -551,7 +551,15 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 PS.X = seccioni.Shapes_ref[i].PathPoints[0].X + DeltaX;
                 PS.Y = seccioni.Shapes_ref[i].PathPoints[0].Y + DeltaY;
-                g.DrawString(cont.ToString(), Fuente, br_T, PS);
+
+                if (edicion == Tipo_Edicion.Secciones_modelo)
+                {
+                    g.DrawString(seccion.Refuerzos[i].Alzado.ToString(), Fuente, br_T, PS);
+                }
+                else
+                {
+                    g.DrawString(cont.ToString(), Fuente, br_T, PS);
+                }                
 
                 g.DrawPath(P1, seccioni.Shapes_ref[i]);
                 g.FillPath(br, seccioni.Shapes_ref[i]);

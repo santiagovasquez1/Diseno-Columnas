@@ -118,9 +118,10 @@ namespace DisenoColumnas.Interfaz_Seccion
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 data.Rows[i].Cells[0].Value = Seccion.Refuerzos[i].id;
-                data.Rows[i].Cells[1].Value = Seccion.Refuerzos[i].Diametro;
-                data.Rows[i].Cells[2].Value = Math.Round(Seccion.Refuerzos[i].Coord[0], 2);
-                data.Rows[i].Cells[3].Value = Math.Round(Seccion.Refuerzos[i].Coord[1], 2);
+                data.Rows[i].Cells[1].Value = Seccion.Refuerzos[i].Alzado;
+                data.Rows[i].Cells[2].Value = Seccion.Refuerzos[i].Diametro;
+                data.Rows[i].Cells[3].Value = Math.Round(Seccion.Refuerzos[i].Coord[0], 2);
+                data.Rows[i].Cells[4].Value = Math.Round(Seccion.Refuerzos[i].Coord[1], 2);
             }
         }
 
@@ -137,18 +138,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             double posx, posy;
             double DeltaX1, DeltaY1, DeltaX2, DeltaY2;
             int ContX, ContY;
-
-            if (Seccion.Shape == TipodeSeccion.L | Seccion.Shape == TipodeSeccion.Tee)
-            {
-                if (Seccion.Shape == TipodeSeccion.L)
-                {
-                    //Tw = Seccion.TW * 100;
-                    //tf = Seccion.TF * 100;
-                }
-                else
-                {
-                }
-            }
 
             data.Rows.Clear();
             data.Rows.Add(numero_barras);
@@ -217,14 +206,15 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                boxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[i].Cells[1];
+                boxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[i].Cells[2];
                 id = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
                 diametro = boxCell.Value.ToString();
-                x = Convert.ToDouble(dataGridView1.Rows[i].Cells[2].Value);
-                y = Convert.ToDouble(dataGridView1.Rows[i].Cells[3].Value);
+                x = Convert.ToDouble(dataGridView1.Rows[i].Cells[3].Value);
+                y = Convert.ToDouble(dataGridView1.Rows[i].Cells[4].Value);
                 coord = new double[] { x, y };
 
                 refuerzo = new CRefuerzo(id, diametro, coord, TipodeRefuerzo.longitudinal);
+                refuerzo.Alzado = Convert.ToInt32(dataGridView1.Rows[i].Cells[1].Value);
                 Seccion.Refuerzos.Add(refuerzo);
             }
 

@@ -289,7 +289,15 @@ namespace DisenoColumnas.Secciones
                 if (Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras > As_min)
                 {
                     Diametro1 = Barra_aux;
-                    Diametro2 = Barra_aux - 1;
+                    if (Diametro1 == 4)
+                    {
+                        Diametro2 = 0;
+                    }
+                    else
+                    {
+                        Diametro2 = Barra_aux - 1;
+                    }
+                   
                 }
                 else
                 {
