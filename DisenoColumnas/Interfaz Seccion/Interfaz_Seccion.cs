@@ -238,22 +238,26 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Temp.Exists(x => x.Equals(Columna_i.Seccions[indice].Item1)) == true & Columna_i.Seccions[indice].Item1.Editado == false)
                 {
+                    int m = 0;
+
                     seccion = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Columna_i.Seccions[indice].Item1)));
                     seccion.Name = Columna_i.Seccions[indice].Item1.Name;
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
+                    //seccion.Refuerzos= Columna_i.Seccions[indice].Item1.Refuerzos;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
 
                     if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H & seccion.Shape == TipodeSeccion.Rectangular)
                     {
                         double[] Rotacion;
-
                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                         {
                             Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
                             refuerzo.Coord[0] = Rotacion[0];
                             refuerzo.Coord[1] = Rotacion[1];
+                            refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
+                            m++;
                         }
                     }
                 }

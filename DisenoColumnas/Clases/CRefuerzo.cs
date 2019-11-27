@@ -38,7 +38,7 @@ namespace DisenoColumnas.Clases
             string Layer = "FC_REFUERZO 2";
 
             P_XYZ = new double[] { Xi + Coord[0] / 100, Yi + Coord[1] / 100, 0 };
-            FunctionsAutoCAD.FunctionsAutoCAD.Add_ref(P_XYZ, Layer, 1, 1, 1, 1, 0);
+            FunctionsAutoCAD.FunctionsAutoCAD.Add_ref(P_XYZ, Layer, Alzado, 1, 1, 1, 0);
 
             if (Math.Round(Coord[1], 2) == Ymax) 
             {
