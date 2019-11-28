@@ -305,7 +305,15 @@ namespace DisenoColumnas.Secciones
                     Diametro2 = Barra_aux + 1;
                 }
 
-                X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
+                if (Diametro2 > 0)
+                {
+                    X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
+
+                }
+                else
+                {
+                    X2 = 0;
+                }
 
                 if (X2 % 2 != 0)
                 {

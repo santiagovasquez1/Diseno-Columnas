@@ -256,7 +256,11 @@ namespace DisenoColumnas.Interfaz_Seccion
                             Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
                             refuerzo.Coord[0] = Rotacion[0];
                             refuerzo.Coord[1] = Rotacion[1];
-                            refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
+
+                            if (Columna_i.Seccions[indice].Item1.Refuerzos.Count > 0)
+                            {
+                                refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
+                            }                            
                             m++;
                         }
                     }

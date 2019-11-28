@@ -17,7 +17,7 @@ namespace DisenoColumnas.Clases
         public string Diametro { get; set; }
         public double As_Long { get; set; }
         public double[] Coord { get; set; }
-        public int Alzado { get; set; } = 1;
+        public int Alzado { get; set; }
         public TipodeRefuerzo TipodeRefuerzo { get; set; }
 
         public CRefuerzo(int pid, string pdiametro, double[] pcoord, TipodeRefuerzo ptipo)
@@ -29,6 +29,7 @@ namespace DisenoColumnas.Clases
             TipodeRefuerzo = ptipo;
             d1 = Convert.ToInt32(Diametro.Substring(1));
             As_Long = Form1.Proyecto_.AceroBarras[d1] * Math.Pow(100, 2);
+            Alzado = 1;
         }
 
         public void Dibujo_Ref_Autocad(double Xi, double Yi, double Xmax, double Xmin, double Ymax, double Ymin)

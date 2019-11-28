@@ -2536,7 +2536,7 @@ namespace DisenoColumnas
                     ColumnasMaximas += Name + ",";
                 }
 
-                string MensajeColumnasMaxMaxima = "La(s) columna(s): " + ColumnasMaximas + "  en el acero requerido superan la cuantía máxima permisible.";
+                string MensajeColumnasMaxMaxima = "La(s) columna(s): " + ColumnasMaximas + "  en el acero requerido supera la cuantía máxima permisible.";
                 DialogResult messageBox;
                 messageBox = DialogResult.Yes;
                 if (Activar_CuantiMax)
@@ -2577,7 +2577,7 @@ namespace DisenoColumnas
 
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
                     FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:15");
-                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);
+                    col.Seccions.Last().Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);
                     DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }
