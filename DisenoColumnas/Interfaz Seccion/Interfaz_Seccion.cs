@@ -256,11 +256,11 @@ namespace DisenoColumnas.Interfaz_Seccion
                             Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
                             refuerzo.Coord[0] = Rotacion[0];
                             refuerzo.Coord[1] = Rotacion[1];
-
                             if (Columna_i.Seccions[indice].Item1.Refuerzos.Count > 0)
                             {
                                 refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
-                            }                            
+                            }
+
                             m++;
                         }
                     }
@@ -567,7 +567,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 else
                 {
                     g.DrawString(cont.ToString(), Fuente, br_T, PS);
-                }                
+                }
 
                 g.DrawPath(P1, seccioni.Shapes_ref[i]);
                 g.FillPath(br, seccioni.Shapes_ref[i]);

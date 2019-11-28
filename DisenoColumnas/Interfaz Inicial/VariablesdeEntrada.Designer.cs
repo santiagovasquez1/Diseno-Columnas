@@ -37,6 +37,10 @@
             this.Label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.e_acabados = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.P_R = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.Radio_Des = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.Radio_Dmo = new System.Windows.Forms.RadioButton();
@@ -46,10 +50,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.R_Box = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.P_R = new System.Windows.Forms.TextBox();
-            this.e_acabados = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -117,7 +117,7 @@
             this.T_arranque.Location = new System.Drawing.Point(204, 47);
             this.T_arranque.Name = "T_arranque";
             this.T_arranque.Size = new System.Drawing.Size(66, 23);
-            this.T_arranque.TabIndex = 5;
+            this.T_arranque.TabIndex = 6;
             // 
             // T_Vf
             // 
@@ -127,7 +127,7 @@
             this.T_Vf.Location = new System.Drawing.Point(204, 104);
             this.T_Vf.Name = "T_Vf";
             this.T_Vf.Size = new System.Drawing.Size(66, 23);
-            this.T_Vf.TabIndex = 6;
+            this.T_Vf.TabIndex = 8;
             // 
             // Label2
             // 
@@ -175,6 +175,50 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fundación";
             // 
+            // e_acabados
+            // 
+            this.e_acabados.BackColor = System.Drawing.Color.White;
+            this.e_acabados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e_acabados.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.e_acabados.Location = new System.Drawing.Point(204, 19);
+            this.e_acabados.Name = "e_acabados";
+            this.e_acabados.Size = new System.Drawing.Size(66, 23);
+            this.e_acabados.TabIndex = 5;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(11, 27);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(146, 15);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Espesor de Acabados (m):";
+            // 
+            // P_R
+            // 
+            this.P_R.BackColor = System.Drawing.Color.White;
+            this.P_R.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.P_R.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.P_R.Location = new System.Drawing.Point(204, 75);
+            this.P_R.Name = "P_R";
+            this.P_R.Size = new System.Drawing.Size(66, 23);
+            this.P_R.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(11, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(175, 15);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Profundidad del Refuerzo (m) :";
+            // 
             // Radio_Des
             // 
             this.Radio_Des.AutoSize = true;
@@ -221,7 +265,7 @@
             this.cb_Aceptar.Location = new System.Drawing.Point(122, 311);
             this.cb_Aceptar.Name = "cb_Aceptar";
             this.cb_Aceptar.Size = new System.Drawing.Size(71, 24);
-            this.cb_Aceptar.TabIndex = 7;
+            this.cb_Aceptar.TabIndex = 9;
             this.cb_Aceptar.Text = "Aceptar";
             this.cb_Aceptar.UseVisualStyleBackColor = false;
             this.cb_Aceptar.Click += new System.EventHandler(this.Cb_Aceptar_Click);
@@ -285,50 +329,6 @@
             this.label3.Size = new System.Drawing.Size(119, 15);
             this.label3.TabIndex = 77;
             this.label3.Text = "Recubrimiento (cm):";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(11, 83);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(175, 15);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "Profundidad del Refuerzo (m) :";
-            // 
-            // P_R
-            // 
-            this.P_R.BackColor = System.Drawing.Color.White;
-            this.P_R.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.P_R.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.P_R.Location = new System.Drawing.Point(204, 75);
-            this.P_R.Name = "P_R";
-            this.P_R.Size = new System.Drawing.Size(66, 23);
-            this.P_R.TabIndex = 28;
-            // 
-            // e_acabados
-            // 
-            this.e_acabados.BackColor = System.Drawing.Color.White;
-            this.e_acabados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e_acabados.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.e_acabados.Location = new System.Drawing.Point(204, 19);
-            this.e_acabados.Name = "e_acabados";
-            this.e_acabados.Size = new System.Drawing.Size(66, 23);
-            this.e_acabados.TabIndex = 30;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(11, 27);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(146, 15);
-            this.label8.TabIndex = 29;
-            this.label8.Text = "Espesor de Acabados (m):";
             // 
             // VariablesdeEntrada
             // 

@@ -68,6 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alzado.cs" />
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\CambiarNombreColumna.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\CambiarNombreColumna.Designer.cs">
+      <DependentUpon>CambiarNombreColumna.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz Seccion\FAgregarSeccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,28 +110,28 @@
     <Compile Include="Diseño\AgregarAlzado.Designer.cs">
       <DependentUpon>AgregarAlzado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diseño\AgregarRefuerzoBase.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\AgregarRefuerzoBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Diseño\AgregarRefuerzoBase.Designer.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\AgregarRefuerzoBase.Designer.cs">
       <DependentUpon>AgregarRefuerzoBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diseño\ColSimilares.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColSimilares.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Diseño\ColSimilares.Designer.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColSimilares.Designer.cs">
       <DependentUpon>ColSimilares.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diseño\ColumnasaDiseñar.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColumnasaDiseñar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Diseño\ColumnasaDiseñar.Designer.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColumnasaDiseñar.Designer.cs">
       <DependentUpon>ColumnasaDiseñar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Diseño\ColumnasaGraficar.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColumnasaGraficar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Diseño\ColumnasaGraficar.Designer.cs">
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColumnasaGraficar.Designer.cs">
       <DependentUpon>ColumnasaGraficar.cs</DependentUpon>
     </Compile>
     <Compile Include="Diseño\CuantiVolumetrica.cs">
@@ -221,16 +227,19 @@
     <EmbeddedResource Include="Diseño\AgregarAlzado.resx">
       <DependentUpon>AgregarAlzado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Diseño\AgregarRefuerzoBase.resx">
+    <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\AgregarRefuerzoBase.resx">
       <DependentUpon>AgregarRefuerzoBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Diseño\ColSimilares.resx">
+    <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\CambiarNombreColumna.resx">
+      <DependentUpon>CambiarNombreColumna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColSimilares.resx">
       <DependentUpon>ColSimilares.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Diseño\ColumnasaDiseñar.resx">
+    <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColumnasaDiseñar.resx">
       <DependentUpon>ColumnasaDiseñar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Diseño\ColumnasaGraficar.resx">
+    <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\ColumnasaGraficar.resx">
       <DependentUpon>ColumnasaGraficar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Diseño\CuantiVolumetrica.resx">
@@ -355,6 +364,7 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\editar.png" />
     <None Include="Resources\efe Prima Ce Pixelado.jpg" />
     <None Include="Resources\icons8-dibujados-a-mano-a-color-100.png" />
     <None Include="Resources\icons8-acerca-de-48.png" />

@@ -141,6 +141,22 @@ namespace DisenoColumnas
             return brush;
         }
 
+
+
+        public static float FindTraslapo(int NoBarra, float FC)
+        {
+            float Traslapo = 0;
+            if (FC == 210f) { Traslapo = Form1.Proyecto_.Ld_210[NoBarra]; }
+            if (FC == 280f) { Traslapo = Form1.Proyecto_.Ld_280[NoBarra]; }
+            if (FC == 350f) { Traslapo = Form1.Proyecto_.Ld_350[NoBarra]; }
+            if (FC == 420f) { Traslapo = Form1.Proyecto_.Ld_420[NoBarra]; }
+            if (FC == 490f) { Traslapo = Form1.Proyecto_.Ld_490[NoBarra]; }
+            if (FC == 560f) { Traslapo = Form1.Proyecto_.Ld_560[NoBarra]; }
+            return Traslapo;
+        }
+
+
+
         public static int Redondear_Decimales(double N_decimal, int multiplo, bool RedondInferior = false)
         {
             int valor = 0;

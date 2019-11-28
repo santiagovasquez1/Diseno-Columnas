@@ -280,7 +280,19 @@ namespace DisenoColumnas.Clases
             {
                 if (UnitarioAdicional != null)
                 {
-                    return $"{CantBarras}#{NoBarra}{Tipo}-{UnitarioAdicional.CantBarras}#{UnitarioAdicional.NoBarra}";
+                    if (Tipo2 != "")
+                    {
+                        return $"{Tipo2}{CantBarras}#{NoBarra}{Tipo}-{UnitarioAdicional.CantBarras}#{UnitarioAdicional.NoBarra}";
+                    }
+                    else
+                    {
+                        return $"{CantBarras}#{NoBarra}{Tipo}-{UnitarioAdicional.CantBarras}#{UnitarioAdicional.NoBarra}";
+                    }
+               
+                }
+                else if(Tipo2 !="")
+                {
+                    return $"{Tipo2}{CantBarras}#{NoBarra}{Tipo}";
                 }
                 else
                 {

@@ -2,6 +2,7 @@
 using DisenoColumnas.Clases;
 using DisenoColumnas.DefinirColumnas;
 using DisenoColumnas.Diseño;
+using DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_;
 using DisenoColumnas.Interfaz_Inicial;
 using DisenoColumnas.Interfaz_Seccion;
 using DisenoColumnas.InterfazViewInfo;
@@ -368,6 +369,19 @@ namespace DisenoColumnas
                 variablesdeEntrada = new VariablesdeEntrada(false);
                 variablesdeEntrada.ShowDialog();
 
+
+                //Cambiar Nombre de Columnas
+                m_Informacion = new Informacion();
+                DialogResult EditarColumnas = MessageBox.Show("¿Desea editar el nombre de las columnas?", Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if(EditarColumnas == DialogResult.Yes)
+                {
+                    CambiarNombreColumna nombreColumna = new CambiarNombreColumna();
+                    nombreColumna.ShowDialog();
+                    MessageBox.Show("NOTA: Los nombres editados solo cambiaran cuando grafique el alzado en AutoCAD.", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+
+
                 m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
                 string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
                 try { PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent); } catch { }
@@ -375,7 +389,7 @@ namespace DisenoColumnas
                 mLcolumnas = LColumna;
                 m_PlantaColumnas = new PlantaColumnas();
                 //   m_PlantaColumnas.Show(PanelContenedor);
-                m_Informacion = new Informacion();
+          
                 m_Informacion.Show(PanelContenedor);
 
                 m_Despiece = new Despiece();
@@ -1909,6 +1923,7 @@ namespace DisenoColumnas
                 fuerzasToolStripMenuItem.Enabled = true;
                 despieceToolStripMenuItem.Enabled = true;
                 resultadosToolStripMenuItem.Enabled = true;
+                editarNombresDeColumnasToolStripMenuItem.Enabled = true;
             }
             if (WindowState == FormWindowState.Normal)
             {
@@ -2499,7 +2514,7 @@ namespace DisenoColumnas
                         columnasDrawing.Remove(col);
                     }
 
-                    Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.Name);
+                    Proyecto_.Lista_Columnas.Find(x => x.Name == col.ColSimilName).NamesSimilares.Add(col.Label);
                 }
             }
 
@@ -2569,12 +2584,12 @@ namespace DisenoColumnas
             {
                 if (col.Alzados.Count != 0)
                 {
-                    string Names = col.Name;
+                    string Names = col.Label;
                     for (int i = 0; i < col.NamesSimilares.Count; i++)
                     {
                         Names += "," + col.NamesSimilares[i];
                     }
-
+                    FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
                     FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:15");
                     col.Seccions.Last().Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);
@@ -2610,6 +2625,13 @@ namespace DisenoColumnas
         {
             Resultados.Resultados_ resultados_ = new Resultados.Resultados_();
             resultados_.ShowDialog();
+        }
+
+        private void EditarNombresDeColumnasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CambiarNombreColumna cambiarNombreColumnas = new CambiarNombreColumna();
+            cambiarNombreColumnas.ShowDialog();
+
         }
     }
 }

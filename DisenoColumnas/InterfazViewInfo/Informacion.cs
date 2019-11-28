@@ -13,7 +13,7 @@ namespace DisenoColumnas.InterfazViewInfo
         public Informacion()
         {
             InitializeComponent();
-            EstiloDatGridView();
+            EstiloDatGridView(Info_D);
         }
 
         private Columna ColumnaSelectAnt;
@@ -217,7 +217,7 @@ namespace DisenoColumnas.InterfazViewInfo
                 }
             }
 
-            EstiloDatGridView();
+            EstiloDatGridView(Info_D);
         }
 
         public void MostrarAcero()
@@ -275,7 +275,7 @@ namespace DisenoColumnas.InterfazViewInfo
   
         }
 
-        private void EstiloDatGridView()
+        public void EstiloDatGridView(DataGridView dataGrid)
         {
             DataGridViewCellStyle StyleC = new DataGridViewCellStyle();
             StyleC.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -285,11 +285,11 @@ namespace DisenoColumnas.InterfazViewInfo
             StyleR.Alignment = DataGridViewContentAlignment.MiddleCenter;
             StyleR.Font = new Font("Vderdana", 8, FontStyle.Regular);
 
-            foreach (DataGridViewColumn column in Info_D.Columns)
+            foreach (DataGridViewColumn column in dataGrid.Columns)
             {
                 column.HeaderCell.Style = StyleC;
             }
-            foreach (DataGridViewRow row in Info_D.Rows)
+            foreach (DataGridViewRow row in dataGrid.Rows)
             {
                 row.DefaultCellStyle = StyleR;
             }
