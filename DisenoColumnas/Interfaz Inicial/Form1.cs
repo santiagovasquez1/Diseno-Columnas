@@ -2589,7 +2589,7 @@ namespace DisenoColumnas
                     {
                         Names += "," + col.NamesSimilares[i];
                     }
-
+                    FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
                     FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:15");
                     col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);

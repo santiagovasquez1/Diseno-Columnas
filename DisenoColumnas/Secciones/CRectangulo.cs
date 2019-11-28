@@ -291,11 +291,13 @@ namespace DisenoColumnas.Secciones
                     Diametro1 = Barra_aux;
                     if (Diametro1 == 4)
                     {
-                        Diametro2 = 0;
+                        Diametro2 =0;
+                        X2 = 0;
                     }
                     else
                     {
                         Diametro2 = Barra_aux - 1;
+                        X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
                     }
                    
                 }
@@ -303,9 +305,10 @@ namespace DisenoColumnas.Secciones
                 {
                     Diametro1 = Barra_aux;
                     Diametro2 = Barra_aux + 1;
+                    X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
                 }
 
-                X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
+               
 
                 if (X2 % 2 != 0)
                 {
