@@ -2078,7 +2078,7 @@ namespace DisenoColumnas
 
                             foreach (CRefuerzo refuerzo in Temp_seccion2.Refuerzos)
                             {
-                                Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                                Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], 3 * Math.PI / 2).ToArray();
                                 refuerzo.Coord[0] = Rotacion[0];
                                 refuerzo.Coord[1] = Rotacion[1];
                             }
@@ -2570,7 +2570,7 @@ namespace DisenoColumnas
                     ColumnasMaximas += Name + ",";
                 }
 
-                string MensajeColumnasMaxMaxima = "La(s) columna(s): " + ColumnasMaximas + "  en el acero requerido superan la cuantía máxima permisible.";
+                string MensajeColumnasMaxMaxima = "La(s) columna(s): " + ColumnasMaximas + "  en el acero requerido supera la cuantía máxima permisible.";
                 DialogResult messageBox;
                 messageBox = DialogResult.Yes;
                 if (Activar_CuantiMax)
@@ -2611,7 +2611,7 @@ namespace DisenoColumnas
                     FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:75");
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
                     FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:15");
-                    col.Seccions[0].Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);
+                    col.Seccions.Last().Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);
                     DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }

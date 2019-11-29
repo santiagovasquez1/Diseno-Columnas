@@ -34,14 +34,14 @@ namespace DisenoColumnas.Secciones
         {
             Name = Nombre;
             Material = Material_;
-            Shape = Shape_;            
+            Shape = Shape_;
             radio = pradio;
             Centro = pCentro;
             CoordenadasSeccion = pCoord;
             CalcularArea();
         }
 
-        public void Set_puntos(int numero_puntos,double pradio)
+        public void Set_puntos(int numero_puntos, double pradio)
         {
             double delta_angulo = 2 * Math.PI / numero_puntos;
             double angulo = 0;
@@ -61,7 +61,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY=4220)
+        public void Cuanti_Vol(float FactorDisipacion1, float FactorDisipacion2, float r, float FY = 4220)
         {
             double Ash;
             float S = Estribo.Separacion / 100;
@@ -70,7 +70,7 @@ namespace DisenoColumnas.Secciones
             Estribo.NoRamasV1 = 1;
         }
 
-        public void Calc_vol_inex(float r, float FY,GDE gDE)
+        public void Calc_vol_inex(float r, float FY, GDE gDE)
         {
             float FD1, FD2;
             if (gDE == GDE.DMO)
@@ -103,7 +103,7 @@ namespace DisenoColumnas.Secciones
             Ast2 = 1.29; //Estribo #4
 
             s_min = 7.5;
-            s_max = Form1.Proyecto_.DMO_DES == GDE.DMO ? 2 * radio*100 / 3 : 2 * radio*100 / 4;
+            s_max = Form1.Proyecto_.DMO_DES == GDE.DMO ? 2 * radio * 100 / 3 : 2 * radio * 100 / 4;
 
             G_As1 = 2 * Math.PI * 2 * (radio - r) * 100 + 2 * 14; //Longitud de gancho a 180 de #3
             G_As2 = 2 * Math.PI * 2 * (radio - r) * 100 + 2 * 16.7; //Longitud de gancho a 180 de #3
@@ -163,9 +163,128 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public  void Refuerzo_Base(double recub)
+        public void Refuerzo_Base(double recub)
         {
+            int Num_Barras = 0;
+            int Barra_aux = 0;
+            int Diametro1 = 0;
+            int Diametro2 = 0;
+            double As_min;
+            double As_i;
+            double p_error;
+            int Cont_Aux1 = 0;
+            int Cont_Aux2 = 0;
+            int X1 = 0; //Cantidad de barras para diametro1
+            int X2 = 0; //Cantida de barras para diametro2
 
+            Num_Barras = 4;
+            As_min = 0.01 * Area;
+            As_i = As_min / Num_Barras;
+
+            while (As_i > Form1.Proyecto_.AceroBarras[6])
+            {
+                Num_Barras += 2;
+                As_i = (As_min / Num_Barras);
+            }
+
+            //Asociar As_i a un diametro de barra
+            Barra_aux = FunctionsProject.Find_Barra(As_i);
+
+            //Encontrar Combinatoria optima para el acero base mas aproximado al 1%
+            p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
+
+            if (p_error >= 1.05)
+
+            {
+                if (Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras > As_min)
+                {
+                    Diametro1 = Barra_aux;
+                    if (Diametro1 == 4)
+                    {
+                        Diametro2 = 0;
+                    }
+                    else
+                    {
+                        Diametro2 = Barra_aux - 1;
+                    }
+                }
+                else
+                {
+                    Diametro1 = Barra_aux;
+                    Diametro2 = Barra_aux + 1;
+                }
+
+                if (Diametro2 > 0)
+                {
+                    X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
+                }
+                else
+                {
+                    X2 = 0;
+                }
+
+                if (X2 % 2 != 0)
+                {
+                    X2 = FunctionsProject.Redondear_Decimales(X2, 4, true);
+                }
+
+                X1 = Num_Barras - X2;
+            }
+            else
+            {
+                Diametro1 = Barra_aux;
+                Diametro2 = 0;
+                X1 = Num_Barras;
+                X2 = 0;
+            }
+
+            int[] Aux_Refuerzos = new int[Num_Barras];
+            int Aux_num_barras = Num_Barras;
+            int i = 0;
+
+            Cont_Aux1 = X1;
+            Cont_Aux2 = X2;
+
+            while (Aux_num_barras > 0)
+            {
+                if (X2 > 0)
+                {
+                    if (Cont_Aux1 > 0)
+                    {
+                        if (Cont_Aux1 > 0)
+                        {
+                            Aux_Refuerzos[i] = Diametro1;
+                            Cont_Aux1 -= 1;
+                            Aux_num_barras -= 1;
+                        }
+
+                        if (Cont_Aux1 > 0)
+                        {
+                            Aux_Refuerzos[i + (Num_Barras / 2) - 1] = Diametro1;
+                            Cont_Aux1 -= 1;
+                            Aux_num_barras -= 1;
+                        }
+
+                    }
+                    else
+                    {
+                        if (Aux_Refuerzos[i] == 0)
+                        {
+                            Aux_Refuerzos[i] = Diametro2;
+                            Cont_Aux2 -= 1;
+                            Aux_num_barras -= 1;
+                        }
+                    }
+                }
+                else
+                {
+                    Aux_Refuerzos[i] = Diametro1;
+                    Cont_Aux1 -= 1;
+                    Aux_num_barras -= 1;
+                }
+                i++;
+            }
+            Set_Refuerzo_Seccion(Aux_Refuerzos, recub);
         }
 
         public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
@@ -202,7 +321,7 @@ namespace DisenoColumnas.Secciones
                 };
 
                 circulo = new CCirculo("Refuerzo", r, pcentro, material, TipodeSeccion.Circle, pCoord: null);
-                circulo.Set_puntos(10,r);
+                circulo.Set_puntos(10, r);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
                 Shapes_ref.Add(path);
@@ -289,6 +408,32 @@ namespace DisenoColumnas.Secciones
             Seccion_path.AddClosedCurve(Puntos.ToArray());
         }
 
+        public void Set_Refuerzo_Seccion(int[] Refuerzos_temp, double Recubrimiento)
+        {
+            double Long_arco = 0;
+            double Theta = 0;
+            double Radio_interno = 0;
+            double Perimetro_interno = 0;
+            double[] Coord = new double[2];
+            int id = 0;
+            CRefuerzo refuerzoi = null;
+
+            Radio_interno = ((2 * radio * 100) - 2 * Recubrimiento - 2) / 2;
+            Perimetro_interno = 2 * Math.PI * Radio_interno;
+            Long_arco = Perimetro_interno / Refuerzos_temp.Count();
+
+            foreach (int Diametroi in Refuerzos_temp)
+            {
+                Coord[0] = Radio_interno * Math.Cos((Math.PI / 2) - Theta);
+                Coord[1] = Radio_interno * Math.Sin((Math.PI / 2) - Theta);
+                refuerzoi = FunctionsProject.DeepClone(new CRefuerzo(id, "#" + Diametroi, Coord, TipodeRefuerzo.longitudinal));
+                refuerzoi.Alzado = 1;
+                Refuerzos.Add(refuerzoi);
+                id++;
+                Theta += Long_arco / Radio_interno;
+            }
+        }
+
         public override string ToString()
         {
             string Nombre_seccion;
@@ -320,12 +465,12 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
-        public double Peso_Estribo(Estribo pEstribo,float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
         {
             return 0;
         }
 
-        public void Dibujo_Autocad(double Xi, double Yi,int Num_Alzado)
+        public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {
             throw new NotImplementedException();
         }

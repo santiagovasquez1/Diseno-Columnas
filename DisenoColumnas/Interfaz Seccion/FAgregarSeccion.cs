@@ -135,6 +135,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Nombre_Seccion = $"C{b}{material.Name}";
                 N_Seccion = new CCirculo(Nombre_Seccion, b / 200, new double[] { 0, 0 }, material, TipodeSeccion.Circle, null);
                 N_Seccion.Calc_vol_inex(r / 100, 4220, gde);
+                N_Seccion.Refuerzo_Base(r);
             }
 
             if (Tipo_Seccion == TipodeSeccion.Tee.ToString() | Tipo_Seccion == TipodeSeccion.L.ToString())

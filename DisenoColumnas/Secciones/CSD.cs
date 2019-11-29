@@ -523,13 +523,13 @@ namespace DisenoColumnas.Secciones
 
         public void Refuerzo_Base(double recub)
         {
-            //int Num_Barras = 0;
-            //int Barra_aux = 0;
-            //int Diametro1 = 0;
-            //int Diametro2 = 0;
-            //double As_min;
-            //double As_i;
-            //double p_error;
+            int Num_Barras = 0;
+            int Barra_aux = 0;
+            int Diametro1 = 0;
+            int Diametro2 = 0;
+            double As_min;
+            double As_i;
+            double p_error;
 
             //Num_Barras = Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2);
             //As_min = 0.01 * Area;
