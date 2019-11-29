@@ -213,7 +213,7 @@ namespace DisenoColumnas.Secciones
                 Indice_min = P_As1.FindIndex(x => x == P_As1.Min());
                 Estribo = new Estribo(3)
                 {
-                    Separacion = Convert.ToSingle(Sep[Indice_min])
+                    Separacion = Convert.ToSingle(Sep[Indice_min]),
                 };
             }
             else
@@ -224,6 +224,8 @@ namespace DisenoColumnas.Secciones
                     Separacion = Convert.ToSingle(Sep[Indice_min])
                 };
             }
+
+            Cuanti_Vol(FD1, FD2, r, 4220);
         }
 
         public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
@@ -260,7 +262,7 @@ namespace DisenoColumnas.Secciones
                 };
 
                 circulo = new CCirculo("Refuerzo", r, Centro, material, TipodeSeccion.Circle, pCoord: null);
-                circulo.Set_puntos(10,r);
+                circulo.Set_puntos(10, r);
 
                 path.AddClosedCurve(circulo.Puntos.ToArray());
                 Shapes_ref.Add(path);
@@ -526,55 +528,69 @@ namespace DisenoColumnas.Secciones
             int Num_Barras = 0;
             int Barra_aux = 0;
             int Diametro1 = 0;
-            int Diametro2 = 0;
             double As_min;
             double As_i;
             double p_error;
+            double Relacion_dim = 0;
+            int CapasX1 = 0;
+            int CapasX2 = 0;
+            int CapasY1 = 0;
+            int CapasY2 = 0;
 
-            //Num_Barras = Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2);
-            //As_min = 0.01 * Area;
-            //As_i = As_min / Num_Barras;
+            Num_Barras = Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2) + Estribo.NoRamasH2 * 2 + 2 * (Estribo.NoRamasV2 - 2);
+            As_min = 0.01 * Area;
+            As_i = As_min / Num_Barras;
 
-            //while (As_i > Form1.Proyecto_.AceroBarras[6])
-            //{
-            //    Num_Barras += 2;
-            //    As_i = (As_min / Num_Barras);
-            //}
+            while (As_i > Form1.Proyecto_.AceroBarras[6])
+            {
+                Num_Barras += 2;
+                As_i = (As_min / Num_Barras);
+            }
 
-            ////Asociar As_i a un diametro de barra
-            //Barra_aux = FunctionsProject.Find_Barra(As_i);
+            //Asociar As_i a un diametro de barra
+            Barra_aux = FunctionsProject.Find_Barra(As_i);
 
-            ////Encontrar Combinatoria optima para el acero base mas aproximado al 1%
-            //p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
+            //Encontrar Combinatoria optima para el acero base mas aproximado al 1%
+            p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
 
-            //if (p_error >= 1.05)
-            //{
-            //    int X1 = 0; //Cantidad de barras para diametro1
-            //    int X2 = 0; //Cantida de barras para diametro2
+            Diametro1 = Barra_aux;
 
-            //    if (Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras > As_min)
-            //    {
-            //        Diametro1 = Barra_aux;
-            //        Diametro2 = Barra_aux - 1;
-            //    }
-            //    else
-            //    {
-            //        Diametro1 = Barra_aux;
-            //        Diametro2 = Barra_aux + 1;
-            //    }
+            int[] Aux_Refuerzos = new int[Num_Barras];
+            int Aux_num_barras = Num_Barras;
 
-            //    X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
+            for (int i = 0; i < Aux_Refuerzos.Count(); i++)
+            {
+                Aux_Refuerzos[i] = Diametro1;
+            }
 
-            //    if (X2 % 2 != 0)
-            //    {
-            //        X2 += 1;
-            //    }
+            if (Num_Barras != Estribo.NoRamasH1 * 2 + 2 * (Estribo.NoRamasV1 - 2) + Estribo.NoRamasH2 * 2 + 2 * (Estribo.NoRamasV2 - 2))
+            {
+                CapasX1 = Estribo.NoRamasV1;
+                CapasY2 = Estribo.NoRamasH2;
 
-            //    X1 = Num_Barras - X2;
-            //}
+                Relacion_dim = B / (H - TF);
+
+                if (Relacion_dim < 1)
+                {
+                    CapasY1 = Convert.ToInt32(Relacion_dim * (Num_Barras - 2 * (CapasX1 - CapasY2)) / 2) - 2;
+                    CapasX2 = 2 + (Num_Barras - 2 * (CapasX1 + CapasY2 + CapasY1 - 2)) / 2;
+                }
+                else
+                {
+                    CapasX2 = Convert.ToInt32(Relacion_dim * (Num_Barras - 2 * (CapasX1 - CapasY2)) / 2) - 2;
+                    CapasY1 = 2 + (Num_Barras - 2 * (CapasX1 - CapasY2 - CapasX2 - 2)) / 2;
+                }
+
+                Estribo.NoRamasV1 = CapasX1;
+                Estribo.NoRamasH1 = CapasY1;
+                Estribo.NoRamasV2 = CapasX2;
+                Estribo.NoRamasH2 = CapasY2;
+            }
         }
 
-        public void Dibujo_Autocad(double Xi, double Yi,int Num_Alzado)
+
+
+        public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {
             throw new NotImplementedException();
         }
