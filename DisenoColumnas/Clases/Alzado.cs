@@ -341,7 +341,14 @@ namespace DisenoColumnas.Clases
             {
                 try
                 {
-                    Longitud += (float)Math.Sqrt(Math.Pow(Coordenadas[i][0] - Coordenadas[i - 1][0], 2) + Math.Pow(Coordenadas[i][1] - Coordenadas[i - 1][1], 2));
+                    float X1 = (float)Math.Round(Coordenadas[i][0], 2);
+                    float X2 = (float)Math.Round(Coordenadas[i - 1][0], 2);
+                    float Y1 = (float)Math.Round(Coordenadas[i][1], 2);
+                    float Y2= (float)Math.Round(Coordenadas[i - 1][1], 2);
+
+
+
+                    Longitud += (float)Math.Sqrt(Math.Pow(X1 - X2, 2) + Math.Pow(Y1 - Y2, 2));
                 }
                 catch { }
             }

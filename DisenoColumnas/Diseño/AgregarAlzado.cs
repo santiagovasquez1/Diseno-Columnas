@@ -749,11 +749,18 @@ namespace DisenoColumnas.Diseño
                     }
 
 
-                    ModificarCoordParaEntero(au);
-                    if (au.UnitarioAdicional != null)
+
+                    if (Form1.Proyecto_.Redondear)
                     {
-                        ModificarCoordParaEntero(au.UnitarioAdicional);
+                        ModificarCoordParaEntero(au);
+                        if (au.UnitarioAdicional != null)
+                        {
+                            ModificarCoordParaEntero(au.UnitarioAdicional);
+                        }
+
                     }
+
+
                 }
             }
 

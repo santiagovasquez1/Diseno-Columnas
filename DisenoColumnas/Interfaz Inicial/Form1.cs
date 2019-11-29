@@ -183,9 +183,10 @@ namespace DisenoColumnas
                     LColumna.Text = Proyecto_.Lista_Columnas[0].Name;
                 }
 
-                variablesdeEntrada = new VariablesdeEntrada(true);
+                variablesdeEntrada = new VariablesdeEntrada(false);
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
+                
 
                 CreateDictonaries();
                 WindowState = FormWindowState.Maximized;
@@ -368,7 +369,7 @@ namespace DisenoColumnas
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
                 mFuerzasEnElmentos = null;
 
-                variablesdeEntrada = new VariablesdeEntrada(false);
+                variablesdeEntrada = new VariablesdeEntrada(true);
                 variablesdeEntrada.ShowDialog();
 
 
@@ -1743,33 +1744,29 @@ namespace DisenoColumnas
 
         private void VariablesDeEntradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (variablesdeEntrada != null)
-            {
-                if (Proyecto_ != null)
-                {
-                    if (Proyecto_.DMO_DES == GDE.DMO)
-                    {
-                        variablesdeEntrada.Radio_Dmo.Checked = true;
-                    }
-                    else if (Form1.Proyecto_.DMO_DES == GDE.DES)
-                    {
-                        variablesdeEntrada.Radio_Des.Checked = true;
-                    }
 
-                    variablesdeEntrada.T_Vf.Text = Proyecto_.e_Fundacion.ToString();
-                    variablesdeEntrada.T_arranque.Text = Proyecto_.Nivel_Fundacion.ToString();
-                    variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
-                    variablesdeEntrada.P_R.Text = Proyecto_.P_R.ToString();
-                    variablesdeEntrada.e_acabados.Text = Proyecto_.e_acabados.ToString();
+            if (Proyecto_ != null)
+            {
+                variablesdeEntrada = new VariablesdeEntrada(false);
+                if (Proyecto_.DMO_DES == GDE.DMO)
+                {
+                    variablesdeEntrada.Radio_Dmo.Checked = true;
                 }
+                else if (Form1.Proyecto_.DMO_DES == GDE.DES)
+                {
+                    variablesdeEntrada.Radio_Des.Checked = true;
+                }
+                variablesdeEntrada.T_Vf.Text = Proyecto_.e_Fundacion.ToString();
+                variablesdeEntrada.T_arranque.Text = Proyecto_.Nivel_Fundacion.ToString();
+                variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
+                variablesdeEntrada.P_R.Text = Proyecto_.P_R.ToString();
+                variablesdeEntrada.e_acabados.Text = Proyecto_.e_acabados.ToString();
+                variablesdeEntrada.RedondearDecimales.Checked = Proyecto_.Redondear; 
                 variablesdeEntrada.PictureBox1.Visible = true;
                 variablesdeEntrada.ShowDialog();
             }
-            else
-            {
-                variablesdeEntrada = new VariablesdeEntrada(true);
-                variablesdeEntrada.ShowDialog();
-            }
+      
+            
         }
 
         private void LColumna_SelectedIndexChanged(object sender, EventArgs e)

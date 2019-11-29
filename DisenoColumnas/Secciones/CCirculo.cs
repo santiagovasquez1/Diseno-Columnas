@@ -225,7 +225,7 @@ namespace DisenoColumnas.Secciones
 
                 if (X2 % 2 != 0)
                 {
-                    X2 = FunctionsProject.Redondear_Decimales(X2, 4, true);
+                    X2 = FunctionsProject.Redondear_Entero(X2, 4, true);
                 }
 
                 X1 = Num_Barras - X2;
@@ -472,7 +472,7 @@ namespace DisenoColumnas.Secciones
 
         public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
 
         public static bool operator ==(CCirculo s1, CCirculo s2)

@@ -1637,10 +1637,13 @@ namespace DisenoColumnas.Clases
                     }
 
 
-                    ModificarCoordParaEntero(au);
-                    if (au.UnitarioAdicional != null)
+                    if (Form1.Proyecto_.Redondear)
                     {
-                        ModificarCoordParaEntero(au.UnitarioAdicional);
+                        ModificarCoordParaEntero(au);
+                        if (au.UnitarioAdicional != null)
+                        {
+                            ModificarCoordParaEntero(au.UnitarioAdicional);
+                        }
                     }
                 }
             }
@@ -2106,21 +2109,21 @@ namespace DisenoColumnas.Clases
                 if (Alzados.Count == 2 && a.ID == 1)
                 {
                     DesCota = 0.3f;
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Math.Round( Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText - DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1] + aux.Traslapo, 0 };
                 }
                 else if (Alzados.Count == 2 && a.ID == 2)
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText + DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1] + aux.Traslapo, 0 };
                 }
                 else
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0], Y + aux.Coord_Alzado_PB[1][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0], Math.Round(Y + aux.Coord_Alzado_PB[1][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1] + aux.Traslapo, 0 };
@@ -2274,7 +2277,7 @@ namespace DisenoColumnas.Clases
 
                 if (Alzados.Count == 2 && a.ID == 1)
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0] - DPR / 2, Y + aux.Coord_Alzado_PB[2][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1],2), X + aux.Coord_Alzado_PB[2][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[2][1],2) };
 
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText - DPR / 2, Ytext, 0 };
                     DesCota = 0.3f;
@@ -2300,7 +2303,7 @@ namespace DisenoColumnas.Clases
                 }
                 else if (Alzados.Count == 2 && a.ID == 2)
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0] + DPR / 2, Y + aux.Coord_Alzado_PB[2][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1],2), X + aux.Coord_Alzado_PB[2][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[2][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText + DPR / 2, Ytext, 0 };
 
                     if (aux.NoStory != 1)
@@ -2319,7 +2322,7 @@ namespace DisenoColumnas.Clases
                 }
                 else
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0], Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0], Y + aux.Coord_Alzado_PB[2][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0], Math.Round(Y + aux.Coord_Alzado_PB[1][1],2), X + aux.Coord_Alzado_PB[2][0], Math.Round(Y + aux.Coord_Alzado_PB[2][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText, Ytext, 0 };
 
                     if (aux.NoStory != 1)
@@ -2422,21 +2425,21 @@ namespace DisenoColumnas.Clases
 
                 if (Alzados.Count == 2 && a.ID == 1)
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0] - DPR / 2, Y + aux.Coord_Alzado_PB[2][1], X + aux.Coord_Alzado_PB[3][0] - DPR / 2, Y + aux.Coord_Alzado_PB[3][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1],2), X + aux.Coord_Alzado_PB[2][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[2][1],2), X + aux.Coord_Alzado_PB[3][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[3][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText - DPR / 2, Ytext, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
                 }
                 else if (Alzados.Count == 2 && a.ID == 2)
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0] + DPR / 2, Y + aux.Coord_Alzado_PB[2][1], X + aux.Coord_Alzado_PB[3][0] + DPR / 2, Y + aux.Coord_Alzado_PB[3][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1],2), X + aux.Coord_Alzado_PB[2][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[2][1],2), X + aux.Coord_Alzado_PB[3][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[3][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText + DPR / 2, Ytext, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
                     P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy, 0 };
                 }
                 else
                 {
-                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], X + aux.Coord_Alzado_PB[1][0], Y + aux.Coord_Alzado_PB[1][1], X + aux.Coord_Alzado_PB[2][0], Y + aux.Coord_Alzado_PB[2][1], X + aux.Coord_Alzado_PB[3][0], Y + aux.Coord_Alzado_PB[3][1] };
+                    Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Math.Round(Y + aux.Coord_Alzado_PB[0][1],2), X + aux.Coord_Alzado_PB[1][0], Math.Round(Y + aux.Coord_Alzado_PB[1][1],2), X + aux.Coord_Alzado_PB[2][0], Math.Round(Y + aux.Coord_Alzado_PB[2][1],2), X + aux.Coord_Alzado_PB[3][0], Math.Round(Y + aux.Coord_Alzado_PB[3][1],2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText, Ytext, 0 };
 
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
