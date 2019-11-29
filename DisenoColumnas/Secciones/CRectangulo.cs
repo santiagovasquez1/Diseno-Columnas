@@ -291,7 +291,7 @@ namespace DisenoColumnas.Secciones
                     Diametro1 = Barra_aux;
                     if (Diametro1 == 4)
                     {
-                        Diametro2 =0;
+                        Diametro2 = 0;
                         X2 = 0;
                     }
                     else
@@ -299,7 +299,6 @@ namespace DisenoColumnas.Secciones
                         Diametro2 = Barra_aux - 1;
                         X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
                     }
-
                 }
                 else
                 {
@@ -311,7 +310,6 @@ namespace DisenoColumnas.Secciones
                 if (Diametro2 > 0)
                 {
                     X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
-
                 }
                 else
                 {
@@ -658,7 +656,7 @@ namespace DisenoColumnas.Secciones
             Seccion_path.AddPolygon(Vertices.ToArray());
         }
 
-        public void Dibujo_Autocad(double Xi, double Yi,int Num_Despiece)
+        public void Dibujo_Autocad(double Xi, double Yi, int Num_Despiece)
         {
             string LayerCuadro = "FC_BORDES";
             double[] Vertices = new double[] { Xi, Yi, Xi, Yi - H, Xi + B, Yi - H, Xi + B, Yi };
@@ -711,9 +709,11 @@ namespace DisenoColumnas.Secciones
             #endregion Adicion de ganchos seccion
 
             #region Nombre_Seccion
+
             Nom_Seccion = "%%USeccion " + Num_Despiece;
             FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - (H / 2) - 0.40, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
-            #endregion
+
+            #endregion Nombre_Seccion
         }
 
         public double Peso_Estribo(Estribo pEstribo, float recubrimiento)

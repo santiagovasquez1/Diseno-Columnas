@@ -2059,7 +2059,7 @@ namespace DisenoColumnas
 
                             foreach (CRefuerzo refuerzo in Temp_seccion2.Refuerzos)
                             {
-                                Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                                Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], 3 * Math.PI / 2).ToArray();
                                 refuerzo.Coord[0] = Rotacion[0];
                                 refuerzo.Coord[1] = Rotacion[1];
                             }

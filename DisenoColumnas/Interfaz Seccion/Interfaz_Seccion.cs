@@ -245,7 +245,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion.Material = Columna_i.Seccions[indice].Item1.Material;
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
-                    //seccion.Refuerzos= Columna_i.Seccions[indice].Item1.Refuerzos;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
 
                     if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H & seccion.Shape == TipodeSeccion.Rectangular)
@@ -253,7 +252,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                         double[] Rotacion;
                         foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                         {
-                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], Math.PI / 2).ToArray();
+                            Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], (3 * Math.PI) / 2).ToArray();
                             refuerzo.Coord[0] = Rotacion[0];
                             refuerzo.Coord[1] = Rotacion[1];
                             if (Columna_i.Seccions[indice].Item1.Refuerzos.Count > 0)

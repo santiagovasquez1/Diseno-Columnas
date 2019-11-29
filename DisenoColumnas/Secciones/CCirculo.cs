@@ -174,11 +174,8 @@ namespace DisenoColumnas.Secciones
             double p_error;
             int Cont_Aux1 = 0;
             int Cont_Aux2 = 0;
-            int CapasX = 0;
-            int CapasY = 0;
             int X1 = 0; //Cantidad de barras para diametro1
             int X2 = 0; //Cantida de barras para diametro2
-            bool Desc_X = true;
 
             Num_Barras = 4;
             As_min = 0.01 * Area;
@@ -228,7 +225,7 @@ namespace DisenoColumnas.Secciones
 
                 if (X2 % 2 != 0)
                 {
-                    X2 = FunctionsProject.Redondear_Decimales(X2, 4);
+                    X2 = FunctionsProject.Redondear_Decimales(X2, 4, true);
                 }
 
                 X1 = Num_Barras - X2;
@@ -263,47 +260,11 @@ namespace DisenoColumnas.Secciones
 
                         if (Cont_Aux1 > 0)
                         {
-                            Aux_Refuerzos[i + (Num_Barras / 2) + CapasX - 2] = Diametro1;
+                            Aux_Refuerzos[i + (Num_Barras / 2) - 1] = Diametro1;
                             Cont_Aux1 -= 1;
                             Aux_num_barras -= 1;
                         }
 
-                        if (Cont_Aux1 > 0)
-                        {
-                            Aux_Refuerzos[Num_Barras - 1 - i - (Num_Barras / 2) - (CapasX - 2)] = Diametro1;
-                            Cont_Aux1 -= 1;
-                            Aux_num_barras -= 1;
-                        }
-
-                        if (Cont_Aux1 > 0)
-                        {
-                            Aux_Refuerzos[Num_Barras - 1 - i] = Diametro1;
-                            Cont_Aux1 -= 1;
-                            Aux_num_barras -= 1;
-                        }
-
-                        if (CapasX - 2 > 0)
-                        {
-                            if (Desc_X == true)
-                            {
-                                for (int j = 0; j < (CapasX - 2) * 2; j++)
-                                {
-                                    if (Cont_Aux1 > 0)
-                                    {
-                                        Aux_Refuerzos[CapasY + j] = Diametro1;
-                                        Cont_Aux1 -= 1;
-                                    }
-                                    else
-                                    {
-                                        Aux_Refuerzos[CapasY + j] = Diametro2;
-                                        Cont_Aux2 -= 1;
-                                    }
-                                    Aux_num_barras -= 1;
-                                }
-                            }
-
-                            Desc_X = false;
-                        }
                     }
                     else
                     {
