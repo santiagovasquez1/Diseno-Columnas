@@ -209,6 +209,8 @@ namespace DisenoColumnas
             tool.SetToolTip(Cuantia_Vol_Button, "Calcular Cuantía Volumétrica");
             tool.SetToolTip(Button_Agregar, "Agregar Nuevo Alzado (Ctrl + A)");
             tool.SetToolTip(Disenar, "Diseñar Columnas (Ctrl + D)");
+            tool.SetToolTip(Button_DLNET, "Exportar Cantidades (Archivo DL NET) (Ctrl + E)");
+
         }
 
         private void CloseWindows()
@@ -1652,6 +1654,21 @@ namespace DisenoColumnas
                     }
                 }
 
+                for(int i= VigaMayor.Seccions.Count-1; i>=0; i--)
+                {
+
+                    if (VigaMayor.Seccions[i].Item1.H<0)
+                    {
+                        ISeccion seccionMayor2 = new CRectangulo("Inicial", 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
+                        tuple_Seccion_Mayor = new Tuple<CRectangulo, string>((CRectangulo)seccionMayor2, column.Seccions[i].Item2);
+                        VigaMayor.Seccions[i] = tuple_Seccion_Mayor;
+                    }
+
+
+
+
+                }
+
                 column.VigaMayor = VigaMayor;
             }
             //Asignar Altura Libre;
@@ -1924,6 +1941,8 @@ namespace DisenoColumnas
                 despieceToolStripMenuItem.Enabled = true;
                 resultadosToolStripMenuItem.Enabled = true;
                 editarNombresDeColumnasToolStripMenuItem.Enabled = true;
+                cantidadesDeObraToolStripMenuItem.Enabled = true;
+                Button_DLNET.Enabled = true;
             }
             if (WindowState == FormWindowState.Normal)
             {
@@ -2633,5 +2652,87 @@ namespace DisenoColumnas
             cambiarNombreColumnas.ShowDialog();
 
         }
+
+        private void CantidadesDeObraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            GenerarCantidades();
+
+        }
+
+        private void Button1_Click_1(object sender, EventArgs e)
+        {
+            GenerarCantidades();
+        }
+
+
+        private void GenerarCantidades()
+        {
+
+      
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog() { Title = "Exportar Archivo Texto Formato DL NET", Filter= "Archivo|*.txt" };
+            saveFileDialog.ShowDialog();
+
+            string RutaArchivo = saveFileDialog.FileName;
+
+            if (RutaArchivo != "")
+            {
+                Proyecto_.Lista_Columnas.ForEach(x => x.CalcularCantidadesDLNET());
+
+
+                List<string> ArchivoaGenerar = new List<string>();
+
+                int CantidadElementos = 0;
+
+                foreach (Columna col in Proyecto_.Lista_Columnas)
+                {
+
+                    int CantidadRefuerzo = col.Lista_RefuerzoLongitudinal_DLNET.Count + col.Lista_RefuerzoTransversal_DLNET.Count;
+                    if (CantidadRefuerzo != 0)
+                    {
+                        if (col.Label == "")
+                        {
+                            MessageBox.Show($"Asigne el Label de la Columna {col.Name} antes de generar el archivo .txt", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                        ArchivoaGenerar.Add(col.Label);
+                        ArchivoaGenerar.Add(Convert.ToString(1));
+                        ArchivoaGenerar.Add(Convert.ToString(CantidadRefuerzo));
+                        ArchivoaGenerar.AddRange(col.Lista_RefuerzoLongitudinal_DLNET);
+                        ArchivoaGenerar.AddRange(col.Lista_RefuerzoTransversal_DLNET);
+                        CantidadElementos += 1;
+
+                    }
+                }
+
+
+                StreamWriter writer;
+                try
+                {
+                    writer = new StreamWriter(RutaArchivo);
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+
+                writer.WriteLine(CantidadElementos);
+                for (int i=0; i< ArchivoaGenerar.Count; i++)
+                {
+                    writer.WriteLine(ArchivoaGenerar[i]);
+                }
+                writer.Close();
+                Process Proc = new Process();
+                Proc.StartInfo.FileName = RutaArchivo;
+                Proc.Start();
+
+            }
+       
+        }
+
+    
     }
 }

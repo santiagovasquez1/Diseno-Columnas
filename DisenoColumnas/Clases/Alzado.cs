@@ -51,14 +51,24 @@ namespace DisenoColumnas.Clases
         public bool UltPiso { get; set; }
 
         public float e_Fu { get; set; }
+        public float Longitud { get; set; }
 
-        #region Metodos Auxiliares
+        #region Propiedades para Cantidades
+
+        public Tuple<int, string> Cant_Nomenclatura_DLNET { get; set; }
+
+
+
+        #endregion
+
+
+        #region Propiedades Auxiliares
 
         private bool MoveBarra = false;
         private float MouseX = 0;
         private float MouseY = 0;
 
-        #endregion Metodos Auxiliares
+        #endregion Propiedades Auxiliares
 
         public AlzadoUnitario(int CantBarras_, int NoBarra_, string Traslapo, int NoPiso_, int NoAlzado_, float H, float Hviga_, float e_fund_, bool UltPiso_, float Hacum_)
         {
@@ -104,15 +114,34 @@ namespace DisenoColumnas.Clases
                     FormBarra = new Form_Barra();
                 }
          
+                if(FormBarra.Disposing)
+                {
+                    FormBarra = new Form_Barra();
+                }
+
                 FormBarra.Location = new Point((int)MouseX, (int)MouseY);
                 FormBarra.CantBarras.Text = Convert.ToString(CantBarras);
                 FormBarra.D_Barra.Text = Convert.ToString(NoBarra);
                 FormBarra.Ld_Barra.Text = Convert.ToString(Traslapo);
-                FormBarra.L_Barra.Text = String.Format("{0:0.00}", CalcularLongitudRefuerzo(Coord_Alzado_PB));
+                
+
+
+                if (Coord_Alzado_PB.Count!= 0)
+                {
+                    Longitud =CalcularLongitudRefuerzo(Coord_Alzado_PB);
+
+             
+                    FormBarra.L_Barra.Text = String.Format("{0:0.00}", Math.Round( Longitud,2));
+                }
 
                 if (MoveBarra)
                 {
-                    FormBarra.Visible = true;
+                    try
+                    {
+                        FormBarra.Visible = true;
+                    }
+                    catch { FormBarra = new Form_Barra(); FormBarra.Visible = true; }
+                    Form1.m_Despiece.Invalidate();
                 }
                 else
                 {
@@ -305,7 +334,7 @@ namespace DisenoColumnas.Clases
             }
         }
 
-        private float CalcularLongitudRefuerzo(List<float[]> Coordenadas)
+        public float CalcularLongitudRefuerzo(List<float[]> Coordenadas)
         {
             float Longitud = 0;
             for (int i = 0; i < Coordenadas.Count; i++)
@@ -316,7 +345,50 @@ namespace DisenoColumnas.Clases
                 }
                 catch { }
             }
-            return Longitud;
+
+             return Longitud; 
         }
+
+
+        #region Metodos: Cantidades de Obra DlNet
+
+        public void CreararTuplesParaCantidades()
+        {
+            if(Coord_Alzado_PB!= null)
+            {
+
+                if (Coord_Alzado_PB.Count != 0)
+                {
+   
+                    string Nomenclatura = "";
+                    float Gancho90 = Form1.Proyecto_.G90[NoBarra];
+                    float Longitud = (float)Math.Round(CalcularLongitudRefuerzo(Coord_Alzado_PB),2);
+
+                    if (Coord_Alzado_PB.Count == 2)  //Recta
+                    {
+                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}",Longitud)}";
+                    }
+                    if (Coord_Alzado_PB.Count == 3)  //L
+                    {
+                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}",Longitud)}   L{String.Format("{0:0.00}",Gancho90)}";
+                    }
+                    if (Coord_Alzado_PB.Count == 4)  //C
+                    {
+                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}",Longitud)}   L{String.Format("{0:0.00}",Gancho90)}  L{String.Format("{0:0.00}", Gancho90)}";
+                    }
+                    Cant_Nomenclatura_DLNET = new Tuple<int, string>(CantBarras, Nomenclatura);
+                }
+            }
+
+            
+
+        }
+
+
+        #endregion
+
+
+
+
     }
 }

@@ -90,6 +90,57 @@ namespace DisenoColumnas
             streamReader.Close();
         }
 
+
+        public static float RedondearDecimales(float N_decimal, int multiplo)
+        {
+            
+            string[] NumeroDividido = Convert.ToString(N_decimal).Split(Convert.ToChar("."));
+
+            int Entero = Convert.ToInt32(NumeroDividido[0]);
+
+            float Decimal;
+            try {
+
+                Decimal = Convert.ToSingle(NumeroDividido[1]);
+                if (NumeroDividido[1].IndexOf("0") ==0 && NumeroDividido[1].Length ==2)
+                {
+                    string Entero2 = Entero + "." + "1";
+                    return Convert.ToSingle(Entero2);
+                }
+
+                if (Convert.ToString(Decimal).Length <2)
+                {
+                    return N_decimal;
+                }
+
+
+            }
+            catch { Decimal = 0; }
+
+
+            float Comparacion = (Decimal / multiplo);
+            int valor = (int)(Decimal / multiplo);
+            int DecimilaRedondeado;
+            if (valor < (Comparacion))
+            {
+                DecimilaRedondeado=(valor + 1) * multiplo;
+                if (DecimilaRedondeado == 100)
+                {
+                    Entero += 1;
+                    DecimilaRedondeado = 0;
+                }
+            }
+            else
+            {
+                DecimilaRedondeado=valor* multiplo;
+            }
+
+            return Convert.ToSingle(Entero + "." + DecimilaRedondeado);
+
+        }
+
+
+
         public static T DeepClone<T>(T obj)
         {
             using (var ms = new MemoryStream())
@@ -157,7 +208,7 @@ namespace DisenoColumnas
 
 
 
-        public static int Redondear_Decimales(double N_decimal, int multiplo, bool RedondInferior = false)
+        public static int Redondear_Entero(double N_decimal, int multiplo, bool RedondInferior = false)
         {
             int valor = 0;
 

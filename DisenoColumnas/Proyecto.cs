@@ -59,5 +59,17 @@ namespace DisenoColumnas
         {
             AlturaEdificio = Stories.Sum(x => x.Item2) + e_Fundacion;
         }
+
+
+      
+
+
+
+
+
+
+
+
+
     }
 }

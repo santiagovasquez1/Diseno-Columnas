@@ -40,6 +40,20 @@ namespace DisenoColumnas.Secciones
         public bool Editado { get; set; } = false;
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
+
+
+        #region Propiedades: Cantidades -Estribos
+
+        public Tuple<float, float, float,string> Estribo_Dimensiones_B_H_G_Nomenclatura { get; set; }
+
+        public Tuple<int,float, float,string> GanchoV_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+        public Tuple<int, float, float,string> GanchoH_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+
+        #endregion
+
+
+
+
         public CRectangulo(string Nombre, float B_, float H_, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
             //Unidades en metros
@@ -312,7 +326,7 @@ namespace DisenoColumnas.Secciones
 
                 if (X2 % 2 != 0)
                 {
-                    X2 = FunctionsProject.Redondear_Decimales(X2, 4);
+                    X2 = FunctionsProject.Redondear_Entero(X2, 4);
                 }
 
                 X1 = Num_Barras - X2;
@@ -727,6 +741,47 @@ namespace DisenoColumnas.Secciones
             return PAuxiliar;
         }
 
+
+
+        #region Metodos: Cantidades
+
+        public void CalcularDimensionesEstribo_Gancho(Estribo estribo, float R)
+        {
+
+            float B_Estribo = (B - 2 * R);
+            float H_Estribo = (H - 2 * R);
+            float G135_Estribo = Form1.Proyecto_.G135[estribo.NoEstribo];
+            int CantEstribosV = estribo.NoRamasV1 - 2;
+            int CantEstribosH = estribo.NoRamasH1 - 2;
+            float Gancho180_G = Form1.Proyecto_.G180[estribo.NoEstribo];
+            float Long_GanchoH = (B - 2 * R) + 2 * Gancho180_G;
+            float Long_GanchoV = (H - 2 * R) + 2 * Gancho180_G;
+            string Conve_Estribo = $" E  #{estribo.NoEstribo}  {B_Estribo}*{H_Estribo}  G{G135_Estribo}  F0/45";
+            string Conve_Gancho_H = $" #{estribo.NoEstribo}  {Long_GanchoH}  U{Gancho180_G}  U{Gancho180_G}";
+            string Conve_Gancho_V = $" #{estribo.NoEstribo}  {Long_GanchoV}  U{Gancho180_G}  U{Gancho180_G}";
+
+            Estribo_Dimensiones_B_H_G_Nomenclatura = new Tuple<float, float, float, string>(B_Estribo, H_Estribo, G135_Estribo, Conve_Estribo);
+            GanchoH_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosH, Long_GanchoH, Gancho180_G, Conve_Gancho_H);
+            GanchoV_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosV, Long_GanchoV, Gancho180_G, Conve_Gancho_V);
+
+        }
+
+
+
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
         #endregion Propiedades y Metodos - Secciones Predefinidas
+
     }
 }
