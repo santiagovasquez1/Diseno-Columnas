@@ -52,6 +52,8 @@ namespace DisenoColumnas
         public float P_R { get; set; }
         public float e_acabados { get; set; }
 
+        public bool Redondear { get; set; }
+
 
 
 
@@ -59,5 +61,17 @@ namespace DisenoColumnas
         {
             AlturaEdificio = Stories.Sum(x => x.Item2) + e_Fundacion;
         }
+
+
+      
+
+
+
+
+
+
+
+
+
     }
 }

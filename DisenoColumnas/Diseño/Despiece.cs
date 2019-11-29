@@ -114,7 +114,7 @@ namespace DisenoColumnas.Diseño
                     float TamanoFuente = 0.07f * (SX + SY);
                     if (ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY < TamanoFuente)
                     {
-                        TamanoFuente = ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY;
+                        TamanoFuente = ColumnaSelect.LuzLibre[ColumnaSelect.LuzLibre.Count-1] * SY - ColumnaSelect.VigaMayor.Seccions[ColumnaSelect.VigaMayor.Seccions.Count-1].Item1.H * SY;
                     }
 
                     Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);

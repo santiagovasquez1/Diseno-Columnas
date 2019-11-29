@@ -68,6 +68,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cantidadesDeObraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Button_DLNET = new System.Windows.Forms.Button();
             this.B_AutoCAD = new System.Windows.Forms.Button();
             this.Disenar = new System.Windows.Forms.Button();
             this.Button_Agregar = new System.Windows.Forms.Button();
@@ -92,6 +95,7 @@
             this.fuerzasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resultadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -123,7 +127,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 2);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(325, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(205, 24);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -135,6 +139,7 @@
             this.abrirToolStripMenuItem,
             this.guardarToolStripMenuItem,
             this.guardarComoToolStripMenuItem,
+            this.exportarToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.archivoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White;
@@ -403,6 +408,39 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(10, 653);
             this.panel2.TabIndex = 55;
+            // 
+            // exportarToolStripMenuItem
+            // 
+            this.exportarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cantidadesDeObraToolStripMenuItem});
+            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.exportarToolStripMenuItem.Text = "Exportar";
+            // 
+            // cantidadesDeObraToolStripMenuItem
+            // 
+            this.cantidadesDeObraToolStripMenuItem.Name = "cantidadesDeObraToolStripMenuItem";
+            this.cantidadesDeObraToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.cantidadesDeObraToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.cantidadesDeObraToolStripMenuItem.Text = "Cantidades (Archivo DL NET)";
+            this.cantidadesDeObraToolStripMenuItem.Click += new System.EventHandler(this.CantidadesDeObraToolStripMenuItem_Click);
+            // 
+            // Button_DLNET
+            // 
+            this.Button_DLNET.Enabled = false;
+            this.Button_DLNET.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_DLNET.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(224)))), ((int)(((byte)(247)))));
+            this.Button_DLNET.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(201)))), ((int)(((byte)(222)))), ((int)(((byte)(245)))));
+            this.Button_DLNET.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_DLNET.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_DLNET.ForeColor = System.Drawing.Color.Black;
+            this.Button_DLNET.Image = global::DisenoColumnas.Properties.Resources.exportar__3_;
+            this.Button_DLNET.Location = new System.Drawing.Point(138, 24);
+            this.Button_DLNET.Name = "Button_DLNET";
+            this.Button_DLNET.Size = new System.Drawing.Size(24, 24);
+            this.Button_DLNET.TabIndex = 57;
+            this.Button_DLNET.UseVisualStyleBackColor = true;
+            this.Button_DLNET.Click += new System.EventHandler(this.Button1_Click_1);
             // 
             // B_AutoCAD
             // 
@@ -718,12 +756,26 @@
             this.acercaDeToolStripMenuItem.Text = "Acerca de Column Disigner";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeToolStripMenuItem_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label5.Location = new System.Drawing.Point(122, 27);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 19);
+            this.label5.TabIndex = 58;
+            this.label5.Text = "|";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
             this.ClientSize = new System.Drawing.Size(985, 726);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.Button_DLNET);
             this.Controls.Add(this.PanelContenedor);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label4);
@@ -816,5 +868,9 @@
         internal WeifenLuo.WinFormsUI.Docking.DockPanel PanelContenedor;
         private System.Windows.Forms.ToolStripMenuItem resultadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarNombresDeColumnasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cantidadesDeObraToolStripMenuItem;
+        private System.Windows.Forms.Button Button_DLNET;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -7,7 +7,7 @@ namespace DisenoColumnas.Interfaz_Inicial
 {
     public partial class VariablesdeEntrada : Form
     {
-        public bool ProyectoPV = false;
+        public bool ProyectoPV = true;
 
         public VariablesdeEntrada(bool ProyectoPV_)
         {
@@ -38,7 +38,7 @@ namespace DisenoColumnas.Interfaz_Inicial
                     if (Convert.ToSingle(P_R.Text) != Form1.Proyecto_.P_R)
                     {
                     
-                        if (ProyectoPV)
+                        if (ProyectoPV==false)
                         {
                             MessageBox.Show("Debido al cambio realizado deberá volver a diseñar las Columnas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -49,6 +49,16 @@ namespace DisenoColumnas.Interfaz_Inicial
                     Form1.Proyecto_.e_Fundacion = Convert.ToSingle(T_Vf.Text);
                     Form1.Proyecto_.Nivel_Fundacion = Convert.ToSingle(T_arranque.Text);
                     Form1.Proyecto_.e_acabados = Convert.ToSingle(e_acabados.Text);
+                 
+
+                    if (Form1.Proyecto_.Redondear != RedondearDecimales.Checked)
+                    {
+                        if (ProyectoPV==false)
+                        {
+                            MessageBox.Show("Debido al cambio realizado deberá volver a diseñar las Columnas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                    Form1.Proyecto_.Redondear = RedondearDecimales.Checked;
 
                     Form1.Proyecto_.AlturaEdificio_();
                     if (Radio_Des.Checked)
@@ -91,6 +101,8 @@ namespace DisenoColumnas.Interfaz_Inicial
 
         private void VariablesdeEntrada_Load(object sender, EventArgs e)
         {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(RedondearDecimales, "Habilitar/Deshabilitar redondeo de decimales de barras a múltiplo de 5.");
         }
 
         private void PictureBox1_MouseLeave(object sender, EventArgs e)

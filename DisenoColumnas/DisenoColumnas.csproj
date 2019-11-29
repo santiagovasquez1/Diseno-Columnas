@@ -364,6 +364,7 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\exportar %283%29.png" />
     <None Include="Resources\editar.png" />
     <None Include="Resources\efe Prima Ce Pixelado.jpg" />
     <None Include="Resources\icons8-dibujados-a-mano-a-color-100.png" />

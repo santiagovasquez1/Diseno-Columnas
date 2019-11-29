@@ -50,6 +50,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.R_Box = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.RedondearDecimales = new System.Windows.Forms.CheckBox();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -144,6 +145,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.RedondearDecimales);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.Radio_Des);
             this.panel2.Controls.Add(this.label1);
@@ -153,7 +155,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(317, 346);
+            this.panel2.Size = new System.Drawing.Size(317, 351);
             this.panel2.TabIndex = 27;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel2_MouseDown);
             // 
@@ -262,7 +264,7 @@
             this.cb_Aceptar.BackColor = System.Drawing.Color.White;
             this.cb_Aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Aceptar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_Aceptar.Location = new System.Drawing.Point(122, 311);
+            this.cb_Aceptar.Location = new System.Drawing.Point(126, 311);
             this.cb_Aceptar.Name = "cb_Aceptar";
             this.cb_Aceptar.Size = new System.Drawing.Size(71, 24);
             this.cb_Aceptar.TabIndex = 9;
@@ -330,12 +332,23 @@
             this.label3.TabIndex = 77;
             this.label3.Text = "Recubrimiento (cm):";
             // 
+            // RedondearDecimales
+            // 
+            this.RedondearDecimales.AutoSize = true;
+            this.RedondearDecimales.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RedondearDecimales.Location = new System.Drawing.Point(18, 311);
+            this.RedondearDecimales.Name = "RedondearDecimales";
+            this.RedondearDecimales.Size = new System.Drawing.Size(86, 19);
+            this.RedondearDecimales.TabIndex = 82;
+            this.RedondearDecimales.Text = "Redondear";
+            this.RedondearDecimales.UseVisualStyleBackColor = true;
+            // 
             // VariablesdeEntrada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(317, 346);
+            this.ClientSize = new System.Drawing.Size(317, 351);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -383,5 +396,6 @@
         internal System.Windows.Forms.Label label8;
         internal System.Windows.Forms.TextBox P_R;
         internal System.Windows.Forms.Label label5;
+        internal System.Windows.Forms.CheckBox RedondearDecimales;
     }
 }
