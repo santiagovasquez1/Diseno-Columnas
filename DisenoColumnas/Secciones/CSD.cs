@@ -271,137 +271,119 @@ namespace DisenoColumnas.Secciones
 
         public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec)
         {
+            List<float[]> Coord_aletas = new List<float[]>();
+            List<float[]> Coord_alma = new List<float[]>();
+
             GraphicsPath path = new GraphicsPath();
             List<PointF> Vertices = new List<PointF>();
             List<PointF> Vertices2 = new List<PointF>();
 
-            double X1, Y1, X2, Y2, X3, X4, Y3, Y4;
-            double Xr1, Yr1, Xr2, Yr2, Xr3, Xr4, Yr3, Yr4;
-
-            X1 = 0;
-            Y1 = 0;
-            X2 = 0;
-            Y2 = 0;
-
-            X3 = 0;
-            Y3 = 0;
-            X4 = 0;
-            Y4 = 0;
+            float D_off1 = 0;
+            float D_off2 = 0;
 
             var Xunicos = CoordenadasSeccion.Select(x => x[0]).Distinct().ToList();
             var Yunicos = CoordenadasSeccion.Select(x => x[1]).Distinct().ToList();
 
-            if (Shape == TipodeSeccion.L)
-            {
-                //Aleta seccion
-                X1 = (Xunicos.Min() + rec) * 100 * EscalaX;
-                X2 = (Xunicos.Min() + B - rec) * 100 * EscalaX;
+            D_off1 = rec;
+            D_off2 = rec + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] / 100;
 
-                var aux = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList();
-                var aux2 = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min()).ToList();
-
-                if (aux.Exists(x => x[0] == Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
-                {
-                    Y1 = (Yunicos.Min() - rec) * 100 * EscalaY;
-                    Y2 = (Yunicos.Min() + TF + rec) * 100 * EscalaY;
-                }
-                else
-                {
-                    Y1 = (Yunicos.Max() - rec) * 100 * EscalaY;
-                    Y2 = (Yunicos.Max() - TF + rec) * 100 * EscalaY;
-                }
-
-                if (aux2.Exists(x => x[1] == Yunicos.Min()) & aux.Exists(x => x[1] == Yunicos.Max()))
-                {
-                    X3 = (Xunicos.Min() + rec + 0.02) * 100 * EscalaX;
-                    X4 = (Xunicos.Min() + TW + rec) * 100 * EscalaX;
-                }
-                else
-                {
-                    X3 = (Xunicos.Max() - rec - 0.02) * 100 * EscalaX;
-                    X4 = (Xunicos.Max() - TW + rec) * 100 * EscalaX;
-                }
-
-                Y3 = (Yunicos.Min() + rec) * 100 * EscalaY;
-                Y4 = (Yunicos.Max() - rec - 0.02) * 100 * EscalaY;
-            }
+            //Aleta seccion
 
             if (Shape == TipodeSeccion.Tee)
             {
-                //Aleta seccion
-                X1 = (Xunicos.Min() + rec) * 100 * EscalaX;
-                X2 = (Xunicos.Min() + B - rec) * 100 * EscalaX;
+                Coord_aletas = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min() | x[0] == Xunicos.Max()).ToList();
+                Coord_alma = CoordenadasSeccion.FindAll(x => x[0] != Xunicos.Min() & x[0] != Xunicos.Max()).ToList();
+            }
+            else
+            {
+                Coord_aletas = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min() | x[0] == Xunicos.Max()).ToList();
 
-                var aux = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList();
-                var aux2 = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min()).ToList();
+                var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
 
-                if (aux.Exists(x => x[0] == Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
+                if (Xunicos.Exists(x => Math.Round(x, 2) == Math.Round(Xtf - TF, 2))) 
                 {
-                    Y1 = (Yunicos.Min() - rec) * 100 * EscalaY;
-                    Y2 = (Yunicos.Min() + TF + rec) * 100 * EscalaY;
+                    Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
+                    Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
+                    Coord_alma.Add(new float[] { Xtf, Yunicos.Min() });
+                    Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
                 }
                 else
                 {
-                    Y1 = (Yunicos.Max() - rec) * 100 * EscalaY;
-                    Y2 = (Yunicos.Max() - TF + rec) * 100 * EscalaY;
-                }
-
-                var Xmax1 = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList().Select(x => x[0]).ToList();
-                var Xmax2 = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Max()).ToList().Select(x => x[0]).ToList();
-
-                if (Math.Abs(Xmax2[1] - Xmax2[0]) <= Math.Abs(Xmax1[1] - Xmax1[0]))
-                {
-                    X3 = (Math.Min(Xmax2[1], Xmax2[0]) + rec) * 100 * EscalaX;
-                    X4 = (X3 + TW - rec) * 100 * EscalaX;
-                }
-                else
-                {
-                    X3 = (Math.Min(Xmax1[1], Xmax1[0]) + rec) * 100 * EscalaX;
-                    X4 = (X3 + TW - rec) * 100 * EscalaX;
+                    Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
+                    Coord_alma.Add(new float[] { Xtf, Yunicos.Min() });
+                    Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
+                    Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Min() });
                 }
             }
 
-            //Dibujo estribo en el alma
-            Xr1 = X1 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
-            Yr1 = Y1 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
-            Xr2 = X2 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
-            Yr2 = Y2 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
+            var Coord_aletas1 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_aletas), false);
+            var Coord_aletas2 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_aletas), false);
+            var Coord_alma1 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_alma), false);
+            var Coord_alma2 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_alma), false);
 
-            Xr3 = X3 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
-            Yr3 = Y3 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
-            Xr4 = X4 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaX;
-            Yr4 = Y4 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] * EscalaY;
+            #region Dibujo aleta
 
-            Vertices.Add(new PointF((float)X1, (float)Y1));
-            Vertices.Add(new PointF((float)X2, (float)Y1));
-            Vertices.Add(new PointF((float)X2, (float)Y2));
-            Vertices.Add(new PointF((float)X1, (float)Y2));
-
-            Vertices2.Add(new PointF((float)Xr1, (float)Yr1));
-            Vertices2.Add(new PointF((float)Xr2, (float)Yr1));
-            Vertices2.Add(new PointF((float)Xr2, (float)Yr2));
-            Vertices2.Add(new PointF((float)Xr1, (float)Yr2));
+            for (int i = 0; i < Coord_aletas1.Count; i++)
+            {
+                Vertices.Add(new PointF(Coord_aletas1[i][0] * (float)EscalaX * 100, Coord_aletas1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Coord_aletas2[i][0] * (float)EscalaX * 100, Coord_aletas2[i][1] * (float)EscalaX * 100));
+            }
 
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
 
-            //Dibujo estribo en la aleta
+            #endregion Dibujo aleta
 
-            Vertices = new List<PointF>();
-            Vertices2 = new List<PointF>();
+            #region Dibujo alma
 
-            Vertices.Add(new PointF((float)X3, (float)Y3));
-            Vertices.Add(new PointF((float)X4, (float)Y3));
-            Vertices.Add(new PointF((float)X4, (float)Y4));
-            Vertices.Add(new PointF((float)X3, (float)Y4));
+            Vertices.Clear();
+            Vertices2.Clear();
 
-            Vertices2.Add(new PointF((float)Xr3, (float)Yr3));
-            Vertices2.Add(new PointF((float)Xr4, (float)Yr3));
-            Vertices2.Add(new PointF((float)Xr4, (float)Yr4));
-            Vertices2.Add(new PointF((float)Xr3, (float)Yr4));
-
+            for (int i = 0; i < Coord_alma1.Count; i++)
+            {
+                Vertices.Add(new PointF(Coord_alma1[i][0] * (float)EscalaX * 100, Coord_alma1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Coord_alma2[i][0] * (float)EscalaX * 100, Coord_alma2[i][1] * (float)EscalaX * 100));
+            }
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
+
+            #endregion Dibujo alma
+
+            //if (Shape == TipodeSeccion.L)
+            //{
+            //    //Aleta seccion
+            //    X1 = (Xunicos.Min() + rec) * 100 * EscalaX;
+            //    X2 = (Xunicos.Min() + B - rec) * 100 * EscalaX;
+
+            //    var aux = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList();
+            //    var aux2 = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min()).ToList();
+
+            //    if (aux.Exists(x => x[0] == Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
+            //    {
+            //        Y1 = (Yunicos.Min() - rec) * 100 * EscalaY;
+            //        Y2 = (Yunicos.Min() + TF + rec) * 100 * EscalaY;
+            //    }
+            //    else
+            //    {
+            //        Y1 = (Yunicos.Max() - rec) * 100 * EscalaY;
+            //        Y2 = (Yunicos.Max() - TF + rec) * 100 * EscalaY;
+            //    }
+
+            //    if (aux2.Exists(x => x[1] == Yunicos.Min()) & aux.Exists(x => x[1] == Yunicos.Max()))
+            //    {
+            //        X3 = (Xunicos.Min() + rec + 0.02) * 100 * EscalaX;
+            //        X4 = (Xunicos.Min() + TW + rec) * 100 * EscalaX;
+            //    }
+            //    else
+            //    {
+            //        X3 = (Xunicos.Max() - rec - 0.02) * 100 * EscalaX;
+            //        X4 = (Xunicos.Max() - TW + rec) * 100 * EscalaX;
+            //    }
+
+            //    Y3 = (Yunicos.Min() + rec) * 100 * EscalaY;
+            //    Y4 = (Yunicos.Max() - rec - 0.02) * 100 * EscalaY;
+            //}
+
             return path;
         }
 
@@ -587,8 +569,6 @@ namespace DisenoColumnas.Secciones
                 Estribo.NoRamasH2 = CapasY2;
             }
         }
-
-
 
         public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {

@@ -145,25 +145,35 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Tipo_Seccion == TipodeSeccion.Tee.ToString())
                 {
-                    Vertices_Temp.Add(new float[] { 0, h / 100 });
-                    Vertices_Temp.Add(new float[] { 0, (h - tw) / 100 });
-                    Vertices_Temp.Add(new float[] { (b - tf) / 200, (h - tw) / 100 });
-                    Vertices_Temp.Add(new float[] { (b - tf) / 200, 0 });
-                    Vertices_Temp.Add(new float[] { (b + tf) / 200, 0 });
-                    Vertices_Temp.Add(new float[] { (b + tf) / 200, (h - tw) / 100 });
-                    Vertices_Temp.Add(new float[] { b / 100, (h - tw) / 100 });
-                    Vertices_Temp.Add(new float[] { b / 100, h / 100 });
+                    Vertices_Temp.Add(new float[] { 0, -h / 200 });
+                    Vertices_Temp.Add(new float[] { 0, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { (b - tf) / 400, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { (b - tf) / 400, 0 });
+                    Vertices_Temp.Add(new float[] { (b + tf) / 400, 0 });
+                    Vertices_Temp.Add(new float[] { (b + tf) / 400, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, -h / 200 });
 
-                    Xc = Vertices_Temp.Select(x => x[0]).Sum() / Vertices_Temp.Count;
-                    Yc = Vertices_Temp.Select(x => x[1]).Sum() / Vertices_Temp.Count;
+                    Numerador = ((b / 2) * b * tw) + ((b / 2) * (tf * (h - tw)));
+                    Denominador = (b * tw) + (tf * (h - tw));
+
+                    Xc = (Numerador / Denominador) / 100;
+
+                    double y1 = (h - tw) * (h - tw) * tf / 2;
+                    double y2 = (h - (tw / 2)) * b * tw;
+
+                    Numerador = y1 + y2;
+                    Denominador = (b * tw) + (tf * (h - tw));
+
+                    Yc = -(Numerador / Denominador) / 100;
 
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {
-                        var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Vertices_Temp[i][0] - Xc, Vertices_Temp[i][1] - 2*Yc, Vertices_Temp[i][0], Vertices_Temp[i][1]);
+                        var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Vertices_Temp[i][0] - Xc, Vertices_Temp[i][1] - Yc, Vertices_Temp[i][0], Vertices_Temp[i][1]);
                         Vertices.Add(new float[] { (float)Aux[0], (float)Aux[1] });
                     }
 
-                    N_Seccion = new CSD(Nombre_Seccion, b / 100, h / 100, tw / 100, tf / 100, material, TipodeSeccion.Tee, Vertices_Temp);
+                    N_Seccion = new CSD(Nombre_Seccion, b / 100, h / 100, tw / 100, tf / 100, material, TipodeSeccion.Tee, Vertices);
                 }
 
                 if (Tipo_Seccion == TipodeSeccion.L.ToString())
@@ -175,19 +185,16 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Vertices_Temp.Add(new float[] { tf / 200, -h / 200 });
                     Vertices_Temp.Add(new float[] { 0, -h / 200 });
 
-                    //Numerador = ((b / 2) * b * tw) + ((tf / 2) * (tf * (h - tw)));
-                    //Denominador = (b * tw) + (tf * (h - tw));
+                    Numerador = ((b / 2) * b * tw) + ((tf / 2) * (tf * (h - tw)));
+                    Denominador = (b * tw) + (tf * (h - tw));
 
-                    //Xc = (Numerador / Denominador) / 100;
+                    Xc = (Numerador / Denominador) / 100;
 
-                    //Numerador = ((tw / 2) * b * tw) + ((h + tf / 2) * (tf * (h - tw)));
-                    //Denominador = (b * tw) + (tf * (h - tw));
+                    Numerador = ((tw / 2) * b * tw) + ((h + tf / 2) * (tf * (h - tw)));
+                    Denominador = (b * tw) + (tf * (h - tw));
 
-                    //Yc = -(Numerador / Denominador) / 100;
-
-                    Xc = Vertices_Temp.Select(x => x[0]).Sum() / Vertices_Temp.Count;
-                    Yc = Vertices_Temp.Select(x => x[1]).Sum() / Vertices_Temp.Count;
-
+                    Yc = -(Numerador / Denominador) / 100;
+                                       
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {
                         var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Vertices_Temp[i][0] - Xc, Vertices_Temp[i][1] - Yc, Vertices_Temp[i][0], Vertices_Temp[i][1]);
