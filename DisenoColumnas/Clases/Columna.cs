@@ -323,16 +323,24 @@ namespace DisenoColumnas.Clases
             }
         }
 
-        public void MouseMove(MouseEventArgs mouse, ref Cursor cursor)
+        public bool MouseMove(MouseEventArgs mouse, ref Cursor cursor)
         {
-            if (X_Colum - w / 2 <= mouse.X && X_Colum + w / 2 >= mouse.X && Y_Colum - h / 2 <= mouse.Y && Y_Colum + h / 2 >= mouse.Y)
+
+            RectangleF rectangle = new RectangleF(X_Colum - w / 2, Y_Colum - h / 2, w, h);
+            GraphicsPath Path = new GraphicsPath();
+            Path.AddRectangle(rectangle);
+            Cursor new_cursor = Cursors.Default;
+         
+            if (Path.IsVisible(mouse.Location))
             {
-                cursor = Cursors.Hand;
+                return true;
             }
-            else
+            if (cursor != new_cursor)
             {
-                cursor = Cursors.Default;
+                cursor = new_cursor;
             }
+            return false;
+           
         }
 
         public void MouseDobleClick(MouseEventArgs mouse)

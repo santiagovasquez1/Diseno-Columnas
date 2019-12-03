@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -29,38 +30,42 @@ namespace DisenoColumnas.DefinirColumnas
           
         }
 
+        private void Crear_grilla(Graphics g, int Height, int Width)
+        {
+            int No_CuadrosX = 25;
+            int No_CuadrosY = 25;
+
+            float Ancho_Cuadro = Width / No_CuadrosX;
+            float Alto_Cuadro = Height / No_CuadrosY;
+
+            Pen P = new Pen(Color.Black, 1)
+            {
+                Brush = Brushes.LightGray,
+                Color = Color.LightGray,
+                Alignment = PenAlignment.Center
+            };
+
+
+            for (int i = 1; i < No_CuadrosX; i++)
+            {
+                g.DrawLine(P, Ancho_Cuadro * i, 0, Ancho_Cuadro * i, Height);
+            }
+
+            for (int i = 1; i < No_CuadrosY; i++)
+            {
+                g.DrawLine(P, 0, Alto_Cuadro * i, Width, Alto_Cuadro * i);
+            }
+        }
         private void Grafica_Paint(object sender, PaintEventArgs e)
         {
             Grafica.CreateGraphics().Clear(Color.White);
             float Height = Grafica.Height - 30;
             float Width = Grafica.Width - 30;
-            int No_CuadrosX, No_CuadrosY;
-            float Ancho_Cuadro, Alto_Cuadro;
-
-
+        
             //Graficar Cuadicula
 
 
-            float AnchoCuadroD = 20;
-            float AltoCuadroD = 20;
-            No_CuadrosX = (int)(Grafica.Width / AnchoCuadroD) + 1;
-            No_CuadrosY = (int)(Grafica.Width / AltoCuadroD);
-
-            Ancho_Cuadro = AnchoCuadroD;
-            Alto_Cuadro = AltoCuadroD;
-
-            // No_CuadrosX = 
-
-            //for (int i = 1; i < No_CuadrosX; i++)
-            //{
-            //    e.Graphics.DrawLine(new Pen(Brushes.LightGray, 1), Ancho_Cuadro * i, 0, Ancho_Cuadro * i, Grafica.Height);
-            //}
-            //for (int i = 1; i < No_CuadrosY; i++)
-            //{
-            //    e.Graphics.DrawLine(new Pen(Brushes.LightGray, 1), 0, Alto_Cuadro * i, Grafica.Width, Alto_Cuadro * i);
-            //}
-
-            //Mayor negativo y Positivo
+            //Crear_grilla(e.Graphics, Grafica.Height, Grafica.Width);
 
             List<float> MAXX = new List<float>();
             List<float> MINXX = new List<float>();
@@ -226,6 +231,8 @@ namespace DisenoColumnas.DefinirColumnas
             }
         }
 
+
+
         private void Grafica_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
@@ -300,14 +307,18 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void Grafica_MouseMove(object sender, MouseEventArgs e)
         {
-           
-            //foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
-            //{
-            //    Cursor cursor= Grafica.Cursor;
-            //    columna.MouseMove(e,ref cursor);
-            //    break;
-        
-            //}
+
+            foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
+            {
+                Cursor cursor = null;
+                if(columna.MouseMove(e, ref cursor))
+                {
+                    Grafica.Cursor = cursor;
+                    break;
+                }
+                
+      
+            }
         }
 
         private void PlantaColumnas_KeyDown(object sender, KeyEventArgs e)
