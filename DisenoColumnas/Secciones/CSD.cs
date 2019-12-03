@@ -252,7 +252,7 @@ namespace DisenoColumnas.Secciones
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
-                yc = -refuerzoi.Coord[1] * EscalaY;
+                yc = refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -296,11 +296,25 @@ namespace DisenoColumnas.Secciones
             }
             else
             {
-                Coord_aletas = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min() | x[0] == Xunicos.Max()).ToList();
-
                 var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
+                var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
 
-                if (Xunicos.Exists(x => Math.Round(x, 2) == Math.Round(Xtf - TF, 2))) 
+                if (Yunicos.Exists(y => Math.Round(y, 2) == Math.Round(Ytw - TW, 2)))
+                {
+                    Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
+                    Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Min() });
+                    Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
+                    Coord_aletas.Add(new float[] { Xunicos.Min(), Ytw });
+                }
+                else
+                {
+                    Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
+                    Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Min() });
+                    Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
+                    Coord_aletas.Add(new float[] { Xunicos.Min(), Ytw });
+                }
+
+                if (Xunicos.Exists(x => Math.Round(x, 2) == Math.Round(Xtf - TF, 2)))
                 {
                     Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
                     Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
@@ -348,41 +362,6 @@ namespace DisenoColumnas.Secciones
             path.AddPolygon(Vertices2.ToArray());
 
             #endregion Dibujo alma
-
-            //if (Shape == TipodeSeccion.L)
-            //{
-            //    //Aleta seccion
-            //    X1 = (Xunicos.Min() + rec) * 100 * EscalaX;
-            //    X2 = (Xunicos.Min() + B - rec) * 100 * EscalaX;
-
-            //    var aux = CoordenadasSeccion.FindAll(x => x[1] == Yunicos.Min()).ToList();
-            //    var aux2 = CoordenadasSeccion.FindAll(x => x[0] == Xunicos.Min()).ToList();
-
-            //    if (aux.Exists(x => x[0] == Xunicos.Min()) & aux.Exists(x => x[0] == Xunicos.Max()))
-            //    {
-            //        Y1 = (Yunicos.Min() - rec) * 100 * EscalaY;
-            //        Y2 = (Yunicos.Min() + TF + rec) * 100 * EscalaY;
-            //    }
-            //    else
-            //    {
-            //        Y1 = (Yunicos.Max() - rec) * 100 * EscalaY;
-            //        Y2 = (Yunicos.Max() - TF + rec) * 100 * EscalaY;
-            //    }
-
-            //    if (aux2.Exists(x => x[1] == Yunicos.Min()) & aux.Exists(x => x[1] == Yunicos.Max()))
-            //    {
-            //        X3 = (Xunicos.Min() + rec + 0.02) * 100 * EscalaX;
-            //        X4 = (Xunicos.Min() + TW + rec) * 100 * EscalaX;
-            //    }
-            //    else
-            //    {
-            //        X3 = (Xunicos.Max() - rec - 0.02) * 100 * EscalaX;
-            //        X4 = (Xunicos.Max() - TW + rec) * 100 * EscalaX;
-            //    }
-
-            //    Y3 = (Yunicos.Min() + rec) * 100 * EscalaY;
-            //    Y4 = (Yunicos.Max() - rec - 0.02) * 100 * EscalaY;
-            //}
 
             return path;
         }
@@ -443,6 +422,153 @@ namespace DisenoColumnas.Secciones
             {
                 Tuple<int, int> TupleAux = new Tuple<int, int>(Refuer.Refuerzo.Count, Convert.ToInt32(Refuer.Diametro.Replace("#", "")));
                 No_D_Barra.Add(TupleAux);
+            }
+        }
+
+        public void Set_Refuerzo_Seccion(int[] Refuerzos_temp, double Recubrimiento)
+        {
+            int ContX, ContY, ContT, id;
+            double posx, posy;
+            double[] Coord_ref = new double[2];
+            int CapasX1, CapasX2, CapasY1, CapasY2;
+            int Barras_Aleta, Barras_alma;
+            CRefuerzo refuerzoi;
+            double DeltaX1, DeltaY1, DeltaX2, DeltaY2;
+            double r = Recubrimiento / 100 + 2 * Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] / 100;
+            Refuerzos = new List<CRefuerzo>();
+
+            if (Estribo.NoRamasV1 > Estribo.NoRamasV2)
+            {
+                CapasX1 = Estribo.NoRamasV1;
+                CapasX2 = Estribo.NoRamasV2;
+            }
+            else
+            {
+                CapasX1 = Estribo.NoRamasV2;
+                CapasX2 = Estribo.NoRamasV1;
+            }
+
+            if (Estribo.NoRamasH1 > Estribo.NoRamasH2)
+            {
+                CapasY1 = Estribo.NoRamasH1;
+                CapasY2 = Estribo.NoRamasH2;
+            }
+            else
+            {
+                CapasY1 = Estribo.NoRamasH2;
+                CapasY2 = Estribo.NoRamasH1;
+            }
+
+            DeltaX1 = (B - 2 * r) / (CapasX1 - 1); //Separacion horizontal del refuerzo en la aleta
+            DeltaY1 = (TW - 2 * r) / (CapasY2 - 1); //Separacion vertical del refuerzo en la aleta
+            DeltaX2 = (TF - 2 * r) / (CapasX2 - 1); //Separacion horizontal del refuerzo en el alma
+            DeltaY2 = ((H - TW) - 2 * r) / (CapasY1 - 1); //Separacion vertical del refuerzo en el alma
+
+            Barras_Aleta = 2 * CapasY2 + 2 * (CapasX1 - 2);
+            Barras_alma = 2 * CapasY1 + 2 * (CapasX2 - 2);
+
+            var Xunicos = CoordenadasSeccion.Select(x => x[0]).Distinct().ToList();
+            var Yunicos = CoordenadasSeccion.Select(x => x[1]).Distinct().ToList();
+
+            var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
+            var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
+
+            //Asignar refuerzo en la aleta
+
+            posx = Xunicos.Min() + r;
+
+            if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
+                posy = Yunicos.Max() - r;
+            else
+                posy = Yunicos.Min() + TW - r;
+
+            ContX = CapasX1; ContY = CapasY2 - 2;
+            ContT = 0;
+            id = 1;
+
+            for (int i = 0; i < Barras_Aleta; i++)
+            {
+                Coord_ref[0] = posx;
+                Coord_ref[1] = posy;
+
+                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
+                Refuerzos.Add(refuerzoi);
+
+                posx += DeltaX1;
+                ContX--;
+
+                if (ContX == 0 & ContY > 0)
+                {
+                    posx = Xunicos.Min() + r;
+                    posy -= DeltaY1;
+                    ContX = 2;
+                    DeltaX1 = (B - 2 * r) / (CapasX1 - 1);
+                    ContY--;
+                }
+
+                if (ContX == 0 & ContY == 0)
+                {
+                    ContX = CapasX1;
+                    DeltaX1 = (B - 2 * r) / (CapasX1 - 1);
+                    posx = Xunicos.Min() + r;
+                    posy -= DeltaY1;
+                }
+
+                id++;
+                ContT++;
+            }
+
+            //Asignar refuerzo en el alma
+
+            ContX = CapasX2-2; ContY = CapasY1;
+
+            if (Shape == TipodeSeccion.L)
+                posx = Xtf + TF + r;
+            else
+                posx = Xtf + r;
+
+            if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
+                posy = Yunicos.Max() - TW - r;
+            else
+                posy = Yunicos.Max() - r;
+
+            for (int i = 0; i < Barras_alma; i++)
+            {
+                Coord_ref[0] = posx;
+                Coord_ref[1] = posy;
+
+                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
+                Refuerzos.Add(refuerzoi);
+
+                posy -= DeltaY2;
+                ContY--;
+
+                if (ContY == 0 & ContX > 0)
+                {
+                    posx += DeltaX2;
+                    if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
+                        posy = Yunicos.Max() - TW - r;
+                    else
+                        posy = Yunicos.Max() - r;
+                    ContY = 2;
+                    DeltaY2 = ((H - TW) - 2 * r) / (CapasY1 - 1);
+                    ContX--;
+                }
+
+                if (ContX == 0 & ContY == 0)
+                {
+                    ContY = CapasY1;
+                    DeltaY2 = ((H - TW) - 2 * r) / (ContY - 1);
+                    posx += DeltaX2;
+
+                    if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
+                        posy = Yunicos.Max() - TW - r;
+                    else
+                        posy = Yunicos.Max() - r;
+                }
+
+                id++;
+                ContT++;
             }
         }
 
@@ -550,17 +676,20 @@ namespace DisenoColumnas.Secciones
                 CapasX1 = Estribo.NoRamasV1;
                 CapasY2 = Estribo.NoRamasH2;
 
-                Relacion_dim = B / (H - TF);
+                if (B > (H - TF))
+                    Relacion_dim = B / (H - TF);
+                else
+                    Relacion_dim = (H - TF) / B;
 
                 if (Relacion_dim < 1)
                 {
-                    CapasY1 = Convert.ToInt32(Relacion_dim * (Num_Barras - 2 * (CapasX1 - CapasY2)) / 2) - 2;
-                    CapasX2 = 2 + (Num_Barras - 2 * (CapasX1 + CapasY2 + CapasY1 - 2)) / 2;
+                    CapasY1 = Convert.ToInt32(0.5 * Relacion_dim * (Num_Barras - 2 * (CapasX1 - CapasY2)) / 2);
+                    CapasX2 = 2 + (Num_Barras - 2 * CapasY1 - 2 * (CapasX1 - 2) - 2 * CapasY2) / 2;
                 }
                 else
                 {
-                    CapasX2 = Convert.ToInt32(Relacion_dim * (Num_Barras - 2 * (CapasX1 - CapasY2)) / 2) - 2;
-                    CapasY1 = 2 + (Num_Barras - 2 * (CapasX1 - CapasY2 - CapasX2 - 2)) / 2;
+                    CapasX2 = Convert.ToInt32(0.5 * Relacion_dim * (Num_Barras - 2 * (CapasX1 - CapasY2)) / 2);
+                    CapasY1 = (Num_Barras - 2 * (CapasX1 - 2) - 2 * CapasY2 - 2 * (CapasX2 - 2)) / 2;
                 }
 
                 Estribo.NoRamasV1 = CapasX1;
@@ -568,6 +697,8 @@ namespace DisenoColumnas.Secciones
                 Estribo.NoRamasV2 = CapasX2;
                 Estribo.NoRamasH2 = CapasY2;
             }
+
+            Set_Refuerzo_Seccion(Aux_Refuerzos, recub);
         }
 
         public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)

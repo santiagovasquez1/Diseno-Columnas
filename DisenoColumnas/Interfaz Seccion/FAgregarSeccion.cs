@@ -157,7 +157,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Numerador = ((b / 2) * b * tw) + ((b / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Xc = (Numerador / Denominador) / 100;
+                    Xc = b / 200;
 
                     double y1 = (h - tw) * (h - tw) * tf / 2;
                     double y2 = (h - (tw / 2)) * b * tw;
@@ -165,7 +165,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Numerador = y1 + y2;
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Yc = -(Numerador / Denominador) / 100;
+                    Yc = -h / 200;
 
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {
@@ -188,12 +188,12 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Numerador = ((b / 2) * b * tw) + ((tf / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Xc = (Numerador / Denominador) / 100;
+                    Xc = b / 200;
 
                     Numerador = ((tw / 2) * b * tw) + ((h + tf / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Yc = -(Numerador / Denominador) / 100;
+                    Yc = -h / 200;
                                        
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {
