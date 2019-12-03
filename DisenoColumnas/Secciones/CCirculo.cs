@@ -176,7 +176,7 @@ namespace DisenoColumnas.Secciones
             int Cont_Aux2 = 0;
             int X1 = 0; //Cantidad de barras para diametro1
             int X2 = 0; //Cantida de barras para diametro2
-
+            Refuerzos.Clear();
             Num_Barras = 4;
             As_min = 0.01 * Area;
             As_i = As_min / Num_Barras;

@@ -520,7 +520,7 @@ namespace DisenoColumnas.Secciones
 
             //Asignar refuerzo en el alma
 
-            ContX = CapasX2-2; ContY = CapasY1;
+            ContX = CapasX2 - 2; ContY = CapasY1;
 
             if (Shape == TipodeSeccion.L)
                 posx = Xtf + TF + r;
@@ -700,6 +700,79 @@ namespace DisenoColumnas.Secciones
 
             Set_Refuerzo_Seccion(Aux_Refuerzos, recub);
         }
+
+        #region Metodos y Propiedades: Cantidades
+
+        public Tuple<float, float, float, string> EstriboAleta_Dimensiones_B_H_G_Nomenclatura { get; set; }
+        public Tuple<float, float, float, string> EstriboAlma_Dimensiones_B_H_G_Nomenclatura { get; set; }
+
+        public Tuple<int, float, float, string> GanchoHAleta_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+        public Tuple<int, float, float, string> GanchoVAleta_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+
+        public Tuple<int, float, float, string> GanchoHAlma_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+        public Tuple<int, float, float, string> GanchoVAlma_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+
+        public void CalcularDimensionesEstribo_Gancho(Estribo estribo, float R)
+        {
+            float B_Estribo;
+            float H_Estribo;
+            float G135_Estribo = Form1.Proyecto_.G135[estribo.NoEstribo];
+            float Gancho180_G = Form1.Proyecto_.G180[estribo.NoEstribo];
+
+            int CantEstribosVAleta;
+            int CantEstribosVAlma;
+            int CantEstribosHAleta;
+            int CantEstribosHAlma;
+
+            float Long_GanchoHAleta;
+            float Long_GanchoVAleta;
+            float Long_GanchoHAlma;
+            float Long_GanchoVAlma;
+
+            string Conve_Estribo;
+            string Conve_Gancho;
+
+            //------------ALETA -----------------
+            //Estribo
+            B_Estribo = (B - 2 * R);
+            H_Estribo = TW - 2 * R;
+            Conve_Estribo = $" E  #{estribo.NoEstribo}  {B_Estribo}*{H_Estribo}  G{G135_Estribo}  F0/45";
+            EstriboAleta_Dimensiones_B_H_G_Nomenclatura = new Tuple<float, float, float, string>(B_Estribo, H_Estribo, G135_Estribo, Conve_Estribo);
+
+            //Gancho Vertical
+            CantEstribosVAleta = estribo.NoRamasV1 - 2;
+            Long_GanchoVAleta = TW - 2 * R + 2 * Gancho180_G;
+            Conve_Gancho = $" #{estribo.NoEstribo}  {Long_GanchoVAleta}  U{Gancho180_G}  U{Gancho180_G}";
+            GanchoVAleta_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosVAleta, Long_GanchoVAleta, Gancho180_G, Conve_Gancho);
+
+            //Gancho Horizontal
+            CantEstribosHAleta = estribo.NoRamasH1 - 2;
+            Long_GanchoHAleta = B - 2 * R + 2 * Gancho180_G;
+            Conve_Gancho = $" #{estribo.NoEstribo}  {Long_GanchoVAleta}  U{Gancho180_G}  U{Gancho180_G}";
+            GanchoHAleta_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosHAleta, Long_GanchoHAleta, Gancho180_G, Conve_Gancho);
+
+            //------------ALMA -----------------
+
+            //Estribo
+            B_Estribo = (TF - 2 * R);
+            H_Estribo = H - 2 * R;
+            Conve_Estribo = $" E  #{estribo.NoEstribo}  {B_Estribo}*{H_Estribo}  G{G135_Estribo}  F0/45";
+            EstriboAlma_Dimensiones_B_H_G_Nomenclatura = new Tuple<float, float, float, string>(B_Estribo, H_Estribo, G135_Estribo, Conve_Estribo);
+
+            //Gancho Vertical
+            CantEstribosVAlma = estribo.NoRamasV2 - 2;
+            Long_GanchoVAlma = H - 2 * R + 2 * Gancho180_G;
+            Conve_Gancho = $" #{estribo.NoEstribo}  {Long_GanchoVAlma}  U{Gancho180_G}  U{Gancho180_G}";
+            GanchoVAlma_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosVAlma, Long_GanchoVAlma, Gancho180_G, Conve_Gancho);
+
+            //Gancho Horizontal
+            CantEstribosHAlma = estribo.NoRamasH2 - 2;
+            Long_GanchoHAlma = TF - 2 * R + 2 * Gancho180_G;
+            Conve_Gancho = $" #{estribo.NoEstribo}  {Long_GanchoHAlma}  U{Gancho180_G}  U{Gancho180_G}";
+            GanchoHAlma_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosHAlma, Long_GanchoHAlma, Gancho180_G, Conve_Gancho);
+        }
+
+        #endregion Metodos y Propiedades: Cantidades
 
         public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {

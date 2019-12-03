@@ -511,7 +511,7 @@ namespace DisenoColumnas
             Proyecto_.Ld_560.Add(11, 1.6f);
             Proyecto_.Ld_560.Add(14, 1.9f);
 
-            #region Diccionario diametro barras
+            #region Diccionario Diametro barras
 
             //Diametros en centimetros
             Proyecto_.Diametro_ref = new Dictionary<int, float>();
@@ -531,15 +531,15 @@ namespace DisenoColumnas
             #region Diccionario -> Masa Nominal Barras
 
             Proyecto_.MasaNominalBarras = new Dictionary<int, float>();
-            Proyecto_.MasaNominalBarras.Add(2, 0.249f);
+            Proyecto_.MasaNominalBarras.Add(2, 0.25f);
             Proyecto_.MasaNominalBarras.Add(3, 0.560f);
-            Proyecto_.MasaNominalBarras.Add(4, 0.994f);
-            Proyecto_.MasaNominalBarras.Add(5, 1.552f);
-            Proyecto_.MasaNominalBarras.Add(6, 2.235f);
-            Proyecto_.MasaNominalBarras.Add(7, 3.042f);
-            Proyecto_.MasaNominalBarras.Add(8, 3.973f);
-            Proyecto_.MasaNominalBarras.Add(9, 5.060f);
-            Proyecto_.MasaNominalBarras.Add(10, 6.404f);
+            Proyecto_.MasaNominalBarras.Add(4, 1.0f);
+            Proyecto_.MasaNominalBarras.Add(5, 1.56f);
+            Proyecto_.MasaNominalBarras.Add(6, 2.25f);
+            Proyecto_.MasaNominalBarras.Add(7, 3.06f);
+            Proyecto_.MasaNominalBarras.Add(8, 4f);
+            Proyecto_.MasaNominalBarras.Add(9, 5.00f);
+            Proyecto_.MasaNominalBarras.Add(10, 6.40f);
             Proyecto_.MasaNominalBarras.Add(11, 7.907f);
             Proyecto_.MasaNominalBarras.Add(14, 8.938f);
 
@@ -2677,25 +2677,36 @@ namespace DisenoColumnas
 
             if (RutaArchivo != "")
             {
-                Proyecto_.Lista_Columnas.ForEach(x => x.CalcularCantidadesDLNET());
-
-
                 List<string> ArchivoaGenerar = new List<string>();
 
                 int CantidadElementos = 0;
+                foreach (Columna col in Proyecto_.Lista_Columnas)
+                {
+                    if (col.Label == "" | col.Label == null)
+                    {
+                        MessageBox.Show($"Asigne el Label de la Columna {col.Name} antes de generar el archivo .txt", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                }
+                ParaCantidades.Visible = true; BarraProgresoCantidades.Visible = true; int contador = 1;
 
+                BarraProgresoCantidades.Maximum = Proyecto_.Lista_Columnas.Count; BarraProgresoCantidades.Value = 0;
+                foreach (Columna col in Proyecto_.Lista_Columnas)
+                {
+                    col.CalcularCantidadesDLNET();
+                    BarraProgresoCantidades.Value +=1; contador +=1;
+                    ParaCantidades.Text = contador + "/" +Proyecto_.Lista_Columnas.Count;
+                    Application.DoEvents();
+                }
+
+                BarraProgresoCantidades.Visible = false; ParaCantidades.Visible = false;
                 foreach (Columna col in Proyecto_.Lista_Columnas)
                 {
 
                     int CantidadRefuerzo = col.Lista_RefuerzoLongitudinal_DLNET.Count + col.Lista_RefuerzoTransversal_DLNET.Count;
                     if (CantidadRefuerzo != 0)
                     {
-                        if (col.Label == "")
-                        {
-                            MessageBox.Show($"Asigne el Label de la Columna {col.Name} antes de generar el archivo .txt", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                        ArchivoaGenerar.Add(col.Label);
+                         ArchivoaGenerar.Add(col.Label);
                         ArchivoaGenerar.Add(Convert.ToString(1));
                         ArchivoaGenerar.Add(Convert.ToString(CantidadRefuerzo));
                         ArchivoaGenerar.AddRange(col.Lista_RefuerzoLongitudinal_DLNET);

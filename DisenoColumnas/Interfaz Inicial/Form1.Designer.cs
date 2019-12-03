@@ -45,21 +45,41 @@
             WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient7 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel5 = new System.Windows.Forms.Panel();
+            this.Button_Minimize = new System.Windows.Forms.Button();
+            this.Button_MaxRest = new System.Windows.Forms.Button();
+            this.Button_Cerrar = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cantidadesDeObraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.variablesDeEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuantíaVolumétricaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnasIgualesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dibujoDeSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarNombresDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarSeccionesPredeterminadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.infromaciónDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.despieceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plantaDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fuerzasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resultadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.L_NameProject = new System.Windows.Forms.ToolStripStatusLabel();
             this.PanelContenedor = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.toolBar = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.label3 = new System.Windows.Forms.Label();
             this.LColumna = new System.Windows.Forms.ComboBox();
@@ -68,8 +88,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.exportarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cantidadesDeObraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Button_DLNET = new System.Windows.Forms.Button();
             this.B_AutoCAD = new System.Windows.Forms.Button();
             this.Disenar = new System.Windows.Forms.Button();
@@ -77,25 +95,9 @@
             this.SaveAs_B = new System.Windows.Forms.Button();
             this.Save_B = new System.Windows.Forms.Button();
             this.Cuantia_Vol_Button = new System.Windows.Forms.Button();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.Button_Minimize = new System.Windows.Forms.Button();
-            this.Button_MaxRest = new System.Windows.Forms.Button();
-            this.Button_Cerrar = new System.Windows.Forms.Button();
-            this.variablesDeEntradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cuantíaVolumétricaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.columnasIgualesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dibujoDeSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editarNombresDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editarSeccionesPredeterminadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.infromaciónDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agregarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.despieceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.plantaDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fuerzasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resultadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
+            this.BarraProgresoCantidades = new System.Windows.Forms.ProgressBar();
+            this.ParaCantidades = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -115,6 +117,60 @@
             this.panel5.Size = new System.Drawing.Size(985, 26);
             this.panel5.TabIndex = 24;
             this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel5_MouseDown);
+            // 
+            // Button_Minimize
+            // 
+            this.Button_Minimize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_Minimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Minimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.Button_Minimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.Button_Minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Minimize.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Minimize.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_Minimize.Image = global::DisenoColumnas.Properties.Resources.Minimizex16;
+            this.Button_Minimize.Location = new System.Drawing.Point(865, 0);
+            this.Button_Minimize.Name = "Button_Minimize";
+            this.Button_Minimize.Size = new System.Drawing.Size(40, 26);
+            this.Button_Minimize.TabIndex = 27;
+            this.Button_Minimize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_Minimize.UseVisualStyleBackColor = true;
+            this.Button_Minimize.Click += new System.EventHandler(this.Minimized_Click);
+            // 
+            // Button_MaxRest
+            // 
+            this.Button_MaxRest.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_MaxRest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_MaxRest.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.Button_MaxRest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.Button_MaxRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_MaxRest.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_MaxRest.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_MaxRest.Image = global::DisenoColumnas.Properties.Resources.Maximizar14X11;
+            this.Button_MaxRest.Location = new System.Drawing.Point(905, 0);
+            this.Button_MaxRest.Name = "Button_MaxRest";
+            this.Button_MaxRest.Size = new System.Drawing.Size(40, 26);
+            this.Button_MaxRest.TabIndex = 28;
+            this.Button_MaxRest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_MaxRest.UseVisualStyleBackColor = true;
+            this.Button_MaxRest.Click += new System.EventHandler(this.Button_MaxRest_Click);
+            // 
+            // Button_Cerrar
+            // 
+            this.Button_Cerrar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.Button_Cerrar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Cerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(101)))), ((int)(((byte)(113)))));
+            this.Button_Cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.Button_Cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Cerrar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Cerrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Button_Cerrar.Image = global::DisenoColumnas.Properties.Resources.x16Blanca;
+            this.Button_Cerrar.Location = new System.Drawing.Point(945, 0);
+            this.Button_Cerrar.Name = "Button_Cerrar";
+            this.Button_Cerrar.Size = new System.Drawing.Size(40, 26);
+            this.Button_Cerrar.TabIndex = 26;
+            this.Button_Cerrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Button_Cerrar.UseVisualStyleBackColor = true;
+            this.Button_Cerrar.Click += new System.EventHandler(this.Close_Click);
             // 
             // menuStrip1
             // 
@@ -180,6 +236,22 @@
             this.guardarComoToolStripMenuItem.Text = "Guardar como";
             this.guardarComoToolStripMenuItem.Click += new System.EventHandler(this.GuardarComoToolStripMenuItem_Click);
             // 
+            // exportarToolStripMenuItem
+            // 
+            this.exportarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cantidadesDeObraToolStripMenuItem});
+            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
+            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.exportarToolStripMenuItem.Text = "Exportar";
+            // 
+            // cantidadesDeObraToolStripMenuItem
+            // 
+            this.cantidadesDeObraToolStripMenuItem.Name = "cantidadesDeObraToolStripMenuItem";
+            this.cantidadesDeObraToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.cantidadesDeObraToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
+            this.cantidadesDeObraToolStripMenuItem.Text = "Cantidades (Archivo DL NET)";
+            this.cantidadesDeObraToolStripMenuItem.Click += new System.EventHandler(this.CantidadesDeObraToolStripMenuItem_Click);
+            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
@@ -202,6 +274,66 @@
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.editarToolStripMenuItem.Text = "Editar";
             // 
+            // variablesDeEntradaToolStripMenuItem
+            // 
+            this.variablesDeEntradaToolStripMenuItem.Enabled = false;
+            this.variablesDeEntradaToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.VarEntrada;
+            this.variablesDeEntradaToolStripMenuItem.Name = "variablesDeEntradaToolStripMenuItem";
+            this.variablesDeEntradaToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.variablesDeEntradaToolStripMenuItem.Text = "Variables de Entrada";
+            this.variablesDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.VariablesDeEntradaToolStripMenuItem_Click);
+            // 
+            // cuantíaVolumétricaToolStripMenuItem
+            // 
+            this.cuantíaVolumétricaToolStripMenuItem.Enabled = false;
+            this.cuantíaVolumétricaToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.image;
+            this.cuantíaVolumétricaToolStripMenuItem.Name = "cuantíaVolumétricaToolStripMenuItem";
+            this.cuantíaVolumétricaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.cuantíaVolumétricaToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.cuantíaVolumétricaToolStripMenuItem.Text = "Cuantía Volumétrica";
+            this.cuantíaVolumétricaToolStripMenuItem.Click += new System.EventHandler(this.CuantíaVolumétricaToolStripMenuItem_Click);
+            // 
+            // columnasIgualesToolStripMenuItem
+            // 
+            this.columnasIgualesToolStripMenuItem.Enabled = false;
+            this.columnasIgualesToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.SameCol1;
+            this.columnasIgualesToolStripMenuItem.Name = "columnasIgualesToolStripMenuItem";
+            this.columnasIgualesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.columnasIgualesToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.columnasIgualesToolStripMenuItem.Text = "Columnas Iguales";
+            this.columnasIgualesToolStripMenuItem.Click += new System.EventHandler(this.ColumnasIgualesToolStripMenuItem_Click);
+            // 
+            // dibujoDeSecciónToolStripMenuItem
+            // 
+            this.dibujoDeSecciónToolStripMenuItem.Enabled = false;
+            this.dibujoDeSecciónToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.columna;
+            this.dibujoDeSecciónToolStripMenuItem.Name = "dibujoDeSecciónToolStripMenuItem";
+            this.dibujoDeSecciónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.dibujoDeSecciónToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.dibujoDeSecciónToolStripMenuItem.Text = "Dibujo de Sección";
+            this.dibujoDeSecciónToolStripMenuItem.Click += new System.EventHandler(this.DibujoDeSecciónToolStripMenuItem_Click);
+            // 
+            // editarNombresDeColumnasToolStripMenuItem
+            // 
+            this.editarNombresDeColumnasToolStripMenuItem.Enabled = false;
+            this.editarNombresDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.editar;
+            this.editarNombresDeColumnasToolStripMenuItem.Name = "editarNombresDeColumnasToolStripMenuItem";
+            this.editarNombresDeColumnasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
+            this.editarNombresDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.editarNombresDeColumnasToolStripMenuItem.Text = "Editar Nombre de Columnas";
+            this.editarNombresDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.EditarNombresDeColumnasToolStripMenuItem_Click);
+            // 
+            // editarSeccionesPredeterminadasToolStripMenuItem
+            // 
+            this.editarSeccionesPredeterminadasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.bloquear;
+            this.editarSeccionesPredeterminadasToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.editarSeccionesPredeterminadasToolStripMenuItem.Name = "editarSeccionesPredeterminadasToolStripMenuItem";
+            this.editarSeccionesPredeterminadasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
+            this.editarSeccionesPredeterminadasToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.editarSeccionesPredeterminadasToolStripMenuItem.Text = "Editar Secciones";
+            this.editarSeccionesPredeterminadasToolStripMenuItem.Click += new System.EventHandler(this.EditarSeccionesPredeterminadasToolStripMenuItem_Click);
+            // 
             // verToolStripMenuItem
             // 
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -216,6 +348,66 @@
             this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.verToolStripMenuItem.Text = "Ver";
             // 
+            // infromaciónDeColumnasToolStripMenuItem
+            // 
+            this.infromaciónDeColumnasToolStripMenuItem.Enabled = false;
+            this.infromaciónDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.info;
+            this.infromaciónDeColumnasToolStripMenuItem.Name = "infromaciónDeColumnasToolStripMenuItem";
+            this.infromaciónDeColumnasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.infromaciónDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.infromaciónDeColumnasToolStripMenuItem.Text = "Infromación de la Columna";
+            this.infromaciónDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.InfromaciónDeColumnasToolStripMenuItem_Click);
+            // 
+            // agregarAlzadoToolStripMenuItem
+            // 
+            this.agregarAlzadoToolStripMenuItem.Enabled = false;
+            this.agregarAlzadoToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.vcsadded_93506;
+            this.agregarAlzadoToolStripMenuItem.Name = "agregarAlzadoToolStripMenuItem";
+            this.agregarAlzadoToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.agregarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.agregarAlzadoToolStripMenuItem.Text = "Agregar Alzado";
+            this.agregarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregarAlzadoToolStripMenuItem_Click);
+            // 
+            // despieceToolStripMenuItem
+            // 
+            this.despieceToolStripMenuItem.Enabled = false;
+            this.despieceToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.herramienta_de_recorte;
+            this.despieceToolStripMenuItem.Name = "despieceToolStripMenuItem";
+            this.despieceToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
+            this.despieceToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.despieceToolStripMenuItem.Text = "Despiece";
+            this.despieceToolStripMenuItem.Click += new System.EventHandler(this.DespieceToolStripMenuItem_Click);
+            // 
+            // plantaDeColumnasToolStripMenuItem
+            // 
+            this.plantaDeColumnasToolStripMenuItem.Enabled = false;
+            this.plantaDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.anteproyecto;
+            this.plantaDeColumnasToolStripMenuItem.Name = "plantaDeColumnasToolStripMenuItem";
+            this.plantaDeColumnasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.plantaDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.plantaDeColumnasToolStripMenuItem.Text = "Planta de Columnas";
+            this.plantaDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.PlantaDeColumnasToolStripMenuItem_Click);
+            // 
+            // fuerzasToolStripMenuItem
+            // 
+            this.fuerzasToolStripMenuItem.Enabled = false;
+            this.fuerzasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.Fuerzas;
+            this.fuerzasToolStripMenuItem.Name = "fuerzasToolStripMenuItem";
+            this.fuerzasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.fuerzasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.fuerzasToolStripMenuItem.Text = "Fuerzas";
+            this.fuerzasToolStripMenuItem.Click += new System.EventHandler(this.FuerzasToolStripMenuItem_Click);
+            // 
+            // resultadosToolStripMenuItem
+            // 
+            this.resultadosToolStripMenuItem.Enabled = false;
+            this.resultadosToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.analisis;
+            this.resultadosToolStripMenuItem.Name = "resultadosToolStripMenuItem";
+            this.resultadosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.resultadosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.resultadosToolStripMenuItem.Text = "Resultados";
+            this.resultadosToolStripMenuItem.Click += new System.EventHandler(this.ResultadosToolStripMenuItem_Click);
+            // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -224,6 +416,15 @@
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
+            // 
+            // acercaDeToolStripMenuItem
+            // 
+            this.acercaDeToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.icons8_acerca_de_48;
+            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            this.acercaDeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.acercaDeToolStripMenuItem.Text = "Acerca de Column Disigner";
+            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -324,6 +525,26 @@
             this.toolBar.Size = new System.Drawing.Size(985, 25);
             this.toolBar.TabIndex = 30;
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::DisenoColumnas.Properties.Resources.Newx16;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "Nuevo (Ctrl + N)";
+            this.toolStripButton1.Click += new System.EventHandler(this.ToolStripButton1_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::DisenoColumnas.Properties.Resources.Openx16;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "Abrir (Ctrl + O)";
+            this.toolStripButton2.Click += new System.EventHandler(this.ToolStripButton2_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -408,22 +629,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(10, 653);
             this.panel2.TabIndex = 55;
-            // 
-            // exportarToolStripMenuItem
-            // 
-            this.exportarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cantidadesDeObraToolStripMenuItem});
-            this.exportarToolStripMenuItem.Name = "exportarToolStripMenuItem";
-            this.exportarToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
-            this.exportarToolStripMenuItem.Text = "Exportar";
-            // 
-            // cantidadesDeObraToolStripMenuItem
-            // 
-            this.cantidadesDeObraToolStripMenuItem.Name = "cantidadesDeObraToolStripMenuItem";
-            this.cantidadesDeObraToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.cantidadesDeObraToolStripMenuItem.Size = new System.Drawing.Size(266, 22);
-            this.cantidadesDeObraToolStripMenuItem.Text = "Cantidades (Archivo DL NET)";
-            this.cantidadesDeObraToolStripMenuItem.Click += new System.EventHandler(this.CantidadesDeObraToolStripMenuItem_Click);
             // 
             // Button_DLNET
             // 
@@ -553,209 +758,6 @@
             this.Cuantia_Vol_Button.UseVisualStyleBackColor = true;
             this.Cuantia_Vol_Button.Click += new System.EventHandler(this.Cb_cuantiavol_Click);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::DisenoColumnas.Properties.Resources.Newx16;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "Nuevo (Ctrl + N)";
-            this.toolStripButton1.Click += new System.EventHandler(this.ToolStripButton1_Click);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::DisenoColumnas.Properties.Resources.Openx16;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Abrir (Ctrl + O)";
-            this.toolStripButton2.Click += new System.EventHandler(this.ToolStripButton2_Click);
-            // 
-            // Button_Minimize
-            // 
-            this.Button_Minimize.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_Minimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.Button_Minimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.Button_Minimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.Button_Minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Minimize.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Minimize.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Button_Minimize.Image = global::DisenoColumnas.Properties.Resources.Minimizex16;
-            this.Button_Minimize.Location = new System.Drawing.Point(865, 0);
-            this.Button_Minimize.Name = "Button_Minimize";
-            this.Button_Minimize.Size = new System.Drawing.Size(40, 26);
-            this.Button_Minimize.TabIndex = 27;
-            this.Button_Minimize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_Minimize.UseVisualStyleBackColor = true;
-            this.Button_Minimize.Click += new System.EventHandler(this.Minimized_Click);
-            // 
-            // Button_MaxRest
-            // 
-            this.Button_MaxRest.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_MaxRest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.Button_MaxRest.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.Button_MaxRest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.Button_MaxRest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_MaxRest.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_MaxRest.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Button_MaxRest.Image = global::DisenoColumnas.Properties.Resources.Maximizar14X11;
-            this.Button_MaxRest.Location = new System.Drawing.Point(905, 0);
-            this.Button_MaxRest.Name = "Button_MaxRest";
-            this.Button_MaxRest.Size = new System.Drawing.Size(40, 26);
-            this.Button_MaxRest.TabIndex = 28;
-            this.Button_MaxRest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_MaxRest.UseVisualStyleBackColor = true;
-            this.Button_MaxRest.Click += new System.EventHandler(this.Button_MaxRest_Click);
-            // 
-            // Button_Cerrar
-            // 
-            this.Button_Cerrar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_Cerrar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.Button_Cerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(101)))), ((int)(((byte)(113)))));
-            this.Button_Cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
-            this.Button_Cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Cerrar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Button_Cerrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Button_Cerrar.Image = global::DisenoColumnas.Properties.Resources.x16Blanca;
-            this.Button_Cerrar.Location = new System.Drawing.Point(945, 0);
-            this.Button_Cerrar.Name = "Button_Cerrar";
-            this.Button_Cerrar.Size = new System.Drawing.Size(40, 26);
-            this.Button_Cerrar.TabIndex = 26;
-            this.Button_Cerrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Button_Cerrar.UseVisualStyleBackColor = true;
-            this.Button_Cerrar.Click += new System.EventHandler(this.Close_Click);
-            // 
-            // variablesDeEntradaToolStripMenuItem
-            // 
-            this.variablesDeEntradaToolStripMenuItem.Enabled = false;
-            this.variablesDeEntradaToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.VarEntrada;
-            this.variablesDeEntradaToolStripMenuItem.Name = "variablesDeEntradaToolStripMenuItem";
-            this.variablesDeEntradaToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.variablesDeEntradaToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.variablesDeEntradaToolStripMenuItem.Text = "Variables de Entrada";
-            this.variablesDeEntradaToolStripMenuItem.Click += new System.EventHandler(this.VariablesDeEntradaToolStripMenuItem_Click);
-            // 
-            // cuantíaVolumétricaToolStripMenuItem
-            // 
-            this.cuantíaVolumétricaToolStripMenuItem.Enabled = false;
-            this.cuantíaVolumétricaToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.image;
-            this.cuantíaVolumétricaToolStripMenuItem.Name = "cuantíaVolumétricaToolStripMenuItem";
-            this.cuantíaVolumétricaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.cuantíaVolumétricaToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.cuantíaVolumétricaToolStripMenuItem.Text = "Cuantía Volumétrica";
-            this.cuantíaVolumétricaToolStripMenuItem.Click += new System.EventHandler(this.CuantíaVolumétricaToolStripMenuItem_Click);
-            // 
-            // columnasIgualesToolStripMenuItem
-            // 
-            this.columnasIgualesToolStripMenuItem.Enabled = false;
-            this.columnasIgualesToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.SameCol1;
-            this.columnasIgualesToolStripMenuItem.Name = "columnasIgualesToolStripMenuItem";
-            this.columnasIgualesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.columnasIgualesToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.columnasIgualesToolStripMenuItem.Text = "Columnas Iguales";
-            this.columnasIgualesToolStripMenuItem.Click += new System.EventHandler(this.ColumnasIgualesToolStripMenuItem_Click);
-            // 
-            // dibujoDeSecciónToolStripMenuItem
-            // 
-            this.dibujoDeSecciónToolStripMenuItem.Enabled = false;
-            this.dibujoDeSecciónToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.columna;
-            this.dibujoDeSecciónToolStripMenuItem.Name = "dibujoDeSecciónToolStripMenuItem";
-            this.dibujoDeSecciónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.dibujoDeSecciónToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.dibujoDeSecciónToolStripMenuItem.Text = "Dibujo de Sección";
-            this.dibujoDeSecciónToolStripMenuItem.Click += new System.EventHandler(this.DibujoDeSecciónToolStripMenuItem_Click);
-            // 
-            // editarNombresDeColumnasToolStripMenuItem
-            // 
-            this.editarNombresDeColumnasToolStripMenuItem.Enabled = false;
-            this.editarNombresDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.editar;
-            this.editarNombresDeColumnasToolStripMenuItem.Name = "editarNombresDeColumnasToolStripMenuItem";
-            this.editarNombresDeColumnasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.editarNombresDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.editarNombresDeColumnasToolStripMenuItem.Text = "Editar Nombre de Columnas";
-            this.editarNombresDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.EditarNombresDeColumnasToolStripMenuItem_Click);
-            // 
-            // editarSeccionesPredeterminadasToolStripMenuItem
-            // 
-            this.editarSeccionesPredeterminadasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.bloquear;
-            this.editarSeccionesPredeterminadasToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.editarSeccionesPredeterminadasToolStripMenuItem.Name = "editarSeccionesPredeterminadasToolStripMenuItem";
-            this.editarSeccionesPredeterminadasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.editarSeccionesPredeterminadasToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.editarSeccionesPredeterminadasToolStripMenuItem.Text = "Editar Secciones";
-            this.editarSeccionesPredeterminadasToolStripMenuItem.Click += new System.EventHandler(this.EditarSeccionesPredeterminadasToolStripMenuItem_Click);
-            // 
-            // infromaciónDeColumnasToolStripMenuItem
-            // 
-            this.infromaciónDeColumnasToolStripMenuItem.Enabled = false;
-            this.infromaciónDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.info;
-            this.infromaciónDeColumnasToolStripMenuItem.Name = "infromaciónDeColumnasToolStripMenuItem";
-            this.infromaciónDeColumnasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.infromaciónDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.infromaciónDeColumnasToolStripMenuItem.Text = "Infromación de la Columna";
-            this.infromaciónDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.InfromaciónDeColumnasToolStripMenuItem_Click);
-            // 
-            // agregarAlzadoToolStripMenuItem
-            // 
-            this.agregarAlzadoToolStripMenuItem.Enabled = false;
-            this.agregarAlzadoToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.vcsadded_93506;
-            this.agregarAlzadoToolStripMenuItem.Name = "agregarAlzadoToolStripMenuItem";
-            this.agregarAlzadoToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.agregarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.agregarAlzadoToolStripMenuItem.Text = "Agregar Alzado";
-            this.agregarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregarAlzadoToolStripMenuItem_Click);
-            // 
-            // despieceToolStripMenuItem
-            // 
-            this.despieceToolStripMenuItem.Enabled = false;
-            this.despieceToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.herramienta_de_recorte;
-            this.despieceToolStripMenuItem.Name = "despieceToolStripMenuItem";
-            this.despieceToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.despieceToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.despieceToolStripMenuItem.Text = "Despiece";
-            this.despieceToolStripMenuItem.Click += new System.EventHandler(this.DespieceToolStripMenuItem_Click);
-            // 
-            // plantaDeColumnasToolStripMenuItem
-            // 
-            this.plantaDeColumnasToolStripMenuItem.Enabled = false;
-            this.plantaDeColumnasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.anteproyecto;
-            this.plantaDeColumnasToolStripMenuItem.Name = "plantaDeColumnasToolStripMenuItem";
-            this.plantaDeColumnasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.plantaDeColumnasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.plantaDeColumnasToolStripMenuItem.Text = "Planta de Columnas";
-            this.plantaDeColumnasToolStripMenuItem.Click += new System.EventHandler(this.PlantaDeColumnasToolStripMenuItem_Click);
-            // 
-            // fuerzasToolStripMenuItem
-            // 
-            this.fuerzasToolStripMenuItem.Enabled = false;
-            this.fuerzasToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.Fuerzas;
-            this.fuerzasToolStripMenuItem.Name = "fuerzasToolStripMenuItem";
-            this.fuerzasToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.fuerzasToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.fuerzasToolStripMenuItem.Text = "Fuerzas";
-            this.fuerzasToolStripMenuItem.Click += new System.EventHandler(this.FuerzasToolStripMenuItem_Click);
-            // 
-            // resultadosToolStripMenuItem
-            // 
-            this.resultadosToolStripMenuItem.Enabled = false;
-            this.resultadosToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.analisis;
-            this.resultadosToolStripMenuItem.Name = "resultadosToolStripMenuItem";
-            this.resultadosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.resultadosToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
-            this.resultadosToolStripMenuItem.Text = "Resultados";
-            this.resultadosToolStripMenuItem.Click += new System.EventHandler(this.ResultadosToolStripMenuItem_Click);
-            // 
-            // acercaDeToolStripMenuItem
-            // 
-            this.acercaDeToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.icons8_acerca_de_48;
-            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-            this.acercaDeToolStripMenuItem.Text = "Acerca de Column Disigner";
-            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeToolStripMenuItem_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -768,12 +770,37 @@
             this.label5.TabIndex = 58;
             this.label5.Text = "|";
             // 
+            // BarraProgresoCantidades
+            // 
+            this.BarraProgresoCantidades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BarraProgresoCantidades.Location = new System.Drawing.Point(762, 707);
+            this.BarraProgresoCantidades.Name = "BarraProgresoCantidades";
+            this.BarraProgresoCantidades.Size = new System.Drawing.Size(156, 13);
+            this.BarraProgresoCantidades.TabIndex = 61;
+            this.BarraProgresoCantidades.Visible = false;
+            // 
+            // ParaCantidades
+            // 
+            this.ParaCantidades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ParaCantidades.AutoSize = true;
+            this.ParaCantidades.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.ParaCantidades.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParaCantidades.ForeColor = System.Drawing.Color.White;
+            this.ParaCantidades.Location = new System.Drawing.Point(923, 706);
+            this.ParaCantidades.Name = "ParaCantidades";
+            this.ParaCantidades.Size = new System.Drawing.Size(34, 15);
+            this.ParaCantidades.TabIndex = 62;
+            this.ParaCantidades.Text = "1/10";
+            this.ParaCantidades.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
             this.ClientSize = new System.Drawing.Size(985, 726);
+            this.Controls.Add(this.ParaCantidades);
+            this.Controls.Add(this.BarraProgresoCantidades);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Button_DLNET);
             this.Controls.Add(this.PanelContenedor);
@@ -872,5 +899,7 @@
         private System.Windows.Forms.ToolStripMenuItem cantidadesDeObraToolStripMenuItem;
         private System.Windows.Forms.Button Button_DLNET;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ProgressBar BarraProgresoCantidades;
+        internal System.Windows.Forms.Label ParaCantidades;
     }
 }

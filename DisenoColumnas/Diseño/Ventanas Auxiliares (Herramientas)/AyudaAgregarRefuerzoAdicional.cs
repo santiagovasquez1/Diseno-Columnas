@@ -349,10 +349,8 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
 
         private void CantBarras_TextChanged(object sender, EventArgs e)
         {
-            int CantBarras_i;
-            int NoBarra_i;
 
-            if (Int32.TryParse(CantBarras.Text, out CantBarras_i) && Int32.TryParse(NoBarra.Text, out NoBarra_i))
+            if (Int32.TryParse(CantBarras.Text, out int CantBarras_i) && Int32.TryParse(NoBarra.Text, out int NoBarra_i))
             {
                 LlenarConvencionesList(CantBarras_i, NoBarra_i);
             }
@@ -370,10 +368,8 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
 
         private void NoBarra_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int CantBarras_i;
-            int NoBarra_i;
 
-            if (Int32.TryParse(CantBarras.Text, out CantBarras_i) && Int32.TryParse(NoBarra.Text, out NoBarra_i))
+            if (Int32.TryParse(CantBarras.Text, out int CantBarras_i) && Int32.TryParse(NoBarra.Text, out int NoBarra_i))
             {
                 LlenarConvencionesList(CantBarras_i, NoBarra_i);
             }
@@ -403,18 +399,18 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
             {
                 if (ConvecionAlzado.Tipo2 == "")
                 {
-                    Text = $"Aporta acero en el Top del piso en el cual está{Environment.NewLine}posicionado y el Bottom del piso subsiguiente.";
+                    Text = $"Aporta acero en el Top del piso en el que está{Environment.NewLine}posicionado y el Bottom del piso subsiguiente.";
                     size = new Size(278, 42);
                 }
                 if (ConvecionAlzado.Tipo2 == "+")
                 {
-                    Text = $"Aporta acero en el Top del piso en el cual está{Environment.NewLine}posicionado y el Bottom del piso subsiguiente.";
+                    Text = $"Aporta acero en el Top del piso en el que está{Environment.NewLine}posicionado y el Bottom del piso subsiguiente.";
                     size = new Size(278, 39);
                 }
 
                 if (ConvecionAlzado.Tipo2 == "-")
                 {
-                    Text = $"Aporta acero en el Top del piso en el cual está{Environment.NewLine}posicionado.";
+                    Text = $"Aporta acero en el Top del piso en el que está{Environment.NewLine}posicionado.";
                     size = new Size(268, 39);
                 }
             }
@@ -423,12 +419,12 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
             {
                 if (ConvecionAlzado.Tipo == "Botton")
                 {
-                    Text = $"Aporta acero en el Bottom del piso en el cual está{Environment.NewLine}posicionado (Nomenclatura recomendada solo para{Environment.NewLine}el primer piso)";
+                    Text = $"Aporta acero en el Bottom del piso en el que está{Environment.NewLine}posicionado (Nomenclatura recomendada solo para{Environment.NewLine}el primer piso)";
                     size = new Size(299, 54);
                 }
                 if (ConvecionAlzado.Tipo == "A")
                 {
-                    Text = $"Aporta acero en el Top del piso en el cual está posicionado,{Environment.NewLine}el Bottom del piso subsiguiente y el Buttom del piso en el cual{Environment.NewLine}está posicionado.";
+                    Text = $"Aporta acero en el Top del piso en el que está posicionado,{Environment.NewLine}el Bottom del piso subsiguiente y el Buttom del piso en el que{Environment.NewLine}está posicionado.";
                     size = new Size(353, 56);
                 }
             }

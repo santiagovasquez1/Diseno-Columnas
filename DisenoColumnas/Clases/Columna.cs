@@ -2743,20 +2743,55 @@ namespace DisenoColumnas.Clases
             for (int i = Seccions.Count - 1; i >= 0; i--)
             {
                 //Sección Rectangular
-                CRectangulo rectangulo = (CRectangulo)Seccions[i].Item1;
-                rectangulo.CalcularDimensionesEstribo_Gancho(rectangulo.Estribo, R);
                 int Cantidad = (int)CantEstribos_Sepa[i][0] + (int)CantEstribos_Sepa[i][1] + (int)CantEstribos_Sepa[i][2] + (int)CantEstribos_Sepa[i][3];
-                ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(rectangulo.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, rectangulo.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
-                ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(rectangulo.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, rectangulo.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
-                ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(Cantidad, rectangulo.Estribo_Dimensiones_B_H_G_Nomenclatura.Item4));
 
-                if (i == Seccions.Count - 1)
+                if (Seccions[i].Item1 is CRectangulo)
                 {
-                    //Agregar a Lista de Ganchos Y Estribos correspondientes a la Fundación
-                    int C_F = (int)Math.Ceiling(((Form1.Proyecto_.e_Fundacion * 100 - 10) /( Form1.Proyecto_.SE_F*100)) + 1);
-                    ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F, rectangulo.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                    CRectangulo  seccion2 = (CRectangulo)Seccions[i].Item1;
+                    seccion2.CalcularDimensionesEstribo_Gancho(seccion2.Estribo, R);
+                    ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                    ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                    ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(Cantidad, seccion2.Estribo_Dimensiones_B_H_G_Nomenclatura.Item4));
+                    if (i == Seccions.Count - 1)
+                    {
+                        //Agregar a Lista de Ganchos Y Estribos correspondientes a la Fundación
+                        int C_F = (int)Math.Ceiling(((Form1.Proyecto_.e_Fundacion * 100 - 10) / (Form1.Proyecto_.SE_F * 100)) + 1);
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F* seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item1, seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F* seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item1, seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                        ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F, seccion2.Estribo_Dimensiones_B_H_G_Nomenclatura.Item4));
+                    }
 
                 }
+                if (Seccions[i].Item1 is CSD)
+                {
+                    CSD seccion2 = (CSD)Seccions[i].Item1;
+                    seccion2.CalcularDimensionesEstribo_Gancho(seccion2.Estribo, R);
+
+                    ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoHAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoHAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                    ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoVAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoVAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                    ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoHAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoHAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                    ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoVAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoVAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+
+                    ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(Cantidad, seccion2.EstriboAleta_Dimensiones_B_H_G_Nomenclatura.Item4));
+                    ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(Cantidad, seccion2.EstriboAlma_Dimensiones_B_H_G_Nomenclatura.Item4));
+
+                    if (i == Seccions.Count - 1)
+                    {
+                        //Agregar a Lista de Ganchos Y Estribos correspondientes a la Fundación
+                        int C_F = (int)Math.Ceiling(((Form1.Proyecto_.e_Fundacion * 100 - 10) / (Form1.Proyecto_.SE_F * 100)) + 1);
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoHAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * C_F, seccion2.GanchoHAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoVAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * C_F, seccion2.GanchoVAleta_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoHAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * C_F, seccion2.GanchoHAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoVAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * C_F, seccion2.GanchoVAlma_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+
+                        ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F, seccion2.EstriboAleta_Dimensiones_B_H_G_Nomenclatura.Item4));
+                        ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F, seccion2.EstriboAlma_Dimensiones_B_H_G_Nomenclatura.Item4));
+
+                    }
+
+                }
+
+
 
             }
 
@@ -2819,8 +2854,10 @@ namespace DisenoColumnas.Clases
                             VectorIndices.Add(j);
                         }
                     }
-
-                    Lista_DllNetFinal.Add(Cantidad1 + Nomenclatura1);
+                    if (Cantidad1 != 0)
+                    {
+                        Lista_DllNetFinal.Add(Cantidad1 + Nomenclatura1);
+                    }
                 }
             }
         }
