@@ -299,34 +299,34 @@ namespace DisenoColumnas.Secciones
                 var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
                 var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
 
-                if (Yunicos.Exists(y => Math.Round(y, 2) == Math.Round(Ytw - TW, 2)))
+                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
                 {
-                    Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
-                    Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Min() });
+                    Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
+                    Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
                     Coord_aletas.Add(new float[] { Xunicos.Min(), Ytw });
                 }
                 else
                 {
+                    Coord_aletas.Add(new float[] { Xunicos.Min(), Ytw });
                     Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Min() });
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
-                    Coord_aletas.Add(new float[] { Xunicos.Min(), Ytw });
                 }
 
-                if (Xunicos.Exists(x => Math.Round(x, 2) == Math.Round(Xtf - TF, 2)))
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2))
                 {
-                    Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
-                    Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
-                    Coord_alma.Add(new float[] { Xtf, Yunicos.Min() });
                     Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
+                    Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
+                    Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Min() });
+                    Coord_alma.Add(new float[] { Xtf, Yunicos.Min() });
                 }
                 else
                 {
+                    Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
                     Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
                     Coord_alma.Add(new float[] { Xtf, Yunicos.Min() });
-                    Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
-                    Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Min() });
+                    Coord_alma.Add(new float[] { Xunicos.Min(), Yunicos.Min() });
                 }
             }
 
@@ -473,7 +473,7 @@ namespace DisenoColumnas.Secciones
             var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
             var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
 
-            //Asignar refuerzo en la aleta
+            #region Barras Alteta
 
             posx = Xunicos.Min() + r;
 
@@ -518,12 +518,23 @@ namespace DisenoColumnas.Secciones
                 ContT++;
             }
 
-            //Asignar refuerzo en el alma
+            #endregion Barras Alteta
 
-            ContX = CapasX2-2; ContY = CapasY1;
+            #region Barras alma
+
+            ContX = CapasX2 - 2; ContY = CapasY1;
 
             if (Shape == TipodeSeccion.L)
-                posx = Xtf + TF + r;
+            {
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2))
+                {
+                    posx = Xtf + r;
+                }
+                else
+                {
+                    posx = Xunicos.Min() + r;
+                }
+            }
             else
                 posx = Xtf + r;
 
@@ -551,7 +562,7 @@ namespace DisenoColumnas.Secciones
                     else
                         posy = Yunicos.Max() - r;
                     ContY = 2;
-                    DeltaY2 = ((H - TW) - 2 * r) / (CapasY1 - 1);
+                    DeltaY2 = ((H - TW) - 2 * r) / (ContY - 1);
                     ContX--;
                 }
 
@@ -570,6 +581,8 @@ namespace DisenoColumnas.Secciones
                 id++;
                 ContT++;
             }
+
+            #endregion Barras alma
         }
 
         public override string ToString()

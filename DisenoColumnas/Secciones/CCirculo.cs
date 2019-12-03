@@ -417,6 +417,7 @@ namespace DisenoColumnas.Secciones
             double[] Coord = new double[2];
             int id = 0;
             CRefuerzo refuerzoi = null;
+            Refuerzos.Clear();
 
             Radio_interno = ((2 * radio * 100) - 2 * Recubrimiento - 2) / 2;
             Perimetro_interno = 2 * Math.PI * Radio_interno;
@@ -437,7 +438,7 @@ namespace DisenoColumnas.Secciones
         public override string ToString()
         {
             string Nombre_seccion;
-            Nombre_seccion = $"C{radio * 2 * 100}{Material.Name}";
+            Nombre_seccion = $"C{Math.Round(radio * 2 * 100, 0)}{Material.Name}";
             return string.Format("{0}", Nombre_seccion);
         }
 
