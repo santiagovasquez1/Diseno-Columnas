@@ -38,18 +38,31 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            for (int i=0;i<D_ColLabel.Rows.Count;i++)
+            for (int i = 0; i < D_ColLabel.Rows.Count; i++)
             {
                 string Label = "";
-                if(D_ColLabel.Rows[i].Cells[1].Value != null)
+                if (D_ColLabel.Rows[i].Cells[1].Value != null)
                 {
                     Label = D_ColLabel.Rows[i].Cells[1].Value.ToString();
                 }
-                Form1.Proyecto_.Lista_Columnas.Find(x=>x.Name== D_ColLabel.Rows[i].Cells[0].Value.ToString()).Label =  Label.ToUpper();
+                Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColLabel.Rows[i].Cells[0].Value.ToString()).Label = Label.ToUpper();
 
             }
             Close();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -61,6 +74,42 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
         {
             Utilidades.MoveWindow.ReleaseCapture();
             Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
+        }
+
+        private void D_ColLabel_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (D_ColLabel.Rows[e.RowIndex].Cells[1].Value != null)
+            {
+                D_ColLabel.Rows[e.RowIndex].Cells[1].Value = D_ColLabel.Rows[e.RowIndex].Cells[1].Value.ToString().ToUpper();
+            }
+            else
+            {
+                D_ColLabel.Rows[e.RowIndex].Cells[1].Value = "";
+            }
+            for (int i = 0; i < D_ColLabel.Rows.Count; i++)
+            {
+                if (i != e.RowIndex)
+                {
+                    if (D_ColLabel.Rows[i].Cells[1].Value != null)
+                    {
+                        if (D_ColLabel.Rows[i].Cells[1].Value.ToString() != "")
+                        {
+                            
+                            if (D_ColLabel.Rows[i].Cells[1].Value.ToString() == D_ColLabel.Rows[e.RowIndex].Cells[1].Value.ToString())
+                            {
+                                MessageBox.Show("El Label asignado ya existe.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                D_ColLabel.Rows[e.RowIndex].Cells[1].Value = "";
+                                return;
+                            }
+                        }
+                    }
+
+
+                }
+
+
+            }
+            
         }
     }
 }
