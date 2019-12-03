@@ -2,6 +2,8 @@
 using DisenoColumnas.Secciones;
 using DisenoColumnas.Utilidades;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Interfaz_Seccion
@@ -100,7 +102,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             ISeccion N_Seccion = null;
             string Nombre_Seccion = "";
             GDE gde = GDE.DMO;
-            float FD1 = 0;float FD2 = 0;
+            List<float[]> Vertices_Temp = new List<float[]>();
+            List<float[]> Vertices = new List<float[]>();
+            double Xc, Yc;
+            double Numerador, Denominador;
+
             MAT_CONCRETE material = new MAT_CONCRETE()
             {
                 Name = "H" + tbFc.Text,
@@ -110,15 +116,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             if (Radio_Dmo.Checked)
             {
                 gde = GDE.DMO;
-                FD1 = 0.20f;
-                FD2 = 0.06f;
             }
 
             if (Radio_Des.Checked)
             {
                 gde = GDE.DES;
-                FD1 = 0.30f;
-                FD2 = 0.09f;
             }
 
             if (Tipo_Seccion == TipodeSeccion.Rectangular.ToString())
@@ -126,7 +128,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Nombre_Seccion = $"C{b}X{h}{material.Name}";
                 N_Seccion = new CRectangulo(Nombre_Seccion, b / 100, h / 100, material, TipodeSeccion.Rectangular, null);
                 N_Seccion.Calc_vol_inex(r / 100, 4220, gde);
-                N_Seccion.Cuanti_Vol(FD1, FD2, r / 100, 4220);
                 N_Seccion.Refuerzo_Base(r);
             }
 
@@ -143,11 +144,68 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Nombre_Seccion = $"C{b}X{h}X{tw}X{tf}{Tipo_Seccion}{material.Name}";
 
                 if (Tipo_Seccion == TipodeSeccion.Tee.ToString())
-                    N_Seccion = new CSD(Nombre_Seccion, b / 100, h / 100, tw / 100, tf / 100, material, TipodeSeccion.Tee, null);
+                {
+                    Vertices_Temp.Add(new float[] { 0, -h / 200 });
+                    Vertices_Temp.Add(new float[] { 0, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { (b - tf) / 400, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { (b - tf) / 400, 0 });
+                    Vertices_Temp.Add(new float[] { (b + tf) / 400, 0 });
+                    Vertices_Temp.Add(new float[] { (b + tf) / 400, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, -h / 200 });
+
+                    Numerador = ((b / 2) * b * tw) + ((b / 2) * (tf * (h - tw)));
+                    Denominador = (b * tw) + (tf * (h - tw));
+
+                    Xc = b / 200;
+
+                    double y1 = (h - tw) * (h - tw) * tf / 2;
+                    double y2 = (h - (tw / 2)) * b * tw;
+
+                    Numerador = y1 + y2;
+                    Denominador = (b * tw) + (tf * (h - tw));
+
+                    Yc = -h / 200;
+
+                    for (int i = 0; i < Vertices_Temp.Count; i++)
+                    {
+                        var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Vertices_Temp[i][0] - Xc, Vertices_Temp[i][1] - Yc, Vertices_Temp[i][0], Vertices_Temp[i][1]);
+                        Vertices.Add(new float[] { (float)Aux[0], (float)Aux[1] });
+                    }
+
+                    N_Seccion = new CSD(Nombre_Seccion, b / 100, h / 100, tw / 100, tf / 100, material, TipodeSeccion.Tee, Vertices);
+                }
+
                 if (Tipo_Seccion == TipodeSeccion.L.ToString())
-                    N_Seccion = new CSD(Nombre_Seccion, b / 100, h / 100, tw / 100, tf / 100, material, TipodeSeccion.L, null);
+                {
+                    Vertices_Temp.Add(new float[] { 0, 0 });
+                    Vertices_Temp.Add(new float[] { b / 200, 0 });
+                    Vertices_Temp.Add(new float[] { b / 200, -tw / 200 });
+                    Vertices_Temp.Add(new float[] { tf / 200, -tw / 200 });
+                    Vertices_Temp.Add(new float[] { tf / 200, -h / 200 });
+                    Vertices_Temp.Add(new float[] { 0, -h / 200 });
+
+                    Numerador = ((b / 2) * b * tw) + ((tf / 2) * (tf * (h - tw)));
+                    Denominador = (b * tw) + (tf * (h - tw));
+
+                    Xc = b / 200;
+
+                    Numerador = ((tw / 2) * b * tw) + ((h + tf / 2) * (tf * (h - tw)));
+                    Denominador = (b * tw) + (tf * (h - tw));
+
+                    Yc = -h / 200;
+                                       
+                    for (int i = 0; i < Vertices_Temp.Count; i++)
+                    {
+                        var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Vertices_Temp[i][0] - Xc, Vertices_Temp[i][1] - Yc, Vertices_Temp[i][0], Vertices_Temp[i][1]);
+                        Vertices.Add(new float[] { (float)Aux[0], (float)Aux[1] });
+                    }
+
+                    N_Seccion = new CSD(Nombre_Seccion, b / 100, h / 100, tw / 100, tf / 100, material, TipodeSeccion.L, Vertices);
+                }
 
                 N_Seccion.Calc_vol_inex(r / 100, 4220, gde);
+                N_Seccion.Refuerzo_Base(r);
             }
 
             if (N_Seccion != null)

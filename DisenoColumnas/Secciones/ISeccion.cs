@@ -39,6 +39,10 @@ namespace DisenoColumnas.Secciones
 
         void Dibujo_Autocad(double Xi, double Yi,int Num_Alzado);
 
+        /// <summary>
+        /// Calcula y posiciona el refuerzo base, cuando no se cuenta con una seccion predefinida
+        /// </summary>
+        /// <param name="recub">Recubrimiento de la seccion</param>
         void Refuerzo_Base(double recub);
 
         void CalcNoDBarras();
