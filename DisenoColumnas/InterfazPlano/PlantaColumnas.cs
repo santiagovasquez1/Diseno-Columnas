@@ -316,6 +316,10 @@ namespace DisenoColumnas.DefinirColumnas
                     Grafica.Cursor = cursor;
                     break;
                 }
+                else
+                {
+                    Grafica.Cursor = Cursors.Default;
+                }
                 
       
             }

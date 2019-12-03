@@ -333,6 +333,7 @@ namespace DisenoColumnas.Clases
          
             if (Path.IsVisible(mouse.Location))
             {
+                cursor = Cursors.Hand;
                 return true;
             }
             if (cursor != new_cursor)
