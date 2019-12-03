@@ -1761,7 +1761,8 @@ namespace DisenoColumnas
                 variablesdeEntrada.Fy_Box.Text = Proyecto_.FY.ToString();
                 variablesdeEntrada.P_R.Text = Proyecto_.P_R.ToString();
                 variablesdeEntrada.e_acabados.Text = Proyecto_.e_acabados.ToString();
-                variablesdeEntrada.RedondearDecimales.Checked = Proyecto_.Redondear; 
+                variablesdeEntrada.RedondearDecimales.Checked = Proyecto_.Redondear;
+                variablesdeEntrada.SE_F.Text = Proyecto_.SE_F.ToString();
                 variablesdeEntrada.PictureBox1.Visible = true;
                 variablesdeEntrada.ShowDialog();
             }
@@ -2609,7 +2610,7 @@ namespace DisenoColumnas
                     col.DrawColumAutoCAD(XY[0] + DeltaX, XY[1], Names, NoDes);
                     FunctionsAutoCAD.FunctionsAutoCAD.SetScale("1:15");
                     col.Seccions.Last().Item1.Dibujo_Autocad(XY[0] + DeltaX, XY[1] - 1.60, NoDes);
-                    DeltaX += 5 + col.Alzados[col.Alzados.Count - 1].DistX;
+                    DeltaX += 10 + col.Alzados[col.Alzados.Count - 1].DistX;
                     NoDes += 1;
                 }
             }

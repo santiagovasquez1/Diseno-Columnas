@@ -68,6 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alzado.cs" />
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\AyudaAgregarRefuerzoAdicional.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\AyudaAgregarRefuerzoAdicional.Designer.cs">
+      <DependentUpon>AyudaAgregarRefuerzoAdicional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\CambiarNombreColumna.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\AgregarRefuerzoBase.resx">
       <DependentUpon>AgregarRefuerzoBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\AyudaAgregarRefuerzoAdicional.resx">
+      <DependentUpon>AyudaAgregarRefuerzoAdicional.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Diseño\Ventanas Auxiliares %28Herramientas%29\CambiarNombreColumna.resx">
       <DependentUpon>CambiarNombreColumna.cs</DependentUpon>
@@ -392,6 +401,7 @@
     <None Include="Resources\columna.png" />
     <None Include="Resources\columna2.png" />
     <None Include="Resources\analisis.png" />
+    <None Include="Resources\1C.png" />
     <Content Include="Resources\Csearch.cur" />
     <None Include="Resources\vcsadded_93506x16.png" />
     <None Include="Resources\vcsadded_93506.png" />

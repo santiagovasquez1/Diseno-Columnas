@@ -48,6 +48,7 @@ namespace DisenoColumnas
         public GDE DMO_DES { get; set; }
         public float R { get; set; }
         public float FY { get; set; }
+        public float SE_F { get; set; }
 
         public float P_R { get; set; }
         public float e_acabados { get; set; }

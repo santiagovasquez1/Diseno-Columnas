@@ -147,7 +147,7 @@ namespace DisenoColumnas.DefinirColumnas
                 {
                     if (columna.Seccions[i].Item2 == Nomb_PrimerPiso)
                     {
-                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
+                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI,columna.Seccions[i].Item1);
                     }
                 }
 

@@ -152,7 +152,24 @@ namespace DisenoColumnas
                 return (T)formatter.Deserialize(ms);
             }
         }
+        public static List<PointF> CreatePointsForCircle(int numero_puntos, double pradio,double XC,double YC)
+        {
+            double delta_angulo = 2 * Math.PI / numero_puntos;
+            double angulo = 0;
 
+            PointF pi = new PointF();
+            List<PointF> Puntos = new List<PointF>();
+
+            for (int i = 0; i < numero_puntos; i++)
+            {
+                pi.X = Convert.ToSingle(XC + Math.Cos(angulo) * pradio);
+                pi.Y = Convert.ToSingle(YC + Math.Sin(angulo) * pradio);
+                Puntos.Add(pi);
+                angulo += delta_angulo;
+            }
+            return Puntos;
+
+        }
         public static SolidBrush ColorBarra(int Barra)
         {
             SolidBrush brush = new SolidBrush(Color.Black);

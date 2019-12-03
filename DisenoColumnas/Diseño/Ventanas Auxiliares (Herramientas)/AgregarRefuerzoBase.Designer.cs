@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.BarraPersonalizada = new System.Windows.Forms.Panel();
             this.Label_BarraProgreso = new System.Windows.Forms.Label();
             this.BarraPersonalizada2 = new System.Windows.Forms.Panel();
@@ -41,7 +42,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.NoBarra = new System.Windows.Forms.ComboBox();
             this.CantBarras = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.BarraPersonalizada.SuspendLayout();
@@ -83,6 +83,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Refuerzo Base";
             this.groupBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GroupBox1_MouseDown);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(196, 123);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(86, 26);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Cancelar";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // BarraPersonalizada
             // 
@@ -128,6 +141,7 @@
             this.label3.Size = new System.Drawing.Size(34, 15);
             this.label3.TabIndex = 28;
             this.label3.Text = "Tipo:";
+            this.label3.Visible = false;
             // 
             // TP2
             // 
@@ -140,6 +154,7 @@
             this.TP2.TabStop = true;
             this.TP2.Text = "Tipo 2";
             this.TP2.UseVisualStyleBackColor = true;
+            this.TP2.Visible = false;
             // 
             // TP1
             // 
@@ -152,13 +167,14 @@
             this.TP1.TabStop = true;
             this.TP1.Text = "Tipo 1";
             this.TP1.UseVisualStyleBackColor = true;
+            this.TP1.Visible = false;
             // 
             // cb_Aceptar
             // 
             this.cb_Aceptar.BackColor = System.Drawing.Color.White;
             this.cb_Aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Aceptar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_Aceptar.Location = new System.Drawing.Point(95, 125);
+            this.cb_Aceptar.Location = new System.Drawing.Point(95, 123);
             this.cb_Aceptar.Name = "cb_Aceptar";
             this.cb_Aceptar.Size = new System.Drawing.Size(86, 26);
             this.cb_Aceptar.TabIndex = 25;
@@ -170,7 +186,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(66, 64);
+            this.label2.Location = new System.Drawing.Point(66, 57);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 15);
             this.label2.TabIndex = 24;
@@ -180,7 +196,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(75, 93);
+            this.label1.Location = new System.Drawing.Point(75, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 15);
             this.label1.TabIndex = 23;
@@ -193,15 +209,13 @@
             this.NoBarra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NoBarra.FormattingEnabled = true;
             this.NoBarra.Items.AddRange(new object[] {
-            "2",
-            "3",
             "4",
             "5",
             "6",
             "7",
             "8",
             "10"});
-            this.NoBarra.Location = new System.Drawing.Point(196, 90);
+            this.NoBarra.Location = new System.Drawing.Point(196, 83);
             this.NoBarra.Name = "NoBarra";
             this.NoBarra.Size = new System.Drawing.Size(103, 23);
             this.NoBarra.TabIndex = 0;
@@ -209,23 +223,10 @@
             // CantBarras
             // 
             this.CantBarras.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantBarras.Location = new System.Drawing.Point(196, 61);
+            this.CantBarras.Location = new System.Drawing.Point(196, 54);
             this.CantBarras.Name = "CantBarras";
             this.CantBarras.Size = new System.Drawing.Size(103, 23);
             this.CantBarras.TabIndex = 22;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(196, 125);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 26);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "Cancelar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // AgregarRefuerzoBase
             // 
@@ -237,7 +238,9 @@
             this.Name = "AgregarRefuerzoBase";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AgregarRefuerzoBase";
+            this.Load += new System.EventHandler(this.AgregarRefuerzoBase_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AgregarRefuerzoBase_MouseDown);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

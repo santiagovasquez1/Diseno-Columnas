@@ -1,7 +1,9 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -135,7 +137,9 @@ namespace DisenoColumnas.Diseño
 
         public void EndCellEdit(int IndiceC, int IndiceR, bool isNotPaste, Columna ColumnaSelect)
         {
-            if (D_Alzado.Rows[IndiceR].Cells[IndiceC].Value != null && IndiceR < ColumnaSelect.LuzLibre.Count)
+
+ 
+            if (IndiceR < ColumnaSelect.LuzLibre.Count && D_Alzado.Rows[IndiceR].Cells[IndiceC].Value != null)
             {
                 string ValorCelda = D_Alzado.Rows[IndiceR].Cells[IndiceC].Value.ToString();
                 object[] Clasficiacion = ClasificarCelda(ValorCelda);
@@ -1070,6 +1074,110 @@ namespace DisenoColumnas.Diseño
                 Form Form_RefuerzoBase = new AgregarRefuerzoBase();
                 AgregarRefuerzoBase.IndiceC = e.ColumnIndex;
                 Form_RefuerzoBase.ShowDialog();
+            }
+            if (e.ColumnIndex != 0 && e.RowIndex != -1 && D_Alzado.SelectedCells.Count==1)
+            {
+
+                if (refuerzoAdicional!=null)
+                {
+                    int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
+                    string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
+
+                    AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
+                    AyudaAgregarRefuerzoAdicional.AlzadoCorrespondiente = D_Alzado.SelectedCells[0].ColumnIndex - 1;
+                    AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
+                    refuerzoAdicional.Invalidate();
+                }
+
+
+            }
+
+
+
+         }
+
+        private void AsignarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+           var a =D_Alzado.SelectedCells;
+
+            List<int> Filas_numeros = new List<int>();
+            List<int> Columnas_numeros = new List<int>();
+
+            foreach(DataGridViewTextBoxCell boxCell in D_Alzado.SelectedCells)
+            {
+                if (Filas_numeros.Exists(x=>x== boxCell.RowIndex ) == false)
+                {
+                   
+                   Filas_numeros.Add(boxCell.RowIndex); 
+                }
+                if (Columnas_numeros.Exists(x => x == boxCell.ColumnIndex-1) == false && boxCell.ColumnIndex-0>=0)
+                {
+
+                    Columnas_numeros.Add(boxCell.ColumnIndex-1);
+                }
+            }
+            Filas_numeros= Filas_numeros.OrderByDescending(x=>x).ToList();
+            Columnas_numeros = Columnas_numeros.OrderBy(x => x).ToList();
+
+            AgregarRefuerzoBase @base = new AgregarRefuerzoBase();
+            AgregarRefuerzoBase.Columnas = Columnas_numeros;
+            AgregarRefuerzoBase.Filas = Filas_numeros;
+            AgregarRefuerzoBase.EditarAlgunosAlzados = true;
+            @base.ShowDialog();
+
+
+        }
+       private  AyudaAgregarRefuerzoAdicional refuerzoAdicional;
+
+        private void AsignarRefuerzoAdicionalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (D_Alzado.SelectedCells.Count == 1)
+            {
+                int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
+
+                string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
+                
+
+                refuerzoAdicional = new AyudaAgregarRefuerzoAdicional();
+                AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
+                AyudaAgregarRefuerzoAdicional.AlzadoCorrespondiente= D_Alzado.SelectedCells[0].ColumnIndex-1;
+                AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
+                refuerzoAdicional.Show();
+            }
+        }
+
+        private void D_Alzado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+      
+        }
+
+        private void D_Alzado_KeyDown(object sender, KeyEventArgs e)
+        {
+
+      
+        }
+
+        private void D_Alzado_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (D_Alzado.SelectedCells.Count == 1)
+            {
+                if (D_Alzado.SelectedCells[0].ColumnIndex>0)
+                { 
+                if (refuerzoAdicional != null)
+                {
+                    int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
+                    string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
+
+                    AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
+                    AyudaAgregarRefuerzoAdicional.AlzadoCorrespondiente = D_Alzado.SelectedCells[0].ColumnIndex - 1;
+                    AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
+                    refuerzoAdicional.Invalidate();
+                }
+
+
+            }
             }
         }
     }

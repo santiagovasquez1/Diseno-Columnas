@@ -36,6 +36,7 @@
             this.T_Vf = new System.Windows.Forms.TextBox();
             this.Label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.RedondearDecimales = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.e_acabados = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -50,7 +51,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.R_Box = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.RedondearDecimales = new System.Windows.Forms.CheckBox();
+            this.SE_F = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -125,10 +127,10 @@
             this.T_Vf.BackColor = System.Drawing.Color.White;
             this.T_Vf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_Vf.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_Vf.Location = new System.Drawing.Point(204, 104);
+            this.T_Vf.Location = new System.Drawing.Point(204, 134);
             this.T_Vf.Name = "T_Vf";
             this.T_Vf.Size = new System.Drawing.Size(66, 23);
-            this.T_Vf.TabIndex = 8;
+            this.T_Vf.TabIndex = 9;
             // 
             // Label2
             // 
@@ -136,7 +138,7 @@
             this.Label2.BackColor = System.Drawing.Color.Transparent;
             this.Label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.Black;
-            this.Label2.Location = new System.Drawing.Point(11, 112);
+            this.Label2.Location = new System.Drawing.Point(11, 140);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(171, 15);
             this.Label2.TabIndex = 25;
@@ -155,12 +157,25 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(317, 351);
+            this.panel2.Size = new System.Drawing.Size(317, 391);
             this.panel2.TabIndex = 27;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel2_MouseDown);
             // 
+            // RedondearDecimales
+            // 
+            this.RedondearDecimales.AutoSize = true;
+            this.RedondearDecimales.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RedondearDecimales.Location = new System.Drawing.Point(25, 349);
+            this.RedondearDecimales.Name = "RedondearDecimales";
+            this.RedondearDecimales.Size = new System.Drawing.Size(86, 19);
+            this.RedondearDecimales.TabIndex = 10;
+            this.RedondearDecimales.Text = "Redondear";
+            this.RedondearDecimales.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.SE_F);
+            this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.e_acabados);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.P_R);
@@ -172,7 +187,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(11, 163);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(288, 142);
+            this.groupBox2.Size = new System.Drawing.Size(288, 180);
             this.groupBox2.TabIndex = 81;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fundación";
@@ -264,10 +279,10 @@
             this.cb_Aceptar.BackColor = System.Drawing.Color.White;
             this.cb_Aceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cb_Aceptar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb_Aceptar.Location = new System.Drawing.Point(126, 311);
+            this.cb_Aceptar.Location = new System.Drawing.Point(133, 349);
             this.cb_Aceptar.Name = "cb_Aceptar";
             this.cb_Aceptar.Size = new System.Drawing.Size(71, 24);
-            this.cb_Aceptar.TabIndex = 9;
+            this.cb_Aceptar.TabIndex = 11;
             this.cb_Aceptar.Text = "Aceptar";
             this.cb_Aceptar.UseVisualStyleBackColor = false;
             this.cb_Aceptar.Click += new System.EventHandler(this.Cb_Aceptar_Click);
@@ -332,23 +347,34 @@
             this.label3.TabIndex = 77;
             this.label3.Text = "Recubrimiento (cm):";
             // 
-            // RedondearDecimales
+            // SE_F
             // 
-            this.RedondearDecimales.AutoSize = true;
-            this.RedondearDecimales.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RedondearDecimales.Location = new System.Drawing.Point(18, 311);
-            this.RedondearDecimales.Name = "RedondearDecimales";
-            this.RedondearDecimales.Size = new System.Drawing.Size(86, 19);
-            this.RedondearDecimales.TabIndex = 82;
-            this.RedondearDecimales.Text = "Redondear";
-            this.RedondearDecimales.UseVisualStyleBackColor = true;
+            this.SE_F.BackColor = System.Drawing.Color.White;
+            this.SE_F.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SE_F.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SE_F.Location = new System.Drawing.Point(204, 104);
+            this.SE_F.Name = "SE_F";
+            this.SE_F.Size = new System.Drawing.Size(66, 23);
+            this.SE_F.TabIndex = 30;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(11, 110);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(158, 15);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Separación de Estribos (m) :";
             // 
             // VariablesdeEntrada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(317, 351);
+            this.ClientSize = new System.Drawing.Size(317, 391);
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -357,7 +383,7 @@
             this.Name = "VariablesdeEntrada";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VariablesdeEntrada";
             this.Load += new System.EventHandler(this.VariablesdeEntrada_Load);
             this.Panel1.ResumeLayout(false);
@@ -397,5 +423,7 @@
         internal System.Windows.Forms.TextBox P_R;
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.CheckBox RedondearDecimales;
+        internal System.Windows.Forms.TextBox SE_F;
+        internal System.Windows.Forms.Label label9;
     }
 }
