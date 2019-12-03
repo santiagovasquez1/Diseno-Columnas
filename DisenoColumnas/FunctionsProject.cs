@@ -289,9 +289,12 @@ namespace DisenoColumnas
 
             foreach (KeyValuePair<int, double> As_d in Form1.Proyecto_.AceroBarras)
             {
-                p_error = Math.Abs((Asi - As_d.Value) / As_d.Value) * 100;
-                Dif.Add(p_error);
-                Diametros.Add(As_d.Key);
+                if (As_d.Value >= Asi)
+                {
+                    p_error = Math.Abs((Asi - As_d.Value) / As_d.Value) * 100;
+                    Dif.Add(p_error);
+                    Diametros.Add(As_d.Key);
+                }
             }
 
             indice = Dif.FindIndex(x => x == Dif.Min());
