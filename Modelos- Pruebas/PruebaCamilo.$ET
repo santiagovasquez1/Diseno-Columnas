@@ -1,4 +1,4 @@
-$ File C:\Users\jrosales\Desktop\Diseno_Columnas\Modelos- Pruebas\PruebaCamilo.$ET saved 10/31/19 9:02:58
+$ File D:\Visual Studio\Diseno-Columnas\Modelos- Pruebas\PruebaCamilo.$ET saved 12/3/19 15:03:41
  
 $ PROGRAM INFORMATION
   PROGRAM  "ETABS"  VERSION "9.5.0"  
@@ -17046,8 +17046,6 @@ $ STATIC LOADS
   SEISMIC "EY2"  "USER_COEFF"    DIR "Y-ECC"  ECC 0.05  TOPSTORY "PISO 29"    BOTTOMSTORY "BASE"    SHEARCOEFF 0.149  HEIGHTEXPONENT 2
   SEISMIC "EX2"  "USER_COEFF"    DIR "X-ECC"  ECC 0.05  TOPSTORY "PISO 29"    BOTTOMSTORY "BASE"    SHEARCOEFF 0.149  HEIGHTEXPONENT 2
 
-$ POINT OBJECT LOADS
-
 $ LINE OBJECT LOADS
   LINELOAD  "B143"  "PISO 1"  TYPE "UNIFF"  DIR "GRAV"  LC "DEAD"  FVAL 0.36
   LINELOAD  "B192"  "PISO 1"  TYPE "UNIFF"  DIR "GRAV"  LC "DEAD"  FVAL 0.54
@@ -26424,8 +26422,8 @@ ETABS Nonlinear 9.5.0 File saved as D:\CAMILO A\CAMILO ARROYAVE\PROYECTOS EFE PR
 ETABS Display 9.5.0 File imported from  C:\Users\jrosales\Desktop\Diseno_Columnas\Modelo porticos\Prueba11.e2k at  18/10/2019 9:50:17 a.m.
 ETABS Nonlinear 9.5.0 File saved as C:\Users\jrosales\Desktop\Diseno_Columnas\Modelo porticos\Prueba11.EDB at 18/10/2019 9:50:31 a.m.
 ETABS Nonlinear 9.5.0 File saved as C:\Users\jrosales\Desktop\Diseno_Columnas\Modelo porticos\Prueba11.EDB at 18/10/2019 9:55:19 a.m.
-ETABS Display 9.5.0 File imported from  C:\Users\jrosales\Desktop\Diseno_Columnas\Modelos- Pruebas\PruebaCamilo.e2k at  31/10/2019 9:01:05 a.m.
-ETABS Nonlinear 9.5.0 File saved as C:\Users\jrosales\Desktop\Diseno_Columnas\Modelos- Pruebas\PruebaCamilo.EDB at 31/10/2019 9:02:58 a.m.
+ETABS Display 9.5.0 File imported from  D:\Visual Studio\Diseno-Columnas\Modelos- Pruebas\PruebaCamilo.e2k at  3/12/2019 3:03:12 p.m.
+ETABS Nonlinear 9.5.0 File saved as D:\Visual Studio\Diseno-Columnas\Modelos- Pruebas\PruebaCamilo.EDB at 3/12/2019 3:03:41 p.m.
   ENDCOMMENTS  
 
   END
