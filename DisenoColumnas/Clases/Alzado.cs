@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
@@ -57,10 +58,7 @@ namespace DisenoColumnas.Clases
 
         public Tuple<int, string> Cant_Nomenclatura_DLNET { get; set; }
 
-
-
-        #endregion
-
+        #endregion Propiedades para Cantidades
 
         #region Propiedades Auxiliares
 
@@ -109,12 +107,12 @@ namespace DisenoColumnas.Clases
                     e.Graphics.DrawLines(new Pen(brush, 2), Cord_Escala.ToArray());
                 }
 
-                if (FormBarra == null )
+                if (FormBarra == null)
                 {
                     FormBarra = new Form_Barra();
                 }
-         
-                if(FormBarra.Disposing)
+
+                if (FormBarra.Disposing)
                 {
                     FormBarra = new Form_Barra();
                 }
@@ -123,15 +121,12 @@ namespace DisenoColumnas.Clases
                 FormBarra.CantBarras.Text = Convert.ToString(CantBarras);
                 FormBarra.D_Barra.Text = Convert.ToString(NoBarra);
                 FormBarra.Ld_Barra.Text = Convert.ToString(Traslapo);
-                
 
-
-                if (Coord_Alzado_PB.Count!= 0)
+                if (Coord_Alzado_PB.Count != 0)
                 {
-                    Longitud =CalcularLongitudRefuerzo(Coord_Alzado_PB);
+                    Longitud = CalcularLongitudRefuerzo(Coord_Alzado_PB);
 
-             
-                    FormBarra.L_Barra.Text = String.Format("{0:0.00}", Math.Round( Longitud,2));
+                    FormBarra.L_Barra.Text = String.Format("{0:0.00}", Math.Round(Longitud, 2));
                 }
 
                 if (MoveBarra)
@@ -157,7 +152,7 @@ namespace DisenoColumnas.Clases
             {
                 if (Coord_Alzado_PB_Escal.Count == 2)
                 {
-                    if (Coord_Alzado_PB_Escal[0][1]< Coord_Alzado_PB_Escal[1][1])
+                    if (Coord_Alzado_PB_Escal[0][1] < Coord_Alzado_PB_Escal[1][1])
                     {
                         if (e.X >= Coord_Alzado_PB_Escal[0][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
                             e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
@@ -187,105 +182,13 @@ namespace DisenoColumnas.Clases
                     }
                 }
 
-                if (Coord_Alzado_PB_Escal.Count == 3)
+                if (Coord_Alzado_PB_Escal.Count == 3 | Coord_Alzado_PB_Escal.Count == 4)
                 {
-                    if (NoStory == 1 & UltPiso == false)
-                    {
-                        if (e.X >= Coord_Alzado_PB_Escal[2][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
-                                e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
-                        {
-                            MouseX = Cursor.Position.X;
-                            MouseY = Cursor.Position.Y;
-                            MoveBarra = true;
-                        }
-                        else if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[0][0] &&
-                              e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB[0][1] + EsBarra)  //Entre Puntos 1 y 2
-                        {
-                            MouseX = Cursor.Position.X;
-                            MouseY = Cursor.Position.Y;
-                            MoveBarra = true;
-                        }
-                        else
-                        {
-                            MoveBarra = false;
-                        }
-                    }
-                    else
-                    {
+                    GraphicsPath path = new GraphicsPath();
+                    List<PointF> pointFs = Coord_Alzado_PB_Escal.ConvertAll(new Converter<float[], PointF>(CoversionaPuntos));
+                    path.AddLines(pointFs.ToArray());
 
-                        if (Coord_Alzado_PB_Escal[1][1] < Coord_Alzado_PB_Escal[0][1])
-                        {
-                            if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
-                                   e.Y >= Coord_Alzado_PB_Escal[1][1] && e.Y <= Coord_Alzado_PB_Escal[0][1])
-                            {
-                                MouseX = Cursor.Position.X;
-                                MouseY = Cursor.Position.Y;
-                                MoveBarra = true;
-                            }
-                            else if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[2][0] &&
-                                  e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB[2][1] + EsBarra)  //Entre Puntos 1 y 2
-                            {
-                                MouseX = Cursor.Position.X;
-                                MouseY = Cursor.Position.Y;
-                                MoveBarra = true;
-                            }
-                            else
-                            {
-                                MoveBarra = false;
-                            }
-                        }
-                        else
-                        {
-                            if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
-                               e.Y >= Coord_Alzado_PB_Escal[1][1] && e.Y <= Coord_Alzado_PB_Escal[2][1])
-                            {
-                                MouseX = Cursor.Position.X;
-                                MouseY = Cursor.Position.Y;
-                                MoveBarra = true;
-                            }
-                            else if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[2][0] &&
-                                  e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB[0][1] + EsBarra)  //Entre Puntos 1 y 2
-                            {
-                                MouseX = Cursor.Position.X;
-                                MouseY = Cursor.Position.Y;
-                                MoveBarra = true;
-                            }
-                            else
-                            {
-                                MoveBarra = false;
-                            }
-
-
-
-
-                        }
-
-
-
-
-
-
-                    }
-                }
-
-                if (Coord_Alzado_PB_Escal.Count == 4)
-                {
-                    if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[1][0] + EsBarra &&
-                              e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB_Escal[1][1])
-                    {
-                        MouseX = Cursor.Position.X;
-                        MouseY = Cursor.Position.Y;
-                        MoveBarra = true;
-                    }
-                    else if (e.X >= Coord_Alzado_PB_Escal[1][0] && e.X <= Coord_Alzado_PB_Escal[0][0] &&
-                              e.Y >= Coord_Alzado_PB_Escal[0][1] && e.Y <= Coord_Alzado_PB[0][1] + EsBarra)
-                    {
-                        MouseX = Cursor.Position.X;
-                        MouseY = Cursor.Position.Y;
-                        MoveBarra = true;
-                    }
-                    else if (e.X >= Coord_Alzado_PB_Escal[2][0] && e.X <= Coord_Alzado_PB_Escal[3][0] &&
-                     e.Y >= Coord_Alzado_PB_Escal[2][1] && e.Y <= Coord_Alzado_PB[2][1] + EsBarra)
+                    if (path.IsVisible(e.Location))
                     {
                         MouseX = Cursor.Position.X;
                         MouseY = Cursor.Position.Y;
@@ -297,6 +200,11 @@ namespace DisenoColumnas.Clases
                     }
                 }
             }
+        }
+
+        private PointF CoversionaPuntos(float[] FloatArray)
+        {
+            return new PointF(FloatArray[0], FloatArray[1]);
         }
 
         public override string ToString()
@@ -317,9 +225,8 @@ namespace DisenoColumnas.Clases
                     {
                         return $"{CantBarras}#{NoBarra}{Tipo}-{UnitarioAdicional.CantBarras}#{UnitarioAdicional.NoBarra}";
                     }
-               
                 }
-                else if(Tipo2 !="")
+                else if (Tipo2 != "")
                 {
                     return $"{Tipo2}{CantBarras}#{NoBarra}{Tipo}";
                 }
@@ -344,58 +251,45 @@ namespace DisenoColumnas.Clases
                     float X1 = (float)Math.Round(Coordenadas[i][0], 2);
                     float X2 = (float)Math.Round(Coordenadas[i - 1][0], 2);
                     float Y1 = (float)Math.Round(Coordenadas[i][1], 2);
-                    float Y2= (float)Math.Round(Coordenadas[i - 1][1], 2);
-
-
+                    float Y2 = (float)Math.Round(Coordenadas[i - 1][1], 2);
 
                     Longitud += (float)Math.Sqrt(Math.Pow(X1 - X2, 2) + Math.Pow(Y1 - Y2, 2));
                 }
                 catch { }
             }
 
-             return Longitud; 
+            return Longitud;
         }
-
 
         #region Metodos: Cantidades de Obra DlNet
 
         public void CreararTuplesParaCantidades()
         {
-            if(Coord_Alzado_PB!= null)
+            if (Coord_Alzado_PB != null)
             {
-
                 if (Coord_Alzado_PB.Count != 0)
                 {
-   
                     string Nomenclatura = "";
                     float Gancho90 = Form1.Proyecto_.G90[NoBarra];
-                    float Longitud = (float)Math.Round(CalcularLongitudRefuerzo(Coord_Alzado_PB),2);
+                    float Longitud = (float)Math.Round(CalcularLongitudRefuerzo(Coord_Alzado_PB), 2);
 
                     if (Coord_Alzado_PB.Count == 2)  //Recta
                     {
-                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}",Longitud)}";
+                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}", Longitud)}";
                     }
                     if (Coord_Alzado_PB.Count == 3)  //L
                     {
-                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}",Longitud)}   L{String.Format("{0:0.00}",Gancho90)}";
+                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}", Longitud)}   L{String.Format("{0:0.00}", Gancho90)}";
                     }
                     if (Coord_Alzado_PB.Count == 4)  //C
                     {
-                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}",Longitud)}   L{String.Format("{0:0.00}",Gancho90)}  L{String.Format("{0:0.00}", Gancho90)}";
+                        Nomenclatura = $" #{NoBarra}  {String.Format("{0:0.00}", Longitud)}   L{String.Format("{0:0.00}", Gancho90)}  L{String.Format("{0:0.00}", Gancho90)}";
                     }
                     Cant_Nomenclatura_DLNET = new Tuple<int, string>(CantBarras, Nomenclatura);
                 }
             }
-
-            
-
         }
 
-
-        #endregion
-
-
-
-
+        #endregion Metodos: Cantidades de Obra DlNet
     }
 }

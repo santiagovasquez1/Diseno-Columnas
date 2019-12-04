@@ -81,6 +81,7 @@
             this.ConvecionesRefuerzoAdicional.Size = new System.Drawing.Size(214, 109);
             this.ConvecionesRefuerzoAdicional.TabIndex = 1;
             this.ConvecionesRefuerzoAdicional.SelectedIndexChanged += new System.EventHandler(this.ConvecionesRefuerzoAdicional_SelectedIndexChanged);
+            this.ConvecionesRefuerzoAdicional.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ConvecionesRefuerzoAdicional_KeyUp);
             // 
             // button1
             // 
@@ -107,6 +108,7 @@
             this.cb_Aceptar.Text = "Agregar";
             this.cb_Aceptar.UseVisualStyleBackColor = false;
             this.cb_Aceptar.Click += new System.EventHandler(this.Cb_Aceptar_Click);
+            this.cb_Aceptar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AyudaAgregarRefuerzoAdicional_KeyUp);
             // 
             // groupBox2
             // 
@@ -312,6 +314,7 @@
             this.Text = "Refuerzo Adicional";
             this.Load += new System.EventHandler(this.AyudaAgregarRefuerzoAdicional_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.AyudaAgregarRefuerzoAdicional_Paint);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AyudaAgregarRefuerzoAdicional_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.DrawAyuda)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

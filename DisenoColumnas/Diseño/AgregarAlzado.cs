@@ -1135,16 +1135,19 @@ namespace DisenoColumnas.Diseño
 
             if (D_Alzado.SelectedCells.Count == 1)
             {
-                int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
+                if (D_Alzado.SelectedCells[0].ColumnIndex > 0)
+                {
+                    int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
 
-                string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
-                
+                    string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
 
-                refuerzoAdicional = new AyudaAgregarRefuerzoAdicional();
-                AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
-                AyudaAgregarRefuerzoAdicional.AlzadoCorrespondiente= D_Alzado.SelectedCells[0].ColumnIndex-1;
-                AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
-                refuerzoAdicional.Show();
+
+                    refuerzoAdicional = new AyudaAgregarRefuerzoAdicional();
+                    AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
+                    AyudaAgregarRefuerzoAdicional.AlzadoCorrespondiente = D_Alzado.SelectedCells[0].ColumnIndex - 1;
+                    AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
+                    refuerzoAdicional.Show();
+                }
             }
         }
 

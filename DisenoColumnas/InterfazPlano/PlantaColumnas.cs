@@ -152,7 +152,7 @@ namespace DisenoColumnas.DefinirColumnas
                 {
                     if (columna.Seccions[i].Item2 == Nomb_PrimerPiso)
                     {
-                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI,columna.Seccions[i].Item1);
+                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI,columna.Seccions[i].Item1,CheckedLabels);
                     }
                 }
 
@@ -342,6 +342,13 @@ namespace DisenoColumnas.DefinirColumnas
                     break;
 
             }
+        }
+
+        private bool CheckedLabels { get; set; }
+        private void MostrarLabels_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckedLabels = mostrarLabels.Checked;
+            Invalidate();
         }
     }
 }

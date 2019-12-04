@@ -570,5 +570,23 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
             AlzadoAagregar.Text = (AlzadoCorrespondiente + 1).ToString();
             Text = $"Refuerzo Adicional – Piso:{PisoCorrespondiente} Alzado: {AlzadoCorrespondiente + 1}";
         }
+
+        private void AyudaAgregarRefuerzoAdicional_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
+
+        private void ConvecionesRefuerzoAdicional_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
+
+    
     }
 }

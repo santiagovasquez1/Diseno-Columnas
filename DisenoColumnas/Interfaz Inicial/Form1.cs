@@ -48,8 +48,11 @@ namespace DisenoColumnas
         public static string TColumna;
         public static CLista_Secciones secciones_predef;
 
+
+
         public Form1()
         {
+      
             InitializeComponent();
             mFormPrincipal = this;
             CargarToolTips();
@@ -136,7 +139,7 @@ namespace DisenoColumnas
                     }
                 }
                 FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
-
+                CreateDictonaries();
                 CloseWindows();
                 Proyecto_.Ruta = openFileDialog.FileName;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
@@ -188,7 +191,7 @@ namespace DisenoColumnas
                 La_Column.Enabled = true;
                 
 
-                CreateDictonaries();
+          
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -1996,7 +1999,7 @@ namespace DisenoColumnas
         private void Form1_Load(object sender, EventArgs e)
         {
     
-            CreateDictonaries();
+            
             mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             Main_Secciones.Crear_archivo();
         }
@@ -2175,6 +2178,7 @@ namespace DisenoColumnas
             foreach (Columna col in Lista_ColumnasDiseñar)
             {
                 col.AgregarAlzadoSugerido();
+                //col.Alzados[0].ID;  --- ID QUE SE DEBE AGREGAR
                 if (col.Alzados.Count != 0)
                 {
                     Cuadro_diseño.Label_Progress.Text = "✓ Columna: " + col.Name;
@@ -2315,8 +2319,11 @@ namespace DisenoColumnas
             int m = 0;
             int pos = 0;
 
+
             foreach (CRefuerzo refuerzo in Col.Seccions[i].Item1.Refuerzos)
             {
+             
+
                 if (Base.Count() == 2)
                 {
                     if (m % 2 == 0)

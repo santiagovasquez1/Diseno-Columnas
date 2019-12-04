@@ -310,4 +310,6 @@ namespace DisenoColumnas
             return Barra_def;
         }
     }
+
+
 }

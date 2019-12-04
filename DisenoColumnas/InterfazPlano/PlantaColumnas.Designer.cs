@@ -35,6 +35,7 @@
             this.Grafica = new System.Windows.Forms.PictureBox();
             this.Ayudas2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.allReadyColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mostrarLabels = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.Ayudas2.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +76,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Grafica.BackColor = System.Drawing.Color.White;
+            this.Grafica.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Grafica.ContextMenuStrip = this.Ayudas2;
             this.Grafica.Cursor = System.Windows.Forms.Cursors.Default;
             this.Grafica.Location = new System.Drawing.Point(35, 12);
@@ -90,9 +92,10 @@
             // Ayudas2
             // 
             this.Ayudas2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allReadyColumnsToolStripMenuItem});
+            this.allReadyColumnsToolStripMenuItem,
+            this.mostrarLabels});
             this.Ayudas2.Name = "Ayudas2";
-            this.Ayudas2.Size = new System.Drawing.Size(175, 26);
+            this.Ayudas2.Size = new System.Drawing.Size(175, 48);
             // 
             // allReadyColumnsToolStripMenuItem
             // 
@@ -101,6 +104,14 @@
             this.allReadyColumnsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.allReadyColumnsToolStripMenuItem.Text = "All Ready Columns";
             this.allReadyColumnsToolStripMenuItem.Click += new System.EventHandler(this.AllReadyColumnsToolStripMenuItem_Click);
+            // 
+            // mostrarLabels
+            // 
+            this.mostrarLabels.CheckOnClick = true;
+            this.mostrarLabels.Name = "mostrarLabels";
+            this.mostrarLabels.Size = new System.Drawing.Size(174, 22);
+            this.mostrarLabels.Text = "Mostrar Labels";
+            this.mostrarLabels.CheckedChanged += new System.EventHandler(this.MostrarLabels_CheckedChanged);
             // 
             // PlantaColumnas
             // 
@@ -136,5 +147,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ContextMenuStrip Ayudas2;
         private System.Windows.Forms.ToolStripMenuItem allReadyColumnsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mostrarLabels;
     }
 }

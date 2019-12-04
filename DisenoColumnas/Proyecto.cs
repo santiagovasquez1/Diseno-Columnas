@@ -67,12 +67,5 @@ namespace DisenoColumnas
       
 
 
-
-
-
-
-
-
-
     }
 }

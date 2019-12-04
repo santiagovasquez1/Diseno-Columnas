@@ -198,7 +198,7 @@ namespace DisenoColumnas.Clases
 
         #region MetodosPaint
 
-        public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI,ISeccion seccion)
+        public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI, ISeccion seccion,bool MostrarLabels)
         {
             if (CoordXY[0] < 0)
             {
@@ -250,7 +250,6 @@ namespace DisenoColumnas.Clases
                 }
             }
 
-
             if (w > 15)
             {
                 w = 15;
@@ -270,9 +269,9 @@ namespace DisenoColumnas.Clases
                 {
                     w = 9;
                 }
-         
+
                 GraphicsPath Path = new GraphicsPath();
-                List<PointF> PuntosCircle = FunctionsProject.CreatePointsForCircle(100, w, X_Colum, Y_Colum );
+                List<PointF> PuntosCircle = FunctionsProject.CreatePointsForCircle(100, w, X_Colum, Y_Colum);
 
                 Path.AddClosedCurve(PuntosCircle.ToArray());
                 graphics.DrawPath(Pens.Black, Path);
@@ -280,15 +279,9 @@ namespace DisenoColumnas.Clases
             }
             else
             {
-
                 graphics.DrawRectangle(Pens.Black, X_Colum - w / 2, Y_Colum - h / 2, w, h);
                 graphics.FillRectangle(BrushesColor, X_Colum - w / 2, Y_Colum - h / 2, w, h);
-
             }
-
-
-
-
 
             float Tamano_Text = (SX + SY) * 0.6f * 0.3f;
 
@@ -305,8 +298,12 @@ namespace DisenoColumnas.Clases
             }
 
             float Y_string = Y_Colum;
-
-            graphics.DrawString(Name, new Font("Calibri", Tamano_Text, FontStyle.Bold), Brushes.DarkRed, X_string, Y_string);
+            string NameAGraficar = Name;
+            if (MostrarLabels)
+            {
+                NameAGraficar = Label;
+            }
+            graphics.DrawString(NameAGraficar, new Font("Calibri", Tamano_Text, FontStyle.Bold), Brushes.DarkRed, X_string, Y_string);
         }
 
         public Columna MouseDown(MouseEventArgs mouse)
@@ -325,12 +322,11 @@ namespace DisenoColumnas.Clases
 
         public bool MouseMove(MouseEventArgs mouse, ref Cursor cursor)
         {
-
             RectangleF rectangle = new RectangleF(X_Colum - w / 2, Y_Colum - h / 2, w, h);
             GraphicsPath Path = new GraphicsPath();
             Path.AddRectangle(rectangle);
             Cursor new_cursor = Cursors.Default;
-         
+
             if (Path.IsVisible(mouse.Location))
             {
                 cursor = Cursors.Hand;
@@ -341,7 +337,6 @@ namespace DisenoColumnas.Clases
                 cursor = new_cursor;
             }
             return false;
-           
         }
 
         public void MouseDobleClick(MouseEventArgs mouse)
@@ -732,14 +727,25 @@ namespace DisenoColumnas.Clases
                         if (resultadosETABs[i].Porct_Refuerzo[0] <= 105f & resultadosETABs[i].Porct_Refuerzo[0] >= 95f)
                         {
                             AceroQueFalta1 = 0;
-                            AdicionalArribaOAbajo[i] = "+";
                         }
 
                         float AceroQueFalta2 = (float)(resultadosETABs[i - 1].AsTopMediumButton[2] - resultadosETABs[i - 1].As_asignado[2]);
                         if (resultadosETABs[i - 1].Porct_Refuerzo[2] <= 105f & resultadosETABs[i - 1].Porct_Refuerzo[2] >= 95f)
                         {
                             AceroQueFalta2 = 0;
+                        }
+
+                        if (resultadosETABs[i].Porct_Refuerzo[0] < 95f)
+                        {
                             AdicionalArribaOAbajo[i] = "-";
+                        }
+                        if (resultadosETABs[i - 1].Porct_Refuerzo[2] < 95f)
+                        {
+                            AdicionalArribaOAbajo[i] = "+";
+                        }
+                        if (resultadosETABs[i - 1].Porct_Refuerzo[2] < 95f && resultadosETABs[i].Porct_Refuerzo[0] < 95)
+                        {
+                            AdicionalArribaOAbajo[i] = "";
                         }
                         AceroMayorPorPiso[i] = AceroQueFalta1 > AceroQueFalta2 ? AceroQueFalta1 : AceroQueFalta2;
                     }
@@ -891,7 +897,6 @@ namespace DisenoColumnas.Clases
 
                 int CantAlzadosAnteriores = Alzados.Count;
                 int CantAlzadosACrear = AcerosAdicionales_Sugerdio.Max(x => x.Count);
-
 
                 for (int i = 0; i < CantAlzadosACrear; i++)
                 {
@@ -1723,8 +1728,6 @@ namespace DisenoColumnas.Clases
                 }
             }
 
-
-
             //Dibujar Cuadro Fundación
 
             float B_Fund = Alzados[Alzados.Count - 1].DistX;
@@ -1744,32 +1747,26 @@ namespace DisenoColumnas.Clases
             //Agregar Texto Estribos en Fundación
             int C_F = (int)Math.Ceiling(((Form1.Proyecto_.e_Fundacion * 100 - 10) / (Form1.Proyecto_.SE_F * 100)) + 1);//Cantidad de Estribos
 
-
-            string TextoEstribos2 = C_F + "#" + Seccions[Seccions.Count-1].Item1.Estribo.NoEstribo + "/" + Form1.Proyecto_.SE_F * 100;
+            string TextoEstribos2 = C_F + "#" + Seccions[Seccions.Count - 1].Item1.Estribo.NoEstribo + "/" + Form1.Proyecto_.SE_F * 100;
             double DistCorrerText2;
             if (TextoEstribos2.Length < 7)
             {
                 DistCorrerText2 = 0.15 * (8);
-
             }
             else
             {
                 DistCorrerText2 = 0.15 * (TextoEstribos2.Length);
             }
 
-            
-            double[] P_XYZf = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText2 / 2, Y + Form1.Proyecto_.e_Fundacion/2 + 0.05, 0 };
+            double[] P_XYZf = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText2 / 2, Y + Form1.Proyecto_.e_Fundacion / 2 + 0.05, 0 };
             FunctionsAutoCAD.FunctionsAutoCAD.AddText(TextoEstribos2, P_XYZf, 0.75, 0.10, "FC_R-80", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
-
-
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Ver_Fund, LayerCuadro, false);
 
-
             //Cota espesor Fundación
 
-            double[] P1_CotaF = new double[] { X- B_CajonEstribos, Y, 0 };
-            double[] P2_CotaF = new double[] { X- B_CajonEstribos, Y + Form1.Proyecto_.e_Fundacion, 0 };
+            double[] P1_CotaF = new double[] { X - B_CajonEstribos, Y, 0 };
+            double[] P2_CotaF = new double[] { X - B_CajonEstribos, Y + Form1.Proyecto_.e_Fundacion, 0 };
             FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaF, P2_CotaF, "FC_COTAS", "FC_TEXT1", -0.3f);
 
             //Dibujar Cada Entre Piso
@@ -1797,20 +1794,18 @@ namespace DisenoColumnas.Clases
                                                    X,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H };
                 FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Ver_Colum, LayerCuadro);
 
-
-
                 float DesCota = -0.3f;
                 //Cotas entre piso y espesor de Viga
 
                 //Cotas entre Piso
 
-                double[] P1_CotaT = new double[] { X- B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i], 0 };
-                double[] P2_CotaT = new double[] { X- B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
+                double[] P1_CotaT = new double[] { X - B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i], 0 };
+                double[] P2_CotaT = new double[] { X - B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
 
                 if (Form1.Proyecto_.e_acabados != 0 & i == LuzAcum.Count - 1)
                 {
-                    P1_CotaT = new double[] { X- B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i] + Form1.Proyecto_.e_acabados, 0 };
-                    P2_CotaT = new double[] { X- B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
+                    P1_CotaT = new double[] { X - B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i] + Form1.Proyecto_.e_acabados, 0 };
+                    P2_CotaT = new double[] { X - B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
                     FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
 
                     P1_CotaT = new double[] { X - B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i], 0 };
@@ -1833,55 +1828,46 @@ namespace DisenoColumnas.Clases
                     FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
                 }
                 //Cotas Viga
-                P1_CotaT = new double[] { X- B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
-                P2_CotaT = new double[] { X- B_CajonEstribos, Y + LuzAcum[i], 0 };
+                P1_CotaT = new double[] { X - B_CajonEstribos, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H, 0 };
+                P2_CotaT = new double[] { X - B_CajonEstribos, Y + LuzAcum[i], 0 };
                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
 
+                //Agregar Textos De Estribos
 
-
-
-                //Agregar Textos De Estribos 
-
-
-               
                 double[] P_XYZ1;
                 if ((int)CantEstribos_Sepa[i][2] == 0)
                 {
                     // Zona Confinada
 
-                    string TextoEstribos = ((int)CantEstribos_Sepa[i][1]+ (int)CantEstribos_Sepa[i][3]) + "#" + Seccions[i].Item1.Estribo.NoEstribo + "/" + (float)CantEstribos_Sepa[i][4] * 100;
+                    string TextoEstribos = ((int)CantEstribos_Sepa[i][1] + (int)CantEstribos_Sepa[i][3]) + "#" + Seccions[i].Item1.Estribo.NoEstribo + "/" + (float)CantEstribos_Sepa[i][4] * 100;
                     double DistCorrerText;
                     if (TextoEstribos.Length < 7)
                     {
                         DistCorrerText = 0.15 * (8);
-
                     }
                     else
                     {
                         DistCorrerText = 0.15 * (TextoEstribos.Length);
                     }
 
-
-                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i]- VigaMayor.Seccions[i].Item1.H - LuzLibre[i] / 2 + 0.05, 0 };
+                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i] / 2 + 0.05, 0 };
                     FunctionsAutoCAD.FunctionsAutoCAD.AddText(TextoEstribos, P_XYZ1, 0.75, 0.10, "FC_R-80", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
-       
                 }
                 else
                 {
                     //Zona No Confinada
-                    string TextoEstribos = CantEstribos_Sepa[i][2] + "#" + Seccions[i].Item1.Estribo.NoEstribo +"/" + (float)CantEstribos_Sepa[i][5]*100;
+                    string TextoEstribos = CantEstribos_Sepa[i][2] + "#" + Seccions[i].Item1.Estribo.NoEstribo + "/" + (float)CantEstribos_Sepa[i][5] * 100;
                     double DistCorrerText;
                     if (TextoEstribos.Length < 7)
                     {
                         DistCorrerText = 0.15 * (8);
-
                     }
                     else
                     {
                         DistCorrerText = 0.15 * (TextoEstribos.Length);
                     }
 
-                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i] / 2 +0.05, 0 };
+                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i] / 2 + 0.05, 0 };
                     FunctionsAutoCAD.FunctionsAutoCAD.AddText(TextoEstribos, P_XYZ1, 0.75, 0.10, "FC_R-80", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
 
                     //Zona Confinada (Arriba)
@@ -1889,17 +1875,16 @@ namespace DisenoColumnas.Clases
                     float DistYubicacion = 0.25f;
 
                     TextoEstribos = CantEstribos_Sepa[i][1] + "#" + Seccions[i].Item1.Estribo.NoEstribo + "/" + (float)CantEstribos_Sepa[i][4] * 100;
-                    
+
                     if (TextoEstribos.Length < 7)
                     {
                         DistCorrerText = 0.15 * (8);
-
                     }
                     else
                     {
                         DistCorrerText = 0.15 * (TextoEstribos.Length);
                     }
-                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i]- VigaMayor.Seccions[i].Item1.H - DistYubicacion + 0.05, 0 };
+                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - DistYubicacion + 0.05, 0 };
                     FunctionsAutoCAD.FunctionsAutoCAD.AddText(TextoEstribos, P_XYZ1, 0.75, 0.10, "FC_R-80", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
 
                     //Zona Confinada (Abajo)
@@ -1907,25 +1892,21 @@ namespace DisenoColumnas.Clases
                     if (TextoEstribos.Length < 7)
                     {
                         DistCorrerText = 0.15 * (8);
-
                     }
                     else
                     {
                         DistCorrerText = 0.15 * (TextoEstribos.Length);
                     }
-                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i]- VigaMayor.Seccions[i].Item1.H - LuzLibre[i] + DistYubicacion + 0.05, 0 };
+                    P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText / 2, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H - LuzLibre[i] + DistYubicacion + 0.05, 0 };
                     FunctionsAutoCAD.FunctionsAutoCAD.AddText(TextoEstribos, P_XYZ1, 0.75, 0.10, "FC_R-80", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
-
                 }
 
-
-                //En Viga 
+                //En Viga
                 string TextoEstribos1 = CantEstribos_Sepa[i][0] + "#" + Seccions[i].Item1.Estribo.NoEstribo + "/" + (float)CantEstribos_Sepa[i][4] * 100;
                 double DistCorrerText1;
                 if (TextoEstribos1.Length < 7)
                 {
                     DistCorrerText1 = 0.15 * (8);
-
                 }
                 else
                 {
@@ -1934,7 +1915,6 @@ namespace DisenoColumnas.Clases
 
                 P_XYZ1 = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerText1 / 2, Y + LuzAcum[i] - VigaMayor.Seccions[i].Item1.H / 2 + 0.05, 0 };
                 FunctionsAutoCAD.FunctionsAutoCAD.AddText(TextoEstribos1, P_XYZ1, 0.75, 0.10, "FC_R-80", "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
-
 
                 if (i != 0)
                 {
@@ -1945,13 +1925,11 @@ namespace DisenoColumnas.Clases
 
                     FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa1, LayerCuadro, false);
 
-
                     //Para Cajon de Estribos
                     VerLosa1 = new double[] {X-B_CajonEstribos,Y+LuzAcum[i] -VigaMayor.Seccions[i].Item1.H,
                                                    X-B_CajonEstribos,Y+LuzAcum[i] };
 
                     FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa1, LayerCuadro, false);
-
 
                     double[] VerLosa2 = new double[] {X+B_Draw,Y+LuzAcum[i],
                                                    X+B_Draw,Y+LuzAcum[i]-VigaMayor.Seccions[i].Item1.H};
@@ -2035,6 +2013,11 @@ namespace DisenoColumnas.Clases
                 {
                     TextCota = @"{\H1.33333x;\C11; Resistencia a la compresión del concreto a los 28 días\Pf'c=" + Resitencias[i] + @"kgf/cm²\C256; }";
                 }
+                else if (IndiceI - IndiceF == 0)
+                {
+                    DesplazCota = 0.7f;
+                    TextCota = @"{\H1.33333x;\C11; Resistencia a la \Pcompresión del\Pconcreto a los 28 días\Pf'c=" + Resitencias[i] + @"kgf/cm²\C256; }";
+                }
                 else
                 {
                     DesplazCota = 0.7f;
@@ -2069,14 +2052,12 @@ namespace DisenoColumnas.Clases
                                                    X+B_DrawF,Y+LuzAcum[0]-VigaMayor.Seccions[0].Item1.H };
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa_Final, LayerCuadro, false);
 
-            // LOSA FINAL PARA ESTRIBOS 
+            // LOSA FINAL PARA ESTRIBOS
             VerLosa_Final = new double[] {X-B_CajonEstribos,Y+LuzAcum[0] -VigaMayor.Seccions[0].Item1.H,
                                                    X-B_CajonEstribos,Y+LuzAcum[0],
                                                    X,Y+LuzAcum[0],
                                                    X,Y+LuzAcum[0]-VigaMayor.Seccions[0].Item1.H };
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(VerLosa_Final, LayerCuadro, false);
-
-
 
             //Agregar Cuadro, Titulo
             double DistCT = 0.5f;
@@ -2094,24 +2075,16 @@ namespace DisenoColumnas.Clases
                                       X,Y+ LuzAcum[0]};
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vert_CT, LayerCuadro, false);
 
-
-
-
             string TitleDespi = "DESPIECE " + NoDespiece;
             double DistCorrerTextB = 0.15 * (TitleDespi.Length - 1);
             double[] P_XYZ = new double[] { X + B_DrawF / 2 - DistCorrerTextB / 2, Y + LuzAcum[0] + DistCT / 2 + 0.05, 0 };
             FunctionsAutoCAD.FunctionsAutoCAD.AddText(TitleDespi, P_XYZ, 0.75, 0.10, LayerTitiles, "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
 
-
             //Agregar Titulo de Estribos
             TitleDespi = "ESTRIBOS ";
             DistCorrerTextB = 0.15 * (TitleDespi.Length - 1);
-            P_XYZ = new double[] { X-B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerTextB / 2, Y + LuzAcum[0] + DistCT / 2 + 0.05, 0 };
+            P_XYZ = new double[] { X - B_CajonEstribos + B_CajonEstribos / 2 - DistCorrerTextB / 2, Y + LuzAcum[0] + DistCT / 2 + 0.05, 0 };
             FunctionsAutoCAD.FunctionsAutoCAD.AddText(TitleDespi, P_XYZ, 0.75, 0.10, LayerTitiles, "FC_TEXT1", 0, justifyText: FunctionsAutoCAD.JustifyText.Center);
-
-
-
-
 
             //Agregar Cuadro, Nombre Columnas
 
@@ -2119,9 +2092,9 @@ namespace DisenoColumnas.Clases
             string Dimensiones = "(" + Seccions[Seccions.Count - 1].Item1.B * 100 + "x" + Seccions[Seccions.Count - 1].Item1.H * 100 + ")";
             if (Seccions[Seccions.Count - 1].Item1.H == 0)
             {
-                Dimensiones= "(" + "∅" + Seccions[Seccions.Count - 1].Item1.B * 100 + ")";
+                Dimensiones = "(" + "∅" + Seccions[Seccions.Count - 1].Item1.B * 100 + ")";
             }
-            
+
             string NamesColumns = Names + @"\P" + Dimensiones;
 
             float Altu_Names = 1f;
@@ -2189,7 +2162,7 @@ namespace DisenoColumnas.Clases
             float eF = Form1.Proyecto_.e_Fundacion;
             string NivelFund = N_F >= 0 ? "N+" + String.Format("{0:0.00}", N_F) + @"\P" + "Fundación" : "N" + String.Format("{0:0.00}", N_F) + @"\P" + "Fundación";
 
-            FunctionsAutoCAD.FunctionsAutoCAD.B_NivelSeccion(new double[] { X-B_CajonEstribos, Y + eF, 0 }, NivelFund, 1.08, 1.90, false, "FC_COTAS", 75, 75, 75, 0);
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NivelSeccion(new double[] { X - B_CajonEstribos, Y + eF, 0 }, NivelFund, 1.08, 1.90, false, "FC_COTAS", 75, 75, 75, 0);
             float NivelN = N_F;
             int NoLosa = 0;
             for (int i = LuzAcum.Count - 1; i >= 0; i--)
@@ -2198,7 +2171,7 @@ namespace DisenoColumnas.Clases
                 string Nivel;
                 double[] PXYZ;
 
-                PXYZ = new double[] { X-B_CajonEstribos, Y + LuzAcum[i], 0 };
+                PXYZ = new double[] { X - B_CajonEstribos, Y + LuzAcum[i], 0 };
                 NivelN += LuzLibre[i] + VigaMayor.Seccions[i].Item1.H;
 
                 if (NivelN >= 0)
@@ -2680,11 +2653,11 @@ namespace DisenoColumnas.Clases
             }
 
             float Lo = 0;
-            Lo = Seccions[i].Item1.B*100 > Seccions[i].Item1.H*100 ? Seccions[i].Item1.B*100 : Seccions[i].Item1.H*100;
+            Lo = Seccions[i].Item1.B * 100 > Seccions[i].Item1.H * 100 ? Seccions[i].Item1.B * 100 : Seccions[i].Item1.H * 100;
 
-            if ((LuzLibre[i]*100) / 6 > Lo)
+            if ((LuzLibre[i] * 100) / 6 > Lo)
             {
-                Lo = (LuzLibre[i]*100) / 6;
+                Lo = (LuzLibre[i] * 100) / 6;
             }
             if (Form1.Proyecto_.DMO_DES == GDE.DMO)
             {
@@ -2698,7 +2671,7 @@ namespace DisenoColumnas.Clases
             {
                 try
                 {
-                    S2 = (Form1.Proyecto_.Diametro_ref[MenorDiametro] ) * 6 > 15f ? (Form1.Proyecto_.Diametro_ref[MenorDiametro] ) * 6 : 15f;
+                    S2 = (Form1.Proyecto_.Diametro_ref[MenorDiametro]) * 6 > 15f ? (Form1.Proyecto_.Diametro_ref[MenorDiametro]) * 6 : 15f;
                 }
                 catch
                 {
@@ -2710,12 +2683,12 @@ namespace DisenoColumnas.Clases
                 }
             }
 
-            C_Viga = (int)Math.Ceiling((VigaMayor.Seccions[i].Item1.H*100 - 10) / S1 + 1);
+            C_Viga = (int)Math.Ceiling((VigaMayor.Seccions[i].Item1.H * 100 - 10) / S1 + 1);
 
-            if (2 * Lo >= LuzLibre[i]*100)
+            if (2 * Lo >= LuzLibre[i] * 100)
             {
                 ZNC = 0;
-                ZC2 = (int)Math.Ceiling((((Lo-5) / (int)(S1))+1)); 
+                ZC2 = (int)Math.Ceiling((((Lo - 5) / (int)(S1)) + 1));
                 ZC1 = (int)Math.Ceiling((((Lo - 5) / (int)(S1)) + 1));
             }
             else
@@ -2723,9 +2696,9 @@ namespace DisenoColumnas.Clases
                 ZC2 = (int)Math.Ceiling((((Lo - 5) / (int)(S1)) + 1));
                 ZC1 = (int)Math.Ceiling((((Lo - 5) / (int)(S1)) + 1));
 
-                ZNC = (int)((((LuzLibre[i] * 100 -S1*(ZC1*2-2)) / (int)(S2))));
+                ZNC = (int)((((LuzLibre[i] * 100 - S1 * (ZC1 * 2 - 2)) / (int)(S2))));
             }
-            CantEstribos_Sepa[i] = new object[] { C_Viga, ZC1, ZNC, ZC2, S1/100, S2/100 };
+            CantEstribos_Sepa[i] = new object[] { C_Viga, ZC1, ZNC, ZC2, S1 / 100, S2 / 100 };
         }
 
         #endregion Metodos - Calcular Cantidad de Estribos VIGA,ZC,ZNC
@@ -2747,7 +2720,7 @@ namespace DisenoColumnas.Clases
 
                 if (Seccions[i].Item1 is CRectangulo)
                 {
-                    CRectangulo  seccion2 = (CRectangulo)Seccions[i].Item1;
+                    CRectangulo seccion2 = (CRectangulo)Seccions[i].Item1;
                     seccion2.CalcularDimensionesEstribo_Gancho(seccion2.Estribo, R);
                     ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
                     ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item1 * Cantidad, seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
@@ -2756,11 +2729,10 @@ namespace DisenoColumnas.Clases
                     {
                         //Agregar a Lista de Ganchos Y Estribos correspondientes a la Fundación
                         int C_F = (int)Math.Ceiling(((Form1.Proyecto_.e_Fundacion * 100 - 10) / (Form1.Proyecto_.SE_F * 100)) + 1);
-                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F* seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item1, seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
-                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F* seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item1, seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F * seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item1, seccion2.GanchoH_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
+                        ListaGanchos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F * seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item1, seccion2.GanchoV_Dim_Cant_Ltotal_G_Nomenclatura.Item4));
                         ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F, seccion2.Estribo_Dimensiones_B_H_G_Nomenclatura.Item4));
                     }
-
                 }
                 if (Seccions[i].Item1 is CSD)
                 {
@@ -2786,17 +2758,9 @@ namespace DisenoColumnas.Clases
 
                         ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F, seccion2.EstriboAleta_Dimensiones_B_H_G_Nomenclatura.Item4));
                         ListaEstribos_Cant_Nomenclatura.Add(new Tuple<int, string>(C_F, seccion2.EstriboAlma_Dimensiones_B_H_G_Nomenclatura.Item4));
-
                     }
-
                 }
-
-
-
             }
-
-
-
 
             Lista_RefuerzoTransversal_DLNET = new List<string>();
             RetornarListaDepurada(Lista_RefuerzoTransversal_DLNET, ListaGanchos_Cant_Nomenclatura);
