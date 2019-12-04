@@ -789,7 +789,20 @@ namespace DisenoColumnas.Secciones
 
         public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {
-            throw new NotImplementedException();
+            string LayerCuadro = "FC_BORDES";
+            double[] P_XYZ = { };
+            List<double> Vertices = new List<double>();
+
+            var Escalar = B_Operaciones_Matricialesl.Operaciones.Escalar(0.50, FunctionsProject.DeepClone(CoordenadasSeccion));
+
+            for (int i = 0; i < Escalar.Count; i++)
+            {
+                var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi-TW,Escalar[i][0], Escalar[i][1]);
+                Vertices.Add(Aux[0]);
+                Vertices.Add(Aux[1]);
+            }
+
+            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices.ToArray(), LayerCuadro, true);
         }
 
         public static bool operator ==(CSD s1, CSD s2)
