@@ -23,6 +23,7 @@ namespace DisenoColumnas.Interfaz_Seccion
     {
         private string Nombre_Columna { get; set; }
         public bool Over { get; set; } = false;
+        public bool Over_ref { get; set; } = false;
         public bool Seleccionado { get; set; } = false;
         private static double Xmax { get; set; } = 150; //[cm]
         private static double Ymax { get; set; } = 75;  //[cm]
@@ -37,6 +38,10 @@ namespace DisenoColumnas.Interfaz_Seccion
         public double EscalaR { get; set; }
         public static string Piso { get; set; }
         public Tipo_Edicion edicion { get; set; }
+        public int Indice_ref { get; set; } = -1;
+        public FInfo_Ref Info_ref { get; set; }
+        public FEditarRef EditarRef { get; set; }
+        public GDE GDE { get; set; }
 
         public FInterfaz_Seccion(Tipo_Edicion pedicion)
         {
@@ -316,25 +321,29 @@ namespace DisenoColumnas.Interfaz_Seccion
             return false;
         }
 
-        private bool MouseOverPoint(PointF mouse_pt)
+        private bool MouseOverRefuerzo(PointF mouse_pt)
         {
+            GraphicsPath path = new GraphicsPath();
             PointF Temp;
+            int i = 0;
             float X_r, Y_r;
 
             X_r = mouse_pt.X - Grafica.Width / 2;
             Y_r = mouse_pt.Y - Grafica.Height / 2;
+
             Temp = new PointF(X_r, Y_r);
 
-            GraphicsPath path = new GraphicsPath();
-            path.AddPolygon(Vertices.ToArray());
-
-            var pr = path.PathPoints;
-
-            foreach (PointF pi in path.PathPoints)
+            if (seccion.Shapes_ref != null)
             {
-                if (Temp.X == pi.X & Temp.Y == pi.Y)
+                foreach (var refuerzoi in seccion.Shapes_ref)
                 {
-                    return true;
+                    if (refuerzoi.IsVisible(Temp))
+                    {
+                        Indice_ref = i;
+                        return true;
+                    }
+
+                    i++;
                 }
             }
 
@@ -374,6 +383,52 @@ namespace DisenoColumnas.Interfaz_Seccion
                 new_cursor = Cursors.Hand;
             }
 
+            Over_ref = MouseOverRefuerzo(e.Location);
+
+            if (Info_ref == null)
+            {
+                Info_ref = new FInfo_Ref();
+            }
+
+            if (Info_ref.Disposing)
+            {
+                Info_ref = new FInfo_Ref();
+            }
+
+            if (Over_ref == true & edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                try
+                {
+                    Info_ref.Visible = true;
+                }
+                catch
+                {
+                    Info_ref = new FInfo_Ref();
+                    Info_ref.Visible = true;
+                }
+            }
+            else
+            {
+                Info_ref.Visible = false;
+            }
+
+            if (Info_ref.Visible)
+            {
+                if (seccion.Refuerzos[Indice_ref].Coord[0] > 0)
+                {
+                    Info_ref.Location = new Point(e.X+100, e.Y);
+                }
+                else
+                {
+                    Info_ref.Location = new Point(e.X -30-Info_ref.Width, e.Y);
+                }
+                Info_ref.D_Barra.Text = seccion.Refuerzos[Indice_ref].Diametro;
+                Info_ref.ID_Ref.Text = Convert.ToString(seccion.Refuerzos[Indice_ref].id);
+                Info_ref.Num_alzado.Text = Convert.ToString(seccion.Refuerzos[Indice_ref].Alzado);
+                Info_ref.Xc.Text = $"{Math.Round(seccion.Refuerzos[Indice_ref].Coord[0], 2) }";
+                Info_ref.Yc.Text = $"{Math.Round(seccion.Refuerzos[Indice_ref].Coord[1], 2) }";
+            }
+
             if (Grafica.Cursor != new_cursor)
             {
                 Grafica.Cursor = new_cursor;
@@ -387,7 +442,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             FAgregarRef agregarRef = null;
             FEditarPredef editarPredef = null;
 
-            if (MouseOverPoligono(e.Location))
+            if (MouseOverPoligono(e.Location) & e.Button == MouseButtons.Left)
             {
                 Over = true;
                 Seleccionado = true;
@@ -403,6 +458,15 @@ namespace DisenoColumnas.Interfaz_Seccion
                     editarPredef = new FEditarPredef(seccion, this, GDE.DMO);
                     editarPredef.ShowDialog();
                 }
+            }
+
+            if (MouseOverRefuerzo(e.Location) & e.Button == MouseButtons.Right)
+            {
+                Grafica.ContextMenuStrip = cmEditar_Ref;
+            }
+            else
+            {
+                Grafica.ContextMenuStrip = null;
             }
         }
 
@@ -593,14 +657,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             Grafica.Invalidate();
         }
 
-        private void Grafica_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void Grafica_MouseHover(object sender, EventArgs e)
-        {
-        }
-
         private void cbSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
             ISeccion[] Secciones = { };
@@ -620,6 +676,39 @@ namespace DisenoColumnas.Interfaz_Seccion
             lbPisos.Items.Clear();
             lbPisos.Items.AddRange(Secciones);
             lbPisos.SelectedItem = lbPisos.Items[0];
+        }
+
+        private void editarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditarRef = new FEditarRef(seccion, Piso, Indice_ref,this);
+            EditarRef.Show();
+        }
+
+        private void eliminarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int indice=0;
+            seccion.Refuerzos.RemoveAt(Indice_ref);
+
+            if (edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == Piso);
+                Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<ISeccion, string>(seccion, Piso);
+            }
+
+            if (edicion == Tipo_Edicion.Secciones_predef)
+            {
+                if (GDE == GDE.DMO)
+                {
+                    indice = Form1.secciones_predef.Secciones_DMO.FindIndex(x1 => x1.ToString() == seccion.ToString());
+                    Form1.secciones_predef.Secciones_DMO[indice] = seccion;
+                }
+                else
+                {
+                    indice = Form1.secciones_predef.Secciones_DES.FindIndex(x1 => x1.ToString() == seccion.ToString());
+                    Form1.secciones_predef.Secciones_DES[indice] = seccion;
+                }
+            }
+
         }
     }
 }

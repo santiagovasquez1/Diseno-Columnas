@@ -92,6 +92,18 @@
     <Compile Include="Interfaz Seccion\FEditarPredef.Designer.cs">
       <DependentUpon>FEditarPredef.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz Seccion\FEditarRef.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FEditarRef.Designer.cs">
+      <DependentUpon>FEditarRef.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FInfo_Ref.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FInfo_Ref.Designer.cs">
+      <DependentUpon>FInfo_Ref.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resultados\Resultados_.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Seccion\FEditarPredef.resx">
       <DependentUpon>FEditarPredef.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\FEditarRef.resx">
+      <DependentUpon>FEditarRef.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\FInfo_Ref.resx">
+      <DependentUpon>FInfo_Ref.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Seccion\Interfaz_Seccion.resx">
       <DependentUpon>Interfaz_Seccion.cs</DependentUpon>

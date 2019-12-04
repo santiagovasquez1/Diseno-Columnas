@@ -28,69 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FInterfaz_Seccion));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.BSeleccionar_columna = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.Grafica = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbPisos = new System.Windows.Forms.ListBox();
             this.gbSecciones = new System.Windows.Forms.GroupBox();
             this.cbSecciones = new System.Windows.Forms.ComboBox();
-            this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            this.cmEditar_Ref = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Grafica = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
+            this.cmEditar_Ref.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.SuspendLayout();
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BSeleccionar_columna,
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(24, 528);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // BSeleccionar_columna
-            // 
-            this.BSeleccionar_columna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.BSeleccionar_columna.Image = global::DisenoColumnas.Properties.Resources.anadir;
-            this.BSeleccionar_columna.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BSeleccionar_columna.Name = "BSeleccionar_columna";
-            this.BSeleccionar_columna.Size = new System.Drawing.Size(21, 20);
-            this.BSeleccionar_columna.Text = "Editar refuerzo de seccion";
-            this.BSeleccionar_columna.Click += new System.EventHandler(this.BSeleccionar_columna_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(21, 20);
-            this.toolStripButton1.Text = "Agregar Estribos";
-            // 
-            // Grafica
-            // 
-            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grafica.BackColor = System.Drawing.Color.White;
-            this.Grafica.Location = new System.Drawing.Point(27, 12);
-            this.Grafica.Name = "Grafica";
-            this.Grafica.Size = new System.Drawing.Size(702, 487);
-            this.Grafica.TabIndex = 1;
-            this.Grafica.TabStop = false;
-            this.Grafica.Click += new System.EventHandler(this.Grafica_Click);
-            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
-            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
-            this.Grafica.MouseHover += new System.EventHandler(this.Grafica_MouseHover);
-            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
             // 
             // label1
             // 
@@ -155,6 +108,43 @@
             this.cbSecciones.TabIndex = 0;
             this.cbSecciones.SelectedIndexChanged += new System.EventHandler(this.cbSecciones_SelectedIndexChanged);
             // 
+            // cmEditar_Ref
+            // 
+            this.cmEditar_Ref.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editarRefuerzoToolStripMenuItem,
+            this.eliminarRefuerzoToolStripMenuItem});
+            this.cmEditar_Ref.Name = "cmEditar_Ref";
+            this.cmEditar_Ref.Size = new System.Drawing.Size(181, 70);
+            // 
+            // editarRefuerzoToolStripMenuItem
+            // 
+            this.editarRefuerzoToolStripMenuItem.Name = "editarRefuerzoToolStripMenuItem";
+            this.editarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarRefuerzoToolStripMenuItem.Text = "Editar refuerzo";
+            this.editarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.editarRefuerzoToolStripMenuItem_Click);
+            // 
+            // eliminarRefuerzoToolStripMenuItem
+            // 
+            this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
+            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
+            this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
+            // 
+            // Grafica
+            // 
+            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grafica.BackColor = System.Drawing.Color.White;
+            this.Grafica.Location = new System.Drawing.Point(27, 12);
+            this.Grafica.Name = "Grafica";
+            this.Grafica.Size = new System.Drawing.Size(702, 487);
+            this.Grafica.TabIndex = 1;
+            this.Grafica.TabStop = false;
+            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
+            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
+            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,7 +154,6 @@
             this.Controls.Add(this.gbSecciones);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.Grafica);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -173,11 +162,10 @@
             this.Text = "Sección";
             this.Load += new System.EventHandler(this.Interfaz_Seccion_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FInterfaz_Seccion_Paint);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.gbSecciones.ResumeLayout(false);
+            this.cmEditar_Ref.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,13 +174,13 @@
         #endregion
 
         public  System.Windows.Forms.PictureBox Grafica;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton BSeleccionar_columna;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox lbPisos;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.GroupBox gbSecciones;
         private System.Windows.Forms.ComboBox cbSecciones;
+        private System.Windows.Forms.ContextMenuStrip cmEditar_Ref;
+        private System.Windows.Forms.ToolStripMenuItem eliminarRefuerzoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarRefuerzoToolStripMenuItem;
     }
 }
