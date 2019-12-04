@@ -416,11 +416,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 if (seccion.Refuerzos[Indice_ref].Coord[0] > 0)
                 {
-                    Info_ref.Location = new Point(e.X+100, e.Y);
+                    Info_ref.Location = new Point(Cursor.Position.X +30, Cursor.Position.Y);
                 }
                 else
                 {
-                    Info_ref.Location = new Point(e.X -30-Info_ref.Width, e.Y);
+                    Info_ref.Location = new Point(Cursor.Position.X -30-Info_ref.Width, Cursor.Position.Y);
                 }
                 Info_ref.D_Barra.Text = seccion.Refuerzos[Indice_ref].Diametro;
                 Info_ref.ID_Ref.Text = Convert.ToString(seccion.Refuerzos[Indice_ref].id);

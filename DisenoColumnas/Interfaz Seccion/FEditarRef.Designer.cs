@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FEditarRef));
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bCancelar = new System.Windows.Forms.Button();
+            this.bAceptar = new System.Windows.Forms.Button();
+            this.tbYc = new System.Windows.Forms.TextBox();
+            this.tbXc = new System.Windows.Forms.TextBox();
+            this.cbDiametros = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.ID_Ref = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbDiametros = new System.Windows.Forms.ComboBox();
-            this.tbXc = new System.Windows.Forms.TextBox();
-            this.tbYc = new System.Windows.Forms.TextBox();
-            this.bCancelar = new System.Windows.Forms.Button();
-            this.bAceptar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            this.groupBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
             // panel1
             // 
@@ -78,7 +78,58 @@
             this.groupBox1.Size = new System.Drawing.Size(237, 207);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Edición Refuerzo :";
+            this.groupBox1.Text = "Edición Refuerzo";
+            this.groupBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // bCancelar
+            // 
+            this.bCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bCancelar.Location = new System.Drawing.Point(134, 154);
+            this.bCancelar.Name = "bCancelar";
+            this.bCancelar.Size = new System.Drawing.Size(91, 36);
+            this.bCancelar.TabIndex = 16;
+            this.bCancelar.Text = "Cancelar";
+            this.bCancelar.UseVisualStyleBackColor = true;
+            this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
+            // 
+            // bAceptar
+            // 
+            this.bAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bAceptar.Location = new System.Drawing.Point(19, 154);
+            this.bAceptar.Name = "bAceptar";
+            this.bAceptar.Size = new System.Drawing.Size(91, 36);
+            this.bAceptar.TabIndex = 15;
+            this.bAceptar.Text = "Aceptar";
+            this.bAceptar.UseVisualStyleBackColor = true;
+            this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
+            // 
+            // tbYc
+            // 
+            this.tbYc.Location = new System.Drawing.Point(147, 117);
+            this.tbYc.Name = "tbYc";
+            this.tbYc.Size = new System.Drawing.Size(84, 23);
+            this.tbYc.TabIndex = 14;
+            // 
+            // tbXc
+            // 
+            this.tbXc.Location = new System.Drawing.Point(147, 85);
+            this.tbXc.Name = "tbXc";
+            this.tbXc.Size = new System.Drawing.Size(84, 23);
+            this.tbXc.TabIndex = 13;
+            // 
+            // cbDiametros
+            // 
+            this.cbDiametros.FormattingEnabled = true;
+            this.cbDiametros.Items.AddRange(new object[] {
+            "#4",
+            "#5",
+            "#6",
+            "#7",
+            "#8"});
+            this.cbDiametros.Location = new System.Drawing.Point(147, 56);
+            this.cbDiametros.Name = "cbDiametros";
+            this.cbDiametros.Size = new System.Drawing.Size(84, 23);
+            this.cbDiametros.TabIndex = 11;
             // 
             // label8
             // 
@@ -134,56 +185,6 @@
             this.label3.Text = "Diámetro de la Barra:";
             this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label3_MouseMove);
             // 
-            // cbDiametros
-            // 
-            this.cbDiametros.FormattingEnabled = true;
-            this.cbDiametros.Items.AddRange(new object[] {
-            "#4",
-            "#5",
-            "#6",
-            "#7",
-            "#8"});
-            this.cbDiametros.Location = new System.Drawing.Point(147, 56);
-            this.cbDiametros.Name = "cbDiametros";
-            this.cbDiametros.Size = new System.Drawing.Size(84, 23);
-            this.cbDiametros.TabIndex = 11;
-            // 
-            // tbXc
-            // 
-            this.tbXc.Location = new System.Drawing.Point(147, 85);
-            this.tbXc.Name = "tbXc";
-            this.tbXc.Size = new System.Drawing.Size(84, 23);
-            this.tbXc.TabIndex = 13;
-            // 
-            // tbYc
-            // 
-            this.tbYc.Location = new System.Drawing.Point(147, 117);
-            this.tbYc.Name = "tbYc";
-            this.tbYc.Size = new System.Drawing.Size(84, 23);
-            this.tbYc.TabIndex = 14;
-            // 
-            // bCancelar
-            // 
-            this.bCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bCancelar.Location = new System.Drawing.Point(134, 154);
-            this.bCancelar.Name = "bCancelar";
-            this.bCancelar.Size = new System.Drawing.Size(91, 36);
-            this.bCancelar.TabIndex = 16;
-            this.bCancelar.Text = "Cancelar";
-            this.bCancelar.UseVisualStyleBackColor = true;
-            this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
-            // 
-            // bAceptar
-            // 
-            this.bAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bAceptar.Location = new System.Drawing.Point(19, 154);
-            this.bAceptar.Name = "bAceptar";
-            this.bAceptar.Size = new System.Drawing.Size(91, 36);
-            this.bAceptar.TabIndex = 15;
-            this.bAceptar.Text = "Aceptar";
-            this.bAceptar.UseVisualStyleBackColor = true;
-            this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
-            // 
             // FEditarRef
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,8 +192,9 @@
             this.ClientSize = new System.Drawing.Size(259, 231);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FEditarRef";
-            this.Text = "FEditarRef";
+            this.Text = "Editar Refuerzo";
             this.Load += new System.EventHandler(this.FEditarRef_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FEditarRef_MouseMove);
             this.panel1.ResumeLayout(false);
