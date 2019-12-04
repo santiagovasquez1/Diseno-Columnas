@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel2 = new System.Windows.Forms.Panel();
             this.Button2 = new System.Windows.Forms.Button();
             this.Button1 = new System.Windows.Forms.Button();
             this.D_ColLabel = new System.Windows.Forms.DataGridView();
-            this.Panel1 = new System.Windows.Forms.Panel();
-            this.Label9 = new System.Windows.Forms.Label();
             this.Muros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Panel1 = new System.Windows.Forms.Panel();
+            this.Label9 = new System.Windows.Forms.Label();
             this.Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.D_ColLabel)).BeginInit();
             this.Panel1.SuspendLayout();
@@ -95,6 +95,23 @@
             this.D_ColLabel.Name = "D_ColLabel";
             this.D_ColLabel.Size = new System.Drawing.Size(282, 343);
             this.D_ColLabel.TabIndex = 0;
+            this.D_ColLabel.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_ColLabel_CellEndEdit);
+            // 
+            // Muros
+            // 
+            this.Muros.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.Muros.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Muros.HeaderText = "Columna";
+            this.Muros.Name = "Muros";
+            this.Muros.ReadOnly = true;
+            // 
+            // Label
+            // 
+            this.Label.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Label.HeaderText = "Label";
+            this.Label.Name = "Label";
+            this.Label.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Panel1
             // 
@@ -118,22 +135,6 @@
             this.Label9.TabIndex = 12;
             this.Label9.Text = "Editar Nombre de Columnas";
             this.Label9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label9_MouseDown);
-            // 
-            // Muros
-            // 
-            this.Muros.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.Muros.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Muros.HeaderText = "Columna";
-            this.Muros.Name = "Muros";
-            this.Muros.ReadOnly = true;
-            // 
-            // Label
-            // 
-            this.Label.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Label.HeaderText = "Label";
-            this.Label.Name = "Label";
-            this.Label.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // CambiarNombreColumna
             // 

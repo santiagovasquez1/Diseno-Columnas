@@ -1995,7 +1995,7 @@ namespace DisenoColumnas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Proyecto_ = new Proyecto();
+    
             CreateDictonaries();
             mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             Main_Secciones.Crear_archivo();
