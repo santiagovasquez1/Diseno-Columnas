@@ -30,6 +30,10 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Yc = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.Xc = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.L_Barra = new System.Windows.Forms.Label();
             this.Num_alzado = new System.Windows.Forms.Label();
             this.D_Barra = new System.Windows.Forms.Label();
@@ -38,10 +42,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.Xc = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.Yc = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +82,46 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información de la Barra";
             // 
+            // Yc
+            // 
+            this.Yc.AutoSize = true;
+            this.Yc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Yc.Location = new System.Drawing.Point(148, 139);
+            this.Yc.Name = "Yc";
+            this.Yc.Size = new System.Drawing.Size(35, 15);
+            this.Yc.TabIndex = 11;
+            this.Yc.Text = "XXXX";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(21, 139);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 15);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Yc (cm) : ";
+            // 
+            // Xc
+            // 
+            this.Xc.AutoSize = true;
+            this.Xc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Xc.Location = new System.Drawing.Point(148, 115);
+            this.Xc.Name = "Xc";
+            this.Xc.Size = new System.Drawing.Size(35, 15);
+            this.Xc.TabIndex = 9;
+            this.Xc.Text = "XXXX";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(21, 115);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Xc (cm) : ";
+            // 
             // L_Barra
             // 
             this.L_Barra.AutoSize = true;
@@ -96,7 +136,7 @@
             // 
             this.Num_alzado.AutoSize = true;
             this.Num_alzado.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Num_alzado.Location = new System.Drawing.Point(154, 87);
+            this.Num_alzado.Location = new System.Drawing.Point(148, 87);
             this.Num_alzado.Name = "Num_alzado";
             this.Num_alzado.Size = new System.Drawing.Size(35, 15);
             this.Num_alzado.TabIndex = 6;
@@ -116,7 +156,7 @@
             // 
             this.ID_Ref.AutoSize = true;
             this.ID_Ref.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ID_Ref.Location = new System.Drawing.Point(135, 30);
+            this.ID_Ref.Location = new System.Drawing.Point(148, 30);
             this.ID_Ref.Name = "ID_Ref";
             this.ID_Ref.Size = new System.Drawing.Size(28, 15);
             this.ID_Ref.TabIndex = 4;
@@ -162,46 +202,6 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Diámetro de la Barra:";
             // 
-            // Xc
-            // 
-            this.Xc.AutoSize = true;
-            this.Xc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Xc.Location = new System.Drawing.Point(154, 115);
-            this.Xc.Name = "Xc";
-            this.Xc.Size = new System.Drawing.Size(35, 15);
-            this.Xc.TabIndex = 9;
-            this.Xc.Text = "XXXX";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(21, 115);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 15);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Xc (cm) : ";
-            // 
-            // Yc
-            // 
-            this.Yc.AutoSize = true;
-            this.Yc.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Yc.Location = new System.Drawing.Point(154, 139);
-            this.Yc.Name = "Yc";
-            this.Yc.Size = new System.Drawing.Size(35, 15);
-            this.Yc.TabIndex = 11;
-            this.Yc.Text = "XXXX";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(21, 139);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(54, 15);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Yc (cm) : ";
-            // 
             // FInfo_Ref
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,6 +210,8 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FInfo_Ref";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "FInfo_Ref";
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

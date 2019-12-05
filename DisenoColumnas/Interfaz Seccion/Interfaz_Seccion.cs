@@ -251,7 +251,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
-           
+
                     foreach(CRefuerzo refuerzo in seccion.Refuerzos)
                     {
                         if (Columna_i.Seccions[indice].Item1.Refuerzos.Count > 0)
