@@ -11,7 +11,7 @@ namespace DisenoColumnas.Clases
     }
 
     [Serializable]
-    public class CRefuerzo
+    public class CRefuerzo:IComparable
     {
         public int id { get; set; }
         public string Diametro { get; set; }
@@ -76,6 +76,50 @@ namespace DisenoColumnas.Clases
         public override string ToString()
         {
             return string.Format("{0}", Diametro);
+        }
+
+        public int CompareTo(object obj)
+        {
+           if (obj is CRefuerzo)
+            {
+                CRefuerzo temp = (CRefuerzo)obj;
+                if (As_Long > temp.As_Long) return 1;
+                if (As_Long < temp.As_Long) return +1;               
+             }
+            return 0;
+        }
+        
+        public static bool operator ==(CRefuerzo r1,CRefuerzo r2)
+        {
+            return r1.Equals(r2);
+        }
+
+        public static bool operator !=(CRefuerzo r1, CRefuerzo r2)
+        {
+            try
+            {
+                return !r1.Equals(r2);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool operator <(CRefuerzo r1, CRefuerzo r2)
+        {
+            if (r1.CompareTo(r2) < 0)
+                return true;
+            else
+                return false;
+        }
+
+        public static bool operator >(CRefuerzo r1, CRefuerzo r2)
+        {
+            if (r1.CompareTo(r2) > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

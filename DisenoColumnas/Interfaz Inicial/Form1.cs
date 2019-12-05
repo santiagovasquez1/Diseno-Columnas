@@ -54,7 +54,6 @@ namespace DisenoColumnas
 
         public Form1()
         {
-      
             InitializeComponent();
             mFormPrincipal = this;
             CargarToolTips();
@@ -117,7 +116,7 @@ namespace DisenoColumnas
         }
 
 
-        
+
         private void CrearCarpetaOCargar()
         {
             string NameCarpeta = @"C:\Users\" + Environment.UserName + @"\.colum";
@@ -177,7 +176,7 @@ namespace DisenoColumnas
 
                 CrearCarpetaOCargar();
                 string configFile = Path.Combine(RutaConfig, "DockPanel.temp.config");
-               
+
                 try
                 {
                     PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent);
@@ -217,9 +216,7 @@ namespace DisenoColumnas
                 variablesdeEntrada = new VariablesdeEntrada(false);
                 LColumna.Enabled = true;
                 La_Column.Enabled = true;
-                
 
-          
                 WindowState = FormWindowState.Maximized;
             }
         }
@@ -242,7 +239,6 @@ namespace DisenoColumnas
             tool.SetToolTip(Button_Agregar, "Agregar Nuevo Alzado (Ctrl + A)");
             tool.SetToolTip(Disenar, "Diseñar Columnas (Ctrl + D)");
             tool.SetToolTip(Button_DLNET, "Exportar Cantidades (Archivo DL NET) (Ctrl + E)");
-
         }
 
         private void CloseWindows()
@@ -404,18 +400,15 @@ namespace DisenoColumnas
                 variablesdeEntrada = new VariablesdeEntrada(true);
                 variablesdeEntrada.ShowDialog();
 
-
                 //Cambiar Nombre de Columnas
                 m_Informacion = new Informacion();
                 DialogResult EditarColumnas = MessageBox.Show("¿Desea editar el nombre de las columnas?", Proyecto_.Empresa, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if(EditarColumnas == DialogResult.Yes)
+                if (EditarColumnas == DialogResult.Yes)
                 {
                     CambiarNombreColumna nombreColumna = new CambiarNombreColumna();
                     nombreColumna.ShowDialog();
                     MessageBox.Show("NOTA: Los nombres editados solo cambiaran cuando grafique el alzado en AutoCAD.", Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-
 
                 m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
                 CrearCarpetaOCargar();
@@ -425,7 +418,7 @@ namespace DisenoColumnas
                 mLcolumnas = LColumna;
                 m_PlantaColumnas = new PlantaColumnas();
                 //   m_PlantaColumnas.Show(PanelContenedor);
-          
+
                 m_Informacion.Show(PanelContenedor);
 
                 m_Despiece = new Despiece();
@@ -559,7 +552,7 @@ namespace DisenoColumnas
             Proyecto_.Diametro_ref.Add(11, 3.58f);
             Proyecto_.Diametro_ref.Add(14, 4.30f);
 
-            #endregion Diccionario diametro barras
+            #endregion Diccionario Diametro barras
 
             #region Diccionario -> Masa Nominal Barras
 
@@ -1688,19 +1681,14 @@ namespace DisenoColumnas
                     }
                 }
 
-                for(int i= VigaMayor.Seccions.Count-1; i>=0; i--)
+                for (int i = VigaMayor.Seccions.Count - 1; i >= 0; i--)
                 {
-
-                    if (VigaMayor.Seccions[i].Item1.H<0)
+                    if (VigaMayor.Seccions[i].Item1.H < 0)
                     {
                         ISeccion seccionMayor2 = new CRectangulo("Inicial", 0, 0, new MAT_CONCRETE(), TipodeSeccion.None);
                         tuple_Seccion_Mayor = new Tuple<CRectangulo, string>((CRectangulo)seccionMayor2, column.Seccions[i].Item2);
                         VigaMayor.Seccions[i] = tuple_Seccion_Mayor;
                     }
-
-
-
-
                 }
 
                 column.VigaMayor = VigaMayor;
@@ -1777,7 +1765,6 @@ namespace DisenoColumnas
 
         private void VariablesDeEntradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (Proyecto_ != null)
             {
                 variablesdeEntrada = new VariablesdeEntrada(false);
@@ -1799,8 +1786,6 @@ namespace DisenoColumnas
                 variablesdeEntrada.PictureBox1.Visible = true;
                 variablesdeEntrada.ShowDialog();
             }
-      
-            
         }
 
         private void LColumna_SelectedIndexChanged(object sender, EventArgs e)
@@ -2083,8 +2068,6 @@ namespace DisenoColumnas
                 Temp = secciones_predef.Secciones_DES;
             }
 
-           
-
             foreach (Columna Col in Lista_ColumnasDiseñar)
             {
                 //Seleccionar Diferentes secciones
@@ -2111,6 +2094,8 @@ namespace DisenoColumnas
                         if (Temp_seccion2.Refuerzos.Count > 0 & Temp_seccion2.B > Temp_seccion2.H)
                         {
                             double[] Rotacion;
+                            Temp_seccion2.Estribo.NoRamasH1 = Temp_seccion.Estribo.NoRamasV1;
+                            Temp_seccion2.Estribo.NoRamasV1 = Temp_seccion.Estribo.NoRamasH1;
 
                             foreach (CRefuerzo refuerzo in Temp_seccion2.Refuerzos)
                             {
@@ -2120,11 +2105,12 @@ namespace DisenoColumnas
                             }
                         }
                         Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion2, piso);
+                        Col.Seccions[i].Item1.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
+                        Col.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
                     }
                     else
                     {
                         Temp_seccion.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
-                        Temp_seccion.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
                         Temp_seccion.Refuerzo_Base(Proyecto_.R);
                         Temp_seccion.Material = Col.Seccions[i].Item1.Material;
                         Temp_seccion.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
@@ -2213,6 +2199,27 @@ namespace DisenoColumnas
             foreach (Columna col in Lista_ColumnasDiseñar)
             {
                 col.AgregarAlzadoSugerido();
+
+                bool Ref_base = true;
+                var Temp_base = new List<string>();
+                foreach (var alzado in col.Alzados)
+                {
+                    foreach (var alzado_piso in alzado.Colum_Alzado)
+                    {
+                        if (alzado_piso == null)
+                        {
+                            Ref_base = false;
+                            break;
+                        }
+                    }
+
+                    if (Ref_base == true)
+                    {
+                        Temp_base.Add(alzado.ID.ToString());
+                    }
+
+                }
+
                 //col.Alzados[0].ID;  --- ID QUE SE DEBE AGREGAR
                 if (col.Alzados.Count != 0)
                 {
@@ -2354,11 +2361,8 @@ namespace DisenoColumnas
             int m = 0;
             int pos = 0;
 
-
             foreach (CRefuerzo refuerzo in Col.Seccions[i].Item1.Refuerzos)
             {
-             
-
                 if (Base.Count() == 2)
                 {
                     if (m % 2 == 0)
@@ -2690,15 +2694,11 @@ namespace DisenoColumnas
         {
             CambiarNombreColumna cambiarNombreColumnas = new CambiarNombreColumna();
             cambiarNombreColumnas.ShowDialog();
-
         }
 
         private void CantidadesDeObraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
             GenerarCantidades();
-
         }
 
         private void Button1_Click_1(object sender, EventArgs e)
@@ -2706,13 +2706,9 @@ namespace DisenoColumnas
             GenerarCantidades();
         }
 
-
         private void GenerarCantidades()
         {
-
-      
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog() { Title = "Exportar Archivo Texto Formato DL NET", Filter= "Archivo|*.txt" };
+            SaveFileDialog saveFileDialog = new SaveFileDialog() { Title = "Exportar Archivo Texto Formato DL NET", Filter = "Archivo|*.txt" };
             saveFileDialog.ShowDialog();
 
             string RutaArchivo = saveFileDialog.FileName;
@@ -2736,42 +2732,39 @@ namespace DisenoColumnas
                 foreach (Columna col in Proyecto_.Lista_Columnas)
                 {
                     col.CalcularCantidadesDLNET();
-                    BarraProgresoCantidades.Value +=1; contador +=1;
-                    ParaCantidades.Text = contador + "/" +Proyecto_.Lista_Columnas.Count;
+                    BarraProgresoCantidades.Value += 1; contador += 1;
+                    ParaCantidades.Text = contador + "/" + Proyecto_.Lista_Columnas.Count;
                     Application.DoEvents();
                 }
 
                 BarraProgresoCantidades.Visible = false; ParaCantidades.Visible = false;
                 foreach (Columna col in Proyecto_.Lista_Columnas)
                 {
-
                     int CantidadRefuerzo = col.Lista_RefuerzoLongitudinal_DLNET.Count + col.Lista_RefuerzoTransversal_DLNET.Count;
                     if (CantidadRefuerzo != 0)
                     {
-                         ArchivoaGenerar.Add(col.Label);
+                        ArchivoaGenerar.Add(col.Label);
                         ArchivoaGenerar.Add(Convert.ToString(1));
                         ArchivoaGenerar.Add(Convert.ToString(CantidadRefuerzo));
                         ArchivoaGenerar.AddRange(col.Lista_RefuerzoLongitudinal_DLNET);
                         ArchivoaGenerar.AddRange(col.Lista_RefuerzoTransversal_DLNET);
                         CantidadElementos += 1;
-
                     }
                 }
-
 
                 StreamWriter writer;
                 try
                 {
                     writer = new StreamWriter(RutaArchivo);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
-
                 writer.WriteLine(CantidadElementos);
-                for (int i=0; i< ArchivoaGenerar.Count; i++)
+                for (int i = 0; i < ArchivoaGenerar.Count; i++)
                 {
                     writer.WriteLine(ArchivoaGenerar[i]);
                 }
@@ -2779,11 +2772,7 @@ namespace DisenoColumnas
                 Process Proc = new Process();
                 Proc.StartInfo.FileName = RutaArchivo;
                 Proc.Start();
-
             }
-       
         }
-
-    
     }
 }
