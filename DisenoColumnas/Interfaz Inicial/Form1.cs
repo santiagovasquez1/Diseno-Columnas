@@ -48,6 +48,8 @@ namespace DisenoColumnas
         public static string TColumna;
         public static CLista_Secciones secciones_predef;
 
+        private string RutaConfig = "";
+
 
 
         public Form1()
@@ -114,19 +116,43 @@ namespace DisenoColumnas
             //Falta resultados
         }
 
+
+        
+        private void CrearCarpetaOCargar()
+        {
+            string NameCarpeta = @"C:\Users\" + Environment.UserName + @"\.colum";
+            RutaConfig = NameCarpeta;
+            if (Directory.Exists(NameCarpeta))
+            {
+                RutaConfig = NameCarpeta;
+            }
+            else
+            {
+                Directory.CreateDirectory(NameCarpeta);
+            }
+
+        }
+
+
+
         private void AbrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenProject();
         }
 
-        private void OpenProject()
+        private void OpenProject(bool ArchivoExterno=false, string Ruta="")
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "DMC |*.Colum";
-            openFileDialog.Title = "Abrir Proyecto";
-            openFileDialog.ShowDialog();
 
-            if (openFileDialog.FileName != "")
+            if (ArchivoExterno==false)
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "DMC |*.Colum";
+                openFileDialog.Title = "Abrir Proyecto";
+                openFileDialog.ShowDialog();
+                Ruta = openFileDialog.FileName;
+            }
+
+            if (Ruta != "")
             {
                 if (Proyecto_ != null)
                 {
@@ -138,10 +164,10 @@ namespace DisenoColumnas
                         Save();
                     }
                 }
-                FunctionsProject.Deserealizar(openFileDialog.FileName, ref Proyecto_);
+                FunctionsProject.Deserealizar(Ruta, ref Proyecto_);
                 CreateDictonaries();
                 CloseWindows();
-                Proyecto_.Ruta = openFileDialog.FileName;
+                Proyecto_.Ruta = Ruta;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
                 mFuerzasEnElmentos = null;
 
@@ -149,7 +175,9 @@ namespace DisenoColumnas
                 L_NameProject.Text = Proyecto_.Name;
                 Text = Proyecto_.Name + " - " + NameProgram;
 
-                string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+                CrearCarpetaOCargar();
+                string configFile = Path.Combine(RutaConfig, "DockPanel.temp.config");
+               
                 try
                 {
                     PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent);
@@ -267,7 +295,8 @@ namespace DisenoColumnas
                     L_NameProject.Text = Proyecto_.Name;
                     Text = Proyecto_.Name + " - " + NameProgram;
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
-                    string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+                    CrearCarpetaOCargar();
+                    string configFile = Path.Combine(RutaConfig, "DockPanel.temp.config");
                     PanelContenedor.SaveAsXml(configFile);
                 }
 
@@ -295,8 +324,8 @@ namespace DisenoColumnas
                 if (Proyecto_.Ruta != "")
                 {
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
-                    string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
-
+                    CrearCarpetaOCargar();
+                    string configFile = Path.Combine(RutaConfig, "DockPanel.temp.config");
                     PanelContenedor.SaveAsXml(configFile);
                 }
                 else
@@ -389,7 +418,8 @@ namespace DisenoColumnas
 
 
                 m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-                string configFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "DockPanel.temp.config");
+                CrearCarpetaOCargar();
+                string configFile = Path.Combine(RutaConfig, "DockPanel.temp.config");
                 try { PanelContenedor.LoadFromXml(configFile, m_deserializeDockContent); } catch { }
 
                 mLcolumnas = LColumna;
@@ -1998,8 +2028,13 @@ namespace DisenoColumnas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-    
-            
+
+            string FicheroExterno = Environment.CommandLine;
+            if (FicheroExterno.Contains(".Colum"))
+            {
+                OpenProject(true, FicheroExterno.Split(new char[] { '"' })[3]);
+            }
+
             mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             Main_Secciones.Crear_archivo();
         }
@@ -2295,8 +2330,8 @@ namespace DisenoColumnas
 
             Reporte.Add(""); Reporte.Add("---------------------------------------"); Reporte.Add("Diseño de Columnas"); Reporte.Add("Versión 1.0");
             Reporte.Add("© 2019 efe- Prima – Ce"); Reporte.Add("Todos los Derechos Reservados.");
-            string Ruta_ArchivoTemporal = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Reporte.txt");
-
+            CrearCarpetaOCargar();
+            string Ruta_ArchivoTemporal = Path.Combine(RutaConfig, "Reporte.txt");
             StreamWriter writer = new StreamWriter(Ruta_ArchivoTemporal);
             for (int i = 0; i < Reporte.Count; i++)
             {

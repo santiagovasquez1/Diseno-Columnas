@@ -132,5 +132,11 @@ namespace DisenoColumnas.Interfaz_Inicial
         {
             Close();
         }
+
+        private void Panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Utilidades.MoveWindow.ReleaseCapture();
+            Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
+        }
     }
 }

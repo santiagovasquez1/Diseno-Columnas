@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.Panel1 = new System.Windows.Forms.Panel();
-            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.Label6 = new System.Windows.Forms.Label();
             this.Label7 = new System.Windows.Forms.Label();
             this.T_arranque = new System.Windows.Forms.TextBox();
@@ -38,6 +37,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.RedondearDecimales = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.SE_F = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.e_acabados = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.P_R = new System.Windows.Forms.TextBox();
@@ -51,13 +52,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.R_Box = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.SE_F = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel1
@@ -71,22 +71,7 @@
             this.Panel1.Name = "Panel1";
             this.Panel1.Size = new System.Drawing.Size(317, 23);
             this.Panel1.TabIndex = 13;
-            // 
-            // PictureBox1
-            // 
-            this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBox1.Image = global::DisenoColumnas.Properties.Resources.close_button;
-            this.PictureBox1.Location = new System.Drawing.Point(294, 8);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(10, 10);
-            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBox1.TabIndex = 23;
-            this.PictureBox1.TabStop = false;
-            this.PictureBox1.Visible = false;
-            this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
-            this.PictureBox1.MouseLeave += new System.EventHandler(this.PictureBox1_MouseLeave);
-            this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
+            this.Panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseDown);
             // 
             // Label6
             // 
@@ -191,6 +176,28 @@
             this.groupBox2.TabIndex = 81;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Fundación";
+            // 
+            // SE_F
+            // 
+            this.SE_F.BackColor = System.Drawing.Color.White;
+            this.SE_F.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SE_F.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SE_F.Location = new System.Drawing.Point(204, 104);
+            this.SE_F.Name = "SE_F";
+            this.SE_F.Size = new System.Drawing.Size(66, 23);
+            this.SE_F.TabIndex = 30;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(11, 110);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(158, 15);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Separación de Estribos (m) :";
             // 
             // e_acabados
             // 
@@ -347,27 +354,21 @@
             this.label3.TabIndex = 77;
             this.label3.Text = "Recubrimiento (cm):";
             // 
-            // SE_F
+            // PictureBox1
             // 
-            this.SE_F.BackColor = System.Drawing.Color.White;
-            this.SE_F.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SE_F.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SE_F.Location = new System.Drawing.Point(204, 104);
-            this.SE_F.Name = "SE_F";
-            this.SE_F.Size = new System.Drawing.Size(66, 23);
-            this.SE_F.TabIndex = 30;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(11, 110);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(158, 15);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Separación de Estribos (m) :";
+            this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBox1.Image = global::DisenoColumnas.Properties.Resources.close_button;
+            this.PictureBox1.Location = new System.Drawing.Point(294, 8);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(10, 10);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBox1.TabIndex = 23;
+            this.PictureBox1.TabStop = false;
+            this.PictureBox1.Visible = false;
+            this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
+            this.PictureBox1.MouseLeave += new System.EventHandler(this.PictureBox1_MouseLeave);
+            this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
             // 
             // VariablesdeEntrada
             // 
@@ -388,13 +389,13 @@
             this.Load += new System.EventHandler(this.VariablesdeEntrada_Load);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

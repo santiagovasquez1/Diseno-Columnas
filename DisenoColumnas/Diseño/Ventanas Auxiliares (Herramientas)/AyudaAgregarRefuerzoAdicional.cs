@@ -23,7 +23,7 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
             CantBarras.Text = Convert.ToString(5);
             NoBarra.Text = Convert.ToString(6);
             ConvecionesRefuerzoAdicional.SelectedIndex = 0;
-            Text = $"Refuerzo Adicional – Piso:{PisoCorrespondiente} Alzado: {AlzadoCorrespondiente + 1}";
+            Text = $"Refuerzo Adicional – {PisoCorrespondiente} - Alzado: {AlzadoCorrespondiente + 1}";
             PisoAagregar.Text = PisoCorrespondiente;
             AlzadoAagregar.Text = (AlzadoCorrespondiente+1).ToString();
         }
@@ -568,7 +568,7 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
     
             PisoAagregar.Text = PisoCorrespondiente;
             AlzadoAagregar.Text = (AlzadoCorrespondiente + 1).ToString();
-            Text = $"Refuerzo Adicional – Piso:{PisoCorrespondiente} Alzado: {AlzadoCorrespondiente + 1}";
+            Text = $"Refuerzo Adicional – {PisoCorrespondiente} - Alzado: {AlzadoCorrespondiente + 1}";
         }
 
         private void AyudaAgregarRefuerzoAdicional_KeyUp(object sender, KeyEventArgs e)
