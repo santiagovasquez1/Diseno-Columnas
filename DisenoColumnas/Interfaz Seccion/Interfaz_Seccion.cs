@@ -251,6 +251,19 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion.B = Columna_i.Seccions[indice].Item1.B;
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
+           
+                    foreach(CRefuerzo refuerzo in seccion.Refuerzos)
+                    {
+                        if (Columna_i.Seccions[indice].Item1.Refuerzos.Count > 0)
+                        {
+                            refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
+                            refuerzo.Diametro= Columna_i.Seccions[indice].Item1.Refuerzos[m].Diametro;
+                            refuerzo.As_Long = Columna_i.Seccions[indice].Item1.Refuerzos[m].As_Long;
+                            refuerzo.id= Columna_i.Seccions[indice].Item1.Refuerzos[m].id;
+                            refuerzo.TipodeRefuerzo= Columna_i.Seccions[indice].Item1.Refuerzos[m].TipodeRefuerzo;
+                        }
+                        m++;
+                    }
 
                     if (seccion.Refuerzos.Count > 0 & seccion.B > seccion.H & seccion.Shape == TipodeSeccion.Rectangular)
                     {
@@ -260,12 +273,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                             Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], (3 * Math.PI) / 2).ToArray();
                             refuerzo.Coord[0] = Rotacion[0];
                             refuerzo.Coord[1] = Rotacion[1];
-                            if (Columna_i.Seccions[indice].Item1.Refuerzos.Count > 0)
-                            {
-                                refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
-                            }
 
-                            m++;
                         }
                     }
                 }
@@ -416,11 +424,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 if (seccion.Refuerzos[Indice_ref].Coord[0] > 0)
                 {
-                    Info_ref.Location = new Point(e.X+100, e.Y);
+                    Info_ref.Location = new Point(Cursor.Position.X + 100, Cursor.Position.Y);
                 }
                 else
                 {
-                    Info_ref.Location = new Point(e.X -30-Info_ref.Width, e.Y);
+                    Info_ref.Location = new Point(Cursor.Position.X - 30 - Info_ref.Width, Cursor.Position.Y);
                 }
                 Info_ref.D_Barra.Text = seccion.Refuerzos[Indice_ref].Diametro;
                 Info_ref.ID_Ref.Text = Convert.ToString(seccion.Refuerzos[Indice_ref].id);

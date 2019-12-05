@@ -40,19 +40,14 @@ namespace DisenoColumnas.Secciones
         public bool Editado { get; set; } = false;
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
-
-
         #region Propiedades: Cantidades -Estribos
 
-        public Tuple<float, float, float,string> Estribo_Dimensiones_B_H_G_Nomenclatura { get; set; }
+        public Tuple<float, float, float, string> Estribo_Dimensiones_B_H_G_Nomenclatura { get; set; }
 
-        public Tuple<int,float, float,string> GanchoV_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
-        public Tuple<int, float, float,string> GanchoH_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+        public Tuple<int, float, float, string> GanchoV_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
+        public Tuple<int, float, float, string> GanchoH_Dim_Cant_Ltotal_G_Nomenclatura { get; set; }
 
-        #endregion
-
-
-
+        #endregion Propiedades: Cantidades -Estribos
 
         public CRectangulo(string Nombre, float B_, float H_, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> Coordenadas = null)
         {
@@ -154,6 +149,11 @@ namespace DisenoColumnas.Secciones
 
             s_max = Math.Round(s_max, 2);
 
+            if (s_max > 15)
+            {
+                s_max = 15;
+            }
+
             pasos = Convert.ToInt32((s_max - s_min) / delta);
             s_d = s_min;
 
@@ -211,20 +211,44 @@ namespace DisenoColumnas.Secciones
             else
             {
                 double S1, S2, SH, SV, Sdef1, Sdef2;
+                double limite1, limite2, limite3, limite_def;
                 double PAs1, PAs2;
                 float Ach = (B - 2 * r) * (H - 2 * r);
 
-                #region Estribo  #3
-
                 S1 = Estribo.NoRamasV1 * Form1.Proyecto_.AceroBarras[3] / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasV1 * FY * Form1.Proyecto_.AceroBarras[3] / (FD2 * (B - 2 * r) * Material.FC);
-                SV = new double[] { S1 * 100, S2 * 100, s_max }.Min();
+
+                #region Estribo  #3
+
+                SV = new double[] { S1 * 100, S2 * 100 }.Min();
 
                 S1 = Estribo.NoRamasH1 * Form1.Proyecto_.AceroBarras[3] / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasH1 * FY * Form1.Proyecto_.AceroBarras[3] / (FD2 * (H - 2 * r) * Material.FC);
-                SH = new double[] { S1 * 100, S2 * 100, s_max }.Min();
 
+                SH = new double[] { S1 * 100, S2 * 100 }.Min();
                 Sdef1 = Math.Round(Math.Min(SV, SH), 1);
+
+                if (gDE == GDE.DMO)
+                {
+                    var Db = Refuerzos.Min();
+                    int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
+                    limite1 = 8 * Form1.Proyecto_.Diametro_ref[Db1];
+                    limite2 = 16 * Form1.Proyecto_.Diametro_ref[3];
+                    limite3 = 15;
+                    limite_def = new double[] { limite1, limite2, limite3 }.Min();
+                    if (Sdef1 > limite_def) Sdef1 = limite_def;
+                }
+
+                if (gDE == GDE.DES)
+                {
+                    var Db = Refuerzos.Min();
+                    int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
+                    limite1 = 6 * Form1.Proyecto_.Diametro_ref[Db1];
+                    limite2 = 15;
+                    limite_def = new double[] { limite1, limite2 }.Min();
+                    if (Sdef1 > limite_def) Sdef1 = limite_def;
+                }
+
                 Estribo.NoEstribo = 3;
                 Estribo.Separacion = (float)Sdef1;
 
@@ -236,13 +260,35 @@ namespace DisenoColumnas.Secciones
 
                 S1 = Estribo.NoRamasV1 * Form1.Proyecto_.AceroBarras[4] / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasV1 * FY * Form1.Proyecto_.AceroBarras[4] / (FD2 * (B - 2 * r) * Material.FC);
-                SV = new double[] { S1 * 100, S2 * 100, s_max }.Min();
+                SV = new double[] { S1 * 100, S2 * 100 }.Min();
 
                 S1 = Estribo.NoRamasH1 * Form1.Proyecto_.AceroBarras[4] / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasH1 * FY * Form1.Proyecto_.AceroBarras[4] / (FD2 * (H - 2 * r) * Material.FC);
-                SH = new double[] { S1 * 100, S2 * 100, s_max }.Min();
+                SH = new double[] { S1 * 100, S2 * 100 }.Min();
 
                 Sdef2 = Math.Round(Math.Min(SV, SH), 1);
+
+                if (gDE == GDE.DMO)
+                {
+                    var Db = Refuerzos.Min();
+                    int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
+                    limite1 = 8 * Form1.Proyecto_.Diametro_ref[Db1];
+                    limite2 = 16 * Form1.Proyecto_.Diametro_ref[4];
+                    limite3 = 15;
+                    limite_def = new double[] { limite1, limite2, limite3 }.Min();
+                    if (Sdef2 > limite_def) Sdef2 = limite_def;
+                }
+
+                if (gDE == GDE.DES)
+                {
+                    var Db = Refuerzos.Min();
+                    int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
+                    limite1 = 6 * Form1.Proyecto_.Diametro_ref[Db1];
+                    limite2 = 15;
+                    limite_def = new double[] { limite1, limite2 }.Min();
+                    if (Sdef2 > limite_def) Sdef2 = limite_def;
+                }
+
                 Estribo.NoEstribo = 4;
                 Estribo.Separacion = (float)Sdef2;
 
@@ -253,11 +299,13 @@ namespace DisenoColumnas.Secciones
                 if (PAs1 < PAs2)
                 {
                     Estribo.NoEstribo = 3;
+                    Estribo.Area = Form1.Proyecto_.AceroBarras[Estribo.NoEstribo];
                     Estribo.Separacion = (float)Sdef1;
                 }
                 else
                 {
                     Estribo.NoEstribo = 4;
+                    Estribo.Area = Form1.Proyecto_.AceroBarras[Estribo.NoEstribo];
                     Estribo.Separacion = (float)Sdef2;
                 }
             }
@@ -749,13 +797,10 @@ namespace DisenoColumnas.Secciones
             return PAuxiliar;
         }
 
-
-
         #region Metodos: Cantidades
 
         public void CalcularDimensionesEstribo_Gancho(Estribo estribo, float R)
         {
-
             float B_Estribo = (B - 2 * R);
             float H_Estribo = (H - 2 * R);
             float G135_Estribo = Form1.Proyecto_.G135[estribo.NoEstribo];
@@ -771,25 +816,10 @@ namespace DisenoColumnas.Secciones
             Estribo_Dimensiones_B_H_G_Nomenclatura = new Tuple<float, float, float, string>(B_Estribo, H_Estribo, G135_Estribo, Conve_Estribo);
             GanchoH_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosH, Long_GanchoH, Gancho180_G, Conve_Gancho_H);
             GanchoV_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosV, Long_GanchoV, Gancho180_G, Conve_Gancho_V);
-
         }
 
-
-
-
-
-        #endregion
-
-
-
-
-
-
-
-
-
+        #endregion Metodos: Cantidades
 
         #endregion Propiedades y Metodos - Secciones Predefinidas
-
     }
 }

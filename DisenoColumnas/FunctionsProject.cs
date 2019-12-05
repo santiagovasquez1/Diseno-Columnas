@@ -289,7 +289,7 @@ namespace DisenoColumnas
 
             foreach (KeyValuePair<int, double> As_d in Form1.Proyecto_.AceroBarras)
             {
-                if (As_d.Value >= Asi)
+                if (As_d.Value >= 0.98 * Asi) 
                 {
                     p_error = Math.Abs((Asi - As_d.Value) / As_d.Value) * 100;
                     Dif.Add(p_error);
