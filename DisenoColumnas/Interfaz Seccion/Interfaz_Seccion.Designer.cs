@@ -39,10 +39,13 @@
             this.editarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Grafica = new System.Windows.Forms.PictureBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.BSeleccionar_columna = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -51,7 +54,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(27, 506);
+            this.label1.Location = new System.Drawing.Point(29, 504);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 4;
@@ -114,19 +117,19 @@
             this.editarRefuerzoToolStripMenuItem,
             this.eliminarRefuerzoToolStripMenuItem});
             this.cmEditar_Ref.Name = "cmEditar_Ref";
-            this.cmEditar_Ref.Size = new System.Drawing.Size(181, 70);
+            this.cmEditar_Ref.Size = new System.Drawing.Size(164, 48);
             // 
             // editarRefuerzoToolStripMenuItem
             // 
             this.editarRefuerzoToolStripMenuItem.Name = "editarRefuerzoToolStripMenuItem";
-            this.editarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.editarRefuerzoToolStripMenuItem.Text = "Editar refuerzo";
             this.editarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.editarRefuerzoToolStripMenuItem_Click);
             // 
             // eliminarRefuerzoToolStripMenuItem
             // 
             this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
-            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
             this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
             // 
@@ -145,12 +148,34 @@
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BSeleccionar_columna});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(32, 528);
+            this.toolStrip1.TabIndex = 7;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // BSeleccionar_columna
+            // 
+            this.BSeleccionar_columna.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BSeleccionar_columna.Image = ((System.Drawing.Image)(resources.GetObject("BSeleccionar_columna.Image")));
+            this.BSeleccionar_columna.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BSeleccionar_columna.Name = "BSeleccionar_columna";
+            this.BSeleccionar_columna.Size = new System.Drawing.Size(29, 20);
+            this.BSeleccionar_columna.Text = "toolStripButton1";
+            this.BSeleccionar_columna.Click += new System.EventHandler(this.BSeleccionar_columna_Click);
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(904, 528);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.gbSecciones);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -166,6 +191,8 @@
             this.gbSecciones.ResumeLayout(false);
             this.cmEditar_Ref.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,5 +209,7 @@
         private System.Windows.Forms.ContextMenuStrip cmEditar_Ref;
         private System.Windows.Forms.ToolStripMenuItem eliminarRefuerzoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarRefuerzoToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton BSeleccionar_columna;
     }
 }

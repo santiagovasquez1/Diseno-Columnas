@@ -252,15 +252,15 @@ namespace DisenoColumnas.Interfaz_Seccion
                     seccion.H = Columna_i.Seccions[indice].Item1.H;
                     seccion.CoordenadasSeccion = Columna_i.Seccions[indice].Item1.CoordenadasSeccion;
 
-                    foreach(CRefuerzo refuerzo in seccion.Refuerzos)
+                    foreach (CRefuerzo refuerzo in seccion.Refuerzos)
                     {
                         if (Columna_i.Seccions[indice].Item1.Refuerzos.Count > 0)
                         {
                             refuerzo.Alzado = Columna_i.Seccions[indice].Item1.Refuerzos[m].Alzado;
-                            refuerzo.Diametro= Columna_i.Seccions[indice].Item1.Refuerzos[m].Diametro;
+                            refuerzo.Diametro = Columna_i.Seccions[indice].Item1.Refuerzos[m].Diametro;
                             refuerzo.As_Long = Columna_i.Seccions[indice].Item1.Refuerzos[m].As_Long;
-                            refuerzo.id= Columna_i.Seccions[indice].Item1.Refuerzos[m].id;
-                            refuerzo.TipodeRefuerzo= Columna_i.Seccions[indice].Item1.Refuerzos[m].TipodeRefuerzo;
+                            refuerzo.id = Columna_i.Seccions[indice].Item1.Refuerzos[m].id;
+                            refuerzo.TipodeRefuerzo = Columna_i.Seccions[indice].Item1.Refuerzos[m].TipodeRefuerzo;
                         }
                         m++;
                     }
@@ -273,7 +273,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                             Rotacion = Operaciones.Rotacion(refuerzo.Coord[0], refuerzo.Coord[1], (3 * Math.PI) / 2).ToArray();
                             refuerzo.Coord[0] = Rotacion[0];
                             refuerzo.Coord[1] = Rotacion[1];
-
                         }
                     }
                 }
@@ -491,21 +490,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             label1.Update();
         }
 
-        private void BSeleccionar_columna_Click(object sender, EventArgs e)
-        {
-            if (edicion == Tipo_Edicion.Secciones_modelo)
-            {
-                FAgregarRef fseleccion = new FAgregarRef(seccion, Piso, this);
-                fseleccion.ShowDialog();
-            }
-
-            if (edicion == Tipo_Edicion.Secciones_predef)
-            {
-                FAgregarSeccion fseccion = new FAgregarSeccion();
-                fseccion.ShowDialog();
-            }
-        }
-
         private void Dibujo_Estribo(Graphics g, ISeccion seccioni)
         {
             GraphicsPath path = new GraphicsPath();
@@ -688,13 +672,13 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void editarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditarRef = new FEditarRef(seccion, Piso, Indice_ref,this);
+            EditarRef = new FEditarRef(seccion, Piso, Indice_ref, this);
             EditarRef.Show();
         }
 
         private void eliminarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int indice=0;
+            int indice = 0;
             seccion.Refuerzos.RemoveAt(Indice_ref);
 
             if (edicion == Tipo_Edicion.Secciones_modelo)
@@ -716,7 +700,21 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Form1.secciones_predef.Secciones_DES[indice] = seccion;
                 }
             }
+        }
 
+        private void BSeleccionar_columna_Click(object sender, EventArgs e)
+        {
+            if (edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                FAgregarRef fseleccion = new FAgregarRef(seccion, Piso, this);
+                fseleccion.ShowDialog();
+            }
+
+            if (edicion == Tipo_Edicion.Secciones_predef)
+            {
+                FAgregarSeccion fseccion = new FAgregarSeccion();
+                fseccion.ShowDialog();
+            }
         }
     }
 }

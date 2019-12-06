@@ -476,6 +476,18 @@ namespace DisenoColumnas.Secciones
            // throw new NotImplementedException();
         }
 
+        public void Actualizar_Ref(Alzado palzado,int indice)
+        {
+            if (palzado.Colum_Alzado[indice] != null)
+            {
+                var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
+                foreach (var refuerzoi in Refuerzo_alzado)
+                {
+                    refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
+                }
+            }
+        }
+
         public static bool operator ==(CCirculo s1, CCirculo s2)
         {
             return s1.Equals(s2);

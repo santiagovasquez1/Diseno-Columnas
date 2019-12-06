@@ -1,5 +1,6 @@
 ﻿using DisenoColumnas.Clases;
 using DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_;
+using DisenoColumnas.Interfaz_Seccion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -137,8 +138,6 @@ namespace DisenoColumnas.Diseño
 
         public void EndCellEdit(int IndiceC, int IndiceR, bool isNotPaste, Columna ColumnaSelect)
         {
-
- 
             if (IndiceR < ColumnaSelect.LuzLibre.Count && D_Alzado.Rows[IndiceR].Cells[IndiceC].Value != null)
             {
                 string ValorCelda = D_Alzado.Rows[IndiceR].Cells[IndiceC].Value.ToString();
@@ -266,6 +265,19 @@ namespace DisenoColumnas.Diseño
                     Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
                     Form1.m_Despiece.Invalidate();
                 }
+
+                ColumnaSelect.Seccions[IndiceR].Item1.Actualizar_Ref(ColumnaSelect.Alzados[IndiceC - 1], IndiceR);
+
+                if (Form1.mIntefazSeccion != null)
+                {
+                    Form1.mIntefazSeccion.edicion = Tipo_Edicion.Secciones_modelo;
+                    Form1.mIntefazSeccion.Get_Columna();
+                    Form1.mIntefazSeccion.Load_Pisos();
+                    Form1.mIntefazSeccion.Get_section();
+                    Form1.mIntefazSeccion.Invalidate();
+                    Form1.mFuerzasEnElmentos.Invalidate();
+                }
+
             }
             else if (IndiceR < ColumnaSelect.LuzLibre.Count)
             {
@@ -273,9 +285,21 @@ namespace DisenoColumnas.Diseño
                 DeterminarCoordAlzado(IndiceC);
                 ColumnaSelect.ActualizarRefuerzo();
                 ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
+                ColumnaSelect.Seccions[IndiceR].Item1.Actualizar_Ref(ColumnaSelect.Alzados[IndiceC - 1], IndiceR);
                 Form1.m_Informacion.MostrarAcero();
                 Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
                 Form1.m_Despiece.Invalidate();
+                Form1.mIntefazSeccion.Invalidate();
+
+                if (Form1.mIntefazSeccion != null)
+                {
+                    Form1.mIntefazSeccion.edicion = Tipo_Edicion.Secciones_modelo;
+                    Form1.mIntefazSeccion.Get_Columna();
+                    Form1.mIntefazSeccion.Load_Pisos();
+                    Form1.mIntefazSeccion.Get_section();
+                    Form1.mIntefazSeccion.Invalidate();
+                    Form1.mFuerzasEnElmentos.Invalidate();
+                }
             }
         }
 
@@ -286,7 +310,7 @@ namespace DisenoColumnas.Diseño
             float eF = Form1.Proyecto_.e_Fundacion;
             float r = eF - PR;
 
-            float r2 = Form1.Proyecto_.R/100;
+            float r2 = Form1.Proyecto_.R / 100;
 
             float LdAd = 0.4f;
 
@@ -347,7 +371,6 @@ namespace DisenoColumnas.Diseño
                                     au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
                                 }
                             }
-
                         }
                     }
                 }
@@ -417,8 +440,6 @@ namespace DisenoColumnas.Diseño
                     float DisG = Form1.Proyecto_.G90[au.NoBarra];
                     if (au.NoStory == 1 && au.Tipo == "T1") //Si es Primer Piso y  Si Tiene Traslapo Tipo1
                     {
-
-                      
                         float[] XY1 = new float[] { au.x1 + a.DistX + DisG, r };
                         float[] XY2 = new float[] { au.x1 + a.DistX, r };
                         float[] XY3 = new float[] { au.x1 + a.DistX, eF + au.H_Stroy / 2 + au.Traslapo / 2 };
@@ -427,9 +448,8 @@ namespace DisenoColumnas.Diseño
 
                     if (au.NoStory != 1 && au.Tipo == "T1")
                     {
-
                         float[] XY1 = new float[] { au.x1 + a.DistX, au.Hacum - au.Hviga - au.H_Stroy / 2 - au.Traslapo / 2 };
-                        float[] XY2= new float[] { au.x1 + a.DistX, au.Hacum - r2 };
+                        float[] XY2 = new float[] { au.x1 + a.DistX, au.Hacum - r2 };
                         float[] XY3 = new float[] { au.x1 + a.DistX + DisG, au.Hacum - r2 };
 
                         au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); ; au.Coord_Alzado_PB.Add(XY3);
@@ -443,7 +463,6 @@ namespace DisenoColumnas.Diseño
                     }
                     else if (au.NoStory != 1 && au.Tipo == "T3") // Traslapo Tipo 3
                     {
-                     
                         float[] XY1 = new float[] { au.x1 + a.DistX, Hacum1 - Hviga1 - H1 / 2 - au.Traslapo / 2 };
                         float[] XY2 = new float[] { au.x1 + a.DistX, au.Hacum - r2 };
                         float[] XY3 = new float[] { au.x1 + a.DistX + DisG, au.Hacum - r2 };
@@ -464,7 +483,7 @@ namespace DisenoColumnas.Diseño
                             float[] XY1 = new float[] { au.x1 + a.DistX + DisG, r };
                             float[] XY2 = new float[] { au.x1 + a.DistX, r };
                             float[] XY3 = new float[] { au.x1 + a.DistX, au.Hacum - r2 };
-                            float[] XY4 = new float[] { au.x1 + a.DistX + DisG, au.Hacum -r2 };
+                            float[] XY4 = new float[] { au.x1 + a.DistX + DisG, au.Hacum - r2 };
                             au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); au.Coord_Alzado_PB.Add(XY3); au.Coord_Alzado_PB.Add(XY4);
                         }
                         else
@@ -752,8 +771,6 @@ namespace DisenoColumnas.Diseño
                         au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2); au.Coord_Alzado_PB.Add(XY3);
                     }
 
-
-
                     if (Form1.Proyecto_.Redondear)
                     {
                         ModificarCoordParaEntero(au);
@@ -761,17 +778,12 @@ namespace DisenoColumnas.Diseño
                         {
                             ModificarCoordParaEntero(au.UnitarioAdicional);
                         }
-
                     }
-
-
                 }
             }
-
-      
         }
 
-        private void ModificarCoordParaEntero( AlzadoUnitario au)
+        private void ModificarCoordParaEntero(AlzadoUnitario au)
         {
             if (au.Coord_Alzado_PB != null)
             {
@@ -782,11 +794,10 @@ namespace DisenoColumnas.Diseño
 
                     if (LongitudInicial != LongitudQueDebeSer)
                     {
-                        float Faltante = (float)Math.Round(Math.Abs(LongitudInicial - LongitudQueDebeSer),2);
+                        float Faltante = (float)Math.Round(Math.Abs(LongitudInicial - LongitudQueDebeSer), 2);
 
                         if (au.Coord_Alzado_PB.Count == 2)
                         {
-
                             if (au.Coord_Alzado_PB[0][1] > au.Coord_Alzado_PB[1][1])
                             {
                                 au.Coord_Alzado_PB[0][1] += Faltante / 2;
@@ -797,24 +808,19 @@ namespace DisenoColumnas.Diseño
                                 au.Coord_Alzado_PB[0][1] -= Faltante / 2;
                                 au.Coord_Alzado_PB[1][1] += Faltante / 2;
                             }
-
                         }
                         if (au.Coord_Alzado_PB.Count == 3)
                         {
-
                             if (au.NoStory != 1)
                             {
                                 if (au.Coord_Alzado_PB[2][1] > au.Coord_Alzado_PB[0][1])
                                 {
-
                                     au.Coord_Alzado_PB[0][1] -= Faltante;
                                 }
                                 else
                                 {
                                     au.Coord_Alzado_PB[2][1] -= Faltante;
                                 }
-
-                          
                             }
                             else
                             {
@@ -1075,10 +1081,9 @@ namespace DisenoColumnas.Diseño
                 AgregarRefuerzoBase.IndiceC = e.ColumnIndex;
                 Form_RefuerzoBase.ShowDialog();
             }
-            if (e.ColumnIndex != 0 && e.RowIndex != -1 && D_Alzado.SelectedCells.Count==1)
+            if (e.ColumnIndex != 0 && e.RowIndex != -1 && D_Alzado.SelectedCells.Count == 1)
             {
-
-                if (refuerzoAdicional!=null)
+                if (refuerzoAdicional != null)
                 {
                     int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
                     string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
@@ -1088,36 +1093,28 @@ namespace DisenoColumnas.Diseño
                     AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
                     refuerzoAdicional.Invalidate();
                 }
-
-
             }
-
-
-
-         }
+        }
 
         private void AsignarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-           var a =D_Alzado.SelectedCells;
+            var a = D_Alzado.SelectedCells;
 
             List<int> Filas_numeros = new List<int>();
             List<int> Columnas_numeros = new List<int>();
 
-            foreach(DataGridViewTextBoxCell boxCell in D_Alzado.SelectedCells)
+            foreach (DataGridViewTextBoxCell boxCell in D_Alzado.SelectedCells)
             {
-                if (Filas_numeros.Exists(x=>x== boxCell.RowIndex ) == false)
+                if (Filas_numeros.Exists(x => x == boxCell.RowIndex) == false)
                 {
-                   
-                   Filas_numeros.Add(boxCell.RowIndex); 
+                    Filas_numeros.Add(boxCell.RowIndex);
                 }
-                if (Columnas_numeros.Exists(x => x == boxCell.ColumnIndex-1) == false && boxCell.ColumnIndex-0>=0)
+                if (Columnas_numeros.Exists(x => x == boxCell.ColumnIndex - 1) == false && boxCell.ColumnIndex - 0 >= 0)
                 {
-
-                    Columnas_numeros.Add(boxCell.ColumnIndex-1);
+                    Columnas_numeros.Add(boxCell.ColumnIndex - 1);
                 }
             }
-            Filas_numeros= Filas_numeros.OrderByDescending(x=>x).ToList();
+            Filas_numeros = Filas_numeros.OrderByDescending(x => x).ToList();
             Columnas_numeros = Columnas_numeros.OrderBy(x => x).ToList();
 
             AgregarRefuerzoBase @base = new AgregarRefuerzoBase();
@@ -1125,14 +1122,12 @@ namespace DisenoColumnas.Diseño
             AgregarRefuerzoBase.Filas = Filas_numeros;
             AgregarRefuerzoBase.EditarAlgunosAlzados = true;
             @base.ShowDialog();
-
-
         }
-       private  AyudaAgregarRefuerzoAdicional refuerzoAdicional;
+
+        private AyudaAgregarRefuerzoAdicional refuerzoAdicional;
 
         private void AsignarRefuerzoAdicionalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             if (D_Alzado.SelectedCells.Count == 1)
             {
                 if (D_Alzado.SelectedCells[0].ColumnIndex > 0)
@@ -1140,7 +1135,6 @@ namespace DisenoColumnas.Diseño
                     int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
 
                     string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
-
 
                     refuerzoAdicional = new AyudaAgregarRefuerzoAdicional();
                     AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
@@ -1153,34 +1147,29 @@ namespace DisenoColumnas.Diseño
 
         private void D_Alzado_KeyPress(object sender, KeyPressEventArgs e)
         {
-      
         }
 
         private void D_Alzado_KeyDown(object sender, KeyEventArgs e)
         {
-
-      
         }
 
         private void D_Alzado_KeyUp(object sender, KeyEventArgs e)
         {
             if (D_Alzado.SelectedCells.Count == 1)
             {
-                if (D_Alzado.SelectedCells[0].ColumnIndex>0)
-                { 
-                if (refuerzoAdicional != null)
+                if (D_Alzado.SelectedCells[0].ColumnIndex > 0)
                 {
-                    int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
-                    string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
+                    if (refuerzoAdicional != null)
+                    {
+                        int RowCorrespondiente = D_Alzado.SelectedCells[0].RowIndex;
+                        string Piso = Form1.Proyecto_.ColumnaSelect.Seccions[RowCorrespondiente].Item2;
 
-                    AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
-                    AyudaAgregarRefuerzoAdicional.AlzadoCorrespondiente = D_Alzado.SelectedCells[0].ColumnIndex - 1;
-                    AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
-                    refuerzoAdicional.Invalidate();
+                        AyudaAgregarRefuerzoAdicional.PisoCorrespondiente = Piso;
+                        AyudaAgregarRefuerzoAdicional.AlzadoCorrespondiente = D_Alzado.SelectedCells[0].ColumnIndex - 1;
+                        AyudaAgregarRefuerzoAdicional.RowCorrespondiente = RowCorrespondiente;
+                        refuerzoAdicional.Invalidate();
+                    }
                 }
-
-
-            }
             }
         }
     }

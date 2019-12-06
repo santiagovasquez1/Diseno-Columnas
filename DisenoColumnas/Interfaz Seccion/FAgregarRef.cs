@@ -112,14 +112,18 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Cargar_Datos(DataGridView data)
         {
+
             data.Rows.Clear();
             data.Rows.Add(Seccion.Refuerzos.Count);
+            DataGridViewComboBoxCell boxCell;
 
             for (int i = 0; i < data.Rows.Count; i++)
             {
+                boxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[i].Cells[2];
+                var indice = boxCell.Items.IndexOf(Seccion.Refuerzos[i].Diametro);
                 data.Rows[i].Cells[0].Value = Seccion.Refuerzos[i].id;
                 data.Rows[i].Cells[1].Value = Seccion.Refuerzos[i].Alzado;
-                data.Rows[i].Cells[2].Value = Seccion.Refuerzos[i].Diametro;
+                data.Rows[i].Cells[2].Value = boxCell.Items[indice];
                 data.Rows[i].Cells[3].Value = Math.Round(Seccion.Refuerzos[i].Coord[0], 2);
                 data.Rows[i].Cells[4].Value = Math.Round(Seccion.Refuerzos[i].Coord[1], 2);
             }

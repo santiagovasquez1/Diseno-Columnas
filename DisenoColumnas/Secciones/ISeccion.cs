@@ -47,6 +47,8 @@ namespace DisenoColumnas.Secciones
 
         void CalcNoDBarras();
 
+        void Actualizar_Ref(Alzado palzado,int indice);
+
         double Peso_Estribo(Estribo pEstribo,float recubrimiento);
 
         #region SobreCargas

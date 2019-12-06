@@ -818,6 +818,18 @@ namespace DisenoColumnas.Secciones
             GanchoV_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosV, Long_GanchoV, Gancho180_G, Conve_Gancho_V);
         }
 
+        public void Actualizar_Ref(Alzado palzado,int indice)
+        {
+            if (palzado.Colum_Alzado[indice] != null)
+            {                
+                var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
+                foreach(var refuerzoi in Refuerzo_alzado)
+                {
+                    refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
+                }
+            }            
+        }
+
         #endregion Metodos: Cantidades
 
         #endregion Propiedades y Metodos - Secciones Predefinidas

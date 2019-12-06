@@ -50,8 +50,6 @@ namespace DisenoColumnas
 
         private string RutaConfig = "";
 
-
-
         public Form1()
         {
             InitializeComponent();
@@ -115,8 +113,6 @@ namespace DisenoColumnas
             //Falta resultados
         }
 
-
-
         private void CrearCarpetaOCargar()
         {
             string NameCarpeta = @"C:\Users\" + Environment.UserName + @"\.colum";
@@ -129,20 +125,16 @@ namespace DisenoColumnas
             {
                 Directory.CreateDirectory(NameCarpeta);
             }
-
         }
-
-
 
         private void AbrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenProject();
         }
 
-        private void OpenProject(bool ArchivoExterno=false, string Ruta="")
+        private void OpenProject(bool ArchivoExterno = false, string Ruta = "")
         {
-
-            if (ArchivoExterno==false)
+            if (ArchivoExterno == false)
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Filter = "DMC |*.Colum";
@@ -2013,7 +2005,6 @@ namespace DisenoColumnas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             string FicheroExterno = Environment.CommandLine;
             if (FicheroExterno.Contains(".Colum"))
             {
@@ -2104,6 +2095,7 @@ namespace DisenoColumnas
                                 refuerzo.Coord[1] = Rotacion[1];
                             }
                         }
+
                         Col.Seccions[i] = new Tuple<ISeccion, string>(Temp_seccion2, piso);
                         Col.Seccions[i].Item1.Calc_vol_inex(Proyecto_.R / 100, 4220, Proyecto_.DMO_DES);
                         Col.Seccions[i].Item1.Cuanti_Vol(FD1, FD2, Proyecto_.R / 100, 4220);
@@ -2217,7 +2209,6 @@ namespace DisenoColumnas
                     {
                         Temp_base.Add(alzado.ID.ToString());
                     }
-
                 }
 
                 //col.Alzados[0].ID;  --- ID QUE SE DEBE AGREGAR

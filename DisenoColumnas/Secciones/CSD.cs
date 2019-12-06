@@ -805,6 +805,18 @@ namespace DisenoColumnas.Secciones
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices.ToArray(), LayerCuadro, true);
         }
 
+        public void Actualizar_Ref(Alzado palzado,int indice)
+        {
+            if (palzado.Colum_Alzado[indice] != null)
+            {
+                var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
+                foreach (var refuerzoi in Refuerzo_alzado)
+                {
+                    refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
+                }
+            }
+        }
+
         public static bool operator ==(CSD s1, CSD s2)
         {
             return s1.Equals(s2);
