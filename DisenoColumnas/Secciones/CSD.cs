@@ -827,6 +827,23 @@ namespace DisenoColumnas.Secciones
             }
         }
 
+        public void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
+        {
+            if (palzado.Colum_Alzado[indice] != null)
+            {
+
+            }
+
+            if (fInterfaz != null)
+            {
+                fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
+                fInterfaz.Get_Columna();
+                fInterfaz.Load_Pisos();
+                fInterfaz.Get_section();
+                fInterfaz.Invalidate();
+            }
+        }
+
         public static bool operator ==(CSD s1, CSD s2)
         {
             return s1.Equals(s2);

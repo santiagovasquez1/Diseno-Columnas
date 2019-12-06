@@ -50,6 +50,8 @@ namespace DisenoColumnas.Secciones
 
         void Actualizar_Ref(Alzado palzado,int indice,FInterfaz_Seccion fInterfaz);
 
+        void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz);
+
         double Peso_Estribo(Estribo pEstribo,float recubrimiento);
 
         #region SobreCargas

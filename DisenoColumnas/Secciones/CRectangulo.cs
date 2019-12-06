@@ -819,14 +819,21 @@ namespace DisenoColumnas.Secciones
             GanchoV_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosV, Long_GanchoV, Gancho180_G, Conve_Gancho_V);
         }
 
-        public void Actualizar_Ref(Alzado palzado,int indice, FInterfaz_Seccion fInterfaz)
+        public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
         {
             if (palzado.Colum_Alzado[indice] != null)
-            {                
-                var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
-                foreach(var refuerzoi in Refuerzo_alzado)
+            {
+                if (palzado.Colum_Alzado[indice].Tipo == "A" | palzado.Colum_Alzado[indice].Tipo == "Bottom")
                 {
-                    refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
+                    Refueroz_Adicional(palzado, indice, fInterfaz);
+                }
+                else
+                {
+                    var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
+                    foreach (var refuerzoi in Refuerzo_alzado)
+                    {
+                        refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
+                    }
                 }
             }
 
@@ -838,7 +845,65 @@ namespace DisenoColumnas.Secciones
                 fInterfaz.Get_section();
                 fInterfaz.Invalidate();
             }
+        }
 
+        public void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
+        {
+            CRefuerzo nRefuerzo = null;
+            double[] coord1 = new double[2];
+            int id = 0;
+            double Xmin, Xmax, Ymin, Ymax;
+
+            Xmin = Refuerzos.Select(x => x.Coord[0]).Min();
+            Xmax = Refuerzos.Select(x => x.Coord[0]).Max();
+            Ymin = Refuerzos.Select(x => x.Coord[1]).Min();
+            Ymax = Refuerzos.Select(x => x.Coord[1]).Max();
+
+            if (palzado.Colum_Alzado[indice] != null)
+            {
+                if (Refuerzos.Exists(x => x.Alzado == palzado.ID))
+                {
+                    var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
+                    foreach (var refuerzoi in Refuerzo_alzado)
+                    {
+                        refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
+                    }
+                }
+                else
+                {
+                   for (int i = 0; i < palzado.Colum_Alzado[indice].CantBarras; i+=2)
+                    {
+                        id = Refuerzos.Last().id + 1;
+
+                        if (i % 2 == 0)
+                        {
+                            coord1[0] = Refuerzos[i].Coord[0] + Form1.Proyecto_.Diametro_ref[Convert.ToInt16(Refuerzos[i].Diametro.Substring(1))] / 2 +
+                                Form1.Proyecto_.Diametro_ref[Convert.ToInt16(palzado.Colum_Alzado[indice].NoBarra)] / 2;
+                            coord1[1] = Refuerzos[i].Coord[1];
+                        }
+                        else
+                        {
+                            coord1[0] = Refuerzos[Refuerzos.Count - i - 1].Coord[0] + Form1.Proyecto_.Diametro_ref[Convert.ToInt16(Refuerzos[Refuerzos.Count - i - 1].Diametro.Substring(1))] / 2 +
+                                Form1.Proyecto_.Diametro_ref[Convert.ToInt16(palzado.Colum_Alzado[indice].NoBarra)] / 2;
+                            coord1[1] = Refuerzos[Refuerzos.Count - i - 1].Coord[1];
+                        }
+
+                        nRefuerzo = new CRefuerzo(id, $"#{palzado.Colum_Alzado[indice].NoBarra}",coord1, TipodeRefuerzo.longitudinal);
+                        nRefuerzo.Alzado = palzado.ID;
+                        Refuerzos.Add(nRefuerzo);
+                    }       
+
+                }
+            }
+
+            if (fInterfaz != null)
+            {
+                fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
+                fInterfaz.Get_Columna();
+                fInterfaz.Load_Pisos();
+                fInterfaz.Get_section();
+                fInterfaz.Invalidate();
+            }
         }
 
         #endregion Metodos: Cantidades
