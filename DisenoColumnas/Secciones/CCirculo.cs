@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Interfaz_Seccion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -476,7 +477,7 @@ namespace DisenoColumnas.Secciones
            // throw new NotImplementedException();
         }
 
-        public void Actualizar_Ref(Alzado palzado,int indice)
+        public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
         {
             if (palzado.Colum_Alzado[indice] != null)
             {
@@ -486,6 +487,16 @@ namespace DisenoColumnas.Secciones
                     refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
                 }
             }
+
+            if (fInterfaz != null)
+            {
+                fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
+                fInterfaz.Get_Columna();
+                fInterfaz.Load_Pisos();
+                fInterfaz.Get_section();
+                fInterfaz.Invalidate();
+            }
+
         }
 
         public static bool operator ==(CCirculo s1, CCirculo s2)

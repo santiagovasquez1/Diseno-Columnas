@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Interfaz_Seccion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -47,7 +48,7 @@ namespace DisenoColumnas.Secciones
 
         void CalcNoDBarras();
 
-        void Actualizar_Ref(Alzado palzado,int indice);
+        void Actualizar_Ref(Alzado palzado,int indice,FInterfaz_Seccion fInterfaz);
 
         double Peso_Estribo(Estribo pEstribo,float recubrimiento);
 

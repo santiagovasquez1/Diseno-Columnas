@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Interfaz_Seccion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -797,7 +798,7 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Escalar.Count; i++)
             {
-                var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi-TW,Escalar[i][0], Escalar[i][1]);
+                var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi - TW, Escalar[i][0], Escalar[i][1]);
                 Vertices.Add(Aux[0]);
                 Vertices.Add(Aux[1]);
             }
@@ -805,7 +806,7 @@ namespace DisenoColumnas.Secciones
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices.ToArray(), LayerCuadro, true);
         }
 
-        public void Actualizar_Ref(Alzado palzado,int indice)
+        public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
         {
             if (palzado.Colum_Alzado[indice] != null)
             {
@@ -814,6 +815,15 @@ namespace DisenoColumnas.Secciones
                 {
                     refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
                 }
+            }
+
+            if (fInterfaz != null)
+            {
+                fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
+                fInterfaz.Get_Columna();
+                fInterfaz.Load_Pisos();
+                fInterfaz.Get_section();
+                fInterfaz.Invalidate();
             }
         }
 

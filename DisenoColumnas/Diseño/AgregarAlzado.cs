@@ -1,6 +1,5 @@
 ﻿using DisenoColumnas.Clases;
 using DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_;
-using DisenoColumnas.Interfaz_Seccion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -266,18 +265,7 @@ namespace DisenoColumnas.Diseño
                     Form1.m_Despiece.Invalidate();
                 }
 
-                ColumnaSelect.Seccions[IndiceR].Item1.Actualizar_Ref(ColumnaSelect.Alzados[IndiceC - 1], IndiceR);
-
-                if (Form1.mIntefazSeccion != null)
-                {
-                    Form1.mIntefazSeccion.edicion = Tipo_Edicion.Secciones_modelo;
-                    Form1.mIntefazSeccion.Get_Columna();
-                    Form1.mIntefazSeccion.Load_Pisos();
-                    Form1.mIntefazSeccion.Get_section();
-                    Form1.mIntefazSeccion.Invalidate();
-                    Form1.mFuerzasEnElmentos.Invalidate();
-                }
-
+                ColumnaSelect.Seccions[IndiceR].Item1.Actualizar_Ref(ColumnaSelect.Alzados[IndiceC - 1], IndiceR, Form1.mIntefazSeccion);
             }
             else if (IndiceR < ColumnaSelect.LuzLibre.Count)
             {
@@ -285,21 +273,11 @@ namespace DisenoColumnas.Diseño
                 DeterminarCoordAlzado(IndiceC);
                 ColumnaSelect.ActualizarRefuerzo();
                 ColumnaSelect.CalcularPesoAcero(IndiceC - 1);
-                ColumnaSelect.Seccions[IndiceR].Item1.Actualizar_Ref(ColumnaSelect.Alzados[IndiceC - 1], IndiceR);
+                ColumnaSelect.Seccions[IndiceR].Item1.Actualizar_Ref(ColumnaSelect.Alzados[IndiceC - 1], IndiceR, Form1.mIntefazSeccion);
                 Form1.m_Informacion.MostrarAcero();
                 Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
                 Form1.m_Despiece.Invalidate();
                 Form1.mIntefazSeccion.Invalidate();
-
-                if (Form1.mIntefazSeccion != null)
-                {
-                    Form1.mIntefazSeccion.edicion = Tipo_Edicion.Secciones_modelo;
-                    Form1.mIntefazSeccion.Get_Columna();
-                    Form1.mIntefazSeccion.Load_Pisos();
-                    Form1.mIntefazSeccion.Get_section();
-                    Form1.mIntefazSeccion.Invalidate();
-                    Form1.mFuerzasEnElmentos.Invalidate();
-                }
             }
         }
 

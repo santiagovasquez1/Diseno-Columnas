@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Interfaz_Seccion;
 using DisenoColumnas.Secciones_Predefinidas;
 using System;
 using System.Collections.Generic;
@@ -818,7 +819,7 @@ namespace DisenoColumnas.Secciones
             GanchoV_Dim_Cant_Ltotal_G_Nomenclatura = new Tuple<int, float, float, string>(CantEstribosV, Long_GanchoV, Gancho180_G, Conve_Gancho_V);
         }
 
-        public void Actualizar_Ref(Alzado palzado,int indice)
+        public void Actualizar_Ref(Alzado palzado,int indice, FInterfaz_Seccion fInterfaz)
         {
             if (palzado.Colum_Alzado[indice] != null)
             {                
@@ -827,7 +828,17 @@ namespace DisenoColumnas.Secciones
                 {
                     refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
                 }
-            }            
+            }
+
+            if (fInterfaz != null)
+            {
+                fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
+                fInterfaz.Get_Columna();
+                fInterfaz.Load_Pisos();
+                fInterfaz.Get_section();
+                fInterfaz.Invalidate();
+            }
+
         }
 
         #endregion Metodos: Cantidades
