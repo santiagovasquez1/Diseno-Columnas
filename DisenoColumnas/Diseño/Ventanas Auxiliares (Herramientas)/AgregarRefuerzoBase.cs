@@ -9,10 +9,11 @@ namespace DisenoColumnas.Diseño
     public partial class AgregarRefuerzoBase : Form
     {
         public static int IndiceC { get; set; }
-        
+
         public static bool EditarAlgunosAlzados { get; set; }
         public static List<int> Filas { get; set; }
         public static List<int> Columnas { get; set; }
+
         public AgregarRefuerzoBase()
         {
             InitializeComponent();
@@ -32,17 +33,13 @@ namespace DisenoColumnas.Diseño
             {
                 if (EditarAlgunosAlzados)
                 {
-              
-
                     AsignarRefuerzo(Filas, Columnas, Convert.ToInt32(NoBarra.Text), Convert.ToInt32(CantBarras.Text));
                     EditarAlgunosAlzados = false;
                     TP1.Enabled = true;
                     TP2.Enabled = true;
-
                 }
                 else
                 {
-
                     string Nomenclatura = r + "#" + NoBarra.Text;
                     Columna ColumnaSelect = Form1.Proyecto_.ColumnaSelect;
                     if (TP1.Checked)
@@ -148,13 +145,12 @@ namespace DisenoColumnas.Diseño
 
             int FilaMayor = Filas_Numeros.Max();
 
-            int Contador = 0; 
+            int Contador = 0;
 
-            for (int i = Columnas_Numeros[0]; i < Columnas_Numeros[Columnas_Numeros.Count-1]+1; i++)
+            for (int i = Columnas_Numeros[0]; i < Columnas_Numeros[Columnas_Numeros.Count - 1] + 1; i++)
             {
-                
                 AlzadoTemporal.Add(new List<string>());
-                for (int j = Filas_Numeros[0]; j >= Filas_Numeros[Filas_Numeros.Count-1]; j--)
+                for (int j = Filas_Numeros[0]; j >= Filas_Numeros[Filas_Numeros.Count - 1]; j--)
                 {
                     string Nomenclatura = CantBarras + "#" + NoBarra;
                     if (i % 2 == 0)
@@ -182,8 +178,6 @@ namespace DisenoColumnas.Diseño
                             }
                             try
                             {
-
-
                                 if (col.Seccions[j].Item1.B != col.Seccions[j - 1].Item1.B | col.Seccions[j].Item1.H != col.Seccions[j - 1].Item1.H)
                                 {
                                     Nomenclatura = CantBarras + "#" + NoBarra;
@@ -195,7 +189,6 @@ namespace DisenoColumnas.Diseño
                                     { Nomenclatura += "T1"; }
                                 }
                             }
-
                             catch { }
                         }
                     }
@@ -224,8 +217,6 @@ namespace DisenoColumnas.Diseño
                             }
                             try
                             {
-
-
                                 if (col.Seccions[j].Item1.B != col.Seccions[j - 1].Item1.B | col.Seccions[j].Item1.H != col.Seccions[j - 1].Item1.H)
                                 {
                                     Nomenclatura = CantBarras + "#" + NoBarra;
@@ -237,24 +228,21 @@ namespace DisenoColumnas.Diseño
                                     { Nomenclatura += "T3"; }
                                 }
                             }
-
                             catch { }
                         }
                     }
-                    
+
                     AlzadoTemporal[Contador].Add(Nomenclatura);
-                
                 }
                 Contador += 1;
             }
 
-            for(int i= 0; i< Columnas_Numeros.Count;i++)
+            for (int i = 0; i < Columnas_Numeros.Count; i++)
             {
-                for (int j= Filas_Numeros.Count-1; j>=0;j--)
+                for (int j = Filas_Numeros.Count - 1; j >= 0; j--)
                 {
                     col.CrearAlzado(Columnas_Numeros[i], Filas_Numeros[j], col, AlzadoTemporal[i][j]);
                 }
-
             }
             for (int i = Columnas_Numeros[0]; i < Columnas_Numeros[Columnas_Numeros.Count - 1] + 1; i++)
             {
@@ -272,16 +260,13 @@ namespace DisenoColumnas.Diseño
                 for (int j = Filas_Numeros.Count - 1; j >= 0; j--)
                 {
                     Form1.mAgregarAlzado.D_Alzado.Rows[Filas_Numeros[j]].Cells[Columnas_Numeros[i] + 1].Value = AlzadoTemporal[i][j].ToString();
-                    
                 }
-
             }
 
             Form1.m_Informacion.MostrarAcero();
             Form1.m_Despiece.Draw_Colum_Alzado.Invalidate();
             Form1.m_Despiece.Draw_Column.Invalidate();
             Form1.mAgregarAlzado.D_Alzado.RefreshEdit();
-
         }
 
         private void GroupBox1_MouseDown(object sender, MouseEventArgs e)

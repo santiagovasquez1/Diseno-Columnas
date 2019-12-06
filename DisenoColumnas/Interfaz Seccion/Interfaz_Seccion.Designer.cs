@@ -50,22 +50,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(27, 506);
+            this.label1.Location = new System.Drawing.Point(29, 504);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
-            // 
+            //
             // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.lbPisos);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -76,11 +76,11 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de pisos";
-            // 
+            //
             // lbPisos
-            // 
-            this.lbPisos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.lbPisos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbPisos.FormattingEnabled = true;
             this.lbPisos.ItemHeight = 15;
@@ -89,9 +89,9 @@
             this.lbPisos.Size = new System.Drawing.Size(154, 409);
             this.lbPisos.TabIndex = 0;
             this.lbPisos.SelectedIndexChanged += new System.EventHandler(this.lbPisos_SelectedIndexChanged);
-            // 
+            //
             // gbSecciones
-            // 
+            //
             this.gbSecciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbSecciones.Controls.Add(this.cbSecciones);
             this.gbSecciones.Enabled = false;
@@ -103,9 +103,9 @@
             this.gbSecciones.TabIndex = 6;
             this.gbSecciones.TabStop = false;
             this.gbSecciones.Text = "Fc secciones";
-            // 
+            //
             // cbSecciones
-            // 
+            //
             this.cbSecciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSecciones.FormattingEnabled = true;
             this.cbSecciones.Location = new System.Drawing.Point(6, 18);
@@ -113,33 +113,33 @@
             this.cbSecciones.Size = new System.Drawing.Size(154, 23);
             this.cbSecciones.TabIndex = 0;
             this.cbSecciones.SelectedIndexChanged += new System.EventHandler(this.cbSecciones_SelectedIndexChanged);
-            // 
+            //
             // cmEditar_Ref
-            // 
+            //
             this.cmEditar_Ref.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editarRefuerzoToolStripMenuItem,
             this.eliminarRefuerzoToolStripMenuItem});
             this.cmEditar_Ref.Name = "cmEditar_Ref";
             this.cmEditar_Ref.Size = new System.Drawing.Size(164, 48);
-            // 
+            //
             // editarRefuerzoToolStripMenuItem
-            // 
+            //
             this.editarRefuerzoToolStripMenuItem.Name = "editarRefuerzoToolStripMenuItem";
             this.editarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.editarRefuerzoToolStripMenuItem.Text = "Editar refuerzo";
             this.editarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.editarRefuerzoToolStripMenuItem_Click);
-            // 
+            //
             // eliminarRefuerzoToolStripMenuItem
-            // 
+            //
             this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
             this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
             this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
-            // 
+            //
             // Grafica
-            // 
-            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Grafica.BackColor = System.Drawing.Color.White;
             this.Grafica.Location = new System.Drawing.Point(27, 12);
@@ -150,9 +150,9 @@
             this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
-            // 
+            //
             // button1
-            // 
+            //
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(568, 502);
             this.button1.Name = "button1";
@@ -161,11 +161,11 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
+            //
             // chart1
-            // 
-            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
@@ -181,9 +181,9 @@
             this.chart1.Size = new System.Drawing.Size(512, 364);
             this.chart1.TabIndex = 8;
             this.chart1.Text = "chart1";
-            // 
+            //
             // FInterfaz_Seccion
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;

@@ -177,6 +177,7 @@ namespace DisenoColumnas.Clases
                             }
                             catch { }
                         }
+                        Seccions[i].Item1.Actualizar_Ref(alzado, i, Form1.mIntefazSeccion);
                     }
                 }
             }
@@ -187,6 +188,8 @@ namespace DisenoColumnas.Clases
                 resultadosETABs[i].Porct_Refuerzo[1] = (resultadosETABs[i].As_asignado[1] / (float)resultadosETABs[i].AsTopMediumButton[1]) * 100;
                 resultadosETABs[i].Porct_Refuerzo[2] = (resultadosETABs[i].As_asignado[2] / (float)resultadosETABs[i].AsTopMediumButton[2]) * 100;
             }
+
+
         }
 
         public void AsignarAsTopMediumButton_()

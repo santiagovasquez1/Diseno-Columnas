@@ -343,12 +343,12 @@
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column2.HeaderText = "Diametro Ref";
             this.Column2.Items.AddRange(new object[] {
-            "#3",
             "#4",
             "#5",
             "#6",
             "#7",
-            "#8"});
+            "#8",
+            "#10"});
             this.Column2.Name = "Column2";
             this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 

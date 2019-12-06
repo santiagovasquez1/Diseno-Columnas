@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Interfaz_Seccion;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -474,6 +475,45 @@ namespace DisenoColumnas.Secciones
         public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {
            // throw new NotImplementedException();
+        }
+
+        public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
+        {
+            if (palzado.Colum_Alzado[indice] != null)
+            {
+                var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
+                foreach (var refuerzoi in Refuerzo_alzado)
+                {
+                    refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
+                }
+            }
+
+            if (fInterfaz != null)
+            {
+                fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
+                fInterfaz.Get_Columna();
+                fInterfaz.Load_Pisos();
+                fInterfaz.Get_section();
+                fInterfaz.Invalidate();
+            }
+
+        }
+
+        public void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
+        {
+            if (palzado.Colum_Alzado[indice] != null)
+            {
+
+            }
+
+            if (fInterfaz != null)
+            {
+                fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
+                fInterfaz.Get_Columna();
+                fInterfaz.Load_Pisos();
+                fInterfaz.Get_section();
+                fInterfaz.Invalidate();
+            }
         }
 
         public static bool operator ==(CCirculo s1, CCirculo s2)
