@@ -718,5 +718,16 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
 
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count-1].Item1 is CRectangulo)
+            {
+                CRectangulo seccionPrueba = (CRectangulo)Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1].Item1;
+
+
+                seccionPrueba.Prueba();
+            }
+        }
     }
 }

@@ -93,7 +93,7 @@ namespace DisenoColumnas
 
         public static float RedondearDecimales(float N_decimal, int multiplo)
         {
-            
+
             string[] NumeroDividido = Convert.ToString(N_decimal).Split(Convert.ToChar("."));
 
             int Entero = Convert.ToInt32(NumeroDividido[0]);
@@ -102,13 +102,13 @@ namespace DisenoColumnas
             try {
 
                 Decimal = Convert.ToSingle(NumeroDividido[1]);
-                if (NumeroDividido[1].IndexOf("0") ==0 && NumeroDividido[1].Length ==2)
+                if (NumeroDividido[1].IndexOf("0") == 0 && NumeroDividido[1].Length == 2)
                 {
                     string Entero2 = Entero + "." + "1";
                     return Convert.ToSingle(Entero2);
                 }
 
-                if (Convert.ToString(Decimal).Length <2)
+                if (Convert.ToString(Decimal).Length < 2)
                 {
                     return N_decimal;
                 }
@@ -123,7 +123,7 @@ namespace DisenoColumnas
             int DecimilaRedondeado;
             if (valor < (Comparacion))
             {
-                DecimilaRedondeado=(valor + 1) * multiplo;
+                DecimilaRedondeado = (valor + 1) * multiplo;
                 if (DecimilaRedondeado == 100)
                 {
                     Entero += 1;
@@ -132,7 +132,7 @@ namespace DisenoColumnas
             }
             else
             {
-                DecimilaRedondeado=valor* multiplo;
+                DecimilaRedondeado = valor * multiplo;
             }
 
             return Convert.ToSingle(Entero + "." + DecimilaRedondeado);
@@ -152,7 +152,7 @@ namespace DisenoColumnas
                 return (T)formatter.Deserialize(ms);
             }
         }
-        public static List<PointF> CreatePointsForCircle(int numero_puntos, double pradio,double XC,double YC)
+        public static List<PointF> CreatePointsForCircle(int numero_puntos, double pradio, double XC, double YC)
         {
             double delta_angulo = 2 * Math.PI / numero_puntos;
             double angulo = 0;
@@ -289,7 +289,7 @@ namespace DisenoColumnas
 
             foreach (KeyValuePair<int, double> As_d in Form1.Proyecto_.AceroBarras)
             {
-                if (As_d.Value >= 0.98 * Asi) 
+                if (As_d.Value >= 0.98 * Asi)
                 {
                     p_error = Math.Abs((Asi - As_d.Value) / As_d.Value) * 100;
                     Dif.Add(p_error);
@@ -309,6 +309,44 @@ namespace DisenoColumnas
 
             return Barra_def;
         }
+
+        /// <summary>
+        /// Determina el Área de un polígono por coordenadas
+        /// </summary>
+        /// <param name="CoordenadasXY">Coordenadas del Polígono (Nota: las coordenadas no son repetidas, es decir no se cierra el polígono)</param>
+        /// <returns></returns>
+        public static float DeterminarArea(List<float[]> CoordenadasXY)
+        {
+            float Area1 = 0;
+            float Area2 = 0;
+            for (int i = 0; i < CoordenadasXY.Count; i++)
+            {
+
+                if (i + 1 == CoordenadasXY.Count)
+                {
+                    Area1 += CoordenadasXY[i][0] * CoordenadasXY[0][1];
+                    Area2 += CoordenadasXY[i][1] * CoordenadasXY[0][0];
+                }
+                else
+                {
+                    Area1 += CoordenadasXY[i][0] * CoordenadasXY[i + 1][1];
+                    Area2 += CoordenadasXY[i][1] * CoordenadasXY[i + 1][0];
+                }
+
+            }
+            return Math.Abs(Area1 - Area2) / 2; ;
+
+        }
+
+        public static float[] DeterminarCentroide(List<float[]> CoordenadasXY)
+        {
+            float X = CoordenadasXY.Sum(x => x[0])/CoordenadasXY.Count;
+            float Y = CoordenadasXY.Sum(x => x[1]) / CoordenadasXY.Count;
+            return new float[] { X, Y };
+
+         }
+
+
     }
 
 

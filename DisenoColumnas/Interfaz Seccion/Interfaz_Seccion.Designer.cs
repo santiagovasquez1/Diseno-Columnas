@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FInterfaz_Seccion));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -39,10 +42,13 @@
             this.editarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Grafica = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -114,19 +120,19 @@
             this.editarRefuerzoToolStripMenuItem,
             this.eliminarRefuerzoToolStripMenuItem});
             this.cmEditar_Ref.Name = "cmEditar_Ref";
-            this.cmEditar_Ref.Size = new System.Drawing.Size(181, 70);
+            this.cmEditar_Ref.Size = new System.Drawing.Size(164, 48);
             // 
             // editarRefuerzoToolStripMenuItem
             // 
             this.editarRefuerzoToolStripMenuItem.Name = "editarRefuerzoToolStripMenuItem";
-            this.editarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.editarRefuerzoToolStripMenuItem.Text = "Editar refuerzo";
             this.editarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.editarRefuerzoToolStripMenuItem_Click);
             // 
             // eliminarRefuerzoToolStripMenuItem
             // 
             this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
-            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
             this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
             // 
@@ -145,12 +151,45 @@
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(568, 502);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(107, 39);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(512, 364);
+            this.chart1.TabIndex = 8;
+            this.chart1.Text = "chart1";
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(904, 528);
+            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gbSecciones);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -166,6 +205,7 @@
             this.gbSecciones.ResumeLayout(false);
             this.cmEditar_Ref.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,5 +222,7 @@
         private System.Windows.Forms.ContextMenuStrip cmEditar_Ref;
         private System.Windows.Forms.ToolStripMenuItem eliminarRefuerzoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarRefuerzoToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        internal System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

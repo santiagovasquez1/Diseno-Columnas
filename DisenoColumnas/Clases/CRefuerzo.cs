@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DisenoColumnas.Clases
 {
@@ -31,6 +32,73 @@ namespace DisenoColumnas.Clases
             As_Long = Form1.Proyecto_.AceroBarras[d1] * Math.Pow(100, 2);
             Alzado = 1;
         }
+
+        #region Propiedades y Metodos para Diagrama
+
+        public List<Tuple<float[], int>> Coordenadas_PorCadaAngulo { get; set; }
+
+        public List<Tuple<List<float>, int>> Esfuerzos_PorCadaCPorCadaAngulo { get; set; }
+        public List<Tuple<List<float>, int>> Deformacion_PorCadaCPorCadaAngulo { get; set; }
+        public List<Tuple<List<float>, int>> Fuerzas_PorCadaCPorCadaAngulo { get; set; }
+
+        public void CalcularCoordenadasPorCadaAngulo(int Angulo)
+        {
+
+            List<double> CoordRotacion = B_Operaciones_Matricialesl.Operaciones.Rotacion(Coord[0], Coord[1], Angulo);
+            float[] CoordeRotadas = new float[] { (float)CoordRotacion[0], (float)CoordRotacion[1] };
+            Coordenadas_PorCadaAngulo.Add(new Tuple<float[], int>(CoordeRotadas, Angulo));
+
+        }
+
+        public void CalcularDeformacion(List<float> C, float ecu,int Angulo,float FY,float ES,float Ymax)
+        {
+
+          float[] CoordenadasAngulo=  Coordenadas_PorCadaAngulo.Find(x => x.Item2 == Angulo).Item1;
+            List<float> Fuerzas = new List<float>();
+            List<float> Deform = new List<float>();
+            List<float> Esfuerz = new List<float>();
+            for (int i=0; i < C.Count; i++)
+            {
+                float C_Original = Ymax - C[i];
+                float d = Ymax - CoordenadasAngulo[1];
+                float esi =((d-C_Original) / C_Original )* ecu;
+
+                float fs = ES * esi;
+
+
+                if (Math.Abs(fs) > FY)
+                {
+                    if (esi < 0)
+                    {
+                        fs = -FY;
+                    }
+                    else
+                    {
+                        fs = FY;
+                    }
+                }
+                float FS;
+
+                FS = fs * (float)Form1.Proyecto_.AceroBarras[Convert.ToInt32(Diametro.Substring(1))] * 10000;
+
+                Fuerzas.Add(FS);
+                Esfuerz.Add(fs);
+                Deform.Add(esi);
+
+            }
+            Esfuerzos_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Esfuerz, Angulo));
+            Deformacion_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Deform, Angulo));
+            Fuerzas_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Fuerzas, Angulo));
+
+
+
+
+
+        }
+
+        #endregion
+
+
 
         public void Dibujo_Ref_Autocad(double Xi, double Yi, double Xmax, double Xmin, double Ymax, double Ymin)
         {
