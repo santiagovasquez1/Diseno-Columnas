@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 
 namespace DisenoColumnas
 {
@@ -340,12 +341,60 @@ namespace DisenoColumnas
 
         public static float[] DeterminarCentroide(List<float[]> CoordenadasXY)
         {
-            float X = CoordenadasXY.Sum(x => x[0])/CoordenadasXY.Count;
-            float Y = CoordenadasXY.Sum(x => x[1]) / CoordenadasXY.Count;
-            return new float[] { X, Y };
 
-         }
+            float Mx = 0; float My = 0;
+            float Area = DeterminarArea(CoordenadasXY);
 
+            for (int i = CoordenadasXY.Count - 1; i >= 0; i--)
+            {
+                float xi;
+                float xi_1;
+                float yi;
+                float yi_1;
+
+                if (i - 1 == -1)
+                {
+                    xi = CoordenadasXY[i][0];
+                    xi_1 = CoordenadasXY[CoordenadasXY.Count - 1][0];
+                    yi = CoordenadasXY[i][1];
+                    yi_1 = CoordenadasXY[CoordenadasXY.Count - 1][1];
+                }
+                else
+                {
+                  xi = CoordenadasXY[i][0];
+                  xi_1 = CoordenadasXY[i - 1][0];
+                  yi = CoordenadasXY[i][1];
+                  yi_1 = CoordenadasXY[i - 1][1];
+                }
+
+                Mx += (float)((xi_1 - xi) * ((Math.Pow(yi_1, 2) + Math.Pow(yi, 2) + yi * yi_1)/6));
+                My += (float)((yi_1 - yi) * ((Math.Pow(xi_1, 2) + Math.Pow(xi, 2) + xi * xi_1)/6));
+
+            }
+
+            return new float[] { My / Area, Mx / Area };
+
+
+        }
+        public static void EstiloDatGridView(DataGridView dataGrid)
+        {
+            DataGridViewCellStyle StyleC = new DataGridViewCellStyle();
+            StyleC.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            StyleC.Font = new Font("Vderdana", 8, FontStyle.Bold);
+
+            DataGridViewCellStyle StyleR = new DataGridViewCellStyle();
+            StyleR.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            StyleR.Font = new Font("Vderdana", 8, FontStyle.Regular);
+
+            foreach (DataGridViewColumn column in dataGrid.Columns)
+            {
+                column.HeaderCell.Style = StyleC;
+            }
+            foreach (DataGridViewRow row in dataGrid.Rows)
+            {
+                row.DefaultCellStyle = StyleR;
+            }
+        }
 
     }
 

@@ -103,6 +103,26 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap angulo_de_flecha_derecha {
+            get {
+                object obj = ResourceManager.GetObject("angulo-de-flecha-derecha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AnguloIzquierda {
+            get {
+                object obj = ResourceManager.GetObject("AnguloIzquierda", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap anteproyecto {
             get {
                 object obj = ResourceManager.GetObject("anteproyecto", resourceCulture);
@@ -136,6 +156,16 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap close_button {
             get {
                 object obj = ResourceManager.GetObject("close-button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap close_button1 {
+            get {
+                object obj = ResourceManager.GetObject("close-button1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

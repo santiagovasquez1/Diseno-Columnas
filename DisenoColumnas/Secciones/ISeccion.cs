@@ -24,6 +24,14 @@ namespace DisenoColumnas.Secciones
         List<float[]> CoordenadasSeccion { get; set; }
         List<Tuple<int, int>> No_D_Barra { get; set; }
 
+         List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
+        List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
+
+         List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
+        List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
+
+        List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
         double Acero_Long { get; set; }
 
         void CalcularArea();

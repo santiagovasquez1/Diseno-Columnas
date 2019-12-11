@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
+
 namespace DisenoColumnas.Interfaz_Seccion
 {
     public enum Tipo_Edicion
@@ -719,13 +720,29 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count-1].Item1 is CRectangulo)
+            if (seccion is CRectangulo)
             {
-                CRectangulo seccionPrueba = (CRectangulo)Form1.Proyecto_.ColumnaSelect.Seccions[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1].Item1;
+                CRectangulo cRectangulo = (CRectangulo)seccion;
+                cRectangulo.DiagramaInteraccion();
 
+                DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
+                DiagramaInteraccion.Seccion = cRectangulo;
+                diagramaInteraccion.Show();
+            }
+            if (seccion is CSD)
+            {
+                CSD cRectangulo = (CSD)seccion;
+                cRectangulo.DiagramaInteraccion();
 
-                seccionPrueba.Prueba();
+                DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
+                DiagramaInteraccion.Seccion = cRectangulo;
+                diagramaInteraccion.Show();
             }
         }
+
+
+
+
+
     }
 }

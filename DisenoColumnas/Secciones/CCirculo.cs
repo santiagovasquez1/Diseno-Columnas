@@ -31,6 +31,21 @@ namespace DisenoColumnas.Secciones
         public float H { get { return 2 * (float)radio; } set { H = value; } }
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
+
+
+        public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
+
+        public List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
+
+        public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
+
+
+
+
+
         public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> pCoord)
         {
             Name = Nombre;

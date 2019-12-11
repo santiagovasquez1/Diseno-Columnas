@@ -44,7 +44,7 @@ namespace DisenoColumnas.Clases
         public void CalcularCoordenadasPorCadaAngulo(int Angulo)
         {
 
-            List<double> CoordRotacion = B_Operaciones_Matricialesl.Operaciones.Rotacion(Coord[0], Coord[1], Angulo);
+            List<double> CoordRotacion = B_Operaciones_Matricialesl.Operaciones.Rotacion(Coord[0], Coord[1], (Angulo * Math.PI) / 180);
             float[] CoordeRotadas = new float[] { (float)CoordRotacion[0], (float)CoordRotacion[1] };
             Coordenadas_PorCadaAngulo.Add(new Tuple<float[], int>(CoordeRotadas, Angulo));
 
@@ -61,8 +61,8 @@ namespace DisenoColumnas.Clases
             {
                 float C_Original = Ymax - C[i];
                 float d = Ymax - CoordenadasAngulo[1];
-                float esi =((d-C_Original) / C_Original )* ecu;
-
+                float esi =((C_Original-d) / C_Original )* ecu;
+                
                 float fs = ES * esi;
 
 

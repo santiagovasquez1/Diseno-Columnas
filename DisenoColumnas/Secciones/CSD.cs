@@ -1,4 +1,5 @@
-﻿using DisenoColumnas.Clases;
+﻿using B_Operaciones_Matricialesl;
+using DisenoColumnas.Clases;
 using DisenoColumnas.Interfaz_Seccion;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,328 @@ namespace DisenoColumnas.Secciones
         public bool Editado { get; set; } = false;
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
         public List<Tuple<int, int>> No_D_Barra { get; set; }
+
+        #region Diagrama de Interacción: Propiedades y Metodos
+        public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
+
+        public List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
+
+        public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
+
+        public void DiagramaInteraccion()
+        {
+
+            float b1 = 0.85f;
+
+            List<PointF> Coordenadas = new List<PointF>();
+            float X, Y;
+            X = -(B * 100 / 2);
+            Y = -(H * 100 / 2);
+            Coordenadas.Add(new PointF(X, Y));
+
+            X = (B * 100 / 2);
+            Y = -(H * 100 / 2);
+            Coordenadas.Add(new PointF(X, Y));
+
+            X = (B * 100 / 2);
+            Y = (H * 100 / 2);
+            Coordenadas.Add(new PointF(X, Y));
+
+            X = -(B * 100 / 2);
+            Y = (H * 100 / 2);
+            Coordenadas.Add(new PointF(X, Y));
+            float ecu = 0.003f;
+            float Fy = Form1.Proyecto_.FY;
+            //float fc = Material.FC;
+            float fc = 280f;
+            float Es = 2000000;
+
+            List<List<float[]>> Coordenadas_PorCadaAngulo = new List<List<float[]>>();
+
+            List<Tuple<List<float>, int>> m_PorCadaAngulo = new List<Tuple<List<float>, int>>();
+            List<Tuple<List<float>, int>> YVariacionC = new List<Tuple<List<float>, int>>();
+            List<Tuple<List<float>, int>> YVariaciona = new List<Tuple<List<float>, int>>();
+
+            List<Tuple<List<float>, int>> AreaComprimida = new List<Tuple<List<float>, int>>();
+            List<Tuple<List<float[]>, int>> CentroideAreaComprimida = new List<Tuple<List<float[]>, int>>();
+
+            foreach (CRefuerzo cRefuerzo in Refuerzos)
+            {
+                cRefuerzo.Coordenadas_PorCadaAngulo = new List<Tuple<float[], int>>();
+                cRefuerzo.Esfuerzos_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
+                cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
+                cRefuerzo.Deformacion_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
+            }
+
+
+            int DeltasVariacionC = 20;
+
+            int Delta = 10;
+            for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
+            {
+                List<float[]> PorCadaRotacion = new List<float[]>();
+                List<float> ms = new List<float>();
+                //Rotacion de la Sección 
+                for (int i = 0; i < Coordenadas.Count; i++)
+                {
+                    List<double> CoordRotadas = Operaciones.Rotacion(Coordenadas[i].X, Coordenadas[i].Y, (Angulo * Math.PI) / 180);
+
+                    PorCadaRotacion.Add(new float[] { (float)CoordRotadas[0], (float)CoordRotadas[1] });
+                }
+
+
+                float Ymax = -99999; float Ymin = 999999;
+                float Xmax = -99999; float Xmin = 999999;
+
+                for (int i = 0; i < PorCadaRotacion.Count; i++)
+                {
+
+                    if (PorCadaRotacion[i][1] > Ymax)
+                    {
+                        Ymax = PorCadaRotacion[i][1];
+                    }
+                    if (PorCadaRotacion[i][1] < Ymin)
+                    {
+                        Ymin = PorCadaRotacion[i][1];
+                    }
+
+                    if (PorCadaRotacion[i][0] > Xmax)
+                    {
+                        Xmax = PorCadaRotacion[i][0];
+                    }
+                    if (PorCadaRotacion[i][0] < Xmin)
+                    {
+                        Xmin = PorCadaRotacion[i][0];
+                    }
+                    float m;
+                    if (i + 1 == PorCadaRotacion.Count)
+                    {
+                        m = (PorCadaRotacion[i][1] - PorCadaRotacion[0][1]) / (PorCadaRotacion[i][0] - PorCadaRotacion[0][0]);
+                    }
+                    else
+                    {
+                        m = (PorCadaRotacion[i][1] - PorCadaRotacion[i + 1][1]) / (PorCadaRotacion[i][0] - PorCadaRotacion[i + 1][0]);
+                    }
+
+                    ms.Add(m);
+
+                }
+
+
+                Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
+
+
+
+                List<float> C_Variando = new List<float>();
+                List<float> a_Variando = new List<float>();
+                List<float> AreaComprimida1 = new List<float>();
+                List<float[]> CentroideAreaComprimida1 = new List<float[]>();
+
+                for (float C = Ymin + (Ymax - Ymin) / DeltasVariacionC; C <= Ymax; C += (Ymax - Ymin) / DeltasVariacionC)
+                {
+                    a_Variando.Add(C + (Ymax - C) - (Ymax - C) * b1);
+                    C_Variando.Add(C);
+                }
+
+
+                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax));
+
+                for (int i = 0; i < a_Variando.Count; i++)
+                {
+
+                    List<float[]> PuntosInter = HallarPuntosDeInter(ms, PorCadaRotacion, a_Variando[i], Xmax, Xmin);
+
+                    List<float[]> PuntosPorEncimadeA = new List<float[]>();
+
+                    for (int j = 0; j < PorCadaRotacion.Count; j++)
+                    {
+                        if (a_Variando[i] <= PorCadaRotacion[j][1])
+                        {
+                            PuntosPorEncimadeA.Add(PorCadaRotacion[j]);
+                        }
+
+                    }
+                    PuntosInter = PuntosInter.OrderByDescending(x => x[0]).ToList();
+                    PuntosPorEncimadeA = PuntosPorEncimadeA.OrderByDescending(x => x[0]).ToList();
+
+                    List<float[]> PuntosParaArea = new List<float[]>();
+
+                    PuntosParaArea.Add(PuntosInter[0]); PuntosParaArea.AddRange(PuntosPorEncimadeA); PuntosParaArea.Add(PuntosInter[1]);
+
+                    float AreaComprimida_Aux = FunctionsProject.DeterminarArea(PuntosParaArea);
+
+
+                    AreaComprimida1.Add(AreaComprimida_Aux);
+
+                    CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroide(PuntosParaArea));
+
+                }
+
+                CentroideAreaComprimida.Add(new Tuple<List<float[]>, int>(CentroideAreaComprimida1, Angulo));
+                AreaComprimida.Add(new Tuple<List<float>, int>(AreaComprimida1, Angulo));
+                YVariaciona.Add(new Tuple<List<float>, int>(a_Variando, Angulo));
+                YVariacionC.Add(new Tuple<List<float>, int>(C_Variando, Angulo));
+                Coordenadas_PorCadaAngulo.Add(PorCadaRotacion);
+                m_PorCadaAngulo.Add(new Tuple<List<float>, int>(ms, Angulo));
+
+
+            }
+
+            PnMn2D = new List<Tuple<List<float[]>, int>>();
+            PuMu2D = new List<Tuple<List<float[]>, int>>();
+            for (int i = 0; i < AreaComprimida.Count; i++)
+            {
+                List<float[]> PnMnAux = new List<float[]>();
+                List<float[]> PuMuAux = new List<float[]>();
+
+
+                for (int j = 0; j < AreaComprimida[i].Item1.Count; j++)
+                {
+                    float Cc = 0.85f * fc * AreaComprimida[i].Item1[j];
+                    float Fs = 0; float Ms = 0;
+                    //Pmax
+                    float Ast = 0;
+                    foreach (CRefuerzo cRefuerzo in Refuerzos)
+                    {
+                        Fs += cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j];
+                        Ms += Math.Abs(cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j]) * Math.Abs(cRefuerzo.Coordenadas_PorCadaAngulo[i].Item1[1]);
+
+                        Ast += (float)Form1.Proyecto_.AceroBarras[Convert.ToInt32(cRefuerzo.Diametro.Substring(1))] * 10000;
+                    }
+
+                    float Mn_ = Cc * (CentroideAreaComprimida[i].Item1[j][1]) + Ms;
+                    float Pn_ = Cc + Fs;
+
+                    float minY = Refuerzos.Min(x => x.Coordenadas_PorCadaAngulo[i].Item1[1]);
+                    float esi = Refuerzos.Find(x => x.Coordenadas_PorCadaAngulo[i].Item1[1] == minY).Deformacion_PorCadaCPorCadaAngulo[i].Item1[j];
+
+                    float et = Math.Abs(esi);
+                    float fi = DeterminarFi(et);
+
+                    float Pu = Pn_ * fi;
+                    float Mu = Mn_ * fi;
+
+
+
+                    float Pmax = 0.75f * (0.85f * fc * ((float)Area * 10000 - Ast) + Fy * Ast);
+
+
+                    if (Pn_ > Pmax)
+                    {
+                        Pn_ = Pmax;
+                        Pu = Pmax * 0.65f;
+                    }
+
+                    if (Pn_ < 0)
+                    {
+                        if (PnMnAux.Exists(x => x[0] == 0) == false)
+                        {
+                            PnMnAux.Add(new float[] { 0, -Ast * Fy });
+                            PuMuAux.Add(new float[] { 0, -Ast * Fy });
+
+
+                        }
+                    }
+                    else
+                    {
+                        PnMnAux.Add(new float[] { Mn_, Pn_ });
+                        PuMuAux.Add(new float[] { Mu, Pu });
+                    }
+
+
+                    if (j == AreaComprimida[i].Item1.Count - 1)
+                    {
+                        float Pmax1 = PnMnAux.Max(x => x[1]);
+                        int IndicePmax1 = PnMnAux.FindIndex(x => x[1] == Pmax1);
+
+                        PnMnAux.Insert(IndicePmax1, new float[] { 0, Pmax1 });
+                        PuMuAux.Insert(IndicePmax1, new float[] { 0, Pmax1 * 0.65f });
+                    }
+
+                }
+                PnMn2D.Add(new Tuple<List<float[]>, int>(PnMnAux, AreaComprimida[i].Item2));
+                PuMu2D.Add(new Tuple<List<float[]>, int>(PuMuAux, AreaComprimida[i].Item2));
+            }
+
+
+            MnPn3D = new List<Tuple<List<float[]>, int>>();
+            MuPu3D = new List<Tuple<List<float[]>, int>>();
+
+
+            for (int i = 0; i < PnMn2D.Count; i++)
+            {
+                int Angulo = PnMn2D[i].Item2;
+                List<float[]> SeriePuntos = new List<float[]>();
+                List<float[]> SeriePuntosU = new List<float[]>();
+
+                for (int j = 0; j < PnMn2D[i].Item1.Count; j++)
+                {
+                    float X1 = (float)(PnMn2D[i].Item1[j][0] * Math.Cos((Angulo * Math.PI / 180)));
+                    float Y2 = (float)(PnMn2D[i].Item1[j][0] * Math.Sin((Angulo * Math.PI / 180)));
+                    float Z2 = PnMn2D[i].Item1[j][1];
+                    float[] PuntosDescompuestos = new float[] { X1, Y2, Z2 };
+
+                    SeriePuntos.Add(PuntosDescompuestos);
+
+                    float X1U = (float)(PuMu2D[i].Item1[j][0] * Math.Cos((Angulo * Math.PI / 180)));
+                    float Y2U = (float)(PuMu2D[i].Item1[j][0] * Math.Sin((Angulo * Math.PI / 180)));
+                    float Z2U = PuMu2D[i].Item1[j][1];
+                    float[] PuntosDescompuestosUltimos = new float[] { X1U, Y2U, Z2U };
+
+                    SeriePuntosU.Add(PuntosDescompuestosUltimos);
+
+
+                }
+                MnPn3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
+                MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
+
+            }
+
+
+        }
+        private float DeterminarFi(float et)
+        {
+            float fi;
+            if (et <= 0.002f)
+            {
+                fi = 0.65f;
+            }
+            else if (et > 0.002 && et < 0.005f)
+            {
+                fi = 0.65f + (et - 0.002f) * (250f / 3f);
+            }
+            else
+            {
+                fi = 0.90f;
+            }
+            return fi;
+
+
+        }
+        private List<float[]> HallarPuntosDeInter(List<float> m, List<float[]> XY, float Yperteneciente, float Xmax, float Xmin)
+        {
+            List<float[]> PuntosHallados = new List<float[]>();
+
+            for (int i = 0; i < m.Count; i++)
+            {
+                float X = ((Yperteneciente - XY[i][1]) / m[i]) + XY[i][0];
+
+                if (X >= Xmin && X <= Xmax)
+                {
+                    PuntosHallados.Add(new float[] { X, Yperteneciente });
+                }
+            }
+
+            return PuntosHallados;
+
+
+        }
+
+        #endregion
+
 
         public CSD(string Nombre, float pB, float pH, float pTw, float pTf, MAT_CONCRETE pMaterial, TipodeSeccion pShape, List<float[]> pCoord = null)
         {
