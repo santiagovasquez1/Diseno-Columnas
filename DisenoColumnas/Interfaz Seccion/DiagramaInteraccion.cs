@@ -33,6 +33,10 @@ namespace DisenoColumnas.Interfaz_Seccion
         private List<float[]> MP3D_SoloUnaRecta { get; set; }
 
         private List<Tuple<List<float[]>, int>> TuplesMP3D { get; set; }
+
+        public static List<float[]> MP_Soli3D = new List<float[]>();
+
+
         private bool ConFi { get; set; }
 
 

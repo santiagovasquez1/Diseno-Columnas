@@ -35,7 +35,7 @@ namespace DisenoColumnas.Clases
         /// </summary>
         public List<string> Load { get; set; } = new List<string>();
 
-        /// <summary><c></c> Carga Axial: Compresión (-)   Tracción (+).
+        /// <summary><c></c> Carga Axial: Compresión (+)   Tracción (-).
         ///
         /// </summary>
         public List<float> P { get; set; } = new List<float>();

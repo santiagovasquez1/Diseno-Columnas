@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiagramaInteraccion));
             this.gl = new OpenTK.GLControl();
             this.Redraw = new System.Windows.Forms.Timer(this.components);
@@ -58,6 +58,7 @@
             this.P = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mx = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.My = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CharMomentos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.GroupBox_Grafica_Diagrama1.SuspendLayout();
@@ -94,15 +95,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CharMomentos.BackColor = System.Drawing.Color.WhiteSmoke;
-            chartArea2.Name = "ChartArea1";
-            this.CharMomentos.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.CharMomentos.ChartAreas.Add(chartArea1);
             this.CharMomentos.Location = new System.Drawing.Point(22, 21);
             this.CharMomentos.Name = "CharMomentos";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsVisibleInLegend = false;
-            series2.Name = "Series1";
-            this.CharMomentos.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsVisibleInLegend = false;
+            series1.Name = "Series1";
+            this.CharMomentos.Series.Add(series1);
             this.CharMomentos.Size = new System.Drawing.Size(346, 235);
             this.CharMomentos.TabIndex = 16;
             this.CharMomentos.Text = "chart1";
@@ -249,6 +250,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label2);
@@ -261,7 +263,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(991, 698);
+            this.panel1.Size = new System.Drawing.Size(991, 685);
             this.panel1.TabIndex = 26;
             // 
             // button2
@@ -379,12 +381,21 @@
             this.My.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.My.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(28, 644);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(55, 23);
+            this.button3.TabIndex = 28;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // DiagramaInteraccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(991, 698);
+            this.ClientSize = new System.Drawing.Size(991, 685);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -437,5 +448,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn P;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mx;
         private System.Windows.Forms.DataGridViewTextBoxColumn My;
+        private System.Windows.Forms.Button button3;
     }
 }

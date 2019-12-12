@@ -56,6 +56,10 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             Paint_Formulario();
             Grafica.Invalidate();
+
+            if (edicion == Tipo_Edicion.Secciones_predef)
+                Radio_Dmo.Checked = true;
+
         }
 
         private void Paint_Formulario()
@@ -740,9 +744,25 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
         }
 
+        private void Radio_Dmo_CheckedChanged(object sender, EventArgs e)
+        {
+            GDE = GDE.DMO;
+            //if (Form1.Proyecto_ == null)
+            //{
+            //    GDE = Form1.Proyecto_.DMO_DES;
+            //}
+            //else
+            //{
+            //    if (Radio_Dmo.Checked)
+            //        GDE = GDE.DMO;
+            //    else
+            //        GDE = GDE.DES;
+            //}
+        }
 
-
-
-
+        private void Radio_Des_CheckedChanged(object sender, EventArgs e)
+        {
+            GDE = GDE.DES;
+        }
     }
 }

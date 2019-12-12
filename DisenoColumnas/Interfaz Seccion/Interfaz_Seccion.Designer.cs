@@ -41,10 +41,14 @@
             this.Grafica = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Radio_Dmo = new System.Windows.Forms.RadioButton();
+            this.Radio_Des = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -66,9 +70,9 @@
             this.groupBox1.Controls.Add(this.lbPisos);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(735, 61);
+            this.groupBox1.Location = new System.Drawing.Point(735, 113);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(166, 438);
+            this.groupBox1.Size = new System.Drawing.Size(166, 386);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de pisos";
@@ -82,7 +86,7 @@
             this.lbPisos.ItemHeight = 15;
             this.lbPisos.Location = new System.Drawing.Point(6, 24);
             this.lbPisos.Name = "lbPisos";
-            this.lbPisos.Size = new System.Drawing.Size(154, 409);
+            this.lbPisos.Size = new System.Drawing.Size(154, 349);
             this.lbPisos.TabIndex = 0;
             this.lbPisos.SelectedIndexChanged += new System.EventHandler(this.lbPisos_SelectedIndexChanged);
             // 
@@ -93,7 +97,7 @@
             this.gbSecciones.Enabled = false;
             this.gbSecciones.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSecciones.ForeColor = System.Drawing.Color.White;
-            this.gbSecciones.Location = new System.Drawing.Point(735, 8);
+            this.gbSecciones.Location = new System.Drawing.Point(735, 65);
             this.gbSecciones.Name = "gbSecciones";
             this.gbSecciones.Size = new System.Drawing.Size(166, 47);
             this.gbSecciones.TabIndex = 6;
@@ -158,12 +162,56 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.Radio_Des);
+            this.groupBox2.Controls.Add(this.Radio_Dmo);
+            this.groupBox2.Enabled = false;
+            this.groupBox2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(735, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(166, 47);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Grado de disipación: ";
+            // 
+            // Radio_Dmo
+            // 
+            this.Radio_Dmo.AutoSize = true;
+            this.Radio_Dmo.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Dmo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
+            this.Radio_Dmo.ForeColor = System.Drawing.Color.White;
+            this.Radio_Dmo.Location = new System.Drawing.Point(16, 22);
+            this.Radio_Dmo.Name = "Radio_Dmo";
+            this.Radio_Dmo.Size = new System.Drawing.Size(53, 19);
+            this.Radio_Dmo.TabIndex = 2;
+            this.Radio_Dmo.Text = "DMO";
+            this.Radio_Dmo.UseVisualStyleBackColor = false;
+            this.Radio_Dmo.CheckedChanged += new System.EventHandler(this.Radio_Dmo_CheckedChanged);
+            // 
+            // Radio_Des
+            // 
+            this.Radio_Des.AutoSize = true;
+            this.Radio_Des.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Des.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
+            this.Radio_Des.ForeColor = System.Drawing.Color.White;
+            this.Radio_Des.Location = new System.Drawing.Point(75, 22);
+            this.Radio_Des.Name = "Radio_Des";
+            this.Radio_Des.Size = new System.Drawing.Size(45, 19);
+            this.Radio_Des.TabIndex = 3;
+            this.Radio_Des.Text = "DES";
+            this.Radio_Des.UseVisualStyleBackColor = false;
+            this.Radio_Des.CheckedChanged += new System.EventHandler(this.Radio_Des_CheckedChanged);
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(904, 528);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.gbSecciones);
             this.Controls.Add(this.groupBox1);
@@ -180,6 +228,8 @@
             this.gbSecciones.ResumeLayout(false);
             this.cmEditar_Ref.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,5 +248,8 @@
         private System.Windows.Forms.ToolStripMenuItem editarRefuerzoToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.RadioButton Radio_Dmo;
+        internal System.Windows.Forms.RadioButton Radio_Des;
     }
 }

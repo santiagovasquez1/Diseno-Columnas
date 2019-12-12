@@ -25,7 +25,7 @@ namespace DisenoColumnas.Clases
 
         public void CalcularArea()
         {
-            Area = Form1.Proyecto_.AceroBarras[NoEstribo];
+            Area = FunctionsProject.Find_As(NoEstribo);
         }
 
         public override string ToString()
