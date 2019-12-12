@@ -29,7 +29,7 @@ namespace DisenoColumnas.Clases
             Coord = pcoord;
             TipodeRefuerzo = ptipo;
             d1 = Convert.ToInt32(Diametro.Substring(1));
-            As_Long = Form1.Proyecto_.AceroBarras[d1] * Math.Pow(100, 2);
+            As_Long = FunctionsProject.Find_As(d1) * Math.Pow(100, 2);
             Alzado = 1;
         }
 

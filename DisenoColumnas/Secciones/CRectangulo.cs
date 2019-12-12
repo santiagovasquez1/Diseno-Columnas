@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 
+
+
 namespace DisenoColumnas.Secciones
 {
     [Serializable]
@@ -429,7 +431,7 @@ namespace DisenoColumnas.Secciones
 
             s_min = 7.5;
 
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (gDE == GDE.DMO)
             {
                 s_max = B / 3 < H / 3 ? B * 100 / 3 : H * 100 / 3;
             }
@@ -506,15 +508,15 @@ namespace DisenoColumnas.Secciones
                 double PAs1, PAs2;
                 float Ach = (B - 2 * r) * (H - 2 * r);
 
-                S1 = Estribo.NoRamasV1 * Form1.Proyecto_.AceroBarras[3] / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
-                S2 = Estribo.NoRamasV1 * FY * Form1.Proyecto_.AceroBarras[3] / (FD2 * (B - 2 * r) * Material.FC);
+                S1 = Estribo.NoRamasV1 * FunctionsProject.Find_As(3) / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasV1 * FY * FunctionsProject.Find_As(3) / (FD2 * (B - 2 * r) * Material.FC);
 
                 #region Estribo  #3
 
                 SV = new double[] { S1 * 100, S2 * 100 }.Min();
 
-                S1 = Estribo.NoRamasH1 * Form1.Proyecto_.AceroBarras[3] / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
-                S2 = Estribo.NoRamasH1 * FY * Form1.Proyecto_.AceroBarras[3] / (FD2 * (H - 2 * r) * Material.FC);
+                S1 = Estribo.NoRamasH1 * FunctionsProject.Find_As(3) / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasH1 * FY * FunctionsProject.Find_As(3) / (FD2 * (H - 2 * r) * Material.FC);
 
                 SH = new double[] { S1 * 100, S2 * 100 }.Min();
                 Sdef1 = Math.Round(Math.Min(SV, SH), 1);
@@ -523,8 +525,8 @@ namespace DisenoColumnas.Secciones
                 {
                     var Db = Refuerzos.Min();
                     int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
-                    limite1 = 8 * Form1.Proyecto_.Diametro_ref[Db1];
-                    limite2 = 16 * Form1.Proyecto_.Diametro_ref[3];
+                    limite1 = 8 * FunctionsProject.Find_Diametro(Db1);
+                    limite2 = 16 * FunctionsProject.Find_Diametro(3);
                     limite3 = 15;
                     limite_def = new double[] { limite1, limite2, limite3 }.Min();
                     if (Sdef1 > limite_def) Sdef1 = limite_def;
@@ -534,7 +536,7 @@ namespace DisenoColumnas.Secciones
                 {
                     var Db = Refuerzos.Min();
                     int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
-                    limite1 = 6 * Form1.Proyecto_.Diametro_ref[Db1];
+                    limite1 = 6 * FunctionsProject.Find_Diametro(Db1);
                     limite2 = 15;
                     limite_def = new double[] { limite1, limite2 }.Min();
                     if (Sdef1 > limite_def) Sdef1 = limite_def;
@@ -549,12 +551,12 @@ namespace DisenoColumnas.Secciones
 
                 #region Estribo  #4
 
-                S1 = Estribo.NoRamasV1 * Form1.Proyecto_.AceroBarras[4] / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
-                S2 = Estribo.NoRamasV1 * FY * Form1.Proyecto_.AceroBarras[4] / (FD2 * (B - 2 * r) * Material.FC);
+                S1 = Estribo.NoRamasV1 * FunctionsProject.Find_As(4) / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasV1 * FY * FunctionsProject.Find_As(4) / (FD2 * (B - 2 * r) * Material.FC);
                 SV = new double[] { S1 * 100, S2 * 100 }.Min();
 
-                S1 = Estribo.NoRamasH1 * Form1.Proyecto_.AceroBarras[4] / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
-                S2 = Estribo.NoRamasH1 * FY * Form1.Proyecto_.AceroBarras[4] / (FD2 * (H - 2 * r) * Material.FC);
+                S1 = Estribo.NoRamasH1 * FunctionsProject.Find_As(4) / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
+                S2 = Estribo.NoRamasH1 * FY * FunctionsProject.Find_As(4) / (FD2 * (H - 2 * r) * Material.FC);
                 SH = new double[] { S1 * 100, S2 * 100 }.Min();
 
                 Sdef2 = Math.Round(Math.Min(SV, SH), 1);
@@ -563,8 +565,8 @@ namespace DisenoColumnas.Secciones
                 {
                     var Db = Refuerzos.Min();
                     int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
-                    limite1 = 8 * Form1.Proyecto_.Diametro_ref[Db1];
-                    limite2 = 16 * Form1.Proyecto_.Diametro_ref[4];
+                    limite1 = 8 * FunctionsProject.Find_As(Db1);
+                    limite2 = 16 * FunctionsProject.Find_As(4);
                     limite3 = 15;
                     limite_def = new double[] { limite1, limite2, limite3 }.Min();
                     if (Sdef2 > limite_def) Sdef2 = limite_def;
@@ -574,7 +576,7 @@ namespace DisenoColumnas.Secciones
                 {
                     var Db = Refuerzos.Min();
                     int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
-                    limite1 = 6 * Form1.Proyecto_.Diametro_ref[Db1];
+                    limite1 = 6 * FunctionsProject.Find_As(Db1);
                     limite2 = 15;
                     limite_def = new double[] { limite1, limite2 }.Min();
                     if (Sdef2 > limite_def) Sdef2 = limite_def;
@@ -590,13 +592,13 @@ namespace DisenoColumnas.Secciones
                 if (PAs1 < PAs2)
                 {
                     Estribo.NoEstribo = 3;
-                    Estribo.Area = Form1.Proyecto_.AceroBarras[Estribo.NoEstribo];
+                    Estribo.Area = FunctionsProject.Find_As(Estribo.NoEstribo);
                     Estribo.Separacion = (float)Sdef1;
                 }
                 else
                 {
                     Estribo.NoEstribo = 4;
-                    Estribo.Area = Form1.Proyecto_.AceroBarras[Estribo.NoEstribo];
+                    Estribo.Area = FunctionsProject.Find_As(Estribo.NoEstribo);
                     Estribo.Separacion = (float)Sdef2;
                 }
             }
@@ -1077,9 +1079,9 @@ namespace DisenoColumnas.Secciones
             double Long_GanchoH = 0;
             int Numero_Estribos = 0;
 
-            Long_Estibo = 2 * (B - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[pEstribo.NoEstribo];
-            Long_GanchoH = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo];
-            Long_GanchoV = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo];
+            Long_Estibo = 2 * (B - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 135);
+            Long_GanchoH = (B - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180);
+            Long_GanchoV = (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180);
 
             Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
 

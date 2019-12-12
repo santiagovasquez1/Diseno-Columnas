@@ -713,7 +713,7 @@ namespace DisenoColumnas
                             columna.resultadosETABs[j].Story_Result.Add(Resultados2[i][0]);
                             columna.resultadosETABs[j].Load.Add(Resultados2[i][2]);
                             columna.resultadosETABs[j].Loc.Add(Convert.ToSingle(Resultados2[i][3]));
-                            columna.resultadosETABs[j].P.Add(Convert.ToSingle(Resultados2[i][4]));
+                            columna.resultadosETABs[j].P.Add(-Convert.ToSingle(Resultados2[i][4]));
                             columna.resultadosETABs[j].V2.Add(Convert.ToSingle(Resultados2[i][5]));
                             columna.resultadosETABs[j].V3.Add(Convert.ToSingle(Resultados2[i][6]));
                             columna.resultadosETABs[j].T.Add(Convert.ToSingle(Resultados2[i][7]));

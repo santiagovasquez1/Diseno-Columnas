@@ -91,17 +91,15 @@ namespace DisenoColumnas
             streamReader.Close();
         }
 
-
         public static float RedondearDecimales(float N_decimal, int multiplo)
         {
-
             string[] NumeroDividido = Convert.ToString(N_decimal).Split(Convert.ToChar("."));
 
             int Entero = Convert.ToInt32(NumeroDividido[0]);
 
             float Decimal;
-            try {
-
+            try
+            {
                 Decimal = Convert.ToSingle(NumeroDividido[1]);
                 if (NumeroDividido[1].IndexOf("0") == 0 && NumeroDividido[1].Length == 2)
                 {
@@ -113,11 +111,8 @@ namespace DisenoColumnas
                 {
                     return N_decimal;
                 }
-
-
             }
             catch { Decimal = 0; }
-
 
             float Comparacion = (Decimal / multiplo);
             int valor = (int)(Decimal / multiplo);
@@ -137,10 +132,7 @@ namespace DisenoColumnas
             }
 
             return Convert.ToSingle(Entero + "." + DecimilaRedondeado);
-
         }
-
-
 
         public static T DeepClone<T>(T obj)
         {
@@ -153,6 +145,7 @@ namespace DisenoColumnas
                 return (T)formatter.Deserialize(ms);
             }
         }
+
         public static List<PointF> CreatePointsForCircle(int numero_puntos, double pradio, double XC, double YC)
         {
             double delta_angulo = 2 * Math.PI / numero_puntos;
@@ -169,8 +162,8 @@ namespace DisenoColumnas
                 angulo += delta_angulo;
             }
             return Puntos;
-
         }
+
         public static SolidBrush ColorBarra(int Barra)
         {
             SolidBrush brush = new SolidBrush(Color.Black);
@@ -210,8 +203,6 @@ namespace DisenoColumnas
             return brush;
         }
 
-
-
         public static float FindTraslapo(int NoBarra, float FC)
         {
             float Traslapo = 0;
@@ -223,8 +214,6 @@ namespace DisenoColumnas
             if (FC == 560f) { Traslapo = Form1.Proyecto_.Ld_560[NoBarra]; }
             return Traslapo;
         }
-
-
 
         public static int Redondear_Entero(double N_decimal, int multiplo, bool RedondInferior = false)
         {
@@ -322,7 +311,6 @@ namespace DisenoColumnas
             float Area2 = 0;
             for (int i = 0; i < CoordenadasXY.Count; i++)
             {
-
                 if (i + 1 == CoordenadasXY.Count)
                 {
                     Area1 += CoordenadasXY[i][0] * CoordenadasXY[0][1];
@@ -333,15 +321,12 @@ namespace DisenoColumnas
                     Area1 += CoordenadasXY[i][0] * CoordenadasXY[i + 1][1];
                     Area2 += CoordenadasXY[i][1] * CoordenadasXY[i + 1][0];
                 }
-
             }
             return Math.Abs(Area1 - Area2) / 2; ;
-
         }
 
         public static float[] DeterminarCentroide(List<float[]> CoordenadasXY)
         {
-
             float Mx = 0; float My = 0;
             float Area = DeterminarArea(CoordenadasXY);
 
@@ -361,21 +346,118 @@ namespace DisenoColumnas
                 }
                 else
                 {
-                  xi = CoordenadasXY[i][0];
-                  xi_1 = CoordenadasXY[i - 1][0];
-                  yi = CoordenadasXY[i][1];
-                  yi_1 = CoordenadasXY[i - 1][1];
+                    xi = CoordenadasXY[i][0];
+                    xi_1 = CoordenadasXY[i - 1][0];
+                    yi = CoordenadasXY[i][1];
+                    yi_1 = CoordenadasXY[i - 1][1];
                 }
 
-                Mx += (float)((xi_1 - xi) * ((Math.Pow(yi_1, 2) + Math.Pow(yi, 2) + yi * yi_1)/6));
-                My += (float)((yi_1 - yi) * ((Math.Pow(xi_1, 2) + Math.Pow(xi, 2) + xi * xi_1)/6));
-
+                Mx += (float)((xi_1 - xi) * ((Math.Pow(yi_1, 2) + Math.Pow(yi, 2) + yi * yi_1) / 6));
+                My += (float)((yi_1 - yi) * ((Math.Pow(xi_1, 2) + Math.Pow(xi, 2) + xi * xi_1) / 6));
             }
 
             return new float[] { My / Area, Mx / Area };
-
-
         }
+
+        public static double Find_As(int diametro)
+        {
+            Dictionary<int, double> AceroBarras = new Dictionary<int, double>();
+            double Asi = 0;
+
+            AceroBarras = new Dictionary<int, double>();
+            AceroBarras.Add(2, 0.32 / 10000);
+            AceroBarras.Add(3, 0.71 / 10000);
+            AceroBarras.Add(4, 1.29 / 10000);
+            AceroBarras.Add(5, 1.99 / 10000);
+            AceroBarras.Add(6, 2.84 / 10000);
+            AceroBarras.Add(7, 3.87 / 10000);
+            AceroBarras.Add(8, 5.10 / 10000);
+            AceroBarras.Add(10, 8.09 / 10000);
+
+            Asi = AceroBarras[diametro];
+
+            return Asi;
+        }
+
+        public static double Find_Diametro(int diametro)
+        {
+            double Di = 0;
+            Dictionary<int, float> Diametro_ref = new Dictionary<int, float>();
+            Diametro_ref.Add(3, 0.95f);
+            Diametro_ref.Add(4, 1.27f);
+            Diametro_ref.Add(5, 1.59f);
+            Diametro_ref.Add(6, 1.91f);
+            Diametro_ref.Add(7, 2.22f);
+            Diametro_ref.Add(8, 2.54f);
+            Diametro_ref.Add(9, 2.87f);
+            Diametro_ref.Add(10, 3.23f);
+            Diametro_ref.Add(11, 3.58f);
+            Diametro_ref.Add(14, 4.30f);
+
+            Di = Diametro_ref[diametro];
+
+            return Di;
+        }
+
+        public static double Gancho(int diametro, int Angulo)
+        {
+            double Long_gancho = 0;
+            Dictionary<int, float> G90 = new Dictionary<int, float>();
+            Dictionary<int, float> G135 = new Dictionary<int, float>();
+            Dictionary<int, float> G180 = new Dictionary<int, float>();
+
+            G180 = new Dictionary<int, float>
+            {
+                { 2, 0.116f },
+                { 3, 0.14f },
+                { 4, 0.167f },
+                { 5, 0.192f },
+                { 6, 0.228f },
+                { 7, 0.266f },
+                { 8, 0.305f },
+                { 10, 0.457f }
+            };
+
+            G135 = new Dictionary<int, float>
+            {
+                { 2, 0.063f },
+                { 3, 0.094f },
+                { 4, 0.125f },
+                { 5, 0.157f },
+                { 6, 0.214f },
+                { 7, 0.249f },
+                { 8, 0.286f },
+                { 10, 0.363f }
+            };
+
+            G90 = new Dictionary<int, float>
+            {
+                { 2, 0.09f },
+                { 3, 0.14f },
+                { 4, 0.18f },
+                { 5, 0.23f },
+                { 6, 0.27f },
+                { 7, 0.32f },
+                { 8, 0.36f },
+                { 10, 0.47f }
+            };
+
+            if (Angulo == 90)
+            {
+                Long_gancho = G90[diametro];
+            }
+            if (Angulo == 135)
+            {
+                Long_gancho = G135[diametro];
+            }
+            if (Angulo == 180)
+            {
+                Long_gancho = G180[diametro];
+            }
+
+            return Long_gancho;
+        }
+
         public static void EstiloDatGridView(DataGridView dataGrid)
         {
             DataGridViewCellStyle StyleC = new DataGridViewCellStyle();
@@ -395,8 +477,5 @@ namespace DisenoColumnas
                 row.DefaultCellStyle = StyleR;
             }
         }
-
     }
-
-
 }
