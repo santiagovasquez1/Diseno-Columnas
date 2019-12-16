@@ -33,6 +33,7 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<int, int>> No_D_Barra { get; set; }
 
         #region Diagrama de Interacción: Propiedades y Metodos
+
         public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
         public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
 
@@ -40,17 +41,19 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
 
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
         #region Propiedades y Metodos para verificación de Vc
+
         public List<float[]> PM2M3V2V3 { get; set; }
         public List<float> Vcx { get; set; }
         public List<float> Vcy { get; set; }
         public List<float> Vsx { get; set; }
         public List<float> Vsy { get; set; }
 
-        #endregion
+        #endregion Propiedades y Metodos para verificación de Vc
+
         public void DiagramaInteraccion()
         {
-
             float b1 = 0.85f;
 
             List<PointF> Coordenadas = new List<PointF>();
@@ -93,7 +96,6 @@ namespace DisenoColumnas.Secciones
                 cRefuerzo.Deformacion_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
             }
 
-
             int DeltasVariacionC = 20;
 
             int Delta = 10;
@@ -101,7 +103,7 @@ namespace DisenoColumnas.Secciones
             {
                 List<float[]> PorCadaRotacion = new List<float[]>();
                 List<float> ms = new List<float>();
-                //Rotacion de la Sección 
+                //Rotacion de la Sección
                 for (int i = 0; i < Coordenadas.Count; i++)
                 {
                     List<double> CoordRotadas = Operaciones.Rotacion(Coordenadas[i].X, Coordenadas[i].Y, (Angulo * Math.PI) / 180);
@@ -109,13 +111,11 @@ namespace DisenoColumnas.Secciones
                     PorCadaRotacion.Add(new float[] { (float)CoordRotadas[0], (float)CoordRotadas[1] });
                 }
 
-
                 float Ymax = -99999; float Ymin = 999999;
                 float Xmax = -99999; float Xmin = 999999;
 
                 for (int i = 0; i < PorCadaRotacion.Count; i++)
                 {
-
                     if (PorCadaRotacion[i][1] > Ymax)
                     {
                         Ymax = PorCadaRotacion[i][1];
@@ -144,13 +144,9 @@ namespace DisenoColumnas.Secciones
                     }
 
                     ms.Add(m);
-
                 }
 
-
                 Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
-
-
 
                 List<float> C_Variando = new List<float>();
                 List<float> a_Variando = new List<float>();
@@ -163,12 +159,10 @@ namespace DisenoColumnas.Secciones
                     C_Variando.Add(C);
                 }
 
-
                 Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax));
 
                 for (int i = 0; i < a_Variando.Count; i++)
                 {
-
                     List<float[]> PuntosInter = HallarPuntosDeInter(ms, PorCadaRotacion, a_Variando[i], Xmax, Xmin);
 
                     List<float[]> PuntosPorEncimadeA = new List<float[]>();
@@ -179,7 +173,6 @@ namespace DisenoColumnas.Secciones
                         {
                             PuntosPorEncimadeA.Add(PorCadaRotacion[j]);
                         }
-
                     }
                     PuntosInter = PuntosInter.OrderByDescending(x => x[0]).ToList();
                     PuntosPorEncimadeA = PuntosPorEncimadeA.OrderByDescending(x => x[0]).ToList();
@@ -190,11 +183,9 @@ namespace DisenoColumnas.Secciones
 
                     float AreaComprimida_Aux = FunctionsProject.DeterminarArea(PuntosParaArea);
 
-
                     AreaComprimida1.Add(AreaComprimida_Aux);
 
                     CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroide(PuntosParaArea));
-
                 }
 
                 CentroideAreaComprimida.Add(new Tuple<List<float[]>, int>(CentroideAreaComprimida1, Angulo));
@@ -203,8 +194,6 @@ namespace DisenoColumnas.Secciones
                 YVariacionC.Add(new Tuple<List<float>, int>(C_Variando, Angulo));
                 Coordenadas_PorCadaAngulo.Add(PorCadaRotacion);
                 m_PorCadaAngulo.Add(new Tuple<List<float>, int>(ms, Angulo));
-
-
             }
 
             PnMn2D = new List<Tuple<List<float[]>, int>>();
@@ -213,7 +202,6 @@ namespace DisenoColumnas.Secciones
             {
                 List<float[]> PnMnAux = new List<float[]>();
                 List<float[]> PuMuAux = new List<float[]>();
-
 
                 for (int j = 0; j < AreaComprimida[i].Item1.Count; j++)
                 {
@@ -241,10 +229,7 @@ namespace DisenoColumnas.Secciones
                     float Pu = Pn_ * fi;
                     float Mu = Mn_ * fi;
 
-
-
                     float Pmax = 0.75f * (0.85f * fc * ((float)Area * 10000 - Ast) + Fy * Ast);
-
 
                     if (Pn_ > Pmax)
                     {
@@ -258,8 +243,6 @@ namespace DisenoColumnas.Secciones
                         {
                             PnMnAux.Add(new float[] { 0, -Ast * Fy });
                             PuMuAux.Add(new float[] { 0, -Ast * Fy });
-
-
                         }
                     }
                     else
@@ -267,7 +250,6 @@ namespace DisenoColumnas.Secciones
                         PnMnAux.Add(new float[] { Mn_, Pn_ });
                         PuMuAux.Add(new float[] { Mu, Pu });
                     }
-
 
                     if (j == AreaComprimida[i].Item1.Count - 1)
                     {
@@ -277,16 +259,13 @@ namespace DisenoColumnas.Secciones
                         PnMnAux.Insert(IndicePmax1, new float[] { 0, Pmax1 });
                         PuMuAux.Insert(IndicePmax1, new float[] { 0, Pmax1 * 0.65f });
                     }
-
                 }
                 PnMn2D.Add(new Tuple<List<float[]>, int>(PnMnAux, AreaComprimida[i].Item2));
                 PuMu2D.Add(new Tuple<List<float[]>, int>(PuMuAux, AreaComprimida[i].Item2));
             }
 
-
             MnPn3D = new List<Tuple<List<float[]>, int>>();
             MuPu3D = new List<Tuple<List<float[]>, int>>();
-
 
             for (int i = 0; i < PnMn2D.Count; i++)
             {
@@ -309,16 +288,12 @@ namespace DisenoColumnas.Secciones
                     float[] PuntosDescompuestosUltimos = new float[] { X1U, Y2U, Z2U };
 
                     SeriePuntosU.Add(PuntosDescompuestosUltimos);
-
-
                 }
                 MnPn3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
                 MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
-
             }
-
-
         }
+
         private float DeterminarFi(float et)
         {
             float fi;
@@ -335,9 +310,8 @@ namespace DisenoColumnas.Secciones
                 fi = 0.90f;
             }
             return fi;
-
-
         }
+
         private List<float[]> HallarPuntosDeInter(List<float> m, List<float[]> XY, float Yperteneciente, float Xmax, float Xmin)
         {
             List<float[]> PuntosHallados = new List<float[]>();
@@ -353,12 +327,9 @@ namespace DisenoColumnas.Secciones
             }
 
             return PuntosHallados;
-
-
         }
 
-        #endregion
-
+        #endregion Diagrama de Interacción: Propiedades y Metodos
 
         public CSD(string Nombre, float pB, float pH, float pTw, float pTf, MAT_CONCRETE pMaterial, TipodeSeccion pShape, List<float[]> pCoord = null)
         {
@@ -482,7 +453,7 @@ namespace DisenoColumnas.Secciones
 
             s_min = 7.5;
 
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (gDE == GDE.DMO)
             {
                 s_max = B / 3 < H / 3 ? B * 100 / 3 : H * 100 / 3;
             }
@@ -578,7 +549,7 @@ namespace DisenoColumnas.Secciones
             foreach (CRefuerzo refuerzoi in Refuerzos)
             {
                 path = new GraphicsPath();
-                r = Form1.Proyecto_.Diametro_ref[Convert.ToInt32(refuerzoi.Diametro.Substring(1))] / 2;
+                r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
@@ -615,7 +586,7 @@ namespace DisenoColumnas.Secciones
             var Yunicos = CoordenadasSeccion.Select(x => x[1]).Distinct().ToList();
 
             D_off1 = rec;
-            D_off2 = rec + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] / 100;
+            D_off2 = rec +  (float)FunctionsProject.Find_Diametro(Estribo.NoEstribo) / 100;
 
             //Aleta seccion
 
@@ -629,7 +600,7 @@ namespace DisenoColumnas.Secciones
                 var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
                 var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
 
-                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
+                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2)) 
                 {
                     Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -644,7 +615,7 @@ namespace DisenoColumnas.Secciones
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
                 }
 
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2))
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Yunicos.Max()) == false)    
                 {
                     Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
                     Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -660,10 +631,10 @@ namespace DisenoColumnas.Secciones
                 }
             }
 
-            var Coord_aletas1 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_aletas), false);
-            var Coord_aletas2 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_aletas), false);
-            var Coord_alma1 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_alma), false);
-            var Coord_alma2 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_alma), false);
+            var Coord_aletas1 = Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_aletas), false);
+            var Coord_aletas2 = Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_aletas), false);
+            var Coord_alma1 = Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_alma), false);
+            var Coord_alma2 = Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_alma), false);
 
             #region Dibujo aleta
 
@@ -764,7 +735,7 @@ namespace DisenoColumnas.Secciones
             int Barras_Aleta, Barras_alma;
             CRefuerzo refuerzoi;
             double DeltaX1, DeltaY1, DeltaX2, DeltaY2;
-            double r = Recubrimiento / 100 + 2 * Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo] / 100;
+            double r = Recubrimiento / 100 + 2 * FunctionsProject.Find_Diametro(Estribo.NoEstribo) / 100;
             Refuerzos = new List<CRefuerzo>();
 
             if (Estribo.NoRamasV1 > Estribo.NoRamasV2)
@@ -856,7 +827,7 @@ namespace DisenoColumnas.Secciones
 
             if (Shape == TipodeSeccion.L)
             {
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2))
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Xunicos.Max()) == true)  
                 {
                     posx = Xtf + r;
                 }
@@ -957,14 +928,14 @@ namespace DisenoColumnas.Secciones
             double Long_GanchoH2 = 0;
             int Numero_Estribos = 0;
 
-            Long_Estibo1 = 2 * (B - 2 * recubrimiento) + 2 * (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[pEstribo.NoEstribo]; //Estribo aleta
-            Long_Estibo2 = 2 * (TW - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G135[pEstribo.NoEstribo]; //Estribo alma
+            Long_Estibo1 = 2 * (B - 2 * recubrimiento) + 2 * (TF - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 135); //Estribo aleta
+            Long_Estibo2 = 2 * (TW - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 135); //Estribo alma
 
-            Long_GanchoH1 = (B - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Aleta
-            Long_GanchoH2 = (TW - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Alma
+            Long_GanchoH1 = (B - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180); //Aleta
+            Long_GanchoH2 = (TW - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180); //Alma
 
-            Long_GanchoV1 = (H - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Aleta
-            Long_GanchoV2 = (TF - 2 * recubrimiento) + 2 * Form1.Proyecto_.G180[pEstribo.NoEstribo]; //Alma
+            Long_GanchoV1 = (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180); //Aleta
+            Long_GanchoV2 = (TF - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180); //Alma
 
             Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
 
@@ -992,7 +963,7 @@ namespace DisenoColumnas.Secciones
             As_min = 0.01 * Area;
             As_i = As_min / Num_Barras;
 
-            while (As_i > Form1.Proyecto_.AceroBarras[6])
+            while (As_i > FunctionsProject.Find_As(6))
             {
                 Num_Barras += 2;
                 As_i = (As_min / Num_Barras);
@@ -1002,7 +973,7 @@ namespace DisenoColumnas.Secciones
             Barra_aux = FunctionsProject.Find_Barra(As_i);
 
             //Encontrar Combinatoria optima para el acero base mas aproximado al 1%
-            p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
+            p_error = Math.Abs(((FunctionsProject.Find_As(Barra_aux) * Num_Barras) - As_min) / As_min) * 100;
 
             Diametro1 = Barra_aux;
 
@@ -1136,12 +1107,9 @@ namespace DisenoColumnas.Secciones
             var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
             var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
 
-
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
-
                 cRefuerzo.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
-
             }
         }
 
@@ -1170,7 +1138,6 @@ namespace DisenoColumnas.Secciones
         {
             if (palzado.Colum_Alzado[indice] != null)
             {
-
             }
 
             if (fInterfaz != null)
