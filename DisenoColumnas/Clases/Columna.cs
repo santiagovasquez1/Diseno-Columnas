@@ -2830,5 +2830,12 @@ namespace DisenoColumnas.Clases
         }
 
         #endregion Metodos - Cantidades de Obra DL NET
+
+        #region Propiedades - Cargas que deben cumplor 0.4Ag*fc
+
+        public List<List<Tuple<float,string,string,float>>> Panalizar { get; set; }
+
+
+        #endregion
     }
 }

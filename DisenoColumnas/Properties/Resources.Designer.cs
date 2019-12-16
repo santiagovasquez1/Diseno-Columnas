@@ -283,6 +283,36 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DiagramaInteraccion {
+            get {
+                object obj = ResourceManager.GetObject("DiagramaInteraccion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DiagramaInteraccionx25 {
+            get {
+                object obj = ResourceManager.GetObject("DiagramaInteraccionx25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DiagramaInteraccionx25__2_ {
+            get {
+                object obj = ResourceManager.GetObject("DiagramaInteraccionx25 (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Diseñox13x13 {
             get {
                 object obj = ResourceManager.GetObject("Diseñox13x13", resourceCulture);

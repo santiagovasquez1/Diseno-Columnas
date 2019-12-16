@@ -41,7 +41,14 @@ namespace DisenoColumnas.Secciones
 
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
 
+        #region Propiedades y Metodos para verificación de Vc
+        public List<float[]> PM2M3V2V3 { get; set; }
+        public List<float> Vcx { get; set; }
+        public List<float> Vcy { get; set; }
+        public List<float> Vsx { get; set; }
+        public List<float> Vsy { get; set; }
 
+        #endregion
 
 
 

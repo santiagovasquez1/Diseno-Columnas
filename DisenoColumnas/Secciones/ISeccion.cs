@@ -62,6 +62,16 @@ namespace DisenoColumnas.Secciones
 
         double Peso_Estribo(Estribo pEstribo,float recubrimiento);
 
+
+        #region Propiedades y Metodos para verificación de Vc
+        List<float[]> PM2M3V2V3 { get; set; }
+        List<float> Vcx { get; set; }
+        List<float> Vcy { get; set; }
+        List<float> Vsx { get; set; }
+        List<float> Vsy { get; set; }
+
+        #endregion
+
         #region SobreCargas
 
         bool Equals(object obj);

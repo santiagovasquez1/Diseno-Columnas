@@ -58,7 +58,13 @@ namespace DisenoColumnas.Interfaz_Seccion
             Grafica.Invalidate();
 
             if (edicion == Tipo_Edicion.Secciones_predef)
+            {
                 Radio_Dmo.Checked = true;
+                groupBox2.Visible = true;
+                groupBox2.Enabled = true;
+            }
+                
+
 
         }
 
@@ -68,24 +74,27 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 Load_Pisos();
 
-                groupBox1.Text = "Lista de pisos";
+                groupBox1.Text = "Lista de Pisos";
                 gbSecciones.Visible = false;
                 gbSecciones.Enabled = false;
 
-                groupBox1.Size = new Size(new Point(166, 489));
-                groupBox1.Location = new Point(735, 9);
+                groupBox1.Size = new Size(166,455);
+                groupBox1.Location = new Point(720, 12);
+                Button_Diagrama.Visible = true;
             }
             if (edicion == Tipo_Edicion.Secciones_predef)
             {
                 Load_predef();
 
-                groupBox1.Text = "Secciones predefinidas";
+                groupBox1.Text = "Secciones Predefinidas";
                 gbSecciones.Visible = true;
                 gbSecciones.Enabled = true;
                 gbSecciones.Size = new Size(new Point(166, 47));
 
-                groupBox1.Size = new Size(new Point(166, 438));
-                groupBox1.Location = new Point(735, 61);
+                Button_Diagrama.Visible = false;
+
+                groupBox1.Size = new Size(new Point(166, 393));
+                groupBox1.Location = new Point(735, 113);
             }
         }
 
@@ -213,7 +222,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             string[] Fc_secciones = { };
             cbSecciones.Items.Clear();
 
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (GDE == GDE.DMO)
             {
                 Secciones = Form1.secciones_predef.Secciones_DMO.ToArray();
             }
@@ -297,7 +306,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             Seccion_name = lbPisos.SelectedItem.ToString();
 
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (GDE == GDE.DMO)
             {
                 indice = Form1.secciones_predef.Secciones_DMO.FindIndex(x => x.ToString() == Seccion_name);
                 seccion = FunctionsProject.DeepClone(Form1.secciones_predef.Secciones_DMO[indice]);
@@ -656,12 +665,13 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void cbSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             ISeccion[] Secciones = { };
             string Fc_secciones = "";
 
             Fc_secciones = cbSecciones.Text;
 
-            if (Form1.Proyecto_.DMO_DES == GDE.DMO)
+            if (GDE == GDE.DMO)
             {
                 Secciones = Form1.secciones_predef.Secciones_DMO.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
             }
@@ -673,6 +683,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             lbPisos.Items.Clear();
             lbPisos.Items.AddRange(Secciones);
             lbPisos.SelectedItem = lbPisos.Items[0];
+
         }
 
         private void editarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -724,45 +735,49 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (seccion is CRectangulo)
+            if(seccion is CRectangulo)
             {
                 CRectangulo cRectangulo = (CRectangulo)seccion;
                 cRectangulo.DiagramaInteraccion();
 
-                DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
-                DiagramaInteraccion.Seccion = cRectangulo;
-                diagramaInteraccion.Show();
-            }
-            if (seccion is CSD)
-            {
-                CSD cRectangulo = (CSD)seccion;
-                cRectangulo.DiagramaInteraccion();
+
+                
+
 
                 DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
                 DiagramaInteraccion.Seccion = cRectangulo;
-                diagramaInteraccion.Show();
+
+                Columna col = Form1.Proyecto_.ColumnaSelect;
+                int indice = col.Seccions.FindIndex(x => x.Item2 == Piso);
+
+                List<float[]> MP_solic = new List<float[]>();
+
+                for (int i = 0; i < col.resultadosETABs[indice].Load.Count; i++)
+                {
+                    if (col.resultadosETABs[indice].Load[i].Contains("SU"))
+                    {
+                        float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
+                        MP_solic.Add(MXPYPU);
+                    }
+
+                }
+
+                DiagramaInteraccion.MP_Soli3D = MP_solic;
+                diagramaInteraccion.ShowDialog();
             }
+    
         }
 
         private void Radio_Dmo_CheckedChanged(object sender, EventArgs e)
         {
             GDE = GDE.DMO;
-            //if (Form1.Proyecto_ == null)
-            //{
-            //    GDE = Form1.Proyecto_.DMO_DES;
-            //}
-            //else
-            //{
-            //    if (Radio_Dmo.Checked)
-            //        GDE = GDE.DMO;
-            //    else
-            //        GDE = GDE.DES;
-            //}
+            Load_predef();
         }
 
         private void Radio_Des_CheckedChanged(object sender, EventArgs e)
         {
             GDE = GDE.DES;
+            Load_predef();
         }
     }
 }

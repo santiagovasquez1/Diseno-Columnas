@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiagramaInteraccion));
             this.gl = new OpenTK.GLControl();
             this.Redraw = new System.Windows.Forms.Timer(this.components);
@@ -48,6 +48,7 @@
             this.Title = new System.Windows.Forms.Label();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.MostrarSolicita = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.P = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mx = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.My = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CharMomentos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.GroupBox_Grafica_Diagrama1.SuspendLayout();
@@ -95,15 +95,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CharMomentos.BackColor = System.Drawing.Color.WhiteSmoke;
-            chartArea1.Name = "ChartArea1";
-            this.CharMomentos.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.CharMomentos.ChartAreas.Add(chartArea2);
             this.CharMomentos.Location = new System.Drawing.Point(22, 21);
             this.CharMomentos.Name = "CharMomentos";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsVisibleInLegend = false;
-            series1.Name = "Series1";
-            this.CharMomentos.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.IsVisibleInLegend = false;
+            series2.Name = "Series1";
+            this.CharMomentos.Series.Add(series2);
             this.CharMomentos.Size = new System.Drawing.Size(346, 235);
             this.CharMomentos.TabIndex = 16;
             this.CharMomentos.Text = "chart1";
@@ -250,7 +250,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.MostrarSolicita);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label2);
@@ -265,6 +265,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(991, 685);
             this.panel1.TabIndex = 26;
+            // 
+            // MostrarSolicita
+            // 
+            this.MostrarSolicita.AutoSize = true;
+            this.MostrarSolicita.Location = new System.Drawing.Point(24, 649);
+            this.MostrarSolicita.Name = "MostrarSolicita";
+            this.MostrarSolicita.Size = new System.Drawing.Size(148, 18);
+            this.MostrarSolicita.TabIndex = 29;
+            this.MostrarSolicita.Text = "Mostrar Solicitaciones";
+            this.MostrarSolicita.UseVisualStyleBackColor = true;
+            this.MostrarSolicita.CheckedChanged += new System.EventHandler(this.MostrarSolicita_CheckedChanged);
             // 
             // button2
             // 
@@ -357,7 +368,7 @@
             // P
             // 
             this.P.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.P.HeaderText = "P [kgf]";
+            this.P.HeaderText = "P [Ton]";
             this.P.Name = "P";
             this.P.ReadOnly = true;
             this.P.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -366,7 +377,7 @@
             // Mx
             // 
             this.Mx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Mx.HeaderText = "Mx [kgf-cm²]";
+            this.Mx.HeaderText = "Mx [Ton-m]";
             this.Mx.Name = "Mx";
             this.Mx.ReadOnly = true;
             this.Mx.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -375,20 +386,11 @@
             // My
             // 
             this.My.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.My.HeaderText = "My [kgf-cm²]";
+            this.My.HeaderText = "My [Ton-m]";
             this.My.Name = "My";
             this.My.ReadOnly = true;
             this.My.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.My.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(28, 644);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(55, 23);
-            this.button3.TabIndex = 28;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // DiagramaInteraccion
             // 
@@ -445,9 +447,9 @@
         private System.Windows.Forms.DataGridView D_MnPn;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox MostrarSolicita;
         private System.Windows.Forms.DataGridViewTextBoxColumn P;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mx;
         private System.Windows.Forms.DataGridViewTextBoxColumn My;
-        private System.Windows.Forms.Button button3;
     }
 }

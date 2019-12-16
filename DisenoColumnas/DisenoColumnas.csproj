@@ -89,6 +89,12 @@
     <Compile Include="Diseño\Ventanas Auxiliares %28Herramientas%29\CambiarNombreColumna.Designer.cs">
       <DependentUpon>CambiarNombreColumna.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz Inicial\ChequeoDeCargas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Inicial\ChequeoDeCargas.Designer.cs">
+      <DependentUpon>ChequeoDeCargas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz Seccion\DiagramaInteraccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +296,9 @@
     <EmbeddedResource Include="Diseño\FuerzasEnElementos.resx">
       <DependentUpon>FuerzasEnElementos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Inicial\ChequeoDeCargas.resx">
+      <DependentUpon>ChequeoDeCargas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Inicial\CuadroDialogoDiseño.resx">
       <DependentUpon>CuadroDialogoDiseño.cs</DependentUpon>
     </EmbeddedResource>
@@ -410,6 +419,9 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DiagramaInteraccion.png" />
+    <None Include="Resources\DiagramaInteraccionx25 %282%29.png" />
+    <None Include="Resources\DiagramaInteraccionx25.png" />
     <None Include="Resources\exportar %283%29.png" />
     <None Include="Resources\editar.png" />
     <None Include="Resources\efe Prima Ce Pixelado.jpg" />

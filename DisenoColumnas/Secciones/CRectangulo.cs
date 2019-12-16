@@ -43,6 +43,16 @@ namespace DisenoColumnas.Secciones
         public bool Editado { get; set; } = false;
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
+
+        #region Propiedades y Metodos para verificación de Vc
+       public List<float[]> PM2M3V2V3 { get; set; }
+       public List<float> Vcx { get; set; }
+       public List<float> Vcy { get; set; }
+       public List<float> Vsx { get; set; }
+       public List<float> Vsy { get; set; }
+
+        #endregion
+
         #region Propiedades: Cantidades -Estribos
 
         public Tuple<float, float, float, string> Estribo_Dimensiones_B_H_G_Nomenclatura { get; set; }
@@ -78,7 +88,8 @@ namespace DisenoColumnas.Secciones
         public void DiagramaInteraccion()
         {
 
-            float b1 = 0.85f;
+            // Hallar Beta
+            float b1 = 0.85f - 0.05f*(Material.FC-280)/70f;
 
             List<PointF> Coordenadas = new List<PointF>();
             float X, Y;
@@ -122,8 +133,10 @@ namespace DisenoColumnas.Secciones
 
 
             int DeltasVariacionC = 20;
-
             int Delta = 10;
+
+
+
             for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
             {
                 List<float[]> PorCadaRotacion = new List<float[]>();
@@ -268,8 +281,6 @@ namespace DisenoColumnas.Secciones
                     float Pu = Pn_ * fi;
                     float Mu = Mn_ * fi;
 
-
-
                     float Pmax = 0.75f * (0.85f * fc * ((float)Area * 10000 - Ast) + Fy * Ast);
 
 
@@ -283,10 +294,8 @@ namespace DisenoColumnas.Secciones
                     {
                         if (PnMnAux.Exists(x => x[0] == 0) == false)
                         {
-                            PnMnAux.Add(new float[] { 0, -Ast * Fy });
-                            PuMuAux.Add(new float[] { 0, -Ast * Fy });
-
-
+                            PnMnAux.Add(new float[] { 0, (-Ast * Fy) });
+                            PuMuAux.Add(new float[] { 0, (-Ast * Fy ) });
                         }
                     }
                     else
@@ -342,6 +351,7 @@ namespace DisenoColumnas.Secciones
                 MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntosU, PnMn2D[i].Item2));
 
             }
+
 
 
         }
@@ -865,8 +875,8 @@ namespace DisenoColumnas.Secciones
             x = Convert.ToSingle(((B / 2) - rec) * 100 * EscalaX);
             y = Convert.ToSingle(((H / 2) - rec) * 100 * EscalaY);
 
-            x1 = Convert.ToSingle(x + (Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo]) * EscalaX);
-            y1 = Convert.ToSingle(y + (Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo]) * EscalaY);
+            x1 = Convert.ToSingle(x + (FunctionsProject.Find_Diametro(Estribo.NoEstribo) * EscalaX));
+            y1 = Convert.ToSingle(y + (FunctionsProject.Find_Diametro(Estribo.NoEstribo) * EscalaY));
 
             Vertices.Add(new PointF(-x, -y));
             Vertices.Add(new PointF(x, -y));

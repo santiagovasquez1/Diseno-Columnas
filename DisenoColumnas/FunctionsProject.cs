@@ -477,5 +477,92 @@ namespace DisenoColumnas
                 row.DefaultCellStyle = StyleR;
             }
         }
+
+        //HALLAR VC
+
+
+        /// <summary>
+        /// Determinar Vc (kgf/cm²)---> Norma C.11.2.1.1
+        /// </summary>
+        /// <param name="d">Si se analiza Vc2, d=h-r, si se analiza Vc3, d=b-d</param>
+        /// <param name="bw">Si se analiza Vc2, bw=bw, si se analiza Vc3, bw=h</param>
+        /// <returns></returns>
+
+        private static float Vc_11_2_1_1(float d, float bw, float fc)
+        {
+            return 0.53f * (float)Math.Sqrt(fc) * bw * d;
+        }
+
+
+        /// <summary>
+        /// Determinar Vc (kgf/cm²) ----> Norma C.11.2.1.2
+        /// </summary>
+        /// <param name="Nu">Carga Axial</param>
+        /// <param name="d">Si se analiza Vc2, d=h-r, si se analiza Vc3, d=b-r</param>
+        /// <param name="bw">Si se analiza Vc2, bw=bw, si se analiza Vc3, bw=h</param>
+        /// <param name="Area"></param>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        private static float Vc_11_2_1_2(float Nu, float d, float bw, float Area, float fc)
+        {
+            return 0.53f * (1 + ((Nu) / (140 * Area))) * (float)Math.Sqrt(fc) * bw * d;
+        }
+
+        /// <summary>
+        /// Determiniar Vc (kgf/cm²) --> Norma C.11.2.2.1 a C.11.2.2.3
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <param name="As"></param>
+        /// <param name="Vu"></param>
+        /// <param name="d">Si se analiza Vc2, d=h-r, si se analiza Vc3, d=b-r</param>
+        /// <param name="bw">Si se analiza Vc2, bw=bw, si se analiza Vc3, bw=h</param>
+        /// <param name="Mu">Puede ser M2 o M3</param>
+        /// <param name="h">Si se analiza Vc2, h=h, si se analiza Vc3, h=bw</param>
+        /// <param name="Nu"></param>
+        /// <param name="Area"></param>
+        /// <returns></returns>
+
+        private static float Vc_11_2_2_1(float fc, float As, float Vu, float d, float bw, float Mu, float h, float Nu, float Area)
+        {
+            float pw=As/ (bw * d);
+
+            float Mm = Mu - (Nu * (4 * h - d) / 8);
+   
+            float Vc1 = (0.5f * (float)Math.Sqrt(fc) + ((176 * pw * Vu * d) / Mm)) * bw * d;
+            if (Mm < 0)
+            {
+                Vc1 = 999999;
+            }
+            float Vc2 = 0.93f * (float)Math.Sqrt(fc) * bw * d * (float)Math.Sqrt(1 + (Nu / (35 * Area)));
+
+            return Vc1 > Vc2 ? Vc2 : Vc1;
+        }
+
+
+        /// <summary>
+        /// Determiniar Vc (Tonf) --> Norma C.11.2.1.1 a C.11.2.2.3
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <param name="pw">Si se analiza Vc2, pw= As/(bw*d), si se analiza Vc3, pw= As/(h*d)</param>
+        /// <param name="Vu"></param>
+        /// <param name="d">Si se analiza Vc2, d=h-r, si se analiza Vc3, d=b-r</param>
+        /// <param name="bw">Si se analiza Vc2, bw=bw, si se analiza Vc3, bw=h</param>
+        /// <param name="Mu">Puede ser M2 o M3</param>
+        /// <param name="h">Si se analiza Vc2, h=h, si se analiza Vc3, h=bw</param>
+        /// <param name="Nu"></param>
+        /// <param name="Area"></param>
+        /// <returns></returns>
+        public static float VcDef(float fc, float As, float Vu, float d, float bw, float Mu, float h, float Nu, float Area)
+        {
+
+            float[] Vc = new float[] { Vc_11_2_1_1(d, bw, fc), Vc_11_2_1_2(Nu, d, bw, Area, fc), Vc_11_2_2_1(fc, As, Vu, d, bw, Mu, h, Nu, Area) };
+
+            return Vc.Min()/1000;
+
+
+
+
+        }
+
     }
 }

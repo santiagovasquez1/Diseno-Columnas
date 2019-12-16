@@ -38,17 +38,17 @@
             this.cmEditar_Ref = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Grafica = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Radio_Dmo = new System.Windows.Forms.RadioButton();
             this.Radio_Des = new System.Windows.Forms.RadioButton();
+            this.Grafica = new System.Windows.Forms.PictureBox();
+            this.Button_Diagrama = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -57,7 +57,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(29, 504);
+            this.label1.Location = new System.Drawing.Point(32, 512);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 4;
@@ -72,7 +72,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(735, 113);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(166, 386);
+            this.groupBox1.Size = new System.Drawing.Size(166, 393);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de pisos";
@@ -86,7 +86,7 @@
             this.lbPisos.ItemHeight = 15;
             this.lbPisos.Location = new System.Drawing.Point(6, 24);
             this.lbPisos.Name = "lbPisos";
-            this.lbPisos.Size = new System.Drawing.Size(154, 349);
+            this.lbPisos.Size = new System.Drawing.Size(154, 364);
             this.lbPisos.TabIndex = 0;
             this.lbPisos.SelectedIndexChanged += new System.EventHandler(this.lbPisos_SelectedIndexChanged);
             // 
@@ -136,32 +136,6 @@
             this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
             this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
             // 
-            // Grafica
-            // 
-            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grafica.BackColor = System.Drawing.Color.White;
-            this.Grafica.Location = new System.Drawing.Point(27, 12);
-            this.Grafica.Name = "Grafica";
-            this.Grafica.Size = new System.Drawing.Size(702, 487);
-            this.Grafica.TabIndex = 1;
-            this.Grafica.TabStop = false;
-            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
-            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
-            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(568, 502);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -176,6 +150,7 @@
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Grado de disipación: ";
+            this.groupBox2.Visible = false;
             // 
             // Radio_Dmo
             // 
@@ -205,14 +180,43 @@
             this.Radio_Des.UseVisualStyleBackColor = false;
             this.Radio_Des.CheckedChanged += new System.EventHandler(this.Radio_Des_CheckedChanged);
             // 
+            // Grafica
+            // 
+            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grafica.BackColor = System.Drawing.Color.White;
+            this.Grafica.Location = new System.Drawing.Point(27, 18);
+            this.Grafica.Name = "Grafica";
+            this.Grafica.Size = new System.Drawing.Size(702, 488);
+            this.Grafica.TabIndex = 1;
+            this.Grafica.TabStop = false;
+            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
+            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
+            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
+            // 
+            // Button_Diagrama
+            // 
+            this.Button_Diagrama.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_Diagrama.BackColor = System.Drawing.Color.Gray;
+            this.Button_Diagrama.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Diagrama.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Button_Diagrama.Location = new System.Drawing.Point(738, 510);
+            this.Button_Diagrama.Name = "Button_Diagrama";
+            this.Button_Diagrama.Size = new System.Drawing.Size(157, 26);
+            this.Button_Diagrama.TabIndex = 7;
+            this.Button_Diagrama.Text = "Diagrama de Interacción";
+            this.Button_Diagrama.UseVisualStyleBackColor = false;
+            this.Button_Diagrama.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(904, 528);
+            this.ClientSize = new System.Drawing.Size(904, 540);
+            this.Controls.Add(this.Button_Diagrama);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.gbSecciones);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -227,9 +231,9 @@
             this.groupBox1.ResumeLayout(false);
             this.gbSecciones.ResumeLayout(false);
             this.cmEditar_Ref.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,10 +250,10 @@
         private System.Windows.Forms.ContextMenuStrip cmEditar_Ref;
         private System.Windows.Forms.ToolStripMenuItem eliminarRefuerzoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarRefuerzoToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.RadioButton Radio_Dmo;
         internal System.Windows.Forms.RadioButton Radio_Des;
+        private System.Windows.Forms.Button Button_Diagrama;
     }
 }

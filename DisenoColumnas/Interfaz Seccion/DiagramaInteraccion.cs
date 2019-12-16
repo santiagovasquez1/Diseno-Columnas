@@ -24,20 +24,26 @@ namespace DisenoColumnas.Interfaz_Seccion
         int eyeX = 100, eyeY = 100, eyeZ = 100; bool Loaded = false;
         List<Int32> GList;
         List<Line> lines = new List<Line>();
-        public static ISeccion Seccion;
+        List<Dot> dots = new List<Dot>();
 
+
+        public static ISeccion Seccion;
+        public static List<float[]> MP_Soli3D = new List<float[]>();
 
         private int Angulo = 0;
         private List<float[]> MP2D { get; set; }
         private List<float[]> MP3D { get; set; }
         private List<float[]> MP3D_SoloUnaRecta { get; set; }
 
+       
+
         private List<Tuple<List<float[]>, int>> TuplesMP3D { get; set; }
 
-        public static List<float[]> MP_Soli3D = new List<float[]>();
+  
 
 
         private bool ConFi { get; set; }
+
 
 
         private void lineGenerator(float width, Color color, int x1, int y1, int z1, int x2, int y2, int z2)
@@ -55,11 +61,40 @@ namespace DisenoColumnas.Interfaz_Seccion
             lines.Add(temp);
         }
 
+
+        private void CreateDots(Color color, decimal X,decimal Y,decimal Z)
+        {
+            Dot temp = new Dot();
+            temp.dot[0] = X;
+            temp.dot[1] = Z;
+            temp.dot[2] = Y;
+            temp.color = color;
+            dots.Add(temp);
+
+        }
+
         private void Redraw_Tick(object sender, EventArgs e)
         {
 
             GList = new List<Int32>();
             GList.Add(0);
+            if (MostrarSolicita.Checked)
+            {
+                foreach (Dot dot in dots)
+                {
+                    GL.NewList(GList.Count, ListMode.Compile);
+                    GL.PointSize(5);
+                    GL.Begin(BeginMode.Points);
+                    GL.Color3(dot.color);
+
+                    decimal[] aux_dot = FactoryMatrix.xVxM(dot.matrix, dot.dot);
+                    GL.Vertex3(Decimal.ToDouble(aux_dot[0]), Decimal.ToDouble(aux_dot[1]), Decimal.ToDouble(aux_dot[2]));
+
+                    GL.End();
+                    GL.EndList();
+                    GList.Add(GList.Count);
+                }
+            }
             foreach (Line line in lines)
             {
                 decimal[] from = FactoryMatrix.xVxM(line.matrix, line.from);
@@ -168,6 +203,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 }
 
+
                 for (int i = 0; i < MP3D_SoloUnaRecta.Count; i++)
                 {
                     try
@@ -187,12 +223,27 @@ namespace DisenoColumnas.Interfaz_Seccion
                     }
                 }
 
+                decimal FC1 = 1000;
+                decimal FC2 = 100000;
+                if (MostrarSolicita.Checked)
+                {
+                    dots.Clear();
+                    for (int i = 0; i < MP_Soli3D.Count; i++)
+                    {
+                        decimal X = (decimal)MP_Soli3D[i][0] * FC2 * EscalaX;
+                        decimal Y = (decimal)MP_Soli3D[i][1] * FC2 * EscalaY;
+                        decimal Z = (decimal)MP_Soli3D[i][2] * FC1 * EscalaZ;
+                        CreateDots(Color.Red, X, Y, Z);
+
+
+                    }
+
+                }
 
 
             }
 
         }
-
 
 
         private void TomarValores(bool conFi)
@@ -215,9 +266,12 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
 
         }
+        float FC1 = 0.001f;
+        float FC2 = 1f / 100000f;
         private void CreateDataGrid()
         {
-       
+   
+
             D_MnPn.Rows.Clear();
             if (Seccion != null)
             {
@@ -226,9 +280,9 @@ namespace DisenoColumnas.Interfaz_Seccion
                 for (int i = 0; i < MP3D.Count; i++)
                 {
                     D_MnPn.Rows.Add();
-                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[0].Value = String.Format("{0:0.00}", MP3D[i][2]);
-                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[1].Value = String.Format("{0:0.00}", MP3D[i][0]);
-                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[2].Value = String.Format("{0:0.00}", MP3D[i][1]);
+                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[0].Value = String.Format("{0:0.00}", MP3D[i][2]*FC1);
+                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[1].Value = String.Format("{0:0.00}", MP3D[i][0]*FC2);
+                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[2].Value = String.Format("{0:0.00}", MP3D[i][1]*FC2);
 
                 }
 
@@ -245,7 +299,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
             
                 chart.Series[0].Points.Clear();
-                chart.Series[0].Color = Color.Blue;
+                chart.Series[0].Color = Color.Black;
                 chart.Series[0].MarkerStyle = MarkerStyle.None;
                 chart.Series[0].MarkerSize = 1;
                 chart.Series[0].MarkerStep = 5;
@@ -253,9 +307,27 @@ namespace DisenoColumnas.Interfaz_Seccion
                 chart.Series[0].LabelBackColor = Color.Transparent;
                 chart.Series[0].ChartType = SeriesChartType.Line;
 
-                foreach(float[] Point in MP2D)
+                chart.ChartAreas[0].AxisX.ArrowStyle = AxisArrowStyle.Triangle;
+                chart.ChartAreas[0].AxisY.ArrowStyle = AxisArrowStyle.Triangle;
+
+                chart.ChartAreas[0].AxisX.RoundAxisValues();
+                chart.ChartAreas[0].AxisY.RoundAxisValues();
+                chart.ChartAreas[0].AxisX.Minimum = 0;
+
+                if (ConFi)
                 {
-                    chart.Series[0].Points.AddXY(Point[0], Point[1]);
+                    chart.ChartAreas[0].AxisX.Title = "Mu (Ton-m)";
+                    chart.ChartAreas[0].AxisY.Title = "Pu (Ton)";
+                }
+                else
+                {
+                    chart.ChartAreas[0].AxisX.Title = "Mn (Ton-m)";
+                    chart.ChartAreas[0].AxisY.Title = "Pn (Ton)";
+                }
+
+                foreach (float[] Point in MP2D)
+                {
+                    chart.Series[0].Points.AddXY(Point[0]*FC2, Point[1]*FC1);
                 }
 
 
@@ -271,8 +343,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             GL.ClearColor(Color.Black);
             generarFlechas();
             MostrarValores();
+           
         }
 
+
+        
       
 
         private void X_mas_Click(object sender, EventArgs e)
@@ -396,6 +471,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             MostrarValores();
         }
 
+        private void MostrarSolicita_CheckedChanged(object sender, EventArgs e)
+        {
+            MostrarValores();
+        }
+
         private void Gl_Paint(object sender, PaintEventArgs e)
         {
             if (!Loaded)
@@ -423,7 +503,8 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             GL.PopMatrix();
             GL.Finish();
-            gl.SwapBuffers();
+            try { 
+            gl.SwapBuffers(); }catch{ }
         }
 
         private void generarFlechas()
