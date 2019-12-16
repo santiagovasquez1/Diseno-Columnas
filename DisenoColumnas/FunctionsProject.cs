@@ -549,6 +549,18 @@ namespace DisenoColumnas
             return Vc1 > Vc2 ? Vc2 : Vc1;
         }
 
+        public static bool Find_Coord(List<float[]> Coordenadas,float X, float Y)
+        {
+            for(int i = 0; i < Coordenadas.Count; i++)
+            {
+                if (Coordenadas[i][0] == X & Coordenadas[i][1] == Y) 
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Determiniar Vc (Tonf) --> Norma C.11.2.1.1 a C.11.2.2.3

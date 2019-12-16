@@ -549,7 +549,7 @@ namespace DisenoColumnas.Secciones
             foreach (CRefuerzo refuerzoi in Refuerzos)
             {
                 path = new GraphicsPath();
-                r = Form1.Proyecto_.Diametro_ref[Convert.ToInt32(refuerzoi.Diametro.Substring(1))] / 2;
+                r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
@@ -600,7 +600,7 @@ namespace DisenoColumnas.Secciones
                 var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
                 var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
 
-                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
+                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2)) 
                 {
                     Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -615,7 +615,7 @@ namespace DisenoColumnas.Secciones
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
                 }
 
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2))
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Yunicos.Max()) == false)    
                 {
                     Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
                     Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -631,10 +631,10 @@ namespace DisenoColumnas.Secciones
                 }
             }
 
-            var Coord_aletas1 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_aletas), false);
-            var Coord_aletas2 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_aletas), false);
-            var Coord_alma1 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_alma), false);
-            var Coord_alma2 = B_Operaciones_Matricialesl.Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_alma), false);
+            var Coord_aletas1 = Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_aletas), false);
+            var Coord_aletas2 = Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_aletas), false);
+            var Coord_alma1 = Operaciones.OffSet(D_off1, FunctionsProject.DeepClone(Coord_alma), false);
+            var Coord_alma2 = Operaciones.OffSet(D_off2, FunctionsProject.DeepClone(Coord_alma), false);
 
             #region Dibujo aleta
 
@@ -827,7 +827,7 @@ namespace DisenoColumnas.Secciones
 
             if (Shape == TipodeSeccion.L)
             {
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2))
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Xunicos.Max()) == true)  
                 {
                     posx = Xtf + r;
                 }
