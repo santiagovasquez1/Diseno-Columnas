@@ -7,7 +7,6 @@ using System.Drawing.Drawing2D;
 
 namespace DisenoColumnas.Secciones
 {
-
     public interface ISeccion
     {
         float B { get; set; }
@@ -22,14 +21,12 @@ namespace DisenoColumnas.Secciones
         List<GraphicsPath> Shapes_ref { get; set; }
         List<CRefuerzo> Refuerzos { get; set; }
         List<float[]> CoordenadasSeccion { get; set; }
+
         List<Tuple<int, int>> No_D_Barra { get; set; }
-
-         List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
+        List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
         List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
-
-         List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
+        List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
         List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
-
         List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
 
         double Acero_Long { get; set; }
@@ -46,7 +43,7 @@ namespace DisenoColumnas.Secciones
 
         void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion);
 
-        void Dibujo_Autocad(double Xi, double Yi,int Num_Alzado);
+        void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado);
 
         /// <summary>
         /// Calcula y posiciona el refuerzo base, cuando no se cuenta con una seccion predefinida
@@ -56,11 +53,11 @@ namespace DisenoColumnas.Secciones
 
         void CalcNoDBarras();
 
-        void Actualizar_Ref(Alzado palzado,int indice,FInterfaz_Seccion fInterfaz);
+        void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz);
 
         void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz);
 
-        double Peso_Estribo(Estribo pEstribo,float recubrimiento);
+        double Peso_Estribo(Estribo pEstribo, float recubrimiento);
 
 
         #region Propiedades y Metodos para verificación de Vc

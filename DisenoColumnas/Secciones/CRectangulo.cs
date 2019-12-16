@@ -1,4 +1,5 @@
-﻿using DisenoColumnas.Clases;
+﻿using B_Operaciones_Matricialesl;
+using DisenoColumnas.Clases;
 using DisenoColumnas.Interfaz_Seccion;
 using DisenoColumnas.Secciones_Predefinidas;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using B_Operaciones_Matricialesl;
+
 
 
 namespace DisenoColumnas.Secciones
@@ -74,8 +75,8 @@ namespace DisenoColumnas.Secciones
             CalcularArea();
         }
 
-
         #region Diagrama de Interacción: Propiedades y Metodos
+
         public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
         public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
 
@@ -83,7 +84,6 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
 
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
-    
 
         public void DiagramaInteraccion()
         {
@@ -131,7 +131,6 @@ namespace DisenoColumnas.Secciones
                 cRefuerzo.Deformacion_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
             }
 
-
             int DeltasVariacionC = 20;
             int Delta = 10;
 
@@ -141,21 +140,18 @@ namespace DisenoColumnas.Secciones
             {
                 List<float[]> PorCadaRotacion = new List<float[]>();
                 List<float> ms = new List<float>();
-                //Rotacion de la Sección 
+                //Rotacion de la Sección
                 for (int i = 0; i < Coordenadas.Count; i++)
                 {
                     List<double> CoordRotadas = Operaciones.Rotacion(Coordenadas[i].X, Coordenadas[i].Y, (Angulo * Math.PI) / 180);
-
                     PorCadaRotacion.Add(new float[] { (float)CoordRotadas[0], (float)CoordRotadas[1] });
                 }
-
 
                 float Ymax = -99999; float Ymin = 999999;
                 float Xmax = -99999; float Xmin = 999999;
 
                 for (int i = 0; i < PorCadaRotacion.Count; i++)
                 {
-
                     if (PorCadaRotacion[i][1] > Ymax)
                     {
                         Ymax = PorCadaRotacion[i][1];
@@ -184,13 +180,9 @@ namespace DisenoColumnas.Secciones
                     }
 
                     ms.Add(m);
-
                 }
 
-
                 Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
-
-
 
                 List<float> C_Variando = new List<float>();
                 List<float> a_Variando = new List<float>();
@@ -203,12 +195,10 @@ namespace DisenoColumnas.Secciones
                     C_Variando.Add(C);
                 }
 
-
                 Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax));
 
                 for (int i = 0; i < a_Variando.Count; i++)
                 {
-
                     List<float[]> PuntosInter = HallarPuntosDeInter(ms, PorCadaRotacion, a_Variando[i], Xmax, Xmin);
 
                     List<float[]> PuntosPorEncimadeA = new List<float[]>();
@@ -219,7 +209,6 @@ namespace DisenoColumnas.Secciones
                         {
                             PuntosPorEncimadeA.Add(PorCadaRotacion[j]);
                         }
-
                     }
                     PuntosInter = PuntosInter.OrderByDescending(x => x[0]).ToList();
                     PuntosPorEncimadeA = PuntosPorEncimadeA.OrderByDescending(x => x[0]).ToList();
@@ -230,11 +219,9 @@ namespace DisenoColumnas.Secciones
 
                     float AreaComprimida_Aux = FunctionsProject.DeterminarArea(PuntosParaArea);
 
-
                     AreaComprimida1.Add(AreaComprimida_Aux);
 
                     CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroide(PuntosParaArea));
-
                 }
 
                 CentroideAreaComprimida.Add(new Tuple<List<float[]>, int>(CentroideAreaComprimida1, Angulo));
@@ -243,17 +230,15 @@ namespace DisenoColumnas.Secciones
                 YVariacionC.Add(new Tuple<List<float>, int>(C_Variando, Angulo));
                 Coordenadas_PorCadaAngulo.Add(PorCadaRotacion);
                 m_PorCadaAngulo.Add(new Tuple<List<float>, int>(ms, Angulo));
-
-
             }
 
             PnMn2D = new List<Tuple<List<float[]>, int>>();
             PuMu2D = new List<Tuple<List<float[]>, int>>();
+
             for (int i = 0; i < AreaComprimida.Count; i++)
             {
                 List<float[]> PnMnAux = new List<float[]>();
                 List<float[]> PuMuAux = new List<float[]>();
-
 
                 for (int j = 0; j < AreaComprimida[i].Item1.Count; j++)
                 {
@@ -283,7 +268,6 @@ namespace DisenoColumnas.Secciones
 
                     float Pmax = 0.75f * (0.85f * fc * ((float)Area * 10000 - Ast) + Fy * Ast);
 
-
                     if (Pn_ > Pmax)
                     {
                         Pn_ = Pmax;
@@ -304,7 +288,6 @@ namespace DisenoColumnas.Secciones
                         PuMuAux.Add(new float[] { Mu, Pu });
                     }
 
-
                     if (j == AreaComprimida[i].Item1.Count - 1)
                     {
                         float Pmax1 = PnMnAux.Max(x => x[1]);
@@ -313,16 +296,13 @@ namespace DisenoColumnas.Secciones
                         PnMnAux.Insert(IndicePmax1, new float[] { 0, Pmax1 });
                         PuMuAux.Insert(IndicePmax1, new float[] { 0, Pmax1 * 0.65f });
                     }
-
                 }
                 PnMn2D.Add(new Tuple<List<float[]>, int>(PnMnAux, AreaComprimida[i].Item2));
                 PuMu2D.Add(new Tuple<List<float[]>, int>(PuMuAux, AreaComprimida[i].Item2));
             }
 
-
             MnPn3D = new List<Tuple<List<float[]>, int>>();
             MuPu3D = new List<Tuple<List<float[]>, int>>();
-
 
             for (int i = 0; i < PnMn2D.Count; i++)
             {
@@ -345,16 +325,15 @@ namespace DisenoColumnas.Secciones
                     float[] PuntosDescompuestosUltimos = new float[] { X1U, Y2U, Z2U };
 
                     SeriePuntosU.Add(PuntosDescompuestosUltimos);
-
                 }
                 MnPn3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
                 MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntosU, PnMn2D[i].Item2));
-
             }
 
 
 
         }
+
         private float DeterminarFi(float et)
         {
             float fi;
@@ -371,9 +350,8 @@ namespace DisenoColumnas.Secciones
                 fi = 0.90f;
             }
             return fi;
-
-
         }
+
         private List<float[]> HallarPuntosDeInter(List<float> m, List<float[]> XY, float Yperteneciente, float Xmax, float Xmin)
         {
             List<float[]> PuntosHallados = new List<float[]>();
@@ -389,12 +367,9 @@ namespace DisenoColumnas.Secciones
             }
 
             return PuntosHallados;
-
-
         }
 
-        #endregion
-
+        #endregion Diagrama de Interacción: Propiedades y Metodos
 
         #region Metodos - Resultados
 
@@ -1205,7 +1180,7 @@ namespace DisenoColumnas.Secciones
                 }
                 else
                 {
-                   for (int i = 0; i < palzado.Colum_Alzado[indice].CantBarras; i+=2)
+                    for (int i = 0; i < palzado.Colum_Alzado[indice].CantBarras; i += 2)
                     {
                         id = Refuerzos.Last().id + 1;
 
@@ -1222,11 +1197,10 @@ namespace DisenoColumnas.Secciones
                             coord1[1] = Refuerzos[Refuerzos.Count - i - 1].Coord[1];
                         }
 
-                        nRefuerzo = new CRefuerzo(id, $"#{palzado.Colum_Alzado[indice].NoBarra}",coord1, TipodeRefuerzo.longitudinal);
+                        nRefuerzo = new CRefuerzo(id, $"#{palzado.Colum_Alzado[indice].NoBarra}", coord1, TipodeRefuerzo.longitudinal);
                         nRefuerzo.Alzado = palzado.ID;
                         Refuerzos.Add(nRefuerzo);
-                    }       
-
+                    }
                 }
             }
 
