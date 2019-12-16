@@ -785,5 +785,14 @@ namespace DisenoColumnas.Interfaz_Seccion
             GDE = GDE.DES;
             Load_predef();
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            if (edicion == Tipo_Edicion.Secciones_predef)
+            {
+                FAgregarSeccion agregarSeccion = new FAgregarSeccion();
+                agregarSeccion.Show();
+            }
+        }
     }
 }

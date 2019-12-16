@@ -277,7 +277,18 @@ namespace DisenoColumnas
             List<double> Dif = new List<double>();
             List<int> Diametros = new List<int>();
 
-            foreach (KeyValuePair<int, double> As_d in Form1.Proyecto_.AceroBarras)
+            Dictionary<int, double> AceroBarras = new Dictionary<int, double>();
+            AceroBarras = new Dictionary<int, double>();
+            AceroBarras.Add(2, 0.32 / 10000);
+            AceroBarras.Add(3, 0.71 / 10000);
+            AceroBarras.Add(4, 1.29 / 10000);
+            AceroBarras.Add(5, 1.99 / 10000);
+            AceroBarras.Add(6, 2.84 / 10000);
+            AceroBarras.Add(7, 3.87 / 10000);
+            AceroBarras.Add(8, 5.10 / 10000);
+            AceroBarras.Add(10, 8.09 / 10000);
+
+            foreach (KeyValuePair<int, double> As_d in AceroBarras)
             {
                 if (As_d.Value >= 0.98 * Asi)
                 {

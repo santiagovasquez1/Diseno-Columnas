@@ -40,15 +40,18 @@
             this.eliminarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.Radio_Dmo = new System.Windows.Forms.RadioButton();
             this.Radio_Des = new System.Windows.Forms.RadioButton();
+            this.Radio_Dmo = new System.Windows.Forms.RadioButton();
             this.Grafica = new System.Windows.Forms.PictureBox();
             this.Button_Diagrama = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -152,20 +155,6 @@
             this.groupBox2.Text = "Grado de disipación: ";
             this.groupBox2.Visible = false;
             // 
-            // Radio_Dmo
-            // 
-            this.Radio_Dmo.AutoSize = true;
-            this.Radio_Dmo.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Dmo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
-            this.Radio_Dmo.ForeColor = System.Drawing.Color.White;
-            this.Radio_Dmo.Location = new System.Drawing.Point(16, 22);
-            this.Radio_Dmo.Name = "Radio_Dmo";
-            this.Radio_Dmo.Size = new System.Drawing.Size(53, 19);
-            this.Radio_Dmo.TabIndex = 2;
-            this.Radio_Dmo.Text = "DMO";
-            this.Radio_Dmo.UseVisualStyleBackColor = false;
-            this.Radio_Dmo.CheckedChanged += new System.EventHandler(this.Radio_Dmo_CheckedChanged);
-            // 
             // Radio_Des
             // 
             this.Radio_Des.AutoSize = true;
@@ -179,6 +168,20 @@
             this.Radio_Des.Text = "DES";
             this.Radio_Des.UseVisualStyleBackColor = false;
             this.Radio_Des.CheckedChanged += new System.EventHandler(this.Radio_Des_CheckedChanged);
+            // 
+            // Radio_Dmo
+            // 
+            this.Radio_Dmo.AutoSize = true;
+            this.Radio_Dmo.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Dmo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
+            this.Radio_Dmo.ForeColor = System.Drawing.Color.White;
+            this.Radio_Dmo.Location = new System.Drawing.Point(16, 22);
+            this.Radio_Dmo.Name = "Radio_Dmo";
+            this.Radio_Dmo.Size = new System.Drawing.Size(53, 19);
+            this.Radio_Dmo.TabIndex = 2;
+            this.Radio_Dmo.Text = "DMO";
+            this.Radio_Dmo.UseVisualStyleBackColor = false;
+            this.Radio_Dmo.CheckedChanged += new System.EventHandler(this.Radio_Dmo_CheckedChanged);
             // 
             // Grafica
             // 
@@ -209,12 +212,34 @@
             this.Button_Diagrama.UseVisualStyleBackColor = false;
             this.Button_Diagrama.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(32, 540);
+            this.toolStrip1.TabIndex = 9;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 20);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(904, 540);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.Button_Diagrama);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbSecciones);
@@ -234,6 +259,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,5 +282,7 @@
         internal System.Windows.Forms.RadioButton Radio_Dmo;
         internal System.Windows.Forms.RadioButton Radio_Des;
         private System.Windows.Forms.Button Button_Diagrama;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
