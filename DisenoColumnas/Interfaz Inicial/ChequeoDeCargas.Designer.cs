@@ -86,10 +86,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(285, 28);
+            this.label1.Size = new System.Drawing.Size(298, 28);
             this.label1.TabIndex = 1;
-            this.label1.Text = "El programa continuara hasta que la carga sea \r\nmenor a 0.4*Ag*f´c de las combina" +
-    "ciones elegidas.\r\n";
+            this.label1.Text = "El programa continuara hasta que la cargas sean \r\nmenores a 0.4*Ag*f´c de las com" +
+    "binaciones elegidas.\r\n";
             // 
             // CASOSCARGA
             // 
