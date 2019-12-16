@@ -1,13 +1,12 @@
 ﻿using DisenoColumnas.Clases.OpenGL;
+using DisenoColumnas.Secciones;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using OpenTK.Graphics.OpenGL;
-using OpenTK;
-using DisenoColumnas.Secciones;
-using System.Linq;
 
 namespace DisenoColumnas.Interfaz_Seccion
 {
@@ -18,14 +17,12 @@ namespace DisenoColumnas.Interfaz_Seccion
             InitializeComponent();
         }
 
-
         #region Para OpenGl
 
-        int eyeX = 100, eyeY = 100, eyeZ = 100; bool Loaded = false;
-        List<Int32> GList;
-        List<Line> lines = new List<Line>();
-        List<Dot> dots = new List<Dot>();
-
+        private int eyeX = 100, eyeY = 100, eyeZ = 100; private bool Loaded = false;
+        private List<Int32> GList;
+        private List<Line> lines = new List<Line>();
+        private List<Dot> dots = new List<Dot>();
 
         public static ISeccion Seccion;
         public static List<float[]> MP_Soli3D = new List<float[]>();
@@ -35,16 +32,9 @@ namespace DisenoColumnas.Interfaz_Seccion
         private List<float[]> MP3D { get; set; }
         private List<float[]> MP3D_SoloUnaRecta { get; set; }
 
-       
-
         private List<Tuple<List<float[]>, int>> TuplesMP3D { get; set; }
 
-  
-
-
         private bool ConFi { get; set; }
-
-
 
         private void lineGenerator(float width, Color color, int x1, int y1, int z1, int x2, int y2, int z2)
         {
@@ -61,8 +51,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             lines.Add(temp);
         }
 
-
-        private void CreateDots(Color color, decimal X,decimal Y,decimal Z)
+        private void CreateDots(Color color, decimal X, decimal Y, decimal Z)
         {
             Dot temp = new Dot();
             temp.dot[0] = X;
@@ -70,12 +59,10 @@ namespace DisenoColumnas.Interfaz_Seccion
             temp.dot[2] = Y;
             temp.color = color;
             dots.Add(temp);
-
         }
 
         private void Redraw_Tick(object sender, EventArgs e)
         {
-
             GList = new List<Int32>();
             GList.Add(0);
             if (MostrarSolicita.Checked)
@@ -112,12 +99,10 @@ namespace DisenoColumnas.Interfaz_Seccion
                 GList.Add(GList.Count);
             }
 
-
             Gl_Paint(gl, null);
         }
-     
 
-        private void CreateLineDecimal(float width, Color color, decimal x1, decimal y1, decimal z1, decimal x2, decimal y2, decimal z2,int ID)
+        private void CreateLineDecimal(float width, Color color, decimal x1, decimal y1, decimal z1, decimal x2, decimal y2, decimal z2, int ID)
         {
             Line temp = new Line();
             temp.ID = ID;
@@ -134,75 +119,62 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void CrearLines()
         {
-
             if (Seccion != null)
             {
                 lines.RemoveAll(x => x.ID != 0);
                 lines.RemoveAll(x => x.ID == -999);
 
-      
-
-
-                
                 decimal MaxX = -9999999;
                 decimal MaxY = -9999999;
                 decimal MaxZ = -9999999;
 
-
                 for (int i = 0; i < TuplesMP3D.Count; i++)
                 {
-                    for (int j = 0; j < TuplesMP3D[j].Item1.Count; j++)
+                    for (int j = 0; j < TuplesMP3D[i].Item1.Count; j++)
                     {
-
-                        if (MaxX < (decimal)TuplesMP3D[j].Item1[j][0])
-                        {                 
-                            MaxX = (decimal)TuplesMP3D[j].Item1[j][0];
-                        }                 
-                        if (MaxY < (decimal)TuplesMP3D[j].Item1[j][1])
-                        {                   
-                            MaxY = (decimal)TuplesMP3D[j].Item1[j][1];
-                        }                  
-                        if (MaxZ < (decimal)TuplesMP3D[j].Item1[j][2])
-                        {                
-                            MaxZ = (decimal)TuplesMP3D[j].Item1[j][2];
+                        if (MaxX < (decimal)TuplesMP3D[i].Item1[j][0])
+                        {
+                            MaxX = (decimal)TuplesMP3D[i].Item1[j][0];
                         }
-
+                        if (MaxY < (decimal)TuplesMP3D[i].Item1[j][1])
+                        {
+                            MaxY = (decimal)TuplesMP3D[i].Item1[j][1];
+                        }
+                        if (MaxZ < (decimal)TuplesMP3D[i].Item1[j][2])
+                        {
+                            MaxZ = (decimal)TuplesMP3D[i].Item1[j][2];
+                        }
                     }
                 }
                 float Ancho = 60; float Alto = 60; float Largo = 100;
 
                 decimal EscalaX = (decimal)Ancho / MaxX;
                 decimal EscalaY = (decimal)Alto / MaxY;
-                decimal EscalaZ =(decimal)Largo / MaxZ;
+                decimal EscalaZ = (decimal)Largo / MaxZ;
 
                 int ID = 1;
                 for (int i = 0; i < TuplesMP3D.Count; i++)
                 {
-                    for (int j = 0; j < TuplesMP3D[j].Item1.Count; j++)
+                    for (int j = 0; j < TuplesMP3D[i].Item1.Count; j++)
                     {
                         try
                         {
                             decimal X1 = (decimal)TuplesMP3D[i].Item1[j][0] * EscalaX;
                             decimal Y1 = (decimal)TuplesMP3D[i].Item1[j][1] * EscalaY;
                             decimal Z1 = (decimal)TuplesMP3D[i].Item1[j][2] * EscalaZ;
-                                               
+
                             decimal X2 = (decimal)TuplesMP3D[i].Item1[j + 1][0] * EscalaX;
                             decimal Y2 = (decimal)TuplesMP3D[i].Item1[j + 1][1] * EscalaY;
                             decimal Z2 = (decimal)TuplesMP3D[i].Item1[j + 1][2] * EscalaZ;
 
                             ID += 1;
                             Color color = Color.FromArgb(0, 255, 0);
-                     
-                            CreateLineDecimal(1, color, X1, Y1, Z1, X2, Y2, Z2,ID);
+
+                            CreateLineDecimal(1, color, X1, Y1, Z1, X2, Y2, Z2, ID);
                         }
                         catch { }
-                      
-
-
                     }
-
                 }
-
 
                 for (int i = 0; i < MP3D_SoloUnaRecta.Count; i++)
                 {
@@ -212,14 +184,13 @@ namespace DisenoColumnas.Interfaz_Seccion
                         decimal Y1 = (decimal)MP3D_SoloUnaRecta[i][1] * EscalaY;
                         decimal Z1 = (decimal)MP3D_SoloUnaRecta[i][2] * EscalaZ;
 
-                        decimal X2 = (decimal)MP3D_SoloUnaRecta[i+1][0] * EscalaX;
-                        decimal Y2 = (decimal)MP3D_SoloUnaRecta[i+1][1] * EscalaY;
-                        decimal Z2 = (decimal)MP3D_SoloUnaRecta[i+1][2] * EscalaZ;
+                        decimal X2 = (decimal)MP3D_SoloUnaRecta[i + 1][0] * EscalaX;
+                        decimal Y2 = (decimal)MP3D_SoloUnaRecta[i + 1][1] * EscalaY;
+                        decimal Z2 = (decimal)MP3D_SoloUnaRecta[i + 1][2] * EscalaZ;
                         CreateLineDecimal(1, Color.FromArgb(255, 0, 255), X1, Y1, Z1, X2, Y2, Z2, -999);
                     }
                     catch
                     {
-                      
                     }
                 }
 
@@ -234,17 +205,10 @@ namespace DisenoColumnas.Interfaz_Seccion
                         decimal Y = (decimal)MP_Soli3D[i][1] * FC2 * EscalaY;
                         decimal Z = (decimal)MP_Soli3D[i][2] * FC1 * EscalaZ;
                         CreateDots(Color.Red, X, Y, Z);
-
-
                     }
-
                 }
-
-
             }
-
         }
-
 
         private void TomarValores(bool conFi)
         {
@@ -264,40 +228,31 @@ namespace DisenoColumnas.Interfaz_Seccion
                 TuplesMP3D = null;
                 TuplesMP3D = (Seccion.MnPn3D);
             }
-
         }
-        float FC1 = 0.001f;
-        float FC2 = 1f / 100000f;
+
+        private float FC1 = 0.001f;
+        private float FC2 = 1f / 100000f;
+
         private void CreateDataGrid()
         {
-   
-
             D_MnPn.Rows.Clear();
             if (Seccion != null)
             {
-           
-
                 for (int i = 0; i < MP3D.Count; i++)
                 {
                     D_MnPn.Rows.Add();
-                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[0].Value = String.Format("{0:0.00}", MP3D[i][2]*FC1);
-                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[1].Value = String.Format("{0:0.00}", MP3D[i][0]*FC2);
-                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[2].Value = String.Format("{0:0.00}", MP3D[i][1]*FC2);
-
+                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[0].Value = String.Format("{0:0.00}", MP3D[i][2] * FC1);
+                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[1].Value = String.Format("{0:0.00}", MP3D[i][0] * FC2);
+                    D_MnPn.Rows[D_MnPn.Rows.Count - 1].Cells[2].Value = String.Format("{0:0.00}", MP3D[i][1] * FC2);
                 }
-
-
             }
             FunctionsProject.EstiloDatGridView(D_MnPn);
-
         }
-
 
         private void Graficar(Chart chart)
         {
             if (Seccion != null)
             {
-            
                 chart.Series[0].Points.Clear();
                 chart.Series[0].Color = Color.Black;
                 chart.Series[0].MarkerStyle = MarkerStyle.None;
@@ -327,15 +282,10 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 foreach (float[] Point in MP2D)
                 {
-                    chart.Series[0].Points.AddXY(Point[0]*FC2, Point[1]*FC1);
+                    chart.Series[0].Points.AddXY(Point[0] * FC2, Point[1] * FC1);
                 }
-
-
             }
-
         }
-
-
 
         private void Gl_Load(object sender, EventArgs e)
         {
@@ -343,12 +293,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             GL.ClearColor(Color.Black);
             generarFlechas();
             MostrarValores();
-           
         }
-
-
-        
-      
 
         private void X_mas_Click(object sender, EventArgs e)
         {
@@ -383,7 +328,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Button1_Click(object sender, EventArgs e)
         {
             Angulo += 10;
-            if (Angulo>350)
+            if (Angulo > 350)
             {
                 Angulo = 0;
             }
@@ -400,7 +345,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             MostrarValores();
         }
 
-
         private void MostrarValores()
         {
             GroupBox_Grafica_Diagrama1.Text = $"Angulo de {Angulo}°";
@@ -414,7 +358,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void DiagramaInteraccion_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
@@ -424,7 +367,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Panel5_MouseDown(object sender, MouseEventArgs e)
         {
-           Utilidades.MoveWindow.ReleaseCapture();
+            Utilidades.MoveWindow.ReleaseCapture();
             Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
@@ -448,7 +391,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             if (radioButton1.Checked)
             {
                 ConFi = false;
-
             }
             else
             {
@@ -462,7 +404,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             if (radioButton1.Checked)
             {
                 ConFi = false;
-
             }
             else
             {
@@ -503,8 +444,11 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             GL.PopMatrix();
             GL.Finish();
-            try { 
-            gl.SwapBuffers(); }catch{ }
+            try
+            {
+                gl.SwapBuffers();
+            }
+            catch { }
         }
 
         private void generarFlechas()
@@ -528,30 +472,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             lineGenerator(1, Color.Blue, 0, 0, 100, 0, -5, 90);
         }
 
-
-
-
-
-
-
-
-
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #endregion Para OpenGl
     }
 }

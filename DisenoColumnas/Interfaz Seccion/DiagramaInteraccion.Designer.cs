@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DiagramaInteraccion));
             this.gl = new OpenTK.GLControl();
             this.Redraw = new System.Windows.Forms.Timer(this.components);
@@ -95,15 +95,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CharMomentos.BackColor = System.Drawing.Color.WhiteSmoke;
-            chartArea2.Name = "ChartArea1";
-            this.CharMomentos.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.CharMomentos.ChartAreas.Add(chartArea1);
             this.CharMomentos.Location = new System.Drawing.Point(22, 21);
             this.CharMomentos.Name = "CharMomentos";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsVisibleInLegend = false;
-            series2.Name = "Series1";
-            this.CharMomentos.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsVisibleInLegend = false;
+            series1.Name = "Series1";
+            this.CharMomentos.Series.Add(series1);
             this.CharMomentos.Size = new System.Drawing.Size(346, 235);
             this.CharMomentos.TabIndex = 16;
             this.CharMomentos.Text = "chart1";
@@ -402,8 +402,9 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DiagramaInteraccion";
-            this.Text = "DiagramaInteraccion";
+            this.Text = "Diagrama de Interacción";
             this.Load += new System.EventHandler(this.DiagramaInteraccion_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.DiagramaInteraccion_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.CharMomentos)).EndInit();

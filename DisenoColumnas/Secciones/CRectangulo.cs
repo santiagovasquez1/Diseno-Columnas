@@ -89,7 +89,7 @@ namespace DisenoColumnas.Secciones
         {
 
             // Hallar Beta
-            float b1 = 0.85f - 0.05f*(Material.FC-280)/70f;
+      
 
             List<PointF> Coordenadas = new List<PointF>();
             float X, Y;
@@ -110,10 +110,9 @@ namespace DisenoColumnas.Secciones
             Coordenadas.Add(new PointF(X, Y));
             float ecu = 0.003f;
             float Fy = Form1.Proyecto_.FY;
-            //float fc = Material.FC;
-            float fc = 280f;
+            float fc = Material.FC;
             float Es = 2000000;
-
+            float b1 = 0.85f - 0.05f * (fc - 280) / 70f;
             List<List<float[]>> Coordenadas_PorCadaAngulo = new List<List<float[]>>();
 
             List<Tuple<List<float>, int>> m_PorCadaAngulo = new List<Tuple<List<float>, int>>();
@@ -818,7 +817,7 @@ namespace DisenoColumnas.Secciones
             foreach (CRefuerzo refuerzoi in Refuerzos)
             {
                 path = new GraphicsPath();
-                r = Form1.Proyecto_.Diametro_ref[Convert.ToInt32(refuerzoi.Diametro.Substring(1))] / 2;
+                r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
@@ -1043,7 +1042,7 @@ namespace DisenoColumnas.Secciones
             var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
             var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
 
-            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices, LayerCuadro, true);
+            FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices, LayerCuadro);
             FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ: new double[] { Xi + B / 2, Yi - 0.04, 0 }, Layer: "FC_ESTRIBOS", Base: B - 0.02 * Form1.Proyecto_.R, Altura: H - 0.02 * Form1.Proyecto_.R, Xscale: 1, Yscale: 1, Zscale: 1, Rotation: 0);
 
             #region Dibujo de refuerzo en seccion

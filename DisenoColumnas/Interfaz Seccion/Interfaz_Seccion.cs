@@ -329,9 +329,12 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             Temp = new PointF(X_r, Y_r);
 
-            if (seccion.Seccion_path != null)
+            if (seccion != null)
             {
-                path = seccion.Seccion_path;
+                if (seccion.Seccion_path != null)
+                {
+                    path = seccion.Seccion_path;
+                }
             }
 
             if (path.IsVisible(Temp))
@@ -354,17 +357,20 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             Temp = new PointF(X_r, Y_r);
 
-            if (seccion.Shapes_ref != null)
+            if (seccion != null)
             {
-                foreach (var refuerzoi in seccion.Shapes_ref)
+                if (seccion.Shapes_ref != null)
                 {
-                    if (refuerzoi.IsVisible(Temp))
+                    foreach (var refuerzoi in seccion.Shapes_ref)
                     {
-                        Indice_ref = i;
-                        return true;
-                    }
+                        if (refuerzoi.IsVisible(Temp))
+                        {
+                            Indice_ref = i;
+                            return true;
+                        }
 
-                    i++;
+                        i++;
+                    }
                 }
             }
 
@@ -754,7 +760,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 for (int i = 0; i < col.resultadosETABs[indice].Load.Count; i++)
                 {
-                    if (col.resultadosETABs[indice].Load[i].Contains("SU"))
+                    if (col.resultadosETABs[indice].Load[i].Contains("SU") | col.resultadosETABs[indice].Load[i].Contains("U0"))
                     {
                         float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
                         MP_solic.Add(MXPYPU);

@@ -240,7 +240,7 @@ namespace DisenoColumnas
                 m_PlantaColumnas.DockHandler.DockPanel = null;
             }
             m_PlantaColumnas = new PlantaColumnas();
-            //m_PlantaColumnas.Show(PanelContenedor);
+
 
             if (m_Informacion != null)
             {
@@ -264,6 +264,14 @@ namespace DisenoColumnas
             if (mFuerzasEnElmentos != null)
             {
                 mFuerzasEnElmentos.DockHandler.DockPanel = null;
+            }
+            if (mIntefazSeccion != null)
+            {
+                mIntefazSeccion.DockHandler.DockPanel = null;
+            }
+            if (mCuantiaVolumetrica != null)
+            {
+                mCuantiaVolumetrica.DockHandler.DockPanel = null;
             }
         }
 
@@ -2156,11 +2164,11 @@ namespace DisenoColumnas
                         Temp_seccion2.H = Temp_seccion.H;
                         Temp_seccion2.Material = Col.Seccions[i].Item1.Material;
 
-                        if (Temp_seccion2.Refuerzos.Count > 0 & Temp_seccion2.B > Temp_seccion2.H)
+                        if (Temp_seccion2.Refuerzos.Count > 0 & Temp_seccion2.B > Temp_seccion2.H )
                         {
                             double[] Rotacion;
-                            Temp_seccion2.Estribo.NoRamasH1 = Temp_seccion.Estribo.NoRamasV1;
-                            Temp_seccion2.Estribo.NoRamasV1 = Temp_seccion.Estribo.NoRamasH1;
+                         //   Temp_seccion2.Estribo.NoRamasH1 = Temp_seccion.Estribo.NoRamasV1;
+                           // Temp_seccion2.Estribo.NoRamasV1 = Temp_seccion.Estribo.NoRamasH1;
 
                             foreach (CRefuerzo refuerzo in Temp_seccion2.Refuerzos)
                             {

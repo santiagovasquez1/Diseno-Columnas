@@ -1123,16 +1123,26 @@ namespace DisenoColumnas.Secciones
             double[] P_XYZ = { };
             List<double> Vertices = new List<double>();
 
-            var Escalar = B_Operaciones_Matricialesl.Operaciones.Escalar(0.50, FunctionsProject.DeepClone(CoordenadasSeccion));
+            var Escalar = Operaciones.Escalar(0.50, FunctionsProject.DeepClone(CoordenadasSeccion));
 
             for (int i = 0; i < Escalar.Count; i++)
             {
-                var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi - TW, Escalar[i][0], Escalar[i][1]);
+                var Aux = Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi - TW, Escalar[i][0], Escalar[i][1]);
                 Vertices.Add(Aux[0]);
                 Vertices.Add(Aux[1]);
             }
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2D(Vertices.ToArray(), LayerCuadro, true);
+            var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
+            var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
+
+
+            foreach (CRefuerzo cRefuerzo in Refuerzos)
+            {
+
+                cRefuerzo.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
+
+            }
         }
 
         public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
