@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAgregarSeccion));
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -52,8 +53,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Button_Cerrar = new System.Windows.Forms.Button();
             this.Label6 = new System.Windows.Forms.Label();
+            this.Button_Cerrar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -70,7 +71,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(329, 581);
+            this.panel1.Size = new System.Drawing.Size(329, 538);
             this.panel1.TabIndex = 2;
             // 
             // groupBox1
@@ -86,10 +87,10 @@
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(7, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 547);
+            this.groupBox1.Size = new System.Drawing.Size(310, 504);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Seccion predefinida";
+            this.groupBox1.Text = "Seccion Predefinida";
             // 
             // groupBox3
             // 
@@ -97,10 +98,10 @@
             this.groupBox3.Controls.Add(this.Radio_Dmo);
             this.groupBox3.Location = new System.Drawing.Point(11, 172);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(283, 98);
+            this.groupBox3.Size = new System.Drawing.Size(283, 65);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Grado de disipación";
+            this.groupBox3.Text = "Grado de Disipación";
             // 
             // Radio_Des
             // 
@@ -108,7 +109,7 @@
             this.Radio_Des.BackColor = System.Drawing.Color.Transparent;
             this.Radio_Des.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
             this.Radio_Des.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Radio_Des.Location = new System.Drawing.Point(135, 41);
+            this.Radio_Des.Location = new System.Drawing.Point(133, 31);
             this.Radio_Des.Name = "Radio_Des";
             this.Radio_Des.Size = new System.Drawing.Size(45, 19);
             this.Radio_Des.TabIndex = 4;
@@ -121,7 +122,7 @@
             this.Radio_Dmo.BackColor = System.Drawing.Color.Transparent;
             this.Radio_Dmo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
             this.Radio_Dmo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Radio_Dmo.Location = new System.Drawing.Point(11, 41);
+            this.Radio_Dmo.Location = new System.Drawing.Point(9, 31);
             this.Radio_Dmo.Name = "Radio_Dmo";
             this.Radio_Dmo.Size = new System.Drawing.Size(53, 19);
             this.Radio_Dmo.TabIndex = 3;
@@ -138,7 +139,7 @@
             this.groupBox2.Controls.Add(this.tbAncho);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.LAncho);
-            this.groupBox2.Location = new System.Drawing.Point(11, 276);
+            this.groupBox2.Location = new System.Drawing.Point(11, 243);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(283, 197);
             this.groupBox2.TabIndex = 8;
@@ -281,7 +282,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(168, 494);
+            this.button2.Location = new System.Drawing.Point(162, 448);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(126, 36);
             this.button2.TabIndex = 10;
@@ -292,7 +293,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(11, 494);
+            this.button1.Location = new System.Drawing.Point(20, 448);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(126, 36);
             this.button1.TabIndex = 9;
@@ -313,11 +314,24 @@
             this.panel2.TabIndex = 14;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
+            // Label6
+            // 
+            this.Label6.AutoSize = true;
+            this.Label6.BackColor = System.Drawing.Color.Transparent;
+            this.Label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label6.ForeColor = System.Drawing.Color.Black;
+            this.Label6.Location = new System.Drawing.Point(3, 4);
+            this.Label6.Name = "Label6";
+            this.Label6.Size = new System.Drawing.Size(162, 15);
+            this.Label6.TabIndex = 22;
+            this.Label6.Text = "Agregar Sección Predefinida ";
+            this.Label6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label6_MouseDown);
+            // 
             // Button_Cerrar
             // 
             this.Button_Cerrar.BackColor = System.Drawing.Color.Gray;
             this.Button_Cerrar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.Button_Cerrar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.Button_Cerrar.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.Button_Cerrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(101)))), ((int)(((byte)(113)))));
             this.Button_Cerrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
             this.Button_Cerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -332,28 +346,16 @@
             this.Button_Cerrar.UseVisualStyleBackColor = false;
             this.Button_Cerrar.Click += new System.EventHandler(this.Button_Cerrar_Click);
             // 
-            // Label6
-            // 
-            this.Label6.AutoSize = true;
-            this.Label6.BackColor = System.Drawing.Color.Transparent;
-            this.Label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label6.ForeColor = System.Drawing.Color.Black;
-            this.Label6.Location = new System.Drawing.Point(3, 4);
-            this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(133, 15);
-            this.Label6.TabIndex = 22;
-            this.Label6.Text = "Agregar Seccion predef";
-            this.Label6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label6_MouseDown);
-            // 
             // FAgregarSeccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 581);
+            this.ClientSize = new System.Drawing.Size(329, 538);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FAgregarSeccion";
-            this.Text = "FAgregarSeccion";
+            this.Text = "Agregar Sección Predefinida ";
             this.Load += new System.EventHandler(this.FAgregarSeccion_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

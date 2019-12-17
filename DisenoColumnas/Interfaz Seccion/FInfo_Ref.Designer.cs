@@ -131,6 +131,7 @@
             this.L_Barra.Size = new System.Drawing.Size(28, 15);
             this.L_Barra.TabIndex = 7;
             this.L_Barra.Text = "XXX";
+            this.L_Barra.Visible = false;
             // 
             // Num_alzado
             // 
@@ -171,6 +172,7 @@
             this.label2.Size = new System.Drawing.Size(121, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Longitud de la Barra:";
+            this.label2.Visible = false;
             // 
             // label4
             // 

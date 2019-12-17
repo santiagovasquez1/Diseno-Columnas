@@ -42,16 +42,17 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Radio_Des = new System.Windows.Forms.RadioButton();
             this.Radio_Dmo = new System.Windows.Forms.RadioButton();
-            this.Grafica = new System.Windows.Forms.PictureBox();
             this.Button_Diagrama = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.AgregarSeccion = new System.Windows.Forms.ToolStripButton();
+            this.SaveSection = new System.Windows.Forms.ToolStripButton();
+            this.Grafica = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -183,21 +184,6 @@
             this.Radio_Dmo.UseVisualStyleBackColor = false;
             this.Radio_Dmo.CheckedChanged += new System.EventHandler(this.Radio_Dmo_CheckedChanged);
             // 
-            // Grafica
-            // 
-            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grafica.BackColor = System.Drawing.Color.White;
-            this.Grafica.Location = new System.Drawing.Point(27, 18);
-            this.Grafica.Name = "Grafica";
-            this.Grafica.Size = new System.Drawing.Size(702, 488);
-            this.Grafica.TabIndex = 1;
-            this.Grafica.TabStop = false;
-            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
-            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
-            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
-            // 
             // Button_Diagrama
             // 
             this.Button_Diagrama.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -216,22 +202,50 @@
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.AgregarSeccion,
+            this.SaveSection});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(32, 540);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // AgregarSeccion
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(29, 20);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.AgregarSeccion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AgregarSeccion.Image = global::DisenoColumnas.Properties.Resources.AgregarCol2;
+            this.AgregarSeccion.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AgregarSeccion.Name = "AgregarSeccion";
+            this.AgregarSeccion.Size = new System.Drawing.Size(29, 20);
+            this.AgregarSeccion.Text = "Agregar Sección";
+            this.AgregarSeccion.Visible = false;
+            this.AgregarSeccion.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // SaveSection
+            // 
+            this.SaveSection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SaveSection.Image = global::DisenoColumnas.Properties.Resources.SaveSection;
+            this.SaveSection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SaveSection.Name = "SaveSection";
+            this.SaveSection.Size = new System.Drawing.Size(29, 20);
+            this.SaveSection.Text = "Guardar Secciones";
+            this.SaveSection.Visible = false;
+            this.SaveSection.Click += new System.EventHandler(this.SaveSection_Click);
+            // 
+            // Grafica
+            // 
+            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grafica.BackColor = System.Drawing.Color.White;
+            this.Grafica.Location = new System.Drawing.Point(27, 18);
+            this.Grafica.Name = "Grafica";
+            this.Grafica.Size = new System.Drawing.Size(702, 488);
+            this.Grafica.TabIndex = 1;
+            this.Grafica.TabStop = false;
+            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
+            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
+            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
             // 
             // FInterfaz_Seccion
             // 
@@ -258,9 +272,9 @@
             this.cmEditar_Ref.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,6 +297,7 @@
         internal System.Windows.Forms.RadioButton Radio_Des;
         private System.Windows.Forms.Button Button_Diagrama;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton AgregarSeccion;
+        private System.Windows.Forms.ToolStripButton SaveSection;
     }
 }

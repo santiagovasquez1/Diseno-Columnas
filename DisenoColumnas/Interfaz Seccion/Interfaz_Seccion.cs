@@ -62,6 +62,14 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Radio_Dmo.Checked = true;
                 groupBox2.Visible = true;
                 groupBox2.Enabled = true;
+                SaveSection.Visible = true;
+                AgregarSeccion.Visible = true;
+
+            }
+            else
+            {
+                AgregarSeccion.Visible = false;
+                SaveSection.Visible = false;
             }
                 
 
@@ -793,6 +801,22 @@ namespace DisenoColumnas.Interfaz_Seccion
                 FAgregarSeccion agregarSeccion = new FAgregarSeccion();
                 agregarSeccion.Show();
             }
+        }
+
+        private void SaveSection_Click(object sender, EventArgs e)
+        {
+            #region Guardado secciones predef
+
+            CUsuario usuario = new CUsuario();
+            string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            usuario.Get_user();
+
+            if (usuario.Permiso == true)
+            {
+                FunctionsProject.Serializar_Secciones(Ruta_Completa, Form1.secciones_predef);
+            }
+
+            #endregion Guardado secciones predef
         }
     }
 }

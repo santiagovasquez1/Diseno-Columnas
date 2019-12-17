@@ -296,18 +296,7 @@ namespace DisenoColumnas
                     PanelContenedor.SaveAsXml(configFile);
                 }
 
-                #region Guardado secciones predef
-
-                CUsuario usuario = new CUsuario();
-                string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
-                usuario.Get_user();
-
-                if (usuario.Permiso == true & pEdicion == Tipo_Edicion.Secciones_predef)
-                {
-                    FunctionsProject.Serializar_Secciones(Ruta_Completa, secciones_predef);
-                }
-
-                #endregion Guardado secciones predef
+     
             }
         }
 

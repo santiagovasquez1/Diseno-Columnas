@@ -83,6 +83,26 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AgregarCol2 {
+            get {
+                object obj = ResourceManager.GetObject("AgregarCol2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AgregarColumna {
+            get {
+                object obj = ResourceManager.GetObject("AgregarColumna", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap anadir {
             get {
                 object obj = ResourceManager.GetObject("anadir", resourceCulture);
@@ -576,6 +596,16 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap SaveAllx13 {
             get {
                 object obj = ResourceManager.GetObject("SaveAllx13", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SaveSection {
+            get {
+                object obj = ResourceManager.GetObject("SaveSection", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
