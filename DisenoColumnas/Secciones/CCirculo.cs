@@ -30,16 +30,16 @@ namespace DisenoColumnas.Secciones
         public float B { get { return 2 * (float)radio; } set { B = value; } }
         public float H { get { return 2 * (float)radio; } set { H = value; } }
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
-                          
+
         #region Propiedades y Metodos para verificación de Vc
+
         public List<float[]> PM2M3V2V3 { get; set; }
         public List<float> Vcx { get; set; }
         public List<float> Vcy { get; set; }
         public List<float> Vsx { get; set; }
         public List<float> Vsy { get; set; }
 
-        #endregion
-               
+        #endregion Propiedades y Metodos para verificación de Vc
 
         public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> pCoord)
         {
@@ -114,7 +114,7 @@ namespace DisenoColumnas.Secciones
             Ast2 = 1.29; //Estribo #4
 
             s_min = 7.5;
-            s_max = Form1.Proyecto_.DMO_DES == GDE.DMO ? 2 * radio * 100 / 3 : 2 * radio * 100 / 4;
+            s_max = gDE == GDE.DMO ? 2 * radio * 100 / 3 : 2 * radio * 100 / 4;
 
             G_As1 = 2 * Math.PI * 2 * (radio - r) * 100 + 2 * 14; //Longitud de gancho a 180 de #3
             G_As2 = 2 * Math.PI * 2 * (radio - r) * 100 + 2 * 16.7; //Longitud de gancho a 180 de #3
@@ -192,7 +192,7 @@ namespace DisenoColumnas.Secciones
             As_min = 0.01 * Area;
             As_i = As_min / Num_Barras;
 
-            while (As_i > Form1.Proyecto_.AceroBarras[6])
+            while (As_i > FunctionsProject.Find_As(6))
             {
                 Num_Barras += 2;
                 As_i = (As_min / Num_Barras);
@@ -202,7 +202,7 @@ namespace DisenoColumnas.Secciones
             Barra_aux = FunctionsProject.Find_Barra(As_i);
 
             //Encontrar Combinatoria optima para el acero base mas aproximado al 1%
-            p_error = Math.Abs(((Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras) - As_min) / As_min) * 100;
+            p_error = Math.Abs(((FunctionsProject.Find_As(Barra_aux) * Num_Barras) - As_min) / As_min) * 100;
 
             if (p_error >= 1.05)
 
@@ -275,7 +275,6 @@ namespace DisenoColumnas.Secciones
                             Cont_Aux1 -= 1;
                             Aux_num_barras -= 1;
                         }
-
                     }
                     else
                     {
@@ -318,7 +317,7 @@ namespace DisenoColumnas.Secciones
             foreach (CRefuerzo refuerzoi in Refuerzos)
             {
                 path = new GraphicsPath();
-                r = Form1.Proyecto_.Diametro_ref[Convert.ToInt32(refuerzoi.Diametro.Substring(1))] / 2;
+                r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
@@ -344,7 +343,7 @@ namespace DisenoColumnas.Secciones
             GraphicsPath path = new GraphicsPath();
             CCirculo circulo1, circulo2;
             double r1 = (radio - rec) * 100;
-            double r2 = (r1 + Form1.Proyecto_.Diametro_ref[Estribo.NoEstribo]);
+            double r2 = (r1 + FunctionsProject.Find_Diametro(Estribo.NoEstribo));
 
             MAT_CONCRETE material = new MAT_CONCRETE
             {
@@ -484,7 +483,7 @@ namespace DisenoColumnas.Secciones
 
         public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
         {
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
@@ -506,14 +505,12 @@ namespace DisenoColumnas.Secciones
                 fInterfaz.Get_section();
                 fInterfaz.Invalidate();
             }
-
         }
 
         public void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
         {
             if (palzado.Colum_Alzado[indice] != null)
             {
-
             }
 
             if (fInterfaz != null)
@@ -566,21 +563,26 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
         public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+        public List<Tuple<List<float[]>, int>> PbMb2D { get; set; } = new List<Tuple<List<float[]>, int>>();
+        public List<Tuple<float[], int>> PbMb3D { get; set; } = new List<Tuple<float[], int>>();
+        private List<Tuple<List<float>, int>> AreaComprimida = new List<Tuple<List<float>, int>>();
+        private List<Tuple<List<float[]>, int>> CentroideAreaComprimida = new List<Tuple<List<float[]>, int>>();
 
         public void DiagramaInteraccion()
         {
             float ecu = 0.003f;
-            float Fy = Form1.Proyecto_.FY;
+            float Fy = 4220;
             float fc = Material.FC;
             float Es = 2000000;
-            float b1 = 0.85f - 0.05f * (fc - 280) / 70f;
+            float beta = 0.85f - 0.05f * (fc - 280) / 70f;
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
                 cRefuerzo.Coordenadas_PorCadaAngulo = new List<Tuple<float[], int>>();
                 cRefuerzo.Esfuerzos_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
                 cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
-                cRefuerzo.Deformacion_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();                
+                cRefuerzo.Momento_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
+                cRefuerzo.Deformacion_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
             }
 
             int DeltasVariacionC = 20;
@@ -593,15 +595,186 @@ namespace DisenoColumnas.Secciones
 
                 //Rotacion de la Sección
 
+                Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
 
+                List<float> C_Variando = new List<float>();
+                List<float> a_Variando = new List<float>();
+                List<float> AreaComprimida1 = new List<float>();
+                List<float[]> CentroideAreaComprimida1 = new List<float[]>();
 
+                float Ymin = -(float)radio * 100;
+                float Ymax = (float)radio * 100;
 
+                for (float C = Ymin + (Ymax - Ymin) / DeltasVariacionC; C <= Ymax; C += (Ymax - Ymin) / DeltasVariacionC)
+                {
+                    a_Variando.Add(C + (Ymax - C) - (Ymax - C) * beta);
+                    C_Variando.Add(C);
+                }
+
+                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax));
+
+                //Calculo de PnMn para cada variacion de c
+                for (int i = 0; i < a_Variando.Count; i++)
+                {
+                    float A1, A2;
+                    float[] Centroide_comp;
+
+                    A1 = Area_Segmento(a_Variando[i]);
+                    A2 = Area_Segmento(-(float)Math.Round(radio, 2) * 100);
+
+                    AreaComprimida1.Add((float)(Math.Pow(100, 2) * Area) - (A1 - A2));
+                    Centroide_comp = new float[] { 0, (float)Centroide_Segmento(a_Variando[i], A1 - A2) };
+                    CentroideAreaComprimida1.Add(Centroide_comp);
+                }
+
+                CentroideAreaComprimida.Add(new Tuple<List<float[]>, int>(CentroideAreaComprimida1, Angulo));
+                AreaComprimida.Add(new Tuple<List<float>, int>(AreaComprimida1, Angulo));
             }
 
+            PnMn2D = new List<Tuple<List<float[]>, int>>();
+            PuMu2D = new List<Tuple<List<float[]>, int>>();
+
+            for (int i = 0; i < AreaComprimida.Count; i++)
+            {
+                List<float[]> PnMnAux = new List<float[]>();
+                List<float[]> PuMuAux = new List<float[]>();
+
+                for (int j = 0; j < AreaComprimida[i].Item1.Count; j++)
+                {
+                    float Cc = 0.85f * fc * AreaComprimida[i].Item1[j];
+                    float Fs = 0; float Ms = 0;
+                    float Ast = 0;
+
+                    Ast = (float)Refuerzos.Select(x => x.As_Long).Sum();
+                    foreach (CRefuerzo cRefuerzo in Refuerzos)
+                    {
+                        Fs += cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j];
+                        Ms += cRefuerzo.Momento_PorCadaCPorCadaAngulo[i].Item1[j];
+                    }
+
+                    float Pmax = 0.75f * (0.85f * fc * ((float)Area * 10000 - Ast) + Fy * Ast);
+                    float Pn_ = Cc + Fs;
+                    float Mn_ = Cc * (-CentroideAreaComprimida[i].Item1[j][1]) + Ms;
+
+                    float minY = Refuerzos.Min(x => x.Coordenadas_PorCadaAngulo[i].Item1[1]);
+                    float esi = Refuerzos.Find(x => x.Coordenadas_PorCadaAngulo[i].Item1[1] == minY).Deformacion_PorCadaCPorCadaAngulo[i].Item1[j];
+
+                    float et = Math.Abs(esi);
+                    float fi = DeterminarFi(et);
+
+                    float Pu = Pn_ * fi;
+                    float Mu = Mn_ * fi;
+
+                    if (Pn_ > Pmax)
+                    {
+                        Pn_ = Pmax;
+                        Pu = Pmax * 0.65f;
+                    }
+
+                    if (Pn_ < 0)
+                    {
+                        if (PnMnAux.Exists(x => x[0] == 0) == false)
+                        {
+                            PnMnAux.Add(new float[] { 0, (-Ast * Fy) });
+                            PuMuAux.Add(new float[] { 0, (-Ast * Fy) });
+                        }
+                    }
+                    else
+                    {
+                        PnMnAux.Add(new float[] { Mn_, Pn_ });
+                        PuMuAux.Add(new float[] { Mu, Pu });
+                    }
+                }
+            }
         }
 
+        private float DeterminarFi(float et)
+        {
+            float fi;
+            if (et <= 0.002f)
+            {
+                fi = 0.65f;
+            }
+            else if (et > 0.002 && et < 0.005f)
+            {
+                fi = 0.65f + (et - 0.002f) * (250f / 3f);
+            }
+            else
+            {
+                fi = 0.90f;
+            }
+            return fi;
+        }
 
+        public void Pn_Balanceado(double recubrimiento, double DiyMax, int Angulo)
+        {
+            double Magnitud_Cb, Magnitud_ab;
+            double Pc_b, Mc_B;
+            double Pb, Mb;
+            double cb, ab;
+            double Centroide;
+            double fsl, Msl;
 
-        #endregion
+            float ecu = 0.003f;
+            float Fy = 4220;
+            float fc = Material.FC;
+            float Es = 2000000;
+            float beta = 0.85f - 0.05f * (fc - 280) / 70f;
+            float ey = Fy / Es;
+            double A1, A2,AreaComp;
+            double ag;
+
+            Magnitud_Cb = (DiyMax + radio * 100) * ecu / (ey + ecu);
+            Magnitud_ab = beta * Magnitud_Cb;
+
+            cb = Magnitud_Cb - (radio * 100);
+            ab = beta * cb;
+            ag = radio*100-ab
+
+            A1 = Area_Segmento((float)ab);
+            A2 = Area_Segmento(-(float)radio * 100);
+            AreaComp = Area * Math.Pow(100, 2) - (A1 - A2);
+
+            Pc_b = 0.85 * fc * AreaComp;
+
+            Centroide = Centroide_Segmento(ag, AreaComp);
+            Mc_B = Pc_b * Math.Abs(Centroide);
+
+            List<float> temp_c = new List<float>();
+            temp_c.Add((float)cb);
+
+            foreach (CRefuerzo refuezo in Refuerzos)
+            {
+                refuezo.CalcularDeformacion(temp_c, ecu, Angulo, Fy, Es, (float)radio * 100);
+            }
+
+            fsl = Refuerzos.Select(x => x.Fuerzas_PorCadaCPorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[0]).First()).ToList().Sum();
+            Msl = Refuerzos.Select(x => x.Momento_PorCadaCPorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[0]).First()).ToList().Sum();
+
+            Pb = Pc_b + fsl;
+            Mb = Mc_B + Msl;
+
+            float[] Temp = new float[] { (float)Mb, (float)Pb };
+            PbMb3D.Add(new Tuple<float[], int>(Temp, Angulo));
+        }
+
+        public float Area_Segmento(float Y)
+        {
+            float a, b;
+
+            a = Y / ((float)radio * 100);
+            b = (float)Math.Sqrt(Math.Pow(radio * 100, 2) - Math.Pow(Math.Round(Y, 2), 2));
+            return (float)(Math.Pow(radio * 100, 2) * Math.Asin(a) + Y * b);
+        }
+
+        public double Centroide_Segmento(double Y, double Area)
+        {
+            double a, b;
+            a = Math.Pow(radio * 100, 2) - Math.Pow(Y, 2);
+            b = Math.Pow(a, 3 / 2);
+            return (-2 * b / 3) / Area;
+        }
+
+        #endregion Diagrama de iteraccion: Propiedades y Metodos
     }
 }

@@ -35,11 +35,11 @@ namespace DisenoColumnas.Clases
 
         #region Propiedades y Metodos para Diagrama
 
-        public List<Tuple<float[], int>> Coordenadas_PorCadaAngulo { get; set; }
-
-        public List<Tuple<List<float>, int>> Esfuerzos_PorCadaCPorCadaAngulo { get; set; }
-        public List<Tuple<List<float>, int>> Deformacion_PorCadaCPorCadaAngulo { get; set; }
-        public List<Tuple<List<float>, int>> Fuerzas_PorCadaCPorCadaAngulo { get; set; }
+        public List<Tuple<float[], int>> Coordenadas_PorCadaAngulo { get; set; } = new List<Tuple<float[], int>>();
+        public List<Tuple<List<float>, int>> Esfuerzos_PorCadaCPorCadaAngulo { get; set; } = new List<Tuple<List<float>, int>>();
+        public List<Tuple<List<float>, int>> Deformacion_PorCadaCPorCadaAngulo { get; set; } = new List<Tuple<List<float>, int>>();
+        public List<Tuple<List<float>, int>> Fuerzas_PorCadaCPorCadaAngulo { get; set; } = new List<Tuple<List<float>, int>>();
+        public List<Tuple<List<float>, int>> Momento_PorCadaCPorCadaAngulo { get; set; } = new List<Tuple<List<float>, int>>();
 
         public void CalcularCoordenadasPorCadaAngulo(int Angulo)
         {
@@ -54,12 +54,14 @@ namespace DisenoColumnas.Clases
             List<float> Fuerzas = new List<float>();
             List<float> Deform = new List<float>();
             List<float> Esfuerz = new List<float>();
+            List<float> Momento = new List<float>();
+
             for (int i = 0; i < C.Count; i++)
             {
                 float C_Original = Ymax - C[i];
                 float d = Ymax - CoordenadasAngulo[1];
                 float esi = ((C_Original - d) / C_Original) * ecu;
-
+                
                 float fs = ES * esi;
 
                 if (Math.Abs(fs) > FY)
@@ -73,17 +75,23 @@ namespace DisenoColumnas.Clases
                         fs = FY;
                     }
                 }
-                float FS;
 
-                FS = fs * (float)Form1.Proyecto_.AceroBarras[Convert.ToInt32(Diametro.Substring(1))] * 10000;
+                float FS;
+                float Mi;
+
+                FS = fs * (float)As_Long;
+                Mi = Math.Abs(FS) * Math.Abs(CoordenadasAngulo[1]);
 
                 Fuerzas.Add(FS);
+                Momento.Add(Mi);
                 Esfuerz.Add(fs);
                 Deform.Add(esi);
             }
+
             Esfuerzos_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Esfuerz, Angulo));
             Deformacion_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Deform, Angulo));
             Fuerzas_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Fuerzas, Angulo));
+            Momento_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Momento, Angulo));
         }
 
         #endregion Propiedades y Metodos para Diagrama

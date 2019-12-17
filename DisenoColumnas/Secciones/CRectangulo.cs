@@ -131,9 +131,7 @@ namespace DisenoColumnas.Secciones
 
             int DeltasVariacionC = 20;
             int Delta = 10;
-
-
-
+                       
             for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
             {
                 List<float[]> PorCadaRotacion = new List<float[]>();
@@ -218,7 +216,6 @@ namespace DisenoColumnas.Secciones
                     float AreaComprimida_Aux = FunctionsProject.DeterminarArea(PuntosParaArea);
 
                     AreaComprimida1.Add(AreaComprimida_Aux);
-
                     CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroide(PuntosParaArea));
                 }
 

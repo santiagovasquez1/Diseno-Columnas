@@ -9,7 +9,6 @@ using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-
 namespace DisenoColumnas.Interfaz_Seccion
 {
     public enum Tipo_Edicion
@@ -63,9 +62,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 groupBox2.Visible = true;
                 groupBox2.Enabled = true;
             }
-                
-
-
         }
 
         private void Paint_Formulario()
@@ -78,7 +74,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 gbSecciones.Visible = false;
                 gbSecciones.Enabled = false;
 
-                groupBox1.Size = new Size(166,455);
+                groupBox1.Size = new Size(166, 455);
                 groupBox1.Location = new Point(720, 12);
                 Button_Diagrama.Visible = true;
             }
@@ -671,7 +667,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void cbSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             ISeccion[] Secciones = { };
             string Fc_secciones = "";
 
@@ -689,7 +684,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             lbPisos.Items.Clear();
             lbPisos.Items.AddRange(Secciones);
             lbPisos.SelectedItem = lbPisos.Items[0];
-
         }
 
         private void editarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -741,14 +735,10 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if(seccion is CRectangulo)
+            if (seccion is CRectangulo)
             {
                 CRectangulo cRectangulo = (CRectangulo)seccion;
                 cRectangulo.DiagramaInteraccion();
-
-
-                
-
 
                 DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
                 DiagramaInteraccion.Seccion = cRectangulo;
@@ -765,13 +755,11 @@ namespace DisenoColumnas.Interfaz_Seccion
                         float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
                         MP_solic.Add(MXPYPU);
                     }
-
                 }
 
                 DiagramaInteraccion.MP_Soli3D = MP_solic;
                 diagramaInteraccion.ShowDialog();
             }
-    
         }
 
         private void Radio_Dmo_CheckedChanged(object sender, EventArgs e)
@@ -792,6 +780,28 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 FAgregarSeccion agregarSeccion = new FAgregarSeccion();
                 agregarSeccion.Show();
+            }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            if (edicion == Tipo_Edicion.Secciones_predef)
+            {
+                if (seccion.Shape == TipodeSeccion.Circle)
+                {
+                    CCirculo Temp = (CCirculo)seccion;
+                    //Temp.DiagramaInteraccion();
+
+                    int Delta = 10;
+                    double DiyMax;
+
+                    for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
+                    {
+                        Temp.Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
+                        DiyMax = Temp.Refuerzos.Select(x => x.Coordenadas_PorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[1])).Select(x3 => x3.Max()).Max();
+                        Temp.Pn_Balanceado(0.04, DiyMax, Angulo);
+                    }
+                }
             }
         }
     }
