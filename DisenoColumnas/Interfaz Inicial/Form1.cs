@@ -900,7 +900,7 @@ namespace DisenoColumnas
 
             for (int i = 0; i < Lista_Materiales_Aux.Count; i++)
             {
-                if (Lista_Materiales_Aux[i].Contains("FC"))
+                if (Lista_Materiales_Aux[i].Contains(" FC "))
                 {
                     Lista_Materiales_Aux2.Add(Lista_Materiales_Aux[i].Split().ToList());
                 }

@@ -30,17 +30,7 @@ namespace DisenoColumnas.Secciones
         public float B { get { return 2 * (float)radio; } set { B = value; } }
         public float H { get { return 2 * (float)radio; } set { H = value; } }
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
-
-
-
-        public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
-        public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
-
-        public List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
-        public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
-
-        public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
-
+                          
         #region Propiedades y Metodos para verificación de Vc
         public List<float[]> PM2M3V2V3 { get; set; }
         public List<float> Vcx { get; set; }
@@ -49,9 +39,7 @@ namespace DisenoColumnas.Secciones
         public List<float> Vsy { get; set; }
 
         #endregion
-
-
-
+               
 
         public CCirculo(string Nombre, double pradio, double[] pCentro, MAT_CONCRETE Material_, TipodeSeccion Shape_, List<float[]> pCoord)
         {
@@ -570,5 +558,50 @@ namespace DisenoColumnas.Secciones
             else
                 return false;
         }
+
+        #region Diagrama de iteraccion: Propiedades y Metodos
+
+        public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
+        public List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
+        public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
+        public void DiagramaInteraccion()
+        {
+            float ecu = 0.003f;
+            float Fy = Form1.Proyecto_.FY;
+            float fc = Material.FC;
+            float Es = 2000000;
+            float b1 = 0.85f - 0.05f * (fc - 280) / 70f;
+
+            foreach (CRefuerzo cRefuerzo in Refuerzos)
+            {
+                cRefuerzo.Coordenadas_PorCadaAngulo = new List<Tuple<float[], int>>();
+                cRefuerzo.Esfuerzos_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
+                cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
+                cRefuerzo.Deformacion_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();                
+            }
+
+            int DeltasVariacionC = 20;
+            int Delta = 10;
+
+            for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
+            {
+                List<float[]> PorCadaRotacion = new List<float[]>();
+                List<float> ms = new List<float>();
+
+                //Rotacion de la Sección
+
+
+
+
+            }
+
+        }
+
+
+
+        #endregion
     }
 }

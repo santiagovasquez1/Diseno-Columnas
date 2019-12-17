@@ -88,8 +88,7 @@ namespace DisenoColumnas.Secciones
         public void DiagramaInteraccion()
         {
 
-            // Hallar Beta
-      
+            // Hallar Beta     
 
             List<PointF> Coordenadas = new List<PointF>();
             float X, Y;
