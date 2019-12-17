@@ -159,7 +159,7 @@ namespace DisenoColumnas.Secciones
                     C_Variando.Add(C);
                 }
 
-                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax));
+                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax,Shape));
 
                 for (int i = 0; i < a_Variando.Count; i++)
                 {

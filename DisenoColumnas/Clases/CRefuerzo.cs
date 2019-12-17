@@ -48,7 +48,7 @@ namespace DisenoColumnas.Clases
             Coordenadas_PorCadaAngulo.Add(new Tuple<float[], int>(CoordeRotadas, Angulo));
         }
 
-        public void CalcularDeformacion(List<float> C, float ecu, int Angulo, float FY, float ES, float Ymax)
+        public void CalcularDeformacion(List<float> C, float ecu, int Angulo, float FY, float ES, float Ymax,Secciones.TipodeSeccion pseccion)
         {
             float[] CoordenadasAngulo = Coordenadas_PorCadaAngulo.Find(x => x.Item2 == Angulo).Item1;
             List<float> Fuerzas = new List<float>();
@@ -56,36 +56,75 @@ namespace DisenoColumnas.Clases
             List<float> Esfuerz = new List<float>();
             List<float> Momento = new List<float>();
 
-            for (int i = 0; i < C.Count; i++)
+            if (pseccion != Secciones.TipodeSeccion.Circle)
             {
-                float C_Original = Ymax - C[i];
-                float d = Ymax - CoordenadasAngulo[1];
-                float esi = ((C_Original - d) / C_Original) * ecu;
-                
-                float fs = ES * esi;
-
-                if (Math.Abs(fs) > FY)
+                for (int i = 0; i < C.Count; i++)
                 {
-                    if (esi < 0)
+                    float C_Original = Ymax - C[i];
+                    float d = Ymax - CoordenadasAngulo[1];
+                    float esi = ((C_Original - d) / C_Original) * ecu;
+
+                    float fs = ES * esi;
+
+                    if (Math.Abs(fs) > FY)
                     {
-                        fs = -FY;
+                        if (esi < 0)
+                        {
+                            fs = -FY;
+                        }
+                        else
+                        {
+                            fs = FY;
+                        }
                     }
-                    else
-                    {
-                        fs = FY;
-                    }
+
+                    float FS;
+                    float Mi;
+
+                    FS = fs * (float)As_Long;
+                    Mi = Math.Abs(FS) * Math.Abs(CoordenadasAngulo[1]);
+
+                    Fuerzas.Add(FS);
+                    Momento.Add(Mi);
+                    Esfuerz.Add(fs);
+                    Deform.Add(esi);
                 }
+            }
+            else
+            {
+                for (int i = 0; i < C.Count; i++)
+                {
+                    float Magnitud_Di, Magnitud_Ci;
+                    Magnitud_Ci = C[i] + Ymax;
+                    Magnitud_Di = CoordenadasAngulo[1] + Ymax;
 
-                float FS;
-                float Mi;
+                    float esi = ((Magnitud_Ci - Magnitud_Di) / Magnitud_Ci) * ecu;
 
-                FS = fs * (float)As_Long;
-                Mi = Math.Abs(FS) * Math.Abs(CoordenadasAngulo[1]);
+                    float fs = ES * esi;
 
-                Fuerzas.Add(FS);
-                Momento.Add(Mi);
-                Esfuerz.Add(fs);
-                Deform.Add(esi);
+                    if (Math.Abs(fs) > FY)
+                    {
+                        if (esi < 0)
+                        {
+                            fs = -FY;
+                        }
+                        else
+                        {
+                            fs = FY;
+                        }
+                    }
+
+                    float FS;
+                    float Mi;
+
+                    FS = fs * (float)As_Long;
+                    Mi = Math.Abs(FS) * Math.Abs(Ymax - Magnitud_Di);
+
+                    Fuerzas.Add(FS);
+                    Momento.Add(Mi);
+                    Esfuerz.Add(fs);
+                    Deform.Add(esi);
+                }
             }
 
             Esfuerzos_PorCadaCPorCadaAngulo.Add(new Tuple<List<float>, int>(Esfuerz, Angulo));

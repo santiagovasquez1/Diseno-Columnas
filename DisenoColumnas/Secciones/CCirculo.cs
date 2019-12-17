@@ -611,7 +611,7 @@ namespace DisenoColumnas.Secciones
                     C_Variando.Add(C);
                 }
 
-                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax));
+                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax,Shape));
 
                 //Calculo de PnMn para cada variacion de c
                 for (int i = 0; i < a_Variando.Count; i++)
@@ -722,22 +722,20 @@ namespace DisenoColumnas.Secciones
             float beta = 0.85f - 0.05f * (fc - 280) / 70f;
             float ey = Fy / Es;
             double A1, A2,AreaComp;
-            double ag;
 
             Magnitud_Cb = (DiyMax + radio * 100) * ecu / (ey + ecu);
             Magnitud_ab = beta * Magnitud_Cb;
 
             cb = Magnitud_Cb - (radio * 100);
-            ab = beta * cb;
-            ag = radio*100-ab
+            ab = Magnitud_ab - (radio * 100);
 
             A1 = Area_Segmento((float)ab);
             A2 = Area_Segmento(-(float)radio * 100);
-            AreaComp = Area * Math.Pow(100, 2) - (A1 - A2);
+            AreaComp =(A1 - A2);
 
             Pc_b = 0.85 * fc * AreaComp;
 
-            Centroide = Centroide_Segmento(ag, AreaComp);
+            Centroide = Centroide_Segmento(ab, AreaComp);
             Mc_B = Pc_b * Math.Abs(Centroide);
 
             List<float> temp_c = new List<float>();
@@ -745,7 +743,7 @@ namespace DisenoColumnas.Secciones
 
             foreach (CRefuerzo refuezo in Refuerzos)
             {
-                refuezo.CalcularDeformacion(temp_c, ecu, Angulo, Fy, Es, (float)radio * 100);
+                refuezo.CalcularDeformacion(temp_c, ecu, Angulo, Fy, Es, (float)radio * 100, Shape);
             }
 
             fsl = Refuerzos.Select(x => x.Fuerzas_PorCadaCPorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[0]).First()).ToList().Sum();
@@ -771,7 +769,7 @@ namespace DisenoColumnas.Secciones
         {
             double a, b;
             a = Math.Pow(radio * 100, 2) - Math.Pow(Y, 2);
-            b = Math.Pow(a, 3 / 2);
+            b = Math.Pow(a, 3f / 2f);
             return (-2 * b / 3) / Area;
         }
 
