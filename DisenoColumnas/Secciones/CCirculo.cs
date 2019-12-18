@@ -694,11 +694,11 @@ namespace DisenoColumnas.Secciones
 
                     if (j == AreaComprimida[i].Item1.Count - 1)
                     {
-                        float Pmax1 = PnMnAux.Max(x => x[1]);
-                        int IndicePmax1 = PnMnAux.FindIndex(x => x[1] == Pmax1);
+                        //float Pmax1 = PnMnAux.Max(x => x[1]);
+                        //int IndicePmax1 = PnMnAux.FindIndex(x => x[1] == Pmax1);
 
-                        PnMnAux.Insert(IndicePmax1, new float[] { 0, Pmax1 });
-                        PuMuAux.Insert(IndicePmax1, new float[] { 0, Pmax1 * 0.65f });
+                        PnMnAux.Add(new float[] { 0, Pmax });
+                        PuMuAux.Add(new float[] { 0, 0.65f * Pmax });
                     }
                 }
                 PnMn2D.Add(new Tuple<List<float[]>, int>(PnMnAux, AreaComprimida[i].Item2));
