@@ -98,10 +98,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.BarraProgresoCantidades = new System.Windows.Forms.ProgressBar();
             this.ParaCantidades = new System.Windows.Forms.Label();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.agregrarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diseñarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolBar.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel5
@@ -111,6 +115,7 @@
             this.panel5.Controls.Add(this.Button_MaxRest);
             this.panel5.Controls.Add(this.Button_Cerrar);
             this.panel5.Controls.Add(this.menuStrip1);
+            this.panel5.Controls.Add(this.menuStrip2);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
@@ -793,6 +798,37 @@
             this.ParaCantidades.Text = "1/10";
             this.ParaCantidades.Visible = false;
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregrarAlzadoToolStripMenuItem,
+            this.diseñarToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(332, 1);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(287, 24);
+            this.menuStrip2.TabIndex = 29;
+            this.menuStrip2.Text = "menuStrip2";
+            this.menuStrip2.Visible = false;
+            // 
+            // agregrarAlzadoToolStripMenuItem
+            // 
+            this.agregrarAlzadoToolStripMenuItem.Name = "agregrarAlzadoToolStripMenuItem";
+            this.agregrarAlzadoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.agregrarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.agregrarAlzadoToolStripMenuItem.Text = "AgregrarAlzado";
+            this.agregrarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregrarAlzadoToolStripMenuItem_Click);
+            // 
+            // diseñarToolStripMenuItem
+            // 
+            this.diseñarToolStripMenuItem.Name = "diseñarToolStripMenuItem";
+            this.diseñarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.diseñarToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.diseñarToolStripMenuItem.Text = "Diseñar";
+            this.diseñarToolStripMenuItem.Click += new System.EventHandler(this.DiseñarToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -840,6 +876,8 @@
             this.statusStrip1.PerformLayout();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -901,5 +939,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ProgressBar BarraProgresoCantidades;
         internal System.Windows.Forms.Label ParaCantidades;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem agregrarAlzadoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diseñarToolStripMenuItem;
     }
 }

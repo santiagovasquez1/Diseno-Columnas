@@ -1092,14 +1092,17 @@ namespace DisenoColumnas.Diseño
                     Columnas_numeros.Add(boxCell.ColumnIndex - 1);
                 }
             }
+
             Filas_numeros = Filas_numeros.OrderByDescending(x => x).ToList();
             Columnas_numeros = Columnas_numeros.OrderBy(x => x).ToList();
-
-            AgregarRefuerzoBase @base = new AgregarRefuerzoBase();
-            AgregarRefuerzoBase.Columnas = Columnas_numeros;
-            AgregarRefuerzoBase.Filas = Filas_numeros;
-            AgregarRefuerzoBase.EditarAlgunosAlzados = true;
-            @base.ShowDialog();
+            if (Columnas_numeros.Exists(x=> x==-1)==false)
+            {
+                AgregarRefuerzoBase @base = new AgregarRefuerzoBase();
+                AgregarRefuerzoBase.Columnas = Columnas_numeros;
+                AgregarRefuerzoBase.Filas = Filas_numeros;
+                AgregarRefuerzoBase.EditarAlgunosAlzados = true;
+                @base.ShowDialog();
+            }
         }
 
         private AyudaAgregarRefuerzoAdicional refuerzoAdicional;

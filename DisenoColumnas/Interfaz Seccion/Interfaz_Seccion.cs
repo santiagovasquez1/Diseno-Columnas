@@ -61,6 +61,14 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Radio_Dmo.Checked = true;
                 groupBox2.Visible = true;
                 groupBox2.Enabled = true;
+                SaveSection.Visible = true;
+                AgregarSeccion.Visible = true;
+
+            }
+            else
+            {
+                AgregarSeccion.Visible = false;
+                SaveSection.Visible = false;
             }
         }
 
@@ -783,26 +791,20 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void SaveSection_Click(object sender, EventArgs e)
         {
-            if (edicion == Tipo_Edicion.Secciones_predef)
+            #region Guardado secciones predef
+
+            CUsuario usuario = new CUsuario();
+            string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            usuario.Get_user();
+
+            if (usuario.Permiso == true)
             {
-                if (seccion.Shape == TipodeSeccion.Circle)
-                {
-                    CCirculo Temp = (CCirculo)seccion;
-                    Temp.DiagramaInteraccion();
-
-                    //int Delta = 10;
-                    //double DiyMax;
-
-                    //for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
-                    //{
-                    //    Temp.Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
-                    //    DiyMax = Temp.Refuerzos.Select(x => x.Coordenadas_PorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[1])).Select(x3 => x3.Max()).Max();
-                    //    Temp.Pn_Balanceado(0.04, DiyMax, Angulo);
-                    //}
-                }
+                FunctionsProject.Serializar_Secciones(Ruta_Completa, Form1.secciones_predef);
             }
+
+            #endregion Guardado secciones predef
         }
     }
 }

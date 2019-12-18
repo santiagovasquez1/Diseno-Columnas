@@ -42,21 +42,21 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Radio_Des = new System.Windows.Forms.RadioButton();
             this.Radio_Dmo = new System.Windows.Forms.RadioButton();
-            this.Grafica = new System.Windows.Forms.PictureBox();
             this.Button_Diagrama = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.AgregarSeccion = new System.Windows.Forms.ToolStripButton();
+            this.SaveSection = new System.Windows.Forms.ToolStripButton();
+            this.Grafica = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -66,10 +66,10 @@
             this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
-            // 
+            //
             // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.lbPisos);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -80,11 +80,11 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de pisos";
-            // 
+            //
             // lbPisos
-            // 
-            this.lbPisos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.lbPisos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbPisos.FormattingEnabled = true;
             this.lbPisos.ItemHeight = 15;
@@ -93,9 +93,9 @@
             this.lbPisos.Size = new System.Drawing.Size(154, 364);
             this.lbPisos.TabIndex = 0;
             this.lbPisos.SelectedIndexChanged += new System.EventHandler(this.lbPisos_SelectedIndexChanged);
-            // 
+            //
             // gbSecciones
-            // 
+            //
             this.gbSecciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbSecciones.Controls.Add(this.cbSecciones);
             this.gbSecciones.Enabled = false;
@@ -107,9 +107,9 @@
             this.gbSecciones.TabIndex = 6;
             this.gbSecciones.TabStop = false;
             this.gbSecciones.Text = "Fc secciones";
-            // 
+            //
             // cbSecciones
-            // 
+            //
             this.cbSecciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSecciones.FormattingEnabled = true;
             this.cbSecciones.Location = new System.Drawing.Point(6, 18);
@@ -117,31 +117,31 @@
             this.cbSecciones.Size = new System.Drawing.Size(154, 23);
             this.cbSecciones.TabIndex = 0;
             this.cbSecciones.SelectedIndexChanged += new System.EventHandler(this.cbSecciones_SelectedIndexChanged);
-            // 
+            //
             // cmEditar_Ref
-            // 
+            //
             this.cmEditar_Ref.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editarRefuerzoToolStripMenuItem,
             this.eliminarRefuerzoToolStripMenuItem});
             this.cmEditar_Ref.Name = "cmEditar_Ref";
             this.cmEditar_Ref.Size = new System.Drawing.Size(164, 48);
-            // 
+            //
             // editarRefuerzoToolStripMenuItem
-            // 
+            //
             this.editarRefuerzoToolStripMenuItem.Name = "editarRefuerzoToolStripMenuItem";
             this.editarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.editarRefuerzoToolStripMenuItem.Text = "Editar refuerzo";
             this.editarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.editarRefuerzoToolStripMenuItem_Click);
-            // 
+            //
             // eliminarRefuerzoToolStripMenuItem
-            // 
+            //
             this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
             this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
             this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
-            // 
+            //
             // groupBox2
-            // 
+            //
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.Radio_Des);
             this.groupBox2.Controls.Add(this.Radio_Dmo);
@@ -155,9 +155,9 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Grado de disipación: ";
             this.groupBox2.Visible = false;
-            // 
+            //
             // Radio_Des
-            // 
+            //
             this.Radio_Des.AutoSize = true;
             this.Radio_Des.BackColor = System.Drawing.Color.Transparent;
             this.Radio_Des.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
@@ -169,9 +169,9 @@
             this.Radio_Des.Text = "DES";
             this.Radio_Des.UseVisualStyleBackColor = false;
             this.Radio_Des.CheckedChanged += new System.EventHandler(this.Radio_Des_CheckedChanged);
-            // 
+            //
             // Radio_Dmo
-            // 
+            //
             this.Radio_Dmo.AutoSize = true;
             this.Radio_Dmo.BackColor = System.Drawing.Color.Transparent;
             this.Radio_Dmo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
@@ -183,24 +183,9 @@
             this.Radio_Dmo.Text = "DMO";
             this.Radio_Dmo.UseVisualStyleBackColor = false;
             this.Radio_Dmo.CheckedChanged += new System.EventHandler(this.Radio_Dmo_CheckedChanged);
-            // 
-            // Grafica
-            // 
-            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grafica.BackColor = System.Drawing.Color.White;
-            this.Grafica.Location = new System.Drawing.Point(27, 18);
-            this.Grafica.Name = "Grafica";
-            this.Grafica.Size = new System.Drawing.Size(702, 488);
-            this.Grafica.TabIndex = 1;
-            this.Grafica.TabStop = false;
-            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
-            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
-            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
-            // 
+            //
             // Button_Diagrama
-            // 
+            //
             this.Button_Diagrama.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Button_Diagrama.BackColor = System.Drawing.Color.Gray;
             this.Button_Diagrama.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -212,31 +197,58 @@
             this.Button_Diagrama.Text = "Diagrama de Interacción";
             this.Button_Diagrama.UseVisualStyleBackColor = false;
             this.Button_Diagrama.Click += new System.EventHandler(this.Button1_Click);
-            // 
+            //
             // toolStrip1
-            // 
+            //
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2});
+            this.AgregarSeccion,
+            this.SaveSection});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(107, 540);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(104, 20);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
+            //
+            // AgregarSeccion
+            //
+            this.AgregarSeccion.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AgregarSeccion.Image = global::DisenoColumnas.Properties.Resources.AgregarCol2;
+            this.AgregarSeccion.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AgregarSeccion.Name = "AgregarSeccion";
+            this.AgregarSeccion.Size = new System.Drawing.Size(29, 20);
+            this.AgregarSeccion.Text = "Agregar Sección";
+            this.AgregarSeccion.Visible = false;
+            this.AgregarSeccion.Click += new System.EventHandler(this.toolStripButton1_Click);
+            //
+            // SaveSection
+            //
+            this.SaveSection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SaveSection.Image = global::DisenoColumnas.Properties.Resources.SaveSection;
+            this.SaveSection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SaveSection.Name = "SaveSection";
+            this.SaveSection.Size = new System.Drawing.Size(29, 20);
+            this.SaveSection.Text = "Guardar Secciones";
+            this.SaveSection.Visible = false;
+            this.SaveSection.Click += new System.EventHandler(this.SaveSection_Click);
+            //
+            // Grafica
+            //
+            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grafica.BackColor = System.Drawing.Color.White;
+            this.Grafica.Location = new System.Drawing.Point(27, 18);
+            this.Grafica.Name = "Grafica";
+            this.Grafica.Size = new System.Drawing.Size(702, 488);
+            this.Grafica.TabIndex = 1;
+            this.Grafica.TabStop = false;
+            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
+            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
+            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
+            //
             // toolStripButton2
-            // 
+            //
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -244,9 +256,9 @@
             this.toolStripButton2.Size = new System.Drawing.Size(104, 19);
             this.toolStripButton2.Text = "Diagrama Circular";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
+            //
             // FInterfaz_Seccion
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
@@ -270,9 +282,9 @@
             this.cmEditar_Ref.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,7 +307,7 @@
         internal System.Windows.Forms.RadioButton Radio_Des;
         private System.Windows.Forms.Button Button_Diagrama;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton AgregarSeccion;
+        private System.Windows.Forms.ToolStripButton SaveSection;
     }
 }

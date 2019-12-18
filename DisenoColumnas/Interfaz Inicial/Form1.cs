@@ -228,7 +228,7 @@ namespace DisenoColumnas
             tool.SetToolTip(Save_B, "Guardar (Ctrl + S)");
             tool.SetToolTip(SaveAs_B, "Guardar (Ctrl + Mayús + S)");
             tool.SetToolTip(Cuantia_Vol_Button, "Calcular Cuantía Volumétrica");
-            tool.SetToolTip(Button_Agregar, "Agregar Nuevo Alzado (Ctrl + A)");
+            tool.SetToolTip(Button_Agregar, "Agregar Nuevo Alzado (Ctrl + Mayús + N)");
             tool.SetToolTip(Disenar, "Diseñar Columnas (Ctrl + D)");
             tool.SetToolTip(Button_DLNET, "Exportar Cantidades (Archivo DL NET) (Ctrl + E)");
         }
@@ -296,18 +296,7 @@ namespace DisenoColumnas
                     PanelContenedor.SaveAsXml(configFile);
                 }
 
-                #region Guardado secciones predef
-
-                CUsuario usuario = new CUsuario();
-                string Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
-                usuario.Get_user();
-
-                if (usuario.Permiso == true & pEdicion == Tipo_Edicion.Secciones_predef)
-                {
-                    FunctionsProject.Serializar_Secciones(Ruta_Completa, secciones_predef);
-                }
-
-                #endregion Guardado secciones predef
+     
             }
         }
 
@@ -2056,6 +2045,10 @@ namespace DisenoColumnas
 
         private void Button_Agregar_Click(object sender, EventArgs e)
         {
+            AgregarAlzado();
+        }
+        private void AgregarAlzado()
+        {
             if (Proyecto_.ColumnaSelect != null)
             {
                 int CantidadPisos = 0;
@@ -2084,7 +2077,6 @@ namespace DisenoColumnas
                 mAgregarAlzado.CrearDataGrid(true);
             }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             string FicheroExterno = Environment.CommandLine;
@@ -2497,6 +2489,11 @@ namespace DisenoColumnas
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            ActionDiseñar();
+        }
+
+        private void ActionDiseñar()
+        {
             ColumnasaDiseñar SelecColumnsDisenar = new ColumnasaDiseñar();
             List<Columna> ColumnasADiseñar = new List<Columna>();
 
@@ -2514,8 +2511,9 @@ namespace DisenoColumnas
             {
                 Diseñar(ref ColumnasADiseñar);
             }
-        }
 
+
+        }
         private void EditarSeccionesPredeterminadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CUsuario usuario = new CUsuario();
@@ -2845,6 +2843,22 @@ namespace DisenoColumnas
                 Process Proc = new Process();
                 Proc.StartInfo.FileName = RutaArchivo;
                 Proc.Start();
+            }
+        }
+
+        private void AgregrarAlzadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Proyecto_ != null)
+            {
+                AgregarAlzado();
+            }
+        }
+
+        private void DiseñarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Proyecto_ != null)
+            {
+                ActionDiseñar();
             }
         }
     }

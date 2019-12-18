@@ -419,6 +419,7 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SaveSection.png" />
     <None Include="Resources\DiagramaInteraccion.png" />
     <None Include="Resources\DiagramaInteraccionx25 %282%29.png" />
     <None Include="Resources\DiagramaInteraccionx25.png" />
@@ -454,6 +455,8 @@
     <None Include="Resources\close-button1.png" />
     <None Include="Resources\AnguloIzquierda.png" />
     <None Include="Resources\angulo-de-flecha-derecha.png" />
+    <None Include="Resources\AgregarColumna.png" />
+    <None Include="Resources\AgregarCol2.png" />
     <Content Include="Resources\Csearch.cur" />
     <None Include="Resources\vcsadded_93506x16.png" />
     <None Include="Resources\vcsadded_93506.png" />
