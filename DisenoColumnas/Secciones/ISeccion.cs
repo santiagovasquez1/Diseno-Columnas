@@ -58,7 +58,6 @@ namespace DisenoColumnas.Secciones
         void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz);
 
         double Peso_Estribo(Estribo pEstribo, float recubrimiento);
-
         void DiagramaInteraccion();
 
         #region Propiedades y Metodos para verificación de Vc

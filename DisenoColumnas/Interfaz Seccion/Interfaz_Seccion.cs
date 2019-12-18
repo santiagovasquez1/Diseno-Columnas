@@ -83,7 +83,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 groupBox1.Size = new Size(166, 455);
                 groupBox1.Location = new Point(720, 12);
-                Button_Diagrama.Visible = true;
+            //    Button_Diagrama.Visible = true;
             }
             if (edicion == Tipo_Edicion.Secciones_predef)
             {
@@ -94,7 +94,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 gbSecciones.Enabled = true;
                 gbSecciones.Size = new Size(new Point(166, 47));
 
-                Button_Diagrama.Visible = true;
+               // Button_Diagrama.Visible = false;
 
                 groupBox1.Size = new Size(new Point(166, 393));
                 groupBox1.Location = new Point(735, 113);
@@ -742,27 +742,49 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Button1_Click(object sender, EventArgs e)
         {
+
             seccion.DiagramaInteraccion();
 
             DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
             DiagramaInteraccion.Seccion = seccion;
 
+
+
+
+
+
+
+
+
             //Columna col = Form1.Proyecto_.ColumnaSelect;
             //int indice = col.Seccions.FindIndex(x => x.Item2 == Piso);
 
-            //List<float[]> MP_solic = new List<float[]>();
 
-            //for (int i = 0; i < col.resultadosETABs[indice].Load.Count; i++)
-            //{
-            //    if (col.resultadosETABs[indice].Load[i].Contains("SU") | col.resultadosETABs[indice].Load[i].Contains("U0"))
-            //    {
-            //        float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
-            //        MP_solic.Add(MXPYPU);
-            //    }
-            //}
+            if (edicion == Tipo_Edicion.Secciones_modelo)
+            {
 
-            //DiagramaInteraccion.MP_Soli3D = MP_solic;
+                Columna col = Form1.Proyecto_.ColumnaSelect;
+                int indice = col.Seccions.FindIndex(x => x.Item2 == Piso);
+                List<float[]> MP_solic = new List<float[]>();
+
+                for (int i = 0; i < col.resultadosETABs[indice].Load.Count; i++)
+                {
+                    if (col.resultadosETABs[indice].Load[i].Contains("SU") | col.resultadosETABs[indice].Load[i].Contains("U0"))
+                    {
+                        float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
+                        MP_solic.Add(MXPYPU);
+                    }
+
+                }
+
+                DiagramaInteraccion.MP_Soli3D = MP_solic;
+            }
+
+
+
             diagramaInteraccion.ShowDialog();
+
+
         }
 
         private void Radio_Dmo_CheckedChanged(object sender, EventArgs e)

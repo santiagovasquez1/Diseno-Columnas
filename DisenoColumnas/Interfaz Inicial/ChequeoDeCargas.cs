@@ -89,7 +89,7 @@ namespace DisenoColumnas.Interfaz_Inicial
 
                         for(int j=0; j < col.Panalizar[i].Count; j++)
                         {
-                            if(col.Panalizar[i][j].Item4 < Math.Abs(col.Panalizar[i][j].Item1)*1000)
+                            if(col.Panalizar[i][j].Item4 < (col.Panalizar[i][j].Item1)*1000)
                             {
                                 string ColumnaQueNoCumple = col.Name + " - " + col.Panalizar[i][j].Item3 + " - " + col.Panalizar[i][j].Item2;
                                 NamesColumnasQueNoCumplen.Add(ColumnaQueNoCumple);
@@ -153,7 +153,7 @@ namespace DisenoColumnas.Interfaz_Inicial
                         DataInfo.Rows[DataInfo.Rows.Count - 1].Cells[3].Value = ColumnaSelect.Panalizar[i][j].Item2;
                         DataInfo.Rows[DataInfo.Rows.Count - 1].Cells[4].Value = String.Format("{0:0.00}", ColumnaSelect.Panalizar[i][j].Item4 / 1000);
                         DataInfo.Rows[DataInfo.Rows.Count - 1].Cells[5].Value = String.Format("{0:0.00}", ColumnaSelect.Panalizar[i][j].Item1);
-                        if (ColumnaSelect.Panalizar[i][j].Item4 < Math.Abs(ColumnaSelect.Panalizar[i][j].Item1) * 1000)
+                        if (ColumnaSelect.Panalizar[i][j].Item4 < ColumnaSelect.Panalizar[i][j].Item1 * 1000)
                         {
                             StyleR.BackColor = Color.FromArgb(248, 134, 134);
                             StyleR.Font = new Font("Vderdana", 8, FontStyle.Bold);

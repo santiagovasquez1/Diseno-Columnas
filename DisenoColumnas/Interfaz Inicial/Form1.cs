@@ -623,8 +623,8 @@ namespace DisenoColumnas
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             openFileDialog1.DefaultExt = "e2K";
-            openFileDialog1.Filter = "Archivo de ETABS 9.5 |*.$ET;*.e2k";
-            openFileDialog1.Title = "Abrir Archivo de ETABS 9.5";
+            openFileDialog1.Filter = "Archivo de ETABS |*.$ET;*.e2k";
+            openFileDialog1.Title = "Abrir Archivo de ETABS 9.5, 16.0, 17.1, 18.0";
             openFileDialog1.ShowDialog();
 
             if (openFileDialog1.FileName != "")
@@ -675,7 +675,7 @@ namespace DisenoColumnas
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.Title = "Resultados a Flexo Compresión";
-            openFileDialog.Filter = "Resultados |*.csv";
+            openFileDialog.Filter = "Resultados Flexo Compresión |*.csv";
             openFileDialog.ShowDialog();
 
             if (openFileDialog.FileName != "")
@@ -945,12 +945,12 @@ namespace DisenoColumnas
                 TipodeSeccion tipodeSeccion;
                 float TF, TW, B, H;
 
-                if (SHAPE == "SD")
+                if (SHAPE == "Section")
                 {
                     //Section Designer
 
                     int Inicio_DesignerSections = ArchivoE2KETABS.FindIndex(x => x.Contains("$ SECTION DESIGNER SECTIONS")) + 1;
-                    int Final_DesignerSection = ArchivoE2KETABS.FindIndex(x => x.Contains("$ WALL/SLAB/DECK PROPERTIES")) - 1;
+                    int Final_DesignerSection = ArchivoE2KETABS.FindIndex(x => x.Contains("$ SLAB PROPERTIES")) - 1;
 
                     List<List<string>> SectionDesginer = new List<List<string>>();
 
@@ -962,11 +962,11 @@ namespace DisenoColumnas
 
                     for (int k = 0; k < SectionDesginer.Count; k++)
                     {
-                        if (SectionDesginer[k].Count == 7)
+                        if (SectionDesginer[k].Count == 9)
                         {
-                            if (SectionDesginer[k][5] == "POLYGON")
+                            if (SectionDesginer[k][7] == "POLYGON")
                             {
-                                NoPuntos = Convert.ToInt32(SectionDesginer[k][6].Replace("  NUMCORNERPTS ", ""));
+                                NoPuntos = Convert.ToInt32(SectionDesginer[k][8].Replace("  NUMCORNERPTS ", ""));
                                 Coord = new List<float[]>();
 
                                 for (int s = k + 1; s < k + NoPuntos + 1; s++)

@@ -373,6 +373,11 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void DiagramaInteraccion_Load(object sender, EventArgs e)
         {
+
+            if(Form1.mIntefazSeccion.edicion == Tipo_Edicion.Secciones_predef)
+            {
+                MostrarSolicita.Enabled = false;
+            }
             MostrarValores();
         }
 
