@@ -790,17 +790,17 @@ namespace DisenoColumnas.Interfaz_Seccion
                 if (seccion.Shape == TipodeSeccion.Circle)
                 {
                     CCirculo Temp = (CCirculo)seccion;
-                    //Temp.DiagramaInteraccion();
+                    Temp.DiagramaInteraccion();
 
-                    int Delta = 10;
-                    double DiyMax;
+                    //int Delta = 10;
+                    //double DiyMax;
 
-                    for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
-                    {
-                        Temp.Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
-                        DiyMax = Temp.Refuerzos.Select(x => x.Coordenadas_PorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[1])).Select(x3 => x3.Max()).Max();
-                        Temp.Pn_Balanceado(0.04, DiyMax, Angulo);
-                    }
+                    //for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
+                    //{
+                    //    Temp.Refuerzos.ForEach(x => x.CalcularCoordenadasPorCadaAngulo(Angulo));
+                    //    DiyMax = Temp.Refuerzos.Select(x => x.Coordenadas_PorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[1])).Select(x3 => x3.Max()).Max();
+                    //    Temp.Pn_Balanceado(0.04, DiyMax, Angulo);
+                    //}
                 }
             }
         }

@@ -8,8 +8,6 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 
-
-
 namespace DisenoColumnas.Secciones
 {
     [Serializable]
@@ -44,15 +42,15 @@ namespace DisenoColumnas.Secciones
         public bool Editado { get; set; } = false;
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
 
-
         #region Propiedades y Metodos para verificación de Vc
-       public List<float[]> PM2M3V2V3 { get; set; }
-       public List<float> Vcx { get; set; }
-       public List<float> Vcy { get; set; }
-       public List<float> Vsx { get; set; }
-       public List<float> Vsy { get; set; }
 
-        #endregion
+        public List<float[]> PM2M3V2V3 { get; set; }
+        public List<float> Vcx { get; set; }
+        public List<float> Vcy { get; set; }
+        public List<float> Vsx { get; set; }
+        public List<float> Vsy { get; set; }
+
+        #endregion Propiedades y Metodos para verificación de Vc
 
         #region Propiedades: Cantidades -Estribos
 
@@ -87,8 +85,7 @@ namespace DisenoColumnas.Secciones
 
         public void DiagramaInteraccion()
         {
-
-            // Hallar Beta     
+            // Hallar Beta
 
             List<PointF> Coordenadas = new List<PointF>();
             float X, Y;
@@ -131,7 +128,7 @@ namespace DisenoColumnas.Secciones
 
             int DeltasVariacionC = 20;
             int Delta = 10;
-                       
+
             for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
             {
                 List<float[]> PorCadaRotacion = new List<float[]>();
@@ -191,7 +188,7 @@ namespace DisenoColumnas.Secciones
                     C_Variando.Add(C);
                 }
 
-                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax,Shape));
+                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax, Shape));
 
                 for (int i = 0; i < a_Variando.Count; i++)
                 {
@@ -274,7 +271,7 @@ namespace DisenoColumnas.Secciones
                         if (PnMnAux.Exists(x => x[0] == 0) == false)
                         {
                             PnMnAux.Add(new float[] { 0, (-Ast * Fy) });
-                            PuMuAux.Add(new float[] { 0, (-Ast * Fy ) });
+                            PuMuAux.Add(new float[] { 0, (-Ast * Fy) });
                         }
                     }
                     else
@@ -324,9 +321,6 @@ namespace DisenoColumnas.Secciones
                 MnPn3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
                 MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntosU, PnMn2D[i].Item2));
             }
-
-
-
         }
 
         private float DeterminarFi(float et)

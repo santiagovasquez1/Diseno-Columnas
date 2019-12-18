@@ -604,16 +604,22 @@ namespace DisenoColumnas.Secciones
 
                 float Ymin = -(float)radio * 100;
                 float Ymax = (float)radio * 100;
+                float Magnitud_C, Magnitud_a;
+                float atemp;
 
                 for (float C = Ymin + (Ymax - Ymin) / DeltasVariacionC; C <= Ymax; C += (Ymax - Ymin) / DeltasVariacionC)
                 {
-                    a_Variando.Add(C + (Ymax - C) - (Ymax - C) * beta);
+                    Magnitud_C = C + (float)radio * 100;
+                    Magnitud_a = beta * Magnitud_C;
+                    atemp = Magnitud_a - (float)radio * 100;
+
                     C_Variando.Add(C);
+                    a_Variando.Add(atemp);                    
                 }
 
                 Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax,Shape));
 
-                //Calculo de PnMn para cada variacion de c
+                //Calculo del area comprimida para cada variacion de c
                 for (int i = 0; i < a_Variando.Count; i++)
                 {
                     float A1, A2;
@@ -622,7 +628,7 @@ namespace DisenoColumnas.Secciones
                     A1 = Area_Segmento(a_Variando[i]);
                     A2 = Area_Segmento(-(float)Math.Round(radio, 2) * 100);
 
-                    AreaComprimida1.Add((float)(Math.Pow(100, 2) * Area) - (A1 - A2));
+                    AreaComprimida1.Add(A1 - A2);
                     Centroide_comp = new float[] { 0, (float)Centroide_Segmento(a_Variando[i], A1 - A2) };
                     CentroideAreaComprimida1.Add(Centroide_comp);
                 }
@@ -646,18 +652,19 @@ namespace DisenoColumnas.Secciones
                     float Ast = 0;
 
                     Ast = (float)Refuerzos.Select(x => x.As_Long).Sum();
+
                     foreach (CRefuerzo cRefuerzo in Refuerzos)
                     {
                         Fs += cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j];
                         Ms += cRefuerzo.Momento_PorCadaCPorCadaAngulo[i].Item1[j];
                     }
-
+                    
                     float Pmax = 0.75f * (0.85f * fc * ((float)Area * 10000 - Ast) + Fy * Ast);
                     float Pn_ = Cc + Fs;
                     float Mn_ = Cc * (-CentroideAreaComprimida[i].Item1[j][1]) + Ms;
 
-                    float minY = Refuerzos.Min(x => x.Coordenadas_PorCadaAngulo[i].Item1[1]);
-                    float esi = Refuerzos.Find(x => x.Coordenadas_PorCadaAngulo[i].Item1[1] == minY).Deformacion_PorCadaCPorCadaAngulo[i].Item1[j];
+                    float maxY = Refuerzos.Max(x => x.Coordenadas_PorCadaAngulo[i].Item1[1]);
+                    float esi = Refuerzos.Find(x => x.Coordenadas_PorCadaAngulo[i].Item1[1] == maxY).Deformacion_PorCadaCPorCadaAngulo[i].Item1[j];
 
                     float et = Math.Abs(esi);
                     float fi = DeterminarFi(et);
@@ -684,8 +691,49 @@ namespace DisenoColumnas.Secciones
                         PnMnAux.Add(new float[] { Mn_, Pn_ });
                         PuMuAux.Add(new float[] { Mu, Pu });
                     }
+
+                    if (j == AreaComprimida[i].Item1.Count - 1)
+                    {
+                        float Pmax1 = PnMnAux.Max(x => x[1]);
+                        int IndicePmax1 = PnMnAux.FindIndex(x => x[1] == Pmax1);
+
+                        PnMnAux.Insert(IndicePmax1, new float[] { 0, Pmax1 });
+                        PuMuAux.Insert(IndicePmax1, new float[] { 0, Pmax1 * 0.65f });
+                    }
                 }
+                PnMn2D.Add(new Tuple<List<float[]>, int>(PnMnAux, AreaComprimida[i].Item2));
+                PuMu2D.Add(new Tuple<List<float[]>, int>(PuMuAux, AreaComprimida[i].Item2));
             }
+
+            MnPn3D = new List<Tuple<List<float[]>, int>>();
+            MuPu3D = new List<Tuple<List<float[]>, int>>();
+
+            for (int i = 0; i < PnMn2D.Count; i++)
+            {
+                int Angulo = PnMn2D[i].Item2;
+                List<float[]> SeriePuntos = new List<float[]>();
+                List<float[]> SeriePuntosU = new List<float[]>();
+
+                for (int j = 0; j < PnMn2D[i].Item1.Count; j++)
+                {
+                    float X1 = (float)(PnMn2D[i].Item1[j][0] * Math.Cos((Angulo * Math.PI / 180)));
+                    float Y2 = (float)(PnMn2D[i].Item1[j][0] * Math.Sin((Angulo * Math.PI / 180)));
+                    float Z2 = PnMn2D[i].Item1[j][1];
+                    float[] PuntosDescompuestos = new float[] { X1, Y2, Z2 };
+
+                    SeriePuntos.Add(PuntosDescompuestos);
+
+                    float X1U = (float)(PuMu2D[i].Item1[j][0] * Math.Cos((Angulo * Math.PI / 180)));
+                    float Y2U = (float)(PuMu2D[i].Item1[j][0] * Math.Sin((Angulo * Math.PI / 180)));
+                    float Z2U = PuMu2D[i].Item1[j][1];
+                    float[] PuntosDescompuestosUltimos = new float[] { X1U, Y2U, Z2U };
+
+                    SeriePuntosU.Add(PuntosDescompuestosUltimos);
+                }
+                MnPn3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
+                MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntosU, PnMn2D[i].Item2));
+            }
+
         }
 
         private float DeterminarFi(float et)
@@ -748,6 +796,8 @@ namespace DisenoColumnas.Secciones
 
             fsl = Refuerzos.Select(x => x.Fuerzas_PorCadaCPorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[0]).First()).ToList().Sum();
             Msl = Refuerzos.Select(x => x.Momento_PorCadaCPorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[0]).First()).ToList().Sum();
+            var coord = Refuerzos.Select(x => x.Coordenadas_PorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[1]).First()).ToList();
+            var prueba = Refuerzos.Select(x => x.Fuerzas_PorCadaCPorCadaAngulo.Select(x1 => x1.Item1).Select(x2 => x2[0]).First()).ToList();
 
             Pb = Pc_b + fsl;
             Mb = Mc_B + Msl;
