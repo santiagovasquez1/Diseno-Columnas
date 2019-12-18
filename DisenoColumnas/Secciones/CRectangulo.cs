@@ -127,6 +127,7 @@ namespace DisenoColumnas.Secciones
             {
                 cRefuerzo.Coordenadas_PorCadaAngulo = new List<Tuple<float[], int>>();
                 cRefuerzo.Esfuerzos_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
+                cRefuerzo.Momento_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
                 cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
                 cRefuerzo.Deformacion_PorCadaCPorCadaAngulo = new List<Tuple<List<float>, int>>();
             }
