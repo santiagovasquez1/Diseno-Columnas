@@ -164,8 +164,6 @@ namespace DisenoColumnas.Clases
                 {
                     T_XYZ = new double[] { Xi + (Coord[0] / 100) + 0.03, Yi + (Coord[1] / 100) - 0.007, 0 };
                 }
-
-
             }
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddText(Alzado.ToString(), T_XYZ, 0.075, 0.0225, "FC_R-100", "FC_TEXT", 0);

@@ -1,5 +1,6 @@
 ﻿using DisenoColumnas.Secciones_Predefinidas;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -624,6 +625,28 @@ namespace DisenoColumnas
         public static PointF CoversionaPuntos(float[] FloatArray)
         {
             return new PointF(FloatArray[0], FloatArray[1]);
+        }
+
+        public static double[] Distancias(IEnumerable Lista1, IEnumerable Lista2)
+        {
+            var Punto1=Lista1.Cast<double>().ToList();
+            var Puntos = Lista2.Cast<double[]>().ToList();
+
+            List<double> Distancias = new List<double>();
+            double Aux_dist = 0;
+            int indice = 0;
+            double[] Coord_def = { };
+
+            for (int i = 0; i < Puntos.Count(); i++) 
+            {
+                Aux_dist = Math.Pow(Punto1[0] - Puntos[i][0], 2) + Math.Pow(Punto1[1] - Puntos[i][1], 2);
+                Distancias.Add(Math.Sqrt(Aux_dist));
+            }
+
+            indice = Distancias.FindIndex(x => x == Distancias.Min());
+            Coord_def = Puntos[indice];
+
+            return Coord_def;
         }
 
     }
