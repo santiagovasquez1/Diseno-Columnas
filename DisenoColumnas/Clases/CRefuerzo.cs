@@ -156,14 +156,16 @@ namespace DisenoColumnas.Clases
 
             if (Math.Round(Coord[1], 2) > Ymin & Math.Round(Coord[1], 2) < Ymax)
             {
-                if (Math.Round(Coord[0], 2) == Xmin)
+                if (Math.Round(Coord[0], 2) >= Xmin)
                 {
                     T_XYZ = new double[] { Xi + (Coord[0] / 100) - 0.05, Yi + (Coord[1] / 100) - 0.007, 0 };
                 }
-                if (Math.Round(Coord[0], 2) == Xmax)
+                if (Math.Round(Coord[0], 2) <= Xmax)
                 {
                     T_XYZ = new double[] { Xi + (Coord[0] / 100) + 0.03, Yi + (Coord[1] / 100) - 0.007, 0 };
                 }
+
+
             }
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddText(Alzado.ToString(), T_XYZ, 0.075, 0.0225, "FC_R-100", "FC_TEXT", 0);
