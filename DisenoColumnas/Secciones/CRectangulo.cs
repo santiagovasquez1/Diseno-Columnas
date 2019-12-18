@@ -1031,10 +1031,8 @@ namespace DisenoColumnas.Secciones
             double Dist1 = 0;
             double Dist2 = 0;
             double[] P_XYZ = { };
-            string Layer_aux = "";
             string Nom_Seccion = "";
             string Escala = "1:15";
-            short Flip_state = 0;
 
             var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
             var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
@@ -1053,22 +1051,52 @@ namespace DisenoColumnas.Secciones
 
             #region Adicion de ganchos seccion
 
-            //Dibujo de Ganchos verticales
+            ////Dibujo de Ganchos verticales
             Dist1 = Math.Abs(Y_unicos.Max() - Y_unicos.Min()) / 100;
             Dist2 = Math.Abs(X_unicos.Max() - X_unicos.Min()) / 100;
-            Layer_aux = "FC_GANCHOS";
 
-            for (int i = 1; i < X_unicos.Count - 1; i++)
+            //Determinar coordenadas ganchos
+
+            float SepX = (B * 100 - 2 * 4f) / (Estribo.NoRamasV1 - 1);
+            float SepY = (H * 100 - 2 * 4f) / (Estribo.NoRamasH1 - 1);
+            float DeltaX = -(B * 100 / 2) + 4f; float DeltaY = -(H * 100 / 2) + 4f;
+            List<double[]> CoordX = new List<double[]>();
+            List<double[]> CoordY = new List<double[]>();
+            var lista2 = Refuerzos.Select(x => x.Coord).ToList();
+
+            for (int i = 0; i < Estribo.NoRamasV1; i++)
             {
-                P_XYZ = new double[] { Xi + (B / 2) + X_unicos[i] / 100, Yi - (H / 2) + Y_unicos.Max() / 100, 0 };
-                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270, Flip_state);
-                Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
+                if (i>0 & i < Estribo.NoRamasV1 - 1)
+                {
+                    CoordX.Add(FunctionsProject.Distancias(new double[] { DeltaX, -(H * 100 / 2) + 4f }, lista2));
+                }
+
+                DeltaX += SepX;
             }
 
-            Flip_state = 1;
-            for (int i = 1; i < Y_unicos.Count - 1; i++)
+            for (int i = 0; i < Estribo.NoRamasH1; i++)
             {
-                P_XYZ = new double[] { Xi + (B / 2) + X_unicos.Min() / 100, Yi - (H / 2) + Y_unicos[i] / 100, 0 };
+                if (i > 0 & i < Estribo.NoRamasH1 - 1)
+                {
+                    CoordY.Add(FunctionsProject.Distancias(new double[] { -(B * 100 / 2) + 4f, DeltaY }, lista2));
+                }
+                DeltaY += SepY;
+            }
+
+            short Flip_state=0;
+            string Layer_aux = "FC_GANCHOS";
+
+            for (int i = 0; i < CoordX.Count; i++) 
+            {
+                P_XYZ = new double[] { Xi + (B / 2) + CoordX[i][0] / 100, Yi - (H / 2) + Y_unicos.Max() / 100, 0 };
+                FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270, Flip_state);
+                Flip_state = Flip_state == 0 ? (short)1 : (short)0;
+            }
+            Flip_state = 1;
+
+            for (int i = 0; i < CoordY.Count; i++) 
+            {
+                P_XYZ = new double[] { Xi + (B / 2) + X_unicos.Min() / 100, Yi - (H / 2) + CoordY[i][1] / 100, 0 };
                 FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist2, 1, 1, 1, 0, Flip_state);
 
                 Flip_state = Flip_state == 0 ? (Int16)1 : (Int16)0;
@@ -1128,17 +1156,10 @@ namespace DisenoColumnas.Secciones
         {
             if (palzado.Colum_Alzado[indice] != null)
             {
-                if (palzado.Colum_Alzado[indice].Tipo == "A" | palzado.Colum_Alzado[indice].Tipo == "Bottom")
+                var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
+                foreach (var refuerzoi in Refuerzo_alzado)
                 {
-                    Refueroz_Adicional(palzado, indice, fInterfaz);
-                }
-                else
-                {
-                    var Refuerzo_alzado = Refuerzos.FindAll(x => x.Alzado == palzado.ID);
-                    foreach (var refuerzoi in Refuerzo_alzado)
-                    {
-                        refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
-                    }
+                    refuerzoi.Diametro = $"#{palzado.Colum_Alzado[indice].NoBarra}";
                 }
             }
 
