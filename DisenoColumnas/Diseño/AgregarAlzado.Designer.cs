@@ -63,7 +63,6 @@
             this.D_Alzado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_Alzado_CellClick);
             this.D_Alzado.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.D_Alzado_CellEndEdit);
             this.D_Alzado.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.D_Alzado_CellMouseClick);
-            this.D_Alzado.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.D_Alzado_CellMouseDown);
             this.D_Alzado.KeyDown += new System.Windows.Forms.KeyEventHandler(this.D_Alzado_KeyDown);
             this.D_Alzado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.D_Alzado_KeyPress);
             this.D_Alzado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.D_Alzado_KeyUp);
@@ -145,7 +144,6 @@
             this.elminarColumnaDeAlzadoToolStripMenuItem.Name = "elminarColumnaDeAlzadoToolStripMenuItem";
             this.elminarColumnaDeAlzadoToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
             this.elminarColumnaDeAlzadoToolStripMenuItem.Text = "Eliminar Alzado";
-            this.elminarColumnaDeAlzadoToolStripMenuItem.Click += new System.EventHandler(this.ElminarColumnaDeAlzadoToolStripMenuItem_Click);
             // 
             // AgregarAlzado
             // 

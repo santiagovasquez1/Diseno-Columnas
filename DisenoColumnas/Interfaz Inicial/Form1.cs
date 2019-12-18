@@ -2047,6 +2047,10 @@ namespace DisenoColumnas
         {
             AgregarAlzado();
         }
+
+
+
+
         private void AgregarAlzado()
         {
             if (Proyecto_.ColumnaSelect != null)
@@ -2077,6 +2081,43 @@ namespace DisenoColumnas
                 mAgregarAlzado.CrearDataGrid(true);
             }
         }
+
+
+
+        private void EliminarAlzado()
+        {
+            if (Proyecto_.ColumnaSelect != null)
+            {
+                if (Proyecto_.ColumnaSelect.Alzados.Count > 1)
+                {
+
+                    Proyecto_.ColumnaSelect.Alzados.RemoveAt(Proyecto_.ColumnaSelect.Alzados.Count-1);
+                    Proyecto_.ColumnaSelect.KgRefuerzoforColumAlzado.RemoveAt(Proyecto_.ColumnaSelect.Alzados.Count - 1);
+
+                    Proyecto_.ColumnaSelect.ActualizarRefuerzo();
+                    Proyecto_.ColumnaSelect.CalcularPesoAcero();
+                    try
+                    {
+                        mAgregarAlzado.CrearDataGrid(true);
+                        m_Despiece.Draw_Column.Invalidate();
+                        m_Despiece.Draw_Colum_Alzado.Invalidate();
+                        m_Informacion.ColumnaSelectAnt = null;
+                        m_Informacion.CrearDataGriedView(true);
+                        m_Informacion.Invalidate();
+                    }
+                    catch { }
+
+                }
+
+            }
+
+        }
+
+
+
+
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
             string FicheroExterno = Environment.CommandLine;
@@ -2514,6 +2555,10 @@ namespace DisenoColumnas
 
 
         }
+
+
+
+
         private void EditarSeccionesPredeterminadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CUsuario usuario = new CUsuario();
@@ -2860,6 +2905,11 @@ namespace DisenoColumnas
             {
                 ActionDiseñar();
             }
+        }
+
+        private void EliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EliminarAlzado();
         }
     }
 }

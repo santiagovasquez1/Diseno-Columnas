@@ -64,7 +64,7 @@ namespace DisenoColumnas.Clases
 
         public List<int> Prueba = new List<int>();
 
-        private List<float> KgRefuerzoforColumAlzado { get; set; } = new List<float>();
+        public List<float> KgRefuerzoforColumAlzado { get; set; } = new List<float>();
 
         public float KgRefuerzo { get; set; }
 

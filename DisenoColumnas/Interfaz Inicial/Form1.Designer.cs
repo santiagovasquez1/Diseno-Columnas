@@ -73,6 +73,9 @@
             this.resultadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.agregrarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diseñarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.L_NameProject = new System.Windows.Forms.ToolStripStatusLabel();
@@ -98,14 +101,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.BarraProgresoCantidades = new System.Windows.Forms.ProgressBar();
             this.ParaCantidades = new System.Windows.Forms.Label();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.agregrarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.diseñarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolBar.SuspendLayout();
-            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel5
@@ -188,7 +190,7 @@
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 2);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(205, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(325, 24);
             this.menuStrip1.TabIndex = 25;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -365,6 +367,9 @@
             // 
             // agregarAlzadoToolStripMenuItem
             // 
+            this.agregarAlzadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarToolStripMenuItem,
+            this.eliminarToolStripMenuItem});
             this.agregarAlzadoToolStripMenuItem.Enabled = false;
             this.agregarAlzadoToolStripMenuItem.Image = global::DisenoColumnas.Properties.Resources.vcsadded_93506;
             this.agregarAlzadoToolStripMenuItem.Name = "agregarAlzadoToolStripMenuItem";
@@ -430,6 +435,37 @@
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de Column Disigner";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.AcercaDeToolStripMenuItem_Click);
+            // 
+            // menuStrip2
+            // 
+            this.menuStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
+            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregrarAlzadoToolStripMenuItem,
+            this.diseñarToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(332, 1);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(167, 24);
+            this.menuStrip2.TabIndex = 29;
+            this.menuStrip2.Text = "menuStrip2";
+            this.menuStrip2.Visible = false;
+            // 
+            // agregrarAlzadoToolStripMenuItem
+            // 
+            this.agregrarAlzadoToolStripMenuItem.Name = "agregrarAlzadoToolStripMenuItem";
+            this.agregrarAlzadoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.agregrarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.agregrarAlzadoToolStripMenuItem.Text = "AgregrarAlzado";
+            this.agregrarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregrarAlzadoToolStripMenuItem_Click);
+            // 
+            // diseñarToolStripMenuItem
+            // 
+            this.diseñarToolStripMenuItem.Name = "diseñarToolStripMenuItem";
+            this.diseñarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.diseñarToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.diseñarToolStripMenuItem.Text = "Diseñar";
+            this.diseñarToolStripMenuItem.Click += new System.EventHandler(this.DiseñarToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -798,36 +834,22 @@
             this.ParaCantidades.Text = "1/10";
             this.ParaCantidades.Visible = false;
             // 
-            // menuStrip2
+            // agregarToolStripMenuItem
             // 
-            this.menuStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(112)))), ((int)(((byte)(113)))));
-            this.menuStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.agregrarAlzadoToolStripMenuItem,
-            this.diseñarToolStripMenuItem});
-            this.menuStrip2.Location = new System.Drawing.Point(332, 1);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(287, 24);
-            this.menuStrip2.TabIndex = 29;
-            this.menuStrip2.Text = "menuStrip2";
-            this.menuStrip2.Visible = false;
-            // 
-            // agregrarAlzadoToolStripMenuItem
-            // 
-            this.agregrarAlzadoToolStripMenuItem.Name = "agregrarAlzadoToolStripMenuItem";
-            this.agregrarAlzadoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
+            this.agregarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
-            this.agregrarAlzadoToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
-            this.agregrarAlzadoToolStripMenuItem.Text = "AgregrarAlzado";
-            this.agregrarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregrarAlzadoToolStripMenuItem_Click);
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.agregarToolStripMenuItem.Text = "Agregar";
             // 
-            // diseñarToolStripMenuItem
+            // eliminarToolStripMenuItem
             // 
-            this.diseñarToolStripMenuItem.Name = "diseñarToolStripMenuItem";
-            this.diseñarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.diseñarToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.diseñarToolStripMenuItem.Text = "Diseñar";
-            this.diseñarToolStripMenuItem.Click += new System.EventHandler(this.DiseñarToolStripMenuItem_Click);
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Delete)));
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.EliminarToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -872,12 +894,12 @@
             this.panel5.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -942,5 +964,7 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem agregrarAlzadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem diseñarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
     }
 }

@@ -16,7 +16,7 @@ namespace DisenoColumnas.InterfazViewInfo
             EstiloDatGridView(Info_D);
         }
 
-        private Columna ColumnaSelectAnt;
+        public Columna ColumnaSelectAnt;
 
         private void DataGridView1_Paint(object sender, PaintEventArgs e)
         {

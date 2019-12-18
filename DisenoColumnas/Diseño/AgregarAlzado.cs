@@ -1160,29 +1160,6 @@ namespace DisenoColumnas.Diseño
             }
         }
 
-        private void ElminarColumnaDeAlzadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-           
-        }
 
-        private void D_Alzado_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (D_Alzado.Columns.Count > 1)
-            {
-                for (int NoColum = 1; NoColum < D_Alzado.Columns.Count - 1; NoColum++)
-                {
-                    Rectangle CeldaR = D_Alzado.GetCellDisplayRectangle(NoColum, -1, true);
-                    if (CeldaR.Location.X >= e.X && e.X <= CeldaR.X + CeldaR.Width && e.Y >= CeldaR.Y && e.Y <= CeldaR.Y + CeldaR.Height)
-                    {
-                        elminarColumnaDeAlzadoToolStripMenuItem.Enabled = true;
-                    }
-                    else
-                    {
-                        elminarColumnaDeAlzadoToolStripMenuItem.Enabled = false;
-                    }
-                }
-            }
-
-        }
     }
 }
