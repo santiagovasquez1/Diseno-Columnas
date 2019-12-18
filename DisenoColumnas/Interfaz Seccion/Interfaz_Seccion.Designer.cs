@@ -247,16 +247,6 @@
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
             //
-            // toolStripButton2
-            //
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(104, 19);
-            this.toolStripButton2.Text = "Diagrama Circular";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            //
             // FInterfaz_Seccion
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

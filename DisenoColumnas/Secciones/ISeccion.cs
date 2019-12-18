@@ -59,6 +59,7 @@ namespace DisenoColumnas.Secciones
 
         double Peso_Estribo(Estribo pEstribo, float recubrimiento);
 
+        void DiagramaInteraccion();
 
         #region Propiedades y Metodos para verificación de Vc
         List<float[]> PM2M3V2V3 { get; set; }
