@@ -10,6 +10,9 @@ namespace DisenoColumnas.Clases
         public List<double> Asmin { get; set; } = new List<double>();
         public List<double> As { get; set; } = new List<double>();
 
+        public float[] prequerida { set; get; } 
+        public float[] pasignada { set; get; } 
+
         public double[] AsTopMediumButton { get; set; } = { };
 
         //Propiedad Adicional
@@ -109,9 +112,6 @@ namespace DisenoColumnas.Clases
             {
              
             }
-
-
-
 
             double[] AsTMB = new double[] { Top, medium, Button };
             AsTopMediumButton = AsTMB;

@@ -96,6 +96,20 @@ namespace DisenoColumnas.Clases
 
         #region Metodos-Calculos
 
+        public void CrearCuantiaProyectoAntiguos(int NoPiso)
+        {
+            float Area = (float)Seccions[NoPiso].Item1.Area;
+   
+            resultadosETABs[NoPiso].prequerida = new float[] { ((float)resultadosETABs[NoPiso].AsTopMediumButton[0]/Area)*100,
+                                                               ((float)resultadosETABs[NoPiso].AsTopMediumButton[1]/Area)*100,
+                                                               ((float)resultadosETABs[NoPiso].AsTopMediumButton[2]/Area)*100 };
+
+            resultadosETABs[NoPiso].pasignada = new float[] { (resultadosETABs[NoPiso].As_asignado[0]/Area)*100,
+                                                               (resultadosETABs[NoPiso].As_asignado[1]/Area)*100,
+                                                               (resultadosETABs[NoPiso].As_asignado[2]/Area)*100 };
+
+        }
+
         public void ActualizarRefuerzo()
         {
             for (int i = 0; i < resultadosETABs.Count; i++)
@@ -187,6 +201,24 @@ namespace DisenoColumnas.Clases
                 resultadosETABs[i].Porct_Refuerzo[0] = (resultadosETABs[i].As_asignado[0] / (float)resultadosETABs[i].AsTopMediumButton[0]) * 100;
                 resultadosETABs[i].Porct_Refuerzo[1] = (resultadosETABs[i].As_asignado[1] / (float)resultadosETABs[i].AsTopMediumButton[1]) * 100;
                 resultadosETABs[i].Porct_Refuerzo[2] = (resultadosETABs[i].As_asignado[2] / (float)resultadosETABs[i].AsTopMediumButton[2]) * 100;
+                float Area = (float)Seccions[i].Item1.Area;
+                //Cuantia
+                if (resultadosETABs[i].pasignada == null)
+                {
+                    CrearCuantiaProyectoAntiguos(i);
+                }
+
+                resultadosETABs[i].prequerida[0] = ((float)resultadosETABs[i].AsTopMediumButton[0] / Area) * 100;
+                resultadosETABs[i].prequerida[1] = ((float)resultadosETABs[i].AsTopMediumButton[1] / Area) * 100;
+                resultadosETABs[i].prequerida[2] = ((float)resultadosETABs[i].AsTopMediumButton[2] / Area) * 100;
+
+                resultadosETABs[i].pasignada[0] = (resultadosETABs[i].As_asignado[0] / Area) * 100;
+                resultadosETABs[i].pasignada[1] = (resultadosETABs[i].As_asignado[1] / Area) * 100;
+                resultadosETABs[i].pasignada[2] = (resultadosETABs[i].As_asignado[2] / Area) * 100;
+
+
+
+
             }
 
 

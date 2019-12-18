@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Informacion));
             this.Info_D = new System.Windows.Forms.DataGridView();
+            this.NameColum = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Column1 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.Column2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.B = new WeifenLuo.DataGridViewTextBoxColumnEx();
@@ -38,10 +40,10 @@
             this.TF = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.Locali = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AceroR = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prequerida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Asasign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pasignada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Porc_Ref = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameColum = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.Info_D)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +65,9 @@
             this.TF,
             this.Locali,
             this.AceroR,
+            this.prequerida,
             this.Asasign,
+            this.pasignada,
             this.Porc_Ref});
             this.Info_D.GridColor = System.Drawing.Color.DarkGray;
             this.Info_D.Location = new System.Drawing.Point(12, 29);
@@ -72,89 +76,6 @@
             this.Info_D.Size = new System.Drawing.Size(1013, 458);
             this.Info_D.TabIndex = 0;
             this.Info_D.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGridView1_Paint);
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "Story";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "F\'c [kgf/cm²]";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // B
-            // 
-            this.B.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.B.HeaderText = "B [cm]";
-            this.B.Name = "B";
-            this.B.ReadOnly = true;
-            this.B.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // H
-            // 
-            this.H.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.H.HeaderText = "H [cm]";
-            this.H.Name = "H";
-            this.H.ReadOnly = true;
-            this.H.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // TW
-            // 
-            this.TW.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TW.HeaderText = "Tw [cm]";
-            this.TW.Name = "TW";
-            this.TW.ReadOnly = true;
-            this.TW.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // TF
-            // 
-            this.TF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TF.HeaderText = "Tf [cm]";
-            this.TF.Name = "TF";
-            this.TF.ReadOnly = true;
-            this.TF.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // Locali
-            // 
-            this.Locali.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Locali.HeaderText = "Top / Medium / Button";
-            this.Locali.Name = "Locali";
-            this.Locali.ReadOnly = true;
-            this.Locali.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Locali.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // AceroR
-            // 
-            this.AceroR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.AceroR.HeaderText = "Acero Requerido [cm²]";
-            this.AceroR.Name = "AceroR";
-            this.AceroR.ReadOnly = true;
-            this.AceroR.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.AceroR.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Asasign
-            // 
-            this.Asasign.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Asasign.HeaderText = "Acero Asignado [cm²]";
-            this.Asasign.Name = "Asasign";
-            this.Asasign.ReadOnly = true;
-            this.Asasign.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Asasign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Porc_Ref
-            // 
-            this.Porc_Ref.HeaderText = "%Ref";
-            this.Porc_Ref.Name = "Porc_Ref";
-            this.Porc_Ref.ReadOnly = true;
-            this.Porc_Ref.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Porc_Ref.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // NameColum
             // 
@@ -167,6 +88,120 @@
             this.NameColum.TabIndex = 0;
             this.NameColum.Text = "Columna: ";
             // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.FillWeight = 42.18026F;
+            this.Column1.HeaderText = "Story";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.FillWeight = 42.18026F;
+            this.Column2.HeaderText = "F\'c [kgf/cm²]";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // B
+            // 
+            this.B.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.B.FillWeight = 42.18026F;
+            this.B.HeaderText = "B [cm]";
+            this.B.Name = "B";
+            this.B.ReadOnly = true;
+            this.B.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // H
+            // 
+            this.H.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.H.FillWeight = 42.18026F;
+            this.H.HeaderText = "H [cm]";
+            this.H.Name = "H";
+            this.H.ReadOnly = true;
+            this.H.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // TW
+            // 
+            this.TW.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TW.FillWeight = 42.18026F;
+            this.TW.HeaderText = "Tw [cm]";
+            this.TW.Name = "TW";
+            this.TW.ReadOnly = true;
+            this.TW.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // TF
+            // 
+            this.TF.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TF.FillWeight = 42.18026F;
+            this.TF.HeaderText = "Tf [cm]";
+            this.TF.Name = "TF";
+            this.TF.ReadOnly = true;
+            this.TF.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Locali
+            // 
+            this.Locali.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Locali.FillWeight = 42.18026F;
+            this.Locali.HeaderText = "Top / Medium / Button";
+            this.Locali.Name = "Locali";
+            this.Locali.ReadOnly = true;
+            this.Locali.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Locali.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // AceroR
+            // 
+            this.AceroR.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.AceroR.FillWeight = 42.18026F;
+            this.AceroR.HeaderText = "Acero Requerido [cm²]";
+            this.AceroR.Name = "AceroR";
+            this.AceroR.ReadOnly = true;
+            this.AceroR.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.AceroR.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // prequerida
+            // 
+            this.prequerida.FillWeight = 42.18026F;
+            this.prequerida.HeaderText = "rho R";
+            this.prequerida.Name = "prequerida";
+            this.prequerida.ReadOnly = true;
+            this.prequerida.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.prequerida.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.prequerida.Width = 81;
+            // 
+            // Asasign
+            // 
+            this.Asasign.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Asasign.FillWeight = 42.18026F;
+            this.Asasign.HeaderText = "Acero Asignado [cm²]";
+            this.Asasign.Name = "Asasign";
+            this.Asasign.ReadOnly = true;
+            this.Asasign.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Asasign.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // pasignada
+            // 
+            this.pasignada.FillWeight = 40.91206F;
+            this.pasignada.HeaderText = "rho A";
+            this.pasignada.Name = "pasignada";
+            this.pasignada.ReadOnly = true;
+            this.pasignada.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.pasignada.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.pasignada.Width = 79;
+            // 
+            // Porc_Ref
+            // 
+            this.Porc_Ref.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Porc_Ref.FillWeight = 41.01506F;
+            this.Porc_Ref.HeaderText = "%Ref";
+            this.Porc_Ref.Name = "Porc_Ref";
+            this.Porc_Ref.ReadOnly = true;
+            this.Porc_Ref.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Porc_Ref.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // Informacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -176,6 +211,7 @@
             this.Controls.Add(this.NameColum);
             this.Controls.Add(this.Info_D);
             this.DockAreas = ((WeifenLuo.WinFormsUI.Docking.DockAreas)((WeifenLuo.WinFormsUI.Docking.DockAreas.Float | WeifenLuo.WinFormsUI.Docking.DockAreas.Document)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Informacion";
@@ -190,6 +226,7 @@
         #endregion
         public  System.Windows.Forms.Label NameColum;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        internal System.Windows.Forms.DataGridView Info_D;
         private WeifenLuo.DataGridViewTextBoxColumnEx Column1;
         private WeifenLuo.DataGridViewTextBoxColumnEx Column2;
         private WeifenLuo.DataGridViewTextBoxColumnEx B;
@@ -198,8 +235,9 @@
         private WeifenLuo.DataGridViewTextBoxColumnEx TF;
         private System.Windows.Forms.DataGridViewTextBoxColumn Locali;
         private System.Windows.Forms.DataGridViewTextBoxColumn AceroR;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prequerida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Asasign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pasignada;
         private System.Windows.Forms.DataGridViewTextBoxColumn Porc_Ref;
-        internal System.Windows.Forms.DataGridView Info_D;
     }
 }
