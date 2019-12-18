@@ -2049,8 +2049,6 @@ namespace DisenoColumnas
         }
 
 
-
-
         private void AgregarAlzado()
         {
             if (Proyecto_.ColumnaSelect != null)
@@ -2065,7 +2063,7 @@ namespace DisenoColumnas
                 }
 
                 int MaximoID = -99999;
-                int CantidaAnteriorAlzados = 0;
+                int CantidaAnteriorAlzados;
                 for (int i = 0; i < Proyecto_.ColumnaSelect.Alzados.Count; i++)
                 {
                     if (Proyecto_.ColumnaSelect.Alzados[i].ID > MaximoID)
@@ -2079,6 +2077,7 @@ namespace DisenoColumnas
                 Proyecto_.ColumnaSelect.Alzados.Add(alzadoN);
                 Proyecto_.ColumnaSelect.CrearListaPesosRefuerzos(CantidaAnteriorAlzados);
                 mAgregarAlzado.CrearDataGrid(true);
+                m_Despiece.Invalidate();
             }
         }
 
