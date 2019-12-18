@@ -2200,8 +2200,8 @@ namespace DisenoColumnas
                         if (Temp_seccion2.Refuerzos.Count > 0 & Temp_seccion2.B > Temp_seccion2.H )
                         {
                             double[] Rotacion;
-                         //   Temp_seccion2.Estribo.NoRamasH1 = Temp_seccion.Estribo.NoRamasV1;
-                           // Temp_seccion2.Estribo.NoRamasV1 = Temp_seccion.Estribo.NoRamasH1;
+                            Temp_seccion2.Estribo.NoRamasH1 = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Temp_seccion)).Estribo.NoRamasV1);
+                            Temp_seccion2.Estribo.NoRamasV1 = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Temp_seccion)).Estribo.NoRamasH1);
 
                             foreach (CRefuerzo refuerzo in Temp_seccion2.Refuerzos)
                             {
@@ -2552,7 +2552,6 @@ namespace DisenoColumnas
             {
                 Diseñar(ref ColumnasADiseñar);
             }
-
 
         }
 
