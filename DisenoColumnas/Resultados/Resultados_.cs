@@ -138,15 +138,16 @@ namespace DisenoColumnas.Resultados
         private void Button1_Click(object sender, EventArgs e)
         {
             DataVirtual.Tables.Clear();
+            if (treeViewResultados.Nodes[0].Nodes[0].Checked)
+            {
+                CreateTableVirtualInfoColumnas();
+            }
             if (treeViewResultados.Nodes[0].Nodes[1].Checked)
             {
                 CrearTableVitualEstribos();
 
             }
-            if (treeViewResultados.Nodes[0].Nodes[0].Checked)
-            { 
-                CreateTableVirtualInfoColumnas();
-            }
+            
             if (DataVirtual.Tables.Count!=0)
             {
                 TabladeResultados tabladeResultados = new TabladeResultados();

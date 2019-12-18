@@ -433,6 +433,16 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap excel_icon {
+            get {
+                object obj = ResourceManager.GetObject("excel_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap expandBtn {
             get {
                 object obj = ResourceManager.GetObject("expandBtn", resourceCulture);
@@ -473,6 +483,16 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_export_excel_64174 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_export_excel_64174", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_acerca_de_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-acerca-de-48", resourceCulture);
@@ -486,6 +506,16 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap icons8_dibujados_a_mano_a_color_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8-dibujados-a-mano-a-color-100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_microsoft_excel_400 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-microsoft-excel-400", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
