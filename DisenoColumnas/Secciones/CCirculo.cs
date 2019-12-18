@@ -576,6 +576,11 @@ namespace DisenoColumnas.Secciones
             float Es = 2000000;
             float beta = 0.85f - 0.05f * (fc - 280) / 70f;
 
+            PbMb2D = new List<Tuple<List<float[]>, int>>();
+            PbMb3D = new List<Tuple<float[], int>>();
+            AreaComprimida = new List<Tuple<List<float>, int>>();
+            CentroideAreaComprimida = new List<Tuple<List<float[]>, int>>();
+
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
                 cRefuerzo.Coordenadas_PorCadaAngulo = new List<Tuple<float[], int>>();
@@ -614,10 +619,10 @@ namespace DisenoColumnas.Secciones
                     atemp = Magnitud_a - (float)radio * 100;
 
                     C_Variando.Add(C);
-                    a_Variando.Add(atemp);                    
+                    a_Variando.Add(atemp);
                 }
 
-                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax,Shape));
+                Refuerzos.ForEach(x => x.CalcularDeformacion(C_Variando, ecu, Angulo, Fy, Es, Ymax, Shape));
 
                 //Calculo del area comprimida para cada variacion de c
                 for (int i = 0; i < a_Variando.Count; i++)
@@ -658,7 +663,7 @@ namespace DisenoColumnas.Secciones
                         Fs += cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j];
                         Ms += cRefuerzo.Momento_PorCadaCPorCadaAngulo[i].Item1[j];
                     }
-                    
+
                     float Pmax = 0.75f * (0.85f * fc * ((float)Area * 10000 - Ast) + Fy * Ast);
                     float Pn_ = Cc + Fs;
                     float Mn_ = Cc * (-CentroideAreaComprimida[i].Item1[j][1]) + Ms;
@@ -694,9 +699,6 @@ namespace DisenoColumnas.Secciones
 
                     if (j == AreaComprimida[i].Item1.Count - 1)
                     {
-                        //float Pmax1 = PnMnAux.Max(x => x[1]);
-                        //int IndicePmax1 = PnMnAux.FindIndex(x => x[1] == Pmax1);
-
                         PnMnAux.Add(new float[] { 0, Pmax });
                         PuMuAux.Add(new float[] { 0, 0.65f * Pmax });
                     }
@@ -733,7 +735,6 @@ namespace DisenoColumnas.Secciones
                 MnPn3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
                 MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntosU, PnMn2D[i].Item2));
             }
-
         }
 
         private float DeterminarFi(float et)
@@ -769,7 +770,7 @@ namespace DisenoColumnas.Secciones
             float Es = 2000000;
             float beta = 0.85f - 0.05f * (fc - 280) / 70f;
             float ey = Fy / Es;
-            double A1, A2,AreaComp;
+            double A1, A2, AreaComp;
 
             Magnitud_Cb = (DiyMax + radio * 100) * ecu / (ey + ecu);
             Magnitud_ab = beta * Magnitud_Cb;
@@ -779,7 +780,7 @@ namespace DisenoColumnas.Secciones
 
             A1 = Area_Segmento((float)ab);
             A2 = Area_Segmento(-(float)radio * 100);
-            AreaComp =(A1 - A2);
+            AreaComp = (A1 - A2);
 
             Pc_b = 0.85 * fc * AreaComp;
 

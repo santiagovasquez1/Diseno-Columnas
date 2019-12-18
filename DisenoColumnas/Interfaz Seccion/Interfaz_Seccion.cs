@@ -42,6 +42,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         public FInfo_Ref Info_ref { get; set; }
         public FEditarRef EditarRef { get; set; }
         public GDE GDE { get; set; }
+        public bool Add_Refuerzo { get; set; }
 
         public FInterfaz_Seccion(Tipo_Edicion pedicion)
         {
@@ -83,7 +84,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 groupBox1.Size = new Size(166, 455);
                 groupBox1.Location = new Point(720, 12);
-            //    Button_Diagrama.Visible = true;
+                //    Button_Diagrama.Visible = true;
             }
             if (edicion == Tipo_Edicion.Secciones_predef)
             {
@@ -94,7 +95,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 gbSecciones.Enabled = true;
                 gbSecciones.Size = new Size(new Point(166, 47));
 
-               // Button_Diagrama.Visible = false;
+                // Button_Diagrama.Visible = false;
 
                 groupBox1.Size = new Size(new Point(166, 393));
                 groupBox1.Location = new Point(735, 113);
@@ -410,7 +411,10 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (MouseOverPoligono(e.Location))
             {
-                new_cursor = Cursors.Hand;
+                if (Add_Refuerzo == false)
+                    new_cursor = Cursors.Hand;
+                else
+                    new_cursor = Cursors.Cross;
             }
 
             Over_ref = MouseOverRefuerzo(e.Location);
@@ -478,25 +482,44 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Seleccionado = true;
                 Grafica.Invalidate();
 
-                if (edicion == Tipo_Edicion.Secciones_modelo)
+                if (Add_Refuerzo == false)
                 {
-                    agregarRef = new FAgregarRef(seccion, Piso, this);
-                    agregarRef.ShowDialog();
+                    if (edicion == Tipo_Edicion.Secciones_modelo)
+                    {
+                        agregarRef = new FAgregarRef(seccion, Piso, this);
+                        agregarRef.ShowDialog();
+                    }
+                    if (edicion == Tipo_Edicion.Secciones_predef)
+                    {
+                        editarPredef = new FEditarPredef(seccion, this, GDE.DMO);
+                        editarPredef.ShowDialog();
+                    }
                 }
-                if (edicion == Tipo_Edicion.Secciones_predef)
+                else
                 {
-                    editarPredef = new FEditarPredef(seccion, this, GDE.DMO);
-                    editarPredef.ShowDialog();
+                    double[] Coord = { };
+                    double x, y;
+                    int pid = seccion.Refuerzos.Last().id + 1;
+                    x = (e.Location.X - Grafica.Width / 2)/EscalaX;
+                    y = -(e.Location.Y - Grafica.Height / 2) / EscalaX;
+
+                    Coord = new double[] { x, y };
+                    CRefuerzo new_refuerzo = new CRefuerzo(pid, "#4", Coord, TipodeRefuerzo.longitudinal);
+                    seccion.Refuerzos.Add(new_refuerzo);
+                    Reload_Seccion();
                 }
             }
 
-            if (MouseOverRefuerzo(e.Location) & e.Button == MouseButtons.Right)
+            else if (Add_Refuerzo==false)
             {
-                Grafica.ContextMenuStrip = cmEditar_Ref;
-            }
-            else
-            {
-                Grafica.ContextMenuStrip = null;
+                if (MouseOverRefuerzo(e.Location) & e.Button == MouseButtons.Right)
+                {
+                    Grafica.ContextMenuStrip = cmEditar_Ref;
+                }
+                else
+                {
+                    Grafica.ContextMenuStrip = null;
+                }
             }
         }
 
@@ -591,6 +614,29 @@ namespace DisenoColumnas.Interfaz_Seccion
             g.DrawString(Ref_Seccion, Fuente, br, PS);
 
             #endregion Info Estribos
+        }
+
+        private void Reload_Seccion()
+        {
+            int indice = 0;
+
+            if (edicion == Tipo_Edicion.Secciones_modelo)
+            {
+                indice = Form1.Proyecto_.ColumnaSelect.Seccions.FindIndex(x1 => x1.Item2 == Piso);
+                Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<ISeccion, string>(seccion, Piso);
+            }
+
+            if (edicion == Tipo_Edicion.Secciones_predef & GDE == GDE.DMO)
+            {
+                indice = Form1.secciones_predef.Secciones_DMO.FindIndex(x1 => x1.ToString() == seccion.ToString());
+                Form1.secciones_predef.Secciones_DMO[indice] = seccion;
+            }
+
+            if (edicion == Tipo_Edicion.Secciones_predef & GDE == GDE.DES)
+            {
+                indice = Form1.secciones_predef.Secciones_DES.FindIndex(x1 => x1.ToString() == seccion.ToString());
+                Form1.secciones_predef.Secciones_DES[indice] = seccion;
+            }
         }
 
         private void Dibujo_Refuerzo(Graphics g, ISeccion seccioni)
@@ -742,27 +788,16 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
             seccion.DiagramaInteraccion();
 
             DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
             DiagramaInteraccion.Seccion = seccion;
 
-
-
-
-
-
-
-
-
             //Columna col = Form1.Proyecto_.ColumnaSelect;
             //int indice = col.Seccions.FindIndex(x => x.Item2 == Piso);
 
-
             if (edicion == Tipo_Edicion.Secciones_modelo)
             {
-
                 Columna col = Form1.Proyecto_.ColumnaSelect;
                 int indice = col.Seccions.FindIndex(x => x.Item2 == Piso);
                 List<float[]> MP_solic = new List<float[]>();
@@ -774,17 +809,12 @@ namespace DisenoColumnas.Interfaz_Seccion
                         float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
                         MP_solic.Add(MXPYPU);
                     }
-
                 }
 
                 DiagramaInteraccion.MP_Soli3D = MP_solic;
             }
 
-
-
             diagramaInteraccion.ShowDialog();
-
-
         }
 
         private void Radio_Dmo_CheckedChanged(object sender, EventArgs e)
@@ -822,6 +852,18 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
 
             #endregion Guardado secciones predef
+        }
+
+        private void tsbAddRefuerzo_Click(object sender, EventArgs e)
+        {
+            Add_Refuerzo = true;
+            //Cursor cursor = Cursors.IBeam;
+            //Grafica.Cursor = cursor;
+        }
+
+        private void tbSeleccionar_Click(object sender, EventArgs e)
+        {
+            Add_Refuerzo = false;
         }
     }
 }
