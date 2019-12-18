@@ -41,6 +41,8 @@
             this.ID_Ref = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tbAlzado = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +55,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(259, 231);
+            this.panel1.Size = new System.Drawing.Size(259, 269);
             this.panel1.TabIndex = 2;
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
@@ -62,6 +64,8 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.tbAlzado);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.bCancelar);
             this.groupBox1.Controls.Add(this.bAceptar);
             this.groupBox1.Controls.Add(this.tbYc);
@@ -75,7 +79,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(11, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(237, 207);
+            this.groupBox1.Size = new System.Drawing.Size(237, 245);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edición Refuerzo";
@@ -84,10 +88,10 @@
             // bCancelar
             // 
             this.bCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bCancelar.Location = new System.Drawing.Point(134, 154);
+            this.bCancelar.Location = new System.Drawing.Point(134, 192);
             this.bCancelar.Name = "bCancelar";
             this.bCancelar.Size = new System.Drawing.Size(91, 36);
-            this.bCancelar.TabIndex = 16;
+            this.bCancelar.TabIndex = 5;
             this.bCancelar.Text = "Cancelar";
             this.bCancelar.UseVisualStyleBackColor = true;
             this.bCancelar.Click += new System.EventHandler(this.bCancelar_Click);
@@ -95,27 +99,27 @@
             // bAceptar
             // 
             this.bAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.bAceptar.Location = new System.Drawing.Point(19, 154);
+            this.bAceptar.Location = new System.Drawing.Point(19, 192);
             this.bAceptar.Name = "bAceptar";
             this.bAceptar.Size = new System.Drawing.Size(91, 36);
-            this.bAceptar.TabIndex = 15;
+            this.bAceptar.TabIndex = 4;
             this.bAceptar.Text = "Aceptar";
             this.bAceptar.UseVisualStyleBackColor = true;
             this.bAceptar.Click += new System.EventHandler(this.bAceptar_Click);
             // 
             // tbYc
             // 
-            this.tbYc.Location = new System.Drawing.Point(147, 117);
+            this.tbYc.Location = new System.Drawing.Point(147, 146);
             this.tbYc.Name = "tbYc";
             this.tbYc.Size = new System.Drawing.Size(84, 23);
-            this.tbYc.TabIndex = 14;
+            this.tbYc.TabIndex = 3;
             // 
             // tbXc
             // 
-            this.tbXc.Location = new System.Drawing.Point(147, 85);
+            this.tbXc.Location = new System.Drawing.Point(147, 114);
             this.tbXc.Name = "tbXc";
             this.tbXc.Size = new System.Drawing.Size(84, 23);
-            this.tbXc.TabIndex = 13;
+            this.tbXc.TabIndex = 2;
             // 
             // cbDiametros
             // 
@@ -129,13 +133,13 @@
             this.cbDiametros.Location = new System.Drawing.Point(147, 56);
             this.cbDiametros.Name = "cbDiametros";
             this.cbDiametros.Size = new System.Drawing.Size(84, 23);
-            this.cbDiametros.TabIndex = 11;
+            this.cbDiametros.TabIndex = 0;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(16, 123);
+            this.label8.Location = new System.Drawing.Point(16, 152);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 15);
             this.label8.TabIndex = 10;
@@ -146,7 +150,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(16, 91);
+            this.label6.Location = new System.Drawing.Point(16, 120);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 15);
             this.label6.TabIndex = 8;
@@ -185,11 +189,28 @@
             this.label3.Text = "Diámetro de la Barra:";
             this.label3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label3_MouseMove);
             // 
+            // tbAlzado
+            // 
+            this.tbAlzado.Location = new System.Drawing.Point(147, 83);
+            this.tbAlzado.Name = "tbAlzado";
+            this.tbAlzado.Size = new System.Drawing.Size(84, 23);
+            this.tbAlzado.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 15);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Num Alzado  : ";
+            // 
             // FEditarRef
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 231);
+            this.ClientSize = new System.Drawing.Size(259, 269);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -218,5 +239,7 @@
         private System.Windows.Forms.TextBox tbXc;
         private System.Windows.Forms.Button bCancelar;
         private System.Windows.Forms.Button bAceptar;
+        private System.Windows.Forms.TextBox tbAlzado;
+        private System.Windows.Forms.Label label1;
     }
 }

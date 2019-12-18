@@ -32,6 +32,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             ID_Ref.Text = Convert.ToString(Seccion.Refuerzos[index].id);
             cbDiametros.Text = Seccion.Refuerzos[index].Diametro;
+            tbAlzado.Text= Seccion.Refuerzos[index].Alzado.ToString();
             tbXc.Text = $"{Math.Round(Seccion.Refuerzos[index].Coord[0], 2)}";
             tbYc.Text = $"{Math.Round(Seccion.Refuerzos[index].Coord[1], 2)}";
         }
@@ -40,16 +41,19 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             CRefuerzo refuerzo;
             string diametro;
+            int Alzado = 0;
             double x, y;
             double[] coord;
             int indice = 0;
 
             diametro = cbDiametros.Text;
+            Alzado = Convert.ToInt32(tbAlzado.Text);
             x = Convert.ToDouble(tbXc.Text);
             y = Convert.ToDouble(tbYc.Text);
             coord = new double[] { x, y };
 
             refuerzo = new CRefuerzo(Seccion.Refuerzos[index].id, diametro, coord, TipodeRefuerzo.longitudinal);
+            refuerzo.Alzado = Alzado;
             Seccion.Refuerzos[index] = FunctionsProject.DeepClone(refuerzo);
             Seccion.Editado = true;
 
