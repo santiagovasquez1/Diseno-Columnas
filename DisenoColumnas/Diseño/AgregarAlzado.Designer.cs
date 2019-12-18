@@ -39,6 +39,7 @@
             this.pegarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asignarRefuerzoAdicionalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.elminarColumnaDeAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.D_Alzado)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -92,9 +93,10 @@
             this.cortarToolStripMenuItem,
             this.pegarToolStripMenuItem,
             this.asignarRefuerzoToolStripMenuItem,
-            this.asignarRefuerzoAdicionalToolStripMenuItem});
+            this.asignarRefuerzoAdicionalToolStripMenuItem,
+            this.elminarColumnaDeAlzadoToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(305, 114);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(305, 136);
             // 
             // copiarToolStripMenuItem
             // 
@@ -137,6 +139,13 @@
             this.asignarRefuerzoAdicionalToolStripMenuItem.Text = "Asignar Refuerzo Adicional";
             this.asignarRefuerzoAdicionalToolStripMenuItem.Click += new System.EventHandler(this.AsignarRefuerzoAdicionalToolStripMenuItem_Click);
             // 
+            // elminarColumnaDeAlzadoToolStripMenuItem
+            // 
+            this.elminarColumnaDeAlzadoToolStripMenuItem.Name = "elminarColumnaDeAlzadoToolStripMenuItem";
+            this.elminarColumnaDeAlzadoToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
+            this.elminarColumnaDeAlzadoToolStripMenuItem.Text = "Eliminar Alzado";
+            this.elminarColumnaDeAlzadoToolStripMenuItem.Click += new System.EventHandler(this.ElminarColumnaDeAlzadoToolStripMenuItem_Click);
+            // 
             // AgregarAlzado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,5 +181,6 @@
         internal System.Windows.Forms.DataGridView D_Alzado;
         private System.Windows.Forms.ToolStripMenuItem asignarRefuerzoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignarRefuerzoAdicionalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem elminarColumnaDeAlzadoToolStripMenuItem;
     }
 }

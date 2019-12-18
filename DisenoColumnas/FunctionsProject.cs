@@ -336,7 +336,7 @@ namespace DisenoColumnas
             return Math.Abs(Area1 - Area2) / 2; ;
         }
 
-        public static float[] DeterminarCentroide(List<float[]> CoordenadasXY)
+        public static float[] DeterminarCentroideSentidoAntiHorario(List<float[]> CoordenadasXY)
         {
             float Mx = 0; float My = 0;
             float Area = DeterminarArea(CoordenadasXY);
@@ -369,6 +369,44 @@ namespace DisenoColumnas
 
             return new float[] { My / Area, Mx / Area };
         }
+
+        public static float[] DeterminarCentroideSentidoHorario(List<float[]> CoordenadasXY)
+        {
+            float Mx = 0; float My = 0;
+            float Area = DeterminarArea(CoordenadasXY);
+
+            for (int i = 0; i < CoordenadasXY.Count; i++)
+            {
+                float xi;
+                float xi_1;
+                float yi;
+                float yi_1;
+
+                if (i + 1 == CoordenadasXY.Count)
+                {
+                    xi = CoordenadasXY[i][0];
+                    xi_1 = CoordenadasXY[0][0];
+                    yi = CoordenadasXY[i][1];
+                    yi_1 = CoordenadasXY[0][1];
+                }
+                else
+                {
+                    xi = CoordenadasXY[i][0];
+                    xi_1 = CoordenadasXY[i + 1][0];
+                    yi = CoordenadasXY[i][1];
+                    yi_1 = CoordenadasXY[i+1][1];
+                }
+
+                Mx += (float)((xi_1 - xi) * ((Math.Pow(yi_1, 2) + Math.Pow(yi, 2) + yi * yi_1) / 6));
+                My += (float)((yi_1 - yi) * ((Math.Pow(xi_1, 2) + Math.Pow(xi, 2) + xi * xi_1) / 6));
+            }
+
+            return new float[] { My / Area, Mx / Area };
+        }
+
+
+
+
 
         public static double Find_As(int diametro)
         {
@@ -581,10 +619,11 @@ namespace DisenoColumnas
             float[] Vc = new float[] { Vc_11_2_1_1(d, bw, fc), Vc_11_2_1_2(Nu, d, bw, Area, fc), Vc_11_2_2_1(fc, As, Vu, d, bw, Mu, h, Nu, Area) };
 
             return Vc.Min()/1000;
+        }
 
-
-
-
+        public static PointF CoversionaPuntos(float[] FloatArray)
+        {
+            return new PointF(FloatArray[0], FloatArray[1]);
         }
 
     }

@@ -32,16 +32,6 @@ namespace DisenoColumnas.Secciones
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
         public List<Tuple<int, int>> No_D_Barra { get; set; }
 
-        #region Diagrama de Interacción: Propiedades y Metodos
-
-        public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
-        public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
-
-        public List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
-        public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
-
-        public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
-
         #region Propiedades y Metodos para verificación de Vc
 
         public List<float[]> PM2M3V2V3 { get; set; }
@@ -52,33 +42,33 @@ namespace DisenoColumnas.Secciones
 
         #endregion Propiedades y Metodos para verificación de Vc
 
+        #region Diagrama de Interacción: Propiedades y Metodos
+
+        public List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PnMn2D { get; set; }
+
+        public List<Tuple<List<float[]>, int>> MuPu3D { get; set; }
+        public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
+
+        public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
         public void DiagramaInteraccion()
         {
-            float b1 = 0.85f;
+
+            // Hallar Beta     
 
             List<PointF> Coordenadas = new List<PointF>();
-            float X, Y;
-            X = -(B * 100 / 2);
-            Y = -(H * 100 / 2);
-            Coordenadas.Add(new PointF(X, Y));
-
-            X = (B * 100 / 2);
-            Y = -(H * 100 / 2);
-            Coordenadas.Add(new PointF(X, Y));
-
-            X = (B * 100 / 2);
-            Y = (H * 100 / 2);
-            Coordenadas.Add(new PointF(X, Y));
-
-            X = -(B * 100 / 2);
-            Y = (H * 100 / 2);
-            Coordenadas.Add(new PointF(X, Y));
+            Coordenadas = CoordenadasSeccion.ConvertAll(new Converter<float[], PointF>(FunctionsProject.CoversionaPuntos));
             float ecu = 0.003f;
-            float Fy = Form1.Proyecto_.FY;
-            //float fc = Material.FC;
-            float fc = 280f;
-            float Es = 2000000;
+            float Fy = 4220f;
+            if (Form1.Proyecto_ != null)
+            {
+                Fy = Form1.Proyecto_.FY;
+            }
 
+            float fc = Material.FC;
+            float Es = 2000000;
+            float b1 = 0.85f - 0.05f * (fc - 280) / 70f;
             List<List<float[]>> Coordenadas_PorCadaAngulo = new List<List<float[]>>();
 
             List<Tuple<List<float>, int>> m_PorCadaAngulo = new List<Tuple<List<float>, int>>();
@@ -87,6 +77,9 @@ namespace DisenoColumnas.Secciones
 
             List<Tuple<List<float>, int>> AreaComprimida = new List<Tuple<List<float>, int>>();
             List<Tuple<List<float[]>, int>> CentroideAreaComprimida = new List<Tuple<List<float[]>, int>>();
+            List<Tuple<float[], int>> CentroideFigura = new List<Tuple<float[], int>>();
+
+
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
@@ -97,8 +90,10 @@ namespace DisenoColumnas.Secciones
             }
 
             int DeltasVariacionC = 20;
-
             int Delta = 10;
+
+
+
             for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
             {
                 List<float[]> PorCadaRotacion = new List<float[]>();
@@ -106,10 +101,12 @@ namespace DisenoColumnas.Secciones
                 //Rotacion de la Sección
                 for (int i = 0; i < Coordenadas.Count; i++)
                 {
-                    List<double> CoordRotadas = Operaciones.Rotacion(Coordenadas[i].X, Coordenadas[i].Y, (Angulo * Math.PI) / 180);
-
+                    List<double> CoordRotadas = Operaciones.Rotacion(Coordenadas[i].X*100, Coordenadas[i].Y*100, (Angulo * Math.PI) / 180);
                     PorCadaRotacion.Add(new float[] { (float)CoordRotadas[0], (float)CoordRotadas[1] });
                 }
+
+
+               float[] CentroideFigura2 = FunctionsProject.DeterminarCentroideSentidoHorario(PorCadaRotacion);
 
                 float Ymax = -99999; float Ymin = 999999;
                 float Xmax = -99999; float Xmin = 999999;
@@ -163,29 +160,11 @@ namespace DisenoColumnas.Secciones
 
                 for (int i = 0; i < a_Variando.Count; i++)
                 {
-                    List<float[]> PuntosInter = HallarPuntosDeInter(ms, PorCadaRotacion, a_Variando[i], Xmax, Xmin);
-
-                    List<float[]> PuntosPorEncimadeA = new List<float[]>();
-
-                    for (int j = 0; j < PorCadaRotacion.Count; j++)
-                    {
-                        if (a_Variando[i] <= PorCadaRotacion[j][1])
-                        {
-                            PuntosPorEncimadeA.Add(PorCadaRotacion[j]);
-                        }
-                    }
-                    PuntosInter = PuntosInter.OrderByDescending(x => x[0]).ToList();
-                    PuntosPorEncimadeA = PuntosPorEncimadeA.OrderByDescending(x => x[0]).ToList();
-
-                    List<float[]> PuntosParaArea = new List<float[]>();
-
-                    PuntosParaArea.Add(PuntosInter[0]); PuntosParaArea.AddRange(PuntosPorEncimadeA); PuntosParaArea.Add(PuntosInter[1]);
-
-                    float AreaComprimida_Aux = FunctionsProject.DeterminarArea(PuntosParaArea);
-
+                    List<float[]> PuntosInter = DeterminarPuntosInterceptos(ms, PorCadaRotacion, a_Variando[i]);
+             
+                    float AreaComprimida_Aux = FunctionsProject.DeterminarArea(PuntosInter);
                     AreaComprimida1.Add(AreaComprimida_Aux);
-
-                    CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroide(PuntosParaArea));
+                    CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroideSentidoHorario(PuntosInter));
                 }
 
                 CentroideAreaComprimida.Add(new Tuple<List<float[]>, int>(CentroideAreaComprimida1, Angulo));
@@ -194,10 +173,14 @@ namespace DisenoColumnas.Secciones
                 YVariacionC.Add(new Tuple<List<float>, int>(C_Variando, Angulo));
                 Coordenadas_PorCadaAngulo.Add(PorCadaRotacion);
                 m_PorCadaAngulo.Add(new Tuple<List<float>, int>(ms, Angulo));
+
+
+                CentroideFigura.Add(new Tuple<float[], int>(CentroideFigura2, Angulo));
             }
 
             PnMn2D = new List<Tuple<List<float[]>, int>>();
             PuMu2D = new List<Tuple<List<float[]>, int>>();
+
             for (int i = 0; i < AreaComprimida.Count; i++)
             {
                 List<float[]> PnMnAux = new List<float[]>();
@@ -212,12 +195,12 @@ namespace DisenoColumnas.Secciones
                     foreach (CRefuerzo cRefuerzo in Refuerzos)
                     {
                         Fs += cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j];
-                        Ms += Math.Abs(cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j]) * Math.Abs(cRefuerzo.Coordenadas_PorCadaAngulo[i].Item1[1]);
+                        Ms += Math.Abs(cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j]) * Math.Abs(cRefuerzo.Coordenadas_PorCadaAngulo[i].Item1[1]- CentroideFigura[i].Item1[1]);
 
-                        Ast += (float)Form1.Proyecto_.AceroBarras[Convert.ToInt32(cRefuerzo.Diametro.Substring(1))] * 10000;
+                        Ast += (float)FunctionsProject.Find_As(Convert.ToInt32(cRefuerzo.Diametro.Substring(1))) * 10000;
                     }
 
-                    float Mn_ = Cc * (CentroideAreaComprimida[i].Item1[j][1]) + Ms;
+                    float Mn_ = Cc * (CentroideAreaComprimida[i].Item1[j][1]-CentroideFigura[i].Item1[1]) + Ms;
                     float Pn_ = Cc + Fs;
 
                     float minY = Refuerzos.Min(x => x.Coordenadas_PorCadaAngulo[i].Item1[1]);
@@ -241,8 +224,8 @@ namespace DisenoColumnas.Secciones
                     {
                         if (PnMnAux.Exists(x => x[0] == 0) == false)
                         {
-                            PnMnAux.Add(new float[] { 0, -Ast * Fy });
-                            PuMuAux.Add(new float[] { 0, -Ast * Fy });
+                            PnMnAux.Add(new float[] { 0, (-Ast * Fy) });
+                            PuMuAux.Add(new float[] { 0, (-Ast * Fy) });
                         }
                     }
                     else
@@ -290,8 +273,9 @@ namespace DisenoColumnas.Secciones
                     SeriePuntosU.Add(PuntosDescompuestosUltimos);
                 }
                 MnPn3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
-                MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntos, PnMn2D[i].Item2));
+                MuPu3D.Add(new Tuple<List<float[]>, int>(SeriePuntosU, PnMn2D[i].Item2));
             }
+
         }
 
         private float DeterminarFi(float et)
@@ -312,22 +296,108 @@ namespace DisenoColumnas.Secciones
             return fi;
         }
 
-        private List<float[]> HallarPuntosDeInter(List<float> m, List<float[]> XY, float Yperteneciente, float Xmax, float Xmin)
+        private List<float[]> DeterminarPuntosInterceptos(List<float> m, List<float[]> XY, float Yperteneciente)
         {
             List<float[]> PuntosHallados = new List<float[]>();
+            List<PointF[]> PuntosPendie = new List<PointF[]>();
 
             for (int i = 0; i < m.Count; i++)
             {
-                float X = ((Yperteneciente - XY[i][1]) / m[i]) + XY[i][0];
-
-                if (X >= Xmin && X <= Xmax)
+                PointF[] points;
+                if (i + 1 == m.Count)
                 {
-                    PuntosHallados.Add(new float[] { X, Yperteneciente });
+                    points = new PointF[] { new PointF(XY[i][0], XY[i][1]), new PointF(XY[0][0], XY[0][1]) };
                 }
+                else
+                {
+                    points = new PointF[] { new PointF(XY[i][0], XY[i][1]), new PointF(XY[i + 1][0], XY[i + 1][1]) };
+
+                }
+                PuntosPendie.Add(points);
+            }
+
+            for (int i = 0; i < PuntosPendie.Count; i++)
+            {
+                float[] Punto = (PuntoIntercepto(PuntosPendie[i], m[i], Yperteneciente));
+
+                if (i == 0)
+                {
+                    if (Punto.Length !=0)
+                    {
+                        PuntosHallados.Add(Punto);
+                    }
+                    else
+                    {
+                        if (PuntosPendie[i][0].Y > Yperteneciente)
+                        {
+                            if (FunctionsProject.Find_Coord(PuntosHallados, PuntosPendie[i][0].X, PuntosPendie[i][0].Y) == false)
+                            {
+                                PuntosHallados.Add(new float[] { PuntosPendie[i][0].X, PuntosPendie[i][0].Y });
+                            }
+                        }
+                        if (PuntosPendie[i][1].Y > Yperteneciente)
+                        {
+                            if (FunctionsProject.Find_Coord(PuntosHallados, PuntosPendie[i][1].X, PuntosPendie[i][1].Y) == false)
+                            {
+                                PuntosHallados.Add(new float[] { PuntosPendie[i][1].X, PuntosPendie[i][1].Y });
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+
+                    if (Punto.Length != 0)
+                    {
+                        PuntosHallados.Add(Punto);
+                    }
+
+                    if (PuntosPendie[i][0].Y > Yperteneciente)
+                    {
+                        if (FunctionsProject.Find_Coord(PuntosHallados, PuntosPendie[i][0].X, PuntosPendie[i][0].Y) == false)
+                        {
+                            PuntosHallados.Add(new float[] { PuntosPendie[i][0].X, PuntosPendie[i][0].Y });
+                        }
+                    }
+                    if (PuntosPendie[i][1].Y > Yperteneciente)
+                    {
+                        if (FunctionsProject.Find_Coord(PuntosHallados, PuntosPendie[i][1].X, PuntosPendie[i][1].Y) == false)
+                        {
+                            PuntosHallados.Add(new float[] { PuntosPendie[i][1].X, PuntosPendie[i][1].Y });
+                        }
+                    }
+
+                }
+
+
+           
             }
 
             return PuntosHallados;
         }
+
+        private float[] PuntoIntercepto(PointF[] Puntos, float m,float Yperteneciente)
+        {
+
+            float[] XY = new float[] { };
+            float X = ((Yperteneciente - Puntos[0].Y) / m) + Puntos[0].X;
+            float MaxY = Puntos.Max(Z => Z.Y);
+            float MinY = Puntos.Min(Z => Z.Y);
+            float Xmin = Puntos.Min(Z => Z.X);
+            float Xmax = Puntos.Max(Z => Z.X);
+
+            if (X >= Xmin && X <= Xmax && Yperteneciente >= MinY && Yperteneciente <= MaxY)
+            {
+                XY = new float[] { X, Yperteneciente };
+            }
+
+            return XY;
+
+        }
+
+
+
 
         #endregion Diagrama de Interacción: Propiedades y Metodos
 

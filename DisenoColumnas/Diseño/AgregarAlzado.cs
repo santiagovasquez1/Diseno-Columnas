@@ -277,7 +277,10 @@ namespace DisenoColumnas.Diseño
                 Form1.m_Informacion.MostrarAcero();
                 Form1.m_Despiece.KgRefuerzo_L.Text = ColumnaSelect.KgRefuerzo.ToString();
                 Form1.m_Despiece.Invalidate();
-                Form1.mIntefazSeccion.Invalidate();
+                if (Form1.mIntefazSeccion != null)
+                {
+                    Form1.mIntefazSeccion.Invalidate();
+                }
             }
         }
 
@@ -930,6 +933,26 @@ namespace DisenoColumnas.Diseño
 
         private void D_Alzado_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+
+     
+            if (D_Alzado.Columns.Count > 1)
+            {
+                for (int NoColum=1; NoColum < D_Alzado.Columns.Count-1; NoColum++)
+                {
+                    Rectangle CeldaR =  D_Alzado.GetCellDisplayRectangle(NoColum, -1, true);
+                    if (CeldaR.Location.X>= e.X && e.X<= CeldaR.X+ CeldaR.Width && e.Y>= CeldaR.Y && e.Y<=CeldaR.Y+CeldaR.Height )
+                    {
+                        elminarColumnaDeAlzadoToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        elminarColumnaDeAlzadoToolStripMenuItem.Enabled = false;
+                    }
+                }
+            }
+            
+
+
             if (D_Alzado.SelectedCells.Count > 0)
             {
                 D_Alzado.ContextMenuStrip = contextMenuStrip2;
@@ -1053,12 +1076,7 @@ namespace DisenoColumnas.Diseño
 
         private void D_Alzado_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 0 && e.RowIndex == -1)
-            {
-                Form Form_RefuerzoBase = new AgregarRefuerzoBase();
-                AgregarRefuerzoBase.IndiceC = e.ColumnIndex;
-                Form_RefuerzoBase.ShowDialog();
-            }
+
             if (e.ColumnIndex != 0 && e.RowIndex != -1 && D_Alzado.SelectedCells.Count == 1)
             {
                 if (refuerzoAdicional != null)
@@ -1073,6 +1091,7 @@ namespace DisenoColumnas.Diseño
                 }
             }
         }
+
 
         private void AsignarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1153,5 +1172,12 @@ namespace DisenoColumnas.Diseño
                 }
             }
         }
+
+        private void ElminarColumnaDeAlzadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+
     }
 }

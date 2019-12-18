@@ -108,7 +108,12 @@ namespace DisenoColumnas.Secciones
             Y = (H * 100 / 2);
             Coordenadas.Add(new PointF(X, Y));
             float ecu = 0.003f;
-            float Fy = Form1.Proyecto_.FY;
+            float Fy = 4220f;
+            if (Form1.Proyecto_ != null)
+            {
+                Fy = Form1.Proyecto_.FY;
+            }
+        
             float fc = Material.FC;
             float Es = 2000000;
             float b1 = 0.85f - 0.05f * (fc - 280) / 70f;
@@ -219,7 +224,7 @@ namespace DisenoColumnas.Secciones
 
                     AreaComprimida1.Add(AreaComprimida_Aux);
 
-                    CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroide(PuntosParaArea));
+                    CentroideAreaComprimida1.Add(FunctionsProject.DeterminarCentroideSentidoAntiHorario(PuntosParaArea));
                 }
 
                 CentroideAreaComprimida.Add(new Tuple<List<float[]>, int>(CentroideAreaComprimida1, Angulo));
@@ -249,7 +254,7 @@ namespace DisenoColumnas.Secciones
                         Fs += cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j];
                         Ms += Math.Abs(cRefuerzo.Fuerzas_PorCadaCPorCadaAngulo[i].Item1[j]) * Math.Abs(cRefuerzo.Coordenadas_PorCadaAngulo[i].Item1[1]);
 
-                        Ast += (float)Form1.Proyecto_.AceroBarras[Convert.ToInt32(cRefuerzo.Diametro.Substring(1))] * 10000;
+                        Ast += (float)FunctionsProject.Find_As(Convert.ToInt32(cRefuerzo.Diametro.Substring(1))) * 10000;
                     }
 
                     float Mn_ = Cc * (CentroideAreaComprimida[i].Item1[j][1]) + Ms;

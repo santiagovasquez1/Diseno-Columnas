@@ -75,7 +75,7 @@ namespace DisenoColumnas.Clases
                 }
                 float FS;
 
-                FS = fs * (float)Form1.Proyecto_.AceroBarras[Convert.ToInt32(Diametro.Substring(1))] * 10000;
+                FS = fs * (float)FunctionsProject.Find_As(Convert.ToInt32(Diametro.Substring(1))) * 10000;
 
                 Fuerzas.Add(FS);
                 Esfuerz.Add(fs);

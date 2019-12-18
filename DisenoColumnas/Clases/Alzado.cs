@@ -185,7 +185,7 @@ namespace DisenoColumnas.Clases
                 if (Coord_Alzado_PB_Escal.Count == 3 | Coord_Alzado_PB_Escal.Count == 4)
                 {
                     GraphicsPath path = new GraphicsPath();
-                    List<PointF> pointFs = Coord_Alzado_PB_Escal.ConvertAll(new Converter<float[], PointF>(CoversionaPuntos));
+                    List<PointF> pointFs = Coord_Alzado_PB_Escal.ConvertAll(new Converter<float[], PointF>(FunctionsProject.CoversionaPuntos));
                     path.AddLines(pointFs.ToArray());
 
                     if (path.IsVisible(e.Location))
@@ -202,10 +202,7 @@ namespace DisenoColumnas.Clases
             }
         }
 
-        private PointF CoversionaPuntos(float[] FloatArray)
-        {
-            return new PointF(FloatArray[0], FloatArray[1]);
-        }
+
 
         public override string ToString()
         {
