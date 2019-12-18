@@ -99,6 +99,24 @@ namespace DisenoColumnas.InterfazViewInfo
                             Info_D.Rows[Info_D.Rows.Count - 3].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[0] * FactorConversion, 2);
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[1] * FactorConversion, 2);
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[2] * FactorConversion, 2);
+
+                            if (ColumnaSelect.resultadosETABs[i].prequerida==null)
+                            {
+                                ColumnaSelect.CrearCuantiaProyectoAntiguos(i);
+                            }
+               
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["prequerida"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].prequerida[0], 2) + "%";
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["prequerida"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].prequerida[1], 2) + "%";
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["prequerida"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].prequerida[2], 2) + "%";
+
+                            Info_D.Rows[Info_D.Rows.Count - 3].Cells["pasignada"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].pasignada[0], 2) + "%";
+                            Info_D.Rows[Info_D.Rows.Count - 2].Cells["pasignada"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].pasignada[1], 2) + "%";
+                            Info_D.Rows[Info_D.Rows.Count - 1].Cells["pasignada"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].pasignada[2], 2) + "%";
+
+
+
+
+
                             if (Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) > 105 | Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 3) < 95)
                             {
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["Porc_Ref"].Style.ForeColor = Color_RefMen;
@@ -162,7 +180,6 @@ namespace DisenoColumnas.InterfazViewInfo
 
                             if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Circle)
                             {
-
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = ColumnaSelect.Seccions[i].Item1.B * FCMetros;
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Style.BackColor = Color.LightGray;
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Style.BackColor = Color.LightGray;
@@ -191,8 +208,8 @@ namespace DisenoColumnas.InterfazViewInfo
 
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["B"].Value = SeccionTL.B * FCMetros;
                                 Info_D.Rows[Info_D.Rows.Count - 3].Cells["H"].Value = SeccionTL.H * FCMetros;
-                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value =SeccionTL.TW * FCMetros;
-                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value =SeccionTL.TF * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["TW"].Value = SeccionTL.TW * FCMetros;
+                                Info_D.Rows[Info_D.Rows.Count - 3].Cells["TF"].Value = SeccionTL.TF * FCMetros;
 
                                 Info_D.Rows[Info_D.Rows.Count - 2].Cells["B"].Value = SeccionTL.B * FCMetros;
                                 Info_D.Rows[Info_D.Rows.Count - 2].Cells["H"].Value = SeccionTL.H * FCMetros;
@@ -261,6 +278,7 @@ namespace DisenoColumnas.InterfazViewInfo
                         Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Style.Font = new Font("Vderdana", 8, FontStyle.Bold);
                     }
                     double FactorConversion = 10000;
+
                     Info_D.Rows[(i * 3 + 3) - 3].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[0] * FactorConversion, 2);
                     Info_D.Rows[(i * 3 + 3) - 2].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[1] * FactorConversion, 2);
                     Info_D.Rows[(i * 3 + 3) - 1].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[2] * FactorConversion, 2);
@@ -268,11 +286,22 @@ namespace DisenoColumnas.InterfazViewInfo
                     Info_D.Rows[(i * 3 + 3) - 3].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[0], 2) + "%";
                     Info_D.Rows[(i * 3 + 3) - 2].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[1], 2) + "%";
                     Info_D.Rows[(i * 3 + 3) - 1].Cells["Porc_Ref"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].Porct_Refuerzo[2], 2) + "%";
+
+
+                    if (ColumnaSelect.resultadosETABs[i].prequerida == null)
+                    {
+                        ColumnaSelect.CrearCuantiaProyectoAntiguos(i);
+                    }
+
+                    Info_D.Rows[(i * 3 + 3) - 3].Cells["pasignada"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].pasignada[0], 2) + "%";
+                    Info_D.Rows[(i * 3 + 3) - 2].Cells["pasignada"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].pasignada[1], 2) + "%";
+                    Info_D.Rows[(i * 3 + 3) - 1].Cells["pasignada"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].pasignada[2], 2) + "%";
+
+
+
                     // Info_D.Refresh();
                 }
             }
-
-  
         }
 
         public void EstiloDatGridView(DataGridView dataGrid)
