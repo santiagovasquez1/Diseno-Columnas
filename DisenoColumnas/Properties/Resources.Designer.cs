@@ -193,6 +193,16 @@ namespace DisenoColumnas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap collapseBtn {
+            get {
+                object obj = ResourceManager.GetObject("collapseBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap columna {
             get {
                 object obj = ResourceManager.GetObject("columna", resourceCulture);
@@ -416,6 +426,16 @@ namespace DisenoColumnas.Properties {
         internal static System.Drawing.Bitmap efePrimaCeLogoSolo {
             get {
                 object obj = ResourceManager.GetObject("efePrimaCeLogoSolo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap expandBtn {
+            get {
+                object obj = ResourceManager.GetObject("expandBtn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

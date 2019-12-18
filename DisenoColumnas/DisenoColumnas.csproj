@@ -131,6 +131,12 @@
     <Compile Include="Resultados\Resultados_.Designer.cs">
       <DependentUpon>Resultados_.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resultados\TabladeResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resultados\TabladeResultados.Designer.cs">
+      <DependentUpon>TabladeResultados.cs</DependentUpon>
+    </Compile>
     <Compile Include="Secciones\CCirculo.cs" />
     <Compile Include="Clases\Columna.cs" />
     <Compile Include="Clases\ColumnaAlzadoDrawing.cs" />
@@ -349,6 +355,9 @@
     <EmbeddedResource Include="Resultados\Resultados_.resx">
       <DependentUpon>Resultados_.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resultados\TabladeResultados.resx">
+      <DependentUpon>TabladeResultados.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -419,6 +428,7 @@
     <None Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\expandBtn.png" />
     <None Include="Resources\SaveSection.png" />
     <None Include="Resources\DiagramaInteraccion.png" />
     <None Include="Resources\DiagramaInteraccionx25 %282%29.png" />
@@ -457,6 +467,7 @@
     <None Include="Resources\angulo-de-flecha-derecha.png" />
     <None Include="Resources\AgregarColumna.png" />
     <None Include="Resources\AgregarCol2.png" />
+    <None Include="Resources\collapseBtn.png" />
     <Content Include="Resources\Csearch.cur" />
     <None Include="Resources\vcsadded_93506x16.png" />
     <None Include="Resources\vcsadded_93506.png" />
