@@ -623,7 +623,7 @@ namespace DisenoColumnas.Secciones
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
-                yc = refuerzoi.Coord[1] * EscalaY;
+                yc = -refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -862,7 +862,7 @@ namespace DisenoColumnas.Secciones
                 Coord_ref[0] = posx;
                 Coord_ref[1] = posy;
 
-                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
+                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, -posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
                 Refuerzos.Add(refuerzoi);
 
                 posx += DeltaX1;
@@ -919,7 +919,7 @@ namespace DisenoColumnas.Secciones
                 Coord_ref[0] = posx;
                 Coord_ref[1] = posy;
 
-                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
+                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, -posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
                 Refuerzos.Add(refuerzoi);
 
                 posy -= DeltaY2;
