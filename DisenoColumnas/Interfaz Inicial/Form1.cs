@@ -929,9 +929,6 @@ namespace DisenoColumnas
             {
                 if (ArchivoE2KETABS[i].Contains("Rectangular") | ArchivoE2KETABS[i].Contains("Circle") | ArchivoE2KETABS[i].Contains("Te") | ArchivoE2KETABS[i].Contains("Angle") | ArchivoE2KETABS[i].Contains("SD Section"))
                 {
-                    if (ArchivoE2KETABS[i].Contains("SD Section"))
-                    {
-                    }
                     Lista_Secciones_Aux.Add(ArchivoE2KETABS[i].Split().ToList());
                 }
             }
@@ -1063,10 +1060,19 @@ namespace DisenoColumnas
                             var Xunicos = Coord.Select(x => x[0]).Distinct().ToList();
                             var Yunicos = Coord.Select(x => x[1]).Distinct().ToList();
 
-                            pTw = FunctionsProject.Dimension(Xunicos, false);
-                            pTf = FunctionsProject.Dimension(Yunicos, false);
-                            pB = FunctionsProject.Dimension(Xunicos, true);
-                            pH = FunctionsProject.Dimension(Yunicos, true);
+                            var p = FunctionsProject.Dimension2(Coord, true); //Dimenciones en X
+                            var q = FunctionsProject.Dimension2(Coord, false); //Dimenciones en Y
+
+                            pB = (float)p[0];
+                            pTw = (float)p[1];
+
+                            pH = (float)q[0];
+                            pTf = (float)q[1];
+
+                            //pTw = FunctionsProject.Dimension(Xunicos, false);
+                            //pTf = FunctionsProject.Dimension(Yunicos, false);
+                            //pB = FunctionsProject.Dimension(Xunicos, true);
+                            //pH = FunctionsProject.Dimension(Yunicos, true);
 
                             seccion = new CSD(Nombre, pB, pH, pTw, pTf, mAT_, tipodeSeccion, Coord);
                         }
@@ -1541,10 +1547,19 @@ namespace DisenoColumnas
                             var Xunicos = Coord.Select(x => x[0]).Distinct().ToList();
                             var Yunicos = Coord.Select(x => x[1]).Distinct().ToList();
 
-                            pTw = FunctionsProject.Dimension(Xunicos, false);
-                            pTf = FunctionsProject.Dimension(Yunicos, false);
-                            pB = FunctionsProject.Dimension(Xunicos, true);
-                            pH = FunctionsProject.Dimension(Yunicos, true);
+                            var p = FunctionsProject.Dimension2(Coord, true); //Dimenciones en X
+                            var q= FunctionsProject.Dimension2(Coord, false); //Dimenciones en Y
+
+                            pB = (float)p[0];
+                            pTw= (float)p[1];
+
+                            pH= (float)q[0];
+                            pTf = (float)q[1];
+
+                            //pTw = FunctionsProject.Dimension(Xunicos, false);
+                            //pTf = FunctionsProject.Dimension(Yunicos, false);
+                            //pB = FunctionsProject.Dimension(Xunicos, true);
+                            //pH = FunctionsProject.Dimension(Yunicos, true);
 
                             seccion = new CSD(Nombre, pB, pH, pTw, pTf, mAT_, tipodeSeccion, Coord);
                         }

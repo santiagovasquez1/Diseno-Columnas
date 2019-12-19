@@ -710,8 +710,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_aletas1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_aletas1[i][0] * (float)EscalaX * 100, Coord_aletas1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_aletas2[i][0] * (float)EscalaX * 100, Coord_aletas2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Coord_aletas1[i][0] * (float)EscalaX * 100, -Coord_aletas1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Coord_aletas2[i][0] * (float)EscalaX * 100, -Coord_aletas2[i][1] * (float)EscalaX * 100));
             }
 
             path.AddPolygon(Vertices.ToArray());
@@ -726,8 +726,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_alma1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_alma1[i][0] * (float)EscalaX * 100, Coord_alma1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_alma2[i][0] * (float)EscalaX * 100, Coord_alma2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Coord_alma1[i][0] * (float)EscalaX * 100, -Coord_alma1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Coord_alma2[i][0] * (float)EscalaX * 100, -Coord_alma2[i][1] * (float)EscalaX * 100));
             }
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
@@ -771,7 +771,7 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < CoordenadasSeccion.Count; i++)
             {
-                Vertices.Add(new PointF(CoordenadasSeccion[i][0] * 100 * (float)EscalaX, CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
+                Vertices.Add(new PointF(CoordenadasSeccion[i][0] * 100 * (float)EscalaX, -CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
             }
 
             #endregion Vertices
@@ -862,7 +862,7 @@ namespace DisenoColumnas.Secciones
                 Coord_ref[0] = posx;
                 Coord_ref[1] = posy;
 
-                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, -posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
+                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
                 Refuerzos.Add(refuerzoi);
 
                 posx += DeltaX1;
@@ -919,7 +919,7 @@ namespace DisenoColumnas.Secciones
                 Coord_ref[0] = posx;
                 Coord_ref[1] = posy;
 
-                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, -posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
+                refuerzoi = new CRefuerzo(id, "#" + Refuerzos_temp[ContT], new double[] { posx * 100, posy * 100 }, ptipo: TipodeRefuerzo.longitudinal);
                 Refuerzos.Add(refuerzoi);
 
                 posy -= DeltaY2;

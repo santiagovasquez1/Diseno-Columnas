@@ -157,14 +157,14 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Tipo_Seccion == TipodeSeccion.Tee.ToString())
                 {
-                    Vertices_Temp.Add(new float[] { 0, -h / 200 });
-                    Vertices_Temp.Add(new float[] { 0, -(h - tw) / 200 });
-                    Vertices_Temp.Add(new float[] { (b - tf) / 400, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { 0, h / 200 });
+                    Vertices_Temp.Add(new float[] { 0, (h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { (b - tf) / 400, (h - tw) / 200 });
                     Vertices_Temp.Add(new float[] { (b - tf) / 400, 0 });
                     Vertices_Temp.Add(new float[] { (b + tf) / 400, 0 });
-                    Vertices_Temp.Add(new float[] { (b + tf) / 400, -(h - tw) / 200 });
-                    Vertices_Temp.Add(new float[] { b / 200, -(h - tw) / 200 });
-                    Vertices_Temp.Add(new float[] { b / 200, -h / 200 });
+                    Vertices_Temp.Add(new float[] { (b + tf) / 400, (h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, (h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, h / 200 });
 
                     Numerador = ((b / 2) * b * tw) + ((b / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
@@ -177,7 +177,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Numerador = y1 + y2;
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Yc = -h / 200;
+                    Yc = h / 200;
 
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {
@@ -192,10 +192,10 @@ namespace DisenoColumnas.Interfaz_Seccion
                 {
                     Vertices_Temp.Add(new float[] { 0, 0 });
                     Vertices_Temp.Add(new float[] { b / 200, 0 });
-                    Vertices_Temp.Add(new float[] { b / 200, -tw / 200 });
-                    Vertices_Temp.Add(new float[] { tf / 200, -tw / 200 });
-                    Vertices_Temp.Add(new float[] { tf / 200, -h / 200 });
-                    Vertices_Temp.Add(new float[] { 0, -h / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, tw / 200 });
+                    Vertices_Temp.Add(new float[] { tf / 200, tw / 200 });
+                    Vertices_Temp.Add(new float[] { tf / 200, h / 200 });
+                    Vertices_Temp.Add(new float[] { 0, h / 200 });
 
                     Numerador = ((b / 2) * b * tw) + ((tf / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
@@ -205,7 +205,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Numerador = ((tw / 2) * b * tw) + ((h + tf / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Yc = -h / 200;
+                    Yc = h / 200;
 
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {

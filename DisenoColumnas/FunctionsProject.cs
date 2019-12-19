@@ -236,6 +236,42 @@ namespace DisenoColumnas
             }
         }
 
+        public static double[] Dimension2(List<float[]> Puntos,bool lado)
+        {
+            var Xmax = Puntos.Select(x => x[0]).Distinct().ToList().Max();
+            var Xmin = Puntos.Select(x => x[0]).Distinct().ToList().Min();
+
+            var Ymax = Puntos.Select(x => x[1]).Distinct().ToList().Max();
+            var Ymin = Puntos.Select(x => x[1]).Distinct().ToList().Min();
+
+            double L1, L2;
+            double[] Temp;
+
+            if (lado == true)
+            {
+                var Punto1 = Puntos.FindAll(x => x[1] == Ymin);
+                var Punto2 = Puntos.FindAll(x => x[1] == Ymax);
+
+                L1 = Math.Abs(Punto1[0][0] - Punto1[1][0]);
+                L2 = Math.Abs(Punto2[0][0] - Punto2[1][0]);
+            }
+            else
+            {
+                var Punto1 = Puntos.FindAll(x => x[0] == Xmin);
+                var Punto2 = Puntos.FindAll(x => x[0] == Xmax);
+
+                L1 = Math.Abs(Punto1[0][1] - Punto1[1][1]);
+                L2 = Math.Abs(Punto2[0][1] - Punto2[1][1]);
+            }
+
+            if (L1 >= L2)
+                Temp = new double[] { L1, L2 };
+            else
+                Temp = new double[] { L2, L1 };
+
+            return Temp;
+        }
+
         public static float Dimension(List<float> P_unicos, bool lado)
         {
             float Max = -(float)Math.Pow(10, 6);
