@@ -30,6 +30,7 @@ namespace DisenoColumnas.Secciones
         List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
 
         double Acero_Long { get; set; }
+        Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos);
 
         void CalcularArea();
 

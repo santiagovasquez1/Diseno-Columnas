@@ -36,21 +36,12 @@
             this.Redraw = new System.Windows.Forms.Timer(this.components);
             this.CharMomentos = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.X_mas = new System.Windows.Forms.ToolStripButton();
-            this.X_menos = new System.Windows.Forms.ToolStripButton();
-            this.Y_mas = new System.Windows.Forms.ToolStripButton();
-            this.Y_menos = new System.Windows.Forms.ToolStripButton();
-            this.Z_mas = new System.Windows.Forms.ToolStripButton();
-            this.Z_menos = new System.Windows.Forms.ToolStripButton();
             this.GroupBox_Grafica_Diagrama1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.Title = new System.Windows.Forms.Label();
-            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.MostrarSolicita = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -59,14 +50,27 @@
             this.P = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mx = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.My = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.verSolicitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ChangeAngulo_Abajo = new System.Windows.Forms.Button();
+            this.ChangeAngulo_Arriba = new System.Windows.Forms.Button();
+            this.X_mas = new System.Windows.Forms.ToolStripButton();
+            this.X_menos = new System.Windows.Forms.ToolStripButton();
+            this.Y_mas = new System.Windows.Forms.ToolStripButton();
+            this.Y_menos = new System.Windows.Forms.ToolStripButton();
+            this.Z_mas = new System.Windows.Forms.ToolStripButton();
+            this.Z_menos = new System.Windows.Forms.ToolStripButton();
+            this.sinSolicitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.CharMomentos)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.GroupBox_Grafica_Diagrama1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.D_MnPn)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gl
@@ -97,6 +101,7 @@
             this.CharMomentos.BackColor = System.Drawing.Color.WhiteSmoke;
             chartArea1.Name = "ChartArea1";
             this.CharMomentos.ChartAreas.Add(chartArea1);
+            this.CharMomentos.ContextMenuStrip = this.contextMenuStrip1;
             this.CharMomentos.Location = new System.Drawing.Point(22, 21);
             this.CharMomentos.Name = "CharMomentos";
             series1.ChartArea = "ChartArea1";
@@ -124,66 +129,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(24, 279);
             this.toolStrip1.TabIndex = 17;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // X_mas
-            // 
-            this.X_mas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.X_mas.Image = ((System.Drawing.Image)(resources.GetObject("X_mas.Image")));
-            this.X_mas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.X_mas.Name = "X_mas";
-            this.X_mas.Size = new System.Drawing.Size(21, 20);
-            this.X_mas.Text = "X+";
-            this.X_mas.Click += new System.EventHandler(this.X_mas_Click);
-            // 
-            // X_menos
-            // 
-            this.X_menos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.X_menos.Image = ((System.Drawing.Image)(resources.GetObject("X_menos.Image")));
-            this.X_menos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.X_menos.Name = "X_menos";
-            this.X_menos.Size = new System.Drawing.Size(21, 20);
-            this.X_menos.Text = "X-";
-            this.X_menos.Click += new System.EventHandler(this.X_menos_Click);
-            // 
-            // Y_mas
-            // 
-            this.Y_mas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Y_mas.Image = ((System.Drawing.Image)(resources.GetObject("Y_mas.Image")));
-            this.Y_mas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Y_mas.Name = "Y_mas";
-            this.Y_mas.Size = new System.Drawing.Size(21, 20);
-            this.Y_mas.Text = "Y+";
-            this.Y_mas.Click += new System.EventHandler(this.Y_mas_Click);
-            // 
-            // Y_menos
-            // 
-            this.Y_menos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Y_menos.Image = ((System.Drawing.Image)(resources.GetObject("Y_menos.Image")));
-            this.Y_menos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Y_menos.Name = "Y_menos";
-            this.Y_menos.Size = new System.Drawing.Size(21, 20);
-            this.Y_menos.Text = "Y-";
-            this.Y_menos.Click += new System.EventHandler(this.Y_menos_Click);
-            // 
-            // Z_mas
-            // 
-            this.Z_mas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Z_mas.Image = ((System.Drawing.Image)(resources.GetObject("Z_mas.Image")));
-            this.Z_mas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Z_mas.Name = "Z_mas";
-            this.Z_mas.Size = new System.Drawing.Size(21, 20);
-            this.Z_mas.Text = "Z+";
-            this.Z_mas.Click += new System.EventHandler(this.Z_mas_Click);
-            // 
-            // Z_menos
-            // 
-            this.Z_menos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Z_menos.Image = ((System.Drawing.Image)(resources.GetObject("Z_menos.Image")));
-            this.Z_menos.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Z_menos.Name = "Z_menos";
-            this.Z_menos.Size = new System.Drawing.Size(21, 20);
-            this.Z_menos.Text = "Z-";
-            this.Z_menos.Click += new System.EventHandler(this.Z_menos_Click);
             // 
             // GroupBox_Grafica_Diagrama1
             // 
@@ -232,27 +177,12 @@
             this.Title.TabIndex = 24;
             this.Title.Text = "Diagrama de Interacción - 0°";
             // 
-            // PictureBox1
-            // 
-            this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBox1.Image = global::DisenoColumnas.Properties.Resources.close_button1;
-            this.PictureBox1.Location = new System.Drawing.Point(967, 9);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(10, 10);
-            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBox1.TabIndex = 12;
-            this.PictureBox1.TabStop = false;
-            this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
-            this.PictureBox1.MouseLeave += new System.EventHandler(this.PictureBox1_MouseLeave);
-            this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
-            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.MostrarSolicita);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.ChangeAngulo_Abajo);
+            this.panel1.Controls.Add(this.ChangeAngulo_Arriba);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.Label1);
             this.panel1.Controls.Add(this.radioButton2);
@@ -276,30 +206,6 @@
             this.MostrarSolicita.Text = "Mostrar Solicitaciones";
             this.MostrarSolicita.UseVisualStyleBackColor = true;
             this.MostrarSolicita.CheckedChanged += new System.EventHandler(this.MostrarSolicita_CheckedChanged);
-            // 
-            // button2
-            // 
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Image = global::DisenoColumnas.Properties.Resources.AnguloIzquierda;
-            this.button2.Location = new System.Drawing.Point(455, 644);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(37, 23);
-            this.button2.TabIndex = 27;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Image = global::DisenoColumnas.Properties.Resources.angulo_de_flecha_derecha;
-            this.button1.Location = new System.Drawing.Point(508, 644);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(37, 23);
-            this.button1.TabIndex = 26;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label2
             // 
@@ -392,6 +298,127 @@
             this.My.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.My.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verSolicitacionesToolStripMenuItem,
+            this.sinSolicitacionesToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            // 
+            // verSolicitacionesToolStripMenuItem
+            // 
+            this.verSolicitacionesToolStripMenuItem.Name = "verSolicitacionesToolStripMenuItem";
+            this.verSolicitacionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verSolicitacionesToolStripMenuItem.Text = "Ver Solicitaciones";
+            this.verSolicitacionesToolStripMenuItem.Click += new System.EventHandler(this.VerSolicitacionesToolStripMenuItem_Click);
+            // 
+            // PictureBox1
+            // 
+            this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBox1.Image = global::DisenoColumnas.Properties.Resources.close_button1;
+            this.PictureBox1.Location = new System.Drawing.Point(967, 9);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(10, 10);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBox1.TabIndex = 12;
+            this.PictureBox1.TabStop = false;
+            this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
+            this.PictureBox1.MouseLeave += new System.EventHandler(this.PictureBox1_MouseLeave);
+            this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
+            // 
+            // ChangeAngulo_Abajo
+            // 
+            this.ChangeAngulo_Abajo.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.ChangeAngulo_Abajo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ChangeAngulo_Abajo.Image = global::DisenoColumnas.Properties.Resources.AnguloIzquierda;
+            this.ChangeAngulo_Abajo.Location = new System.Drawing.Point(455, 644);
+            this.ChangeAngulo_Abajo.Name = "ChangeAngulo_Abajo";
+            this.ChangeAngulo_Abajo.Size = new System.Drawing.Size(37, 23);
+            this.ChangeAngulo_Abajo.TabIndex = 27;
+            this.ChangeAngulo_Abajo.UseVisualStyleBackColor = true;
+            this.ChangeAngulo_Abajo.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // ChangeAngulo_Arriba
+            // 
+            this.ChangeAngulo_Arriba.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.ChangeAngulo_Arriba.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ChangeAngulo_Arriba.Image = global::DisenoColumnas.Properties.Resources.angulo_de_flecha_derecha;
+            this.ChangeAngulo_Arriba.Location = new System.Drawing.Point(508, 644);
+            this.ChangeAngulo_Arriba.Name = "ChangeAngulo_Arriba";
+            this.ChangeAngulo_Arriba.Size = new System.Drawing.Size(37, 23);
+            this.ChangeAngulo_Arriba.TabIndex = 26;
+            this.ChangeAngulo_Arriba.UseVisualStyleBackColor = true;
+            this.ChangeAngulo_Arriba.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // X_mas
+            // 
+            this.X_mas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.X_mas.Image = ((System.Drawing.Image)(resources.GetObject("X_mas.Image")));
+            this.X_mas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.X_mas.Name = "X_mas";
+            this.X_mas.Size = new System.Drawing.Size(21, 20);
+            this.X_mas.Text = "X+";
+            this.X_mas.Click += new System.EventHandler(this.X_mas_Click);
+            // 
+            // X_menos
+            // 
+            this.X_menos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.X_menos.Image = ((System.Drawing.Image)(resources.GetObject("X_menos.Image")));
+            this.X_menos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.X_menos.Name = "X_menos";
+            this.X_menos.Size = new System.Drawing.Size(21, 20);
+            this.X_menos.Text = "X-";
+            this.X_menos.Click += new System.EventHandler(this.X_menos_Click);
+            // 
+            // Y_mas
+            // 
+            this.Y_mas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Y_mas.Image = ((System.Drawing.Image)(resources.GetObject("Y_mas.Image")));
+            this.Y_mas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Y_mas.Name = "Y_mas";
+            this.Y_mas.Size = new System.Drawing.Size(21, 20);
+            this.Y_mas.Text = "Y+";
+            this.Y_mas.Click += new System.EventHandler(this.Y_mas_Click);
+            // 
+            // Y_menos
+            // 
+            this.Y_menos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Y_menos.Image = ((System.Drawing.Image)(resources.GetObject("Y_menos.Image")));
+            this.Y_menos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Y_menos.Name = "Y_menos";
+            this.Y_menos.Size = new System.Drawing.Size(21, 20);
+            this.Y_menos.Text = "Y-";
+            this.Y_menos.Click += new System.EventHandler(this.Y_menos_Click);
+            // 
+            // Z_mas
+            // 
+            this.Z_mas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Z_mas.Image = ((System.Drawing.Image)(resources.GetObject("Z_mas.Image")));
+            this.Z_mas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Z_mas.Name = "Z_mas";
+            this.Z_mas.Size = new System.Drawing.Size(21, 20);
+            this.Z_mas.Text = "Z+";
+            this.Z_mas.Click += new System.EventHandler(this.Z_mas_Click);
+            // 
+            // Z_menos
+            // 
+            this.Z_menos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Z_menos.Image = ((System.Drawing.Image)(resources.GetObject("Z_menos.Image")));
+            this.Z_menos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Z_menos.Name = "Z_menos";
+            this.Z_menos.Size = new System.Drawing.Size(21, 20);
+            this.Z_menos.Text = "Z-";
+            this.Z_menos.Click += new System.EventHandler(this.Z_menos_Click);
+            // 
+            // sinSolicitacionesToolStripMenuItem
+            // 
+            this.sinSolicitacionesToolStripMenuItem.Name = "sinSolicitacionesToolStripMenuItem";
+            this.sinSolicitacionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sinSolicitacionesToolStripMenuItem.Text = "Sin Solicitaciones";
+            this.sinSolicitacionesToolStripMenuItem.Click += new System.EventHandler(this.SinSolicitacionesToolStripMenuItem_Click);
+            // 
             // DiagramaInteraccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -415,10 +442,11 @@
             this.groupBox2.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.D_MnPn)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -427,7 +455,6 @@
 
         private OpenTK.GLControl gl;
         private System.Windows.Forms.Timer Redraw;
-        private System.Windows.Forms.DataVisualization.Charting.Chart CharMomentos;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton X_mas;
         private System.Windows.Forms.ToolStripButton X_menos;
@@ -435,7 +462,6 @@
         private System.Windows.Forms.ToolStripButton Y_menos;
         private System.Windows.Forms.ToolStripButton Z_mas;
         private System.Windows.Forms.ToolStripButton Z_menos;
-        private System.Windows.Forms.GroupBox GroupBox_Grafica_Diagrama1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel5;
         internal System.Windows.Forms.PictureBox PictureBox1;
@@ -446,11 +472,16 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.DataGridView D_MnPn;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ChangeAngulo_Abajo;
+        private System.Windows.Forms.Button ChangeAngulo_Arriba;
         private System.Windows.Forms.CheckBox MostrarSolicita;
         private System.Windows.Forms.DataGridViewTextBoxColumn P;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mx;
         private System.Windows.Forms.DataGridViewTextBoxColumn My;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem verSolicitacionesToolStripMenuItem;
+        internal System.Windows.Forms.GroupBox GroupBox_Grafica_Diagrama1;
+        internal System.Windows.Forms.DataVisualization.Charting.Chart CharMomentos;
+        private System.Windows.Forms.ToolStripMenuItem sinSolicitacionesToolStripMenuItem;
     }
 }

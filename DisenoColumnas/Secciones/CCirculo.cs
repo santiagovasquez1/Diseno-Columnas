@@ -567,7 +567,7 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<float[], int>> PbMb3D { get; set; } = new List<Tuple<float[], int>>();
         private List<Tuple<List<float>, int>> AreaComprimida = new List<Tuple<List<float>, int>>();
         private List<Tuple<List<float[]>, int>> CentroideAreaComprimida = new List<Tuple<List<float[]>, int>>();
-
+        public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos) { return null; }
         public void DiagramaInteraccion()
         {
             float ecu = 0.003f;

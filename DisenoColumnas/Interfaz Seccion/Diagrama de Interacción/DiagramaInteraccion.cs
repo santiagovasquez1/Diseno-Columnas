@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases.OpenGL;
+using DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción;
 using DisenoColumnas.Secciones;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
@@ -14,11 +15,13 @@ namespace DisenoColumnas.Interfaz_Seccion
     {
         public DiagramaInteraccion()
         {
+           
             InitializeComponent();
+            Diagrama = this;
         }
 
         #region Para OpenGl
-
+        public static DiagramaInteraccion Diagrama { get; set; }
         private int eyeX = 100, eyeY = 100, eyeZ = 100; private bool Loaded = false;
         private List<Int32> GList;
         private List<Line> lines = new List<Line>();
@@ -27,10 +30,17 @@ namespace DisenoColumnas.Interfaz_Seccion
         public static ISeccion Seccion;
         public static List<float[]> MP_Soli3D = new List<float[]>();
 
+        public static List<float[]> MPpuntosSolicitaciones { get; set; } = new List<float[]>();
+
+        public static List<float[]> MP2D_UnAngulo { get; set; } = new List<float[]>();
+        public static List<float[]> MP3D_UnAngulo { get; set; } = new List<float[]>();
+
         private int Angulo = 0;
         private List<float[]> MP2D { get; set; }
         private List<float[]> MP3D { get; set; }
         private List<float[]> MP3D_SoloUnaRecta { get; set; }
+
+
 
         private List<Tuple<List<float[]>, int>> TuplesMP3D { get; set; }
 
@@ -212,6 +222,12 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void TomarValores(bool conFi)
         {
+            ChangeAngulo_Abajo.Enabled = true;
+            ChangeAngulo_Arriba.Enabled = true;
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
+            Label1.Enabled = true;
+            label2.Enabled = true;
             if (conFi)
             {
                 MP2D = (Seccion.PuMu2D.Find(x => x.Item2 == Angulo).Item1);
@@ -228,6 +244,20 @@ namespace DisenoColumnas.Interfaz_Seccion
                 TuplesMP3D = null;
                 TuplesMP3D = (Seccion.MnPn3D);
             }
+
+            if (MPpuntosSolicitaciones.Count != 0)
+            {
+                MP2D = MP2D_UnAngulo;
+                MP3D = MP3D_UnAngulo;
+                ChangeAngulo_Abajo.Enabled = false;
+                ChangeAngulo_Arriba.Enabled = false;
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
+                Label1.Enabled = false;
+                label2.Enabled = false;
+            }
+
+
         }
 
         private float FC1 = 0.001f;
@@ -249,7 +279,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             FunctionsProject.EstiloDatGridView(D_MnPn);
         }
 
-        private void Graficar(Chart chart)
+        public void Graficar(Chart chart)
         {
             if (Seccion != null)
             {
@@ -279,17 +309,36 @@ namespace DisenoColumnas.Interfaz_Seccion
                     chart.ChartAreas[0].AxisX.Title = "Mn (Ton-m)";
                     chart.ChartAreas[0].AxisY.Title = "Pn (Ton)";
                 }
-
                 foreach (float[] Point in MP2D)
                 {
                     chart.Series[0].Points.AddXY(Point[0] * FC2, Point[1] * FC1);
                 }
+                chart.Series.Remove(chart.Series.FindByName("Puntos"));
+                chart.Series.Add("Puntos");
+                chart.Series[1].Points.Clear();
+                chart.Series[1].Color = Color.Red;
+                chart.Series[1].MarkerStyle = MarkerStyle.Circle;
+                chart.Series[1].MarkerSize = 4;
+                chart.Series[1].MarkerStep = 5;
+                chart.Series[1].MarkerColor = Color.Red;
+                chart.Series[1].LabelBackColor = Color.Transparent;
+                chart.Series[1].ChartType = SeriesChartType.Point;
+
+                foreach (float[] Point in MPpuntosSolicitaciones)
+                {
+                    chart.Series[1].Points.AddXY(Point[0], Point[1]);
+                }
+
             }
         }
 
         private void Gl_Load(object sender, EventArgs e)
         {
             Loaded = true;
+            MP2D_UnAngulo.Clear();
+            MP3D_UnAngulo.Clear();
+            MPpuntosSolicitaciones.Clear();
+
             GL.ClearColor(Color.Black);
             generarFlechas();
             MostrarValores();
@@ -345,10 +394,13 @@ namespace DisenoColumnas.Interfaz_Seccion
             MostrarValores();
         }
 
-        private void MostrarValores()
+        public void MostrarValores()
         {
-            GroupBox_Grafica_Diagrama1.Text = $"Angulo de {Angulo}°";
-            Title.Text = $"Diagrama de Interacción - {Angulo}°";
+            if (MP2D_UnAngulo.Count == 0)
+            {
+                GroupBox_Grafica_Diagrama1.Text = $"Angulo de {Angulo}°";
+                Title.Text = $"Diagrama de Interacción - {Angulo}°";
+            }
             TomarValores(ConFi);
             CreateDataGrid();
             CrearLines();
@@ -419,6 +471,23 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void MostrarSolicita_CheckedChanged(object sender, EventArgs e)
         {
+            MostrarValores();
+        }
+
+        private void VerSolicitacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Solicitaciones VentanaSolicitaciones = new Solicitaciones();
+            Solicitaciones.MP_Soli3D = MP_Soli3D;
+            Solicitaciones.Seccion = Seccion;
+            Solicitaciones.Ultimos = ConFi;
+            VentanaSolicitaciones.ShowDialog();
+        }
+
+        private void SinSolicitacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MP2D_UnAngulo.Clear();
+            MP3D_UnAngulo.Clear();
+            MPpuntosSolicitaciones.Clear();
             MostrarValores();
         }
 

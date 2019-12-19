@@ -51,7 +51,7 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
 
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
-
+        public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos) { return null; }
         public void DiagramaInteraccion()
         {
 

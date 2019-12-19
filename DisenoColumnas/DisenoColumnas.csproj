@@ -114,11 +114,17 @@
     <Compile Include="Interfaz Inicial\ChequeoDeCargas.Designer.cs">
       <DependentUpon>ChequeoDeCargas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaz Seccion\DiagramaInteraccion.cs">
+    <Compile Include="Interfaz Seccion\Diagrama de Interacción\DiagramaInteraccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaz Seccion\DiagramaInteraccion.Designer.cs">
+    <Compile Include="Interfaz Seccion\Diagrama de Interacción\DiagramaInteraccion.Designer.cs">
       <DependentUpon>DiagramaInteraccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz Seccion\Diagrama de Interacción\Solicitaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\Diagrama de Interacción\Solicitaciones.Designer.cs">
+      <DependentUpon>Solicitaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaz Seccion\FAgregarSeccion.cs">
       <SubType>Form</SubType>
@@ -336,8 +342,11 @@
     <EmbeddedResource Include="Interfaz Inicial\VariablesdeEntrada.resx">
       <DependentUpon>VariablesdeEntrada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaz Seccion\DiagramaInteraccion.resx">
+    <EmbeddedResource Include="Interfaz Seccion\Diagrama de Interacción\DiagramaInteraccion.resx">
       <DependentUpon>DiagramaInteraccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\Diagrama de Interacción\Solicitaciones.resx">
+      <DependentUpon>Solicitaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Seccion\FAgregarRef.resx">
       <DependentUpon>FAgregarRef.cs</DependentUpon>

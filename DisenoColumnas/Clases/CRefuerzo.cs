@@ -41,6 +41,12 @@ namespace DisenoColumnas.Clases
         public List<Tuple<List<float>, int>> Fuerzas_PorCadaCPorCadaAngulo { get; set; } = new List<Tuple<List<float>, int>>();
         public List<Tuple<List<float>, int>> Momento_PorCadaCPorCadaAngulo { get; set; } = new List<Tuple<List<float>, int>>();
 
+        public float[] Coordenadas_Angulo { get; set; } = new float[] { };
+        public List<float> Esfuerzos_Angulo { get; set; } = new List<float>();
+        public List<float> Deformacion_Angulo { get; set; } = new List<float>();
+        public List<float> Fuerzas_Angulo { get; set; } = new List<float>();
+        public List<float> Momento_Angulo { get; set; } = new List<float>();
+
         public void CalcularCoordenadasPorCadaAngulo(int Angulo)
         {
             List<double> CoordRotacion = B_Operaciones_Matricialesl.Operaciones.Rotacion(Coord[0], Coord[1], (Angulo * Math.PI) / 180);
@@ -48,7 +54,7 @@ namespace DisenoColumnas.Clases
             Coordenadas_PorCadaAngulo.Add(new Tuple<float[], int>(CoordeRotadas, Angulo));
         }
 
-        public void CalcularDeformacion(List<float> C, float ecu, int Angulo, float FY, float ES, float Ymax,Secciones.TipodeSeccion pseccion)
+        public void CalcularDeformacion(List<float> C, float ecu, int Angulo, float FY, float ES, float Ymax, Secciones.TipodeSeccion pseccion)
         {
             float[] CoordenadasAngulo = Coordenadas_PorCadaAngulo.Find(x => x.Item2 == Angulo).Item1;
             List<float> Fuerzas = new List<float>();
