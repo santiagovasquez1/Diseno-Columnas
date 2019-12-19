@@ -535,18 +535,18 @@ namespace DisenoColumnas.Secciones
             else
             {
                 double S1, S2, SH, SV, Sdef1, Sdef2;
-                double limite1, limite2, limite3, limite_def;
+                double limite1, limite2, limite3, limite4, limite_def;
                 double PAs1, PAs2;
                 float Ach = (B - 2 * r) * (H - 2 * r);
 
-                S1 = Estribo.NoRamasV1 * FunctionsProject.Find_As(3) / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
+                S1 = Estribo.NoRamasV1 * FunctionsProject.Find_As(3) / (FD1 * (B - 2 * r) * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasV1 * FY * FunctionsProject.Find_As(3) / (FD2 * (B - 2 * r) * Material.FC);
 
                 #region Estribo  #3
 
                 SV = new double[] { S1 * 100, S2 * 100 }.Min();
 
-                S1 = Estribo.NoRamasH1 * FunctionsProject.Find_As(3) / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
+                S1 = Estribo.NoRamasH1 * FunctionsProject.Find_As(3) / (FD1 * (H - 2 * r) * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasH1 * FY * FunctionsProject.Find_As(3) / (FD2 * (H - 2 * r) * Material.FC);
 
                 SH = new double[] { S1 * 100, S2 * 100 }.Min();
@@ -559,8 +559,9 @@ namespace DisenoColumnas.Secciones
                     limite1 = 8 * FunctionsProject.Find_Diametro(Db1);
                     limite2 = 16 * FunctionsProject.Find_Diametro(3);
                     limite3 = 15;
-                    limite_def = new double[] { limite1, limite2, limite3 }.Min();
-                    if (Sdef1 > limite_def) Sdef1 = limite_def;
+                    limite4 = B / 3 < H / 3 ? B * 100 / 3 : H * 100 / 3;
+                    limite_def = new double[] { limite1, limite2, limite3, limite4 }.Min();
+                    if (Sdef1 > limite_def) Sdef1 = Math.Round(limite_def, 1);
                 }
 
                 if (gDE == GDE.DES)
@@ -569,8 +570,9 @@ namespace DisenoColumnas.Secciones
                     int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
                     limite1 = 6 * FunctionsProject.Find_Diametro(Db1);
                     limite2 = 15;
-                    limite_def = new double[] { limite1, limite2 }.Min();
-                    if (Sdef1 > limite_def) Sdef1 = limite_def;
+                    limite4 = B / 4 < H / 4 ? B * 100 / 4 : H * 100 / 4;
+                    limite_def = new double[] { limite1, limite2, limite4 }.Min();
+                    if (Sdef1 > limite_def) Sdef1 = Math.Round(limite_def, 2);
                 }
 
                 Estribo.NoEstribo = 3;
@@ -582,11 +584,11 @@ namespace DisenoColumnas.Secciones
 
                 #region Estribo  #4
 
-                S1 = Estribo.NoRamasV1 * FunctionsProject.Find_As(4) / (FD1 * B * (Material.FC / FY) * ((Area / Ach) - 1));
+                S1 = Estribo.NoRamasV1 * FunctionsProject.Find_As(4) / (FD1 * (B - 2 * r) * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasV1 * FY * FunctionsProject.Find_As(4) / (FD2 * (B - 2 * r) * Material.FC);
                 SV = new double[] { S1 * 100, S2 * 100 }.Min();
 
-                S1 = Estribo.NoRamasH1 * FunctionsProject.Find_As(4) / (FD1 * H * (Material.FC / FY) * ((Area / Ach) - 1));
+                S1 = Estribo.NoRamasH1 * FunctionsProject.Find_As(4) / (FD1 * (H - 2 * r) * (Material.FC / FY) * ((Area / Ach) - 1));
                 S2 = Estribo.NoRamasH1 * FY * FunctionsProject.Find_As(4) / (FD2 * (H - 2 * r) * Material.FC);
                 SH = new double[] { S1 * 100, S2 * 100 }.Min();
 
@@ -596,21 +598,23 @@ namespace DisenoColumnas.Secciones
                 {
                     var Db = Refuerzos.Min();
                     int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
-                    limite1 = 8 * FunctionsProject.Find_As(Db1);
-                    limite2 = 16 * FunctionsProject.Find_As(4);
+                    limite1 = 8 * FunctionsProject.Find_Diametro(Db1);
+                    limite2 = 16 * FunctionsProject.Find_Diametro(4);
                     limite3 = 15;
-                    limite_def = new double[] { limite1, limite2, limite3 }.Min();
-                    if (Sdef2 > limite_def) Sdef2 = limite_def;
+                    limite4 = B / 3 < H / 3 ? B * 100 / 3 : H * 100 / 3;
+                    limite_def = new double[] { limite1, limite2, limite3,limite4 }.Min();
+                    if (Sdef2 > limite_def) Sdef2 = Math.Round(limite_def, 1);
                 }
 
                 if (gDE == GDE.DES)
                 {
                     var Db = Refuerzos.Min();
                     int Db1 = Convert.ToInt16(Db.Diametro.Substring(1));
-                    limite1 = 6 * FunctionsProject.Find_As(Db1);
+                    limite1 = 6 * FunctionsProject.Find_Diametro(Db1);
                     limite2 = 15;
-                    limite_def = new double[] { limite1, limite2 }.Min();
-                    if (Sdef2 > limite_def) Sdef2 = limite_def;
+                    limite4 = B / 4 < H / 4 ? B * 100 / 4 : H * 100 / 4;
+                    limite_def = new double[] { limite1, limite2,limite4 }.Min();
+                    if (Sdef2 > limite_def) Sdef2 = Math.Round(limite_def, 2);
                 }
 
                 Estribo.NoEstribo = 4;

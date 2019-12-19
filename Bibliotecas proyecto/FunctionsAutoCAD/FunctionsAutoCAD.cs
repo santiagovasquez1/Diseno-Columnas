@@ -287,6 +287,24 @@ namespace FunctionsAutoCAD
         }
 
         /// <summary>
+        /// Crear una circunferencia
+        /// </summary>
+        /// <param name="Center">Insertion point del cirvulo. Ejemplo: (x,y,z)</param>
+        /// <param name="Layer">Capa del Polígono</param>
+        /// <param name="Radio">Radio de la circunferencia</param>
+        public static void AddCircle(double [] Center, double Radio,string Layer)
+        {
+            if (AcadDoc != null)
+            {
+                AcadCircle acadCircle = AcadDoc.ModelSpace.AddCircle(Center, Radio);
+                acadCircle.Layer = Layer;
+                acadCircle.Update();
+            }
+        }
+
+
+
+        /// <summary>
         /// Crear un nuevo Polígono en 2D con su respectivo Relleno (Hatch).
         /// </summary>
         /// <param name="VerticesList">Vértices del Polígono</param>
@@ -392,8 +410,7 @@ namespace FunctionsAutoCAD
             }
 
         }
-
-
+        
         /// <summary>
         /// Bloque: Corte de Sección - Efe Prima Ce
         /// </summary>
@@ -456,6 +473,18 @@ namespace FunctionsAutoCAD
                 blockReference.Update();
             }
         }
+
+        /// <summary>
+        /// Bloque: Estibo para secciones circulares - Efe Prima Ce
+        /// </summary>
+        public static void B_Estribo_Circular(double[] P_XYZ, string Layer, double Radio, double Xscale, double Yscale, double Zscale, float Rotation)
+        {
+            if (AcadDoc != null)
+            {
+                AcadBlockReference blockReference = AcadDoc.ModelSpace.InsertBlock(P_XYZ, "FC_B_Estribo circular", Xscale, Yscale, Zscale, Rotation);
+            }
+        }
+
 
         /// <summary>
         /// Bloque: Ganchos seccion - Efe Prima Ce

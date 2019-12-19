@@ -623,7 +623,7 @@ namespace DisenoColumnas.Secciones
                 r = r * EscalaR;
 
                 xc = refuerzoi.Coord[0] * EscalaX;
-                yc = refuerzoi.Coord[1] * EscalaY;
+                yc = -refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -710,8 +710,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_aletas1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_aletas1[i][0] * (float)EscalaX * 100, Coord_aletas1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_aletas2[i][0] * (float)EscalaX * 100, Coord_aletas2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Coord_aletas1[i][0] * (float)EscalaX * 100, -Coord_aletas1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Coord_aletas2[i][0] * (float)EscalaX * 100, -Coord_aletas2[i][1] * (float)EscalaX * 100));
             }
 
             path.AddPolygon(Vertices.ToArray());
@@ -726,8 +726,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_alma1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_alma1[i][0] * (float)EscalaX * 100, Coord_alma1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_alma2[i][0] * (float)EscalaX * 100, Coord_alma2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Coord_alma1[i][0] * (float)EscalaX * 100, -Coord_alma1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Coord_alma2[i][0] * (float)EscalaX * 100, -Coord_alma2[i][1] * (float)EscalaX * 100));
             }
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
@@ -771,7 +771,7 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < CoordenadasSeccion.Count; i++)
             {
-                Vertices.Add(new PointF(CoordenadasSeccion[i][0] * 100 * (float)EscalaX, CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
+                Vertices.Add(new PointF(CoordenadasSeccion[i][0] * 100 * (float)EscalaX, -CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
             }
 
             #endregion Vertices

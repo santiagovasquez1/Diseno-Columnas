@@ -481,9 +481,34 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
-        public void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado)
+        public void Dibujo_Autocad(double Xi, double Yi, int Num_Despiece)
         {
-            // throw new NotImplementedException();
+            string LayerCirculo = "FC_BORDES";
+            double[] CentroDibujo = new double[3] { Xi + Centro[0], Yi - Centro[1], 0 };
+            double EscalaR = (radio - 2 * 0.02) / radio;
+            string Nom_Seccion = "";
+            string Escala = "1:15";
+
+            FunctionsAutoCAD.FunctionsAutoCAD.AddCircle(CentroDibujo, radio, LayerCirculo);
+            FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo_Circular(CentroDibujo, "FC_ESTRIBOS", radio - 2 * 0.02, EscalaR, EscalaR, 1, 0);
+            
+            #region Dibujo de refuerzo en seccion
+
+            var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
+            var Y_unicos = Refuerzos.Select(x => Math.Round(x.Coord[1], 2)).ToList().Distinct().ToList();
+            foreach (CRefuerzo refi in Refuerzos)
+            {
+                refi.Dibujo_Ref_Autocad(Xi, Yi, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
+            }
+
+            #endregion Dibujo de refuerzo en seccion
+
+            #region Nombre_Seccion
+
+            Nom_Seccion = "%%USeccion " + Num_Despiece;
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - (H / 2) - 0.40, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
+
+            #endregion Nombre_Seccion
         }
 
         public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)

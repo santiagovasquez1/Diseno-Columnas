@@ -3,7 +3,6 @@ using DisenoColumnas.Secciones;
 using DisenoColumnas.Utilidades;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Interfaz_Seccion
@@ -93,8 +92,21 @@ namespace DisenoColumnas.Interfaz_Seccion
             tf = Convert.ToSingle(tbTf.Text);
             r = Convert.ToSingle(tb_r.Text);
 
-            Crear_Seccion(Tipo_seccion, b, h, tw, tf, r);
-            Close();
+            if (Tipo_seccion != TipodeSeccion.L.ToString() & Tipo_seccion != TipodeSeccion.Tee.ToString())
+            {
+                Crear_Seccion(Tipo_seccion, b, h, tw, tf, r);
+                Close();
+            }
+            else
+            {
+                if (b <= h)
+                {
+                    Crear_Seccion(Tipo_seccion, b, h, tw, tf, r);
+                    Close();
+                }
+                else
+                    MessageBox.Show("H debe ser mayor que B", "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void Crear_Seccion(string Tipo_Seccion, float b, float h, float tw, float tf, float r)
@@ -145,14 +157,14 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 if (Tipo_Seccion == TipodeSeccion.Tee.ToString())
                 {
-                    Vertices_Temp.Add(new float[] { 0, -h / 200 });
-                    Vertices_Temp.Add(new float[] { 0, -(h - tw) / 200 });
-                    Vertices_Temp.Add(new float[] { (b - tf) / 400, -(h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { 0, h / 200 });
+                    Vertices_Temp.Add(new float[] { 0, (h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { (b - tf) / 400, (h - tw) / 200 });
                     Vertices_Temp.Add(new float[] { (b - tf) / 400, 0 });
                     Vertices_Temp.Add(new float[] { (b + tf) / 400, 0 });
-                    Vertices_Temp.Add(new float[] { (b + tf) / 400, -(h - tw) / 200 });
-                    Vertices_Temp.Add(new float[] { b / 200, -(h - tw) / 200 });
-                    Vertices_Temp.Add(new float[] { b / 200, -h / 200 });
+                    Vertices_Temp.Add(new float[] { (b + tf) / 400, (h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, (h - tw) / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, h / 200 });
 
                     Numerador = ((b / 2) * b * tw) + ((b / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
@@ -165,7 +177,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Numerador = y1 + y2;
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Yc = -h / 200;
+                    Yc = h / 200;
 
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {
@@ -180,10 +192,10 @@ namespace DisenoColumnas.Interfaz_Seccion
                 {
                     Vertices_Temp.Add(new float[] { 0, 0 });
                     Vertices_Temp.Add(new float[] { b / 200, 0 });
-                    Vertices_Temp.Add(new float[] { b / 200, -tw / 200 });
-                    Vertices_Temp.Add(new float[] { tf / 200, -tw / 200 });
-                    Vertices_Temp.Add(new float[] { tf / 200, -h / 200 });
-                    Vertices_Temp.Add(new float[] { 0, -h / 200 });
+                    Vertices_Temp.Add(new float[] { b / 200, tw / 200 });
+                    Vertices_Temp.Add(new float[] { tf / 200, tw / 200 });
+                    Vertices_Temp.Add(new float[] { tf / 200, h / 200 });
+                    Vertices_Temp.Add(new float[] { 0, h / 200 });
 
                     Numerador = ((b / 2) * b * tw) + ((tf / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
@@ -193,8 +205,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Numerador = ((tw / 2) * b * tw) + ((h + tf / 2) * (tf * (h - tw)));
                     Denominador = (b * tw) + (tf * (h - tw));
 
-                    Yc = -h / 200;
-                                       
+                    Yc = h / 200;
+
                     for (int i = 0; i < Vertices_Temp.Count; i++)
                     {
                         var Aux = B_Operaciones_Matricialesl.Operaciones.Traslacion(Vertices_Temp[i][0] - Xc, Vertices_Temp[i][1] - Yc, Vertices_Temp[i][0], Vertices_Temp[i][1]);
