@@ -18,13 +18,13 @@ namespace DisenoColumnas.Clases
 
             Username = WindowsIdentity.GetCurrent().Name;
             string User_aux = "";
-            Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+            //Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
 
             //try
             //{
-            //    Ruta_Carpeta = Application.StartupPath;
-            //    Ruta_Archivo = @"\\Secciones.sec";
-            //    Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
+            Ruta_Carpeta = Application.StartupPath;
+            Ruta_Archivo = @"\\Secciones.sec";
+            Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
             //}
             //catch (System.Exception)
             //{

@@ -51,6 +51,7 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
 
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
         public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos)
         {
             List<PointF> Coordenadas = new List<PointF>();
@@ -77,8 +78,6 @@ namespace DisenoColumnas.Secciones
 
             List<float[]> Coordenadas_Angulo = new List<float[]>();
 
-
-
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
                 cRefuerzo.Coordenadas_Angulo = new float[] { };
@@ -88,13 +87,11 @@ namespace DisenoColumnas.Secciones
                 cRefuerzo.Deformacion_Angulo = new List<float>();
             }
 
-
-
             //Rotacion de la Sección
             for (int i = 0; i < Coordenadas.Count; i++)
             {
                 List<double> CoordRotadas = Operaciones.Rotacion(Coordenadas[i].X, Coordenadas[i].Y, (Angulo * Math.PI) / 180);
-                Coordenadas_Angulo.Add(new float[] { (float)CoordRotadas[0]*100, (float)CoordRotadas[1] *100});
+                Coordenadas_Angulo.Add(new float[] { (float)CoordRotadas[0] * 100, (float)CoordRotadas[1] * 100 });
             }
 
             float[] CentroideFigura2 = FunctionsProject.DeterminarCentroideSentidoAntiHorario(Coordenadas_Angulo);
@@ -106,7 +103,6 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coordenadas_Angulo.Count; i++)
             {
-
                 float m;
                 if (i + 1 == Coordenadas_Angulo.Count)
                 {
@@ -118,7 +114,6 @@ namespace DisenoColumnas.Secciones
                 }
 
                 ms.Add(m);
-
             }
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
@@ -126,18 +121,16 @@ namespace DisenoColumnas.Secciones
                 cRefuerzo.Coordenadas_Angulo = new float[] { (float)CoordRotadas[0], (float)CoordRotadas[1] };
             }
 
-
             int DeltasVariacionC = 20;
 
-            for (float C = ymin/b1; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
+            for (float C = ymin / b1; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
             {
                 YVariaciona.Add(C + (ymax - C) - (ymax - C) * b1);
                 YVariacionC.Add(C);
             }
-              
+
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
-
                 for (int i = 0; i < YVariacionC.Count; i++)
                 {
                     float C_Original = ymax - YVariacionC[i];
@@ -193,13 +186,12 @@ namespace DisenoColumnas.Secciones
                 foreach (CRefuerzo cRefuerzo in Refuerzos)
                 {
                     Fs += cRefuerzo.Fuerzas_Angulo[i];
-                    Ms += Math.Abs(cRefuerzo.Fuerzas_Angulo[i]) * Math.Abs(cRefuerzo.Coordenadas_Angulo[1]- CentroideFigura2[1]);
+                    Ms += Math.Abs(cRefuerzo.Fuerzas_Angulo[i]) * Math.Abs(cRefuerzo.Coordenadas_Angulo[1] - CentroideFigura2[1]);
                     Ast += (float)FunctionsProject.Find_As(Convert.ToInt32(cRefuerzo.Diametro.Substring(1))) * 10000;
                 }
 
-
-                float Mnx = Cc * (CentroideAreaComprimida[i][0]- CentroideFigura2[0]);
-                float Mny = Cc * (CentroideAreaComprimida[i][1]-CentroideFigura2[1]) + Ms;
+                float Mnx = Cc * (CentroideAreaComprimida[i][0] - CentroideFigura2[0]);
+                float Mny = Cc * (CentroideAreaComprimida[i][1] - CentroideFigura2[1]) + Ms;
 
                 float Mn_ = (float)Math.Sqrt(Math.Pow(Mnx, 2) + Math.Pow(Mny, 2));
                 float Pn_ = Cc + Fs;
@@ -240,17 +232,13 @@ namespace DisenoColumnas.Secciones
                     int IndicePmax1 = MP.FindIndex(x => x[1] == Pmax1);
 
                     MP.Insert(IndicePmax1, new float[] { 0, Pmax1 });
-
                 }
-
-
             }
 
             List<float[]> MP3D = new List<float[]>();
 
             for (int i = 0; i < MP.Count; i++)
             {
-
                 float X1 = (float)(MP[i][0] * Math.Cos((Angulo * Math.PI / 180)));
                 float Y2 = (float)(MP[i][0] * Math.Sin((Angulo * Math.PI / 180)));
                 float Z2 = MP[i][1];
@@ -258,10 +246,7 @@ namespace DisenoColumnas.Secciones
                 MP3D.Add(PuntosDescompuestos);
             }
 
-
             return new Tuple<List<float[]>, List<float[]>>(MP, MP3D);
-
-
         }
 
         public void DiagramaInteraccion()
@@ -273,11 +258,9 @@ namespace DisenoColumnas.Secciones
             MuPu3D = new List<Tuple<List<float[]>, int>>();
             for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
             {
-
                 Tuple<List<float[]>, List<float[]>> ResultadosNominales = DiagramaInteraccionParaUnAngulo(Angulo, false);
                 List<float[]> PnMn2D_ = ResultadosNominales.Item1;
                 List<float[]> MnPn3D_ = ResultadosNominales.Item2;
-
 
                 PnMn2D.Add(new Tuple<List<float[]>, int>(PnMn2D_, Angulo));
                 MnPn3D.Add(new Tuple<List<float[]>, int>(MnPn3D_, Angulo));
@@ -288,7 +271,6 @@ namespace DisenoColumnas.Secciones
                 PuMu2D.Add(new Tuple<List<float[]>, int>(PuMu2D_, Angulo));
                 MuPu3D.Add(new Tuple<List<float[]>, int>(MuPu3D_, Angulo));
             }
-
         }
 
         private float DeterminarFi(float et)
@@ -324,7 +306,6 @@ namespace DisenoColumnas.Secciones
                 else
                 {
                     points = new PointF[] { new PointF(XY[i][0], XY[i][1]), new PointF(XY[i + 1][0], XY[i + 1][1]) };
-
                 }
                 PuntosPendie.Add(points);
             }
@@ -335,7 +316,7 @@ namespace DisenoColumnas.Secciones
 
                 if (i == 0)
                 {
-                    if (Punto.Length !=0)
+                    if (Punto.Length != 0)
                     {
                         PuntosHallados.Add(Punto);
                     }
@@ -356,11 +337,9 @@ namespace DisenoColumnas.Secciones
                             }
                         }
                     }
-
                 }
                 else
                 {
-
                     if (Punto.Length != 0)
                     {
                         PuntosHallados.Add(Punto);
@@ -380,19 +359,14 @@ namespace DisenoColumnas.Secciones
                             PuntosHallados.Add(new float[] { PuntosPendie[i][1].X, PuntosPendie[i][1].Y });
                         }
                     }
-
                 }
-
-
-           
             }
 
             return PuntosHallados;
         }
 
-        private float[] PuntoIntercepto(PointF[] Puntos, float m,float Yperteneciente)
+        private float[] PuntoIntercepto(PointF[] Puntos, float m, float Yperteneciente)
         {
-
             float[] XY = new float[] { };
             float X = ((Yperteneciente - Puntos[0].Y) / m) + Puntos[0].X;
             float MaxY = Puntos.Max(Z => Z.Y);
@@ -406,11 +380,7 @@ namespace DisenoColumnas.Secciones
             }
 
             return XY;
-
         }
-
-
-
 
         #endregion Diagrama de Interacción: Propiedades y Metodos
 
@@ -669,7 +639,7 @@ namespace DisenoColumnas.Secciones
             var Yunicos = CoordenadasSeccion.Select(x => x[1]).Distinct().ToList();
 
             D_off1 = rec;
-            D_off2 = rec +  (float)FunctionsProject.Find_Diametro(Estribo.NoEstribo) / 100;
+            D_off2 = rec + (float)FunctionsProject.Find_Diametro(Estribo.NoEstribo) / 100;
 
             //Aleta seccion
 
@@ -683,7 +653,7 @@ namespace DisenoColumnas.Secciones
                 var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
                 var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
 
-                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2)) 
+                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
                 {
                     Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -698,7 +668,7 @@ namespace DisenoColumnas.Secciones
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
                 }
 
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Yunicos.Max()) == false)    
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Yunicos.Max()) == false)
                 {
                     Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
                     Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -910,7 +880,7 @@ namespace DisenoColumnas.Secciones
 
             if (Shape == TipodeSeccion.L)
             {
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Xunicos.Max()) == true)  
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Xunicos.Max()) == true)
                 {
                     posx = Xtf + r;
                 }
@@ -1181,7 +1151,7 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Escalar.Count; i++)
             {
-                var Aux = Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi - TW, Escalar[i][0], Escalar[i][1]);
+                var Aux = Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi - 0.60, Escalar[i][0], Escalar[i][1]);
                 Vertices.Add(Aux[0]);
                 Vertices.Add(Aux[1]);
             }
@@ -1192,8 +1162,13 @@ namespace DisenoColumnas.Secciones
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
-                cRefuerzo.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
+                cRefuerzo.Dibujo_Ref_Autocad(Xi, Yi - 0.60, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
             }
+
+            //Estribos Alma
+
+
+
         }
 
         public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)
