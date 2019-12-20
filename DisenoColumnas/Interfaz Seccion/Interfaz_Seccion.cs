@@ -806,7 +806,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 {
                     if (col.resultadosETABs[indice].Load[i].Contains("SU") | col.resultadosETABs[indice].Load[i].Contains("U0"))
                     {
-                        float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
+                        float[] MXPYPU = new float[] { col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].P[i] };
+                        //float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
                         MP_solic.Add(MXPYPU);
                     }
                 }
