@@ -184,8 +184,6 @@ namespace DisenoColumnas.Secciones
 
             List<float[]> MP = new List<float[]>();
 
-
-
             for (int i = 0; i < AreaComprimida.Count; i++)
             {
                 float Cc = 0.85f * fc * AreaComprimida[i];
@@ -200,7 +198,10 @@ namespace DisenoColumnas.Secciones
                 }
 
 
-                float Mn_ = Cc * (CentroideAreaComprimida[i][1]- CentroideFigura2[1]) + Ms;
+                float Mnx = Cc * (CentroideAreaComprimida[i][0]- CentroideFigura2[0]);
+                float Mny = Cc * (CentroideAreaComprimida[i][1]-CentroideFigura2[1]) + Ms;
+
+                float Mn_ = (float)Math.Sqrt(Math.Pow(Mnx, 2) + Math.Pow(Mny, 2));
                 float Pn_ = Cc + Fs;
 
                 float minY = Refuerzos.Min(x => x.Coordenadas_Angulo[1]);
@@ -240,8 +241,6 @@ namespace DisenoColumnas.Secciones
 
                     MP.Insert(IndicePmax1, new float[] { 0, Pmax1 });
 
-                    MP.RemoveAll(x => x[0] < 0);
-
                 }
 
 
@@ -258,6 +257,7 @@ namespace DisenoColumnas.Secciones
                 float[] PuntosDescompuestos = new float[] { X1, Y2, Z2 };
                 MP3D.Add(PuntosDescompuestos);
             }
+
 
             return new Tuple<List<float[]>, List<float[]>>(MP, MP3D);
 

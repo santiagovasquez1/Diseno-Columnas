@@ -258,7 +258,10 @@ namespace DisenoColumnas.Secciones
                 }
 
 
-                float Mn_ = Cc * (CentroideAreaComprimida[i][1]) + Ms;
+                float Mnx = Cc * (CentroideAreaComprimida[i][0]);
+                float Mny = Cc * (CentroideAreaComprimida[i][1]) + Ms;
+
+                float Mn_ = (float)Math.Sqrt(Math.Pow(Mnx, 2) + Math.Pow(Mny, 2));
                 float Pn_ = Cc + Fs;
 
                 float minY = Refuerzos.Min(x => x.Coordenadas_Angulo[1]);
