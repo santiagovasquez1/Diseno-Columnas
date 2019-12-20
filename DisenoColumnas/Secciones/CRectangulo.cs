@@ -171,7 +171,7 @@ namespace DisenoColumnas.Secciones
 
             int DeltasVariacionC = 20;
 
-            for (float C = ymin + (ymax - ymin) / DeltasVariacionC; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
+            for (float C = ymin /b1; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
             {
                 YVariaciona.Add(C + (ymax - C) - (ymax - C) * b1);
                 YVariacionC.Add(C);
