@@ -1,10 +1,12 @@
-﻿using DisenoColumnas.Clases.OpenGL;
+﻿using ClosedXML.Excel;
+using DisenoColumnas.Clases.OpenGL;
 using DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción;
 using DisenoColumnas.Secciones;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -41,7 +43,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private List<float[]> MP3D_SoloUnaRecta { get; set; }
 
 
-
+        private List<Tuple<List<float[]>, int>> TuplesMP2D { get; set; }
         private List<Tuple<List<float[]>, int>> TuplesMP3D { get; set; }
 
         private bool ConFi { get; set; }
@@ -234,6 +236,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 MP3D = (Seccion.MuPu3D.Find(x => x.Item2 == Angulo).Item1);
                 TuplesMP3D = null;
                 TuplesMP3D = (Seccion.MuPu3D);
+                TuplesMP2D = Seccion.PuMu2D;
                 MP3D_SoloUnaRecta = Seccion.MuPu3D.Find(x => x.Item2 == Angulo).Item1;
             }
             else
@@ -243,6 +246,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 MP3D_SoloUnaRecta = Seccion.MnPn3D.Find(x => x.Item2 == Angulo).Item1;
                 TuplesMP3D = null;
                 TuplesMP3D = (Seccion.MnPn3D);
+                TuplesMP2D = Seccion.PnMn2D;
             }
 
             if (MPpuntosSolicitaciones.Count != 0)
@@ -335,6 +339,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Gl_Load(object sender, EventArgs e)
         {
             Loaded = true;
+     
             MP2D_UnAngulo.Clear();
             MP3D_UnAngulo.Clear();
             MPpuntosSolicitaciones.Clear();
@@ -425,9 +430,10 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void DiagramaInteraccion_Load(object sender, EventArgs e)
         {
-
-            if(Form1.mIntefazSeccion.edicion == Tipo_Edicion.Secciones_predef)
+            sinSolicitacionesToolStripMenuItem.Checked = true;
+            if (Form1.mIntefazSeccion.edicion == Tipo_Edicion.Secciones_predef)
             {
+                contextMenuStrip1.Enabled = false;
                 MostrarSolicita.Enabled = false;
             }
             MostrarValores();
@@ -476,20 +482,104 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void VerSolicitacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Solicitaciones VentanaSolicitaciones = new Solicitaciones();
-            Solicitaciones.MP_Soli3D = MP_Soli3D;
-            Solicitaciones.Seccion = Seccion;
-            Solicitaciones.Ultimos = ConFi;
-            VentanaSolicitaciones.ShowDialog();
+            if (sinSolicitacionesToolStripMenuItem.Checked)
+            {
+                sinSolicitacionesToolStripMenuItem.Checked = false;
+
+            }
+            if (verSolicitacionesToolStripMenuItem.Checked)
+            {
+                Solicitaciones VentanaSolicitaciones = new Solicitaciones();
+                Solicitaciones.MP_Soli3D = MP_Soli3D;
+                Solicitaciones.Seccion = Seccion;
+                Solicitaciones.Ultimos = ConFi;
+                VentanaSolicitaciones.ShowDialog();
+            }
         }
 
         private void SinSolicitacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MP2D_UnAngulo.Clear();
-            MP3D_UnAngulo.Clear();
-            MPpuntosSolicitaciones.Clear();
-            MostrarValores();
+            if (verSolicitacionesToolStripMenuItem.Checked)
+            {
+                verSolicitacionesToolStripMenuItem.Checked = false;
+            }
+            if (sinSolicitacionesToolStripMenuItem.Checked)
+            {
+                
+
+                MP2D_UnAngulo.Clear();
+                MP3D_UnAngulo.Clear();
+                MPpuntosSolicitaciones.Clear();
+                MostrarValores();
+
+            }
         }
+
+        private void ExportarDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateExcel();
+        }
+
+        private void CreateExcel()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog() { Title = "Exportar Datos - Diagrama de Interacción", Filter = "Resultados |*.xlsx" };
+            saveFileDialog.ShowDialog();
+            string Ruta = saveFileDialog.FileName;
+
+            if (Ruta != "")
+            {
+                using (var workbook = new XLWorkbook())
+                {
+
+                    string TextoCarga = "Pn [Tonf]"; string M1 = "Mnx [Tonf-m]"; string M2 = "Mny [Tonf-m]";
+                    if (ConFi)
+                    {
+                        TextoCarga = "Pu [Tonf]"; M1 = "Mux [Tonf-m]"; M2 = "Muy [Tonf-m]";
+                    }
+
+
+
+
+
+                    var worksheet = workbook.AddWorksheet("DI 3D");
+                    for (int i = 0; i < TuplesMP3D.Count; i++)
+                    {
+                        int ColumnaP = 1 + ((TuplesMP3D[i].Item2) / 10) * 5;
+                        int ColumnaM1 = 2 + ((TuplesMP3D[i].Item2) / 10) * 5;
+                        int ColumnaM2 = 3 + ((TuplesMP3D[i].Item2) / 10) * 5;
+                        worksheet.Cell(1, ColumnaP).Value = "Curva "+ (i+1) + "- Ángulo: " + TuplesMP3D[i].Item2+"°";
+                        for (int j = 0; j < TuplesMP3D[i].Item1.Count; j++)
+                        {
+                           
+                            if (j == 0)
+                            {
+                                worksheet.Cell(2, ColumnaP).Value = TextoCarga;
+                                worksheet.Cell(2, ColumnaM1).Value = M1;
+                                worksheet.Cell(2, ColumnaM2).Value = M2;
+                            }
+                            worksheet.Cell(j + 3, ColumnaP).Value = Math.Round(TuplesMP3D[i].Item1[j][2]*FC1,2);
+                            worksheet.Cell(j + 3, ColumnaM1).Value = Math.Round(TuplesMP3D[i].Item1[j][0] * FC2, 2);
+                            worksheet.Cell(j + 3, ColumnaM2).Value = Math.Round(TuplesMP3D[i].Item1[j][1] * FC2, 2);
+                        }
+                    }
+                    try
+                    {
+                        workbook.SaveAs(Ruta);
+                        Process Proc = new Process();
+                        Proc.StartInfo.FileName = Ruta;
+                        Proc.Start();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+
+              
+            }
+        }
+
+
 
         private void Gl_Paint(object sender, PaintEventArgs e)
         {
