@@ -46,15 +46,19 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.AgregarSeccion = new System.Windows.Forms.ToolStripButton();
             this.SaveSection = new System.Windows.Forms.ToolStripButton();
-            this.Grafica = new System.Windows.Forms.PictureBox();
-            this.tsbAddRefuerzo = new System.Windows.Forms.ToolStripButton();
             this.tbSeleccionar = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddRefuerzo = new System.Windows.Forms.ToolStripButton();
+            this.Grafica = new System.Windows.Forms.PictureBox();
+            this.cmSecciones = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.agregarSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarSecciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
+            this.cmSecciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -210,7 +214,7 @@
             this.tsbAddRefuerzo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(32, 540);
+            this.toolStrip1.Size = new System.Drawing.Size(24, 540);
             this.toolStrip1.TabIndex = 9;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -220,7 +224,7 @@
             this.AgregarSeccion.Image = global::DisenoColumnas.Properties.Resources.AgregarCol2;
             this.AgregarSeccion.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AgregarSeccion.Name = "AgregarSeccion";
-            this.AgregarSeccion.Size = new System.Drawing.Size(29, 20);
+            this.AgregarSeccion.Size = new System.Drawing.Size(21, 20);
             this.AgregarSeccion.Text = "Agregar Sección";
             this.AgregarSeccion.Visible = false;
             this.AgregarSeccion.Click += new System.EventHandler(this.toolStripButton1_Click);
@@ -231,10 +235,32 @@
             this.SaveSection.Image = global::DisenoColumnas.Properties.Resources.SaveSection;
             this.SaveSection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.SaveSection.Name = "SaveSection";
-            this.SaveSection.Size = new System.Drawing.Size(29, 20);
+            this.SaveSection.Size = new System.Drawing.Size(21, 20);
             this.SaveSection.Text = "Guardar Secciones";
             this.SaveSection.Visible = false;
             this.SaveSection.Click += new System.EventHandler(this.SaveSection_Click);
+            // 
+            // tbSeleccionar
+            // 
+            this.tbSeleccionar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbSeleccionar.Image = global::DisenoColumnas.Properties.Resources.cursor;
+            this.tbSeleccionar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbSeleccionar.Name = "tbSeleccionar";
+            this.tbSeleccionar.Size = new System.Drawing.Size(21, 20);
+            this.tbSeleccionar.Text = "Seleccionar";
+            this.tbSeleccionar.ToolTipText = "Seleccionar sección";
+            this.tbSeleccionar.Click += new System.EventHandler(this.tbSeleccionar_Click);
+            // 
+            // tsbAddRefuerzo
+            // 
+            this.tsbAddRefuerzo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbAddRefuerzo.Image = global::DisenoColumnas.Properties.Resources.anadir;
+            this.tsbAddRefuerzo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddRefuerzo.Name = "tsbAddRefuerzo";
+            this.tsbAddRefuerzo.Size = new System.Drawing.Size(21, 20);
+            this.tsbAddRefuerzo.Text = "Agregar refuerzo";
+            this.tsbAddRefuerzo.ToolTipText = "Agregar refuerzo a la sección";
+            this.tsbAddRefuerzo.Click += new System.EventHandler(this.tsbAddRefuerzo_Click);
             // 
             // Grafica
             // 
@@ -251,27 +277,27 @@
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
             // 
-            // tsbAddRefuerzo
+            // cmSecciones
             // 
-            this.tsbAddRefuerzo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbAddRefuerzo.Image = global::DisenoColumnas.Properties.Resources.anadir;
-            this.tsbAddRefuerzo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbAddRefuerzo.Name = "tsbAddRefuerzo";
-            this.tsbAddRefuerzo.Size = new System.Drawing.Size(29, 20);
-            this.tsbAddRefuerzo.Text = "Agregar refuerzo";
-            this.tsbAddRefuerzo.ToolTipText = "Agregar refuerzo a la sección";
-            this.tsbAddRefuerzo.Click += new System.EventHandler(this.tsbAddRefuerzo_Click);
+            this.cmSecciones.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarSecciónToolStripMenuItem,
+            this.eliminarSecciónToolStripMenuItem});
+            this.cmSecciones.Name = "cmSecciones";
+            this.cmSecciones.Size = new System.Drawing.Size(181, 70);
             // 
-            // tbSeleccionar
+            // agregarSecciónToolStripMenuItem
             // 
-            this.tbSeleccionar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbSeleccionar.Image = global::DisenoColumnas.Properties.Resources.cursor;
-            this.tbSeleccionar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbSeleccionar.Name = "tbSeleccionar";
-            this.tbSeleccionar.Size = new System.Drawing.Size(29, 20);
-            this.tbSeleccionar.Text = "Seleccionar";
-            this.tbSeleccionar.ToolTipText = "Seleccionar sección";
-            this.tbSeleccionar.Click += new System.EventHandler(this.tbSeleccionar_Click);
+            this.agregarSecciónToolStripMenuItem.Name = "agregarSecciónToolStripMenuItem";
+            this.agregarSecciónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarSecciónToolStripMenuItem.Text = "Agregar Sección";
+            this.agregarSecciónToolStripMenuItem.Click += new System.EventHandler(this.agregarSecciónToolStripMenuItem_Click);
+            // 
+            // eliminarSecciónToolStripMenuItem
+            // 
+            this.eliminarSecciónToolStripMenuItem.Name = "eliminarSecciónToolStripMenuItem";
+            this.eliminarSecciónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarSecciónToolStripMenuItem.Text = "Eliminar Sección";
+            this.eliminarSecciónToolStripMenuItem.Click += new System.EventHandler(this.eliminarSecciónToolStripMenuItem_Click);
             // 
             // FInterfaz_Seccion
             // 
@@ -301,6 +327,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
+            this.cmSecciones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,5 +354,8 @@
         private System.Windows.Forms.ToolStripButton SaveSection;
         private System.Windows.Forms.ToolStripButton tsbAddRefuerzo;
         private System.Windows.Forms.ToolStripButton tbSeleccionar;
+        private System.Windows.Forms.ContextMenuStrip cmSecciones;
+        private System.Windows.Forms.ToolStripMenuItem agregarSecciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eliminarSecciónToolStripMenuItem;
     }
 }

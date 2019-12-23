@@ -1146,6 +1146,8 @@ namespace DisenoColumnas.Secciones
             string LayerCuadro = "FC_BORDES";
             double[] P_XYZ = { };
             List<double> Vertices = new List<double>();
+            string Nom_Seccion = "";
+            string Escala = "1:15";
 
             var Escalar = Operaciones.Escalar(0.50, FunctionsProject.DeepClone(CoordenadasSeccion));
 
@@ -1165,10 +1167,83 @@ namespace DisenoColumnas.Secciones
                 cRefuerzo.Dibujo_Ref_Autocad(Xi, Yi - 0.60, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
             }
 
+            #region Estribos y ramas
+
+            //Estribos Aleta
+            var Xmin = CoordenadasSeccion.Select(x => x[0]).Min();
+            var Xmax = CoordenadasSeccion.Select(x => x[0]).Max();
+            var Ymin = CoordenadasSeccion.Select(x => x[1]).Min();
+            var Ymax = CoordenadasSeccion.Select(x => x[1]).Max();
+
+            if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax, Ymax) == true)
+            {
+                P_XYZ = new double[] { Xi + 0.15, Yi - 0.04, 0 };
+            }
+            else
+            {
+                P_XYZ = new double[] { Xi + 0.15, Yi - H - 0.04, 0 };
+            }
+            FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", B - 0.02 * Form1.Proyecto_.R, TF - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+
             //Estribos Alma
 
+            if (Shape == TipodeSeccion.L)
+            {
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin, Ymax) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin + TW, Ymax) == true)
+                {
+                    P_XYZ = new double[] { Xi, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
 
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax - TW, Ymax) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax, Ymax) == true)
+                {
+                    P_XYZ = new double[] { Xi + Xmax - TW, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
 
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin, Ymin) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin + TW, Ymin) == true)
+                {
+                    P_XYZ = new double[] { Xi, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax - TW, Ymin) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax, Ymin) == true)
+                {
+                    P_XYZ = new double[] { Xi + Xmax - TW, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+            }
+            else
+            {
+                var Punto1 = CoordenadasSeccion.FindAll(Y => Y[1] == Ymin);
+                var Punto2 = CoordenadasSeccion.FindAll(Y => Y[1] == Ymax);
+
+                var L1 = Math.Abs(Punto1[0][1] - Punto1[1][1]);
+                var L2 = Math.Abs(Punto2[0][1] - Punto2[1][1]);
+
+                if (L1 < L2)
+                {
+                    var Xtw = Math.Abs(Xi - Punto1[0][1]);
+                    P_XYZ = new double[] { Xi + Xtw, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+                else
+                {
+                    var Xtw = Math.Abs(Xi - Punto2[0][1]);
+                    P_XYZ = new double[] { Xi + Xtw, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+            }
+
+            #endregion Estribos y ramas
+
+            #region Nombre_Seccion
+
+            Nom_Seccion = "%%USeccion " + Num_Alzado;
+
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - H - 0.2, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
+
+            #endregion Nombre_Seccion
         }
 
         public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)

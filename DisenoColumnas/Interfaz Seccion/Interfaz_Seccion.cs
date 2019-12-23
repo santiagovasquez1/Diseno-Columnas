@@ -43,6 +43,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         public FEditarRef EditarRef { get; set; }
         public GDE GDE { get; set; }
         public bool Add_Refuerzo { get; set; }
+        public int Indice_Lb { get; set; }
 
         public FInterfaz_Seccion(Tipo_Edicion pedicion)
         {
@@ -64,9 +65,12 @@ namespace DisenoColumnas.Interfaz_Seccion
                 groupBox2.Enabled = true;
                 SaveSection.Visible = true;
                 AgregarSeccion.Visible = true;
+                lbPisos.ContextMenuStrip = cmSecciones;
+
             }
             else
             {
+                lbPisos.ContextMenuStrip = null;
                 AgregarSeccion.Visible = false;
                 SaveSection.Visible = false;
             }
@@ -107,8 +111,6 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Grafica_Paint(object sender, PaintEventArgs e)
         {
             int X, Y;
-            //EscalaX = Grafica.Width / (2 * Xmax);
-            //EscalaY = Grafica.Height / (2 * Ymax);
 
             if (Grafica.Width / (2 * Xmax) < Grafica.Height / (2 * Ymax))
             {
@@ -706,6 +708,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void lbPisos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Indice_Lb = lbPisos.SelectedIndex;
             Piso = lbPisos.SelectedItem.ToString();
             if (edicion == Tipo_Edicion.Secciones_modelo)
             {
@@ -720,23 +723,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void cbSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ISeccion[] Secciones = { };
-            string Fc_secciones = "";
-
-            Fc_secciones = cbSecciones.Text;
-
-            if (GDE == GDE.DMO)
-            {
-                Secciones = Form1.secciones_predef.Secciones_DMO.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
-            }
-            else
-            {
-                Secciones = Form1.secciones_predef.Secciones_DES.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
-            }
-
-            lbPisos.Items.Clear();
-            lbPisos.Items.AddRange(Secciones);
-            lbPisos.SelectedItem = lbPisos.Items[0];
+            Actualizar_Lista();
         }
 
         private void editarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -781,7 +768,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (edicion == Tipo_Edicion.Secciones_predef)
             {
-                FAgregarSeccion fseccion = new FAgregarSeccion();
+                FAgregarSeccion fseccion = new FAgregarSeccion(GDE,lbPisos);
                 fseccion.ShowDialog();
             }
         }
@@ -792,9 +779,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             DiagramaInteraccion diagramaInteraccion = new DiagramaInteraccion();
             DiagramaInteraccion.Seccion = seccion;
-
-            //Columna col = Form1.Proyecto_.ColumnaSelect;
-            //int indice = col.Seccions.FindIndex(x => x.Item2 == Piso);
 
             if (edicion == Tipo_Edicion.Secciones_modelo)
             {
@@ -834,7 +818,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             if (edicion == Tipo_Edicion.Secciones_predef)
             {
-                FAgregarSeccion agregarSeccion = new FAgregarSeccion();
+                FAgregarSeccion agregarSeccion = new FAgregarSeccion(GDE, lbPisos);
                 agregarSeccion.Show();
             }
         }
@@ -865,6 +849,55 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void tbSeleccionar_Click(object sender, EventArgs e)
         {
             Add_Refuerzo = false;
+        }
+
+        private void agregarSecciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FAgregarSeccion agregarSeccion = new FAgregarSeccion(GDE, lbPisos);
+            agregarSeccion.Show();
+        }
+
+        private void eliminarSecciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string Nombre_Seccion = lbPisos.Items[Indice_Lb].ToString();
+            int Indice_Lista = 0;
+
+            if (GDE == GDE.DMO)
+            {
+                Indice_Lista= Form1.secciones_predef.Secciones_DMO.FindIndex(x1 => x1.ToString() == Nombre_Seccion);
+                Form1.secciones_predef.Secciones_DMO.RemoveAt(Indice_Lista);
+                lbPisos.Items.Remove(Indice_Lista);
+                Actualizar_Lista();
+            }
+            else
+            {
+                Indice_Lista = Form1.secciones_predef.Secciones_DES.FindIndex(x1 => x1.ToString() == Nombre_Seccion);
+                Form1.secciones_predef.Secciones_DES.RemoveAt(Indice_Lista);
+                lbPisos.Items.Remove(Indice_Lista);
+                Actualizar_Lista();
+            }
+
+        }
+
+        private void Actualizar_Lista()
+        {
+            ISeccion[] Secciones = { };
+            string Fc_secciones = "";
+
+            Fc_secciones = cbSecciones.Text;
+
+            if (GDE == GDE.DMO)
+            {
+                Secciones = Form1.secciones_predef.Secciones_DMO.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
+            }
+            else
+            {
+                Secciones = Form1.secciones_predef.Secciones_DES.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
+            }
+
+            lbPisos.Items.Clear();
+            lbPisos.Items.AddRange(Secciones);
+            lbPisos.SelectedItem = lbPisos.Items[0];
         }
     }
 }

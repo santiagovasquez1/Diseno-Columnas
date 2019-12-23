@@ -506,7 +506,7 @@ namespace DisenoColumnas.Secciones
             #region Nombre_Seccion
 
             Nom_Seccion = "%%USeccion " + Num_Despiece;
-            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - (H / 2) - 0.40, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - H- 0.20, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
 
             #endregion Nombre_Seccion
         }
