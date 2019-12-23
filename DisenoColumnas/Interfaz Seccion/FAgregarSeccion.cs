@@ -114,7 +114,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 else
                     MessageBox.Show("H debe ser mayor que B", "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            
         }
 
         private void Crear_Seccion(string Tipo_Seccion, float b, float h, float tw, float tf, float r)

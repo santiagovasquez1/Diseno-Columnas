@@ -27,7 +27,6 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                 D_ColLabel.Rows.Add();
                 D_ColLabel.Rows[D_ColLabel.Rows.Count - 1].Cells[0].Value = col.Name;
                 D_ColLabel.Rows[D_ColLabel.Rows.Count - 1].Cells[1].Value = col.Label;
-
             }
         }
 
@@ -46,23 +45,9 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                     Label = D_ColLabel.Rows[i].Cells[1].Value.ToString();
                 }
                 Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColLabel.Rows[i].Cells[0].Value.ToString()).Label = Label.ToUpper();
-
             }
             Close();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -94,7 +79,6 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                     {
                         if (D_ColLabel.Rows[i].Cells[1].Value.ToString() != "")
                         {
-                            
                             if (D_ColLabel.Rows[i].Cells[1].Value.ToString() == D_ColLabel.Rows[e.RowIndex].Cells[1].Value.ToString())
                             {
                                 MessageBox.Show("El Label asignado ya existe.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -103,13 +87,8 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                             }
                         }
                     }
-
-
                 }
-
-
             }
-            
         }
     }
 }

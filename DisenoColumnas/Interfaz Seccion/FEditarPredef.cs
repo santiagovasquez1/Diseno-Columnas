@@ -56,7 +56,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             for (int i = 0; i < Seccion.No_D_Barra.Count; i++)
             {
-                if (i == Seccion.No_D_Barra.Count-1)
+                if (i == Seccion.No_D_Barra.Count - 1)
                 {
                     Ref_Base += $"{Seccion.No_D_Barra[i].Item1}#{Seccion.No_D_Barra[i].Item2}";
                 }
@@ -73,18 +73,17 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Cuantia_Volumetrica()
         {
             int NumEstribo = 0;
-            int pos = 0;              
+            int pos = 0;
 
             pos = cbEstribo.Text.IndexOf('#') + 1;
             NumEstribo = Convert.ToInt32(cbEstribo.Text.Substring(pos));
 
             if (Seccion.Estribo == null)
             {
-
             }
 
             Estribo temp = new Estribo(NumEstribo);
-            
+
             if (nudSep.Value > 0)
             {
                 temp.Separacion = (float)nudSep.Value;
@@ -93,9 +92,8 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 temp.Separacion = Seccion.Estribo.Separacion;
             }
-           
-            Seccion.Estribo = temp;
 
+            Seccion.Estribo = temp;
 
             float FD1, FD2;
             if (gde == GDE.DMO)
@@ -140,7 +138,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private double Peso_Estribos()
         {
-            return Seccion.Peso_Estribo(Seccion.Estribo,0.04f);
+            return Seccion.Peso_Estribo(Seccion.Estribo, 0.04f);
         }
 
         private void Cargar_Datos(DataGridView data)
@@ -291,6 +289,5 @@ namespace DisenoColumnas.Interfaz_Seccion
             FInterfaz_.Invalidate();
             Close();
         }
-
     }
 }

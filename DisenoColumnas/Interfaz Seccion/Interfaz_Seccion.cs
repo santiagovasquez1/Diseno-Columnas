@@ -66,7 +66,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 SaveSection.Visible = true;
                 AgregarSeccion.Visible = true;
                 lbPisos.ContextMenuStrip = cmSecciones;
-
             }
             else
             {
@@ -511,7 +510,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Reload_Seccion();
                 }
             }
-
             else if (Add_Refuerzo==false)
             {
                 if (MouseOverRefuerzo(e.Location) & e.Button == MouseButtons.Right)
@@ -876,7 +874,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 lbPisos.Items.Remove(Indice_Lista);
                 Actualizar_Lista();
             }
-
         }
 
         private void Actualizar_Lista()

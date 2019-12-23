@@ -236,7 +236,7 @@ namespace DisenoColumnas
             }
         }
 
-        public static double[] Dimension2(List<float[]> Puntos,bool lado)
+        public static double[] Dimension2(List<float[]> Puntos, bool lado)
         {
             var Xmax = Puntos.Select(x => x[0]).Distinct().ToList().Max();
             var Xmin = Puntos.Select(x => x[0]).Distinct().ToList().Min();
@@ -431,7 +431,7 @@ namespace DisenoColumnas
                     xi = CoordenadasXY[i][0];
                     xi_1 = CoordenadasXY[i + 1][0];
                     yi = CoordenadasXY[i][1];
-                    yi_1 = CoordenadasXY[i+1][1];
+                    yi_1 = CoordenadasXY[i + 1][1];
                 }
 
                 Mx += (float)((xi_1 - xi) * ((Math.Pow(yi_1, 2) + Math.Pow(yi, 2) + yi * yi_1) / 6));
@@ -440,10 +440,6 @@ namespace DisenoColumnas
 
             return new float[] { My / Area, Mx / Area };
         }
-
-
-
-
 
         public static double Find_As(int diametro)
         {
@@ -566,7 +562,6 @@ namespace DisenoColumnas
 
         //HALLAR VC
 
-
         /// <summary>
         /// Determinar Vc (kgf/cm²)---> Norma C.11.2.1.1
         /// </summary>
@@ -578,7 +573,6 @@ namespace DisenoColumnas
         {
             return 0.53f * (float)Math.Sqrt(fc) * bw * d;
         }
-
 
         /// <summary>
         /// Determinar Vc (kgf/cm²) ----> Norma C.11.2.1.2
@@ -610,10 +604,10 @@ namespace DisenoColumnas
 
         private static float Vc_11_2_2_1(float fc, float As, float Vu, float d, float bw, float Mu, float h, float Nu, float Area)
         {
-            float pw=As/ (bw * d);
+            float pw = As / (bw * d);
 
             float Mm = Mu - (Nu * (4 * h - d) / 8);
-   
+
             float Vc1 = (0.5f * (float)Math.Sqrt(fc) + ((176 * pw * Vu * d) / Mm)) * bw * d;
             if (Mm < 0)
             {
@@ -624,11 +618,11 @@ namespace DisenoColumnas
             return Vc1 > Vc2 ? Vc2 : Vc1;
         }
 
-        public static bool Find_Coord(List<float[]> Coordenadas,float X, float Y)
+        public static bool Find_Coord(List<float[]> Coordenadas, float X, float Y)
         {
-            for(int i = 0; i < Coordenadas.Count; i++)
+            for (int i = 0; i < Coordenadas.Count; i++)
             {
-                if (Coordenadas[i][0] == X & Coordenadas[i][1] == Y) 
+                if (Coordenadas[i][0] == X & Coordenadas[i][1] == Y)
                 {
                     return true;
                 }
@@ -652,10 +646,9 @@ namespace DisenoColumnas
         /// <returns></returns>
         public static float VcDef(float fc, float As, float Vu, float d, float bw, float Mu, float h, float Nu, float Area)
         {
-
             float[] Vc = new float[] { Vc_11_2_1_1(d, bw, fc), Vc_11_2_1_2(Nu, d, bw, Area, fc), Vc_11_2_2_1(fc, As, Vu, d, bw, Mu, h, Nu, Area) };
 
-            return Vc.Min()/1000;
+            return Vc.Min() / 1000;
         }
 
         public static PointF CoversionaPuntos(float[] FloatArray)
@@ -665,7 +658,7 @@ namespace DisenoColumnas
 
         public static double[] Distancias(IEnumerable Lista1, IEnumerable Lista2)
         {
-            var Punto1=Lista1.Cast<double>().ToList();
+            var Punto1 = Lista1.Cast<double>().ToList();
             var Puntos = Lista2.Cast<double[]>().ToList();
 
             List<double> Distancias = new List<double>();
@@ -673,7 +666,7 @@ namespace DisenoColumnas
             int indice = 0;
             double[] Coord_def = { };
 
-            for (int i = 0; i < Puntos.Count(); i++) 
+            for (int i = 0; i < Puntos.Count(); i++)
             {
                 Aux_dist = Math.Pow(Punto1[0] - Puntos[i][0], 2) + Math.Pow(Punto1[1] - Puntos[i][1], 2);
                 Distancias.Add(Math.Sqrt(Aux_dist));
@@ -684,6 +677,5 @@ namespace DisenoColumnas
 
             return Coord_def;
         }
-
     }
 }

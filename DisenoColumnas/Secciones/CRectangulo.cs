@@ -81,10 +81,8 @@ namespace DisenoColumnas.Secciones
 
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
 
-
-        public Tuple<List<float[]>,List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos)
+        public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos)
         {
-
             List<PointF> Coordenadas = new List<PointF>();
             float X, Y;
             X = -(B * 100 / 2);
@@ -112,7 +110,6 @@ namespace DisenoColumnas.Secciones
             float Es = 2000000;
             float b1 = 0.85f - 0.05f * (fc - 280) / 70f;
 
-
             List<float> m_PorCadaAngulo = new List<float>();
             List<float> YVariacionC = new List<float>();
             List<float> YVariaciona = new List<float>();
@@ -121,7 +118,6 @@ namespace DisenoColumnas.Secciones
             List<float[]> CentroideAreaComprimida = new List<float[]>();
 
             List<float[]> Coordenadas_Angulo = new List<float[]>();
-
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
@@ -147,7 +143,6 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coordenadas_Angulo.Count; i++)
             {
-
                 float m;
                 if (i + 1 == Coordenadas_Angulo.Count)
                 {
@@ -159,7 +154,6 @@ namespace DisenoColumnas.Secciones
                 }
 
                 ms.Add(m);
-
             }
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
@@ -169,7 +163,7 @@ namespace DisenoColumnas.Secciones
 
             int DeltasVariacionC = 20;
 
-            for (float C = ymin /b1; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
+            for (float C = ymin / b1; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
             {
                 YVariaciona.Add(C + (ymax - C) - (ymax - C) * b1);
                 YVariacionC.Add(C);
@@ -177,7 +171,6 @@ namespace DisenoColumnas.Secciones
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
-
                 for (int i = 0; i < YVariacionC.Count; i++)
                 {
                     float C_Original = ymax - YVariacionC[i];
@@ -210,8 +203,6 @@ namespace DisenoColumnas.Secciones
                     cRefuerzo.Deformacion_Angulo.Add(esi);
                 }
             }
-
-
 
             for (int i = 0; i < YVariaciona.Count; i++)
             {
@@ -255,7 +246,6 @@ namespace DisenoColumnas.Secciones
                     Ast += (float)FunctionsProject.Find_As(Convert.ToInt32(cRefuerzo.Diametro.Substring(1))) * 10000;
                 }
 
-
                 float Mnx = Cc * (CentroideAreaComprimida[i][0]);
                 float Mny = Cc * (CentroideAreaComprimida[i][1]) + Ms;
 
@@ -289,7 +279,7 @@ namespace DisenoColumnas.Secciones
                 }
                 else
                 {
-                    MP.Add(new float[] {Mn_,Pn_ });
+                    MP.Add(new float[] { Mn_, Pn_ });
                 }
 
                 if (i == AreaComprimida.Count - 1)
@@ -298,17 +288,13 @@ namespace DisenoColumnas.Secciones
                     int IndicePmax1 = MP.FindIndex(x => x[1] == Pmax1);
 
                     MP.Insert(IndicePmax1, new float[] { 0, Pmax1 });
-     
                 }
-
-
             }
 
             List<float[]> MP3D = new List<float[]>();
 
             for (int i = 0; i < MP.Count; i++)
             {
-
                 float X1 = (float)(MP[i][0] * Math.Cos((Angulo * Math.PI / 180)));
                 float Y2 = (float)(MP[i][0] * Math.Sin((Angulo * Math.PI / 180)));
                 float Z2 = MP[i][1];
@@ -316,11 +302,8 @@ namespace DisenoColumnas.Secciones
                 MP3D.Add(PuntosDescompuestos);
             }
 
-
-            return new Tuple<List<float[]>, List<float[]>>(MP,MP3D);
+            return new Tuple<List<float[]>, List<float[]>>(MP, MP3D);
         }
-
-               
 
         public void DiagramaInteraccion()
         {
@@ -331,13 +314,11 @@ namespace DisenoColumnas.Secciones
             MuPu3D = new List<Tuple<List<float[]>, int>>();
             for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
             {
-
-                Tuple<List<float[]>, List<float[]>> ResultadosNominales = DiagramaInteraccionParaUnAngulo(Angulo,false);
+                Tuple<List<float[]>, List<float[]>> ResultadosNominales = DiagramaInteraccionParaUnAngulo(Angulo, false);
                 List<float[]> PnMn2D_ = ResultadosNominales.Item1;
                 List<float[]> MnPn3D_ = ResultadosNominales.Item2;
 
-
-                PnMn2D.Add(new Tuple<List<float[]>, int>(PnMn2D_,Angulo));
+                PnMn2D.Add(new Tuple<List<float[]>, int>(PnMn2D_, Angulo));
                 MnPn3D.Add(new Tuple<List<float[]>, int>(MnPn3D_, Angulo));
 
                 Tuple<List<float[]>, List<float[]>> ResultadosUltimos = DiagramaInteraccionParaUnAngulo(Angulo, true);
@@ -346,7 +327,6 @@ namespace DisenoColumnas.Secciones
                 PuMu2D.Add(new Tuple<List<float[]>, int>(PuMu2D_, Angulo));
                 MuPu3D.Add(new Tuple<List<float[]>, int>(MuPu3D_, Angulo));
             }
-           
         }
 
         private float DeterminarFi(float et)
@@ -603,7 +583,7 @@ namespace DisenoColumnas.Secciones
                     limite2 = 16 * FunctionsProject.Find_Diametro(4);
                     limite3 = 15;
                     limite4 = B / 3 < H / 3 ? B * 100 / 3 : H * 100 / 3;
-                    limite_def = new double[] { limite1, limite2, limite3,limite4 }.Min();
+                    limite_def = new double[] { limite1, limite2, limite3, limite4 }.Min();
                     if (Sdef2 > limite_def) Sdef2 = Math.Round(limite_def, 1);
                 }
 
@@ -614,7 +594,7 @@ namespace DisenoColumnas.Secciones
                     limite1 = 6 * FunctionsProject.Find_Diametro(Db1);
                     limite2 = 15;
                     limite4 = B / 4 < H / 4 ? B * 100 / 4 : H * 100 / 4;
-                    limite_def = new double[] { limite1, limite2,limite4 }.Min();
+                    limite_def = new double[] { limite1, limite2, limite4 }.Min();
                     if (Sdef2 > limite_def) Sdef2 = Math.Round(limite_def, 2);
                 }
 
@@ -1089,7 +1069,7 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Estribo.NoRamasV1; i++)
             {
-                if (i>0 & i < Estribo.NoRamasV1 - 1)
+                if (i > 0 & i < Estribo.NoRamasV1 - 1)
                 {
                     CoordX.Add(FunctionsProject.Distancias(new double[] { DeltaX, -(H * 100 / 2) + 4f }, lista2));
                 }
@@ -1106,10 +1086,10 @@ namespace DisenoColumnas.Secciones
                 DeltaY += SepY;
             }
 
-            short Flip_state=0;
+            short Flip_state = 0;
             string Layer_aux = "FC_GANCHOS";
 
-            for (int i = 0; i < CoordX.Count; i++) 
+            for (int i = 0; i < CoordX.Count; i++)
             {
                 P_XYZ = new double[] { Xi + (B / 2) + CoordX[i][0] / 100, Yi - (H / 2) + Y_unicos.Max() / 100, 0 };
                 FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist1, 1, 1, 1, 270, Flip_state);
@@ -1117,7 +1097,7 @@ namespace DisenoColumnas.Secciones
             }
             Flip_state = 1;
 
-            for (int i = 0; i < CoordY.Count; i++) 
+            for (int i = 0; i < CoordY.Count; i++)
             {
                 P_XYZ = new double[] { Xi + (B / 2) + X_unicos.Min() / 100, Yi - (H / 2) + CoordY[i][1] / 100, 0 };
                 FunctionsAutoCAD.FunctionsAutoCAD.B_Gancho(P_XYZ, Layer_aux, Dist2, 1, 1, 1, 0, Flip_state);

@@ -33,12 +33,9 @@ namespace DisenoColumnas.Interfaz_Inicial
                 }
                 else
                 {
-                
-          
                     if (Convert.ToSingle(P_R.Text) != Form1.Proyecto_.P_R)
                     {
-                    
-                        if (ProyectoPV==false)
+                        if (ProyectoPV == false)
                         {
                             MessageBox.Show("Debido al cambio realizado deberá volver a diseñar las Columnas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -50,11 +47,10 @@ namespace DisenoColumnas.Interfaz_Inicial
                     Form1.Proyecto_.Nivel_Fundacion = Convert.ToSingle(T_arranque.Text);
                     Form1.Proyecto_.e_acabados = Convert.ToSingle(e_acabados.Text);
                     Form1.Proyecto_.SE_F = Convert.ToSingle(SE_F.Text);
-                 
 
                     if (Form1.Proyecto_.Redondear != RedondearDecimales.Checked)
                     {
-                        if (ProyectoPV==false)
+                        if (ProyectoPV == false)
                         {
                             MessageBox.Show("Debido al cambio realizado deberá volver a diseñar las Columnas.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -85,13 +81,11 @@ namespace DisenoColumnas.Interfaz_Inicial
                         }
                     }
 
-
                     if (ProyectoPV)
                     {
                         if (RedondearDecimales.Checked)
                         {
                             MessageBox.Show("NOTA: El redondeo de decimales en la longitud de las barras afectará el dibujo en AutoCAD, se deberá realizar el acotamiento de los traslapos de forma manual. ", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         }
                     }
                     Close();
@@ -101,9 +95,6 @@ namespace DisenoColumnas.Interfaz_Inicial
             {
                 MessageBox.Show("Defina el grado de disipación de la estructura.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
-
-
         }
 
         private void Panel2_MouseDown(object sender, MouseEventArgs e)

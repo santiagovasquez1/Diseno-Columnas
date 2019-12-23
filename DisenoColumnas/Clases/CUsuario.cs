@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
-using System.Windows.Forms;
 
 namespace DisenoColumnas.Clases
 {
@@ -12,8 +11,6 @@ namespace DisenoColumnas.Clases
 
         public void Get_user()
         {
-            string Ruta_Carpeta;
-            string Ruta_Archivo;
             string Ruta_Completa;
 
             Username = WindowsIdentity.GetCurrent().Name;

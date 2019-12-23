@@ -1,10 +1,8 @@
-﻿
-using System.Drawing;
-
+﻿using System.Drawing;
 
 namespace DisenoColumnas.Clases.OpenGL
 {
-    class Line
+    internal class Line
     {
         public Color color;
         public float width;
@@ -12,6 +10,7 @@ namespace DisenoColumnas.Clases.OpenGL
         public decimal[] to = new decimal[4];
         public decimal[,] matrix = FactoryMatrix.getIdentity();
         public int ID;
+
         public Line()
         {
             from[0] = 0;
@@ -23,6 +22,5 @@ namespace DisenoColumnas.Clases.OpenGL
             to[2] = 0;
             to[3] = 1;
         }
-
     }
 }

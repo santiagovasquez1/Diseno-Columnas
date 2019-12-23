@@ -10,8 +10,8 @@ namespace DisenoColumnas.Clases
         public List<double> Asmin { get; set; } = new List<double>();
         public List<double> As { get; set; } = new List<double>();
 
-        public float[] prequerida { set; get; } 
-        public float[] pasignada { set; get; } 
+        public float[] prequerida { set; get; }
+        public float[] pasignada { set; get; }
 
         public double[] AsTopMediumButton { get; set; } = { };
 
@@ -73,18 +73,16 @@ namespace DisenoColumnas.Clases
 
         public void AsignarAsTopMediumButton()
         {
-
             As_asignado = new float[] { 0, 0, 0 };
             Porct_Refuerzo = new float[] { 0, 0, 0 };
             double Top = -999999; double Button = -99999; double medium = -999999;
             int Cant_Estaciones = As.Count;
-            int Div_Esta =  Cant_Estaciones / 3;
+            int Div_Esta = Cant_Estaciones / 3;
             int AsBottom_I = Div_Esta;
             int AsMedium_I = Div_Esta;
 
             try
             {
-             
                 for (int i = 0; i < AsBottom_I; i++)
                 {
                     if (Button < As[i])
@@ -92,7 +90,7 @@ namespace DisenoColumnas.Clases
                         Button = As[i];
                     }
                 }
-                for (int i = AsMedium_I; i < AsMedium_I+ AsBottom_I; i++)
+                for (int i = AsMedium_I; i < AsMedium_I + AsBottom_I; i++)
                 {
                     if (medium < As[i])
                     {
@@ -110,7 +108,6 @@ namespace DisenoColumnas.Clases
             }
             catch
             {
-             
             }
 
             double[] AsTMB = new double[] { Top, medium, Button };

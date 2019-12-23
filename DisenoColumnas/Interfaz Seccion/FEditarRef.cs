@@ -32,7 +32,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             ID_Ref.Text = Convert.ToString(Seccion.Refuerzos[index].id);
             cbDiametros.Text = Seccion.Refuerzos[index].Diametro;
-            tbAlzado.Text= Seccion.Refuerzos[index].Alzado.ToString();
+            tbAlzado.Text = Seccion.Refuerzos[index].Alzado.ToString();
             tbXc.Text = $"{Math.Round(Seccion.Refuerzos[index].Coord[0], 2)}";
             tbYc.Text = $"{Math.Round(Seccion.Refuerzos[index].Coord[1], 2)}";
         }
@@ -63,7 +63,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Form1.Proyecto_.ColumnaSelect.Seccions[indice] = new Tuple<ISeccion, string>(Seccion, piso);
             }
 
-            if (FInterfaz_.edicion == Tipo_Edicion.Secciones_predef & GDE==GDE.DMO)
+            if (FInterfaz_.edicion == Tipo_Edicion.Secciones_predef & GDE == GDE.DMO)
             {
                 indice = Form1.secciones_predef.Secciones_DMO.FindIndex(x1 => x1.ToString() == Seccion.ToString());
                 Form1.secciones_predef.Secciones_DMO[indice] = Seccion;

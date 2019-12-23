@@ -491,7 +491,7 @@ namespace DisenoColumnas.Secciones
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddCircle(CentroDibujo, radio, LayerCirculo);
             FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo_Circular(CentroDibujo, "FC_ESTRIBOS", radio - 2 * 0.02, EscalaR, EscalaR, 1, 0);
-            
+
             #region Dibujo de refuerzo en seccion
 
             var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();
@@ -506,7 +506,7 @@ namespace DisenoColumnas.Secciones
             #region Nombre_Seccion
 
             Nom_Seccion = "%%USeccion " + Num_Despiece;
-            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - H- 0.20, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - H - 0.20, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
 
             #endregion Nombre_Seccion
         }
@@ -592,7 +592,12 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<float[], int>> PbMb3D { get; set; } = new List<Tuple<float[], int>>();
         private List<Tuple<List<float>, int>> AreaComprimida = new List<Tuple<List<float>, int>>();
         private List<Tuple<List<float[]>, int>> CentroideAreaComprimida = new List<Tuple<List<float[]>, int>>();
-        public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos) { return null; }
+
+        public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos)
+        {
+            return null;
+        }
+
         public void DiagramaInteraccion()
         {
             float ecu = 0.003f;

@@ -933,10 +933,6 @@ namespace DisenoColumnas.Diseño
 
         private void D_Alzado_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
-  
-
-
             if (D_Alzado.SelectedCells.Count > 0)
             {
                 D_Alzado.ContextMenuStrip = contextMenuStrip2;
@@ -949,9 +945,6 @@ namespace DisenoColumnas.Diseño
                     contextMenuStrip2.Enabled = true;
                 }
             }
-
-     
-
         }
 
         private void CopyToClipboard(DataGridView data)
@@ -1063,7 +1056,6 @@ namespace DisenoColumnas.Diseño
 
         private void D_Alzado_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
             if (e.ColumnIndex != 0 && e.RowIndex != -1 && D_Alzado.SelectedCells.Count == 1)
             {
                 if (refuerzoAdicional != null)
@@ -1078,7 +1070,6 @@ namespace DisenoColumnas.Diseño
                 }
             }
         }
-
 
         private void AsignarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1101,7 +1092,7 @@ namespace DisenoColumnas.Diseño
 
             Filas_numeros = Filas_numeros.OrderByDescending(x => x).ToList();
             Columnas_numeros = Columnas_numeros.OrderBy(x => x).ToList();
-            if (Columnas_numeros.Exists(x=> x==-1)==false)
+            if (Columnas_numeros.Exists(x => x == -1) == false)
             {
                 AgregarRefuerzoBase @base = new AgregarRefuerzoBase();
                 AgregarRefuerzoBase.Columnas = Columnas_numeros;
@@ -1159,7 +1150,5 @@ namespace DisenoColumnas.Diseño
                 }
             }
         }
-
-
     }
 }

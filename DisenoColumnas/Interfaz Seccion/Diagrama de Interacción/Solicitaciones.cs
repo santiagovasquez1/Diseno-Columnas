@@ -1,12 +1,7 @@
 ﻿using DisenoColumnas.Secciones;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
@@ -20,15 +15,14 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
         public static bool Ultimos { get; set; }
 
         private List<int> Angulos = new List<int>();
+
         public Solicitaciones()
         {
             InitializeComponent();
-       
         }
 
         private void Solicitaciones_Load(object sender, EventArgs e)
         {
-
             if (MP_Soli3D.Count != 0)
             {
                 CalcularAngulos();
@@ -37,10 +31,8 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
             int[] DistinAngulos = Angulos.Distinct().ToArray();
             for (int i = 0; i < DistinAngulos.Length; i++)
             {
-                SolicitBox.Items.Add("Angulo: "+ DistinAngulos[i] + "°");
+                SolicitBox.Items.Add("Angulo: " + DistinAngulos[i] + "°");
             }
-
-
         }
 
         private void CalcularAngulos()
@@ -51,7 +43,7 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
             {
                 int Angulo = (int)(Math.Atan(MP_Soli3D[i][1] / MP_Soli3D[i][2]) * (180 / Math.PI));
                 float Msoli = (float)Math.Sqrt(Math.Pow(MP_Soli3D[i][0], 2) + Math.Pow(MP_Soli3D[i][1], 2));
-            
+
                 if (Angulo < 0)
                 {
                     Angulo += 360;
@@ -60,10 +52,7 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
                 SolicitacionesConAngulos.Add(TupleAux);
                 Angulos.Add(Angulo);
             }
-
         }
-
-
 
         private void CerrarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -72,7 +61,7 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
 
         private void SolicitBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar ==(char) Keys.Escape)
+            if (e.KeyChar == (char)Keys.Escape)
             {
                 Close();
             }
@@ -88,24 +77,22 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
 
             List<float[]> MPpuntosSolicitaciones = new List<float[]>();
 
-            for(int i= 0; i<SolicitacionesConAngulos.Count; i++)
+            for (int i = 0; i < SolicitacionesConAngulos.Count; i++)
             {
-                if(Angulo == SolicitacionesConAngulos[i].Item2)
+                if (Angulo == SolicitacionesConAngulos[i].Item2)
                 {
                     MPpuntosSolicitaciones.Add(SolicitacionesConAngulos[i].Item1);
                 }
             }
 
             DiagramaInteraccion.MPpuntosSolicitaciones = MPpuntosSolicitaciones;
-            DiagramaInteraccion.MP2D_UnAngulo=Seccion.DiagramaInteraccionParaUnAngulo(Angulo, Ultimos).Item1;
+            DiagramaInteraccion.MP2D_UnAngulo = Seccion.DiagramaInteraccionParaUnAngulo(Angulo, Ultimos).Item1;
             DiagramaInteraccion.MP3D_UnAngulo = Seccion.DiagramaInteraccionParaUnAngulo(Angulo, Ultimos).Item2;
             DiagramaInteraccion.Diagrama.Title.Text = $"Diagrama de Interacción - {Angulo}°";
             DiagramaInteraccion.Diagrama.GroupBox_Grafica_Diagrama1.Text = "Angulo de " + Angulo + "°";
             DiagramaInteraccion.Diagrama.MostrarValores();
             DiagramaInteraccion.Diagrama.Invalidate();
             DiagramaInteraccion.Diagrama.CharMomentos.Invalidate();
-         
-
         }
 
         private void Panel1_MouseDown(object sender, MouseEventArgs e)
@@ -116,7 +103,6 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
 
         private void Solicitaciones_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             //DiagramaInteraccion.MPpuntosSolicitaciones.Clear();
             //DiagramaInteraccion.MP2D_UnAngulo.Clear();
             //DiagramaInteraccion.MP3D_UnAngulo.Clear();

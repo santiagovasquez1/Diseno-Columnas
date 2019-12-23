@@ -99,11 +99,10 @@ namespace DisenoColumnas.Diseño
         {
             LoadDataGridView();
 
-            if(Form1.m_Informacion!= null)
+            if (Form1.m_Informacion != null)
             {
                 Form1.m_Informacion.EstiloDatGridView(D_ColGraficar);
             }
-
         }
 
         private void LoadDataGridView()
@@ -115,10 +114,6 @@ namespace DisenoColumnas.Diseño
                 D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[0].Value = columna.Name;
                 D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[1].Value = columna.Ready;
                 D_ColGraficar.Rows[D_ColGraficar.Rows.Count - 1].Cells[2].Value = columna.aGraficar;
-
-
-
-
             }
         }
 

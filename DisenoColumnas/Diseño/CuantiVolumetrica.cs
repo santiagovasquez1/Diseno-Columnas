@@ -3,7 +3,6 @@ using DisenoColumnas.Secciones;
 
 using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo;
 using WeifenLuo.WinFormsUI.Docking;
@@ -31,7 +30,7 @@ namespace DisenoColumnas.Diseño
 
                 Info_Es_Col.Rows[IndiceRow].Cells["NoEstribo"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.NoEstribo.ToString();
                 Info_Es_Col.Rows[IndiceRow].Cells["S_value"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.Separacion.ToString();
-                 Info_Es_Col.Rows[IndiceRow].Cells["CantEstribos"].Value = (int)ColumnaSelect.CantEstribos_Sepa[i][0] + (int)ColumnaSelect.CantEstribos_Sepa[i][1]+(int)ColumnaSelect.CantEstribos_Sepa[i][2] + (int)ColumnaSelect.CantEstribos_Sepa[i][3];
+                Info_Es_Col.Rows[IndiceRow].Cells["CantEstribos"].Value = (int)ColumnaSelect.CantEstribos_Sepa[i][0] + (int)ColumnaSelect.CantEstribos_Sepa[i][1] + (int)ColumnaSelect.CantEstribos_Sepa[i][2] + (int)ColumnaSelect.CantEstribos_Sepa[i][3];
 
                 if (ColumnaSelect.Seccions[i].Item1.Shape == TipodeSeccion.Rectangular)
                 {
@@ -75,10 +74,10 @@ namespace DisenoColumnas.Diseño
             {
                 if (ColumnaSelect.CantEstribos_Sepa == null)
                 {
-                    ColumnaSelect.CantEstribos_Sepa =  new System.Collections.Generic.List<object[]>();
+                    ColumnaSelect.CantEstribos_Sepa = new System.Collections.Generic.List<object[]>();
                     for (int i = ColumnaSelect.LuzAcum.Count - 1; i >= 0; i--)
                     {
-                        ColumnaSelect.CantEstribos_Sepa.Add(new object[] { 0, 0, 0, 0,0,0 });
+                        ColumnaSelect.CantEstribos_Sepa.Add(new object[] { 0, 0, 0, 0, 0, 0 });
                     }
                     for (int i = ColumnaSelect.LuzAcum.Count - 1; i >= 0; i--)
                     {
@@ -119,7 +118,6 @@ namespace DisenoColumnas.Diseño
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.Separacion.ToString();
 
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["CantEstribos"].Value = (int)ColumnaSelect.CantEstribos_Sepa[i][0] + (int)ColumnaSelect.CantEstribos_Sepa[i][1] + (int)ColumnaSelect.CantEstribos_Sepa[i][2] + (int)ColumnaSelect.CantEstribos_Sepa[i][3];
-
                             }
                             else
                             {
