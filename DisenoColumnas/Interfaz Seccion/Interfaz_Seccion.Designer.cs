@@ -60,7 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.cmSecciones.SuspendLayout();
             this.SuspendLayout();
-            this.KeyPreview = true;
             // 
             // label1
             // 
@@ -317,6 +316,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "FInterfaz_Seccion";
             this.Text = "Sección";
             this.Load += new System.EventHandler(this.Interfaz_Seccion_Load);

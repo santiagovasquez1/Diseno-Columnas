@@ -46,8 +46,11 @@ namespace DisenoColumnas.Interfaz_Seccion
         public int Indice_Lb { get; set; }
         public int ex { get; set; } = 1;
         public int ey { get; set; } = 1;
-        public int Dx { get; set; } = 0;
-        public int Dy { get; set; } = 0;
+        public float Dx { get; set; } = 0;
+        public float Dy { get; set; } = 0;
+        public float offsetX { get; set; } = 0;
+        public float offsetY { get; set; } = 0;
+        public List<PointF> MovingPolygon { get; set; } = new List<PointF>();
 
         public FInterfaz_Seccion(Tipo_Edicion pedicion)
         {
@@ -186,7 +189,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Crear_ejes(Graphics g, int Height, int Width)
         {
-            Point ejex = new Point(0 + Dx, 0 + Dy);
+            PointF ejex = new PointF(0 + Dx, 0 + Dy);
 
             Pen P1 = new Pen(Color.Black, 2)
             {
@@ -202,8 +205,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Alignment = System.Drawing.Drawing2D.PenAlignment.Center
             };
 
-            g.DrawLine(P1, new Point(0 + Dx, 0 + Dy), new Point(Dx + Width / 20, Dy + 0));
-            g.DrawLine(P2, new Point(Dx + 0, Dy + 0), new Point(Dx + 0, Dy - Height / 20));
+            g.DrawLine(P1, new PointF(0 + Dx, 0 + Dy), new PointF(Dx + Width / 20, Dy + 0));
+            g.DrawLine(P2, new PointF(Dx + 0, Dy + 0), new PointF(Dx + 0, Dy - Height / 20));
         }
 
         #endregion Metodos de picture box
@@ -348,6 +351,9 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (path.IsVisible(Temp))
             {
+                MovingPolygon = path.PathPoints.ToList();
+                offsetX = MovingPolygon[0].X - mouse_pt.X;
+                offsetY = MovingPolygon[0].Y - mouse_pt.Y;
                 return true;
             }
 
@@ -407,6 +413,15 @@ namespace DisenoColumnas.Interfaz_Seccion
         {
             Cursor pCursor = Cursors.Arrow;
             Grafica.Cursor = pCursor;
+        }
+
+        private void Move_Draw(object sender, MouseEventArgs e)
+        {
+            float new_x1 = e.X + offsetX;
+            float new_y1 = e.Y + offsetY;
+
+            Dx = new_x1-MovingPolygon[0].X;
+            Dy = new_y1 - MovingPolygon[0].Y;
         }
 
         private void Grafica_MouseMove(object sender, MouseEventArgs e)
@@ -707,6 +722,12 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Grafica_MouseDown(object sender, MouseEventArgs e)
         {
             Seleccionar(sender, e);
+            if (e.Button == MouseButtons.Middle)
+            {
+                ex = 1;ey = 1;
+                Dx = 0;Dy = 0;
+                Grafica.Invalidate();
+            }
         }
 
         private void lbPisos_SelectedIndexChanged(object sender, EventArgs e)
