@@ -420,7 +420,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             float new_x1 = e.X + offsetX;
             float new_y1 = e.Y + offsetY;
 
-            Dx = new_x1-MovingPolygon[0].X;
+            Dx = new_x1 - MovingPolygon[0].X;
             Dy = new_y1 - MovingPolygon[0].Y;
         }
 
@@ -521,10 +521,10 @@ namespace DisenoColumnas.Interfaz_Seccion
                     double[] Coord = { };
                     double x, y;
                     int pid = seccion.Refuerzos.Last().id + 1;
-                    x = (e.Location.X - Grafica.Width / 2) / EscalaX;
-                    y = -(e.Location.Y - Grafica.Height / 2) / EscalaX;
+                    x = +((e.Location.X - Grafica.Width / 2) / EscalaX);
+                    y = -((e.Location.Y - Grafica.Height / 2) / EscalaX);
 
-                    Coord = new double[] { x, y };
+                    Coord = new double[] { x - (Dx / EscalaX), y + (Dy / EscalaY) };
                     CRefuerzo new_refuerzo = new CRefuerzo(pid, "#4", Coord, TipodeRefuerzo.longitudinal);
                     seccion.Refuerzos.Add(new_refuerzo);
                     Reload_Seccion();
@@ -545,14 +545,16 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Get_coordinates(object sender, MouseEventArgs e)
         {
-            float X = Dx + e.X - Grafica.Width / 2;
-            float Y = Dy + e.Y - Grafica.Height / 2;
+            float X = e.X - Grafica.Width / 2;
+            float Y = e.Y - Grafica.Height / 2;
             double X_r, Y_r;
 
             X_r = X / EscalaX;
             Y_r = Y / EscalaX;
 
-            label1.Text = "X:" + Math.Round(X_r, 2) + " Y:" + Math.Round(-Y_r, 2);
+            var Coord = new double[] { X_r - (Dx / EscalaX), Y_r + (Dy / EscalaY) };
+
+            label1.Text = "X:" + Math.Round(Coord[0], 2) + " Y:" + Math.Round(-Coord[1], 2);
             label1.Update();
         }
 
@@ -724,8 +726,8 @@ namespace DisenoColumnas.Interfaz_Seccion
             Seleccionar(sender, e);
             if (e.Button == MouseButtons.Middle)
             {
-                ex = 1;ey = 1;
-                Dx = 0;Dy = 0;
+                ex = 1; ey = 1;
+                Dx = 0; Dy = 0;
                 Grafica.Invalidate();
             }
         }
@@ -868,8 +870,6 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void tsbAddRefuerzo_Click(object sender, EventArgs e)
         {
             Add_Refuerzo = true;
-            //Cursor cursor = Cursors.IBeam;
-            //Grafica.Cursor = cursor;
         }
 
         private void tbSeleccionar_Click(object sender, EventArgs e)
