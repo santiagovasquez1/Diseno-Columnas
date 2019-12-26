@@ -60,6 +60,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.cmSecciones.SuspendLayout();
             this.SuspendLayout();
+            this.KeyPreview = true;
             // 
             // label1
             // 
@@ -276,6 +277,7 @@
             this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
             this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
             this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
+            this.Grafica.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FInterfaz_Seccion_Scroll);
             // 
             // cmSecciones
             // 
@@ -283,19 +285,19 @@
             this.agregarSecciónToolStripMenuItem,
             this.eliminarSecciónToolStripMenuItem});
             this.cmSecciones.Name = "cmSecciones";
-            this.cmSecciones.Size = new System.Drawing.Size(181, 70);
+            this.cmSecciones.Size = new System.Drawing.Size(162, 48);
             // 
             // agregarSecciónToolStripMenuItem
             // 
             this.agregarSecciónToolStripMenuItem.Name = "agregarSecciónToolStripMenuItem";
-            this.agregarSecciónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarSecciónToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.agregarSecciónToolStripMenuItem.Text = "Agregar Sección";
             this.agregarSecciónToolStripMenuItem.Click += new System.EventHandler(this.agregarSecciónToolStripMenuItem_Click);
             // 
             // eliminarSecciónToolStripMenuItem
             // 
             this.eliminarSecciónToolStripMenuItem.Name = "eliminarSecciónToolStripMenuItem";
-            this.eliminarSecciónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eliminarSecciónToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.eliminarSecciónToolStripMenuItem.Text = "Eliminar Sección";
             this.eliminarSecciónToolStripMenuItem.Click += new System.EventHandler(this.eliminarSecciónToolStripMenuItem_Click);
             // 
@@ -319,6 +321,7 @@
             this.Text = "Sección";
             this.Load += new System.EventHandler(this.Interfaz_Seccion_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FInterfaz_Seccion_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FInterfaz_Seccion_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.gbSecciones.ResumeLayout(false);
             this.cmEditar_Ref.ResumeLayout(false);

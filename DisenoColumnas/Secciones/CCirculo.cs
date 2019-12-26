@@ -297,7 +297,7 @@ namespace DisenoColumnas.Secciones
             Set_Refuerzo_Seccion(Aux_Refuerzos, recub);
         }
 
-        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
+        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR,float Dx,float Dy)
         {
             GraphicsPath path;
             double r = 0;
@@ -320,8 +320,8 @@ namespace DisenoColumnas.Secciones
                 r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
-                xc = refuerzoi.Coord[0] * EscalaX;
-                yc = -refuerzoi.Coord[1] * EscalaY;
+                xc =Dx+ refuerzoi.Coord[0] * EscalaX;
+                yc =Dy -refuerzoi.Coord[1] * EscalaY;
                 pcentro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -338,12 +338,13 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec)
+        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec, float Dx, float Dy)
         {
             GraphicsPath path = new GraphicsPath();
             CCirculo circulo1, circulo2;
             double r1 = (radio - rec) * 100;
             double r2 = (r1 + FunctionsProject.Find_Diametro(Estribo.NoEstribo));
+            double[] pCentro = new double[] { Centro[0] + Dx, Centro[1] + Dy };
 
             MAT_CONCRETE material = new MAT_CONCRETE
             {
@@ -351,10 +352,10 @@ namespace DisenoColumnas.Secciones
                 Name = "FY4220"
             };
 
-            circulo1 = new CCirculo("Refuerzo", r1, Centro, material, TipodeSeccion.Circle, pCoord: null);
+            circulo1 = new CCirculo("Refuerzo", r1, pCentro, material, TipodeSeccion.Circle, pCoord: null);
             circulo1.Set_puntos(50, r1 * EscalaX);
 
-            circulo2 = new CCirculo("Refuerzo", r2, Centro, material, TipodeSeccion.Circle, pCoord: null);
+            circulo2 = new CCirculo("Refuerzo", r2, pCentro, material, TipodeSeccion.Circle, pCoord: null);
             circulo2.Set_puntos(50, r2 * EscalaX);
 
             path.AddClosedCurve(circulo1.Puntos.ToArray());
@@ -383,12 +384,14 @@ namespace DisenoColumnas.Secciones
             Area = Math.PI * Math.Pow(radio, 2);
         }
 
-        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
+        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion,float Dx,float Dy)
         {
             SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
             Pen P1;
-            Seccion_path = new GraphicsPath();
+            List<PointF> pPuntos = new List<PointF>();
 
+            Seccion_path = new GraphicsPath();
+            
             if (seleccion == false)
             {
                 P1 = new Pen(Color.Black, 2.5f)
@@ -413,9 +416,17 @@ namespace DisenoColumnas.Secciones
             }
 
             Set_puntos(50, radio * 100 * EscalaX);
-            g.DrawClosedCurve(P1, Puntos.ToArray());
-            g.FillClosedCurve(br, Puntos.ToArray());
-            Seccion_path.AddClosedCurve(Puntos.ToArray());
+            PointF pi = new PointF();
+            foreach (PointF punto in Puntos)
+            {
+                pi.X = Convert.ToSingle(punto.X) + Dx;
+                pi.Y = Convert.ToSingle(punto.Y) + Dy;
+                pPuntos.Add(pi);
+            }
+
+            g.DrawClosedCurve(P1, pPuntos.ToArray());
+            g.FillClosedCurve(br, pPuntos.ToArray());
+            Seccion_path.AddClosedCurve(pPuntos.ToArray());
         }
 
         public void Set_Refuerzo_Seccion(int[] Refuerzos_temp, double Recubrimiento)

@@ -39,11 +39,11 @@ namespace DisenoColumnas.Secciones
 
         void Calc_vol_inex(float r, float FY, GDE gDE);
 
-        void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR);
+        void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR, float Dx, float Dy);
 
-        GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec);
+        GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec, float Dx, float Dy);
 
-        void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion);
+        void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion, float Dx, float Dy);
 
         void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado);
 

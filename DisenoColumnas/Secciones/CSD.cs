@@ -582,7 +582,7 @@ namespace DisenoColumnas.Secciones
             Cuanti_Vol(FD1, FD2, r, 4220);
         }
 
-        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
+        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR, float Dx, float Dy)
         {
             GraphicsPath path;
             double r = 0;
@@ -605,8 +605,8 @@ namespace DisenoColumnas.Secciones
                 r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
-                xc = refuerzoi.Coord[0] * EscalaX;
-                yc = -refuerzoi.Coord[1] * EscalaY;
+                xc = Dx + refuerzoi.Coord[0] * EscalaX;
+                yc = Dy - refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -623,7 +623,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec)
+        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec, float Dx, float Dy)
         {
             List<float[]> Coord_aletas = new List<float[]>();
             List<float[]> Coord_alma = new List<float[]>();
@@ -693,8 +693,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_aletas1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_aletas1[i][0] * (float)EscalaX * 100, -Coord_aletas1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_aletas2[i][0] * (float)EscalaX * 100, -Coord_aletas2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Dx + Coord_aletas1[i][0] * (float)EscalaX * 100, Dy - Coord_aletas1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Dx + Coord_aletas2[i][0] * (float)EscalaX * 100, Dy - Coord_aletas2[i][1] * (float)EscalaX * 100));
             }
 
             path.AddPolygon(Vertices.ToArray());
@@ -709,8 +709,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_alma1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_alma1[i][0] * (float)EscalaX * 100, -Coord_alma1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_alma2[i][0] * (float)EscalaX * 100, -Coord_alma2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Dx + Coord_alma1[i][0] * (float)EscalaX * 100, Dy - Coord_alma1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Dx + Coord_alma2[i][0] * (float)EscalaX * 100, Dy - Coord_alma2[i][1] * (float)EscalaX * 100));
             }
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
@@ -720,7 +720,7 @@ namespace DisenoColumnas.Secciones
             return path;
         }
 
-        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
+        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion, float Dx, float Dy)
         {
             SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
             Pen P1;
@@ -754,7 +754,7 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < CoordenadasSeccion.Count; i++)
             {
-                Vertices.Add(new PointF(CoordenadasSeccion[i][0] * 100 * (float)EscalaX, -CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
+                Vertices.Add(new PointF(Dx + CoordenadasSeccion[i][0] * 100 * (float)EscalaX, Dy - CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
             }
 
             #endregion Vertices

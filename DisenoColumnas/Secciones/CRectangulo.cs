@@ -797,7 +797,7 @@ namespace DisenoColumnas.Secciones
             Refuerzos = Main_Secciones.Set_Refuerzo_Seccion(Aux_Refuerzos, CapasX, CapasY, 0, 0, B * 100, H * 100, 0, 0);
         }
 
-        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
+        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR, float Dx, float Dy)
         {
             GraphicsPath path;
             double r = 0;
@@ -820,8 +820,8 @@ namespace DisenoColumnas.Secciones
                 r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
-                xc = refuerzoi.Coord[0] * EscalaX;
-                yc = -refuerzoi.Coord[1] * EscalaY;
+                xc = Dx + refuerzoi.Coord[0] * EscalaX;
+                yc = Dy - refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -838,7 +838,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec)
+        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec, float Dx, float Dy)
         {
             GraphicsPath path = new GraphicsPath();
             List<PointF> Vertices = new List<PointF>();
@@ -852,15 +852,15 @@ namespace DisenoColumnas.Secciones
             x1 = Convert.ToSingle(x + (FunctionsProject.Find_Diametro(Estribo.NoEstribo) * EscalaX));
             y1 = Convert.ToSingle(y + (FunctionsProject.Find_Diametro(Estribo.NoEstribo) * EscalaY));
 
-            Vertices.Add(new PointF(-x, -y));
-            Vertices.Add(new PointF(x, -y));
-            Vertices.Add(new PointF(x, y));
-            Vertices.Add(new PointF(-x, y));
+            Vertices.Add(new PointF(Dx - x, Dy - y));
+            Vertices.Add(new PointF(Dx + x, Dy - y));
+            Vertices.Add(new PointF(Dx + x, Dy + y));
+            Vertices.Add(new PointF(Dx - x, Dy + y));
 
-            Vertices2.Add(new PointF(-x1, -y1));
-            Vertices2.Add(new PointF(x1, -y1));
-            Vertices2.Add(new PointF(x1, y1));
-            Vertices2.Add(new PointF(-x1, y1));
+            Vertices2.Add(new PointF(Dx - x1, Dy - y1));
+            Vertices2.Add(new PointF(Dx + x1, Dy - y1));
+            Vertices2.Add(new PointF(Dx + x1, Dy + y1));
+            Vertices2.Add(new PointF(Dx - x1, Dy + y1));
 
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
@@ -970,7 +970,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
+        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion, float Dx, float Dy)
         {
             double X, Y;
             SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
@@ -1006,19 +1006,19 @@ namespace DisenoColumnas.Secciones
 
             X = -(B * 100 / 2) * EscalaX;
             Y = -(H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             X = (B * 100 / 2) * EscalaX;
             Y = -(H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             X = (B * 100 / 2) * EscalaX;
             Y = (H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             X = -(B * 100 / 2) * EscalaX;
             Y = (H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             #endregion Vertices
 

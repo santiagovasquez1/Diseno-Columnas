@@ -2505,6 +2505,11 @@ namespace DisenoColumnas
             }
         }
 
+        /// <summary>
+        /// Determina las secciones tipicas del alzado actual
+        /// </summary>
+        /// <param name="Secciones_col">Listado completo de secciones del alzado</param>
+        /// <param name="Secciones_def">Secciones tipicas definitavas</param>
         private static void Secciones_tipicas(List<ISeccion> Secciones_col, List<ISeccion> Secciones_def)
         {
             var Agrupacion_areas = from p in Secciones_col

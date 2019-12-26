@@ -44,6 +44,10 @@ namespace DisenoColumnas.Interfaz_Seccion
         public GDE GDE { get; set; }
         public bool Add_Refuerzo { get; set; }
         public int Indice_Lb { get; set; }
+        public int ex { get; set; } = 1;
+        public int ey { get; set; } = 1;
+        public int Dx { get; set; } = 0;
+        public int Dy { get; set; } = 0;
 
         public FInterfaz_Seccion(Tipo_Edicion pedicion)
         {
@@ -113,12 +117,12 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (Grafica.Width / (2 * Xmax) < Grafica.Height / (2 * Ymax))
             {
-                EscalaX = Grafica.Width / (2 * Xmax);
+                EscalaX = Grafica.Width / (2 * Xmax) * ex;
                 EscalaY = EscalaX;
             }
             else
             {
-                EscalaX = Grafica.Height / (2 * Ymax);
+                EscalaX = Grafica.Height / (2 * Ymax) * ex;
                 EscalaY = EscalaX;
             }
 
@@ -135,7 +139,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Crear_grilla(g, Grafica.Height, Grafica.Width);
                 g.TranslateTransform(X, Y);
                 Crear_ejes(g, Grafica.Height, Grafica.Width);
-                seccion.Dibujo_Seccion(g, EscalaX, EscalaY, Over);
+                seccion.Dibujo_Seccion(g, EscalaX, EscalaY, Over, Dx, Dy);
 
                 if (seccion.Estribo == null)
                 {
@@ -144,7 +148,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 Dibujo_Estribo(g, seccion);
 
-                seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR);
+                seccion.Add_Ref_graph(EscalaX, EscalaY, EscalaR, Dx, Dy);
                 seccion.CalcNoDBarras();
                 Dibujo_Refuerzo(g, seccion);
 
@@ -182,7 +186,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Crear_ejes(Graphics g, int Height, int Width)
         {
-            Point ejex = new Point(0, 0);
+            Point ejex = new Point(0 + Dx, 0 + Dy);
 
             Pen P1 = new Pen(Color.Black, 2)
             {
@@ -198,8 +202,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Alignment = System.Drawing.Drawing2D.PenAlignment.Center
             };
 
-            g.DrawLine(P1, new Point(0, 0), new Point(Width / 20, 0));
-            g.DrawLine(P2, new Point(0, 0), new Point(0, -Height / 20));
+            g.DrawLine(P1, new Point(0 + Dx, 0 + Dy), new Point(Dx + Width / 20, Dy + 0));
+            g.DrawLine(P2, new Point(Dx + 0, Dy + 0), new Point(Dx + 0, Dy - Height / 20));
         }
 
         #endregion Metodos de picture box
@@ -457,6 +461,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 {
                     Info_ref.Location = new Point(Cursor.Position.X - 30 - Info_ref.Width, Cursor.Position.Y);
                 }
+
                 Info_ref.D_Barra.Text = seccion.Refuerzos[Indice_ref].Diametro;
                 Info_ref.ID_Ref.Text = Convert.ToString(seccion.Refuerzos[Indice_ref].id);
                 Info_ref.Num_alzado.Text = Convert.ToString(seccion.Refuerzos[Indice_ref].Alzado);
@@ -501,7 +506,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     double[] Coord = { };
                     double x, y;
                     int pid = seccion.Refuerzos.Last().id + 1;
-                    x = (e.Location.X - Grafica.Width / 2)/EscalaX;
+                    x = (e.Location.X - Grafica.Width / 2) / EscalaX;
                     y = -(e.Location.Y - Grafica.Height / 2) / EscalaX;
 
                     Coord = new double[] { x, y };
@@ -510,7 +515,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     Reload_Seccion();
                 }
             }
-            else if (Add_Refuerzo==false)
+            else if (Add_Refuerzo == false)
             {
                 if (MouseOverRefuerzo(e.Location) & e.Button == MouseButtons.Right)
                 {
@@ -525,8 +530,8 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Get_coordinates(object sender, MouseEventArgs e)
         {
-            float X = e.X - Grafica.Width / 2;
-            float Y = e.Y - Grafica.Height / 2;
+            float X = Dx + e.X - Grafica.Width / 2;
+            float Y = Dy + e.Y - Grafica.Height / 2;
             double X_r, Y_r;
 
             X_r = X / EscalaX;
@@ -551,7 +556,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Alignment = System.Drawing.Drawing2D.PenAlignment.Center
             };
 
-            path = seccioni.Add_Estribos(EscalaX, EscalaY, 0.04f);
+            path = seccioni.Add_Estribos(EscalaX, EscalaY, 0.04f, Dx, Dy);
             g.DrawPath(P1, path);
             g.FillPath(br, path);
         }
@@ -706,6 +711,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void lbPisos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Dx = 0; Dy = 0;
             Indice_Lb = lbPisos.SelectedIndex;
             Piso = lbPisos.SelectedItem.ToString();
             if (edicion == Tipo_Edicion.Secciones_modelo)
@@ -721,6 +727,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void cbSecciones_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Dx = 0; Dy = 0;
             Actualizar_Lista();
         }
 
@@ -766,7 +773,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (edicion == Tipo_Edicion.Secciones_predef)
             {
-                FAgregarSeccion fseccion = new FAgregarSeccion(GDE,lbPisos);
+                FAgregarSeccion fseccion = new FAgregarSeccion(GDE, lbPisos);
                 fseccion.ShowDialog();
             }
         }
@@ -862,7 +869,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (GDE == GDE.DMO)
             {
-                Indice_Lista= Form1.secciones_predef.Secciones_DMO.FindIndex(x1 => x1.ToString() == Nombre_Seccion);
+                Indice_Lista = Form1.secciones_predef.Secciones_DMO.FindIndex(x1 => x1.ToString() == Nombre_Seccion);
                 Form1.secciones_predef.Secciones_DMO.RemoveAt(Indice_Lista);
                 lbPisos.Items.Remove(Indice_Lista);
                 Actualizar_Lista();
@@ -895,6 +902,57 @@ namespace DisenoColumnas.Interfaz_Seccion
             lbPisos.Items.Clear();
             lbPisos.Items.AddRange(Secciones);
             lbPisos.SelectedItem = lbPisos.Items[0];
+        }
+
+        private void FInterfaz_Seccion_Scroll(object sender, MouseEventArgs e)
+        {
+            int vueltas = e.Delta;
+
+            if (vueltas > 0)
+            {
+                ex++;
+                ey++;
+                Grafica.Invalidate();
+            }
+            else
+            {
+                if (ex > 1)
+                {
+                    ex--;
+                    ey--;
+                    Grafica.Invalidate();
+                }
+            }
+        }
+
+        private void FInterfaz_Seccion_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                    Dy -= 10;
+                    Grafica.Invalidate();
+                    break;
+
+                case Keys.S:
+                    Dy += 10;
+                    Grafica.Invalidate();
+                    break;
+
+                case Keys.A:
+                    Dx -= 10;
+                    Grafica.Invalidate();
+                    break;
+
+                case Keys.D:
+                    Dx += 10;
+                    Grafica.Invalidate();
+                    break;
+
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
         }
     }
 }
