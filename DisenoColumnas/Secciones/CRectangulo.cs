@@ -10,6 +10,8 @@ using System.Linq;
 
 namespace DisenoColumnas.Secciones
 {
+    
+
     [Serializable]
     public enum TipodeSeccion
     {

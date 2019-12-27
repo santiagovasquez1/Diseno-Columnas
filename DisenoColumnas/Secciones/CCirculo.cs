@@ -101,12 +101,12 @@ namespace DisenoColumnas.Secciones
             double Ast1, Ast2, G_As1, G_As2;
             float delta = 0.50f;
 
-            var Num_Ramas_V = new List<int>();    //Numero de ramas en altura del muro para ambos casos de ast
+            var Num_Ramas_V = new List<int>(); //Numero de ramas en altura del muro para ambos casos de ast
             var GT_As1 = new List<double>();   //Longitud total de los gancho para As1, bajo cada una de las variaciones de la separacion
             var GT_As2 = new List<double>();   //Longitud total de los gancho para As1, bajo cada una de las variaciones de la separacion
 
-            var P_As1 = new List<double>();     //'Peso total As1
-            var P_As2 = new List<double>();     //'Peso total As2
+            var P_As1 = new List<double>();    //Peso total As1
+            var P_As2 = new List<double>();    //Peso total As2
 
             var Sep = new List<double>();
 
