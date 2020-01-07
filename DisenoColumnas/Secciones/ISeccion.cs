@@ -30,6 +30,7 @@ namespace DisenoColumnas.Secciones
         List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
 
         double Acero_Long { get; set; }
+
         Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos);
 
         void CalcularArea();
@@ -38,11 +39,11 @@ namespace DisenoColumnas.Secciones
 
         void Calc_vol_inex(float r, float FY, GDE gDE);
 
-        void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR);
+        void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR, float Dx, float Dy);
 
-        GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec);
+        GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec, float Dx, float Dy);
 
-        void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion);
+        void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion, float Dx, float Dy);
 
         void Dibujo_Autocad(double Xi, double Yi, int Num_Alzado);
 
@@ -59,16 +60,18 @@ namespace DisenoColumnas.Secciones
         void Refueroz_Adicional(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz);
 
         double Peso_Estribo(Estribo pEstribo, float recubrimiento);
+
         void DiagramaInteraccion();
 
         #region Propiedades y Metodos para verificación de Vc
+
         List<float[]> PM2M3V2V3 { get; set; }
         List<float> Vcx { get; set; }
         List<float> Vcy { get; set; }
         List<float> Vsx { get; set; }
         List<float> Vsy { get; set; }
 
-        #endregion
+        #endregion Propiedades y Metodos para verificación de Vc
 
         #region SobreCargas
 

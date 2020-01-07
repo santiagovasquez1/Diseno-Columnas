@@ -73,7 +73,6 @@ namespace DisenoColumnas.Clases
 
         public void AsignarAsTopMediumButton()
         {
-
             As_asignado = new float[] { 0, 0, 0 };
             Porct_Refuerzo = new float[] { 0, 0, 0 };
             double Top = -999999; double Button = -99999; double medium = -999999;

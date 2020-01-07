@@ -155,7 +155,6 @@ namespace DisenoColumnas.Diseño
                 }
                 Form1.mFormPrincipal.Invalidate();
                 Form1.m_Informacion.Invalidate();
-
             }
 
             Close();

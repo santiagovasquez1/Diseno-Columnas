@@ -67,6 +67,8 @@
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infromaciónDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarAlzadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.despieceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plantaDeColumnasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fuerzasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,8 +103,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.BarraProgresoCantidades = new System.Windows.Forms.ProgressBar();
             this.ParaCantidades = new System.Windows.Forms.Label();
-            this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -378,6 +378,23 @@
             this.agregarAlzadoToolStripMenuItem.Text = "Agregar Alzado";
             this.agregarAlzadoToolStripMenuItem.Click += new System.EventHandler(this.AgregarAlzadoToolStripMenuItem_Click);
             // 
+            // agregarToolStripMenuItem
+            // 
+            this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
+            this.agregarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.N)));
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.agregarToolStripMenuItem.Text = "Agregar";
+            // 
+            // eliminarToolStripMenuItem
+            // 
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Delete)));
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.EliminarToolStripMenuItem_Click);
+            // 
             // despieceToolStripMenuItem
             // 
             this.despieceToolStripMenuItem.Enabled = false;
@@ -604,6 +621,7 @@
             // 
             // LColumna
             // 
+            this.LColumna.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LColumna.Enabled = false;
             this.LColumna.FormattingEnabled = true;
             this.LColumna.Location = new System.Drawing.Point(271, 26);
@@ -833,23 +851,6 @@
             this.ParaCantidades.TabIndex = 62;
             this.ParaCantidades.Text = "1/10";
             this.ParaCantidades.Visible = false;
-            // 
-            // agregarToolStripMenuItem
-            // 
-            this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.N)));
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.agregarToolStripMenuItem.Text = "Agregar";
-            // 
-            // eliminarToolStripMenuItem
-            // 
-            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Delete)));
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
-            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.EliminarToolStripMenuItem_Click);
             // 
             // Form1
             // 

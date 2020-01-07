@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
 
-
 namespace DisenoColumnas.Clases.OpenGL
 {
-    class Dot
+    internal class Dot
     {
         public Color color;
         public decimal[] dot = new decimal[4];

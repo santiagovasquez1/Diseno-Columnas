@@ -1063,7 +1063,6 @@ namespace DisenoColumnas.Diseño
 
         private void D_Alzado_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
             if (e.ColumnIndex != 0 && e.RowIndex != -1 && D_Alzado.SelectedCells.Count == 1)
             {
                 if (refuerzoAdicional != null)
@@ -1078,7 +1077,6 @@ namespace DisenoColumnas.Diseño
                 }
             }
         }
-
 
         private void AsignarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1159,7 +1157,5 @@ namespace DisenoColumnas.Diseño
                 }
             }
         }
-
-
     }
 }

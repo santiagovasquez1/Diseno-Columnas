@@ -11,8 +11,6 @@ namespace DisenoColumnas.Clases
 
         public void Get_user()
         {
-            string Ruta_Carpeta;
-            string Ruta_Archivo;
             string Ruta_Completa;
 
             Username = WindowsIdentity.GetCurrent().Name;
@@ -21,9 +19,9 @@ namespace DisenoColumnas.Clases
 
             //try
             //{
-            //    Ruta_Carpeta = Application.StartupPath;
-            //    Ruta_Archivo = @"\\Secciones.sec";
-            //    Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
+            //Ruta_Carpeta = Application.StartupPath;
+            //Ruta_Archivo = @"\\Secciones.sec";
+            //Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
             //}
             //catch (System.Exception)
             //{

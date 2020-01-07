@@ -20,7 +20,6 @@ namespace DisenoColumnas.Interfaz_Inicial
             Size = new Size(340, 246);
             Location = new Point(Location.X + Size.Width / 2, Location.Y + Size.Height / 2);
             CargarCombiaciones();
-
         }
 
         private void CargarCombiaciones()
@@ -30,7 +29,6 @@ namespace DisenoColumnas.Interfaz_Inicial
             List<string> Combinaciones = AllCombinaciones.Distinct().ToList();
 
             CASOSCARGA.Items.AddRange(Combinaciones.ToArray());
-
         }
 
         private void Button4_Click(object sender, EventArgs e)
@@ -57,17 +55,14 @@ namespace DisenoColumnas.Interfaz_Inicial
                         List<Tuple<float, string, string, float>> PqCumplen = new List<Tuple<float, string, string, float>>();
                         for (int j = 0; j < col.resultadosETABs[i].Load.Count; j++)
                         {
-
                             if (CargasAnalizar.Contains(col.resultadosETABs[i].Load[j]))
                             {
                                 Tuple<float, string, string, float> tupleAux = new Tuple<float, string, string, float>(col.resultadosETABs[i].P[j], col.resultadosETABs[i].Load[j], col.Seccions[i].Item2, Factor);
                                 PqCumplen.Add(tupleAux);
                             }
-
                         }
                         col.Panalizar.Add(PqCumplen);
                     }
-
                 }
 
                 Location = new Point(Location.X - Width / 2, Location.Y - Height / 2);
@@ -93,12 +88,8 @@ namespace DisenoColumnas.Interfaz_Inicial
                                 Button_OK.Enabled = false;
                                 B_Salir.Enabled = true;
                             }
-
                         }
-
-
                     }
-
                 }
 
                 Columnas_List.SelectedItem = Columnas_List.Items[0];
@@ -111,8 +102,6 @@ namespace DisenoColumnas.Interfaz_Inicial
             {
                 return;
             }
-
-
         }
 
         private void Columnas_List_SelectedIndexChanged(object sender, EventArgs e)
@@ -120,19 +109,11 @@ namespace DisenoColumnas.Interfaz_Inicial
             CreateDataGridView();
         }
 
-
-
-
-
         private void CreateDataGridView()
         {
-
             if (Columnas_List.SelectedIndex != -1 && Columnas_List.Text != "")
             {
-
-
                 DataInfo.Rows.Clear();
-
 
                 Columna ColumnaSelect = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == Columnas_List.Text);
 
@@ -165,13 +146,9 @@ namespace DisenoColumnas.Interfaz_Inicial
                     }
                 }
 
-
                 EstiloDatGridView(DataInfo);
-
             }
-
         }
-
 
         private void EstiloDatGridView(DataGridView dataGrid)
         {

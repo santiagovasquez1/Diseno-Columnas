@@ -441,10 +441,6 @@ namespace DisenoColumnas
             return new float[] { My / Area, Mx / Area };
         }
 
-
-
-
-
         public static double Find_As(int diametro)
         {
             Dictionary<int, double> AceroBarras = new Dictionary<int, double>();
@@ -566,7 +562,6 @@ namespace DisenoColumnas
 
         //HALLAR VC
 
-
         /// <summary>
         /// Determinar Vc (kgf/cm²)---> Norma C.11.2.1.1
         /// </summary>
@@ -578,7 +573,6 @@ namespace DisenoColumnas
         {
             return 0.53f * (float)Math.Sqrt(fc) * bw * d;
         }
-
 
         /// <summary>
         /// Determinar Vc (kgf/cm²) ----> Norma C.11.2.1.2
@@ -652,7 +646,6 @@ namespace DisenoColumnas
         /// <returns></returns>
         public static float VcDef(float fc, float As, float Vu, float d, float bw, float Mu, float h, float Nu, float Area)
         {
-
             float[] Vc = new float[] { Vc_11_2_1_1(d, bw, fc), Vc_11_2_1_2(Nu, d, bw, Area, fc), Vc_11_2_2_1(fc, As, Vu, d, bw, Mu, h, Nu, Area) };
 
             return Vc.Min() / 1000;
@@ -684,6 +677,5 @@ namespace DisenoColumnas
 
             return Coord_def;
         }
-
     }
 }

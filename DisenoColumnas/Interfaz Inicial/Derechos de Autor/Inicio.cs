@@ -48,8 +48,6 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             }
         }
 
-
-
         private void RegistrarExtension()
         {
             RegistryKey clave1 = Registry.CurrentUser.OpenSubKey("Software", true);
@@ -97,8 +95,6 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
 
             clave3.Close();
         }
-
-
 
         public static void Comprobar(Inicio Formulario)
         {

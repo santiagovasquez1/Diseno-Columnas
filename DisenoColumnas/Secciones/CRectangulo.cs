@@ -10,6 +10,8 @@ using System.Linq;
 
 namespace DisenoColumnas.Secciones
 {
+
+
     [Serializable]
     public enum TipodeSeccion
     {
@@ -19,8 +21,6 @@ namespace DisenoColumnas.Secciones
         Tee,
         L
     }
-
-    internal delegate void DRefuerzo_negativo(int Num_barras);
 
     [Serializable]
     public class CRectangulo : ISeccion, ICloneable, IComparable
@@ -86,7 +86,6 @@ namespace DisenoColumnas.Secciones
 
         public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos)
         {
-
             List<PointF> Coordenadas = new List<PointF>();
             float X, Y;
             X = -(B * 100 / 2);
@@ -114,7 +113,6 @@ namespace DisenoColumnas.Secciones
             float Es = 2000000;
             float b1 = 0.85f - 0.05f * (fc - 280) / 70f;
 
-
             List<float> m_PorCadaAngulo = new List<float>();
             List<float> YVariacionC = new List<float>();
             List<float> YVariaciona = new List<float>();
@@ -123,7 +121,6 @@ namespace DisenoColumnas.Secciones
             List<float[]> CentroideAreaComprimida = new List<float[]>();
 
             List<float[]> Coordenadas_Angulo = new List<float[]>();
-
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
@@ -149,7 +146,6 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coordenadas_Angulo.Count; i++)
             {
-
                 float m;
                 if (i + 1 == Coordenadas_Angulo.Count)
                 {
@@ -161,7 +157,6 @@ namespace DisenoColumnas.Secciones
                 }
 
                 ms.Add(m);
-
             }
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
@@ -179,7 +174,6 @@ namespace DisenoColumnas.Secciones
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
-
                 for (int i = 0; i < YVariacionC.Count; i++)
                 {
                     float C_Original = ymax - YVariacionC[i];
@@ -212,8 +206,6 @@ namespace DisenoColumnas.Secciones
                     cRefuerzo.Deformacion_Angulo.Add(esi);
                 }
             }
-
-
 
             for (int i = 0; i < YVariaciona.Count; i++)
             {
@@ -256,7 +248,6 @@ namespace DisenoColumnas.Secciones
                     Ms += Math.Abs(cRefuerzo.Fuerzas_Angulo[i]) * Math.Abs(cRefuerzo.Coordenadas_Angulo[1]);
                     Ast += (float)FunctionsProject.Find_As(Convert.ToInt32(cRefuerzo.Diametro.Substring(1))) * 10000;
                 }
-
 
                 float Mnx = Cc * (CentroideAreaComprimida[i][0]);
                 float Mny = Cc * (CentroideAreaComprimida[i][1]) + Ms;
@@ -302,15 +293,12 @@ namespace DisenoColumnas.Secciones
                     MP.Insert(IndicePmax1, new float[] { 0, Pmax1 });
 
                 }
-
-
             }
 
             List<float[]> MP3D = new List<float[]>();
 
             for (int i = 0; i < MP.Count; i++)
             {
-
                 float X1 = (float)(MP[i][0] * Math.Cos((Angulo * Math.PI / 180)));
                 float Y2 = (float)(MP[i][0] * Math.Sin((Angulo * Math.PI / 180)));
                 float Z2 = MP[i][1];
@@ -819,7 +807,7 @@ namespace DisenoColumnas.Secciones
             Refuerzos = Main_Secciones.Set_Refuerzo_Seccion(Aux_Refuerzos, CapasX, CapasY, 0, 0, B * 100, H * 100, 0, 0);
         }
 
-        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
+        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR, float Dx, float Dy)
         {
             GraphicsPath path;
             double r = 0;
@@ -842,8 +830,8 @@ namespace DisenoColumnas.Secciones
                 r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
-                xc = refuerzoi.Coord[0] * EscalaX;
-                yc = -refuerzoi.Coord[1] * EscalaY;
+                xc = Dx + refuerzoi.Coord[0] * EscalaX;
+                yc = Dy - refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -860,7 +848,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec)
+        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec, float Dx, float Dy)
         {
             GraphicsPath path = new GraphicsPath();
             List<PointF> Vertices = new List<PointF>();
@@ -874,15 +862,15 @@ namespace DisenoColumnas.Secciones
             x1 = Convert.ToSingle(x + (FunctionsProject.Find_Diametro(Estribo.NoEstribo) * EscalaX));
             y1 = Convert.ToSingle(y + (FunctionsProject.Find_Diametro(Estribo.NoEstribo) * EscalaY));
 
-            Vertices.Add(new PointF(-x, -y));
-            Vertices.Add(new PointF(x, -y));
-            Vertices.Add(new PointF(x, y));
-            Vertices.Add(new PointF(-x, y));
+            Vertices.Add(new PointF(Dx - x, Dy - y));
+            Vertices.Add(new PointF(Dx + x, Dy - y));
+            Vertices.Add(new PointF(Dx + x, Dy + y));
+            Vertices.Add(new PointF(Dx - x, Dy + y));
 
-            Vertices2.Add(new PointF(-x1, -y1));
-            Vertices2.Add(new PointF(x1, -y1));
-            Vertices2.Add(new PointF(x1, y1));
-            Vertices2.Add(new PointF(-x1, y1));
+            Vertices2.Add(new PointF(Dx - x1, Dy - y1));
+            Vertices2.Add(new PointF(Dx + x1, Dy - y1));
+            Vertices2.Add(new PointF(Dx + x1, Dy + y1));
+            Vertices2.Add(new PointF(Dx - x1, Dy + y1));
 
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
@@ -992,7 +980,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
+        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion, float Dx, float Dy)
         {
             double X, Y;
             SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
@@ -1028,19 +1016,19 @@ namespace DisenoColumnas.Secciones
 
             X = -(B * 100 / 2) * EscalaX;
             Y = -(H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             X = (B * 100 / 2) * EscalaX;
             Y = -(H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             X = (B * 100 / 2) * EscalaX;
             Y = (H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             X = -(B * 100 / 2) * EscalaX;
             Y = (H * 100 / 2) * EscalaY;
-            Vertices.Add(new PointF((float)X, (float)Y));
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
 
             #endregion Vertices
 
@@ -1132,7 +1120,8 @@ namespace DisenoColumnas.Secciones
             #region Nombre_Seccion
 
             Nom_Seccion = "%%USeccion " + Num_Despiece;
-            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - (H / 2) - 0.40, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
+
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - H - 0.20, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
 
             #endregion Nombre_Seccion
         }

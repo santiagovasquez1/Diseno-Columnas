@@ -107,7 +107,6 @@ namespace DisenoColumnas.Clases
             resultadosETABs[NoPiso].pasignada = new float[] { (resultadosETABs[NoPiso].As_asignado[0]/Area)*100,
                                                                (resultadosETABs[NoPiso].As_asignado[1]/Area)*100,
                                                                (resultadosETABs[NoPiso].As_asignado[2]/Area)*100 };
-
         }
 
         public void ActualizarRefuerzo()
@@ -215,13 +214,7 @@ namespace DisenoColumnas.Clases
                 resultadosETABs[i].pasignada[0] = (resultadosETABs[i].As_asignado[0] / Area) * 100;
                 resultadosETABs[i].pasignada[1] = (resultadosETABs[i].As_asignado[1] / Area) * 100;
                 resultadosETABs[i].pasignada[2] = (resultadosETABs[i].As_asignado[2] / Area) * 100;
-
-
-
-
             }
-
-
         }
 
         public void AsignarAsTopMediumButton_()
@@ -2868,6 +2861,6 @@ namespace DisenoColumnas.Clases
         public List<List<Tuple<float, string, string, float>>> Panalizar { get; set; }
 
 
-        #endregion
+        #endregion Propiedades - Cargas que deben cumplor 0.4Ag*fc
     }
 }

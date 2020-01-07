@@ -202,8 +202,6 @@ namespace DisenoColumnas.Clases
             }
         }
 
-
-
         public override string ToString()
         {
             if (Tipo == "Botton")

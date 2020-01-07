@@ -118,7 +118,6 @@ namespace DisenoColumnas.Diseño
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["S_value"].Value = ColumnaSelect.Seccions[i].Item1.Estribo.Separacion.ToString();
 
                                 Info_Es_Col.Rows[Info_Es_Col.Rows.Count - 1].Cells["CantEstribos"].Value = (int)ColumnaSelect.CantEstribos_Sepa[i][0] + (int)ColumnaSelect.CantEstribos_Sepa[i][1] + (int)ColumnaSelect.CantEstribos_Sepa[i][2] + (int)ColumnaSelect.CantEstribos_Sepa[i][3];
-
                             }
                             else
                             {

@@ -15,6 +15,7 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
         public static bool Ultimos { get; set; }
 
         private List<int> Angulos = new List<int>();
+
         public Solicitaciones()
         {
             InitializeComponent();
@@ -23,7 +24,6 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
 
         private void Solicitaciones_Load(object sender, EventArgs e)
         {
-
             if (MP_Soli3D.Count != 0)
             {
                 CalcularAngulos();
@@ -34,8 +34,6 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
             {
                 SolicitBox.Items.Add("Angulo: " + DistinAngulos[i] + "°");
             }
-
-
         }
 
         private void CalcularAngulos()
@@ -55,10 +53,7 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
                 SolicitacionesConAngulos.Add(TupleAux);
                 Angulos.Add(Angulo);
             }
-
         }
-
-
 
         private void CerrarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -111,7 +106,6 @@ namespace DisenoColumnas.Interfaz_Seccion.Diagrama_de_Interacción
 
         private void Solicitaciones_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             //DiagramaInteraccion.MPpuntosSolicitaciones.Clear();
             //DiagramaInteraccion.MP2D_UnAngulo.Clear();
             //DiagramaInteraccion.MP3D_UnAngulo.Clear();

@@ -51,6 +51,7 @@ namespace DisenoColumnas.Secciones
         public List<Tuple<List<float[]>, int>> PuMu2D { get; set; }
 
         public List<Tuple<List<float[]>, int>> PnMn2D_v1 { get; set; }
+
         public Tuple<List<float[]>, List<float[]>> DiagramaInteraccionParaUnAngulo(int Angulo, bool MPUiltimos)
         {
             List<PointF> Coordenadas = new List<PointF>();
@@ -77,8 +78,6 @@ namespace DisenoColumnas.Secciones
 
             List<float[]> Coordenadas_Angulo = new List<float[]>();
 
-
-
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
                 cRefuerzo.Coordenadas_Angulo = new float[] { };
@@ -87,8 +86,6 @@ namespace DisenoColumnas.Secciones
                 cRefuerzo.Fuerzas_Angulo = new List<float>();
                 cRefuerzo.Deformacion_Angulo = new List<float>();
             }
-
-
 
             //Rotacion de la Sección
             for (int i = 0; i < Coordenadas.Count; i++)
@@ -106,7 +103,6 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coordenadas_Angulo.Count; i++)
             {
-
                 float m;
                 if (i + 1 == Coordenadas_Angulo.Count)
                 {
@@ -118,14 +114,12 @@ namespace DisenoColumnas.Secciones
                 }
 
                 ms.Add(m);
-
             }
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
                 List<double> CoordRotadas = Operaciones.Rotacion(cRefuerzo.Coord[0], cRefuerzo.Coord[1], (Angulo * Math.PI) / 180);
                 cRefuerzo.Coordenadas_Angulo = new float[] { (float)CoordRotadas[0], (float)CoordRotadas[1] };
             }
-
 
             int DeltasVariacionC = 20;
 
@@ -137,7 +131,6 @@ namespace DisenoColumnas.Secciones
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
-
                 for (int i = 0; i < YVariacionC.Count; i++)
                 {
                     float C_Original = ymax - YVariacionC[i];
@@ -240,17 +233,13 @@ namespace DisenoColumnas.Secciones
                     int IndicePmax1 = MP.FindIndex(x => x[1] == Pmax1);
 
                     MP.Insert(IndicePmax1, new float[] { 0, Pmax1 });
-
                 }
-
-
             }
 
             List<float[]> MP3D = new List<float[]>();
 
             for (int i = 0; i < MP.Count; i++)
             {
-
                 float X1 = (float)(MP[i][0] * Math.Cos((Angulo * Math.PI / 180)));
                 float Y2 = (float)(MP[i][0] * Math.Sin((Angulo * Math.PI / 180)));
                 float Z2 = MP[i][1];
@@ -258,10 +247,7 @@ namespace DisenoColumnas.Secciones
                 MP3D.Add(PuntosDescompuestos);
             }
 
-
             return new Tuple<List<float[]>, List<float[]>>(MP, MP3D);
-
-
         }
 
         public void DiagramaInteraccion()
@@ -273,11 +259,9 @@ namespace DisenoColumnas.Secciones
             MuPu3D = new List<Tuple<List<float[]>, int>>();
             for (int Angulo = 0; Angulo <= 360; Angulo += Delta)
             {
-
                 Tuple<List<float[]>, List<float[]>> ResultadosNominales = DiagramaInteraccionParaUnAngulo(Angulo, false);
                 List<float[]> PnMn2D_ = ResultadosNominales.Item1;
                 List<float[]> MnPn3D_ = ResultadosNominales.Item2;
-
 
                 PnMn2D.Add(new Tuple<List<float[]>, int>(PnMn2D_, Angulo));
                 MnPn3D.Add(new Tuple<List<float[]>, int>(MnPn3D_, Angulo));
@@ -288,7 +272,6 @@ namespace DisenoColumnas.Secciones
                 PuMu2D.Add(new Tuple<List<float[]>, int>(PuMu2D_, Angulo));
                 MuPu3D.Add(new Tuple<List<float[]>, int>(MuPu3D_, Angulo));
             }
-
         }
 
         private float DeterminarFi(float et)
@@ -324,7 +307,6 @@ namespace DisenoColumnas.Secciones
                 else
                 {
                     points = new PointF[] { new PointF(XY[i][0], XY[i][1]), new PointF(XY[i + 1][0], XY[i + 1][1]) };
-
                 }
                 PuntosPendie.Add(points);
             }
@@ -356,11 +338,9 @@ namespace DisenoColumnas.Secciones
                             }
                         }
                     }
-
                 }
                 else
                 {
-
                     if (Punto.Length != 0)
                     {
                         PuntosHallados.Add(Punto);
@@ -380,7 +360,6 @@ namespace DisenoColumnas.Secciones
                             PuntosHallados.Add(new float[] { PuntosPendie[i][1].X, PuntosPendie[i][1].Y });
                         }
                     }
-
                 }
 
 
@@ -392,7 +371,6 @@ namespace DisenoColumnas.Secciones
 
         private float[] PuntoIntercepto(PointF[] Puntos, float m, float Yperteneciente)
         {
-
             float[] XY = new float[] { };
             float X = ((Yperteneciente - Puntos[0].Y) / m) + Puntos[0].X;
             float MaxY = Puntos.Max(Z => Z.Y);
@@ -406,11 +384,7 @@ namespace DisenoColumnas.Secciones
             }
 
             return XY;
-
         }
-
-
-
 
         #endregion Diagrama de Interacción: Propiedades y Metodos
 
@@ -612,7 +586,7 @@ namespace DisenoColumnas.Secciones
             Cuanti_Vol(FD1, FD2, r, 4220);
         }
 
-        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR)
+        public void Add_Ref_graph(double EscalaX, double EscalaY, double EscalaR, float Dx, float Dy)
         {
             GraphicsPath path;
             double r = 0;
@@ -635,8 +609,8 @@ namespace DisenoColumnas.Secciones
                 r = FunctionsProject.Find_Diametro(Convert.ToInt32(refuerzoi.Diametro.Substring(1))) / 2;
                 r = r * EscalaR;
 
-                xc = refuerzoi.Coord[0] * EscalaX;
-                yc = -refuerzoi.Coord[1] * EscalaY;
+                xc = Dx + refuerzoi.Coord[0] * EscalaX;
+                yc = Dy - refuerzoi.Coord[1] * EscalaY;
                 Centro = new double[] { xc, yc };
 
                 MAT_CONCRETE material = new MAT_CONCRETE
@@ -653,7 +627,7 @@ namespace DisenoColumnas.Secciones
             }
         }
 
-        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec)
+        public GraphicsPath Add_Estribos(double EscalaX, double EscalaY, float rec, float Dx, float Dy)
         {
             List<float[]> Coord_aletas = new List<float[]>();
             List<float[]> Coord_alma = new List<float[]>();
@@ -723,8 +697,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_aletas1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_aletas1[i][0] * (float)EscalaX * 100, -Coord_aletas1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_aletas2[i][0] * (float)EscalaX * 100, -Coord_aletas2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Dx + Coord_aletas1[i][0] * (float)EscalaX * 100, Dy - Coord_aletas1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Dx + Coord_aletas2[i][0] * (float)EscalaX * 100, Dy - Coord_aletas2[i][1] * (float)EscalaX * 100));
             }
 
             path.AddPolygon(Vertices.ToArray());
@@ -739,8 +713,8 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < Coord_alma1.Count; i++)
             {
-                Vertices.Add(new PointF(Coord_alma1[i][0] * (float)EscalaX * 100, -Coord_alma1[i][1] * (float)EscalaX * 100));
-                Vertices2.Add(new PointF(Coord_alma2[i][0] * (float)EscalaX * 100, -Coord_alma2[i][1] * (float)EscalaX * 100));
+                Vertices.Add(new PointF(Dx + Coord_alma1[i][0] * (float)EscalaX * 100, Dy - Coord_alma1[i][1] * (float)EscalaX * 100));
+                Vertices2.Add(new PointF(Dx + Coord_alma2[i][0] * (float)EscalaX * 100, Dy - Coord_alma2[i][1] * (float)EscalaX * 100));
             }
             path.AddPolygon(Vertices.ToArray());
             path.AddPolygon(Vertices2.ToArray());
@@ -750,7 +724,7 @@ namespace DisenoColumnas.Secciones
             return path;
         }
 
-        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion)
+        public void Dibujo_Seccion(Graphics g, double EscalaX, double EscalaY, bool seleccion, float Dx, float Dy)
         {
             SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
             Pen P1;
@@ -784,7 +758,7 @@ namespace DisenoColumnas.Secciones
 
             for (int i = 0; i < CoordenadasSeccion.Count; i++)
             {
-                Vertices.Add(new PointF(CoordenadasSeccion[i][0] * 100 * (float)EscalaX, -CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
+                Vertices.Add(new PointF(Dx + CoordenadasSeccion[i][0] * 100 * (float)EscalaX, Dy - CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
             }
 
             #endregion Vertices
@@ -1176,12 +1150,14 @@ namespace DisenoColumnas.Secciones
             string LayerCuadro = "FC_BORDES";
             double[] P_XYZ = { };
             List<double> Vertices = new List<double>();
+            string Nom_Seccion = "";
+            string Escala = "1:15";
 
             var Escalar = Operaciones.Escalar(0.50, FunctionsProject.DeepClone(CoordenadasSeccion));
 
             for (int i = 0; i < Escalar.Count; i++)
             {
-                var Aux = Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi - TW, Escalar[i][0], Escalar[i][1]);
+                var Aux = Operaciones.Traslacion(Escalar[i][0] + Xi, Escalar[i][1] + Yi - 0.60, Escalar[i][0], Escalar[i][1]);
                 Vertices.Add(Aux[0]);
                 Vertices.Add(Aux[1]);
             }
@@ -1192,8 +1168,86 @@ namespace DisenoColumnas.Secciones
 
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
-                cRefuerzo.Dibujo_Ref_Autocad(Xi + B / 2, Yi - H / 2, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
+                cRefuerzo.Dibujo_Ref_Autocad(Xi, Yi - 0.60, X_unicos.Max(), X_unicos.Min(), Y_unicos.Max(), Y_unicos.Min());
             }
+
+            #region Estribos y ramas
+
+            //Estribos Aleta
+            var Xmin = CoordenadasSeccion.Select(x => x[0]).Min();
+            var Xmax = CoordenadasSeccion.Select(x => x[0]).Max();
+            var Ymin = CoordenadasSeccion.Select(x => x[1]).Min();
+            var Ymax = CoordenadasSeccion.Select(x => x[1]).Max();
+
+            if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax, Ymax) == true)
+            {
+                P_XYZ = new double[] { Xi + 0.15, Yi - 0.04, 0 };
+            }
+            else
+            {
+                P_XYZ = new double[] { Xi + 0.15, Yi - H - 0.04, 0 };
+            }
+            FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", B - 0.02 * Form1.Proyecto_.R, TF - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+
+            //Estribos Alma
+
+            if (Shape == TipodeSeccion.L)
+            {
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin, Ymax) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin + TW, Ymax) == true)
+                {
+                    P_XYZ = new double[] { Xi, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax - TW, Ymax) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax, Ymax) == true)
+                {
+                    P_XYZ = new double[] { Xi + Xmax - TW, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin, Ymin) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmin + TW, Ymin) == true)
+                {
+                    P_XYZ = new double[] { Xi, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+
+                if (FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax - TW, Ymin) == true & FunctionsProject.Find_Coord(CoordenadasSeccion, Xmax, Ymin) == true)
+                {
+                    P_XYZ = new double[] { Xi + Xmax - TW, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+            }
+            else
+            {
+                var Punto1 = CoordenadasSeccion.FindAll(Y => Y[1] == Ymin);
+                var Punto2 = CoordenadasSeccion.FindAll(Y => Y[1] == Ymax);
+
+                var L1 = Math.Abs(Punto1[0][1] - Punto1[1][1]);
+                var L2 = Math.Abs(Punto2[0][1] - Punto2[1][1]);
+
+                if (L1 < L2)
+                {
+                    var Xtw = Math.Abs(Xi - Punto1[0][1]);
+                    P_XYZ = new double[] { Xi + Xtw, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+                else
+                {
+                    var Xtw = Math.Abs(Xi - Punto2[0][1]);
+                    P_XYZ = new double[] { Xi + Xtw, Yi - 0.04, 0 };
+                    FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo(P_XYZ, "FC_ESTRIBOS", TW - 0.02 * Form1.Proyecto_.R, H - 0.02 * Form1.Proyecto_.R, 1, 1, 1, 0);
+                }
+            }
+
+            #endregion Estribos y ramas
+
+            #region Nombre_Seccion
+
+            Nom_Seccion = "%%USeccion " + Num_Alzado;
+
+            FunctionsAutoCAD.FunctionsAutoCAD.B_NombreSeccion(P_XYZ: new double[] { Xi + (B / 2), Yi - H - 0.2, 0 }, Seccion: Nom_Seccion, Escala: Escala, Layer: "FC_R-200", Xscale: 15, Yscale: 15, Zscale: 15, Rotation: 0);
+
+            #endregion Nombre_Seccion
         }
 
         public void Actualizar_Ref(Alzado palzado, int indice, FInterfaz_Seccion fInterfaz)

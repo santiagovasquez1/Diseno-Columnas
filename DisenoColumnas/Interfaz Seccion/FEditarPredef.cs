@@ -80,7 +80,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             if (Seccion.Estribo == null)
             {
-
             }
 
             Estribo temp = new Estribo(NumEstribo);
@@ -96,6 +95,7 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             Seccion.Estribo = temp;
 
+            Seccion.Estribo = temp;
 
             float FD1, FD2;
             if (gde == GDE.DMO)
@@ -291,6 +291,5 @@ namespace DisenoColumnas.Interfaz_Seccion
             FInterfaz_.Invalidate();
             Close();
         }
-
     }
 }

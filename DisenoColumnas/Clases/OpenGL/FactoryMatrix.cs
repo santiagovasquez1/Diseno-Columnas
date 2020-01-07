@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace DisenoColumnas.Clases.OpenGL
 {
     public static class FactoryMatrix
@@ -105,7 +104,6 @@ namespace DisenoColumnas.Clases.OpenGL
 
             return matrix;
         }
-
 
         public static decimal[,] xMxM(decimal[,] m2, decimal[,] m1)
         {

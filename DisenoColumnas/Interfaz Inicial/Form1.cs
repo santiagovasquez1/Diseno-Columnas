@@ -241,7 +241,6 @@ namespace DisenoColumnas
             }
             m_PlantaColumnas = new PlantaColumnas();
 
-
             if (m_Informacion != null)
             {
                 m_Informacion.DockHandler.DockPanel = null;
@@ -386,14 +385,9 @@ namespace DisenoColumnas
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
                 mFuerzasEnElmentos = null; mIntefazSeccion = null; m_PlantaColumnas = null;
 
-
-
                 //Chequear Carga P< 0.4*Ag*F'c
                 ChequeoDeCargas chequeoDeCargas = new ChequeoDeCargas();
                 chequeoDeCargas.ShowDialog();
-
-
-
 
                 variablesdeEntrada = new VariablesdeEntrada(true);
                 variablesdeEntrada.ShowDialog();
@@ -752,7 +746,6 @@ namespace DisenoColumnas
                         {
                             ParaAcero = 0;
                         }
-
                     }
 
                     ISeccion seccion = FunctionsProject.DeepClone(columna.Seccions[j].Item1);
@@ -2063,7 +2056,6 @@ namespace DisenoColumnas
             AgregarAlzado();
         }
 
-
         private void AgregarAlzado()
         {
             if (Proyecto_.ColumnaSelect != null)
@@ -2096,8 +2088,6 @@ namespace DisenoColumnas
             }
         }
 
-
-
         private void EliminarAlzado()
         {
             if (Proyecto_.ColumnaSelect != null)
@@ -2120,17 +2110,9 @@ namespace DisenoColumnas
                         m_Informacion.Invalidate();
                     }
                     catch { }
-
                 }
-
             }
-
         }
-
-
-
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -2529,6 +2511,11 @@ namespace DisenoColumnas
             }
         }
 
+        /// <summary>
+        /// Determina las secciones tipicas del alzado actual
+        /// </summary>
+        /// <param name="Secciones_col">Listado completo de secciones del alzado</param>
+        /// <param name="Secciones_def">Secciones tipicas definitavas</param>
         private static void Secciones_tipicas(List<ISeccion> Secciones_col, List<ISeccion> Secciones_def)
         {
             var Agrupacion_areas = from p in Secciones_col
@@ -2566,11 +2553,7 @@ namespace DisenoColumnas
             {
                 Diseñar(ref ColumnasADiseñar);
             }
-
         }
-
-
-
 
         private void EditarSeccionesPredeterminadasToolStripMenuItem_Click(object sender, EventArgs e)
         {

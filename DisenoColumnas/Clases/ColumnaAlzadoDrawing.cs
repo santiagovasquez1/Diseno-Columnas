@@ -32,13 +32,11 @@ namespace DisenoColumnas.Clases
             if (ExisteCambioenB)
             {
                 Bdibujar = columna.Seccions[columna.Seccions.Count - 1].Item1.B;
-
             }
             else
             {
                 Bdibujar = columna.Seccions[columna.Seccions.Count - 1].Item1.H;
             }
-
 
             var P2 = Vector<float>.Build.Dense(new float[] { Bdibujar, 0 });
 
@@ -89,12 +87,10 @@ namespace DisenoColumnas.Clases
             {
                 if (columna.Seccions[i].Item1 != null)
                 {
-
                     float Bdibujar;
                     if (ExisteCambioenB)
                     {
                         Bdibujar = columna.Seccions[i].Item1.B;
-
                     }
                     else
                     {

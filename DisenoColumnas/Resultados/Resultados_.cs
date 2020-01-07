@@ -11,8 +11,8 @@ namespace DisenoColumnas.Resultados
 {
     public partial class Resultados_ : Form
     {
-
         private DataSet DataVirtual;
+
         public Resultados_()
         {
             InitializeComponent();
@@ -22,7 +22,6 @@ namespace DisenoColumnas.Resultados
 
         private void CreateTableVirtualInfoColumnas()
         {
-
             string NameTable = "Información de Columnas";
             List<string> Encabezados = new List<string> { "Top/ Medium/ Button", "Label", "Nombre", "Story", "f'c [kgf/cm²]", "Sección", "Acero Requerido [cm²]", "rho R", "Acero Asignado [cm²]", "rho A", "%Ref" };
             DataTable table = new DataTable(NameTable);
@@ -46,7 +45,6 @@ namespace DisenoColumnas.Resultados
                         if (j == 0)
                         {
                             dataRow[0] = "Top";
-
                         }
                         if (j == 1)
                         {
@@ -73,13 +71,8 @@ namespace DisenoColumnas.Resultados
 
                         table.Rows.Add(dataRow);
                     }
-
-
                 }
-
-
             }
-
         }
 
         private void CrearTableVitualEstribos()
@@ -117,13 +110,8 @@ namespace DisenoColumnas.Resultados
                             table.Rows.Add(dataRow);
                         }
                     }
-
                 }
-
-
             }
-
-
         }
 
 
@@ -142,7 +130,6 @@ namespace DisenoColumnas.Resultados
             if (treeViewResultados.Nodes[0].Nodes[1].Checked)
             {
                 CrearTableVitualEstribos();
-
             }
 
             if (DataVirtual.Tables.Count != 0)
@@ -151,7 +138,6 @@ namespace DisenoColumnas.Resultados
                 TabladeResultados.DataVirtual = DataVirtual;
                 tabladeResultados.ShowDialog();
             }
-
         }
 
         private void Panel5_MouseDown(object sender, MouseEventArgs e)
@@ -163,7 +149,6 @@ namespace DisenoColumnas.Resultados
 
 
         #region TreeView
-
 
         private void treeView1_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
@@ -229,6 +214,7 @@ namespace DisenoColumnas.Resultados
             if ((e.State & TreeNodeStates.Focused) > 0)
                 ControlPaint.DrawFocusRectangle(e.Graphics, e.Node.Bounds);
         }
+
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (e.Action == TreeViewAction.Unknown)
@@ -245,6 +231,7 @@ namespace DisenoColumnas.Resultados
             this.treeViewResultados.Invalidate();
             this.treeViewResultados.EndUpdate();
         }
+
         private void MarcarDesmarcarNodosHijos(TreeNode nodeParent, bool flag)
         {
             nodeParent.Tag = null;
@@ -258,6 +245,7 @@ namespace DisenoColumnas.Resultados
             if (flag && nodeParent.Parent != null)
                 this.IndeterminarPadre(nodeParent.Parent);
         }
+
         private void IndeterminarPadre(TreeNode nodeParent)
         {
             int cntIndeterminados = nodeParent.Nodes.OfType<TreeNode>().Where(node => node.Tag != null).Count();
@@ -268,6 +256,6 @@ namespace DisenoColumnas.Resultados
                 this.IndeterminarPadre(nodeParent.Parent);
         }
 
-        #endregion
+        #endregion TreeView
     }
 }

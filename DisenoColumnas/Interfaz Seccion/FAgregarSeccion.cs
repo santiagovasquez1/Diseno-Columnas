@@ -9,8 +9,13 @@ namespace DisenoColumnas.Interfaz_Seccion
 {
     public partial class FAgregarSeccion : Form
     {
-        public FAgregarSeccion()
+        public GDE gde { get; set; }
+        public ListBox Lista_Secciones { get; set; }
+
+        public FAgregarSeccion(GDE pgde, ListBox pLista_secciones)
         {
+            gde = pgde;
+            Lista_Secciones = pLista_secciones;
             InitializeComponent();
         }
 
@@ -95,6 +100,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             if (Tipo_seccion != TipodeSeccion.L.ToString() & Tipo_seccion != TipodeSeccion.Tee.ToString())
             {
                 Crear_Seccion(Tipo_seccion, b, h, tw, tf, r);
+                Actualizar_Lista();
                 Close();
             }
             else
@@ -102,6 +108,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 if (b <= h)
                 {
                     Crear_Seccion(Tipo_seccion, b, h, tw, tf, r);
+                    Actualizar_Lista();
                     Close();
                 }
                 else
@@ -237,6 +244,25 @@ namespace DisenoColumnas.Interfaz_Seccion
                     }
                 }
             }
+        }
+
+        private void Actualizar_Lista()
+        {
+            ISeccion[] Secciones = { };
+            string Fc_secciones = "H" + tbFc.Text;
+
+            if (gde == GDE.DMO)
+            {
+                Secciones = Form1.secciones_predef.Secciones_DMO.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
+            }
+            else
+            {
+                Secciones = Form1.secciones_predef.Secciones_DES.FindAll(x => x.Material.Name == Fc_secciones).ToArray();
+            }
+
+            Lista_Secciones.Items.Clear();
+            Lista_Secciones.Items.AddRange(Secciones);
+            Lista_Secciones.SelectedItem = Lista_Secciones.Items[0];
         }
     }
 }

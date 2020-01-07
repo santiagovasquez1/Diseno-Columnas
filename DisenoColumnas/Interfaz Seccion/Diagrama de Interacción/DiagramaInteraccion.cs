@@ -23,6 +23,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         }
 
         #region Para OpenGl
+
         public static DiagramaInteraccion Diagrama { get; set; }
         private int eyeX = 100, eyeY = 100, eyeZ = 100; private bool Loaded = false;
         private List<Int32> GList;
@@ -41,7 +42,6 @@ namespace DisenoColumnas.Interfaz_Seccion
         private List<float[]> MP2D { get; set; }
         private List<float[]> MP3D { get; set; }
         private List<float[]> MP3D_SoloUnaRecta { get; set; }
-
 
         private List<Tuple<List<float[]>, int>> TuplesMP2D { get; set; }
         private List<Tuple<List<float[]>, int>> TuplesMP3D { get; set; }
@@ -260,8 +260,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 Label1.Enabled = false;
                 label2.Enabled = false;
             }
-
-
         }
 
         private float FC1 = 0.001f;
@@ -332,7 +330,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 {
                     chart.Series[1].Points.AddXY(Point[0], Point[1]);
                 }
-
             }
         }
 
@@ -485,7 +482,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             if (sinSolicitacionesToolStripMenuItem.Checked)
             {
                 sinSolicitacionesToolStripMenuItem.Checked = false;
-
             }
             if (verSolicitacionesToolStripMenuItem.Checked)
             {
@@ -511,7 +507,6 @@ namespace DisenoColumnas.Interfaz_Seccion
                 MP3D_UnAngulo.Clear();
                 MPpuntosSolicitaciones.Clear();
                 MostrarValores();
-
             }
         }
 
@@ -530,16 +525,11 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 using (var workbook = new XLWorkbook())
                 {
-
                     string TextoCarga = "Pn [Tonf]"; string M1 = "Mnx [Tonf-m]"; string M2 = "Mny [Tonf-m]";
                     if (ConFi)
                     {
                         TextoCarga = "Pu [Tonf]"; M1 = "Mux [Tonf-m]"; M2 = "Muy [Tonf-m]";
                     }
-
-
-
-
 
                     var worksheet = workbook.AddWorksheet("DI 3D");
                     for (int i = 0; i < TuplesMP3D.Count; i++)
@@ -578,8 +568,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             }
         }
-
-
 
         private void Gl_Paint(object sender, PaintEventArgs e)
         {

@@ -97,6 +97,7 @@ namespace DisenoColumnas.Diseño
                             MaxB = ColumnaSelect.Seccions[i].Item1.B;
                         }
                     }
+
                 }
 
                 SX = (Width - 15) / 10;

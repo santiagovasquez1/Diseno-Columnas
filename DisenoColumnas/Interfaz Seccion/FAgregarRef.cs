@@ -112,7 +112,6 @@ namespace DisenoColumnas.Interfaz_Seccion
 
         private void Cargar_Datos(DataGridView data)
         {
-
             data.Rows.Clear();
             data.Rows.Add(Seccion.Refuerzos.Count);
             DataGridViewComboBoxCell boxCell;

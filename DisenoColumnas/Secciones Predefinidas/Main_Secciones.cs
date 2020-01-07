@@ -3,6 +3,7 @@ using DisenoColumnas.Secciones;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace DisenoColumnas.Secciones_Predefinidas
 {
@@ -22,9 +23,9 @@ namespace DisenoColumnas.Secciones_Predefinidas
 
             //try
             //{
-            //    Ruta_Carpeta = Application.StartupPath;
-            //    Ruta_Archivo = @"\\Secciones.sec";
-            //    Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
+            //Ruta_Carpeta = Application.StartupPath;
+            //Ruta_Archivo = @"\\Secciones.sec";
+            //Ruta_Completa = Ruta_Carpeta + Ruta_Archivo;
             //}
             //catch (System.Exception)
             //{

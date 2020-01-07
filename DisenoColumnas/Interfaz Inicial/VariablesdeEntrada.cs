@@ -85,13 +85,11 @@ namespace DisenoColumnas.Interfaz_Inicial
                         }
                     }
 
-
                     if (ProyectoPV)
                     {
                         if (RedondearDecimales.Checked)
                         {
                             MessageBox.Show("NOTA: El redondeo de decimales en la longitud de las barras afectará el dibujo en AutoCAD, se deberá realizar el acotamiento de los traslapos de forma manual. ", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                         }
                     }
                     Close();
@@ -101,9 +99,6 @@ namespace DisenoColumnas.Interfaz_Inicial
             {
                 MessageBox.Show("Defina el grado de disipación de la estructura.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
-
-
         }
 
         private void Panel2_MouseDown(object sender, MouseEventArgs e)

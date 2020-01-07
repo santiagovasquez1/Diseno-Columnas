@@ -349,7 +349,6 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
 
         private void CantBarras_TextChanged(object sender, EventArgs e)
         {
-
             if (Int32.TryParse(CantBarras.Text, out int CantBarras_i) && Int32.TryParse(NoBarra.Text, out int NoBarra_i))
             {
                 LlenarConvencionesList(CantBarras_i, NoBarra_i);
@@ -368,7 +367,6 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
 
         private void NoBarra_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (Int32.TryParse(CantBarras.Text, out int CantBarras_i) && Int32.TryParse(NoBarra.Text, out int NoBarra_i))
             {
                 LlenarConvencionesList(CantBarras_i, NoBarra_i);
@@ -460,6 +458,7 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                 Form1.mAgregarAlzado.D_Alzado.RefreshEdit();
             }
         }
+
         #region Sombra Formulario
 
         //SOMBRA
@@ -553,7 +552,6 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
             if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)     // drag the form
                 m.Result = (IntPtr)HTCAPTION;
         }
-
 
         #endregion Sombra Formulario
 

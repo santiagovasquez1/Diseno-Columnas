@@ -45,7 +45,6 @@ namespace DisenoColumnas.DefinirColumnas
                 Alignment = PenAlignment.Center
             };
 
-
             for (int i = 1; i < No_CuadrosX; i++)
             {
                 g.DrawLine(P, Ancho_Cuadro * i, 0, Ancho_Cuadro * i, Height);
@@ -56,6 +55,7 @@ namespace DisenoColumnas.DefinirColumnas
                 g.DrawLine(P, 0, Alto_Cuadro * i, Width, Alto_Cuadro * i);
             }
         }
+
         private void Grafica_Paint(object sender, PaintEventArgs e)
         {
             Grafica.CreateGraphics().Clear(Color.White);
@@ -64,6 +64,7 @@ namespace DisenoColumnas.DefinirColumnas
 
             //Graficar Cuadicula
 
+            //Graficar Cuadicula
 
             //Crear_grilla(e.Graphics, Grafica.Height, Grafica.Width);
 
@@ -71,7 +72,6 @@ namespace DisenoColumnas.DefinirColumnas
             List<float> MINXX = new List<float>();
             List<float> MAXY = new List<float>();
             List<float> MINXY = new List<float>();
-
 
             float MPX1 = (float)Form1.Proyecto_.Lista_Vigas.Max(x => x.CoordXY1[0]);
             MAXX.Add(MPX1);
@@ -103,9 +103,6 @@ namespace DisenoColumnas.DefinirColumnas
             MPY = MAXY.Max();
             MNY = MINXY.Max();
 
-
-
-
             if (MNX > 0) { MNX = 0; }
             if (MPX < 0) { MPX = 0; }
 
@@ -118,12 +115,10 @@ namespace DisenoColumnas.DefinirColumnas
             float SX = (Width - 15) / (Math.Abs(MPX - MNX));
             float SY = (Height - 15) / (Math.Abs(MPY - MNY));
 
-
             string Nomb_PrimerPiso = "";
             float DisAcum = 0;
             if (Form1.Proyecto_.ColumnaSelect != null)
             {
-
                 try
                 {
                     Nomb_PrimerPiso = Form1.Proyecto_.ColumnaSelect.Seccions[NoPiso].Item2;
@@ -134,8 +129,6 @@ namespace DisenoColumnas.DefinirColumnas
                     DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[NoPiso];
                 }
                 catch { DisAcum = Form1.Proyecto_.ColumnaSelect.LuzAcum[Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1]; }
-
-
             }
 
             foreach (Viga viga in Form1.Proyecto_.Lista_Vigas)
@@ -164,6 +157,7 @@ namespace DisenoColumnas.DefinirColumnas
             Text = "Planta de Columnas - " + Nomb_PrimerPiso + "- Elevación: " + Math.Round(DisAcum, 2);
 
 
+            Text = "Planta de Columnas - " + Nomb_PrimerPiso + "- Elevación: " + Math.Round(DisAcum, 2);
         }
 
         private void PlantaColumnas_Paint(object sender, PaintEventArgs e)
@@ -193,7 +187,6 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void Grafica_MouseDown(object sender, MouseEventArgs e)
         {
-
             Columna ColumaSelectInPlantas;
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
@@ -231,8 +224,6 @@ namespace DisenoColumnas.DefinirColumnas
             }
         }
 
-
-
         private void Grafica_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
@@ -244,9 +235,7 @@ namespace DisenoColumnas.DefinirColumnas
             Invalidate();
         }
 
-
         public int NoPiso = 0;
-
 
         private void Up()
         {
@@ -273,7 +262,6 @@ namespace DisenoColumnas.DefinirColumnas
         {
             if (Form1.Proyecto_.ColumnaSelect != null)
             {
-
                 if (NoPiso >= Form1.Proyecto_.ColumnaSelect.Seccions.Count - 1)
                 {
                     NoPiso = 0;
@@ -286,6 +274,7 @@ namespace DisenoColumnas.DefinirColumnas
                 Invalidate();
             }
         }
+
         private void Button1_Click(object sender, EventArgs e)
         {
             Up();
@@ -307,7 +296,6 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void Grafica_MouseMove(object sender, MouseEventArgs e)
         {
-
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 Cursor cursor = null;
@@ -337,14 +325,15 @@ namespace DisenoColumnas.DefinirColumnas
                 case (char)Keys.Up:
                     Up();
                     break;
+
                 case (char)Keys.Down:
                     Down();
                     break;
-
             }
         }
 
         private bool CheckedLabels { get; set; }
+
         private void MostrarLabels_CheckedChanged(object sender, EventArgs e)
         {
             CheckedLabels = mostrarLabels.Checked;
