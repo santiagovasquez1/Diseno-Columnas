@@ -71,7 +71,7 @@ namespace DisenoColumnas.Clases
             }
             AlturaAcum += H_S;
 
-    
+
 
             bool ExisteCambioenB = false;
 
@@ -83,7 +83,7 @@ namespace DisenoColumnas.Clases
                     catch { }
                 }
             }
-     
+
 
             for (int i = 0; i < columna.LuzLibre.Count; i++)
             {

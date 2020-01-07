@@ -100,11 +100,11 @@ namespace DisenoColumnas.InterfazViewInfo
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[1] * FactorConversion, 2);
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["Asasign"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].As_asignado[2] * FactorConversion, 2);
 
-                            if (ColumnaSelect.resultadosETABs[i].prequerida==null)
+                            if (ColumnaSelect.resultadosETABs[i].prequerida == null)
                             {
                                 ColumnaSelect.CrearCuantiaProyectoAntiguos(i);
                             }
-               
+
                             Info_D.Rows[Info_D.Rows.Count - 3].Cells["prequerida"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].prequerida[0], 2) + "%";
                             Info_D.Rows[Info_D.Rows.Count - 2].Cells["prequerida"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].prequerida[1], 2) + "%";
                             Info_D.Rows[Info_D.Rows.Count - 1].Cells["prequerida"].Value = Math.Round(ColumnaSelect.resultadosETABs[i].prequerida[2], 2) + "%";

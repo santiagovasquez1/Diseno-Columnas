@@ -27,7 +27,7 @@ namespace DisenoColumnas.DefinirColumnas
         private void PlantaColumnas_Load(object sender, EventArgs e)
         {
             Grafica.Invalidate();
-          
+
         }
 
         private void Crear_grilla(Graphics g, int Height, int Width)
@@ -61,7 +61,7 @@ namespace DisenoColumnas.DefinirColumnas
             Grafica.CreateGraphics().Clear(Color.White);
             float Height = Grafica.Height - 30;
             float Width = Grafica.Width - 30;
-        
+
             //Graficar Cuadicula
 
 
@@ -100,7 +100,7 @@ namespace DisenoColumnas.DefinirColumnas
 
             MPX = MAXX.Max();
             MNX = MINXX.Max();
-            MPY = MAXY .Max();
+            MPY = MAXY.Max();
             MNY = MINXY.Max();
 
 
@@ -152,17 +152,17 @@ namespace DisenoColumnas.DefinirColumnas
                 {
                     if (columna.Seccions[i].Item2 == Nomb_PrimerPiso)
                     {
-                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI,columna.Seccions[i].Item1,CheckedLabels);
+                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI, columna.Seccions[i].Item1, CheckedLabels);
                     }
                 }
 
 
-                    
-            }
-         
 
-            Text = "Planta de Columnas - " + Nomb_PrimerPiso + "- Elevación: " + Math.Round(DisAcum,2);
-  
+            }
+
+
+            Text = "Planta de Columnas - " + Nomb_PrimerPiso + "- Elevación: " + Math.Round(DisAcum, 2);
+
 
         }
 
@@ -180,7 +180,7 @@ namespace DisenoColumnas.DefinirColumnas
                     if (Form1.m_Despiece != null)
                     {
                         Form1.m_Despiece.Invalidate();
-                      }
+                    }
                 }
                 else
                 {
@@ -198,17 +198,17 @@ namespace DisenoColumnas.DefinirColumnas
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 ColumaSelectInPlantas = columna.MouseDown(e);
-                
+
                 Grafica.Invalidate();
 
                 if (ColumaSelectInPlantas != null)
                 {
                     Form1.Proyecto_.ColumnaSelect = ColumaSelectInPlantas;
                     Form1.mLcolumnas.Text = Form1.Proyecto_.ColumnaSelect.Name;
-                    NoPiso = Form1.Proyecto_.ColumnaSelect.LuzAcum.Count-1;
+                    NoPiso = Form1.Proyecto_.ColumnaSelect.LuzAcum.Count - 1;
                     break;
                 }
-        
+
             }
 
             foreach (Columna columna1 in Form1.Proyecto_.Lista_Columnas)
@@ -238,7 +238,7 @@ namespace DisenoColumnas.DefinirColumnas
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 columna.MouseDobleClick(e);
-       
+
             }
             Grafica.Invalidate();
             Invalidate();
@@ -298,7 +298,7 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void AllReadyColumnsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach(Columna col in Form1.Proyecto_.Lista_Columnas)
+            foreach (Columna col in Form1.Proyecto_.Lista_Columnas)
             {
                 col.Ready = allReadyColumnsToolStripMenuItem.Checked;
             }
@@ -311,7 +311,7 @@ namespace DisenoColumnas.DefinirColumnas
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
             {
                 Cursor cursor = null;
-                if(columna.MouseMove(e, ref cursor))
+                if (columna.MouseMove(e, ref cursor))
                 {
                     Grafica.Cursor = cursor;
                     break;
@@ -320,14 +320,14 @@ namespace DisenoColumnas.DefinirColumnas
                 {
                     Grafica.Cursor = Cursors.Default;
                 }
-                
-      
+
+
             }
         }
 
         private void PlantaColumnas_KeyDown(object sender, KeyEventArgs e)
         {
-      
+
         }
 
         private void PlantaColumnas_KeyPress(object sender, KeyPressEventArgs e)

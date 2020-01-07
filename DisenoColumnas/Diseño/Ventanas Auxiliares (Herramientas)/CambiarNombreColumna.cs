@@ -94,7 +94,7 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                     {
                         if (D_ColLabel.Rows[i].Cells[1].Value.ToString() != "")
                         {
-                            
+
                             if (D_ColLabel.Rows[i].Cells[1].Value.ToString() == D_ColLabel.Rows[e.RowIndex].Cells[1].Value.ToString())
                             {
                                 MessageBox.Show("El Label asignado ya existe.", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -109,7 +109,7 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
 
 
             }
-            
+
         }
     }
 }

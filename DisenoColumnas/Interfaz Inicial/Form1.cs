@@ -296,7 +296,7 @@ namespace DisenoColumnas
                     PanelContenedor.SaveAsXml(configFile);
                 }
 
-     
+
             }
         }
 
@@ -732,7 +732,7 @@ namespace DisenoColumnas
 
             foreach (Columna columna in Proyecto_.Lista_Columnas)
             {
-                
+
                 for (int j = 0; j < columna.resultadosETABs.Count; j++)
                 {
                     List<float[]> PM2M3V2V3 = new List<float[]>();
@@ -741,14 +741,14 @@ namespace DisenoColumnas
                     int ParaAcero = 0;
                     for (int k = 0; k < columna.resultadosETABs[j].Load.Count; k++)
                     {
-                       
+
                         if (columna.resultadosETABs[j].Load[k].Contains("SU"))
                         {
-                            PM2M3V2V3.Add(new float[] { columna.resultadosETABs[j].P[k], columna.resultadosETABs[j].M2[k], columna.resultadosETABs[j].M3[k], columna.resultadosETABs[j].V2[k], columna.resultadosETABs[j].V3[k],(float)columna.resultadosETABs[j].As[ParaAcero] *10000});
+                            PM2M3V2V3.Add(new float[] { columna.resultadosETABs[j].P[k], columna.resultadosETABs[j].M2[k], columna.resultadosETABs[j].M3[k], columna.resultadosETABs[j].V2[k], columna.resultadosETABs[j].V3[k], (float)columna.resultadosETABs[j].As[ParaAcero] * 10000 });
                             Vcx.Add(0); Vcy.Add(0); Vsx.Add(0); Vsy.Add(0);
                         }
-                        ParaAcero +=1;
-                        if(ParaAcero> columna.resultadosETABs[j].As.Count-1)
+                        ParaAcero += 1;
+                        if (ParaAcero > columna.resultadosETABs[j].As.Count - 1)
                         {
                             ParaAcero = 0;
                         }
@@ -757,23 +757,23 @@ namespace DisenoColumnas
 
                     ISeccion seccion = FunctionsProject.DeepClone(columna.Seccions[j].Item1);
                     seccion.PM2M3V2V3 = PM2M3V2V3;
-                    for(int k=0;k< PM2M3V2V3.Count; k++)
+                    for (int k = 0; k < PM2M3V2V3.Count; k++)
                     {
                         float FC1 = 1000; float FC2 = 100000;
                         float r = 0.04f;
                         float As = PM2M3V2V3[k][5];
-                        float Vu3 = PM2M3V2V3[k][4]*FC1;
+                        float Vu3 = PM2M3V2V3[k][4] * FC1;
                         float Vu2 = PM2M3V2V3[k][3] * FC1;
-                        float Nu= PM2M3V2V3[k][0] * FC1;
-                        float Mu2 = PM2M3V2V3[k][1]*FC2;
-                        float Mu3 = PM2M3V2V3[k][2]*FC2;
+                        float Nu = PM2M3V2V3[k][0] * FC1;
+                        float Mu2 = PM2M3V2V3[k][1] * FC2;
+                        float Mu3 = PM2M3V2V3[k][2] * FC2;
                         float h = seccion.H * 100;
                         float bw = seccion.B * 100;
                         float Area = (float)seccion.Area * 10000;
                         //VCx
-                        float d = (seccion.B-r) * 100;
+                        float d = (seccion.B - r) * 100;
                         Vcx[k] = FunctionsProject.VcDef(seccion.Material.FC, As, Math.Abs(Vu3), d, h, Math.Abs(Mu2), bw, Nu, Area);
-                        Vsx[k] =Math.Abs(Vu3)/FC1 - Vcx[k];
+                        Vsx[k] = Math.Abs(Vu3) / FC1 - Vcx[k];
                         if (Vsx[k] < 0)
                         {
                             Vsx[k] = 0;
@@ -781,7 +781,7 @@ namespace DisenoColumnas
                         //VCy
                         d = (seccion.H - r) * 100;
                         Vcy[k] = FunctionsProject.VcDef(seccion.Material.FC, As, Math.Abs(Vu2), d, bw, Math.Abs(Mu3), h, Nu, Area);
-                        Vsy[k] = Math.Abs(Vu2)/FC1- Vcy[k];
+                        Vsy[k] = Math.Abs(Vu2) / FC1 - Vcy[k];
                         if (Vsy[k] < 0)
                         {
                             Vsy[k] = 0;
@@ -792,7 +792,7 @@ namespace DisenoColumnas
                     Tuple<ISeccion, string> TupleAux = new Tuple<ISeccion, string>(seccion, columna.Seccions[j].Item2);
                     columna.Seccions[j] = TupleAux;
                 }
-          
+
             }
         }
 
@@ -1548,12 +1548,12 @@ namespace DisenoColumnas
                             var Yunicos = Coord.Select(x => x[1]).Distinct().ToList();
 
                             var p = FunctionsProject.Dimension2(Coord, true); //Dimenciones en X
-                            var q= FunctionsProject.Dimension2(Coord, false); //Dimenciones en Y
+                            var q = FunctionsProject.Dimension2(Coord, false); //Dimenciones en Y
 
                             pB = (float)p[0];
-                            pTw= (float)p[1];
+                            pTw = (float)p[1];
 
-                            pH= (float)q[0];
+                            pH = (float)q[0];
                             pTf = (float)q[1];
 
                             //pTw = FunctionsProject.Dimension(Xunicos, false);
@@ -2105,7 +2105,7 @@ namespace DisenoColumnas
                 if (Proyecto_.ColumnaSelect.Alzados.Count > 1)
                 {
 
-                    Proyecto_.ColumnaSelect.Alzados.RemoveAt(Proyecto_.ColumnaSelect.Alzados.Count-1);
+                    Proyecto_.ColumnaSelect.Alzados.RemoveAt(Proyecto_.ColumnaSelect.Alzados.Count - 1);
                     Proyecto_.ColumnaSelect.KgRefuerzoforColumAlzado.RemoveAt(Proyecto_.ColumnaSelect.Alzados.Count - 1);
 
                     Proyecto_.ColumnaSelect.ActualizarRefuerzo();
@@ -2211,7 +2211,7 @@ namespace DisenoColumnas
                         Temp_seccion2.H = Temp_seccion.H;
                         Temp_seccion2.Material = Col.Seccions[i].Item1.Material;
 
-                        if (Temp_seccion2.Refuerzos.Count > 0 & Temp_seccion2.B > Temp_seccion2.H )
+                        if (Temp_seccion2.Refuerzos.Count > 0 & Temp_seccion2.B > Temp_seccion2.H)
                         {
                             double[] Rotacion;
                             Temp_seccion2.Estribo.NoRamasH1 = FunctionsProject.DeepClone(Temp.Find(x => x.Equals(Temp_seccion)).Estribo.NoRamasV1);

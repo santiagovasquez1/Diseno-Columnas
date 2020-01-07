@@ -28,7 +28,7 @@ namespace DisenoColumnas.Diseño
                 MaxB = ColumnaSelect.Seccions.FindAll(m => m != null).ToList().Max(m => m.Item1.B);
                 MaxH = ColumnaSelect.Seccions.FindAll(m => m != null).ToList().Max(m => m.Item1.H);
 
-                bool ExisteCambioenB=false;
+                bool ExisteCambioenB = false;
                 for (int i = ColumnaSelect.Seccions.Count - 1; i >= 0; i--)
                 {
                     if (ColumnaSelect.Seccions[i].Item1 != null)
@@ -37,11 +37,11 @@ namespace DisenoColumnas.Diseño
                         catch { }
                     }
                 }
-                if (ExisteCambioenB==false)
+                if (ExisteCambioenB == false)
                 {
                     MaxB = MaxH;
                 }
-           
+
 
                 float SX = (Draw_Column.Width - 15) / MaxB;
 
@@ -114,7 +114,7 @@ namespace DisenoColumnas.Diseño
                     float TamanoFuente = 0.07f * (SX + SY);
                     if (ColumnaSelect.LuzLibre[0] * SY - ColumnaSelect.VigaMayor.Seccions[0].Item1.H * SY < TamanoFuente)
                     {
-                        TamanoFuente = ColumnaSelect.LuzLibre[ColumnaSelect.LuzLibre.Count-1] * SY - ColumnaSelect.VigaMayor.Seccions[ColumnaSelect.VigaMayor.Seccions.Count-1].Item1.H * SY;
+                        TamanoFuente = ColumnaSelect.LuzLibre[ColumnaSelect.LuzLibre.Count - 1] * SY - ColumnaSelect.VigaMayor.Seccions[ColumnaSelect.VigaMayor.Seccions.Count - 1].Item1.H * SY;
                     }
 
                     Font Fuente = new Font("Calibri", TamanoFuente, FontStyle.Bold);
@@ -268,7 +268,7 @@ namespace DisenoColumnas.Diseño
                         {
                             if (col.Seccions[i].Item1.H != col.Seccions[i - 1].Item1.H)
                             {
-                                float B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i-1].Item1.H) / MaxH1) + DPR;
+                                float B_Draw2 = ((col.Alzados[col.Alzados.Count - 1].DistX * col.Seccions[i - 1].Item1.H) / MaxH1) + DPR;
 
                                 e.Graphics.DrawLine(pen, X + B_Draw * SX, HeighForm - Y - col.LuzAcum[i] * SY, X + B_Draw2 * SX, HeighForm - Y - col.LuzAcum[i] * SY);
                             }
@@ -319,6 +319,6 @@ namespace DisenoColumnas.Diseño
             Draw_Colum_Alzado.Invalidate();
         }
 
-     
+
     }
 }

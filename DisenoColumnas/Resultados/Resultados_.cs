@@ -1,12 +1,9 @@
 ﻿using DisenoColumnas.Clases;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -22,12 +19,12 @@ namespace DisenoColumnas.Resultados
             DataVirtual = new DataSet("DATAVIRTUAL");
         }
 
-     
+
         private void CreateTableVirtualInfoColumnas()
         {
 
             string NameTable = "Información de Columnas";
-            List<string> Encabezados = new List<string> {"Top/ Medium/ Button", "Label", "Nombre", "Story", "f'c [kgf/cm²]","Sección","Acero Requerido [cm²]", "rho R","Acero Asignado [cm²]", "rho A","%Ref" };
+            List<string> Encabezados = new List<string> { "Top/ Medium/ Button", "Label", "Nombre", "Story", "f'c [kgf/cm²]", "Sección", "Acero Requerido [cm²]", "rho R", "Acero Asignado [cm²]", "rho A", "%Ref" };
             DataTable table = new DataTable(NameTable);
             DataVirtual.Tables.Add(table);
             for (int i = 0; i < Encabezados.Count; i++)
@@ -54,12 +51,12 @@ namespace DisenoColumnas.Resultados
                         if (j == 1)
                         {
                             dataRow[0] = "Medium";
-     
+
                         }
                         if (j == 2)
                         {
                             dataRow[0] = "Button";
-       
+
                         }
 
                         dataRow[1] = col.Name;
@@ -68,8 +65,8 @@ namespace DisenoColumnas.Resultados
                         dataRow[4] = col.Seccions[i].Item1.Material.FC;
                         dataRow[5] = col.Seccions[i].Item1.ToString();
 
-                        dataRow[6] = Math.Round(col.resultadosETABs[i].AsTopMediumButton[j] * FC, 2) ;
-                        dataRow[7] = Math.Round(col.resultadosETABs[i].prequerida[j],2) + "%";
+                        dataRow[6] = Math.Round(col.resultadosETABs[i].AsTopMediumButton[j] * FC, 2);
+                        dataRow[7] = Math.Round(col.resultadosETABs[i].prequerida[j], 2) + "%";
                         dataRow[8] = Math.Round(col.resultadosETABs[i].As_asignado[j] * FC, 2);
                         dataRow[9] = Math.Round(col.resultadosETABs[i].pasignada[j], 2) + "%";
                         dataRow[10] = Math.Round(col.resultadosETABs[i].Porct_Refuerzo[j], 2) + "%";
@@ -90,7 +87,7 @@ namespace DisenoColumnas.Resultados
             if (Form1.Proyecto_ != null)
             {
                 string NameTable = "Cantidad de Estribos";
-                List<string> Encabezados = new List<string> { "Columna", "Piso" , "Luz Libre" + Environment.NewLine + "(m)", "#E en Viga", "#E en Zona Confinada", "#E en Zona No Confinada", "#E en Zona Confinada " };
+                List<string> Encabezados = new List<string> { "Columna", "Piso", "Luz Libre" + Environment.NewLine + "(m)", "#E en Viga", "#E en Zona Confinada", "#E en Zona No Confinada", "#E en Zona Confinada " };
                 DataTable table = new DataTable(NameTable);
                 DataVirtual.Tables.Add(table);
 
@@ -102,7 +99,7 @@ namespace DisenoColumnas.Resultados
 
                 foreach (Columna col in Form1.Proyecto_.Lista_Columnas)
                 {
-               
+
                     if (col.CantEstribos_Sepa != null)
                     {
                         for (int i = 0; i < col.CantEstribos_Sepa.Count; i++)
@@ -112,10 +109,10 @@ namespace DisenoColumnas.Resultados
                             dataRow[0] = col.Name;
                             dataRow[1] = col.Seccions[i].Item2;
                             dataRow[2] = String.Format("{0:0.00}", col.LuzLibre[i]);
-                            dataRow[3] = (int)col.CantEstribos_Sepa[i][0] == 0? "-": (col.CantEstribos_Sepa[i][0] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
-                            dataRow[4] = (int)col.CantEstribos_Sepa[i][1] == 0 ?"-" : (col.CantEstribos_Sepa[i][1] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
-                            dataRow[5] = (int)col.CantEstribos_Sepa[i][2] == 0 ?"-" : (col.CantEstribos_Sepa[i][2] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + Math.Round((float)col.CantEstribos_Sepa[i][5]*100,2) + "cm");
-                            dataRow[6] = (int)col.CantEstribos_Sepa[i][3] == 0 ?"-" : (col.CantEstribos_Sepa[i][3] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
+                            dataRow[3] = (int)col.CantEstribos_Sepa[i][0] == 0 ? "-" : (col.CantEstribos_Sepa[i][0] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
+                            dataRow[4] = (int)col.CantEstribos_Sepa[i][1] == 0 ? "-" : (col.CantEstribos_Sepa[i][1] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
+                            dataRow[5] = (int)col.CantEstribos_Sepa[i][2] == 0 ? "-" : (col.CantEstribos_Sepa[i][2] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + Math.Round((float)col.CantEstribos_Sepa[i][5] * 100, 2) + "cm");
+                            dataRow[6] = (int)col.CantEstribos_Sepa[i][3] == 0 ? "-" : (col.CantEstribos_Sepa[i][3] + " # " + col.Seccions[i].Item1.Estribo.NoEstribo + " @" + col.Seccions[i].Item1.Estribo.Separacion + "cm");
 
                             table.Rows.Add(dataRow);
                         }
@@ -129,7 +126,7 @@ namespace DisenoColumnas.Resultados
 
         }
 
-  
+
         private void BAceptar_Click(object sender, EventArgs e)
         {
             Close();
@@ -147,8 +144,8 @@ namespace DisenoColumnas.Resultados
                 CrearTableVitualEstribos();
 
             }
-            
-            if (DataVirtual.Tables.Count!=0)
+
+            if (DataVirtual.Tables.Count != 0)
             {
                 TabladeResultados tabladeResultados = new TabladeResultados();
                 TabladeResultados.DataVirtual = DataVirtual;
@@ -163,7 +160,7 @@ namespace DisenoColumnas.Resultados
             Utilidades.MoveWindow.SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
-        
+
 
         #region TreeView
 

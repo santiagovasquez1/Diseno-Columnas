@@ -491,7 +491,7 @@ namespace DisenoColumnas.Secciones
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddCircle(CentroDibujo, radio, LayerCirculo);
             FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo_Circular(CentroDibujo, "FC_ESTRIBOS", radio - 2 * 0.02, EscalaR, EscalaR, 1, 0);
-            
+
             #region Dibujo de refuerzo en seccion
 
             var X_unicos = Refuerzos.Select(x => Math.Round(x.Coord[0], 2)).ToList().Distinct().ToList();

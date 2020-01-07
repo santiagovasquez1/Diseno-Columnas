@@ -934,7 +934,7 @@ namespace DisenoColumnas.Diseño
         private void D_Alzado_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
 
-  
+
 
 
             if (D_Alzado.SelectedCells.Count > 0)
@@ -950,7 +950,7 @@ namespace DisenoColumnas.Diseño
                 }
             }
 
-     
+
 
         }
 
@@ -1101,7 +1101,7 @@ namespace DisenoColumnas.Diseño
 
             Filas_numeros = Filas_numeros.OrderByDescending(x => x).ToList();
             Columnas_numeros = Columnas_numeros.OrderBy(x => x).ToList();
-            if (Columnas_numeros.Exists(x=> x==-1)==false)
+            if (Columnas_numeros.Exists(x => x == -1) == false)
             {
                 AgregarRefuerzoBase @base = new AgregarRefuerzoBase();
                 AgregarRefuerzoBase.Columnas = Columnas_numeros;

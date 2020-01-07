@@ -94,7 +94,7 @@ namespace DisenoColumnas.Secciones
             for (int i = 0; i < Coordenadas.Count; i++)
             {
                 List<double> CoordRotadas = Operaciones.Rotacion(Coordenadas[i].X, Coordenadas[i].Y, (Angulo * Math.PI) / 180);
-                Coordenadas_Angulo.Add(new float[] { (float)CoordRotadas[0]*100, (float)CoordRotadas[1] *100});
+                Coordenadas_Angulo.Add(new float[] { (float)CoordRotadas[0] * 100, (float)CoordRotadas[1] * 100 });
             }
 
             float[] CentroideFigura2 = FunctionsProject.DeterminarCentroideSentidoAntiHorario(Coordenadas_Angulo);
@@ -129,12 +129,12 @@ namespace DisenoColumnas.Secciones
 
             int DeltasVariacionC = 20;
 
-            for (float C = ymin/b1; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
+            for (float C = ymin / b1; C <= ymax; C += (ymax - ymin) / DeltasVariacionC)
             {
                 YVariaciona.Add(C + (ymax - C) - (ymax - C) * b1);
                 YVariacionC.Add(C);
             }
-              
+
             foreach (CRefuerzo cRefuerzo in Refuerzos)
             {
 
@@ -193,13 +193,13 @@ namespace DisenoColumnas.Secciones
                 foreach (CRefuerzo cRefuerzo in Refuerzos)
                 {
                     Fs += cRefuerzo.Fuerzas_Angulo[i];
-                    Ms += Math.Abs(cRefuerzo.Fuerzas_Angulo[i]) * Math.Abs(cRefuerzo.Coordenadas_Angulo[1]- CentroideFigura2[1]);
+                    Ms += Math.Abs(cRefuerzo.Fuerzas_Angulo[i]) * Math.Abs(cRefuerzo.Coordenadas_Angulo[1] - CentroideFigura2[1]);
                     Ast += (float)FunctionsProject.Find_As(Convert.ToInt32(cRefuerzo.Diametro.Substring(1))) * 10000;
                 }
 
 
-                float Mnx = Cc * (CentroideAreaComprimida[i][0]- CentroideFigura2[0]);
-                float Mny = Cc * (CentroideAreaComprimida[i][1]-CentroideFigura2[1]) + Ms;
+                float Mnx = Cc * (CentroideAreaComprimida[i][0] - CentroideFigura2[0]);
+                float Mny = Cc * (CentroideAreaComprimida[i][1] - CentroideFigura2[1]) + Ms;
 
                 float Mn_ = (float)Math.Sqrt(Math.Pow(Mnx, 2) + Math.Pow(Mny, 2));
                 float Pn_ = Cc + Fs;
@@ -335,7 +335,7 @@ namespace DisenoColumnas.Secciones
 
                 if (i == 0)
                 {
-                    if (Punto.Length !=0)
+                    if (Punto.Length != 0)
                     {
                         PuntosHallados.Add(Punto);
                     }
@@ -384,13 +384,13 @@ namespace DisenoColumnas.Secciones
                 }
 
 
-           
+
             }
 
             return PuntosHallados;
         }
 
-        private float[] PuntoIntercepto(PointF[] Puntos, float m,float Yperteneciente)
+        private float[] PuntoIntercepto(PointF[] Puntos, float m, float Yperteneciente)
         {
 
             float[] XY = new float[] { };
@@ -669,7 +669,7 @@ namespace DisenoColumnas.Secciones
             var Yunicos = CoordenadasSeccion.Select(x => x[1]).Distinct().ToList();
 
             D_off1 = rec;
-            D_off2 = rec +  (float)FunctionsProject.Find_Diametro(Estribo.NoEstribo) / 100;
+            D_off2 = rec + (float)FunctionsProject.Find_Diametro(Estribo.NoEstribo) / 100;
 
             //Aleta seccion
 
@@ -683,7 +683,7 @@ namespace DisenoColumnas.Secciones
                 var Xtf = Xunicos.Find(x => x != Xunicos.Min() & x != Xunicos.Max());
                 var Ytw = Yunicos.Find(y => y != Yunicos.Min() & y != Yunicos.Max());
 
-                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2)) 
+                if (Math.Round(Ytw + TW, 2) == Math.Round(Yunicos.Max(), 2))
                 {
                     Coord_aletas.Add(new float[] { Xunicos.Min(), Yunicos.Max() });
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -698,7 +698,7 @@ namespace DisenoColumnas.Secciones
                     Coord_aletas.Add(new float[] { Xunicos.Max(), Ytw });
                 }
 
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Yunicos.Max()) == false)    
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Yunicos.Max()) == false)
                 {
                     Coord_alma.Add(new float[] { Xtf, Yunicos.Max() });
                     Coord_alma.Add(new float[] { Xunicos.Max(), Yunicos.Max() });
@@ -910,7 +910,7 @@ namespace DisenoColumnas.Secciones
 
             if (Shape == TipodeSeccion.L)
             {
-                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Xunicos.Max()) == true)  
+                if (Math.Round(Xtf + TF, 2) == Math.Round(Xunicos.Max(), 2) & FunctionsProject.Find_Coord(CoordenadasSeccion, Xunicos.Min(), Xunicos.Max()) == true)
                 {
                     posx = Xtf + r;
                 }

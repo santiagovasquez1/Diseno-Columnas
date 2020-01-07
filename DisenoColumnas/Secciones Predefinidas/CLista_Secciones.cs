@@ -1,5 +1,4 @@
-﻿using DisenoColumnas.Clases;
-using DisenoColumnas.Secciones;
+﻿using DisenoColumnas.Secciones;
 using System;
 using System.Collections.Generic;
 

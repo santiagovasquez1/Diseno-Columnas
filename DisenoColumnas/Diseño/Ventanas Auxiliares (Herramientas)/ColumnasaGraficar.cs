@@ -99,7 +99,7 @@ namespace DisenoColumnas.Diseño
         {
             LoadDataGridView();
 
-            if(Form1.m_Informacion!= null)
+            if (Form1.m_Informacion != null)
             {
                 Form1.m_Informacion.EstiloDatGridView(D_ColGraficar);
             }

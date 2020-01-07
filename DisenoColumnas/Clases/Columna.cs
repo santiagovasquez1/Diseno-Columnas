@@ -99,7 +99,7 @@ namespace DisenoColumnas.Clases
         public void CrearCuantiaProyectoAntiguos(int NoPiso)
         {
             float Area = (float)Seccions[NoPiso].Item1.Area;
-   
+
             resultadosETABs[NoPiso].prequerida = new float[] { ((float)resultadosETABs[NoPiso].AsTopMediumButton[0]/Area)*100,
                                                                ((float)resultadosETABs[NoPiso].AsTopMediumButton[1]/Area)*100,
                                                                ((float)resultadosETABs[NoPiso].AsTopMediumButton[2]/Area)*100 };
@@ -233,7 +233,7 @@ namespace DisenoColumnas.Clases
 
         #region MetodosPaint
 
-        public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI, ISeccion seccion,bool MostrarLabels)
+        public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI, ISeccion seccion, bool MostrarLabels)
         {
             if (CoordXY[0] < 0)
             {
@@ -2865,7 +2865,7 @@ namespace DisenoColumnas.Clases
 
         #region Propiedades - Cargas que deben cumplor 0.4Ag*fc
 
-        public List<List<Tuple<float,string,string,float>>> Panalizar { get; set; }
+        public List<List<Tuple<float, string, string, float>>> Panalizar { get; set; }
 
 
         #endregion

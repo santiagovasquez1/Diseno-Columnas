@@ -500,7 +500,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                     double[] Coord = { };
                     double x, y;
                     int pid = seccion.Refuerzos.Last().id + 1;
-                    x = (e.Location.X - Grafica.Width / 2)/EscalaX;
+                    x = (e.Location.X - Grafica.Width / 2) / EscalaX;
                     y = -(e.Location.Y - Grafica.Height / 2) / EscalaX;
 
                     Coord = new double[] { x, y };
@@ -510,7 +510,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 }
             }
 
-            else if (Add_Refuerzo==false)
+            else if (Add_Refuerzo == false)
             {
                 if (MouseOverRefuerzo(e.Location) & e.Button == MouseButtons.Right)
                 {

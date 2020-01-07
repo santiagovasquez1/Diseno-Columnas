@@ -17,7 +17,7 @@ namespace DisenoColumnas.Interfaz_Seccion
     {
         public DiagramaInteraccion()
         {
-           
+
             InitializeComponent();
             Diagrama = this;
         }
@@ -339,7 +339,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void Gl_Load(object sender, EventArgs e)
         {
             Loaded = true;
-     
+
             MP2D_UnAngulo.Clear();
             MP3D_UnAngulo.Clear();
             MPpuntosSolicitaciones.Clear();
@@ -505,7 +505,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
             if (sinSolicitacionesToolStripMenuItem.Checked)
             {
-                
+
 
                 MP2D_UnAngulo.Clear();
                 MP3D_UnAngulo.Clear();
@@ -547,17 +547,17 @@ namespace DisenoColumnas.Interfaz_Seccion
                         int ColumnaP = 1 + ((TuplesMP3D[i].Item2) / 10) * 5;
                         int ColumnaM1 = 2 + ((TuplesMP3D[i].Item2) / 10) * 5;
                         int ColumnaM2 = 3 + ((TuplesMP3D[i].Item2) / 10) * 5;
-                        worksheet.Cell(1, ColumnaP).Value = "Curva "+ (i+1) + "- Ángulo: " + TuplesMP3D[i].Item2+"°";
+                        worksheet.Cell(1, ColumnaP).Value = "Curva " + (i + 1) + "- Ángulo: " + TuplesMP3D[i].Item2 + "°";
                         for (int j = 0; j < TuplesMP3D[i].Item1.Count; j++)
                         {
-                           
+
                             if (j == 0)
                             {
                                 worksheet.Cell(2, ColumnaP).Value = TextoCarga;
                                 worksheet.Cell(2, ColumnaM1).Value = M1;
                                 worksheet.Cell(2, ColumnaM2).Value = M2;
                             }
-                            worksheet.Cell(j + 3, ColumnaP).Value = Math.Round(TuplesMP3D[i].Item1[j][2]*FC1,2);
+                            worksheet.Cell(j + 3, ColumnaP).Value = Math.Round(TuplesMP3D[i].Item1[j][2] * FC1, 2);
                             worksheet.Cell(j + 3, ColumnaM1).Value = Math.Round(TuplesMP3D[i].Item1[j][0] * FC2, 2);
                             worksheet.Cell(j + 3, ColumnaM2).Value = Math.Round(TuplesMP3D[i].Item1[j][1] * FC2, 2);
                         }
@@ -569,13 +569,13 @@ namespace DisenoColumnas.Interfaz_Seccion
                         Proc.StartInfo.FileName = Ruta;
                         Proc.Start();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
 
-              
+
             }
         }
 
