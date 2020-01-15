@@ -30,15 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Barra));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.CantBarras = new System.Windows.Forms.Label();
-            this.D_Barra = new System.Windows.Forms.Label();
-            this.Ld_Barra = new System.Windows.Forms.Label();
             this.L_Barra = new System.Windows.Forms.Label();
+            this.Ld_Barra = new System.Windows.Forms.Label();
+            this.D_Barra = new System.Windows.Forms.Label();
+            this.CantBarras = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -53,46 +53,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(229, 156);
             this.panel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(21, 87);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Longitud de Desarrollo: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(21, 114);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Longitud de la Barra:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Diámetro de la Barra:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(109, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Numero de Barras:";
             // 
             // groupBox1
             // 
@@ -115,25 +75,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información de la Barra";
             // 
-            // CantBarras
+            // L_Barra
             // 
-            this.CantBarras.AutoSize = true;
-            this.CantBarras.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantBarras.Location = new System.Drawing.Point(135, 30);
-            this.CantBarras.Name = "CantBarras";
-            this.CantBarras.Size = new System.Drawing.Size(28, 15);
-            this.CantBarras.TabIndex = 4;
-            this.CantBarras.Text = "XXX";
-            // 
-            // D_Barra
-            // 
-            this.D_Barra.AutoSize = true;
-            this.D_Barra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.D_Barra.Location = new System.Drawing.Point(148, 58);
-            this.D_Barra.Name = "D_Barra";
-            this.D_Barra.Size = new System.Drawing.Size(35, 15);
-            this.D_Barra.TabIndex = 5;
-            this.D_Barra.Text = "XXXX";
+            this.L_Barra.AutoSize = true;
+            this.L_Barra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_Barra.Location = new System.Drawing.Point(148, 114);
+            this.L_Barra.Name = "L_Barra";
+            this.L_Barra.Size = new System.Drawing.Size(28, 15);
+            this.L_Barra.TabIndex = 7;
+            this.L_Barra.Text = "XXX";
             // 
             // Ld_Barra
             // 
@@ -145,15 +95,65 @@
             this.Ld_Barra.TabIndex = 6;
             this.Ld_Barra.Text = "XXXX";
             // 
-            // L_Barra
+            // D_Barra
             // 
-            this.L_Barra.AutoSize = true;
-            this.L_Barra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.L_Barra.Location = new System.Drawing.Point(148, 114);
-            this.L_Barra.Name = "L_Barra";
-            this.L_Barra.Size = new System.Drawing.Size(28, 15);
-            this.L_Barra.TabIndex = 7;
-            this.L_Barra.Text = "XXX";
+            this.D_Barra.AutoSize = true;
+            this.D_Barra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.D_Barra.Location = new System.Drawing.Point(148, 58);
+            this.D_Barra.Name = "D_Barra";
+            this.D_Barra.Size = new System.Drawing.Size(35, 15);
+            this.D_Barra.TabIndex = 5;
+            this.D_Barra.Text = "XXXX";
+            // 
+            // CantBarras
+            // 
+            this.CantBarras.AutoSize = true;
+            this.CantBarras.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CantBarras.Location = new System.Drawing.Point(135, 30);
+            this.CantBarras.Name = "CantBarras";
+            this.CantBarras.Size = new System.Drawing.Size(28, 15);
+            this.CantBarras.TabIndex = 4;
+            this.CantBarras.Text = "XXX";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(21, 114);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(121, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Longitud de la Barra:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(20, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Numero de Barras:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(21, 87);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(138, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Longitud de Desarrollo: ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(21, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(125, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Diámetro de la Barra:";
             // 
             // Form_Barra
             // 
@@ -164,6 +164,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(229, 156);
             this.Name = "Form_Barra";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

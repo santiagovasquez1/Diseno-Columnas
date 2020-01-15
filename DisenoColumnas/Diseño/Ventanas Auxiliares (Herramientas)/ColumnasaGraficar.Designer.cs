@@ -33,12 +33,12 @@
             this.Button2 = new System.Windows.Forms.Button();
             this.Button1 = new System.Windows.Forms.Button();
             this.D_ColGraficar = new System.Windows.Forms.DataGridView();
-            this.Panel1 = new System.Windows.Forms.Panel();
-            this.Label9 = new System.Windows.Forms.Label();
             this.Columnas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColAlready = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Disenar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Panel1 = new System.Windows.Forms.Panel();
             this.PictureBox2 = new System.Windows.Forms.PictureBox();
+            this.Label9 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.D_ColGraficar)).BeginInit();
             this.Panel1.SuspendLayout();
@@ -96,30 +96,6 @@
             this.D_ColGraficar.Size = new System.Drawing.Size(306, 343);
             this.D_ColGraficar.TabIndex = 20;
             // 
-            // Panel1
-            // 
-            this.Panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Panel1.Controls.Add(this.PictureBox2);
-            this.Panel1.Controls.Add(this.Label9);
-            this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Panel1.Location = new System.Drawing.Point(0, 0);
-            this.Panel1.Name = "Panel1";
-            this.Panel1.Size = new System.Drawing.Size(323, 23);
-            this.Panel1.TabIndex = 19;
-            this.Panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseDown);
-            // 
-            // Label9
-            // 
-            this.Label9.AutoSize = true;
-            this.Label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
-            this.Label9.Location = new System.Drawing.Point(8, 3);
-            this.Label9.Name = "Label9";
-            this.Label9.Size = new System.Drawing.Size(153, 15);
-            this.Label9.TabIndex = 12;
-            this.Label9.Text = "Columnas a Graficar Alzado";
-            this.Label9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label9_MouseDown);
-            // 
             // Columnas
             // 
             this.Columnas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -144,6 +120,19 @@
             this.Disenar.Name = "Disenar";
             this.Disenar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // Panel1
+            // 
+            this.Panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel1.Controls.Add(this.PictureBox2);
+            this.Panel1.Controls.Add(this.Label9);
+            this.Panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Panel1.Location = new System.Drawing.Point(0, 0);
+            this.Panel1.Name = "Panel1";
+            this.Panel1.Size = new System.Drawing.Size(323, 23);
+            this.Panel1.TabIndex = 19;
+            this.Panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Panel1_MouseDown);
+            // 
             // PictureBox2
             // 
             this.PictureBox2.BackColor = System.Drawing.Color.Transparent;
@@ -158,6 +147,17 @@
             this.PictureBox2.Click += new System.EventHandler(this.PictureBox2_Click);
             this.PictureBox2.MouseLeave += new System.EventHandler(this.PictureBox2_MouseLeave);
             this.PictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox2_MouseMove);
+            // 
+            // Label9
+            // 
+            this.Label9.AutoSize = true;
+            this.Label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold);
+            this.Label9.Location = new System.Drawing.Point(8, 3);
+            this.Label9.Name = "Label9";
+            this.Label9.Size = new System.Drawing.Size(153, 15);
+            this.Label9.TabIndex = 12;
+            this.Label9.Text = "Columnas a Graficar Alzado";
+            this.Label9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Label9_MouseDown);
             // 
             // panel2
             // 
@@ -180,6 +180,7 @@
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(323, 410);
             this.Name = "ColumnasaGraficar";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

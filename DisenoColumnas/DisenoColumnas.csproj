@@ -93,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clases\Alzado.cs" />
+    <Compile Include="Clases\cBMT.cs" />
+    <Compile Include="Clases\cRefuerzoCuadro.cs" />
     <Compile Include="Clases\OpenGL\Dot.cs" />
     <Compile Include="Clases\OpenGL\FactoryMatrix.cs" />
     <Compile Include="Clases\OpenGL\Line.cs" />
@@ -114,6 +116,9 @@
     <Compile Include="Interfaz Inicial\ChequeoDeCargas.Designer.cs">
       <DependentUpon>ChequeoDeCargas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz Seccion\Controles\DoubleBufferedPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Interfaz Seccion\Diagrama de Interacción\DiagramaInteraccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +130,18 @@
     </Compile>
     <Compile Include="Interfaz Seccion\Diagrama de Interacción\Solicitaciones.Designer.cs">
       <DependentUpon>Solicitaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FAgregarRefMultiple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FAgregarRefMultiple.Designer.cs">
+      <DependentUpon>FAgregarRefMultiple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FAgregarRefMultipleCuadro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz Seccion\FAgregarRefMultipleCuadro.Designer.cs">
+      <DependentUpon>FAgregarRefMultipleCuadro.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaz Seccion\FAgregarSeccion.cs">
       <SubType>Form</SubType>
@@ -351,6 +368,12 @@
     <EmbeddedResource Include="Interfaz Seccion\FAgregarRef.resx">
       <DependentUpon>FAgregarRef.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\FAgregarRefMultiple.resx">
+      <DependentUpon>FAgregarRefMultiple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz Seccion\FAgregarRefMultipleCuadro.resx">
+      <DependentUpon>FAgregarRefMultipleCuadro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interfaz Seccion\FAgregarSeccion.resx">
       <DependentUpon>FAgregarSeccion.cs</DependentUpon>
     </EmbeddedResource>
@@ -499,6 +522,12 @@
     <None Include="Resources\AgregarColumna.png" />
     <None Include="Resources\AgregarCol2.png" />
     <None Include="Resources\collapseBtn.png" />
+    <None Include="Resources\Arrastre.ico" />
+    <None Include="Resources\Arrastre16x16.ico" />
+    <None Include="Resources\BarraIndividual.png" />
+    <None Include="Resources\BarraIndividual1.png" />
+    <None Include="Resources\BarraMultiple.png" />
+    <None Include="Resources\BarrasCuadro.png" />
     <Content Include="Resources\Csearch.cur" />
     <None Include="Resources\vcsadded_93506x16.png" />
     <None Include="Resources\vcsadded_93506.png" />

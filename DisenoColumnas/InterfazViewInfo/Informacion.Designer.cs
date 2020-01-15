@@ -30,8 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Informacion));
             this.Info_D = new System.Windows.Forms.DataGridView();
-            this.NameColum = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Column1 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.Column2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.B = new WeifenLuo.DataGridViewTextBoxColumnEx();
@@ -44,6 +42,8 @@
             this.Asasign = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pasignada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Porc_Ref = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameColum = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.Info_D)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,17 +76,6 @@
             this.Info_D.Size = new System.Drawing.Size(1013, 458);
             this.Info_D.TabIndex = 0;
             this.Info_D.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGridView1_Paint);
-            // 
-            // NameColum
-            // 
-            this.NameColum.AutoSize = true;
-            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NameColum.Location = new System.Drawing.Point(12, 8);
-            this.NameColum.Name = "NameColum";
-            this.NameColum.Size = new System.Drawing.Size(56, 14);
-            this.NameColum.TabIndex = 0;
-            this.NameColum.Text = "Columna: ";
             // 
             // Column1
             // 
@@ -201,6 +190,17 @@
             this.Porc_Ref.ReadOnly = true;
             this.Porc_Ref.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Porc_Ref.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // NameColum
+            // 
+            this.NameColum.AutoSize = true;
+            this.NameColum.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NameColum.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NameColum.Location = new System.Drawing.Point(12, 8);
+            this.NameColum.Name = "NameColum";
+            this.NameColum.Size = new System.Drawing.Size(56, 14);
+            this.NameColum.TabIndex = 0;
+            this.NameColum.Text = "Columna: ";
             // 
             // Informacion
             // 

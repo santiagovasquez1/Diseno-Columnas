@@ -99,6 +99,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(257, 406);
             this.Name = "Solicitaciones";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

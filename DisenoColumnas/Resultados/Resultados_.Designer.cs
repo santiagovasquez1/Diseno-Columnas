@@ -37,13 +37,13 @@
             this.treeViewResultados = new System.Windows.Forms.TreeView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.Title = new System.Windows.Forms.Label();
+            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.bAceptar = new System.Windows.Forms.Button();
-            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel5.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeViewResultados
@@ -93,6 +93,18 @@
             this.Title.TabIndex = 24;
             this.Title.Text = "Resultados";
             // 
+            // PictureBox1
+            // 
+            this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBox1.Image = global::DisenoColumnas.Properties.Resources.close_button1;
+            this.PictureBox1.Location = new System.Drawing.Point(967, 9);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(10, 10);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBox1.TabIndex = 12;
+            this.PictureBox1.TabStop = false;
+            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -129,18 +141,6 @@
             this.bAceptar.UseVisualStyleBackColor = true;
             this.bAceptar.Click += new System.EventHandler(this.BAceptar_Click);
             // 
-            // PictureBox1
-            // 
-            this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PictureBox1.Image = global::DisenoColumnas.Properties.Resources.close_button1;
-            this.PictureBox1.Location = new System.Drawing.Point(967, 9);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(10, 10);
-            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PictureBox1.TabIndex = 12;
-            this.PictureBox1.TabStop = false;
-            // 
             // Resultados_
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,13 +151,14 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(380, 202);
             this.Name = "Resultados_";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DMC- Resultados";
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

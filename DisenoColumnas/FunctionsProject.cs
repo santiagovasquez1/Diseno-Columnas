@@ -306,6 +306,29 @@ namespace DisenoColumnas
             }
         }
 
+
+        public static float Find_MasaNominal(int Diametro)
+        {
+            Dictionary<int, float> MasaNominalBarras = new Dictionary<int, float>();
+
+            MasaNominalBarras.Add(2, 0.25f);
+            MasaNominalBarras.Add(3, 0.560f);
+            MasaNominalBarras.Add(4, 1.0f);
+            MasaNominalBarras.Add(5, 1.56f);
+            MasaNominalBarras.Add(6, 2.25f);
+            MasaNominalBarras.Add(7, 3.06f);
+            MasaNominalBarras.Add(8, 4f);
+            MasaNominalBarras.Add(9, 5.00f);
+            MasaNominalBarras.Add(10, 6.40f);
+            MasaNominalBarras.Add(11, 7.907f);
+            MasaNominalBarras.Add(14, 8.938f);
+
+            return MasaNominalBarras[Diametro];
+
+
+        }
+
+
         public static int Find_Barra(double Asi)
         {
             double p_error = 0;
@@ -538,6 +561,16 @@ namespace DisenoColumnas
             }
 
             return Long_gancho;
+        }
+
+
+        public static float DistanciaEntrePuntos(float XI,float YI,float XF, float YF)
+        {
+            return  (float)Math.Sqrt(Math.Pow(XI - XF, 2) + Math.Pow(YI - YF, 2));
+        }
+        public static float DistanciaEntrePuntos(PointF P1, PointF P2)
+        {
+            return (float)Math.Sqrt(Math.Pow(P1.X - P2.X, 2) + Math.Pow(P1.Y - P2.Y, 2));
         }
 
         public static void EstiloDatGridView(DataGridView dataGrid)

@@ -349,31 +349,37 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void X_mas_Click(object sender, EventArgs e)
         {
             eyeX += 20;
+            MostrarValores();
         }
 
         private void X_menos_Click(object sender, EventArgs e)
         {
             eyeX -= 20;
+            MostrarValores();
         }
 
         private void Y_mas_Click(object sender, EventArgs e)
         {
             eyeZ += 20;
+            MostrarValores();
         }
 
         private void Y_menos_Click(object sender, EventArgs e)
         {
             eyeZ -= 20;
+            MostrarValores();
         }
 
         private void Z_mas_Click(object sender, EventArgs e)
         {
             eyeY += 20;
+            MostrarValores();
         }
 
         private void Z_menos_Click(object sender, EventArgs e)
         {
             eyeY -= 20;
+            MostrarValores();
         }
 
         private void Button1_Click(object sender, EventArgs e)

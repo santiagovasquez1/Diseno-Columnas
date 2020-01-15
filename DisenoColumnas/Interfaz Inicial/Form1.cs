@@ -34,7 +34,7 @@ namespace DisenoColumnas
         public static Tipo_Edicion pEdicion = Tipo_Edicion.Secciones_modelo;
         public bool CancelDiseño = false;
         public bool CancelGarfica = false;
-        private string NameProgram = "DMC";
+        private string NameProgram = "Diseño de Columnas";
 
         private DeserializeDockContent m_deserializeDockContent;
 
@@ -55,6 +55,7 @@ namespace DisenoColumnas
             InitializeComponent();
             mFormPrincipal = this;
             CargarToolTips();
+                      
 
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
         }
@@ -62,6 +63,8 @@ namespace DisenoColumnas
         private void Close_Click(object sender, EventArgs e)
         {
             Application.Exit();
+            
+        
         }
 
         private void Minimized_Click(object sender, EventArgs e)
@@ -137,7 +140,7 @@ namespace DisenoColumnas
             if (ArchivoExterno == false)
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "DMC |*.Colum";
+                openFileDialog.Filter = "DC |*.Colum";
                 openFileDialog.Title = "Abrir Proyecto";
                 openFileDialog.ShowDialog();
                 Ruta = openFileDialog.FileName;
@@ -164,7 +167,7 @@ namespace DisenoColumnas
 
                 L_NameProject.Visible = true;
                 L_NameProject.Text = Proyecto_.Name;
-                Text = Proyecto_.Name + " - " + NameProgram;
+                Text = NameProgram + " - " + Proyecto_.Name ;
 
                 CrearCarpetaOCargar();
                 string configFile = Path.Combine(RutaConfig, "DockPanel.temp.config");
@@ -279,7 +282,7 @@ namespace DisenoColumnas
             if (Proyecto_ != null)
             {
                 SaveFileDialog SaveFile = new SaveFileDialog();
-                SaveFile.Filter = "DMC |*.Colum";
+                SaveFile.Filter = "DC |*.Colum";
                 SaveFile.Title = "Guardar Proyecto";
                 SaveFile.ShowDialog();
 
@@ -288,7 +291,7 @@ namespace DisenoColumnas
                     Proyecto_.Ruta = SaveFile.FileName;
                     Proyecto_.Name = Path.GetFileName(SaveFile.FileName).Replace(".Colum", "");
                     L_NameProject.Text = Proyecto_.Name;
-                    Text = Proyecto_.Name + " - " + NameProgram;
+                    Text = NameProgram + " - " + Proyecto_.Name;
                     FunctionsProject.Serializar(Proyecto_.Ruta, Proyecto_);
                     CrearCarpetaOCargar();
                     string configFile = Path.Combine(RutaConfig, "DockPanel.temp.config");
@@ -384,7 +387,7 @@ namespace DisenoColumnas
                 WindowState = FormWindowState.Maximized;
                 m_Informacion = null; m_Despiece = null; mCuantiaVolumetrica = null; mAgregarAlzado = null;
                 mFuerzasEnElmentos = null; mIntefazSeccion = null; m_PlantaColumnas = null;
-
+                Text = NameProgram + " - " + Proyecto_.Name;
                 //Chequear Carga P< 0.4*Ag*F'c
                 ChequeoDeCargas chequeoDeCargas = new ChequeoDeCargas();
                 chequeoDeCargas.ShowDialog();
@@ -954,9 +957,9 @@ namespace DisenoColumnas
                     {
                         if (SectionDesginer[k].Count == 9)
                         {
-                            if (SectionDesginer[k][7] == "POLYGON")
+                            if (SectionDesginer[k][5] == "POLYGON" && SectionDesginer[k][1] == Nombre)
                             {
-                                NoPuntos = Convert.ToInt32(SectionDesginer[k][8].Replace("  NUMCORNERPTS ", ""));
+                                NoPuntos = Convert.ToInt32(SectionDesginer[k][6].Replace("  NUMCORNERPTS ", ""));
                                 Coord = new List<float[]>();
 
                                 for (int s = k + 1; s < k + NoPuntos + 1; s++)
@@ -968,6 +971,7 @@ namespace DisenoColumnas
                                     float[] XY = { X, Y };
                                     Coord.Add(XY);
                                 }
+                                break;
                             }
                         }
                     }
@@ -1441,7 +1445,7 @@ namespace DisenoColumnas
                     {
                         if (SectionDesginer[k].Count == 7)
                         {
-                            if (SectionDesginer[k][5] == "POLYGON")
+                            if (SectionDesginer[k][5] == "POLYGON" && SectionDesginer[k][1]== Nombre)
                             {
                                 NoPuntos = Convert.ToInt32(SectionDesginer[k][6].Replace("  NUMCORNERPTS ", ""));
                                 Coord = new List<float[]>();
@@ -1455,6 +1459,7 @@ namespace DisenoColumnas
                                     float[] XY = { X, Y };
                                     Coord.Add(XY);
                                 }
+                                break;
                             }
                         }
                     }
@@ -1540,8 +1545,8 @@ namespace DisenoColumnas
                             var Xunicos = Coord.Select(x => x[0]).Distinct().ToList();
                             var Yunicos = Coord.Select(x => x[1]).Distinct().ToList();
 
-                            var p = FunctionsProject.Dimension2(Coord, true); //Dimenciones en X
-                            var q = FunctionsProject.Dimension2(Coord, false); //Dimenciones en Y
+                            var p = FunctionsProject.Dimension2(Coord, true); //Dimensiones en X
+                            var q = FunctionsProject.Dimension2(Coord, false); //Dimensiones en Y
 
                             pB = (float)p[0];
                             pTw = (float)p[1];
@@ -1724,12 +1729,17 @@ namespace DisenoColumnas
                 Viga VigaMayor = new Viga("Viga con Mayor H Por Piso");
                 ISeccion seccionMayor = new CRectangulo("Inicial", 0, -99999, new MAT_CONCRETE(), TipodeSeccion.None);
                 Tuple<CRectangulo, string> tuple_Seccion_Mayor = null;
+                column.VigasEnUnPunto = new List<Viga>();
 
                 for (int i = 0; i < column.Seccions.Count; i++)
                 {
                     tuple_Seccion_Mayor = new Tuple<CRectangulo, string>((CRectangulo)seccionMayor, column.Seccions[i].Item2);
                     VigaMayor.Seccions.Add(tuple_Seccion_Mayor);
+                    
                 }
+
+             
+
 
                 foreach (Viga viga1 in vigasPosibles)
                 {
@@ -1739,6 +1749,7 @@ namespace DisenoColumnas
                         {
                             if (viga1.Seccions[i].Item2 == VigaMayor.Seccions[j].Item2)
                             {
+                            
                                 try
                                 {
                                     if (viga1.Seccions[i].Item1.H > VigaMayor.Seccions[j].Item1.H)
@@ -1761,7 +1772,7 @@ namespace DisenoColumnas
                         VigaMayor.Seccions[i] = tuple_Seccion_Mayor;
                     }
                 }
-
+                column.VigasEnUnPunto.AddRange(vigasPosibles);
                 column.VigaMayor = VigaMayor;
             }
             //Asignar Altura Libre;
@@ -1811,6 +1822,7 @@ namespace DisenoColumnas
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            
             if (Proyecto_ != null)
             {
                 if (Proyecto_.Ruta == "" | Proyecto_.Ruta != "")
@@ -2121,6 +2133,7 @@ namespace DisenoColumnas
             {
                 OpenProject(true, FicheroExterno.Split(new char[] { '"' })[3]);
             }
+            Text =  NameProgram;
 
             mIntefazSeccion = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
             Main_Secciones.Crear_archivo();
@@ -2906,6 +2919,14 @@ namespace DisenoColumnas
         private void EliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EliminarAlzado();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Escape)
+            {
+
+            }
         }
     }
 }

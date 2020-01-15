@@ -1,0 +1,335 @@
+                                                                                
+                                                                                
+ B E G I N   A N A L Y S I S                                2020/01/07  10:50:58
+                                                                                
+                                                                                
+ E L E M E N T   F O R M A T I O N                                      10:50:58
+
+
++NUMBER OF JOINT  ELEMENTS FORMED          =        1066                        
+
++NUMBER OF SPRING ELEMENTS FORMED          =           0                        
+                                                                                
++Frame  element       0 of    1733                                              
++Frame  element     100 of    1733                                              
++Frame  element     200 of    1733                                              
++Frame  element     300 of    1733                                              
++Frame  element     400 of    1733                                              
++Frame  element     500 of    1733                                              
++Frame  element     600 of    1733                                              
++Frame  element     700 of    1733                                              
++Frame  element     800 of    1733                                              
++Frame  element     900 of    1733                                              
++Frame  element    1000 of    1733                                              
++Frame  element    1100 of    1733                                              
++Frame  element    1200 of    1733                                              
++Frame  element    1300 of    1733                                              
++Frame  element    1400 of    1733                                              
++Frame  element    1500 of    1733                                              
++Frame  element    1600 of    1733                                              
++Frame  element    1700 of    1733                                              
++Frame  element    1733 of    1733                                              
++NUMBER OF FRAME  ELEMENTS FORMED          =        1733                        
+                                                                                
++Shell  element       0 of     452                                              
++Shell  element     100 of     452                                              
++Shell  element     200 of     452                                              
++Shell  element     300 of     452                                              
++Shell  element     400 of     452                                              
++Shell  element     452 of     452                                              
++NUMBER OF SHELL  ELEMENTS FORMED          =         452                        
+                                                                                
++Weld       0 of       7                                                        
++Constraint       7 of       7                                                  
++NUMBER OF CONSTRAINTS FORMED              =           7                        
+                                                                                
+ REDUCTION OF CONSTRAINTS AND RESTRAINTS:                                       
+ NUMBER OF                                                                      
+   CONSTRAINT MASTER DOF BEFORE REDUCTION  =          21                        
+   COUPLED CONSTRAINT/RESTRAINT MASTER DOF =           0                        
+   CONSTRAINT MASTER DOF AFTER REDUCTION   =          21                        
+                                                                                
+                                                                                
+ E Q U A T I O N   S O L U T I O N                                      10:51:02
+                                                                                
+ TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =        6366                        
+ APPROXIMATE "EFFECTIVE" BAND WIDTH        =         233                        
+                                                                                
+ NUMBER OF EQUATION STORAGE BLOCKS         =           1                        
+ MAXIMUM BLOCK SIZE (8-BYTE TERMS)         =     1458969                        
+ SIZE OF STIFFNESS FILE(S) (BYTES)         =      11.155 MB                     
+                                                                                
+ NUMBER OF EQUATIONS TO SOLVE              =        6366                        
+ NUMBER OF STATIC LOAD CASES               =          14                        
+ NUMBER OF ACCELERATION LOADS              =           6                        
+ NUMBER OF NONLINEAR DEFORMATION LOADS     =           0                        
+                                                                                
+ CURRENT P-DELTA ANALYSIS ITERATION        =           0                        
+ MAXIMUM NUMBER OF ITERATIONS ALLOWED      =           5                        
+                                                                                
+ CURRENT  DISPLACEMENT MAGNITUDE           =    0.054589                        
+                                                                                
+                                                                                
+                                                                                
+ B E G I N   P - D E L T A   I T E R A T I O N                          10:51:03
+                                                                                
+                                                                                
+ E L E M E N T   F O R M A T I O N                                      10:51:03
+
+                                                                                
++Frame  element       0 of    1733                                              
++Frame  element     100 of    1733                                              
++Frame  element     200 of    1733                                              
++Frame  element     300 of    1733                                              
++Frame  element     400 of    1733                                              
++Frame  element     500 of    1733                                              
++Frame  element     600 of    1733                                              
++Frame  element     700 of    1733                                              
++Frame  element     800 of    1733                                              
++Frame  element     900 of    1733                                              
++Frame  element    1000 of    1733                                              
++Frame  element    1100 of    1733                                              
++Frame  element    1200 of    1733                                              
++Frame  element    1300 of    1733                                              
++Frame  element    1400 of    1733                                              
++Frame  element    1500 of    1733                                              
++Frame  element    1600 of    1733                                              
++Frame  element    1700 of    1733                                              
++Frame  element    1733 of    1733                                              
++NUMBER OF FRAME  ELEMENTS FORMED          =        1733                        
+                                                                                
++Shell  element       0 of     452                                              
++Shell  element     100 of     452                                              
++Shell  element     200 of     452                                              
++Shell  element     300 of     452                                              
++Shell  element     400 of     452                                              
++Shell  element     452 of     452                                              
++NUMBER OF SHELL  ELEMENTS FORMED          =         452                        
+                                                                                
+                                                                                
+ E Q U A T I O N   S O L U T I O N                                      10:51:04
+                                                                                
+ TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =        6366                        
+ APPROXIMATE "EFFECTIVE" BAND WIDTH        =         233                        
+                                                                                
+ NUMBER OF EQUATION STORAGE BLOCKS         =           1                        
+ MAXIMUM BLOCK SIZE (8-BYTE TERMS)         =     1458969                        
+ SIZE OF STIFFNESS FILE(S) (BYTES)         =      11.155 MB                     
+                                                                                
+ NUMBER OF EQUATIONS TO SOLVE              =        6366                        
+ NUMBER OF STATIC LOAD CASES               =          14                        
+ NUMBER OF ACCELERATION LOADS              =           6                        
+ NUMBER OF NONLINEAR DEFORMATION LOADS     =           0                        
+                                                                                
+ CURRENT P-DELTA ANALYSIS ITERATION        =           1                        
+ MAXIMUM NUMBER OF ITERATIONS ALLOWED      =           5                        
+                                                                                
+ CURRENT  DISPLACEMENT MAGNITUDE           =    0.054749                        
+ RELATIVE DISPLACEMENT CHANGE              =    0.002915                        
+ RELATIVE DISPLACEMENT TOLERANCE           =    0.001000                        
+                                                                                
+ ITERATION DID NOT CONVERGE                                                     
+                                                                                
+                                                                                
+ E L E M E N T   F O R M A T I O N                                      10:51:04
+
+                                                                                
++Frame  element       0 of    1733                                              
++Frame  element     100 of    1733                                              
++Frame  element     200 of    1733                                              
++Frame  element     300 of    1733                                              
++Frame  element     400 of    1733                                              
++Frame  element     500 of    1733                                              
++Frame  element     600 of    1733                                              
++Frame  element     700 of    1733                                              
++Frame  element     800 of    1733                                              
++Frame  element     900 of    1733                                              
++Frame  element    1000 of    1733                                              
++Frame  element    1100 of    1733                                              
++Frame  element    1200 of    1733                                              
++Frame  element    1300 of    1733                                              
++Frame  element    1400 of    1733                                              
++Frame  element    1500 of    1733                                              
++Frame  element    1600 of    1733                                              
++Frame  element    1700 of    1733                                              
++Frame  element    1733 of    1733                                              
++NUMBER OF FRAME  ELEMENTS FORMED          =        1733                        
+                                                                                
++Shell  element       0 of     452                                              
++Shell  element     100 of     452                                              
++Shell  element     200 of     452                                              
++Shell  element     300 of     452                                              
++Shell  element     400 of     452                                              
++Shell  element     452 of     452                                              
++NUMBER OF SHELL  ELEMENTS FORMED          =         452                        
+                                                                                
+                                                                                
+ E Q U A T I O N   S O L U T I O N                                      10:51:05
+                                                                                
+ TOTAL NUMBER OF EQUILIBRIUM EQUATIONS     =        6366                        
+ APPROXIMATE "EFFECTIVE" BAND WIDTH        =         233                        
+                                                                                
+ NUMBER OF EQUATION STORAGE BLOCKS         =           1                        
+ MAXIMUM BLOCK SIZE (8-BYTE TERMS)         =     1458969                        
+ SIZE OF STIFFNESS FILE(S) (BYTES)         =      11.155 MB                     
+                                                                                
+ NUMBER OF EQUATIONS TO SOLVE              =        6366                        
+ NUMBER OF STATIC LOAD CASES               =          14                        
+ NUMBER OF ACCELERATION LOADS              =           6                        
+ NUMBER OF NONLINEAR DEFORMATION LOADS     =           0                        
+                                                                                
+ CURRENT P-DELTA ANALYSIS ITERATION        =           2                        
+ MAXIMUM NUMBER OF ITERATIONS ALLOWED      =           5                        
+                                                                                
+ CURRENT  DISPLACEMENT MAGNITUDE           =    0.054749                        
+ RELATIVE DISPLACEMENT CHANGE              =    9.54E-06                        
+ RELATIVE DISPLACEMENT TOLERANCE           =    0.001000                        
+                                                                                
+ ITERATION CONVERGED                                                            
+                                                                                
+                                                                                
+ P - D E L T A   I T E R A T I O N   C O M P L E T E                    10:51:06
+                                                                                
+                                                                                
+ R I T Z   A N A L Y S I S                                              10:51:06
+                                                                                
+ NUMBER OF STIFFNESS DEGREES OF FREEDOM    =        6366                        
+ NUMBER OF MASS DEGREES OF FREEDOM         =        2068                        
+ NUMBER OF RITZ MODES SOUGHT               =         100                        
+ NUMBER OF STARTING VECTORS                =           2                        
+ VECTOR BLOCK SIZE                         =           2                        
+ FREQUENCY SHIFT (CENTER) (CYC/TIME)       =     .000000                        
+                                                                                
+ NUMBER OF RITZ MODES FOUND                =         100                        
+ NUMBER OF GENERATION CYCLES PERFORMED     =          50                        
+                                                                                
+                                                                                
+ R E S P O N S E - S P E C T R U M   A N A L Y S I S                    10:51:07
+                                                                                
+                                                                                
+ J O I N T   O U T P U T                                                10:51:07
+                                                                                
+                                                                                
+ E L E M E N T   J O I N T - F O R C E   O U T P U T                    10:51:08
+
+                                                                                
++Joint  element       0 of    1066                                              
++Joint  element     100 of    1066                                              
++Joint  element     200 of    1066                                              
++Joint  element     300 of    1066                                              
++Joint  element     400 of    1066                                              
++Joint  element     500 of    1066                                              
++Joint  element     600 of    1066                                              
++Joint  element     700 of    1066                                              
++Joint  element     800 of    1066                                              
++Joint  element     900 of    1066                                              
++Joint  element    1000 of    1066                                              
++Joint  element    1066 of    1066                                              
++NUMBER OF JOINT  ELEMENTS SAVED           =        1066                        
+                                                                                
++Frame  element       0 of    1733                                              
++Frame  element     100 of    1733                                              
++Frame  element     200 of    1733                                              
++Frame  element     300 of    1733                                              
++Frame  element     400 of    1733                                              
++Frame  element     500 of    1733                                              
++Frame  element     600 of    1733                                              
++Frame  element     700 of    1733                                              
++Frame  element     800 of    1733                                              
++Frame  element     900 of    1733                                              
++Frame  element    1000 of    1733                                              
++Frame  element    1100 of    1733                                              
++Frame  element    1200 of    1733                                              
++Frame  element    1300 of    1733                                              
++Frame  element    1400 of    1733                                              
++Frame  element    1500 of    1733                                              
++Frame  element    1600 of    1733                                              
++Frame  element    1700 of    1733                                              
++Frame  element    1733 of    1733                                              
++NUMBER OF FRAME  ELEMENTS SAVED           =        1733                        
+                                                                                
++Shell  element       0 of     452                                              
++Shell  element     100 of     452                                              
++Shell  element     200 of     452                                              
++Shell  element     300 of     452                                              
++Shell  element     400 of     452                                              
++Shell  element     452 of     452                                              
++NUMBER OF SHELL  ELEMENTS SAVED           =         452                        
+                                                                                
+                                                                                
+ E L E M E N T   O U T P U T                                            10:51:13
+
+                                                                                
+                                                                                
+ A N A L Y S I S   C O M P L E T E                          2020/01/07  10:51:13
+                                                                                
+                                                                                
+ C E N T E R S   O F   R I G I D I T Y                                  10:51:14
+                                                                                
+ NUMBER OF LOAD CASES TO SOLVE             =          21                        
+                                                                                
+                                                                                
+ B E G I N   A N A L Y S I S                                2020/01/07  10:51:19
+                                                                                
+                                                                                
+ E L E M E N T   F O R M A T I O N                                      10:51:19
+
+
++NUMBER OF JOINT  ELEMENTS FORMED          =        1066                        
+
++NUMBER OF SPRING ELEMENTS FORMED          =           0                        
+                                                                                
+                                                                                
+ L O A D   R E - S O L U T I O N                                        10:51:20
+                                                                                
+ NUMBER OF STATIC LOAD CASES               =          14                        
+                                                                                
+                                                                                
+ E L E M E N T   J O I N T - F O R C E   O U T P U T                    10:51:20
+
+                                                                                
++Joint  element       0 of    1066                                              
++Joint  element     100 of    1066                                              
++Joint  element     200 of    1066                                              
++Joint  element     300 of    1066                                              
++Joint  element     400 of    1066                                              
++Joint  element     500 of    1066                                              
++Joint  element     600 of    1066                                              
++Joint  element     700 of    1066                                              
++Joint  element     800 of    1066                                              
++Joint  element     900 of    1066                                              
++Joint  element    1000 of    1066                                              
++Joint  element    1066 of    1066                                              
++NUMBER OF JOINT  ELEMENTS SAVED           =        1066                        
+                                                                                
++Frame  element       0 of    1733                                              
++Frame  element     100 of    1733                                              
++Frame  element     200 of    1733                                              
++Frame  element     300 of    1733                                              
++Frame  element     400 of    1733                                              
++Frame  element     500 of    1733                                              
++Frame  element     600 of    1733                                              
++Frame  element     700 of    1733                                              
++Frame  element     800 of    1733                                              
++Frame  element     900 of    1733                                              
++Frame  element    1000 of    1733                                              
++Frame  element    1100 of    1733                                              
++Frame  element    1200 of    1733                                              
++Frame  element    1300 of    1733                                              
++Frame  element    1400 of    1733                                              
++Frame  element    1500 of    1733                                              
++Frame  element    1600 of    1733                                              
++Frame  element    1700 of    1733                                              
++Frame  element    1733 of    1733                                              
++NUMBER OF FRAME  ELEMENTS SAVED           =        1733                        
+                                                                                
++Shell  element       0 of     452                                              
++Shell  element     100 of     452                                              
++Shell  element     200 of     452                                              
++Shell  element     300 of     452                                              
++Shell  element     400 of     452                                              
++Shell  element     452 of     452                                              
++NUMBER OF SHELL  ELEMENTS SAVED           =         452                        
+                                                                                
+                                                                                
+ A N A L Y S I S   C O M P L E T E                          2020/01/07  10:51:25

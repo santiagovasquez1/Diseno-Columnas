@@ -152,6 +152,7 @@
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(388, 415);
             this.Name = "ColSimilares";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

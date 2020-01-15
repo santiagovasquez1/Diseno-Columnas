@@ -176,20 +176,20 @@ namespace DisenoColumnas.Diseño
                             {
                                 Nomenclatura += "T2";
                             }
-                            try
-                            {
-                                if (col.Seccions[j].Item1.B != col.Seccions[j - 1].Item1.B | col.Seccions[j].Item1.H != col.Seccions[j - 1].Item1.H)
-                                {
-                                    Nomenclatura = CantBarras + "#" + NoBarra;
-                                    if ((col.AlzadoBaseSugerido.Count - j) % 2 == 0)
-                                    {
-                                        Nomenclatura += "T3";
-                                    }
-                                    else
-                                    { Nomenclatura += "T1"; }
-                                }
-                            }
-                            catch { }
+                            //try
+                            //{
+                            //    if (col.Seccions[j].Item1.B != col.Seccions[j - 1].Item1.B | col.Seccions[j].Item1.H != col.Seccions[j - 1].Item1.H)
+                            //    {
+                            //        Nomenclatura = CantBarras + "#" + NoBarra;
+                            //        if ((col.AlzadoBaseSugerido.Count - j) % 2 == 0)
+                            //        {
+                            //            Nomenclatura += "T3";
+                            //        }
+                            //        else
+                            //        { Nomenclatura += "T1"; }
+                            //    }
+                            //}
+                            //catch { }
                         }
                     }
                     else
@@ -215,20 +215,20 @@ namespace DisenoColumnas.Diseño
                             {
                                 Nomenclatura += "T2";
                             }
-                            try
-                            {
-                                if (col.Seccions[j].Item1.B != col.Seccions[j - 1].Item1.B | col.Seccions[j].Item1.H != col.Seccions[j - 1].Item1.H)
-                                {
-                                    Nomenclatura = CantBarras + "#" + NoBarra;
-                                    if ((col.AlzadoBaseSugerido.Count - j) % 2 == 0)
-                                    {
-                                        Nomenclatura += "T1";
-                                    }
-                                    else
-                                    { Nomenclatura += "T3"; }
-                                }
-                            }
-                            catch { }
+                            //try
+                            //{
+                            //    if (col.Seccions[j].Item1.B != col.Seccions[j - 1].Item1.B | col.Seccions[j].Item1.H != col.Seccions[j - 1].Item1.H)
+                            //    {
+                            //        Nomenclatura = CantBarras + "#" + NoBarra;
+                            //        if ((col.AlzadoBaseSugerido.Count - j) % 2 == 0)
+                            //        {
+                            //            Nomenclatura += "T1";
+                            //        }
+                            //        else
+                            //        { Nomenclatura += "T3"; }
+                            //    }
+                            //}
+                            //catch { }
                         }
                     }
 

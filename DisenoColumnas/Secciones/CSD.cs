@@ -438,8 +438,15 @@ namespace DisenoColumnas.Secciones
 
                 if (S != 0 && Estribo.Area != 0)
                 {
-                    Estribo.NoRamasV1 = Convert.ToInt32(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
-                    Estribo.NoRamasV2 = Convert.ToInt32(Math.Round(Asht / Estribo.Area < 2 ? 2 : (float)Math.Round(Asht / Estribo.Area, 2), 2));
+                    int RamasMenos = (int)Math.Round(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    int RamasMas = (int)Math.Ceiling(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+
+                    Estribo.NoRamasV1 = CalcularRamasDefinitivas((float)Ash, (float)Estribo.Area * RamasMenos, RamasMenos, RamasMas);
+
+                    RamasMenos = (int)Math.Round(Asht / Estribo.Area < 2 ? 2 : (float)Math.Round(Asht / Estribo.Area, 2), 2);
+                    RamasMas = (int)Math.Ceiling(Math.Round(Asht / Estribo.Area < 2 ? 2 : (float)Math.Round(Asht / Estribo.Area, 2), 2));
+
+                    Estribo.NoRamasV2 = CalcularRamasDefinitivas((float)Asht, (float)Estribo.Area * RamasMenos, RamasMenos, RamasMas);
                 }
                 else
                 {
@@ -464,8 +471,14 @@ namespace DisenoColumnas.Secciones
 
                 if (S != 0 && Estribo.Area != 0)
                 {
-                    Estribo.NoRamasH1 = Convert.ToInt32(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
-                    Estribo.NoRamasH2 = Convert.ToInt32(Math.Round(Asht / Estribo.Area < 2 ? 2 : (float)Math.Round(Asht / Estribo.Area, 2), 2));
+                    int RamasMenos = (int)Math.Round(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    int RamasMas = (int)Math.Ceiling(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    Estribo.NoRamasH1 = CalcularRamasDefinitivas((float)Ash, (float)Estribo.Area * RamasMenos, RamasMenos, RamasMas);
+
+                    RamasMenos = (int)Math.Round(Asht / Estribo.Area < 2 ? 2 : (float)Math.Round(Asht / Estribo.Area, 2), 2);
+                    RamasMas = (int)Math.Ceiling(Math.Round(Asht / Estribo.Area < 2 ? 2 : (float)Math.Round(Asht / Estribo.Area, 2), 2));
+
+                    Estribo.NoRamasH2 = CalcularRamasDefinitivas((float)Asht, (float)Estribo.Area * RamasMenos, RamasMenos, RamasMas);
                 }
                 else
                 {
@@ -475,6 +488,21 @@ namespace DisenoColumnas.Secciones
             }
         }
 
+        private int CalcularRamasDefinitivas(float AshNecesario, float AsMenos, int RamasMenor, int RamasMayor)
+        {
+            float Porcentaje = AsMenos / AshNecesario;
+
+            if (Porcentaje >= 0.95f)
+            {
+                return RamasMenor;
+
+            }
+            else
+            {
+                return RamasMayor;
+            }
+
+        }
         public void Calc_vol_inex(float r, float FY, GDE gDE)
         {
             float FD1, FD2;
@@ -546,7 +574,7 @@ namespace DisenoColumnas.Secciones
                 };
 
                 Cuanti_Vol(FD1, FD2, r, FY);
-                P_As1.Add(Peso_Estribo(Estribo, r));
+                P_As1.Add(Peso_Estribo(Estribo, r,1));
 
                 #endregion Estribo #3
 
@@ -558,7 +586,7 @@ namespace DisenoColumnas.Secciones
                 };
 
                 Cuanti_Vol(FD1, FD2, r, FY);
-                P_As2.Add(Peso_Estribo(Estribo, r));
+                P_As2.Add(Peso_Estribo(Estribo, r,1));
 
                 #endregion Estribo #4
 
@@ -974,7 +1002,7 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
-        public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo, float recubrimiento, int Cantidad)
         {
             double PAuxiliar = 0;
             double Long_Estibo1 = 0;
@@ -983,7 +1011,7 @@ namespace DisenoColumnas.Secciones
             double Long_GanchoV2 = 0;
             double Long_GanchoH1 = 0;
             double Long_GanchoH2 = 0;
-            int Numero_Estribos = 0;
+           // int Numero_Estribos = 0;
 
             Long_Estibo1 = 2 * (B - 2 * recubrimiento) + 2 * (TF - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 135); //Estribo aleta
             Long_Estibo2 = 2 * (TW - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 135); //Estribo alma
@@ -993,11 +1021,11 @@ namespace DisenoColumnas.Secciones
 
             Long_GanchoV1 = (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180); //Aleta
             Long_GanchoV2 = (TF - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180); //Alma
-
-            Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
+            float PesoEstribo = FunctionsProject.Find_MasaNominal(Estribo.NoEstribo);
+            //Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
 
             PAuxiliar = (Long_Estibo1 + Long_Estibo2 + (pEstribo.NoRamasH1 - 2) * Long_GanchoH1 + (pEstribo.NoRamasH2 - 2) * Long_GanchoH2 + (pEstribo.NoRamasV1 - 2) * Long_GanchoV1
-                + (pEstribo.NoRamasV2 - 2) * Long_GanchoV2) * pEstribo.Area * 7850 * Numero_Estribos;
+                + (pEstribo.NoRamasV2 - 2) * Long_GanchoV2) * Cantidad* PesoEstribo;
 
             return PAuxiliar;
         }

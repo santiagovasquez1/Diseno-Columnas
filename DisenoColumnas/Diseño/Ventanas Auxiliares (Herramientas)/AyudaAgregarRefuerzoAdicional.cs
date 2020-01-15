@@ -402,8 +402,8 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                 }
                 if (ConvecionAlzado.Tipo2 == "+")
                 {
-                    Text = $"Aporta acero en el Top del piso en el que está{Environment.NewLine}posicionado y el Bottom del piso subsiguiente.";
-                    size = new Size(278, 39);
+                    Text = $"Aporta acero en el Buttom del piso subsiguiente.";
+                    size = new Size(278, 30);
                 }
 
                 if (ConvecionAlzado.Tipo2 == "-")
@@ -422,8 +422,8 @@ namespace DisenoColumnas.Diseño.Ventanas_Auxiliares__Herramientas_
                 }
                 if (ConvecionAlzado.Tipo == "A")
                 {
-                    Text = $"Aporta acero en el Top del piso en el que está posicionado,{Environment.NewLine}el Bottom del piso subsiguiente y el Buttom del piso en el que{Environment.NewLine}está posicionado.";
-                    size = new Size(353, 56);
+                    Text = $"Aporta acero en el Top y el Buttom del piso en el que está {Environment.NewLine}posicionado y en el Bottom del piso subsiguiente.";
+                    size = new Size(335, 40);
                 }
             }
         }

@@ -211,6 +211,7 @@
             this.ClientSize = new System.Drawing.Size(229, 208);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(229, 208);
             this.Name = "FInfo_Ref";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

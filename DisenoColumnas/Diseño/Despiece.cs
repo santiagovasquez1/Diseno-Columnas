@@ -33,6 +33,7 @@ namespace DisenoColumnas.Diseño
                 {
                     if (ColumnaSelect.Seccions[i].Item1 != null)
                     {
+                        //try { if (ColumnaSelect.Seccions[i].Item1.Shape != ColumnaSelect.Seccions[i - 1].Item1.Shape) { break; } } catch { }
                         try { if (ColumnaSelect.Seccions[i].Item1.B - ColumnaSelect.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
                         catch { }
                     }
@@ -210,6 +211,7 @@ namespace DisenoColumnas.Diseño
                 {
                     if (col.Seccions[i].Item1 != null)
                     {
+                        
                         try { if (col.Seccions[i].Item1.B - col.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
                         catch { }
                     }

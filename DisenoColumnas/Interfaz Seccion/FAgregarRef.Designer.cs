@@ -44,17 +44,20 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Button_Cerrar = new System.Windows.Forms.Button();
             this.Label6 = new System.Windows.Forms.Label();
             this.cmEditar = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.agregarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarRefuerzoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eliminarTodosLosRefuerzosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pegarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -254,6 +257,51 @@
             this.dataGridView1.Size = new System.Drawing.Size(365, 340);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "Refuerzo Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column5.HeaderText = "Alzado i";
+            this.Column5.Name = "Column5";
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Diametro Ref";
+            this.Column2.Items.AddRange(new object[] {
+            "#4",
+            "#5",
+            "#6",
+            "#7",
+            "#8",
+            "#10"});
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "Pos X (cm):";
+            this.Column3.Name = "Column3";
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.HeaderText = "Pos Y (cm):";
+            this.Column4.Name = "Column4";
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // panel2
             // 
@@ -304,67 +352,49 @@
             // 
             this.cmEditar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarRefuerzoToolStripMenuItem,
-            this.eliminarRefuerzoToolStripMenuItem});
+            this.eliminarRefuerzoToolStripMenuItem,
+            this.eliminarTodosLosRefuerzosToolStripMenuItem,
+            this.copiarToolStripMenuItem,
+            this.pegarToolStripMenuItem});
             this.cmEditar.Name = "contextMenuStrip1";
-            this.cmEditar.Size = new System.Drawing.Size(164, 48);
+            this.cmEditar.Size = new System.Drawing.Size(223, 114);
             // 
             // agregarRefuerzoToolStripMenuItem
             // 
             this.agregarRefuerzoToolStripMenuItem.Name = "agregarRefuerzoToolStripMenuItem";
-            this.agregarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.agregarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.agregarRefuerzoToolStripMenuItem.Text = "Agregar refuerzo";
             this.agregarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.agregarRefuerzoToolStripMenuItem_Click);
             // 
             // eliminarRefuerzoToolStripMenuItem
             // 
             this.eliminarRefuerzoToolStripMenuItem.Name = "eliminarRefuerzoToolStripMenuItem";
-            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.eliminarRefuerzoToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.eliminarRefuerzoToolStripMenuItem.Text = "Eliminar refuerzo";
             this.eliminarRefuerzoToolStripMenuItem.Click += new System.EventHandler(this.eliminarRefuerzoToolStripMenuItem_Click);
             // 
-            // Column1
+            // eliminarTodosLosRefuerzosToolStripMenuItem
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "Refuerzo Id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.eliminarTodosLosRefuerzosToolStripMenuItem.Name = "eliminarTodosLosRefuerzosToolStripMenuItem";
+            this.eliminarTodosLosRefuerzosToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.eliminarTodosLosRefuerzosToolStripMenuItem.Text = "Eliminar todos los Refuerzos";
+            this.eliminarTodosLosRefuerzosToolStripMenuItem.Click += new System.EventHandler(this.eliminarTodosLosRefuerzosToolStripMenuItem_Click);
             // 
-            // Column5
+            // copiarToolStripMenuItem
             // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.HeaderText = "Alzado i";
-            this.Column5.Name = "Column5";
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
+            this.copiarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.copiarToolStripMenuItem.Text = "Copiar Refuerzo";
+            this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
             // 
-            // Column2
+            // pegarToolStripMenuItem
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Diametro Ref";
-            this.Column2.Items.AddRange(new object[] {
-            "#4",
-            "#5",
-            "#6",
-            "#7",
-            "#8",
-            "#10"});
-            this.Column2.Name = "Column2";
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "Pos X (cm):";
-            this.Column3.Name = "Column3";
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.HeaderText = "Pos Y (cm):";
-            this.Column4.Name = "Column4";
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.pegarToolStripMenuItem.Name = "pegarToolStripMenuItem";
+            this.pegarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pegarToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.pegarToolStripMenuItem.Text = "Pegar Refuerzo";
+            this.pegarToolStripMenuItem.Click += new System.EventHandler(this.pegarToolStripMenuItem_Click);
             // 
             // FAgregarRef
             // 
@@ -374,6 +404,7 @@
             this.ClientSize = new System.Drawing.Size(399, 539);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(399, 539);
             this.Name = "FAgregarRef";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -426,5 +457,8 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ToolStripMenuItem eliminarTodosLosRefuerzosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copiarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pegarToolStripMenuItem;
     }
 }

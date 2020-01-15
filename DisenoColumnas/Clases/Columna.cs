@@ -54,6 +54,9 @@ namespace DisenoColumnas.Clases
 
         public Viga VigaMayor { get; set; }
 
+        public List<Viga> VigasEnUnPunto { get; set; }
+
+        public List<List<cBMT>> PisosDivididos { get; set; }
         public List<float> LuzLibre { get; set; }
 
         public List<float> LuzAcum { get; set; }
@@ -68,7 +71,26 @@ namespace DisenoColumnas.Clases
 
         public float KgRefuerzo { get; set; }
 
+
         #endregion Propeidades - Calculos
+
+
+        #region Sobre Cargas
+
+        public override string ToString()
+        {
+            if (Label != "")
+            {
+                return Name + " - " + Label;
+            }
+            else
+            {
+                return Name;
+            }
+        }
+
+
+        #endregion
 
         #region Propiedades - Auxiliares
 
@@ -226,7 +248,7 @@ namespace DisenoColumnas.Clases
 
         #region MetodosPaint
 
-        public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI, ISeccion seccion, bool MostrarLabels)
+        public void Paint_(Graphics graphics, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI, ISeccion seccion, bool MostrarLabels,float TextoTamano=0)
         {
             if (CoordXY[0] < 0)
             {
@@ -287,7 +309,6 @@ namespace DisenoColumnas.Clases
                 h = 15;
             }
 
-            Graphics graphics = e.Graphics;
 
             if (seccion is CCirculo)
             {
@@ -317,6 +338,13 @@ namespace DisenoColumnas.Clases
             {
                 Tamano_Text = 15;
             }
+            if (TextoTamano != 0)
+            {
+                Tamano_Text = TextoTamano;
+            }
+
+
+
 
             float X_string = X_Colum + w;
 
@@ -383,13 +411,74 @@ namespace DisenoColumnas.Clases
 
         private void CoordAlzado()
         {
+            CoordForAlzadoMemoria =(CoordForAlzado1);
             CoordForAlzado1 = new ColumnaAlzadoDrawing(this);
+          
         }
+
+
+        public void ActualizarCoordenadasPisosDivididos()
+        {
+
+            if(CoordForAlzado1 != CoordForAlzadoMemoria | PisosDivididos== null)
+            {
+                PisosDivididos = new List<List<cBMT>>();
+                for (int i=Seccions.Count-1; i >= 0; i--)
+                {
+                    PisosDivididos.Add(new List<cBMT>());
+
+                }
+
+                for(int i = Seccions.Count - 1; i >= 0; i--)
+                {
+                    List<cBMT> ListcBMTAux = new List<cBMT>();
+                    string story = Seccions[i].Item2;
+                    float LuzDivida = LuzLibre[i]/3;
+                    float x1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][0];   //X
+                    float y1, y2;
+                    //Bottom
+                    y1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1];     //Y
+                    cBMT cBottom = new cBMT(eBMT.Bottom, story);
+                    cBottom.Coord = new List<PointF>();
+                    cBottom.Coord.Add(new PointF(x1, y1));
+                    y2 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida;
+                    cBottom.Coord.Add(new PointF(x1, y2));
+
+                    //Medium
+                    y1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1]+ LuzDivida;     //Y
+                    cBMT cMedium = new cBMT(eBMT.Medium, story);
+                    cMedium.Coord = new List<PointF>();
+                    cMedium.Coord.Add(new PointF(x1, y1));
+                    y2 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida*2;
+                    cMedium.Coord.Add(new PointF(x1, y2));
+
+                    //Top
+                    y1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida*2;     //Y
+                    cBMT cTop = new cBMT(eBMT.Top, story);
+                    cTop.Coord = new List<PointF>();
+                    cTop.Coord.Add(new PointF(x1, y1));
+                    y2 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida * 3;
+                    cTop.Coord.Add(new PointF(x1, y2));
+
+                    ListcBMTAux.Add(cTop); ListcBMTAux.Add(cMedium); ListcBMTAux.Add(cBottom);
+                    PisosDivididos[i] = ListcBMTAux;
+                }
+                
+
+
+            }
+           
+
+        }
+
+
+
+        private ColumnaAlzadoDrawing CoordForAlzadoMemoria { get; set; }
 
         public void Paint_Alzado1(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float X, float Y)
         {
             CoordAlzado();
-
+            ActualizarCoordenadasPisosDivididos();
             //Fundacion
 
             float x1 = X + CoordForAlzado1.Lista_CoordendasFundacion[0][0] * SX;
@@ -1242,7 +1331,7 @@ namespace DisenoColumnas.Clases
                 if (au != null)
                 {
                     float Hacum1 = 0; float Hviga1 = 0; float Hacum2 = 0; float Hviga2 = 0; float H1 = 0; float H2 = 0; string Nom3 = "Not"; string Nom4 = "Not"; float x31 = 0; float x41 = 0;
-                    string Nom1 = "Not"; string Nom2 = "Not"; float x11 = 0; float x12 = 0;
+                    string Nom1 = "Not"; string Nom2 = "Not"; float x11 = 0; float x12 = 0; float Traslpao1 = 0; float Traslpao3 = 0;
                     au.Coord_Alzado_PB = new List<float[]>();
 
                     #region Determinar Variables de Pisos Vecinos
@@ -1253,6 +1342,7 @@ namespace DisenoColumnas.Clases
                     {
                         Nom3 = a.Colum_Alzado[i + 2].Tipo;
                         x31 = a.Colum_Alzado[i + 2].x1;
+                        Traslpao3 = a.Colum_Alzado[i + 2].Traslapo;
                     }
                     catch
                     { }
@@ -1269,6 +1359,9 @@ namespace DisenoColumnas.Clases
                     {
                         Nom1 = a.Colum_Alzado[i + 1].Tipo;
                         x11 = a.Colum_Alzado[i + 1].x1;
+                        Traslpao1 = a.Colum_Alzado[i + 1].Traslapo;
+
+
                     }
                     catch { }
 
@@ -1330,8 +1423,20 @@ namespace DisenoColumnas.Clases
 
                     if (au.UltPiso == false && au.NoStory != 1 && au.Tipo == "T2")
                     {
+                        float TraslapoAbajo = au.Traslapo;
+
+                        if (Nom1 == "T1")
+                        {
+                            TraslapoAbajo = Traslpao1;
+                        }
+
+                        if (Nom3 == "T3")
+                        {
+                            TraslapoAbajo = Traslpao3;
+                        }
+
                         float[] XY1 = new float[] { au.x1 + a.DistX, au.Hacum + H2 / 2 + au.Traslapo / 2 };
-                        float[] XY2 = new float[] { au.x1 + a.DistX, Hacum1 - Hviga1 - H1 / 2 - au.Traslapo / 2 };
+                        float[] XY2 = new float[] { au.x1 + a.DistX, Hacum1 - Hviga1 - H1 / 2 - TraslapoAbajo / 2 };
                         au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                     }
 
@@ -1701,13 +1806,28 @@ namespace DisenoColumnas.Clases
                     if (columna.Alzados[Indice].Colum_Alzado[i].Tipo.Contains("T"))
                     {
                         float TV1 = 0; float TV2 = 0; float TI = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i].NoBarra, columna.Seccions[i].Item1.Material.FC);
+                        float TV11 = 0, TV22 = 0;
 
                         try { TV1 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra, columna.Seccions[i + 1].Item1.Material.FC); } catch { }
                         try { TV2 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i - 1].NoBarra, columna.Seccions[i - 1].Item1.Material.FC); } catch { }
+
+                        try { TV11 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i + 2].NoBarra, columna.Seccions[i + 2].Item1.Material.FC); } catch { }
+                        try { TV22 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i - 2].NoBarra, columna.Seccions[i - 2].Item1.Material.FC); } catch { }
+
                         if (TV1 < TV2)
                         {
                             TV1 = TV2;
                         }
+
+                        if (TV1 < TV11)
+                        {
+                            TV1 = TV11;
+                        }
+                        if (TV1 < TV22)
+                        {
+                            TV1 = TV22;
+                        }
+
                         TraslapoFinal = TI > TV1 ? TI : TV1;
                     }
                     else
@@ -1751,6 +1871,7 @@ namespace DisenoColumnas.Clases
             {
                 if (Seccions[i].Item1 != null)
                 {
+                   // try { if (Seccions[i].Item1.Shape != Seccions[i - 1].Item1.Shape) { break; } } catch { }
                     try { if (Seccions[i].Item1.B - Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
                     catch { }
                 }
@@ -2230,7 +2351,9 @@ namespace DisenoColumnas.Clases
                 string NomeRefuerz = aux.CantBarras + "#" + aux.NoBarra + " L=";
                 double DistCorrerTextY = 0.15 * (NomeRefuerz.Length + 3);
                 double[] Coord_Refuerz; double[] P_XYZ_Text; double[] P1_CotaT, P2_CotaT;
-
+                float Traslapo = aux.Traslapo;
+                try { if (a.Colum_Alzado[i + 1].Tipo == "T1") { Traslapo = a.Colum_Alzado[i + 1].Traslapo; } } catch { };
+                try { if (a.Colum_Alzado[i + 2].Tipo == "T3") { Traslapo = a.Colum_Alzado[i + 2].Traslapo; } } catch { };
                 float DesCota = -0.2f;
                 if (aux.x1 != 0)
                 {
@@ -2243,21 +2366,21 @@ namespace DisenoColumnas.Clases
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1], 2), X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1], 2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText - DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1], 0 };
-                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1] + aux.Traslapo, 0 };
+                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[1][1] + Traslapo, 0 };
                 }
                 else if (Alzados.Count == 2 && a.ID == 2)
                 {
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1], 2), X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1], 2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText + DPR / 2, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1], 0 };
-                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1] + aux.Traslapo, 0 };
+                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[1][1] + Traslapo, 0 };
                 }
                 else
                 {
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Math.Round(Y + aux.Coord_Alzado_PB[0][1], 2), X + aux.Coord_Alzado_PB[1][0], Math.Round(Y + aux.Coord_Alzado_PB[1][1], 2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
                     P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
-                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1] + aux.Traslapo, 0 };
+                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1] + Traslapo, 0 };
 
                     if (aux.Tipo == "A")
                     {
@@ -2726,6 +2849,7 @@ namespace DisenoColumnas.Clases
 
                 ZNC = (int)((((LuzLibre[i] * 100 - S1 * (ZC1 * 2 - 2)) / (int)(S2))));
             }
+    
             CantEstribos_Sepa[i] = new object[] { C_Viga, ZC1, ZNC, ZC2, S1 / 100, S2 / 100 };
         }
 

@@ -235,6 +235,7 @@
             this.ClientSize = new System.Drawing.Size(383, 190);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(383, 190);
             this.Name = "AgregarRefuerzoBase";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

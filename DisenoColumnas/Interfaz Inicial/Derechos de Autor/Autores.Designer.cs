@@ -126,7 +126,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(146, 18);
             this.label6.TabIndex = 31;
-            this.label6.Text = "© 2019 efe- Prima –Ce";
+            this.label6.Text = "© 2020 efe- Prima –Ce";
             // 
             // label1
             // 

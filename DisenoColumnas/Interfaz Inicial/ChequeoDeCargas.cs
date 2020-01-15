@@ -47,12 +47,28 @@ namespace DisenoColumnas.Interfaz_Inicial
 
                     col.Panalizar = new List<List<Tuple<float, string, string, float>>>();
 
+
+                    for (int i = col.resultadosETABs.Count - 1; i >= 0; i--)
+                    {
+                        List<Tuple<float, string, string, float>> PqCumplen = new List<Tuple<float, string, string, float>>();
+                        for (int j = 0; j < col.resultadosETABs[i].Load.Count; j++)
+                        {
+                            if (CargasAnalizar.Contains(col.resultadosETABs[i].Load[j]))
+                            {
+                                Tuple<float, string, string, float> tupleAux = new Tuple<float, string, string, float>(col.resultadosETABs[i].P[j], col.resultadosETABs[i].Load[j], col.Seccions[i].Item2, 0);
+                                PqCumplen.Add(tupleAux);
+                            }
+                        }
+                        col.Panalizar.Add(PqCumplen);
+                    }
+
                     for (int i = col.resultadosETABs.Count - 1; i >= 0; i--)
                     {
                         float Ag = (float)col.Seccions[i].Item1.Area * 10000;
                         float fc = col.Seccions[i].Item1.Material.FC;
                         float Factor = 0.4f * Ag * fc;
                         List<Tuple<float, string, string, float>> PqCumplen = new List<Tuple<float, string, string, float>>();
+                  
                         for (int j = 0; j < col.resultadosETABs[i].Load.Count; j++)
                         {
                             if (CargasAnalizar.Contains(col.resultadosETABs[i].Load[j]))
@@ -61,7 +77,7 @@ namespace DisenoColumnas.Interfaz_Inicial
                                 PqCumplen.Add(tupleAux);
                             }
                         }
-                        col.Panalizar.Add(PqCumplen);
+                        col.Panalizar[i]=PqCumplen;
                     }
                 }
 

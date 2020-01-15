@@ -103,7 +103,7 @@ namespace DisenoColumnas.Diseño
 
         private void ModificarTraslapo(int Indice, Columna columna)
         {
-            for (int i = columna.Alzados[Indice].Colum_Alzado.Count - 1; i >= 0; i--)
+            for ( int i = columna.Alzados[Indice].Colum_Alzado.Count - 1; i >= 0; i--)
             {
                 if (columna.Alzados[Indice].Colum_Alzado[i] != null)
                 {
@@ -111,13 +111,28 @@ namespace DisenoColumnas.Diseño
                     if (columna.Alzados[Indice].Colum_Alzado[i].Tipo.Contains("T"))
                     {
                         float TV1 = 0; float TV2 = 0; float TI = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i].NoBarra, columna.Seccions[i].Item1.Material.FC);
+                        float TV11 = 0, TV22 = 0;
 
                         try { TV1 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i + 1].NoBarra, columna.Seccions[i + 1].Item1.Material.FC); } catch { }
                         try { TV2 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i - 1].NoBarra, columna.Seccions[i - 1].Item1.Material.FC); } catch { }
+
+                        try { TV11 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i + 2].NoBarra, columna.Seccions[i + 2].Item1.Material.FC); } catch { }
+                        try { TV22 = FunctionsProject.FindTraslapo(columna.Alzados[Indice].Colum_Alzado[i - 2].NoBarra, columna.Seccions[i - 2].Item1.Material.FC); } catch { }
+
                         if (TV1 < TV2)
                         {
                             TV1 = TV2;
                         }
+
+                        if (TV1 < TV11)
+                        {
+                            TV1 = TV11;
+                        }
+                        if (TV1 < TV22)
+                        {
+                            TV1 = TV22;
+                        }
+
                         TraslapoFinal = TI > TV1 ? TI : TV1;
                     }
                     else
@@ -364,7 +379,7 @@ namespace DisenoColumnas.Diseño
                 if (au != null)
                 {
                     float Hacum1 = 0; float Hviga1 = 0; float Hacum2 = 0; float Hviga2 = 0; float H1 = 0; float H2 = 0; string Nom3 = "Not"; string Nom4 = "Not"; float x31 = 0; float x41 = 0;
-                    string Nom1 = "Not"; string Nom2 = "Not"; float x11 = 0; float x12 = 0;
+                    string Nom1 = "Not"; string Nom2 = "Not"; float x11 = 0; float x12 = 0;float Traslpao1 = 0; float Traslpao3 = 0;
                     au.Coord_Alzado_PB = new List<float[]>();
 
                     #region Determinar Variables de Pisos Vecinos
@@ -375,6 +390,7 @@ namespace DisenoColumnas.Diseño
                     {
                         Nom3 = a.Colum_Alzado[i + 2].Tipo;
                         x31 = a.Colum_Alzado[i + 2].x1;
+                        Traslpao3 = a.Colum_Alzado[i + 2].Traslapo;
                     }
                     catch
                     { }
@@ -391,6 +407,9 @@ namespace DisenoColumnas.Diseño
                     {
                         Nom1 = a.Colum_Alzado[i + 1].Tipo;
                         x11 = a.Colum_Alzado[i + 1].x1;
+                        Traslpao1 = a.Colum_Alzado[i + 1].Traslapo;
+
+
                     }
                     catch { }
 
@@ -452,8 +471,20 @@ namespace DisenoColumnas.Diseño
 
                     if (au.UltPiso == false && au.NoStory != 1 && au.Tipo == "T2")
                     {
+                        float TraslapoAbajo = au.Traslapo;
+
+                        if (Nom1 == "T1")
+                        {
+                            TraslapoAbajo = Traslpao1;
+                        }
+
+                        if (Nom3 == "T3")
+                        {
+                            TraslapoAbajo = Traslpao3;
+                        }
+
                         float[] XY1 = new float[] { au.x1 + a.DistX, au.Hacum + H2 / 2 + au.Traslapo / 2 };
-                        float[] XY2 = new float[] { au.x1 + a.DistX, Hacum1 - Hviga1 - H1 / 2 - au.Traslapo / 2 };
+                        float[] XY2 = new float[] { au.x1 + a.DistX, Hacum1 - Hviga1 - H1 / 2 - TraslapoAbajo / 2 };
                         au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                     }
 

@@ -58,9 +58,17 @@ namespace DisenoColumnas.DefinirColumnas
 
         private void Grafica_Paint(object sender, PaintEventArgs e)
         {
-            Grafica.CreateGraphics().Clear(Color.White);
+         
             float Height = Grafica.Height - 30;
             float Width = Grafica.Width - 30;
+
+            //Bitmap GraficaTemporal = new Bitmap(Grafica.Width, Grafica.Height);
+            Graphics graphics = e.Graphics;
+            graphics.Clear(Color.White);
+
+
+
+            //graphics.Clear(Color.White);
 
             //Graficar Cuadicula
 
@@ -136,7 +144,7 @@ namespace DisenoColumnas.DefinirColumnas
                 for (int i = viga.Seccions.Count - 1; i >= 0; i--)
                 {
                     if (viga.Seccions[i].Item2 == Nomb_PrimerPiso)
-                        viga.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
+                        viga.Paint_(graphics, Height, Width, SX, SY, -MNX, -MNY, XI, YI);
                 }
             }
             foreach (Columna columna in Form1.Proyecto_.Lista_Columnas)
@@ -145,11 +153,9 @@ namespace DisenoColumnas.DefinirColumnas
                 {
                     if (columna.Seccions[i].Item2 == Nomb_PrimerPiso)
                     {
-                        columna.Paint_(e, Height, Width, SX, SY, -MNX, -MNY, XI, YI, columna.Seccions[i].Item1, CheckedLabels);
+                        columna.Paint_(graphics, Height, Width, SX, SY, -MNX, -MNY, XI, YI, columna.Seccions[i].Item1, CheckedLabels, TamanoText);
                     }
                 }
-
-
 
             }
 
@@ -338,6 +344,16 @@ namespace DisenoColumnas.DefinirColumnas
         {
             CheckedLabels = mostrarLabels.Checked;
             Invalidate();
+        }
+
+        private float TamanoText=0;
+        private void toolStripComboBox1_TextChanged(object sender, EventArgs e)
+        {
+            float tamT = 0;
+            if (Single.TryParse(toolStripComboBox1.Text, out tamT))
+                TamanoText = tamT;
+                 Grafica.Invalidate();
+
         }
     }
 }

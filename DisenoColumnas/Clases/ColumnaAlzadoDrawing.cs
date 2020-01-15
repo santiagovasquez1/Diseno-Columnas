@@ -25,6 +25,7 @@ namespace DisenoColumnas.Clases
             {
                 if (columna.Seccions[i].Item1 != null)
                 {
+
                     try { if (columna.Seccions[i].Item1.B - columna.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
                     catch { }
                 }
@@ -77,6 +78,7 @@ namespace DisenoColumnas.Clases
             {
                 if (columna.Seccions[i].Item1 != null)
                 {
+                
                     try { if (columna.Seccions[i].Item1.B - columna.Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
                     catch { }
                 }

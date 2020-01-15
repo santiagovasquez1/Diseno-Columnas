@@ -14,10 +14,56 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
 
         public Inicio()
         {
-            RegistrarExtension();
             InitializeComponent();
+           // RegistrarExtension();
         }
+        //private void RegistrarExtension()
+        //{
+        //    RegistryKey clave1 = Registry.CurrentUser.OpenSubKey("Software", true);
+        //    clave1.CreateSubKey("Classes");
+        //    clave1 = clave1.OpenSubKey("Classes", true);
 
+        //    clave1.CreateSubKey(".Colum");
+        //    clave1 = clave1.OpenSubKey(".Colum", true);
+        //    clave1.SetValue("", "archivo.Colum");
+
+        //    clave1.Close();
+        //    ////////////////////////////////////////
+        //    RegistryKey clave2 = Registry.CurrentUser.OpenSubKey("Software", true);
+        //    clave2.CreateSubKey("Classes");
+        //    clave2 = clave2.OpenSubKey("Classes", true);
+
+        //    clave2.CreateSubKey("archivo.Colum");
+        //    clave2 = clave2.OpenSubKey("archivo.Colum", true);
+        //    clave2.SetValue("", "File COLUM");
+
+        //    clave2.CreateSubKey("DefaultIcon");
+        //    clave2 = clave2.OpenSubKey("DefaultIcon", true);
+        //    clave2.SetValue("", Application.StartupPath + "\\Iconos\\DocumentoColumnas1.ico");
+
+        //    clave2.Close();
+        //    ////////////////////////////////////////
+        //    RegistryKey clave3 = Registry.CurrentUser.OpenSubKey("Software", true);
+        //    clave3.CreateSubKey("Classes");
+        //    clave3 = clave3.OpenSubKey("Classes", true);
+
+        //    clave3.CreateSubKey("archivo.Colum");
+        //    clave3 = clave3.OpenSubKey("archivo.Colum", true);
+        //    clave3.SetValue("", "File COLUM");
+
+        //    clave3.CreateSubKey("shell");
+        //    clave3 = clave3.OpenSubKey("shell", true);
+
+        //    clave3.CreateSubKey("open");
+        //    clave3 = clave3.OpenSubKey("open", true);
+
+        //    clave3.CreateSubKey("command");
+        //    clave3 = clave3.OpenSubKey("command", true);
+
+        //    clave3.SetValue("", "\"" + Application.StartupPath + "\\DisenoColumnas.exe\" \"%1\"");
+
+        //    clave3.Close();
+        //}
         private void Inicio_Load(object sender, EventArgs e)
 
         {
@@ -48,53 +94,7 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
             }
         }
 
-        private void RegistrarExtension()
-        {
-            RegistryKey clave1 = Registry.CurrentUser.OpenSubKey("Software", true);
-            clave1.CreateSubKey("Classes");
-            clave1 = clave1.OpenSubKey("Classes", true);
 
-            clave1.CreateSubKey(".Colum");
-            clave1 = clave1.OpenSubKey(".Colum", true);
-            clave1.SetValue("", "archivo.Colum");
-
-            clave1.Close();
-            ////////////////////////////////////////
-            RegistryKey clave2 = Registry.CurrentUser.OpenSubKey("Software", true);
-            clave2.CreateSubKey("Classes");
-            clave2 = clave2.OpenSubKey("Classes", true);
-
-            clave2.CreateSubKey("archivo.Colum");
-            clave2 = clave2.OpenSubKey("archivo.Colum", true);
-            clave2.SetValue("", "File COLUM");
-
-            clave2.CreateSubKey("DefaultIcon");
-            clave2 = clave2.OpenSubKey("DefaultIcon", true);
-            clave2.SetValue("", Application.StartupPath + "\\Iconos\\DocumentoColumnas1.ico");
-
-            clave2.Close();
-            ////////////////////////////////////////
-            RegistryKey clave3 = Registry.CurrentUser.OpenSubKey("Software", true);
-            clave3.CreateSubKey("Classes");
-            clave3 = clave3.OpenSubKey("Classes", true);
-
-            clave3.CreateSubKey("archivo.Colum");
-            clave3 = clave3.OpenSubKey("archivo.Colum", true);
-            clave3.SetValue("", "File COLUM");
-
-            clave3.CreateSubKey("shell");
-            clave3 = clave3.OpenSubKey("shell", true);
-
-            clave3.CreateSubKey("open");
-            clave3 = clave3.OpenSubKey("open", true);
-
-            clave3.CreateSubKey("command");
-            clave3 = clave3.OpenSubKey("command", true);
-
-            clave3.SetValue("", "\"" + Application.StartupPath + "\\DisenoColumnas.exe\" \"%1\"");
-
-            clave3.Close();
-        }
 
         public static void Comprobar(Inicio Formulario)
         {

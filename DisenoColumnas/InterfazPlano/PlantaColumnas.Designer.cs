@@ -36,6 +36,8 @@
             this.Ayudas2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.allReadyColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mostrarLabels = new System.Windows.Forms.ToolStripMenuItem();
+            this.tamañoDelTextoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.Ayudas2.SuspendLayout();
             this.SuspendLayout();
@@ -93,15 +95,16 @@
             // 
             this.Ayudas2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.allReadyColumnsToolStripMenuItem,
-            this.mostrarLabels});
+            this.mostrarLabels,
+            this.tamañoDelTextoToolStripMenuItem});
             this.Ayudas2.Name = "Ayudas2";
-            this.Ayudas2.Size = new System.Drawing.Size(175, 48);
+            this.Ayudas2.Size = new System.Drawing.Size(181, 92);
             // 
             // allReadyColumnsToolStripMenuItem
             // 
             this.allReadyColumnsToolStripMenuItem.CheckOnClick = true;
             this.allReadyColumnsToolStripMenuItem.Name = "allReadyColumnsToolStripMenuItem";
-            this.allReadyColumnsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.allReadyColumnsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.allReadyColumnsToolStripMenuItem.Text = "All Ready Columns";
             this.allReadyColumnsToolStripMenuItem.Click += new System.EventHandler(this.AllReadyColumnsToolStripMenuItem_Click);
             // 
@@ -109,9 +112,24 @@
             // 
             this.mostrarLabels.CheckOnClick = true;
             this.mostrarLabels.Name = "mostrarLabels";
-            this.mostrarLabels.Size = new System.Drawing.Size(174, 22);
+            this.mostrarLabels.Size = new System.Drawing.Size(180, 22);
             this.mostrarLabels.Text = "Mostrar Labels";
             this.mostrarLabels.CheckedChanged += new System.EventHandler(this.MostrarLabels_CheckedChanged);
+            // 
+            // tamañoDelTextoToolStripMenuItem
+            // 
+            this.tamañoDelTextoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox1});
+            this.tamañoDelTextoToolStripMenuItem.Name = "tamañoDelTextoToolStripMenuItem";
+            this.tamañoDelTextoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tamañoDelTextoToolStripMenuItem.Text = "Tamaño del Texto";
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
+            this.toolStripComboBox1.TextChanged += new System.EventHandler(this.toolStripComboBox1_TextChanged);
             // 
             // PlantaColumnas
             // 
@@ -148,5 +166,7 @@
         private System.Windows.Forms.ContextMenuStrip Ayudas2;
         private System.Windows.Forms.ToolStripMenuItem allReadyColumnsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mostrarLabels;
+        private System.Windows.Forms.ToolStripMenuItem tamañoDelTextoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox toolStripComboBox1;
     }
 }

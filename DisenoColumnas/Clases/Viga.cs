@@ -21,7 +21,7 @@ namespace DisenoColumnas.Clases
 
         public double[] CoordXY2 { get; set; } = new double[2];   /// Cordenadas en Planta
 
-        public void Paint_(PaintEventArgs e, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI)
+        public void Paint_(Graphics graphics, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI)
         {
             float X_Colum1, X_Colum2, Y_Colum1, Y_Colum2;
 
@@ -67,8 +67,7 @@ namespace DisenoColumnas.Clases
             X_Colum2 += XI;
             Y_Colum2 += YI;
 
-            Graphics graphics = e.Graphics;
-
+     
             Pen pen = new Pen(Color.FromArgb(108, 121, 180));
 
             graphics.DrawLine(pen, X_Colum1, Y_Colum1, X_Colum2, Y_Colum2);

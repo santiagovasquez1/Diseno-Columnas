@@ -44,6 +44,7 @@
             this.NoRamas_H1 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.NoRamas_H2 = new WeifenLuo.DataGridViewTextBoxColumnEx();
             this.CantEstribos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PesoEstribos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.Info_Es_Col)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +82,8 @@
             this.NoRamasV_2,
             this.NoRamas_H1,
             this.NoRamas_H2,
-            this.CantEstribos});
+            this.CantEstribos,
+            this.PesoEstribos});
             this.Info_Es_Col.GridColor = System.Drawing.Color.DarkGray;
             this.Info_Es_Col.Location = new System.Drawing.Point(12, 32);
             this.Info_Es_Col.Name = "Info_Es_Col";
@@ -197,8 +199,16 @@
             // 
             // CantEstribos
             // 
+            this.CantEstribos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.CantEstribos.HeaderText = "Cantidad de Estribos";
             this.CantEstribos.Name = "CantEstribos";
+            // 
+            // PesoEstribos
+            // 
+            this.PesoEstribos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PesoEstribos.HeaderText = "Peso de Estribos [kgf]";
+            this.PesoEstribos.Name = "PesoEstribos";
+            this.PesoEstribos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // CuantiaVolumetrica
             // 
@@ -238,5 +248,6 @@
         private WeifenLuo.DataGridViewTextBoxColumnEx NoRamas_H1;
         private WeifenLuo.DataGridViewTextBoxColumnEx NoRamas_H2;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantEstribos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PesoEstribos;
     }
 }

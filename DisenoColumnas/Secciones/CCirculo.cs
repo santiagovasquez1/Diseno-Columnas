@@ -207,7 +207,7 @@ namespace DisenoColumnas.Secciones
             if (p_error >= 1.05)
 
             {
-                if (Form1.Proyecto_.AceroBarras[Barra_aux] * Num_Barras > As_min)
+                if (FunctionsProject.Find_As(Barra_aux) * Num_Barras > As_min)
                 {
                     Diametro1 = Barra_aux;
                     if (Diametro1 == 4)
@@ -227,7 +227,7 @@ namespace DisenoColumnas.Secciones
 
                 if (Diametro2 > 0)
                 {
-                    X2 = Convert.ToInt32((As_min - Form1.Proyecto_.AceroBarras[Diametro1] * Num_Barras) / (Form1.Proyecto_.AceroBarras[Diametro2] - Form1.Proyecto_.AceroBarras[Diametro1]));
+                    X2 = Convert.ToInt32((As_min - FunctionsProject.Find_As(Diametro1) * Num_Barras) / (FunctionsProject.Find_As(Diametro2) - FunctionsProject.Find_As(Diametro1)));
                 }
                 else
                 {
@@ -487,7 +487,7 @@ namespace DisenoColumnas.Secciones
             return 0;
         }
 
-        public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo, float recubrimiento,int Cantidad)
         {
             return 0;
         }
@@ -497,11 +497,12 @@ namespace DisenoColumnas.Secciones
             string LayerCirculo = "FC_BORDES";
             double[] CentroDibujo = new double[3] { Xi + Centro[0], Yi - Centro[1], 0 };
             double EscalaR = (radio - 2 * 0.02) / radio;
+            double EscalaR2 = radio * 4;
             string Nom_Seccion = "";
             string Escala = "1:15";
 
             FunctionsAutoCAD.FunctionsAutoCAD.AddCircle(CentroDibujo, radio, LayerCirculo);
-            FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo_Circular(CentroDibujo, "FC_ESTRIBOS", radio - 2 * 0.02, EscalaR, EscalaR, 1, 0);
+            FunctionsAutoCAD.FunctionsAutoCAD.B_Estribo_Circular(CentroDibujo, "FC_ESTRIBOS", EscalaR2, EscalaR2, EscalaR2, 1, 0);
 
             #region Dibujo de refuerzo en seccion
 

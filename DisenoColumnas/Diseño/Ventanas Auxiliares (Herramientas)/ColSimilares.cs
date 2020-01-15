@@ -1,4 +1,5 @@
 ﻿using DisenoColumnas.Clases;
+using DisenoColumnas.Secciones;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -102,6 +103,9 @@ namespace DisenoColumnas.Diseño
 
                                     Form1.Proyecto_.Lista_Columnas[i].ColSimilName = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Name;
                                     Form1.Proyecto_.Lista_Columnas[i].Alzados = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Alzados;
+                                    Form1.Proyecto_.Lista_Columnas[i].Seccions = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == D_ColSim.Rows[i].Cells[2].Value.ToString()).Seccions;
+
+
                                 }
                                 else
                                 {
@@ -115,8 +119,10 @@ namespace DisenoColumnas.Diseño
                             else
                             {
                                 List<Alzado> Aux = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].Alzados);
+                                List<Tuple<ISeccion, string>> SeccionsAux  = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].Seccions);
                                 Form1.Proyecto_.Lista_Columnas[i].Alzados = null;
                                 Form1.Proyecto_.Lista_Columnas[i].Alzados = Aux;
+                                Form1.Proyecto_.Lista_Columnas[i].Seccions = SeccionsAux;
                                 Form1.Proyecto_.Lista_Columnas[i].ColSimilName = "";
 
                                 for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
@@ -133,9 +139,12 @@ namespace DisenoColumnas.Diseño
                         else
                         {
                             List<Alzado> Aux = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].Alzados);
-                            Form1.Proyecto_.Lista_Columnas[i].ColSimilName = "";
+                            List<Tuple<ISeccion, string>> SeccionsAux = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].Seccions);
                             Form1.Proyecto_.Lista_Columnas[i].Alzados = null;
                             Form1.Proyecto_.Lista_Columnas[i].Alzados = Aux;
+                            Form1.Proyecto_.Lista_Columnas[i].Seccions = SeccionsAux;
+                            Form1.Proyecto_.Lista_Columnas[i].ColSimilName = "";
+
                             for (int j = 0; j < Form1.Proyecto_.Lista_Columnas[i].resultadosETABs.Count; j++)
                             {
                                 float[] Aux_AsAsing = FunctionsProject.DeepClone(Form1.Proyecto_.Lista_Columnas[i].resultadosETABs[j].As_asignado);
@@ -151,6 +160,8 @@ namespace DisenoColumnas.Diseño
                 for (int i = 0; i < Form1.Proyecto_.Lista_Columnas.Count; i++)
                 {
                     Form1.Proyecto_.Lista_Columnas[i].ActualizarRefuerzo();
+                    Form1.Proyecto_.Lista_Columnas[i].KgRefuerzoforColumAlzado.Clear();
+                    Form1.Proyecto_.Lista_Columnas[i].CrearListaPesosRefuerzos(0);
                     Form1.Proyecto_.Lista_Columnas[i].CalcularPesoAcero();
                 }
                 Form1.mFormPrincipal.Invalidate();

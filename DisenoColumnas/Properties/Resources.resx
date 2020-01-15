@@ -133,6 +133,9 @@
   <data name="Czoom-increasing-symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Czoom-increasing-symbol.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BarraIndividual" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BarraIndividual.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Csearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Csearch.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,17 +148,14 @@
   <data name="columna2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\columna2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="efePrimaCeLogoSolo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\efePrimaCeLogoSolo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="analisis" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\analisis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="editarx16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\editarx16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AnguloIzquierda" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AnguloIzquierda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="efePrimaCeLogoSolo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\efePrimaCeLogoSolo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Arrastre16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Arrastre16x16.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="collapseBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\collapseBtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,8 +175,8 @@
   <data name="Abajo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Abajo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Czoom-increasing-symbol-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Czoom-increasing-symbol-1.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconfinder_export_excel_64174" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconfinder_export_excel_64174.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="zoom-out" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,11 +223,17 @@
   <data name="columna" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\columna.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="analisis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\analisis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DiagramaInteraccionx25 (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DiagramaInteraccionx25 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1C" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1C.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8-dibujados-a-mano-a-color-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-dibujados-a-mano-a-color-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Restaurar14x11" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Restaurar14x11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,6 +250,9 @@
   <data name="expandBtn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\expandBtn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BarraMultiple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BarraMultiple.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="efe-Prima-ce-negative-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\efe-Prima-ce-negative-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -256,14 +265,20 @@
   <data name="close-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8-dibujados-a-mano-a-color-100" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-dibujados-a-mano-a-color-100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AnguloIzquierda" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnguloIzquierda.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Arriba" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Arriba.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Czoom-increasing-symbol-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Czoom-increasing-symbol-1.cur;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="AgregarCol2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AgregarCol2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BarraIndividual1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BarraIndividual1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cursor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -322,7 +337,7 @@
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconfinder_export_excel_64174" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconfinder_export_excel_64174.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="BarrasCuadro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BarrasCuadro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -57,8 +57,8 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Label6 = new System.Windows.Forms.Label();
             this.Button_Cerrar = new System.Windows.Forms.Button();
+            this.Label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbPeso.SuspendLayout();
@@ -395,18 +395,6 @@
             this.panel2.TabIndex = 14;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             // 
-            // Label6
-            // 
-            this.Label6.AutoSize = true;
-            this.Label6.BackColor = System.Drawing.Color.Transparent;
-            this.Label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label6.ForeColor = System.Drawing.Color.Black;
-            this.Label6.Location = new System.Drawing.Point(3, 4);
-            this.Label6.Name = "Label6";
-            this.Label6.Size = new System.Drawing.Size(130, 15);
-            this.Label6.TabIndex = 22;
-            this.Label6.Text = "Secciones Predefinidas";
-            // 
             // Button_Cerrar
             // 
             this.Button_Cerrar.BackColor = System.Drawing.Color.Gray;
@@ -426,6 +414,18 @@
             this.Button_Cerrar.UseVisualStyleBackColor = false;
             this.Button_Cerrar.Click += new System.EventHandler(this.Button_Cerrar_Click);
             // 
+            // Label6
+            // 
+            this.Label6.AutoSize = true;
+            this.Label6.BackColor = System.Drawing.Color.Transparent;
+            this.Label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label6.ForeColor = System.Drawing.Color.Black;
+            this.Label6.Location = new System.Drawing.Point(3, 4);
+            this.Label6.Name = "Label6";
+            this.Label6.Size = new System.Drawing.Size(130, 15);
+            this.Label6.TabIndex = 22;
+            this.Label6.Text = "Secciones Predefinidas";
+            // 
             // FEditarPredef
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,6 +434,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(800, 450);
             this.Name = "FEditarPredef";
             this.Text = "Secciones Predefinidas";
             this.Load += new System.EventHandler(this.FEditarPredef_Load);

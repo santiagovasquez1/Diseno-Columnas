@@ -169,6 +169,7 @@
             this.Controls.Add(this.Panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(288, 416);
             this.Name = "ColumnasaDiseñar";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

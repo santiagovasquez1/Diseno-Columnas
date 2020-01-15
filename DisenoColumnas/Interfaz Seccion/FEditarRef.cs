@@ -115,7 +115,14 @@ namespace DisenoColumnas.Interfaz_Seccion
         private void bAceptar_Click(object sender, EventArgs e)
         {
             Reload_Seccion();
+            Form1.mIntefazSeccion.Grafica.Invalidate();
+
             Close();
+        }
+
+        private void Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

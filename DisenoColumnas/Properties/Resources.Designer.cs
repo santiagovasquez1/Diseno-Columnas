@@ -151,11 +151,61 @@ namespace DisenoColumnas.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        internal static System.Drawing.Icon Arrastre16x16 {
+            get {
+                object obj = ResourceManager.GetObject("Arrastre16x16", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Arriba {
             get {
                 object obj = ResourceManager.GetObject("Arriba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BarraIndividual {
+            get {
+                object obj = ResourceManager.GetObject("BarraIndividual", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BarraIndividual1 {
+            get {
+                object obj = ResourceManager.GetObject("BarraIndividual1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BarraMultiple {
+            get {
+                object obj = ResourceManager.GetObject("BarraMultiple", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BarrasCuadro {
+            get {
+                object obj = ResourceManager.GetObject("BarrasCuadro", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

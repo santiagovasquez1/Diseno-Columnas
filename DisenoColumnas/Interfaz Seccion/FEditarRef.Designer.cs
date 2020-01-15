@@ -57,6 +57,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(259, 241);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
             // groupBox1
@@ -140,6 +141,7 @@
             // 
             // cbDiametros
             // 
+            this.cbDiametros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDiametros.FormattingEnabled = true;
             this.cbDiametros.Items.AddRange(new object[] {
             "#4",
@@ -214,7 +216,9 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(259, 241);
             this.Name = "FEditarRef";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Editar Refuerzo";
             this.Load += new System.EventHandler(this.FEditarRef_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FEditarRef_MouseMove);

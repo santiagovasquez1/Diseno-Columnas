@@ -144,6 +144,7 @@
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximumSize = new System.Drawing.Size(306, 414);
             this.Name = "CambiarNombreColumna";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

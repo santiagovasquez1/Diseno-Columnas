@@ -2,6 +2,7 @@
 using DisenoColumnas.Secciones;
 using DisenoColumnas.Utilidades;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,7 +13,7 @@ namespace DisenoColumnas.Interfaz_Seccion
         private static FInterfaz_Seccion FInterfaz_ { get; set; } = new FInterfaz_Seccion(pedicion: Tipo_Edicion.Secciones_modelo);
         private ISeccion Seccion { get; set; }
         private string piso { get; set; }
-        private int index { get; set; } = -1;
+        private List<int> index { get; set; } = new List<int>();
 
         public FAgregarRef(ISeccion pseccion, string ppiso, FInterfaz_Seccion pInterfaz)
         {
@@ -21,6 +22,8 @@ namespace DisenoColumnas.Interfaz_Seccion
             Seccion = pseccion;
             InitializeComponent();
         }
+
+
 
         private void FAgregarRef_Load(object sender, EventArgs e)
         {
@@ -156,7 +159,8 @@ namespace DisenoColumnas.Interfaz_Seccion
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 data.Rows[i].Cells[0].Value = id;
-                data.Rows[i].Cells[1].Value = "#4";
+                data.Rows[i].Cells[1].Value = "1";
+                data.Rows[i].Cells[2].Value = "#4";
 
                 if (Seccion.Shape == TipodeSeccion.Rectangular)
                 {
@@ -212,10 +216,25 @@ namespace DisenoColumnas.Interfaz_Seccion
                 boxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[i].Cells[2];
                 id = Convert.ToInt32(dataGridView1.Rows[i].Cells[0].Value);
                 diametro = boxCell.Value.ToString();
+                try
+                {
+                    int EnteroDiametro = Convert.ToInt32(diametro.Substring(1)); FunctionsProject.Find_As(EnteroDiametro);
+                   
+                    if (EnteroDiametro > 10 | EnteroDiametro < 0)
+                    {
+                        diametro = "#4";
+                    }
+                    else
+                    {
+                        diametro = "#" + EnteroDiametro;
+                    }
+                }
+                catch { diametro = "#4"; }
+
                 x = Convert.ToDouble(dataGridView1.Rows[i].Cells[3].Value);
                 y = Convert.ToDouble(dataGridView1.Rows[i].Cells[4].Value);
                 coord = new double[] { x, y };
-
+            
                 refuerzo = new CRefuerzo(id, diametro, coord, TipodeRefuerzo.longitudinal);
                 refuerzo.Alzado = Convert.ToInt32(dataGridView1.Rows[i].Cells[1].Value);
                 Seccion.Refuerzos.Add(refuerzo);
@@ -318,10 +337,21 @@ namespace DisenoColumnas.Interfaz_Seccion
 
             Tabla_madre.Rows.Add();
             Last_index = Tabla_madre.Rows.Count - 1;
-            id = Convert.ToInt32(Tabla_madre.Rows[Last_index - 1].Cells[0].Value) + 1;
-
+            try
+            {
+                id = Convert.ToInt32(Tabla_madre.Rows[Last_index - 1].Cells[0].Value) + 1;
+            }
+            catch { id = 1; }
             Tabla_madre.Rows[Last_index].Cells[0].Value = id;
-            Tabla_madre.Rows[Last_index].Cells[1].Value = Seccion.Refuerzos.Last().Diametro;
+            Tabla_madre.Rows[Last_index].Cells[1].Value = 1;
+            try
+            {
+                Tabla_madre.Rows[Last_index].Cells[2].Value = Seccion.Refuerzos.Last().Diametro;
+            }
+            catch
+            {
+                Tabla_madre.Rows[Last_index].Cells[2].Value = "#4";
+            }
         }
 
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -330,21 +360,107 @@ namespace DisenoColumnas.Interfaz_Seccion
             {
                 dataGridView1.ContextMenuStrip = cmEditar;
                 cmEditar.Enabled = true;
-                index = e.RowIndex;
+                index.Clear();
+                for (int m = 0; m < dataGridView1.SelectedCells.Count; m++)
+                {
+                    index.Add(dataGridView1.SelectedCells[m].RowIndex);
+                }
+                index = index.Distinct().ToList();
+                index = index.OrderByDescending(x => x).ToList();
             }
             else
-                index = -1;
+                index.Clear();
         }
 
         private void eliminarRefuerzoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var Tabla_madre = (DataGridView)cmEditar.SourceControl;
-            Tabla_madre.Rows.RemoveAt(index);
-
-            for (int i = index; i < Tabla_madre.RowCount; i++)
+            if (index.Count != 0)
             {
-                Tabla_madre.Rows[i].Cells[0].Value = i + 1;
+                try
+                {
+                    for (int m = 0; m < index.Count; m++)
+                    {
+                        Tabla_madre.Rows.RemoveAt(index[m]);
+
+                        for (int i = index[m]; i < Tabla_madre.RowCount; i++)
+                        {
+                            Tabla_madre.Rows[i].Cells[0].Value = i + 1;
+                        }
+                    }
+                }
+                catch { }
             }
+        }
+
+        private void eliminarTodosLosRefuerzosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var Tabla_madre = (DataGridView)cmEditar.SourceControl;
+            Tabla_madre.Rows.Clear();
+        }
+
+        private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyRefuerzo(dataGridView1);
+        }
+
+        public static List<CRefuerzo> RefuerzosACopiar = new List<CRefuerzo>();
+
+        private void CopyRefuerzo(DataGridView data)
+        {
+            List<int> IDRefuerzos = new List<int>();
+            RefuerzosACopiar.Clear();
+            if (data.SelectedRows.Count != 0)
+            {
+                for (int i = 0; i < data.SelectedRows.Count; i++)
+                {
+                    IDRefuerzos.Add((int)data.Rows[data.SelectedRows[i].Index].Cells[0].Value);
+                }
+            }
+            for (int i = 0; i < data.SelectedRows.Count; i++)
+            {
+                RefuerzosACopiar.Add(FunctionsProject.DeepClone(Seccion.Refuerzos.Find(x => x.id == IDRefuerzos[i])));
+            }
+            RefuerzosACopiar = RefuerzosACopiar.OrderBy(x => x.id).ToList();
+        }
+
+        private void PasteRefuerzo(DataGridView data)
+        {
+            int IDUltRefuerzo = 1;
+
+            try
+            {
+                IDUltRefuerzo = (int)data.Rows[data.Rows.Count - 1].Cells[0].Value + 1;
+                
+            }
+            catch { }
+
+            foreach (CRefuerzo crefuerzo in RefuerzosACopiar)
+            {
+                crefuerzo.id = IDUltRefuerzo;
+                IDUltRefuerzo += 1;
+            }
+
+            foreach (CRefuerzo refuerzo1 in RefuerzosACopiar)
+            {
+                data.Rows.Add();
+                data.Rows[data.Rows.Count - 1].Cells[0].Value = refuerzo1.id;
+                data.Rows[data.Rows.Count - 1].Cells[1].Value = refuerzo1.Alzado;
+                data.Rows[data.Rows.Count - 1].Cells[2].Value = refuerzo1.Diametro;
+                data.Rows[data.Rows.Count - 1].Cells[3].Value = Math.Round(refuerzo1.Coord[0], 2);
+                data.Rows[data.Rows.Count - 1].Cells[4].Value = Math.Round(refuerzo1.Coord[1], 2);
+            }
+
+        }
+
+        private void pegarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PasteRefuerzo(dataGridView1);
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
         }
     }
 }

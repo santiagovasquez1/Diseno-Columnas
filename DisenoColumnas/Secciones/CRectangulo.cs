@@ -400,7 +400,10 @@ namespace DisenoColumnas.Secciones
                 Ash = Ash1 > Ash2 ? Ash1 : Ash2;
                 if (S != 0 && Estribo.Area != 0)
                 {
-                    Estribo.NoRamasV1 = Convert.ToInt32(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+
+                    int RamasMenos = (int)Math.Round(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    int RamasMas = (int)Math.Ceiling(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    Estribo.NoRamasV1 = CalcularRamasDefinitivas((float)Ash, (float)Estribo.Area * RamasMenos, RamasMenos, RamasMas);
                 }
                 else
                 {
@@ -417,7 +420,9 @@ namespace DisenoColumnas.Secciones
 
                 if (S != 0 && Estribo.Area != 0)
                 {
-                    Estribo.NoRamasH1 = Convert.ToInt32(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    int RamasMenos = (int)Math.Round(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    int RamasMas = (int)Math.Ceiling(Math.Round(Ash / Estribo.Area < 2 ? 2 : (float)Math.Round(Ash / Estribo.Area, 2), 2));
+                    Estribo.NoRamasH1 = CalcularRamasDefinitivas((float)Ash, (float)Estribo.Area * RamasMenos, RamasMenos, RamasMas);
                 }
                 else
                 {
@@ -425,7 +430,22 @@ namespace DisenoColumnas.Secciones
                 }
             }
         }
+    
+        private int CalcularRamasDefinitivas(float AshNecesario,float AsMenos,int RamasMenor, int RamasMayor )
+        {
+            float Porcentaje = AsMenos / AshNecesario;
 
+            if (Porcentaje >= 0.95f)
+            {
+                return RamasMenor;
+
+            }
+            else
+            {
+                return RamasMayor;
+            }
+
+        }
         public void Calc_vol_inex(float r, float FY, GDE gDE)
         {
             float FD1, FD2;
@@ -484,7 +504,7 @@ namespace DisenoColumnas.Secciones
                     };
 
                     Cuanti_Vol(FD1, FD2, r, FY);
-                    P_As1.Add(Peso_Estribo(Estribo, r));
+                    P_As1.Add(Peso_Estribo(Estribo, r,1));
 
                     #endregion Estribo #3
 
@@ -496,7 +516,7 @@ namespace DisenoColumnas.Secciones
                     };
 
                     Cuanti_Vol(FD1, FD2, r, FY);
-                    P_As2.Add(Peso_Estribo(Estribo, r));
+                    P_As2.Add(Peso_Estribo(Estribo, r,1));
 
                     Sep.Add(s_d);
                     s_d += delta;
@@ -569,7 +589,7 @@ namespace DisenoColumnas.Secciones
                 Estribo.NoEstribo = 3;
                 Estribo.Separacion = (float)Sdef1;
 
-                PAs1 = Peso_Estribo(Estribo, r);
+                PAs1 = Peso_Estribo(Estribo, r,1);
 
                 #endregion Estribo  #3
 
@@ -611,7 +631,7 @@ namespace DisenoColumnas.Secciones
                 Estribo.NoEstribo = 4;
                 Estribo.Separacion = (float)Sdef2;
 
-                PAs2 = Peso_Estribo(Estribo, r);
+                PAs2 = Peso_Estribo(Estribo, r,1);
 
                 #endregion Estribo  #4
 
@@ -1126,21 +1146,22 @@ namespace DisenoColumnas.Secciones
             #endregion Nombre_Seccion
         }
 
-        public double Peso_Estribo(Estribo pEstribo, float recubrimiento)
+        public double Peso_Estribo(Estribo pEstribo, float recubrimiento,int Cantidad)
         {
             double PAuxiliar = 0;
             double Long_Estibo = 0;
             double Long_GanchoV = 0;
             double Long_GanchoH = 0;
-            int Numero_Estribos = 0;
+            //int Numero_Estribos = 0;
 
             Long_Estibo = 2 * (B - 2 * recubrimiento) + 2 * (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 135);
             Long_GanchoH = (B - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180);
             Long_GanchoV = (H - 2 * recubrimiento) + 2 * FunctionsProject.Gancho(pEstribo.NoEstribo, 180);
 
-            Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
+         //   Numero_Estribos = Convert.ToInt32(Math.Round((100) / pEstribo.Separacion, 0) + 1);
+            float PesoKgEstribo = FunctionsProject.Find_MasaNominal(Estribo.NoEstribo);
 
-            PAuxiliar = (Long_Estibo + (pEstribo.NoRamasH1 - 2) * Long_GanchoH + (pEstribo.NoRamasV1 - 2) * Long_GanchoV) * pEstribo.Area * 7850 * Numero_Estribos;
+            PAuxiliar = (Long_Estibo + (pEstribo.NoRamasH1 - 2) * Long_GanchoH + (pEstribo.NoRamasV1 - 2) * Long_GanchoV) * PesoKgEstribo*Cantidad;
 
             return PAuxiliar;
         }
