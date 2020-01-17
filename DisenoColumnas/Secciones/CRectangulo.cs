@@ -10,7 +10,11 @@ using System.Linq;
 
 namespace DisenoColumnas.Secciones
 {
-
+    [Serializable]
+    public enum ConcreteSections
+    {
+        Beam,Colum,None
+    }
 
     [Serializable]
     public enum TipodeSeccion
@@ -23,7 +27,7 @@ namespace DisenoColumnas.Secciones
     }
 
     [Serializable]
-    public class CRectangulo : ISeccion, ICloneable, IComparable
+    public class CRectangulo : ISeccion, IComparable
     {
         public string Name { get; set; }
         public MAT_CONCRETE Material { get; set; }
@@ -32,6 +36,8 @@ namespace DisenoColumnas.Secciones
         [NonSerialized] private GraphicsPath pSeccion_path;
         public GraphicsPath Seccion_path { get { return pSeccion_path; } set { pSeccion_path = value; } }
         public TipodeSeccion Shape { get; set; }
+        public ConcreteSections Type { get; set; }
+
         public double Area { get; set; }
         public double Acero_Long { get; set; }
         public Estribo Estribo { get; set; }
@@ -41,6 +47,9 @@ namespace DisenoColumnas.Secciones
         public List<float[]> CoordenadasSeccion { get; set; }
         public bool Editado { get; set; } = false;
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
+
+        public List<Tuple<ISeccion, string>> SeccionesVecinosCambios { get; set; } = new List<Tuple<ISeccion, string>>();
+
 
         #region Propiedades y Metodos para verificación de Vc
 
@@ -898,16 +907,7 @@ namespace DisenoColumnas.Secciones
             return path;
         }
 
-        public object Clone()
-        {
-            CRectangulo temp = new CRectangulo(Name, B, H, Material, Shape, CoordenadasSeccion)
-            {
-                Refuerzos = Refuerzos,
-                Vertices = Vertices,
-                Area = Area
-            };
-            return temp;
-        }
+     
 
         public override string ToString()
         {
@@ -1032,6 +1032,49 @@ namespace DisenoColumnas.Secciones
                 br = new SolidBrush(Color.FromArgb(150, Color.Gray));
             }
 
+            #region Vertices
+
+            X = -(B * 100 / 2) * EscalaX;
+            Y = -(H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
+
+            X = (B * 100 / 2) * EscalaX;
+            Y = -(H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
+
+            X = (B * 100 / 2) * EscalaX;
+            Y = (H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
+
+            X = -(B * 100 / 2) * EscalaX;
+            Y = (H * 100 / 2) * EscalaY;
+            Vertices.Add(new PointF((float)X + Dx, (float)Y + Dy));
+
+            #endregion Vertices
+
+            g.DrawPolygon(P1, Vertices.ToArray());
+            g.FillPolygon(br, Vertices.ToArray());
+            Seccion_path.AddPolygon(Vertices.ToArray());
+        }
+        public void Dibujo_SeccionVecina(Graphics g, double EscalaX, double EscalaY, float Dx, float Dy)
+        {
+            double X, Y;
+            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            Pen P1;
+            Vertices = new List<PointF>();
+            Seccion_path = new GraphicsPath();
+
+
+            P1 = new Pen(Color.Black, 3f)
+            {
+                Brush = Brushes.DarkGray,
+                Color = Color.DarkBlue,
+                DashStyle = DashStyle.Dash,
+                LineJoin = LineJoin.Round,
+                Alignment = PenAlignment.Center
+            };
+            br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+  
             #region Vertices
 
             X = -(B * 100 / 2) * EscalaX;
@@ -1203,7 +1246,7 @@ namespace DisenoColumnas.Secciones
                 fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
                 fInterfaz.Get_Columna();
                 fInterfaz.Load_Pisos();
-                fInterfaz.Get_section();
+                fInterfaz.Get_section(true);
                 fInterfaz.Invalidate();
             }
         }

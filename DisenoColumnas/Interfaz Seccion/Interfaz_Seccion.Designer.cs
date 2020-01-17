@@ -53,7 +53,6 @@
             this.Analizar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.CASOSCARGA = new System.Windows.Forms.ListBox();
-            this.Grafica = new DisenoColumnas.Interfaz_Seccion.Controles.DoubleBufferedPictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.CreateSection = new System.Windows.Forms.ToolStripButton();
             this.SaveSection = new System.Windows.Forms.ToolStripButton();
@@ -62,6 +61,11 @@
             this.barraIndiviudalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barraMultipleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmMenuSecciones = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mostrarSecciónesVecinasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.arrribaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abajoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Grafica = new DisenoColumnas.Interfaz_Seccion.Controles.DoubleBufferedPictureBox();
             this.groupBox1.SuspendLayout();
             this.gbSecciones.SuspendLayout();
             this.cmEditar_Ref.SuspendLayout();
@@ -70,8 +74,9 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.cmMenuSecciones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -253,7 +258,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(870, 540);
             this.panel1.TabIndex = 11;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel2
             // 
@@ -324,22 +328,6 @@
             this.CASOSCARGA.Size = new System.Drawing.Size(284, 121);
             this.CASOSCARGA.TabIndex = 0;
             this.CASOSCARGA.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Analizar_KeyUp);
-            // 
-            // Grafica
-            // 
-            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Grafica.BackColor = System.Drawing.Color.White;
-            this.Grafica.Location = new System.Drawing.Point(4, 16);
-            this.Grafica.Name = "Grafica";
-            this.Grafica.Size = new System.Drawing.Size(677, 494);
-            this.Grafica.TabIndex = 9;
-            this.Grafica.TabStop = false;
-            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
-            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
-            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
-            this.Grafica.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FInterfaz_Seccion_Scroll);
             // 
             // toolStrip1
             // 
@@ -426,6 +414,53 @@
             this.toolStripMenuItem2.Text = "Dibujar Rectangulo de Barras";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
+            // cmMenuSecciones
+            // 
+            this.cmMenuSecciones.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mostrarSecciónesVecinasToolStripMenuItem});
+            this.cmMenuSecciones.Name = "cmMenuSecciones";
+            this.cmMenuSecciones.Size = new System.Drawing.Size(216, 26);
+            // 
+            // mostrarSecciónesVecinasToolStripMenuItem
+            // 
+            this.mostrarSecciónesVecinasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.arrribaToolStripMenuItem,
+            this.abajoToolStripMenuItem});
+            this.mostrarSecciónesVecinasToolStripMenuItem.Name = "mostrarSecciónesVecinasToolStripMenuItem";
+            this.mostrarSecciónesVecinasToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.mostrarSecciónesVecinasToolStripMenuItem.Text = "Mostrar Secciones Vecinas ";
+            // 
+            // arrribaToolStripMenuItem
+            // 
+            this.arrribaToolStripMenuItem.CheckOnClick = true;
+            this.arrribaToolStripMenuItem.Name = "arrribaToolStripMenuItem";
+            this.arrribaToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.arrribaToolStripMenuItem.Text = "Arrriba";
+            // 
+            // abajoToolStripMenuItem
+            // 
+            this.abajoToolStripMenuItem.CheckOnClick = true;
+            this.abajoToolStripMenuItem.Name = "abajoToolStripMenuItem";
+            this.abajoToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.abajoToolStripMenuItem.Text = "Abajo";
+            // 
+            // Grafica
+            // 
+            this.Grafica.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Grafica.BackColor = System.Drawing.Color.White;
+            this.Grafica.ContextMenuStrip = this.cmMenuSecciones;
+            this.Grafica.Location = new System.Drawing.Point(4, 16);
+            this.Grafica.Name = "Grafica";
+            this.Grafica.Size = new System.Drawing.Size(677, 494);
+            this.Grafica.TabIndex = 9;
+            this.Grafica.TabStop = false;
+            this.Grafica.Paint += new System.Windows.Forms.PaintEventHandler(this.Grafica_Paint);
+            this.Grafica.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseDown);
+            this.Grafica.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Grafica_MouseMove);
+            this.Grafica.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FInterfaz_Seccion_Scroll);
+            // 
             // FInterfaz_Seccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -455,9 +490,10 @@
             this.panel2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.cmMenuSecciones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Grafica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -496,5 +532,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripButton tbSeleccionar;
+        private System.Windows.Forms.ContextMenuStrip cmMenuSecciones;
+        private System.Windows.Forms.ToolStripMenuItem mostrarSecciónesVecinasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem arrribaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abajoToolStripMenuItem;
     }
 }

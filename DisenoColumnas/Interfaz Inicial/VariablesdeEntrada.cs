@@ -84,14 +84,7 @@ namespace DisenoColumnas.Interfaz_Inicial
                             columna.LuzAcum[i] = DisAcum;
                         }
                     }
-
-                    if (ProyectoPV)
-                    {
-                        if (RedondearDecimales.Checked)
-                        {
-                            MessageBox.Show("NOTA: El redondeo de decimales en la longitud de las barras afectará el dibujo en AutoCAD, se deberá realizar el acotamiento de los traslapos de forma manual. ", Form1.Proyecto_.Empresa, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
+                
                     Close();
                 }
             }

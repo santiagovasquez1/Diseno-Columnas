@@ -178,7 +178,33 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                 Add_Texto_Seccion(g, seccion);
 
-                if(Add_Refuerzo_Multiple_Linea && Add_Refuerzo_Multiple2_Linea)
+
+                #region Seccion Vecina
+                if (arrribaToolStripMenuItem.Enabled)
+                {
+                    if (arrribaToolStripMenuItem.Checked) 
+                    { 
+                        seccion.SeccionesVecinosCambios[0].Item1.Dibujo_SeccionVecina(g, EscalaX, EscalaY, Dx, Dy);
+                    }
+                }
+                if (abajoToolStripMenuItem.Enabled)
+                {
+                    if (abajoToolStripMenuItem.Checked)
+                    {
+                        seccion.SeccionesVecinosCambios[0].Item1.Dibujo_SeccionVecina(g, EscalaX, EscalaY, Dx, Dy);
+                    }
+                }
+                #endregion 
+
+
+
+
+
+
+
+
+
+                if (Add_Refuerzo_Multiple_Linea && Add_Refuerzo_Multiple2_Linea)
                 {
                     Pen penSombreado = new Pen(Color.Black, 2);
                     penSombreado.DashStyle = DashStyle.Dot;
@@ -205,6 +231,13 @@ namespace DisenoColumnas.Interfaz_Seccion
                     path.AddLines(PuntosRectangulo);
                     g.DrawPath(penSombreado, path);  
                 }
+
+
+
+
+
+
+
                 Grafica.Image = newImg;
             }
         }
@@ -356,7 +389,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 {
                     seccion = FunctionsProject.DeepClone(Columna_i.Seccions[indice].Item1);
                 }
-
+                AsignarSeccionesConCambios();
+   
                 Grafica.Invalidate();
             }
         }
@@ -569,7 +603,6 @@ namespace DisenoColumnas.Interfaz_Seccion
             }
 
         }
-
 
 
         float DesXButton = 0; float DesYButton = 0;
@@ -845,7 +878,7 @@ namespace DisenoColumnas.Interfaz_Seccion
                 }
                 else
                 {
-                    Grafica.ContextMenuStrip = null;
+                    Grafica.ContextMenuStrip = cmMenuSecciones;
                 }
             }
         }
@@ -1051,7 +1084,7 @@ namespace DisenoColumnas.Interfaz_Seccion
             Piso = lbPisos.SelectedItem.ToString();
             if (edicion == Tipo_Edicion.Secciones_modelo)
             {
-                Get_section();
+                Get_section(true);
             }
             else
             {
@@ -1308,11 +1341,8 @@ namespace DisenoColumnas.Interfaz_Seccion
                 }
             }
         }
+        
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void Analizar_Click(object sender, EventArgs e)
         {
@@ -1330,8 +1360,8 @@ namespace DisenoColumnas.Interfaz_Seccion
 
                     if (col.resultadosETABs[indice].Load[i].Contains(Carga))
                     {
-                        float[] MXPYPU = new float[] { col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].P[i] };
-                        //float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
+                     //   float[] MXPYPU = new float[] { col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].P[i] };
+                        float[] MXPYPU = new float[] { col.resultadosETABs[indice].M2[i], col.resultadosETABs[indice].M3[i], col.resultadosETABs[indice].P[i] };
                         MP_solic.Add(MXPYPU);
                     }
                 }
@@ -1374,5 +1404,75 @@ namespace DisenoColumnas.Interfaz_Seccion
                 ButtonSeleccionar();
             }
         }
+
+
+
+
+
+
+        private void AsignarSeccionesConCambios()
+        {
+            arrribaToolStripMenuItem.Enabled = false;
+            abajoToolStripMenuItem.Enabled = false;
+            mostrarSecciónesVecinasToolStripMenuItem.Enabled = true;
+            if (seccion.SeccionesVecinosCambios == null)
+            {
+                seccion.SeccionesVecinosCambios = new List<Tuple<ISeccion,string>>();
+            }
+            else
+            {
+                seccion.SeccionesVecinosCambios.Clear();
+            }
+
+            for (int i = Columna_i.Seccions.Count - 1; i >= 0; i--)
+            {
+                Tuple<ISeccion, string> seccion1 = Columna_i.Seccions[i];
+                if (Piso == seccion1.Item2)
+                {
+                    ISeccion seccionV1 = null; ISeccion seccionV2 = null; string PisoV1 = ""; string PisoV2 = "";
+
+                    try { seccionV1 = FunctionsProject.DeepClone(Columna_i.Seccions[i + 1].Item1); PisoV1 = Columna_i.Seccions[i + 1].Item2; } catch { }
+                    try { seccionV2 = FunctionsProject.DeepClone(Columna_i.Seccions[i - 1].Item1); PisoV2 = Columna_i.Seccions[i - 1].Item2; } catch { }
+
+                 
+                    if (CompararSecciones(seccion, seccionV2) != null)
+                    {
+                        seccion.SeccionesVecinosCambios.Add(new Tuple<ISeccion, string>(seccionV2, PisoV2));
+                        arrribaToolStripMenuItem.Enabled = true;
+                    }
+                    if (CompararSecciones(seccion, seccionV1) != null)
+                    {
+                        seccion.SeccionesVecinosCambios.Add(new Tuple<ISeccion, string>(seccionV1, PisoV1));
+                        abajoToolStripMenuItem.Enabled = true;
+                    }
+                    break;
+
+                }
+
+            }
+
+            if (seccion.SeccionesVecinosCambios.Count == 0)
+            {
+                mostrarSecciónesVecinasToolStripMenuItem.Enabled = false;
+            }
+
+        }
+
+
+        private ISeccion CompararSecciones(ISeccion seccionOrg, ISeccion seccionVecina)
+        {
+            if (seccionVecina != null)
+            {
+                if (seccionVecina.B != seccionOrg.B | seccionVecina.H!= seccionOrg.H)
+                {
+                    return seccionVecina;
+                }
+            }
+            return null;
+
+
+        }
+
+  
     }
 }

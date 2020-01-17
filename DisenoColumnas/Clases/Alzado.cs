@@ -49,6 +49,8 @@ namespace DisenoColumnas.Clases
 
         public float Hacum { get; set; }
 
+        public bool CotaAutoCAD { get; set; } = false;
+
         public bool UltPiso { get; set; }
 
         public float e_Fu { get; set; }

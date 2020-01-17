@@ -725,7 +725,59 @@ namespace DisenoColumnas
                         }
                     }
                 }
+
+                if (columna.PisosDesechos.Count > 0)
+                {
+                    for (int j = 0; j < columna.PisosDesechos.Count; j++)
+                    {
+
+                        List<string> Story_Result = new List<string>(); List<string> Load = new List<string>();
+                        List<float> Loc = new List<float>();
+                        List<float> P = new List<float>();
+                        List<float> V2 = new List<float>();
+                        List<float> V3 = new List<float>();
+                        List<float> T = new List<float>();
+                        List<float> M2 = new List<float>();
+                        List<float> M3 = new List<float>();
+
+                        for (int i = 0; i < Resultados2.Count; i++)
+                        {
+                            if (columna.Name == Resultados2[i][1] && columna.PisosDesechos[j].Item1 == Resultados2[i][0])
+                            {
+
+                                Story_Result.Add(columna.Seccions[columna.PisosDesechos[j].Item2].Item2);
+                                Load.Add(Resultados2[i][2]);
+                                Loc.Add(Convert.ToSingle(Resultados2[i][3]));
+                                P.Add(-Convert.ToSingle(Resultados2[i][4]));
+                                V2.Add(Convert.ToSingle(Resultados2[i][5]));
+                                V3.Add(Convert.ToSingle(Resultados2[i][6]));
+                                T.Add(Convert.ToSingle(Resultados2[i][7]));
+                                M2.Add(Convert.ToSingle(Resultados2[i][8]));
+                                M3.Add(Convert.ToSingle(Resultados2[i][9]));
+                            }
+                        }
+
+          
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].Story_Result.AddRange(Story_Result);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].Load.AddRange(Load);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].Loc.AddRange(Loc);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].P.AddRange(P);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].V2.AddRange(V2);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].V3.AddRange(V3);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].T.AddRange(T);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].M2.AddRange( M2);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].M3.AddRange(M3);
+                    }
+                
+
+                }
             }
+
+
+
+
+
+
 
             foreach (Columna columna in Proyecto_.Lista_Columnas)
             {
@@ -820,10 +872,52 @@ namespace DisenoColumnas
                             resultados.As.Add(Convert.ToSingle(Resultados2[i][8]));
                         }
                     }
+
                     columna.resultadosETABs.Add(resultados);
                     columna.AsignarAsTopMediumButton_();
                 }
+
+                if (columna.PisosDesechos.Count > 0)
+                {
+                    for (int j = 0; j < columna.PisosDesechos.Count; j++)
+                    {
+                        List<float> EstacionesRestantes = new List<float>();
+                        List<double> AsminRestantes = new List<double>();
+                        List<double> AsRestantes = new List<double>();
+
+                        for (int i = 0; i < Resultados2.Count; i++)
+                        {
+                            if (columna.Name == Resultados2[i][1] && columna.PisosDesechos[j].Item1== Resultados2[i][0])
+                            {
+
+                                EstacionesRestantes.Add(Convert.ToSingle(Resultados2[i][3]));
+                                AsminRestantes.Add(Convert.ToSingle(Resultados2[i][7]));
+                                AsRestantes.Add(Convert.ToSingle(Resultados2[i][8]));
+                            }
+                        }
+
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].Estacion.AddRange(EstacionesRestantes);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].Asmin.AddRange( AsminRestantes);
+                        columna.resultadosETABs[columna.PisosDesechos[j].Item2].As.AddRange(AsRestantes);
+                    
+                    }
+                    columna.AsignarAsTopMediumButton_();
+
+                }
+
+
+
+
+
+
+
             }
+
+
+
+
+
+
         }
 
         private void CrearObjetosNecesarios2016_2017()
@@ -1404,7 +1498,14 @@ namespace DisenoColumnas
                 Final_FrameSecctions = ArchivoE2KETABS.FindIndex(x => x.Contains("$ CONCRETE SECTIONS")) - 1;
             }
 
+            //Concrete Sections
+            int Inicio_ConcreteSections = ArchivoE2KETABS.FindIndex(x => x.Contains("$ CONCRETE SECTIONS"))+1;
+            int Final_ConcreteSections = ArchivoE2KETABS.FindIndex(x => x.Contains("$ WALL/SLAB/DECK PROPERTIES")) + 1;
+         
+
+
             List<List<string>> Lista_Secciones_Aux = new List<List<string>>();
+            List<List<string>> Lista_Secciones_ConcreteSections = new List<List<string>>();
 
             for (int i = Inicio_FrameSecctions; i < Final_FrameSecctions; i++)
             {
@@ -1417,6 +1518,13 @@ namespace DisenoColumnas
                 }
             }
 
+            for (int i = Inicio_ConcreteSections; i < Final_ConcreteSections; i++)
+            {
+
+                Lista_Secciones_ConcreteSections.Add(ArchivoE2KETABS[i].Split().ToList());
+
+            }
+
             for (int i = 0; i < Lista_Secciones_Aux.Count; i++)
             {
                 string Nombre = Lista_Secciones_Aux[i][4].Replace("\"", "");
@@ -1424,6 +1532,30 @@ namespace DisenoColumnas
                 string SHAPE = Lista_Secciones_Aux[i][10].Replace("\"", "");
                 List<float[]> Coord = null;
                 TipodeSeccion tipodeSeccion;
+                ConcreteSections Type = ConcreteSections.None;
+                for(int j=0; j< Lista_Secciones_ConcreteSections.Count; j++)
+                {
+                    if (Lista_Secciones_ConcreteSections[j].Count >= 24)
+                    {
+                        string NameComparar= Lista_Secciones_ConcreteSections[j][4].Replace("\"", "");
+                        string Tipo = Lista_Secciones_ConcreteSections[j][7].Replace("\"", "");
+                        if(NameComparar == Nombre)
+                        {
+                            if (Tipo == "BEAM")
+                            {
+                                Type = ConcreteSections.Beam;
+                            }
+                            else if(Tipo== "COLUMN")
+                            {
+                                Type = ConcreteSections.Colum;
+                            }
+                            break;
+                        }
+
+                    }
+                }
+
+
                 float TF, TW, B, H;
 
                 if (SHAPE == "SD")
@@ -1500,7 +1632,7 @@ namespace DisenoColumnas
                     }
                     else { tipodeSeccion = TipodeSeccion.None; }
 
-                    H = (float)Convert.ToDouble(Lista_Secciones_Aux[i][13]);
+                    H= (float)Convert.ToDouble(Lista_Secciones_Aux[i][13]);
 
                     try
                     {
@@ -1519,6 +1651,16 @@ namespace DisenoColumnas
                         TW = (float)Convert.ToDouble(Lista_Secciones_Aux[i][22]);
                     }
                     catch { TW = 0; }
+                }
+
+                if(Type == ConcreteSections.Colum)
+                {
+                    if(tipodeSeccion!= TipodeSeccion.Circle)
+                    {
+                        float AuxH = H;
+                        H = B;
+                        B = AuxH;
+                   }
                 }
 
                 foreach (MAT_CONCRETE mAT_ in Proyecto_.Lista_Materiales)
@@ -1798,6 +1940,56 @@ namespace DisenoColumnas
 
             //Depurar Columnas con Area Menor a 400cm2
             Proyecto_.Lista_Columnas.RemoveAll(x => x.Seccions[x.Seccions.Count - 1].Item1.Area < 0.04f);
+
+
+            //Columnas sin Vigas -> Deshacer Pisos
+
+            foreach (Columna columna1 in Proyecto_.Lista_Columnas)
+            {
+
+                for (int i = columna1.VigaMayor.Seccions.Count-1; i >= 0; i--)
+                {
+
+                    if (columna1.VigaMayor.Seccions[i].Item1.H == 0)
+                    {
+                        float LuzLibre1 = 0; List<Tuple<string, int>> Storys = new List<Tuple<string,int>>(); CRectangulo VigaFinal = null;
+
+                        for (int j = i - 1; j >= 0; j--)
+                        {
+                            LuzLibre1 += columna1.LuzLibre[j];
+                            Storys.Add(new Tuple<string,int>(columna1.VigaMayor.Seccions[j].Item2,i));
+                            if (columna1.VigaMayor.Seccions[j].Item1.H != 0)
+                            {
+                                VigaFinal = FunctionsProject.DeepClone(columna1.VigaMayor.Seccions[j].Item1);
+                                break;
+                            }
+                        }
+               
+                        for (int m = 0; m < Storys.Count; m++)
+                        {
+                            int Indice = columna1.Seccions.FindIndex(x => x.Item2 == Storys[m].Item1);
+                            columna1.LuzLibre.RemoveAt(Indice);
+                            columna1.Seccions.RemoveAll(x => x.Item2 == Storys[m].Item1);
+                            columna1.VigaMayor.Seccions.RemoveAt(Indice);
+                            columna1.PisosDesechos.Add(new Tuple<string, int>(Storys[m].Item1, i - Storys.Count));
+                        }
+
+                        columna1.LuzLibre[i-Storys.Count] += LuzLibre1;
+                        columna1.VigaMayor.Seccions[i -Storys.Count] = new Tuple<CRectangulo, string>(VigaFinal, columna1.VigaMayor.Seccions[i].Item2);
+                        
+
+
+                    }
+
+                }
+
+
+
+            }
+
+
+
+
         }
 
         private void PlantaDeColumnasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1889,7 +2081,7 @@ namespace DisenoColumnas
                     mIntefazSeccion.edicion = Tipo_Edicion.Secciones_modelo;
                     mIntefazSeccion.Get_Columna();
                     mIntefazSeccion.Load_Pisos();
-                    mIntefazSeccion.Get_section();
+                    mIntefazSeccion.Get_section(true);
                     mIntefazSeccion.Invalidate();
                     mFuerzasEnElmentos.Invalidate();
                 }
@@ -2923,10 +3115,7 @@ namespace DisenoColumnas
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Escape)
-            {
-
-            }
+          
         }
     }
 }

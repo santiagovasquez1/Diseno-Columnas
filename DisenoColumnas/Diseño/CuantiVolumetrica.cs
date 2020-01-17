@@ -88,7 +88,12 @@ namespace DisenoColumnas.Diseño
                     }
                     for (int i = ColumnaSelect.LuzAcum.Count - 1; i >= 0; i--)
                     {
-                        ColumnaSelect.CantidadEstribos(i);
+                        if (ColumnaSelect.Seccions[i].Item1.Estribo == null)
+                        {
+                            CalCuantiaVol(ColumnaSelect.Seccions[i].Item1, false, i);
+
+                        }
+                            ColumnaSelect.CantidadEstribos(i);
                     }
                 }
 

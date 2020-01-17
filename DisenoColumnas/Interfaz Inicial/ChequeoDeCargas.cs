@@ -133,7 +133,7 @@ namespace DisenoColumnas.Interfaz_Inicial
 
                 Columna ColumnaSelect = Form1.Proyecto_.Lista_Columnas.Find(x => x.Name == Columnas_List.Text);
 
-                for (int i = ColumnaSelect.Panalizar.Count - 1; i >= 0; i--)
+                for (int i = 0; i < ColumnaSelect.Panalizar.Count; i++)
                 {
                     for (int j = 0; j < ColumnaSelect.Panalizar[i].Count; j++)
                     {

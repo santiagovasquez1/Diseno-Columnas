@@ -69,11 +69,14 @@ namespace DisenoColumnas.Clases
 
         public List<float> KgRefuerzoforColumAlzado { get; set; } = new List<float>();
 
+        /// <summary>
+        /// Piso Desecho - Indice que corresponde el Piso
+        /// </summary>
+        public List<Tuple<string, int>> PisosDesechos { get; set; } = new List<Tuple<string, int>>();
+
         public float KgRefuerzo { get; set; }
 
-
         #endregion Propeidades - Calculos
-
 
         #region Sobre Cargas
 
@@ -89,8 +92,7 @@ namespace DisenoColumnas.Clases
             }
         }
 
-
-        #endregion
+        #endregion Sobre Cargas
 
         #region Propiedades - Auxiliares
 
@@ -145,7 +147,7 @@ namespace DisenoColumnas.Clases
                 {
                     if (alzado.Colum_Alzado[i] != null)
                     {
-                        if (alzado.Colum_Alzado[i].Tipo != "A" && alzado.Colum_Alzado[i].Tipo != "Botton")
+                        if (alzado.Colum_Alzado[i].Tipo != "A" && alzado.Colum_Alzado[i].Tipo != "Botton" && alzado.Colum_Alzado[i].Tipo != "T5")
                         {
                             double AreaBarra;
 
@@ -188,7 +190,7 @@ namespace DisenoColumnas.Clases
 
                                 try
                                 {
-                                    resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].UnitarioAdicional.CantBarras;    //Acero Botton - Vecino
+                                    resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].UnitarioAdicional.CantBarras;    //Acero Top - Vecino
                                 }
                                 catch { }
                             }
@@ -208,10 +210,30 @@ namespace DisenoColumnas.Clases
 
                             try
                             {
-                                resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;    //Acero Botton - Vecino
+                                resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;    //Acero Top - Vecino
                             }
                             catch { }
                         }
+                        else if (alzado.Colum_Alzado[i].Tipo == "T5")
+                        {
+                            float AreaBarra;
+                            try
+                            {
+                                AreaBarra = (float)Form1.Proyecto_.AceroBarras[alzado.Colum_Alzado[i].NoBarra];
+                            }
+                            catch
+                            {
+                                AreaBarra = 0;
+                            }
+                            resultadosETABs[i].As_asignado[2] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;
+
+                            try
+                            {
+                                resultadosETABs[i + 1].As_asignado[0] += AreaBarra * alzado.Colum_Alzado[i].CantBarras;    //Acero Top - Vecino
+                            }
+                            catch { }
+                        }
+
                         Seccions[i].Item1.Actualizar_Ref(alzado, i, Form1.mIntefazSeccion);
                     }
                 }
@@ -248,7 +270,7 @@ namespace DisenoColumnas.Clases
 
         #region MetodosPaint
 
-        public void Paint_(Graphics graphics, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI, ISeccion seccion, bool MostrarLabels,float TextoTamano=0)
+        public void Paint_(Graphics graphics, float HeightForm, float WidthForm, float SX, float SY, float WX1, float HY1, float XI, float YI, ISeccion seccion, bool MostrarLabels, float TextoTamano = 0)
         {
             if (CoordXY[0] < 0)
             {
@@ -309,7 +331,6 @@ namespace DisenoColumnas.Clases
                 h = 15;
             }
 
-
             if (seccion is CCirculo)
             {
                 w = 0.35f * (SX + SY) * 0.5f;
@@ -342,9 +363,6 @@ namespace DisenoColumnas.Clases
             {
                 Tamano_Text = TextoTamano;
             }
-
-
-
 
             float X_string = X_Colum + w;
 
@@ -411,29 +429,25 @@ namespace DisenoColumnas.Clases
 
         private void CoordAlzado()
         {
-            CoordForAlzadoMemoria =(CoordForAlzado1);
+            CoordForAlzadoMemoria = (CoordForAlzado1);
             CoordForAlzado1 = new ColumnaAlzadoDrawing(this);
-          
         }
-
 
         public void ActualizarCoordenadasPisosDivididos()
         {
-
-            if(CoordForAlzado1 != CoordForAlzadoMemoria | PisosDivididos== null)
+            if (CoordForAlzado1 != CoordForAlzadoMemoria | PisosDivididos == null)
             {
                 PisosDivididos = new List<List<cBMT>>();
-                for (int i=Seccions.Count-1; i >= 0; i--)
+                for (int i = Seccions.Count - 1; i >= 0; i--)
                 {
                     PisosDivididos.Add(new List<cBMT>());
-
                 }
 
-                for(int i = Seccions.Count - 1; i >= 0; i--)
+                for (int i = Seccions.Count - 1; i >= 0; i--)
                 {
                     List<cBMT> ListcBMTAux = new List<cBMT>();
                     string story = Seccions[i].Item2;
-                    float LuzDivida = LuzLibre[i]/3;
+                    float LuzDivida = LuzLibre[i] / 3;
                     float x1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][0];   //X
                     float y1, y2;
                     //Bottom
@@ -445,15 +459,15 @@ namespace DisenoColumnas.Clases
                     cBottom.Coord.Add(new PointF(x1, y2));
 
                     //Medium
-                    y1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1]+ LuzDivida;     //Y
+                    y1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida;     //Y
                     cBMT cMedium = new cBMT(eBMT.Medium, story);
                     cMedium.Coord = new List<PointF>();
                     cMedium.Coord.Add(new PointF(x1, y1));
-                    y2 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida*2;
+                    y2 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida * 2;
                     cMedium.Coord.Add(new PointF(x1, y2));
 
                     //Top
-                    y1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida*2;     //Y
+                    y1 = CoordForAlzado1.Lista_Coordenadas_Columna_Piso[i][3][1] + LuzDivida * 2;     //Y
                     cBMT cTop = new cBMT(eBMT.Top, story);
                     cTop.Coord = new List<PointF>();
                     cTop.Coord.Add(new PointF(x1, y1));
@@ -463,15 +477,8 @@ namespace DisenoColumnas.Clases
                     ListcBMTAux.Add(cTop); ListcBMTAux.Add(cMedium); ListcBMTAux.Add(cBottom);
                     PisosDivididos[i] = ListcBMTAux;
                 }
-                
-
-
             }
-           
-
         }
-
-
 
         private ColumnaAlzadoDrawing CoordForAlzadoMemoria { get; set; }
 
@@ -1360,8 +1367,6 @@ namespace DisenoColumnas.Clases
                         Nom1 = a.Colum_Alzado[i + 1].Tipo;
                         x11 = a.Colum_Alzado[i + 1].x1;
                         Traslpao1 = a.Colum_Alzado[i + 1].Traslapo;
-
-
                     }
                     catch { }
 
@@ -1871,7 +1876,7 @@ namespace DisenoColumnas.Clases
             {
                 if (Seccions[i].Item1 != null)
                 {
-                   // try { if (Seccions[i].Item1.Shape != Seccions[i - 1].Item1.Shape) { break; } } catch { }
+                    // try { if (Seccions[i].Item1.Shape != Seccions[i - 1].Item1.Shape) { break; } } catch { }
                     try { if (Seccions[i].Item1.B - Seccions[i - 1].Item1.B != 0) { ExisteCambioenB = true; break; } }
                     catch { }
                 }
@@ -2302,6 +2307,7 @@ namespace DisenoColumnas.Clases
                     }
                 }
             }
+            CreateCotas(X, Y);
 
             #endregion Dibujar Refuerzo
 
@@ -2377,10 +2383,19 @@ namespace DisenoColumnas.Clases
                 }
                 else
                 {
+
+                    float MinY = aux.Coord_Alzado_PB.Min(x => x[1]);
+
+                    float Distancia = FunctionsProject.DistanciaEntrePuntos(0, aux.Coord_Alzado_PB[0][1], 0, aux.Coord_Alzado_PB[1][1]);
+
+
+
+
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0], Math.Round(Y + aux.Coord_Alzado_PB[0][1], 2), X + aux.Coord_Alzado_PB[1][0], Math.Round(Y + aux.Coord_Alzado_PB[1][1], 2) };
-                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + aux.Hacum - aux.Hviga - aux.H_Stroy / 2 - DistCorrerTextY / 2, 0 };
-                    P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
-                    P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1] + Traslapo, 0 };
+                    P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[0][0] - DistCorrerText, Y + MinY+Distancia/2 - DistCorrerTextY / 2, 0 };
+                    P1_CotaT = new double[] { 0, 0, 0 }; P2_CotaT = new double[] { 0, 0, 0 };
+                    //P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1], 0 };
+                    // P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[1][1] + Traslapo, 0 };
 
                     if (aux.Tipo == "A")
                     {
@@ -2533,20 +2548,8 @@ namespace DisenoColumnas.Clases
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1], 2), X + aux.Coord_Alzado_PB[1][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1], 2), X + aux.Coord_Alzado_PB[2][0] - DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[2][1], 2) };
 
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText - DPR / 2, Ytext, 0 };
-                    DesCota = 0.3f;
-                    if (aux.NoStory != 1)
-                    {
-                        if (aux.Tipo == "A")
-                        {
-                        }
-                        else
-                        {
-                        }
-                        P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
-                        P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1] + aux.Traslapo, 0 };
-                        FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-                    }
-                    else
+
+                    if (aux.NoStory == 1)
                     {
                         DesCota = 0;
                         P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] - DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
@@ -2559,13 +2562,7 @@ namespace DisenoColumnas.Clases
                     Coord_Refuerz = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[0][1], 2), X + aux.Coord_Alzado_PB[1][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[1][1], 2), X + aux.Coord_Alzado_PB[2][0] + DPR / 2, Math.Round(Y + aux.Coord_Alzado_PB[2][1], 2) };
                     P_XYZ_Text = new double[] { X + aux.Coord_Alzado_PB[1][0] - DistCorrerText + DPR / 2, Ytext, 0 };
 
-                    if (aux.NoStory != 1)
-                    {
-                        P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
-                        P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[0][1] + aux.Traslapo, 0 };
-                        FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-                    }
-                    else
+                    if (aux.NoStory == 1)
                     {
                         DesCota = 0;
                         P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0] + DPR / 2, Y + aux.Coord_Alzado_PB[0][1], 0 };
@@ -2638,12 +2635,6 @@ namespace DisenoColumnas.Clases
                                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
                             }
                         }
-                        else
-                        {
-                            P1_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1], 0 };
-                            P2_CotaT = new double[] { X + aux.Coord_Alzado_PB[0][0], Y + aux.Coord_Alzado_PB[0][1] + aux.Traslapo, 0 };
-                            FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
-                        }
                     }
                     else
                     {
@@ -2702,6 +2693,86 @@ namespace DisenoColumnas.Clases
                 FunctionsAutoCAD.FunctionsAutoCAD.AddPolyline2DWithLengthText(Coord_Refuerz, LayerRefuerzo, NomeRefuerz, P_XYZ_Text, 0.75, 0.10, LayerString, "FC_TEXT1", 90, 1.1);
 
                 FunctionsAutoCAD.FunctionsAutoCAD.AddCota(P1_CotaT, P2_CotaT, "FC_COTAS", "FC_TEXT1", DesCota);
+            }
+        }
+
+        private void CreateCotas(double X, double Y)
+        {
+            foreach (Alzado alzado in Alzados)
+            {
+                for (int i = alzado.Colum_Alzado.Count - 1; i >= 0; i--)
+                {
+                    AlzadoUnitario au = alzado.Colum_Alzado[i];
+                    try
+                    {
+                        au.CotaAutoCAD = false;
+                    }
+                    catch { }
+                }
+            }
+
+            foreach (Alzado alzado in Alzados)
+            {
+                for (int i = alzado.Colum_Alzado.Count - 1; i >= 0; i--)
+                {
+                    AlzadoUnitario au = alzado.Colum_Alzado[i];
+                    float MinY1 = 99999; float MaxY1 = -99999;
+                    float MinY2 = 99999; float MaxY2 = -999999;
+                    float DistaXCorrida = 99999;
+                    float Xmin1 = 99999; float Xmin2 = -99999; float Xmin3 = 99999;
+                    float MinY3 = 99999; float MaxY3 = -99999;
+
+                    try
+                    {
+                        MinY1 = au.Coord_Alzado_PB.Min(x => x[1]);
+                        MaxY1 = au.Coord_Alzado_PB.Max(x => x[1]);
+                        Xmin1 = au.Coord_Alzado_PB.Min(x => x[0]);
+                        DistaXCorrida = au.x1;
+                    }
+                    catch { }
+                    try
+                    {
+                        MinY2 = alzado.Colum_Alzado[i - 1].Coord_Alzado_PB.Min(x => x[1]);
+                        MaxY2 = alzado.Colum_Alzado[i - 1].Coord_Alzado_PB.Max(x => x[1]);
+                        Xmin2 = alzado.Colum_Alzado[i - 1].Coord_Alzado_PB.Min(x => x[0]);
+                    }
+                    catch { }
+                    try
+                    {
+                        MinY3 = alzado.Colum_Alzado[i - 2].Coord_Alzado_PB.Min(x => x[1]);
+                        MaxY3 = alzado.Colum_Alzado[i - 2].Coord_Alzado_PB.Max(x => x[1]);
+                        Xmin3 = alzado.Colum_Alzado[i - 2].Coord_Alzado_PB.Min(x => x[0]);
+                    }
+                    catch { }
+                    float DesCota = 0;
+                    if (DistaXCorrida == 0.1f)
+                    {
+                        DesCota = -0.4f;
+                    }
+                    else { DesCota = -0.3f; }
+                    try
+                    {
+                        if (MaxY1 < MaxY2 && MinY2 < MaxY1 && au.CotaAutoCAD == false)
+                        {
+                            //Se crea Cota
+                            double[] Cota_1 = { X + Xmin1, Y + MinY2, 0 };
+                            double[] Cota_2 = { X + Xmin1, Y + MaxY1, 0 };
+                            au.CotaAutoCAD = true;
+                            FunctionsAutoCAD.FunctionsAutoCAD.AddCota(Cota_1, Cota_2, "FC_COTAS", "FC_TEXT1", DesCota);
+                        }
+                        if (MaxY1 < MaxY3 && MinY3 < MaxY1 && au.CotaAutoCAD == false)
+                        {
+                            //Se crea Cota
+                            double[] Cota_1 = { X + Xmin1, Y + MinY3, 0 };
+                            double[] Cota_2 = { X + Xmin1, Y + MaxY1, 0 };
+                            au.CotaAutoCAD = true;
+                            FunctionsAutoCAD.FunctionsAutoCAD.AddCota(Cota_1, Cota_2, "FC_COTAS", "FC_TEXT1", DesCota);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
             }
         }
 
@@ -2849,7 +2920,7 @@ namespace DisenoColumnas.Clases
 
                 ZNC = (int)((((LuzLibre[i] * 100 - S1 * (ZC1 * 2 - 2)) / (int)(S2))));
             }
-    
+
             CantEstribos_Sepa[i] = new object[] { C_Viga, ZC1, ZNC, ZC2, S1 / 100, S2 / 100 };
         }
 
@@ -2983,7 +3054,6 @@ namespace DisenoColumnas.Clases
         #region Propiedades - Cargas que deben cumplor 0.4Ag*fc
 
         public List<List<Tuple<float, string, string, float>>> Panalizar { get; set; }
-
 
         #endregion Propiedades - Cargas que deben cumplor 0.4Ag*fc
     }

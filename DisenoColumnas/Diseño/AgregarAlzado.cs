@@ -340,33 +340,42 @@ namespace DisenoColumnas.Diseño
 
                         if (i != j && au2 != null)
                         {
-                            if (au.Tipo == "T2" && au2.Tipo == "T2" || au.Tipo == "T2" && au2.Tipo == "T3" || au.Tipo == "T2" && au2.Tipo == "T1" || au.Tipo == "T2" && au2.Tipo == "T4")
+                            if (au.Tipo == "T2" && au2.Tipo == "T2" || au.Tipo == "T2" && au2.Tipo == "T3" || au.Tipo == "T2" && au2.Tipo == "T1" || au.Tipo == "T2" && au2.Tipo == "T4" || au.Tipo == "T2" && au2.Tipo == "T5")
                             {
                                 if (au.x1 == au2.x1)
                                 {
                                     au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
                                 }
                             }
+                            if (au.Tipo == "T5" && au2.Tipo == "T5" || au.Tipo == "T5" && au2.Tipo == "T3" || au.Tipo == "T5" && au2.Tipo == "T1" || au.Tipo == "T5" && au2.Tipo == "T4" || au.Tipo == "T5" && au2.Tipo == "T2")
+                            {
+                                if (au.x1 == au2.x1)
+                                {
+                                    au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
+                                }
+                            }
+
 
                             if (au.Tipo == "T4" && au2.Tipo == "T4")
                             {
                                 au.x1 = au2.x1;
                             }
 
-                            if (au.Tipo == "T1" && au2.Tipo == "T2" || au.Tipo == "T1" && au2.Tipo == "T4")
+                            if (au.Tipo == "T1" && au2.Tipo == "T2" || au.Tipo == "T1" && au2.Tipo == "T4" || au.Tipo == "T1" && au2.Tipo == "T5")
                             {
                                 if (au.x1 == au2.x1)
                                 {
                                     au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
                                 }
                             }
-                            if (au.Tipo == "T3" && au2.Tipo == "T3" || au.Tipo == "T3" && au2.Tipo == "T2" || au.Tipo == "T3" && au2.Tipo == "T4")
+                            if (au.Tipo == "T3" && au2.Tipo == "T3" || au.Tipo == "T3" && au2.Tipo == "T2" || au.Tipo == "T3" && au2.Tipo == "T4" || au.Tipo == "T3" && au2.Tipo == "T5")
                             {
                                 if (au.x1 == au2.x1)
                                 {
                                     au.x1 = au.x1 == 0.1f ? 0 : (float)0.1;
                                 }
                             }
+                         
                         }
                     }
                 }
@@ -487,6 +496,16 @@ namespace DisenoColumnas.Diseño
                         float[] XY2 = new float[] { au.x1 + a.DistX, Hacum1 - Hviga1 - H1 / 2 - TraslapoAbajo / 2 };
                         au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
                     }
+
+                    if (au.UltPiso == false && au.NoStory != 1 && au.Tipo == "T5")
+                    {
+                        float TraslapoAbajo = au.Traslapo;
+
+                        float[] XY1 = new float[] { au.x1 + a.DistX, au.Hacum -au.Hviga-au.H_Stroy/2 + au.Traslapo/2};
+                        float[] XY2 = new float[] { au.x1 + a.DistX, Hacum1 - Hviga1 - H1 / 2 - TraslapoAbajo / 2 };
+                        au.Coord_Alzado_PB.Add(XY1); au.Coord_Alzado_PB.Add(XY2);
+                    }
+
 
                     if (au.NoStory == 1 && au.Tipo == "T4") //Traslapo Tipo 4
                     {

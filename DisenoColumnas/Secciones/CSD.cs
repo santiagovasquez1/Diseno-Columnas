@@ -19,6 +19,7 @@ namespace DisenoColumnas.Secciones
         public float TW { get; set; }
         public float TF { get; set; }
         public TipodeSeccion Shape { get; set; }
+        public ConcreteSections Type { get; set; }
         [NonSerialized] private GraphicsPath pSeccion_path;
         public GraphicsPath Seccion_path { get { return pSeccion_path; } set { pSeccion_path = value; } }
         public double Area { get; set; }
@@ -31,6 +32,9 @@ namespace DisenoColumnas.Secciones
         public bool Editado { get; set; } = false;
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
         public List<Tuple<int, int>> No_D_Barra { get; set; }
+
+        public List<Tuple<ISeccion, string>> SeccionesVecinosCambios { get; set; } = new List<Tuple<ISeccion, string>>();
+       
 
         #region Propiedades y Metodos para verificación de Vc
 
@@ -795,7 +799,35 @@ namespace DisenoColumnas.Secciones
             g.FillPolygon(br, Vertices.ToArray());
             Seccion_path.AddPolygon(Vertices.ToArray());
         }
+        public void Dibujo_SeccionVecina(Graphics g, double EscalaX, double EscalaY, float Dx, float Dy) 
+        {
+            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            Pen P1;
+            Seccion_path = new GraphicsPath();
+            Vertices = new List<PointF>();
+            P1 = new Pen(Color.Black, 3f)
+            {
+                Brush = Brushes.DarkGray,
+                Color = Color.DarkBlue,
+                DashStyle = DashStyle.Dash,
+                LineJoin = LineJoin.Round,
+                Alignment = PenAlignment.Center
+            };
 
+            #region Vertices
+
+            for (int i = 0; i < CoordenadasSeccion.Count; i++)
+            {
+                Vertices.Add(new PointF(Dx + CoordenadasSeccion[i][0] * 100 * (float)EscalaX, Dy - CoordenadasSeccion[i][1] * 100 * (float)EscalaY));
+            }
+
+            #endregion Vertices
+
+            g.DrawPolygon(P1, Vertices.ToArray());
+            g.FillPolygon(br, Vertices.ToArray());
+            Seccion_path.AddPolygon(Vertices.ToArray());
+
+        }
         public void CalcNoDBarras()
         {
             No_D_Barra = new List<Tuple<int, int>>();
@@ -1294,7 +1326,7 @@ namespace DisenoColumnas.Secciones
                 fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
                 fInterfaz.Get_Columna();
                 fInterfaz.Load_Pisos();
-                fInterfaz.Get_section();
+                fInterfaz.Get_section(true);
                 fInterfaz.Invalidate();
             }
         }

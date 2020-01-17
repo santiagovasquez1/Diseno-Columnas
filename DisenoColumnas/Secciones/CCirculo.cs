@@ -17,6 +17,7 @@ namespace DisenoColumnas.Secciones
         public double[] Centro { get; set; } = { };
         public List<PointF> Puntos { get; set; } = new List<PointF>();
         public TipodeSeccion Shape { get; set; }
+        public ConcreteSections Type { get; set; }
         [NonSerialized] private GraphicsPath pSeccion_path;
         public GraphicsPath Seccion_path { get { return pSeccion_path; } set { pSeccion_path = value; } }
         public double Area { get; set; }
@@ -30,6 +31,11 @@ namespace DisenoColumnas.Secciones
         public float B { get { return 2 * (float)radio; } set { B = value; } }
         public float H { get { return 2 * (float)radio; } set { H = value; } }
         public List<GraphicsPath> Shapes_ref { get { return pShapes_ref; } set { pShapes_ref = value; } }
+
+
+        public List<Tuple<ISeccion, string>> SeccionesVecinosCambios { get; set; } = new List<Tuple<ISeccion, string>>();
+        
+
 
         #region Propiedades y Metodos para verificación de Vc
 
@@ -428,7 +434,37 @@ namespace DisenoColumnas.Secciones
             g.FillClosedCurve(br, pPuntos.ToArray());
             Seccion_path.AddClosedCurve(pPuntos.ToArray());
         }
+        public void Dibujo_SeccionVecina(Graphics g, double EscalaX, double EscalaY, float Dx, float Dy) 
+        {
+            SolidBrush br = new SolidBrush(Color.FromArgb(150, Color.Gray));
+            Pen P1;
+            List<PointF> pPuntos = new List<PointF>();
+            Seccion_path = new GraphicsPath();
 
+            P1 = new Pen(Color.Black, 3f)
+            {
+                Brush = Brushes.DarkGray,
+                Color = Color.DarkBlue,
+                DashStyle = DashStyle.Dash,
+                LineJoin = LineJoin.Round,
+                Alignment = PenAlignment.Center
+            };
+
+
+            Set_puntos(50, radio * 100 * EscalaX);
+            PointF pi = new PointF();
+            foreach (PointF punto in Puntos)
+            {
+                pi.X = Convert.ToSingle(punto.X) + Dx;
+                pi.Y = Convert.ToSingle(punto.Y) + Dy;
+                pPuntos.Add(pi);
+            }
+
+            g.DrawClosedCurve(P1, pPuntos.ToArray());
+            g.FillClosedCurve(br, pPuntos.ToArray());
+            Seccion_path.AddClosedCurve(pPuntos.ToArray());
+
+        }
         public void Set_Refuerzo_Seccion(int[] Refuerzos_temp, double Recubrimiento)
         {
             double Long_arco = 0;
@@ -539,7 +575,7 @@ namespace DisenoColumnas.Secciones
                 fInterfaz.edicion = Tipo_Edicion.Secciones_modelo;
                 fInterfaz.Get_Columna();
                 fInterfaz.Load_Pisos();
-                fInterfaz.Get_section();
+                fInterfaz.Get_section(true);
                 fInterfaz.Invalidate();
             }
         }

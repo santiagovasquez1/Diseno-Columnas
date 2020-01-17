@@ -17,13 +17,13 @@ namespace DisenoColumnas.Secciones_Predefinidas
             string Ruta_Archivo;
             string Ruta_Completa;
 
-            //Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
-            //Ruta_Archivo = "Secciones.sec";
-            //Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
-
-            Ruta_Carpeta = @"C:\Users\jrosales\Desktop\Diseno_Columnas\DisenoColumnas\bin\Debug";
+            Ruta_Carpeta = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas";
             Ruta_Archivo = "Secciones.sec";
-            Ruta_Completa = @"C:\Users\jrosales\Desktop\Diseno_Columnas\DisenoColumnas\bin\Debug\\Secciones.sec";
+            Ruta_Completa = @"\\servidor\\Dllo SW\\Secciones Predefinidas - Columnas\\Secciones.sec";
+
+            //Ruta_Carpeta = @"C:\Users\jrosales\Desktop\Diseno_Columnas\DisenoColumnas\bin\Debug";
+            //Ruta_Archivo = "Secciones.sec";
+            //Ruta_Completa = @"C:\Users\jrosales\Desktop\Diseno_Columnas\DisenoColumnas\bin\Debug\\Secciones.sec";
 
             //try
             //{

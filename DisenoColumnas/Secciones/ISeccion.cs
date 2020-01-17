@@ -12,6 +12,7 @@ namespace DisenoColumnas.Secciones
         float B { get; set; }
         MAT_CONCRETE Material { get; set; }
         TipodeSeccion Shape { get; set; }
+        ConcreteSections Type { get; set; }
         double Area { get; set; }
         float H { get; set; }
         Estribo Estribo { get; set; }
@@ -21,6 +22,9 @@ namespace DisenoColumnas.Secciones
         List<GraphicsPath> Shapes_ref { get; set; }
         List<CRefuerzo> Refuerzos { get; set; }
         List<float[]> CoordenadasSeccion { get; set; }
+
+        List<Tuple<ISeccion,string>> SeccionesVecinosCambios { get; set; }
+        void Dibujo_SeccionVecina(Graphics g, double EscalaX, double EscalaY, float Dx, float Dy);
 
         List<Tuple<int, int>> No_D_Barra { get; set; }
         List<Tuple<List<float[]>, int>> MnPn3D { get; set; }
