@@ -98,7 +98,7 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
 
         public static void Comprobar(Inicio Formulario)
         {
-            string ComprobarEntrada = "FAIL";
+            string ComprobarEntrada = "CORRECT";
 
             String IP_Servidor = "";
             if (NetworkInterface.GetIsNetworkAvailable())
@@ -153,7 +153,7 @@ namespace DisenoColumnas.Interfaz_Inicial.Derechos_de_Autor
 
                 if (ComprobarEntrada == "CORRECT")
                 {
-                    //MessageBox.Show("BIENVENIDO", "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("BIENVENIDO", "efe Prima Ce", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Formulario.Visible = false;
                     Form1 Fromulario = new Form1();

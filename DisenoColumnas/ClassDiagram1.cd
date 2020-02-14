@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DisenoColumnas.Clases.Alzado">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAgAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\Alzado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.AlzadoUnitario" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAACAAAEASgAAEQBAAQABAAiIAAgCAQhEAAICKAAQ=</HashCode>
+      <FileName>Clases\Alzado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.cBMT" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEABAAAAAAAAAAAAAAQAAAAAAAAAQ=</HashCode>
+      <FileName>Clases\cBMT.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.Columna" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oRAAQACAGCCEoAENIpBoaFSCAAAFEADHVQyAKCKIgAA=</HashCode>
+      <FileName>Clases\Columna.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Alzados" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.ColumnaAlzadoDrawing" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAACAAAAgAAgAAAAAAAAAAAAAAAAgABAAAA=</HashCode>
+      <FileName>Clases\ColumnaAlzadoDrawing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.CRefuerzo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAABAAAAAABAAYUUACABgAQAAgAwAAISAAAAAEBAqA=</HashCode>
+      <FileName>Clases\CRefuerzo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DisenoColumnas.Clases.cRefuerzoCuadro" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAIAABABAABAAgAIAAMAAAAAAAACAMABAAAAAAAAA=</HashCode>
+      <FileName>Clases\cRefuerzoCuadro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.CUsuario" Collapsed="true">
+    <Position X="10" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAQAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\CUsuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.Estribo" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAABAAAAAAEAAIAAAAAAKAAABAAAAAAAQAAAAA=</HashCode>
+      <FileName>Clases\Estribo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.MAT_CONCRETE" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAgAAAAAQAAAAAAAAAAAAAAAAAAiA=</HashCode>
+      <FileName>Clases\Material.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.ResultadosETABS" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAiAMIAAAAAAAAAQAABCAAAA0AQAAAAAAAAABEBCA=</HashCode>
+      <FileName>Clases\ResultadosETABS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Clases.Viga">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAgQAAAAAAIAQAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Clases\Viga.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DisenoColumnas.Secciones.CCirculo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JVQkoICFIDABAAwtgASME0TAAIAAAZBgAwBwAUWRAqA=</HashCode>
+      <FileName>Secciones\CCirculo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DisenoColumnas.Secciones.CRectangulo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ZUQkoACHAAAAAAQlgBSMEkRAAIAoAZAgEwBQAUWRAqA=</HashCode>
+      <FileName>Secciones\CRectangulo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DisenoColumnas.Secciones.CSD" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>pUQ0sACHAGAAAAQlgASMEkVEMIAAAZAgEwBQAUWRAqA=</HashCode>
+      <FileName>Secciones\CSD.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="DisenoColumnas.Secciones.ISeccion" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JUQkAACFAAAAAAQBgAQMEERAAIAAAZAgAwBQAUWRAIA=</HashCode>
+      <FileName>Secciones\ISeccion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Estribo" />
+      <Property Name="Material" />
+      <Property Name="Shape" />
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Refuerzos" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Enum Name="DisenoColumnas.Clases.eBMT" Collapsed="true">
+    <Position X="4.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Clases\cBMT.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DisenoColumnas.Clases.TipodeRefuerzo" Collapsed="true">
+    <Position X="6.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABCAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\CRefuerzo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DisenoColumnas.Secciones.ConcreteSections" Collapsed="true">
+    <Position X="8.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Secciones\CRectangulo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DisenoColumnas.Secciones.TipodeSeccion" Collapsed="true">
+    <Position X="8.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAgAAAAAAAAAIAUAAAA=</HashCode>
+      <FileName>Secciones\CRectangulo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
